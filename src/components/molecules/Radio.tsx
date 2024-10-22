@@ -7,7 +7,7 @@ const plans = [
   { name: 'Enterprise', ram: '32GB', cpus: '12 CPUs', disk: '1TB SSD disk' },
 ];
 
-export default function Example() {
+export default function RadioMole() {
   const [selected, setSelected] = useState(plans[0]);
 
   return (
@@ -23,7 +23,7 @@ export default function Example() {
             <Radio
               key={plan.name}
               value={plan}
-              className="group relative flex cursor-pointer rounded-lg bg-white/5 py-4 px-5 text-white shadow-md transition focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white data-[checked]:bg-white/10"
+              className="group relative flex cursor-pointer rounded-lg bg-gray-400 py-4 px-5 text-white shadow-md transition focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white data-[checked]:bg-gray-200"
             >
               <div className="flex w-full items-center justify-between">
                 <div className="text-sm/6">
@@ -36,12 +36,15 @@ export default function Example() {
                     <div>{plan.disk}</div>
                   </div>
                 </div>
-                {/* 기본 HTML 체크박스 사용 */}
                 <input
                   type="checkbox"
                   checked={selected.name === plan.name}
                   readOnly
-                  className={`ml-2 w-4 h-4 cursor-pointer transition ${selected.name === plan.name ? 'opacity-100' : 'opacity-0'}`}
+                  className={`w-5 h-5 border-2 rounded ${
+                    selected.name === plan.name
+                      ? 'border-blue-500 bg-blue-500'
+                      : 'border-gray-400'
+                  }`}
                 />
               </div>
             </Radio>

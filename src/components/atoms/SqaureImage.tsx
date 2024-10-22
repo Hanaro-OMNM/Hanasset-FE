@@ -1,6 +1,5 @@
 import React from 'react';
 import photo from '../../image/icon/photo.png';
-import './Image.css';
 
 interface SquareImageProps {
   image?: string; // 선택적 이미지 URL

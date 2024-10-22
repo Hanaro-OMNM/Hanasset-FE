@@ -1,6 +1,6 @@
-import CarForm from '../../../components/form/CarForm';
-import JobForm from '../../../components/form/JobForm';
-import FormLayout from '../../../components/layout/FormLayout';
+import CarForm from '../../../components/atoms/form/CarForm';
+import JobForm from '../../../components/atoms/form/JobForm';
+import FormLayout from '../../../components/template/FormLayout';
 
 export default function PropertyForm() {
   return (

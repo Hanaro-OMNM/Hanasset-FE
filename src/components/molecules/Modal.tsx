@@ -1,4 +1,5 @@
 import { Dialog } from '@headlessui/react';
+import close from '../../image/icon/close.png';
 
 interface ModalProps {
   title: string;
@@ -24,6 +25,7 @@ export default function Modal({
         <div className="title flex justify-between items-center border-b border-gray-300 pb-2 mb-4">
           <span className="text-lg font-bold">{title}</span>
           <img
+            src={close}
             alt="Close"
             className="w-5 h-5 cursor-pointer"
             onClick={closeModal}

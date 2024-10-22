@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import './App.css';
 import LoanRecommend from './pages/LoanRecommned.tsx';
 import Main from './pages/Main.tsx';
 import MyPage from './pages/MyPage.tsx';
@@ -6,7 +7,6 @@ import PropertyAgree from './pages/PropertyAgree.tsx';
 import PropertyForm from './pages/PropertyForm.tsx';
 import RealEstateDetail from './pages/RealEstateDetail.tsx';
 import RealEstateList from './pages/RealEstateList.tsx';
-import './App.css';
 
 function App() {
   return (

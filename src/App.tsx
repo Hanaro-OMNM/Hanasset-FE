@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from 'react-router-dom';
+import LoanRecommend from './pages/LoanRecommned.tsx';
+import Main from './pages/Main.tsx';
+import MyPage from './pages/MyPage.tsx';
+import PropertyAgree from './pages/PropertyAgree.tsx';
+import PropertyForm from './pages/PropertyForm.tsx';
+import RealEstateDetail from './pages/RealEstateDetail.tsx';
+import RealEstateList from './pages/RealEstateList.tsx';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/my-page" element={<MyPage />} />
+        <Route path="/loan-recommend" element={<LoanRecommend />} />
+        <Route path="/real-estate-list" element={<RealEstateList />} />
+        <Route path="/real-estate-detail" element={<RealEstateDetail />} />
+        <Route path="/property-from" element={<PropertyForm />} />
+        <Route path="/property-agree" element={<PropertyAgree />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;

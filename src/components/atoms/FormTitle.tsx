@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface InputLabelProps {
+interface FormTitleProps {
   text: string;
 }
 
-const InputLabel: React.FC<InputLabelProps> = ({ text }) => {
+const FormTitle: React.FC<FormTitleProps> = ({ text }) => {
   return (
     <h2 className="w-[246.38px] h-[38.27px] text-[#1f2024] text-xl font-extrabold font-['Inter'] tracking-tight text-left">
       {text}
@@ -12,4 +12,4 @@ const InputLabel: React.FC<InputLabelProps> = ({ text }) => {
   );
 };
 
-export default InputLabel;
+export default FormTitle;

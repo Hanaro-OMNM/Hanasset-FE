@@ -14,7 +14,7 @@ export default function JobForm() {
   const [selectedJob, setSelectedJob] = useState(joblist[0]);
 
   return (
-    <div className="mt-5">
+    <div className="flex flex-col justify-center items-center mt-5">
       <FormRadio
         items={joblist}
         label="직업을 선택하세요"

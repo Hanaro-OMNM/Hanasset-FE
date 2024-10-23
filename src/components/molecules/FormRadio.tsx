@@ -1,5 +1,4 @@
 import { Radio, RadioGroup } from '@headlessui/react';
-import { useState } from 'react';
 
 interface Plan {
   name: string;

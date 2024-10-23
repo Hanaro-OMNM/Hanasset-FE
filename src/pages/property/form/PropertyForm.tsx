@@ -9,8 +9,8 @@ export default function PropertyForm() {
     <FormLayout>
       {/* <JobForm /> */}
       {/* <CarForm /> */}
-      {/* <ApartForm /> */}
-      <ConfirmLoan />
+      <ApartForm />
+      {/* <ConfirmLoan /> */}
     </FormLayout>
   );
 }

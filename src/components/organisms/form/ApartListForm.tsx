@@ -28,12 +28,12 @@ const apartments: Apartment[] = [
   },
 ];
 //aprt선택후 apartmentInfo가 전달되도록 prop을 바꿔야함
-const apartInfoList: Apartment[] = [
-  { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
-  { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
-  { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
-  { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
-];
+// const apartInfoList: Apartment[] = [
+//   { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
+//   { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
+//   { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
+//   { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
+// ];
 
 export default function ApartListForm() {
   const [selectedApartment, setSelectedApartment] = useState<Apartment>(

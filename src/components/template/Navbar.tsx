@@ -20,6 +20,7 @@ const Navbar: React.FC = () => {
       {/* 메뉴 버튼들 일단은 그냥 div로 구성한 상태 -> 추후 리팩토링 예정 */}
       <div className="w-[58px] h-[300px] mb-[9rem] flex flex-col items-center justify-between">
         <div className="w-[58px] h-[87px] flex flex-col items-center">
+          {/* 선택된 버튼은 배경색 #008485로 변함 */}
           <div className="w-[50px] h-[50px] bg-[#008485] rounded-lg shadow flex items-center justify-center">
             <FaHome className="w-[25px] h-[25px]" color="#ffffff" />
           </div>

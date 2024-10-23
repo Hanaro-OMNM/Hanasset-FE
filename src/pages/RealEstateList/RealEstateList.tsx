@@ -27,7 +27,6 @@ export default function RealEstateList() {
           </div>
         </div>
       </div>
-
       <div className="flex justify-between items-center mb-4">
         <span className="text-sm text-[#b1b1b1]">
           {realEstateCount}개의 매물
@@ -40,7 +39,6 @@ export default function RealEstateList() {
           optionClassName="hover:bg-gray-200"
         />
       </div>
-
       <div className="flex-grow min-h-0 overflow-y-auto">
         {realEstateData.map((item, index) => (
           <RealEstateCard key={index} {...item} />

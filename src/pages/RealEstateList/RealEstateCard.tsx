@@ -10,7 +10,6 @@ interface RealEstateCardProps {
   imageUrl: string;
 }
 
-// RealEstateCard.tsx
 const RealEstateCard: React.FC<RealEstateCardProps> = ({
   type,
   location,
@@ -20,13 +19,13 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
   dealType,
   imageUrl,
 }) => {
-  // 텍스트 길이가 9자를 초과하면 말줄임표를 추가
   const truncateText = (text: string) => {
     if (text.length > 9) {
       return text.substring(0, 9) + '...';
     }
     return text;
   };
+  // 텍스트 길이가 9자를 초과하면 말줄임표를 추가 (텍스트 태그별로 길이 재정의해야 함)
   return (
     <div className="flex w-full bg-white relative font-sans">
       <img
@@ -35,7 +34,6 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
         alt={`${type} 이미지`}
       />
       <div className="flex flex-col justify-center p-4 flex-grow min-w-0">
-        {/* Deal Type */}
         {dealType === '매매' ? (
           <div className="flex text-sm font-bold mb-2 items-center">
             <div className="text-[#008485] flex-shrink-0">{dealType}</div>

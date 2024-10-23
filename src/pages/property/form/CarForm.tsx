@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import InputLabel from '../../atoms/FormTitle';
-import HintText from '../../atoms/HintText';
-import Input from '../../atoms/Input';
-import NoItemButton from '../../atoms/NoItemButton';
+import InputLabel from '../../../components/atoms/FormTitle';
+import HintText from '../../../components/atoms/HintText';
+import Input from '../../../components/atoms/Input';
+import NoItemButton from '../../../components/atoms/NoItemButton';
 
 export default function CarForm() {
   const [carNumber, setCarNumber] = useState('');
@@ -41,7 +41,7 @@ export default function CarForm() {
           placeholder="자동차 번호"
           name="carNumber"
           error={error}
-          errorMessage={errorMessage} // 에러 메시지 prop 전달
+          errorMessage={errorMessage}
           className="my-custom-class"
           inputClassName="px-5 w-[303px] h-[45px] bg-[#f7f7f7] rounded-[10px] text-gray-700 placeholder-gray-400 border-2 border-transparent focus:border-[#b5b6b6] focus:outline-none"
         />

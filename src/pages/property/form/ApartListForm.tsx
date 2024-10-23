@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
-import FormTitle from '../../atoms/FormTitle';
-// Atomic 컴포넌트 FormTitle
-import Input from '../../atoms/Input';
-// Atomic 컴포넌트 Input
-import FormRadio from '../../molecules/FormRadio';
+import FormTitle from '../../../components/atoms/FormTitle';
+import Input from '../../../components/atoms/Input';
+import FormRadio from '../../../components/molecules/FormRadio';
 
-// 제네릭 FormRadio 불러오기
-
-// 아파트 리스트를 위한 타입 정의
 interface Apartment {
   name: string;
   info: string;
@@ -27,13 +22,13 @@ const apartments: Apartment[] = [
     info: '서울특별시 서초구 반포대로 100',
   },
 ];
-//aprt선택후 apartmentInfo가 전달되도록 prop을 바꿔야함
+//apart선택후 apartmentInfo가 전달되도록 prop을 바꿔야하도록 구현 예정
 // const apartInfoList: Apartment[] = [
 //   { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
 //   { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
 //   { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
 //   { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
-// ];
+// ]; //apartinfo 더미 데이터(사용 예정)
 
 export default function ApartListForm() {
   const [selectedApartment, setSelectedApartment] = useState<Apartment>(

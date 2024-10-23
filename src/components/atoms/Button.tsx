@@ -5,7 +5,7 @@ interface ButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   text: string;
-  version?: 'ver1' | 'ver2'; // 추가: 버튼 버전 선택
+  version?: 'ver1' | 'ver2'; //버튼 버전 선택 1: bg-hanagreen 2: border만 hanagreen
 }
 
 export default function Button({
@@ -13,7 +13,7 @@ export default function Button({
   onClick,
   disabled = false,
   text,
-  version = 'ver1', // 기본값은 ver1
+  version = 'ver1',
 }: ButtonProps) {
   return (
     <div

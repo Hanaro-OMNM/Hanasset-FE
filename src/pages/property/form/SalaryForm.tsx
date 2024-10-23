@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import FormTitle from '../../atoms/FormTitle';
-import Input from '../../atoms/Input';
+import FormTitle from '../../../components/atoms/FormTitle';
+import Input from '../../../components/atoms/Input';
 
 interface AssetInfoInputProps {
-  formType: 'income' | 'loan'; // 'income' 또는 'loan' 중 하나로 설정
+  formType: 'income' | 'loan'; // 'income' 또는 'loan' 중 하나로 설정=> Title과 input label 설정
 }
 
 const AssetInfoInput: React.FC<AssetInfoInputProps> = ({ formType }) => {
@@ -23,7 +23,7 @@ const AssetInfoInput: React.FC<AssetInfoInputProps> = ({ formType }) => {
       !Number.isInteger(numericValue)
     ) {
       setError(true);
-      setErrorMessage('0보다 큰 정수를 입력해주세요.'); // 에러 메시지 설정
+      setErrorMessage('0보다 큰 정수를 입력해주세요.');
     } else {
       setError(false);
       setErrorMessage('');
@@ -39,16 +39,15 @@ const AssetInfoInput: React.FC<AssetInfoInputProps> = ({ formType }) => {
             : '이미 받은 대출은 얼마인가요?'
         }
       />{' '}
-      {/* 제목 레이블 */}
       <div className="mt-5">
         <Input
           name="amount"
           value={amount}
           onChange={handleChange}
-          label={formType === 'income' ? '세전 연소득' : '이미 받은 대출 금액'} // 레이블 변경
+          label={formType === 'income' ? '세전 연소득' : '이미 받은 대출 금액'}
           error={error}
-          errorMessage={errorMessage} // 에러 메시지 prop 전달
-          isAmount={true} // 금액 여부 설정
+          errorMessage={errorMessage}
+          isAmount={true}
           inputClassName="px-5 w-[270px] h-[45px] bg-[#f7f7f7] rounded-[10px] text-gray-700 placeholder-gray-400 border-2 border-transparent focus:border-[#b5b6b6] focus:outline-none"
         />
       </div>

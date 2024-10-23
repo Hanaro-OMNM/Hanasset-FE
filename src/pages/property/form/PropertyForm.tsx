@@ -1,10 +1,12 @@
-// import ApartForm from '../../../components/organisms/form/ApartForm';
-// import ApartListForm from '../../../components/organisms/form/ApartListForm';
-// import CarForm from '../../../components/organisms/form/CarForm';
-// import ConfirmLoan from '../../../components/organisms/form/ConfirmLoan';
-// import SalaryForm from '../../../components/organisms/form/SalaryForm';
+// import ApartForm from '../form/ApartForm';
+// import ApartListForm from '../form/ApartListForm';
+// import CarForm from '../form/CarForm';
+// import ConfirmLoan from '../form/ConfirmLoan';
+// import SalaryForm from '../form/SalaryForm';
 import FormLayout from '../../../components/template/FormLayout';
 import JobForm from './JobForm';
+
+//라우팅 구현 미완으로 컴포넌트 주석처리 => 라우팅 구현 후 주석 삭제 예정
 
 export default function PropertyForm() {
   return (

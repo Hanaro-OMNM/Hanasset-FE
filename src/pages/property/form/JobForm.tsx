@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import FormRadio from '../../../components/molecules/FormRadio';
 
-// 수정된 FormRadio 불러오기
-
-// joblist의 타입 정의
 interface JobOption {
   name: string;
 }
@@ -35,6 +32,3 @@ export default function JobForm() {
     </div>
   );
 }
-
-// className =
-//   "text-[#b5b6b6] text-lg font-extrabold font-['Inter'] tracking-tight";

@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import FormRadio from '../../molecules/FormRadio';
+import FormRadio from '../../../components/molecules/FormRadio';
 
-// 수정된 FormRadio 불러오기
-
-// confirmlist의 타입 정의
 interface ConfirmOption {
   name: string;
 }
@@ -22,7 +19,6 @@ export default function JobForm() {
         label="해당 아파트를 담보로 이미 받은 대출이 있나요?"
         selectedItem={selectedConfirm}
         onChange={setSelectedConfirm}
-        // 항목을 보여줄 방식
         display={(item) => (
           <p className="text-lg font-extrabold">{item.name}</p>
         )}

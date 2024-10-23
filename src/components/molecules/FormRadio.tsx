@@ -27,12 +27,12 @@ export default function FormRadio<T>({
         >
           {items.map((item) => (
             <Radio
-              key={JSON.stringify(item)} // 유니크한 키를 제공
+              key={JSON.stringify(item)}
               value={item}
               className={
                 ({ checked }) =>
                   `group relative flex cursor-pointer rounded-lg py-4 px-5 transition focus:outline-none
-                ${checked ? 'text-[#5a5657] bg-gray-100' : 'text-[#B5B6B6]'}` // checked에 따라 배경 색상 변경
+                ${checked ? 'text-[#5a5657] bg-gray-100' : 'text-[#B5B6B6]'}` // checked 여부에 따라 배경 색상 변경
               }
             >
               <div className="flex w-full items-center justify-between">

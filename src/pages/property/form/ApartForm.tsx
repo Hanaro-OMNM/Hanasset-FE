@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import InputLabel from '../../atoms/FormTitle';
-import Input from '../../atoms/Input';
-import NoItemButton from '../../atoms/NoItemButton';
+import InputLabel from '../../../components/atoms/FormTitle';
+import Input from '../../../components/atoms/Input';
+import NoItemButton from '../../../components/atoms/NoItemButton';
 
 export default function ApartForm() {
   const [apartmentAddress, setApartmentAddress] = useState('');
@@ -13,7 +13,6 @@ export default function ApartForm() {
   };
 
   const handleNoApartmentClick = () => {
-    // 보유 부동산이 없는 경우 처리
     console.log('No apartment button clicked');
   };
 

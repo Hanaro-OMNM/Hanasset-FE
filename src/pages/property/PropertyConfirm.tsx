@@ -3,8 +3,6 @@ import Button from '../../components/atoms/Button';
 import FormTitle from '../../components/atoms/FormTitle';
 import PropertyItem from '../property/PropertyItem';
 
-// PropertyItem 컴포넌트 import
-
 interface PropertyConfirmProps {
   job: string;
   income: string;
@@ -36,7 +34,7 @@ const PropertyConfirm: React.FC<PropertyConfirmProps> = ({
   );
 };
 
-// 자체적으로 값을 대입해 테스트할 수 있는 컴포넌트
+// 자체적으로 값을 대입해 테스트할 수 있는 컴포넌트(임시 test코드-삭제 예정)
 const TestPropertyConfirm = () => {
   // 테스트 데이터
   const testJob = '소프트웨어 엔지니어';

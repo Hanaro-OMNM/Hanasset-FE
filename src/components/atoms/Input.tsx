@@ -14,13 +14,13 @@ interface InputProps {
   onClick?: () => void;
   label?: string;
   description?: string;
-  className?: string; // 추가된 prop
+  className?: string; //추가 클래스 prop
   inputClassName?: string; // Input 자체에 대한 추가 클래스 prop
-  placeholder?: string; // 일반 placeholder prop 추가
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void; // 추가된 onChange prop
-  error?: boolean; // 에러 상태 prop 추가
-  errorMessage?: string; // 에러 메시지 prop 추가
-  isAmount?: boolean; // 금액 여부 판단 prop 추가
+  placeholder?: string; // 일반 placeholder prop
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: boolean; // 에러 상태 prop
+  errorMessage?: string; // 에러 메시지 prop
+  isAmount?: boolean; // 금액 input인지 여부 판단 prop
 }
 
 const Input: React.FC<InputProps> = (props) => {

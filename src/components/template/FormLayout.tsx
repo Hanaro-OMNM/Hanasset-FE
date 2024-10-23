@@ -1,3 +1,5 @@
+import Button from '../atoms/Button';
+
 interface FormLayoutProps {
   children: React.ReactNode;
 }
@@ -12,11 +14,7 @@ export default function FormLayout({ children }: FormLayoutProps) {
         {children}
       </div>
 
-      <button className="mt-10 w-[347px] h-12 px-4 py-3 bg-[#abcec8] rounded-xl shadow justify-center items-center gap-2 inline-flex hover:bg-[#008485] hover:outline-none focus:outline-none active:outline-none">
-        <div className="text-white text-base font-semibold font-['Inter']">
-          다음으로
-        </div>
-      </button>
+      <Button text="다음으로" version="ver1" />
     </div>
   );
 }

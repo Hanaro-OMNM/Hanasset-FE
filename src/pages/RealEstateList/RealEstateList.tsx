@@ -19,7 +19,6 @@ export default function RealEstateList() {
 
   return (
     <div className="w-full h-full md:w-2/3 lg:w-1/3 bg-white rounded-xl shadow border-2 p-4 flex flex-col min-h-0">
-      {/* 헤더 부분 */}
       <div className="flex items-center mb-4">
         <FiChevronLeft className="w-[30px] h-[30px] mr-4" />
         <div className="flex-1 text-center">
@@ -29,7 +28,6 @@ export default function RealEstateList() {
         </div>
       </div>
 
-      {/* 매물 개수 및 드롭다운 */}
       <div className="flex justify-between items-center mb-4">
         <span className="text-sm text-[#b1b1b1]">
           {realEstateCount}개의 매물
@@ -43,7 +41,6 @@ export default function RealEstateList() {
         />
       </div>
 
-      {/* 부동산 리스트 */}
       <div className="flex-grow min-h-0 overflow-y-auto">
         {realEstateData.map((item, index) => (
           <RealEstateCard key={index} {...item} />

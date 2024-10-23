@@ -5,7 +5,7 @@ import Profile from '../../assets/img/profile_ex.jpg';
 
 const Navbar: React.FC = () => {
   return (
-    <div className="w-[85px] h-full left-0 top-0 p-4 absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center">
+    <div className="w-[85px] h-full left-0 top-0 p-4 absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center z-50">
       {/* 로고 이미지 */}
       <a
         href="/"

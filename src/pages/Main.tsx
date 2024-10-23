@@ -3,6 +3,9 @@ import Navbar from '../components/template/Navbar';
 export default function Main() {
   return (
     <div className="w-full h-svh relative bg-[#f8fafb]">
+      {/* 왼쪽 측면에 Navbar */}
+      <Navbar />
+
       {/* 배경 이미지 */}
       <div className="w-full h-svh left-0 top-0 absolute">
         <img
@@ -90,9 +93,6 @@ export default function Main() {
             </div>
           </div>
         </div>
-
-        {/* 왼쪽 측면 Navbar */}
-        <Navbar />
       </div>
     </div>
   );

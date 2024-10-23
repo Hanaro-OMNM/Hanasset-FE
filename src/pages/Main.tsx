@@ -1,19 +1,19 @@
-import Logo from '../assets/img/logo.png';
-import Profile from '../assets/img/profile_ex.jpg';
+import Navbar from '../components/template/Navbar';
 
 export default function Main() {
   return (
-    <div className="w-full h-[1024px] relative bg-[#f8fafb]">
+    <div className="w-full h-svh relative bg-[#f8fafb]">
       {/* 배경 이미지 */}
-      <div className="w-full h-[1028px] left-0 top-0 absolute">
+      <div className="w-full h-svh left-0 top-0 absolute">
         <img
-          className="w-[1440px] h-[1028px] left-0 top-0 absolute"
+          className="w-[1440px] h-svh left-0 top-0 absolute"
           src="https://via.placeholder.com/1440x1028"
         />
       </div>
 
-      <div className="w-[590px] h-[1028px] left-[-1px] top-0 absolute">
-        <div className="w-[590px] h-[1028px] left-0 top-0 absolute bg-white/75 backdrop-blur-[10px]" />
+      {/* 사이드 바 Contents */}
+      <div className="w-[590px] h-svh left-[-1px] top-0 absolute">
+        <div className="w-[590px] h-svh left-0 top-0 absolute bg-white/75 backdrop-blur-[10px]" />
         <div className="w-[392px] h-[407px] left-[146px] top-[42px] absolute">
           <div className="w-[392px] h-[330px] left-0 top-[77px] absolute">
             <div className="w-[190px] h-32 left-[202px] top-[202px] absolute">
@@ -91,41 +91,8 @@ export default function Main() {
           </div>
         </div>
 
-        {/* Navbar */}
-        <div className="w-[85px] h-full left-0 top-0 p-4 absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center justify-between">
-          {/* 로고 이미지 */}
-          <div className="w-[59px] h-[79.54px] mt-4 flex flex-col items-center justify-center">
-            <img className="w-[54px] h-[50.34px]" src={Logo} />
-            <div className="w-[53px] text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
-              OMNM
-            </div>
-          </div>
-
-          <div className="w-[58px] h-[301.04px] flex flex-col items-center justify-between">
-            <div className="w-[58px] h-[86.59px] flex flex-col items-center">
-              <div className="w-[58px] h-[58.40px] bg-[#008485] rounded-lg shadow flex items-center justify-center" />
-              <div className="w-[15px] text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center mt-2">
-                홈
-              </div>
-            </div>
-
-            <div className="w-[45px] h-[61.42px] flex flex-col items-center">
-              <div className="w-[30px] text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
-                지도
-              </div>
-            </div>
-
-            <div className="w-[45px] h-[66.45px] flex flex-col items-center">
-              <div className="w-[45px] text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
-                마이홈
-              </div>
-            </div>
-          </div>
-
-          <div className="w-[52px] h-[52.35px] mb-4">
-            <img className="w-full h-full rounded-full" src={Profile} />
-          </div>
-        </div>
+        {/* 왼쪽 측면 Navbar */}
+        <Navbar />
       </div>
     </div>
   );

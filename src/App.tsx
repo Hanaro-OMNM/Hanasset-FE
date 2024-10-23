@@ -6,7 +6,7 @@ import Main from './pages/Main.tsx';
 import MyPage from './pages/MyPage.tsx';
 import PropertyAgree from './pages/PropertyAgree.tsx';
 import RealEstateDetail from './pages/RealEstateDetail.tsx';
-import RealEstateList from './pages/RealEstateList.tsx';
+import RealEstateList from './pages/RealEstateList/RealEstateList.tsx';
 import PropertyForm from './pages/property/form/PropertyForm.tsx';
 
 function App() {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import FormRadio from '../../molecules/FormRadio';
+import FormRadio from '../../../components/molecules/FormRadio';
 
 // 수정된 FormRadio 불러오기
 

@@ -29,12 +29,12 @@ const DropdownCombobox: React.FC<ComboboxProps> = ({
 
   return (
     <Combobox value={selectedItem} onChange={setSelectedItem}>
-      <div className={`relative w-64 ${comboboxClassName}`}>
+      <div className={`relative w-32 ${comboboxClassName}`}>
         {/* Combobox Input */}
-        <div className="relative w-full flex items-center space-x-2 border border-[#008485] rounded-md px-3 py-2 bg-white">
+        <div className="font-semibold text-sm relative w-full flex items-center space-x-2 rounded-md px-3 py-2 bg-white">
           <Combobox.Input
             className="w-full border-none focus:ring-0 text-black"
-            placeholder="Select an option"
+            placeholder="입력"
             onChange={(event) => setQuery(event.target.value)}
             displayValue={(item: string) => item}
           />
@@ -48,7 +48,7 @@ const DropdownCombobox: React.FC<ComboboxProps> = ({
 
         {/* Combobox Options */}
         {filteredItems.length > 0 && (
-          <Combobox.Options className="absolute w-full mt-2 max-h-60 overflow-auto bg-white border border-gray-300 rounded-md shadow-lg z-10">
+          <Combobox.Options className="text-sm absolute w-full mt-2 max-h-60 overflow-auto bg-white border border-gray-300 rounded-md shadow-lg z-10">
             {filteredItems.map((item, index) => (
               <Combobox.Option
                 key={index}

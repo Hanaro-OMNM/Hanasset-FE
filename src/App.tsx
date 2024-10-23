@@ -7,6 +7,7 @@ import MyPage from './pages/MyPage.tsx';
 import PropertyAgree from './pages/PropertyAgree.tsx';
 import RealEstateDetail from './pages/RealEstateDetail.tsx';
 import RealEstateList from './pages/RealEstateList/RealEstateList.tsx';
+import TestPropertyConfirm from './pages/property/PropertyConfirm.tsx';
 import PropertyForm from './pages/property/form/PropertyForm.tsx';
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
           <Route path="/loan-recommend" element={<LoanRecommend />} />
           <Route path="/real-estate-list" element={<RealEstateList />} />
           <Route path="/real-estate-detail" element={<RealEstateDetail />} />
-          <Route path="/property-from" element={<PropertyForm />} />
+          <Route path="/property-form" element={<PropertyForm />} />
+          <Route path="/property-confirm" element={<TestPropertyConfirm />} />
           <Route path="/property-agree" element={<PropertyAgree />} />
         </Routes>
       </Layout>

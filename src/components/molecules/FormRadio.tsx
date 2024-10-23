@@ -1,25 +1,20 @@
 import { Radio, RadioGroup } from '@headlessui/react';
 
-interface Plan {
-  name: string;
-  ram?: string;
-  cpus?: string;
-  disk?: string;
-}
-
-interface RadioMoleProps {
-  items: Plan[];
+interface FormRadioProps<T> {
+  items: T[];
   label: string;
-  selectedItem: Plan;
-  onChange: (item: Plan) => void;
+  selectedItem: T;
+  onChange: (item: T) => void;
+  display: (item: T) => React.ReactNode; // 각 항목을 어떻게 보여줄지 정의
 }
 
-export default function FormRadio({
+export default function FormRadio<T>({
   items,
   label,
   selectedItem,
   onChange,
-}: RadioMoleProps) {
+  display,
+}: FormRadioProps<T>) {
   return (
     <div className="w-full px-4">
       <div className="mx-auto w-full max-w-md">
@@ -32,33 +27,17 @@ export default function FormRadio({
         >
           {items.map((item) => (
             <Radio
-              key={item.name}
+              key={JSON.stringify(item)} // 유니크한 키를 제공
               value={item}
-              className={`group relative flex cursor-pointer rounded-lg bg-white py-4 px-5  transition focus:outline-none
-                ${
-                  selectedItem.name === item.name
-                    ? 'text-[#5a5657] bg-gray-100'
-                    : 'text-[#B5B6B6]'
-                }`}
+              className={
+                ({ checked }) =>
+                  `group relative flex cursor-pointer rounded-lg py-4 px-5 transition focus:outline-none
+                ${checked ? 'text-[#5a5657] bg-gray-100' : 'text-[#B5B6B6]'}` // checked에 따라 배경 색상 변경
+              }
             >
               <div className="flex w-full items-center justify-between">
-                <div className="text-sm/6">
-                  <p
-                    className={`font-semibold ${
-                      selectedItem.name === item.name ? 'text-[#5a5657]' : ''
-                    }`}
-                  >
-                    {item.name}
-                  </p>
-                  {item.ram && (
-                    <div className="flex gap-2">
-                      <div>{item.ram}</div>
-                      <div aria-hidden="true">&middot;</div>
-                      <div>{item.cpus}</div>
-                      <div aria-hidden="true">&middot;</div>
-                      <div>{item.disk}</div>
-                    </div>
-                  )}
+                <div>
+                  {display(item)} {/* 항목을 보여줄 때 display 함수 사용 */}
                 </div>
               </div>
             </Radio>

@@ -26,7 +26,7 @@ export default function ApartForm() {
           placeholder="아파트 주소"
           name="apartmentAddress"
           className="my-custom-class"
-          inputClassName="px-5 w-[303px] h-[45px] bg-[#f7f7f7] rounded-[10px] text-gray-700 placeholder-gray-400 border-2 border-transparent focus:border-[#b5b6b6] focus:outline-none"
+          inputClassName="px-5  rounded-md placeholder-gray-400 border-2 border-transparent "
         />
       </div>
 

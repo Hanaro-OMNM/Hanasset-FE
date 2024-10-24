@@ -54,7 +54,7 @@ const AssetInfoInput: React.FC<AssetInfoInputProps> = ({
           error={error}
           errorMessage={errorMessage}
           isAmount={true}
-          inputClassName="px-5 w-[270px] h-[45px] bg-[#f7f7f7] rounded-[10px] text-gray-700 placeholder-gray-400 border-2 border-transparent focus:border-[#b5b6b6] focus:outline-none"
+          inputClassName="px-5 bg-hanaBlack20 rounded-md placeholder-gray-400 border-2 border-transparent"
         />
       </div>
     </div>

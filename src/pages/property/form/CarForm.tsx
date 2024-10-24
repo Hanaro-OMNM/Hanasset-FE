@@ -5,7 +5,7 @@ import Input from '../../../components/atoms/Input';
 import NoItemButton from '../../../components/atoms/NoItemButton';
 
 interface CarFormProps {
-  onNext: (hasCar: boolean) => void; // onNext prop을 받아서 다음 단계로 이동
+  onNext: (hasCar: boolean) => void;
 }
 
 export default function CarForm({ onNext }: CarFormProps) {
@@ -49,7 +49,7 @@ export default function CarForm({ onNext }: CarFormProps) {
           error={error}
           errorMessage={errorMessage}
           className="my-custom-class"
-          inputClassName="px-5 w-[303px] h-[45px] bg-[#f7f7f7] rounded-[10px] text-gray-700 placeholder-gray-400 border-2 border-transparent focus:border-[#b5b6b6] focus:outline-none"
+          inputClassName="px-5 bg-hanaBlack20 rounded-md placeholder-gray-400 border-2 border-transparent "
         />
         <HintText text="7자리나 8자리의 자동차 번호를 알려주세요(공백없음)" />
       </div>

@@ -27,20 +27,20 @@ export default function LoanRecommend() {
       <div className="w-[375px] h-[62.08px] left-0 top-0 absolute">
         <div className="w-[375px] h-[62.08px] left-0 top-0 absolute bg-neutral-50" />
         {/* header */}
-        <div className="left-[58px] top-[19px] absolute text-center text-[#5a5657] text-base font-semibold font-['Poppins'] leading-normal">
+        <div className="left-[58px] top-[19px] absolute text-center text-hanaBlack80 text-base font-semibold font-['Poppins'] leading-normal">
           맞춤 상품 안내
         </div>
       </div>
 
-      <div className="left-[208px] top-[76px] absolute text-[#5a5657] text-base font-semibold font-['Inter']">
+      <div className="left-[208px] top-[76px] absolute text-hanaBlack80 text-base font-semibold font-['Inter']">
         내가 가진 자산이에요
       </div>
 
-      <div className="left-[295px] top-[102px] absolute text-[#898989] text-sm font-semibold font-['Inter']">
+      <div className="left-[295px] top-[102px] absolute text-[hanaBlack60] text-sm font-semibold font-['Inter']">
         100억!
       </div>
 
-      <div className="left-[31px] top-[236px] absolute text-[#5a5657] text-base font-semibold font-['Inter']">
+      <div className="left-[31px] top-[236px] absolute text-hanaBlack80 text-base font-semibold font-['Inter']">
         나에게 맞는 대출 상품을 찾았어요
       </div>
 
@@ -52,7 +52,7 @@ export default function LoanRecommend() {
               <div className="w-[326px] h-[69px] left-0 top-0 absolute bg-neutral-50 rounded-[10px] shadow" />
               <div className="w-[45.14px] h-[45px] left-[12.04px] top-[12px] absolute bg-[#fff5d9] rounded-xl" />
               <div className="w-[71.22px] h-9 left-[69.21px] top-[17px] absolute">
-                <div className="w-[71.22px] left-0 top-0 absolute text-[#5a5657] text-sm font-semibold font-['Inter']">
+                <div className="w-[71.22px] left-0 top-0 absolute text-hanaBlack80 text-sm font-semibold font-['Inter']">
                   {loan.fin_inst}
                 </div>
                 <div className="w-[35.11px] left-0 top-[21px] absolute text-black text-xs font-semibold font-['Inter']">
@@ -60,7 +60,7 @@ export default function LoanRecommend() {
                 </div>
               </div>
               <div className="w-[108.33px] h-9 left-[166.51px] top-[17px] absolute">
-                <div className="w-[108.33px] left-0 top-0 absolute text-[#8d8c88] text-xs font-medium font-['Inter']">
+                <div className="w-[108.33px] left-0 top-0 absolute text-hanaSilver text-xs font-medium font-['Inter']">
                   {loan.loan_name}
                 </div>
                 <div className="w-[57.18px] left-0 top-[21px] absolute text-black text-xs font-semibold font-['Inter']">
@@ -73,15 +73,15 @@ export default function LoanRecommend() {
       </div>
 
       <div className="w-[155px] h-11 left-[24px] top-[279px] absolute">
-        <div className="w-[155px] h-11 left-0 top-0 absolute bg-[#008485] rounded-[15px]" />
+        <div className="w-[155px] h-11 left-0 top-0 absolute bg-hanaGreen rounded-[15px]" />
         <div className="left-[45.54px] top-[10px] absolute text-center text-neutral-50 text-base font-semibold font-['Poppins'] leading-normal">
           전세 대출
         </div>
       </div>
 
       <div className="w-[155px] h-11 left-[195px] top-[279px] absolute">
-        <div className="w-[155px] h-11 left-0 top-0 absolute bg-[#eeeeec] rounded-[15px]" />
-        <div className="left-[45.54px] top-[10px] absolute text-center text-[#5a5657] text-base font-semibold font-['Poppins'] leading-normal">
+        <div className="w-[155px] h-11 left-0 top-0 absolute bg-hanaSilver40 rounded-[15px]" />
+        <div className="left-[45.54px] top-[10px] absolute text-center text-hanaBlack80 text-base font-semibold font-['Poppins'] leading-normal">
           신용 대출
         </div>
       </div>
@@ -92,7 +92,7 @@ export default function LoanRecommend() {
         금리 낮은 순
       </div>
 
-      <div className="left-[106px] top-[342px] absolute text-[#979797] text-xs font-semibold font-['Inter']">
+      <div className="left-[106px] top-[342px] absolute text-hanaSilver80 text-xs font-semibold font-['Inter']">
         한도 높은 순
       </div>
 
@@ -110,8 +110,8 @@ export default function LoanRecommend() {
       <div className="w-[321px] h-[25px] left-[27px] top-[170px] absolute">
         <div className="w-[353px] h-[7px] p-2 left-[-31px] top-[8px] absolute bg-[#b5b5b5] rounded-[39px]" />
         <div className="left-0 top-[2px] absolute justify-start items-center inline-flex">
-          <div className="w-[186px] h-2 bg-[#008485] rounded-[39px]" />
-          <div className="w-5 h-5 bg-[#008485] rounded-full" />
+          <div className="w-[186px] h-2 bg-hanaGreen rounded-[39px]" />
+          <div className="w-5 h-5 bg-hanaGreen rounded-full" />
         </div>
       </div>
     </div>

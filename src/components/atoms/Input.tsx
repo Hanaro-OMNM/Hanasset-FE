@@ -59,11 +59,12 @@ const Input: React.FC<InputProps> = (props) => {
           onChange={props.onChange}
           placeholder={props.isAmount ? '0' : props.placeholder}
           className={clsx(
-            'flex-grow border rounded p-2 transition duration-200 outline-none pr-10 text-left',
+            ' flex-grow border rounded p-2 transition duration-200 outline-none pr-10 text-left text-hanaBlack80',
             {
-              'border-gray-300': !isFocused && !props.error,
-              'border-blue-500': isFocused,
-              'border-red-500 bg-red-50': props.error,
+              'border-gray-300': isFocused && !props.error,
+
+              'border-red-300 bg-red-100': isFocused && props.error,
+              'w-full': !props.isAmount,
             },
             props.inputClassName
           )}
@@ -72,7 +73,7 @@ const Input: React.FC<InputProps> = (props) => {
         />
         {props.isAmount && (
           <span
-            className={clsx('absolute top-2', {
+            className={clsx('absolute top-2 mx-2', {
               'text-red-500': props.error, // 에러 상태일 때 빨간색
               'text-gray-500': !props.error, // 에러가 아닐 때 기본 색상
             })}

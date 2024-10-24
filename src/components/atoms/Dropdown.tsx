@@ -40,7 +40,7 @@ const DropdownCombobox: React.FC<ComboboxProps> = ({
           />
           <Combobox.Button>
             <FiChevronDown
-              className="w-5 h-5 text-[#008485]"
+              className="w-5 h-5 text-hanaGreen"
               aria-hidden="true"
             />
           </Combobox.Button>
@@ -55,7 +55,7 @@ const DropdownCombobox: React.FC<ComboboxProps> = ({
                 value={item}
                 className={({ active }) =>
                   `cursor-pointer select-none relative py-2 pl-10 pr-4 ${
-                    active ? 'bg-[#008485] text-white' : 'text-black'
+                    active ? 'bg-hanaGreen text-white' : 'text-black'
                   } ${optionClassName}`
                 }
               >

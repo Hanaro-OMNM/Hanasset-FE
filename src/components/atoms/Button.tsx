@@ -5,7 +5,7 @@ interface ButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   text: string;
-  href?: string;
+  version?: 'ver1' | 'ver2'; //버튼 버전 선택 1: bg-hanagreen 2: border만 hanagreen
 }
 
 export default function Button({
@@ -13,23 +13,32 @@ export default function Button({
   onClick,
   disabled = false,
   text,
-  href,
+  version = 'ver1',
 }: ButtonProps) {
   return (
-    <HeadlessButton
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      className={`px-4 py-2 rounded-md font-semibold text-white transition 
-        ${disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-500 hover:bg-blue-700'}`}
+    <div
+      className={`w-full h-12 px-4 py-3 rounded-xl flex justify-center items-center gap-2 transition 
+      ${
+        version === 'ver1'
+          ? disabled
+            ? 'bg-hanaBlack40 cursor-not-allowed'
+            : 'bg-hanaGreen60 hover:bg-hanaGreen focus:bg-hanaGreen'
+          : disabled
+            ? 'bg-white shadow border-2 border-hanaBlack40 cursor-not-allowed'
+            : 'bg-white shadow border-2 border-hanaGreen'
+      }
+      `}
     >
-      {href ? (
-        <a href={href} className="underline text-white">
-          {text}
-        </a>
-      ) : (
-        <>{text}</>
-      )}
-    </HeadlessButton>
+      <HeadlessButton
+        type={type}
+        onClick={onClick}
+        disabled={disabled}
+        className={`w-full h-full text-md font-semibold font-['Inter'] 
+          ${version === 'ver1' ? 'text-white' : disabled ? 'text-hanaBlack40' : 'text-hanaGreen'}
+        `}
+      >
+        {text}
+      </HeadlessButton>
+    </div>
   );
 }

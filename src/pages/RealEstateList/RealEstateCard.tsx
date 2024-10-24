@@ -36,12 +36,12 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
       <div className="flex flex-col justify-center p-4 flex-grow min-w-0">
         {dealType === '매매' ? (
           <div className="flex text-sm font-bold mb-2 items-center">
-            <div className="text-[#008485] flex-shrink-0">{dealType}</div>
+            <div className="text-hanaGreen flex-shrink-0">{dealType}</div>
             <div className="ml-2 flex-shrink-0"> {price} </div>
           </div>
         ) : (
           <div className="flex text-sm font-bold mb-2 items-center">
-            <div className="text-red-500 flex-shrink-0">{dealType}</div>
+            <div className="text-hanaRed80 flex-shrink-0">{dealType}</div>
             <div className="ml-2 flex-shrink-0"> {price} </div>
           </div>
         )}
@@ -51,7 +51,7 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
               {type}
             </span>
           ) : (
-            <span className="text-red-500 pr-1 font-bold text-base flex-shrink-0">
+            <span className="text-hanaRed80 pr-1 font-bold text-base flex-shrink-0">
               {type}
             </span>
           )}

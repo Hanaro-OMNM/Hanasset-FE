@@ -32,8 +32,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
         onChange={handleToggle}
         className={`relative inline-flex items-center justify-center w-[20px] h-[20px] rounded-md border transition-all duration-200 ${
           enabled
-            ? 'bg-[#008485] border-[#008485]'
-            : 'bg-white border-[#008485]'
+            ? 'bg-hanaGreen border-hanaGreen'
+            : 'bg-white border-hanaGreen'
         } ${switchClassName}`}
         id={name}
       >
@@ -42,7 +42,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
       {name && (
         <label
           htmlFor={name}
-          className={`cursor-pointer select-none text-[#008485] font-medium ${labelClassName}`}
+          className={`cursor-pointer select-none text-hanaGreen font-medium ${labelClassName}`}
         >
           {name}
         </label>

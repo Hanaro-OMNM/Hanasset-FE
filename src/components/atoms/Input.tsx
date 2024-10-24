@@ -1,9 +1,3 @@
-import {
-  Description,
-  Field,
-  Input as HeadlessInput,
-  Label,
-} from '@headlessui/react';
 import clsx from 'clsx';
 import React, { useState, useEffect } from 'react';
 
@@ -18,31 +12,42 @@ interface InputProps {
   readOnly?: boolean;
   checked?: boolean;
   onClick?: () => void;
-  label: string;
+  label?: string;
   description?: string;
+  className?: string; //추가 클래스 prop
+  inputClassName?: string; // Input 자체에 대한 추가 클래스 prop
+  placeholder?: string; // 일반 placeholder prop
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: boolean; // 에러 상태 prop
+  errorMessage?: string; // 에러 메시지 prop
+  isAmount?: boolean; // 금액 input인지 여부 판단 prop
 }
 
 const Input: React.FC<InputProps> = (props) => {
   const [value, setValue] = useState<string>('');
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   useEffect(() => {
-    setValue(props.value ? props.value : '');
+    setValue(props.value || '');
   }, [props.value]);
 
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
+
   return (
-    <div className="w-full max-w-md px-4">
-      <Field>
-        <Label className="text-sm/6 font-medium text-white">
+    <div className={clsx('w-full max-w-md ', props.className)}>
+      {props.label && (
+        <label className="text-xs font-medium text-gray-500">
           {props.label}
-        </Label>
-        {props.description && (
-          <Description className="text-sm/6 text-white/50">
-            {props.description}
-          </Description>
-        )}
-        <HeadlessInput
+        </label>
+      )}
+      {props.description && (
+        <p className="text-sm text-gray-100">{props.description}</p>
+      )}
+      <div className="relative mb-4">
+        <input
           name={props.name}
-          type={props.type}
+          type={props.type || 'text'}
           required={props.required}
           pattern={props.pattern}
           maxLength={props.maxLength}
@@ -51,13 +56,37 @@ const Input: React.FC<InputProps> = (props) => {
           checked={props.checked}
           onClick={props.onClick}
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={props.onChange}
+          placeholder={props.isAmount ? '0' : props.placeholder}
           className={clsx(
-            'mt-3 block w-full rounded-lg border-none bg-white/5 py-1.5 px-3 text-sm/6 text-white',
-            'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
+            ' flex-grow border rounded p-2 transition duration-200 outline-none pr-10 text-left text-hanaBlack80',
+            {
+              'border-gray-300': isFocused && !props.error,
+
+              'border-red-300 bg-red-100': isFocused && props.error,
+              'w-full': !props.isAmount,
+            },
+            props.inputClassName
           )}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
-      </Field>
+        {props.isAmount && (
+          <span
+            className={clsx('absolute top-2 mx-2', {
+              'text-red-500': props.error, // 에러 상태일 때 빨간색
+              'text-gray-500': !props.error, // 에러가 아닐 때 기본 색상
+            })}
+          >
+            만원
+          </span>
+        )}
+      </div>
+      {props.error && (
+        <p className="text-red-500 text-xs">
+          {props.errorMessage || '입력란을 올바르게 작성해주세요.'}
+        </p>
+      )}
     </div>
   );
 };

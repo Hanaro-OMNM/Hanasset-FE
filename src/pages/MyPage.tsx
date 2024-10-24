@@ -1,131 +1,92 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
-import Pagination from 'react-js-pagination';
-import { useEffect, useState } from 'react';
-import Button from '../components/atoms/Button';
+import { PiBuildingApartment } from 'react-icons/pi';
+import { useNavigate } from 'react-router-dom';
+import CommonBackground from '../components/atoms/CommonBackground';
+import DoughnutChart from '../components/atoms/DoughnutChart';
+import RegisterButtonGroup from '../components/atoms/RegisterPageButtonGroup';
+import SemiTitle from '../components/atoms/SemiTitle';
+import Swiper from '../components/atoms/Swiper';
 
-export default function Main() {
-  ChartJS.register(ArcElement, Tooltip, Legend, Title);
-  const data = {
-    labels: ['자동차', '부동산', '현금', '적금'],
-    datasets: [
-      {
-        label: '',
-        data: [12, 15, 3, 6],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(255, 16, 86, 0.2)',
-        ],
-        borderWidth: 1,
-      },
-    ],
+interface Asset {
+  name: string;
+}
+
+export default function MyPage() {
+  // 더미데이터
+  const assets: Asset[] = [
+    { name: '서울 성동구 아차산로 111 2층' },
+    { name: '아파트 2' },
+    { name: '아파트 3' },
+    { name: '아파트 4' },
+    { name: '아파트 5' },
+    { name: '아파트 6' },
+  ];
+
+  const interestAreas = ['성수', '홍대', '신촌', '합정', '건대', '종로'];
+
+  const navigate = useNavigate();
+
+  // car, home에 따라 assetRegister 페이지에서 글자, 이미지가 변경되도록
+  const handleRegister = (assetType: 'car' | 'home') => {
+    navigate('/assetRegister', { state: { assetType } });
   };
-  const options = {
-    plugins: {
-      legend: {
-        labels: {
-          font: {
-            size: 8,
-          },
-        },
-      },
-      tooltip: {
-        titleFont: {
-          size: 15,
-        },
-        bodyFont: {
-          size: 12,
-        },
-        footerFont: {},
-        callbacks: {
-          title: () => {
-            return '각 영역 타이틀';
-          },
-        },
-      },
-    },
-  };
-  const handleClick = () => {
-    alert('Button clicked!');
-  };
+
+  const itemsPerPage = 2;
+  // swiper 컴포넌트가 1차원 배열만 받음 // 내 관심 아파트 참고
+  const slides: Asset[][] = Array.from(
+    { length: Math.ceil(assets.length / itemsPerPage) },
+    (_, index) => assets.slice(index * itemsPerPage, (index + 1) * itemsPerPage)
+  );
+
   return (
-    <div className="w-full p-6 bg-slate-500">
-      {/*내 자산 */}
+    <div className="w-[320px] p-6 bg-bgColor mr-auto">
+      {/* 내 자산 ==> 사용자 자산 차트로 보여줌 */}
       <div>
-        <div className="text-[#343c6a] text-base font-semibold font-['Inter'] mb-2">
-          내 자산
-        </div>
-        <div className="w-[325px] h-[300px] bg-white rounded-[15px] shadow flex items-center justify-center">
-          <Doughnut data={data} options={options} />
-        </div>
+        <SemiTitle>내 자산</SemiTitle>
+        <CommonBackground>
+          <DoughnutChart />
+        </CommonBackground>
       </div>
+
       {/*부동산/자동차 ==> 페이지 이동*/}
       <div>
-        <div className="w-[325px] bg-white rounded-[10px] my-10 h-full">
-          <button className="w-full  rounded-br-none rounded-bl-none">
-            <div className=" text-[#1f2024] text-sm font-normal font-['Inter'] leading-tight">
-              부동산
-            </div>
-            <div className="text-[#71727a] text-xs font-normal font-['Inter']  tracking-tight">
-              우리집 등록하고 관리하기
-            </div>
-          </button>
-          <hr />
-          <button className="w-full rounded-tr-none rounded-tl-none">
-            <div className=" text-[#1f2024] text-sm font-normal font-['Inter'] leading-tight">
-              자동차
-            </div>
-            <div className="text-[#71727a] text-xs font-normal font-['Inter']tracking-tight">
-              자동차 등록하고 관리하기
-            </div>
-          </button>
-        </div>
+        <RegisterButtonGroup onRegister={handleRegister} />
       </div>
-      {/*내 관심 지역 ==> 메인 지도에서 내 관심 지역으로 이동*/}
+
+      {/* 내 관심 지역 ==> 메인 지도에서 내 관심 지역으로 이동 */}
       <div>
-        <div className="text-[#333b69] text-base font-semibold font-['Inter']">
-          내 관심 지역
-        </div>
-        <div className="w-[325px] overflow-x-auto scrollbar-hide">
-          <div className="m-5 flex gap-4 ">
-            <div className="w-56 flex-shrink-0 bg-white rounded-[15px] shadow h-[85px] ">
-              1
-            </div>
-            <div className="w-56 flex-shrink-0 bg-white rounded-[15px] shadow h-[85px] ">
-              2
-            </div>
-            <div className="w-56 flex-shrink-0 bg-white rounded-[15px] shadow h-[85px] ">
-              3
-            </div>
-            <div className="w-56 flex-shrink-0 bg-white rounded-[15px] shadow h-[85px] ">
-              4
-            </div>
-            <div className="w-56 flex-shrink-0 bg-white rounded-[15px] shadow h-[85px] ">
-              5
-            </div>
-            <div className="w-56 flex-shrink-0 bg-white rounded-[15px] shadow h-[85px] ">
-              6
-            </div>
-          </div>
-        </div>
+        <SemiTitle>내 관심 지역</SemiTitle>
+        <Swiper
+          items={interestAreas}
+          pagination={false}
+          renderItem={(item) => (
+            <CommonBackground className="h-20 flex items-center justify-center">
+              {item}
+            </CommonBackground>
+          )}
+        />
       </div>
-      {/*내 관심 아파트 ==> 메인 지도에서 내 관심 아파트로 이동*/}
+
+      {/* 내 관심 아파트 ==> 메인 지도에서 내 관심 아파트로 이동 */}
       <div>
-        <div className="text-[#333b69] text-base font-semibold font-['Inter']">
-          내 관심 아파트
-        </div>
-        <div>
-          <div className="w-[322px] h-[85px] bg-white rounded-[15px] shadow">
-            1
-          </div>
-          <div className="w-[322px] h-[85px] bg-white rounded-[15px] shadow">
-            2
-          </div>
-          <Button text="Click Me" onClick={handleClick} />
-          <Button text="Go to Google" href="https://www.google.com" />
-        </div>
+        <SemiTitle>내 관심 아파트</SemiTitle>
+        <Swiper
+          items={slides}
+          renderItem={(pageAssets: Asset[]) => (
+            <div className="flex flex-col gap-2 h-52">
+              {pageAssets.map((asset) => (
+                <button key={asset.name} className="w-full">
+                  <CommonBackground className="flex items-center p-2 h-20">
+                    <PiBuildingApartment />
+                    <div className="ml-6">{asset.name}</div>
+                  </CommonBackground>
+                </button>
+              ))}
+            </div>
+          )}
+          // 화면에 보이는 슬라이드 수 조절
+          spaceBetween={30}
+          slidesPerView={1}
+        />
       </div>
     </div>
   );

@@ -178,24 +178,26 @@ const LoanCard: React.FC<LoanCardProps> = ({
 }) => {
   return (
     <div>
-      <div
-        className={clsx(
-          isHana && 'bg-hanaGreen80 p-4 rounded-lg shadow flex gap-2',
-          !isHana && 'bg-hanaSilver20 p-4 rounded-lg shadow flex gap-2'
-        )}
-      >
-        <LogoImage logoSrcUrl={logoSrcUrl} />
+      <button className="mb-3 w-full">
+        <div
+          className={clsx(
+            isHana && 'bg-hanaGreen80 p-4 rounded-lg shadow flex gap-2',
+            !isHana && 'bg-hanaSilver20 p-4 rounded-lg shadow flex gap-2'
+          )}
+        >
+          <LogoImage logoSrcUrl={logoSrcUrl} />
 
-        <div className="w-24 flex-col justify-center items-center">
-          <FinInst isHana={isHana} finInst={finInst} />
-          <LoanRate isHana={isHana} rate={rate} />
-        </div>
+          <div className="w-24 flex-col justify-center items-center">
+            <FinInst isHana={isHana} finInst={finInst} />
+            <LoanRate isHana={isHana} rate={rate} />
+          </div>
 
-        <div className="flex-col justify-center">
-          <LoanName isHana={isHana} name={name} />
-          <LoanAmount isHana={isHana} amount={amount} />
+          <div className="flex-col justify-center">
+            <LoanName isHana={isHana} name={name} />
+            <LoanAmount isHana={isHana} amount={amount} />
+          </div>
         </div>
-      </div>
+      </button>
     </div>
   );
 };
@@ -216,16 +218,22 @@ const LoanInfoPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#f4f6f9]">
       {/* 헤더 */}
-      <div className="flex items-center justify-between">
-        <button className="text-gray-600">뒤로가기</button>
-        <h1 className="text-lg font-semibold">맞춤 상품 안내</h1>
+      <div className="flex h-12 mb-4 bg-hanaSilver20 items-center justify-start gap-2">
+        <button>뒤로가기</button>
+        <h1 className="text-hanaBlack80 text-lg font-semibold">
+          맞춤 상품 안내
+        </h1>
       </div>
 
       {/* 자산 정보 */}
       <div className="mt-6">
-        <h2 className="text-center text-gray-700">내가 가진 자산이에요</h2>
-        <div className="text-center text-2xl font-bold mt-2">{assets}억</div>
-        <div className="flex justify-center mt-4">
+        <p className="text-right mb-2 pr-4 font-semibold text-hanaBlack80">
+          내가 가진 자산이에요
+        </p>
+        <p className="text-right mb-2 text-sm pr-8 font-semibold  text-hanaBlack60">
+          {assets}억
+        </p>
+        <div className="flex justify-center mt-4 mb-4">
           <input
             type="range"
             min="0"
@@ -237,14 +245,13 @@ const LoanInfoPage: React.FC = () => {
         </div>
       </div>
 
-      <h3 className="ml-4 mt-8 mb-6 text-hanaBlack80 font-semibold">
+      <p className="ml-4 mt-2 mb-6 pl-2 text-hanaBlack80 font-semibold">
         나에게 맞는 대출 상품을 찾았어요
-      </h3>
+      </p>
 
       {/* 대출 종류 선택 */}
-
       <TabGroup>
-        <TabList className={'flex gap-x-3'}>
+        <TabList className={'flex gap-3'}>
           <Tab className="ml-4 w-40 h-12 bg-hanaSilver40 text-hanaBlack80 font-semibold rounded-2xl">
             {({ selected }) => (
               <button
@@ -271,41 +278,40 @@ const LoanInfoPage: React.FC = () => {
           </Tab>
         </TabList>
         <TabPanels>
-          {/* 전세 대출 TabPanel */}
+          <div className="mt-4">
+            {/* 우선 순위 선택 */}
+            <div className="ml-4 pl-3 flex gap-2">
+              <OrderButton
+                activate={activate}
+                onClick={onClick}
+                text="금리 낮은 순"
+              />
+              <OrderButton
+                activate={!activate}
+                onClick={onClick}
+                text="한도 높은 순"
+              />
+            </div>
+          </div>
           <TabPanel>
-            <div>전세 대출 리스트가 들어가야 해요</div>
+            {/* 전세 대출 리스트 */}
+            <div className="mt-2 mr-4 ml-4">
+              전세 대출 리스트가 들어가야 해요
+            </div>
           </TabPanel>
-          {/* 신용 대출 TabPanel */}
           <TabPanel>
-            {/* 대출 상품 리스트 */}
-            <div className="mt-6 mr-4 ml-4">
-              <div className="mt-4 space-y-4">
-                {/* 우선 순위 선택 */}
-                <div className="ml-4 flex gap-2">
-                  <OrderButton
-                    activate={activate}
-                    onClick={onClick}
-                    text="금리 낮은 순"
-                  />
-                  <OrderButton
-                    activate={!activate}
-                    onClick={onClick}
-                    text="한도 높은 순"
-                  />
-                </div>
-
-                {/* 대출 상품 카드 */}
-                {loanList.map((loan: Loan, index: number) => (
-                  <LoanCard
-                    isHana={index === 0 ? true : false}
-                    logoSrcUrl={loan.logoSrcUrl}
-                    finInst={loan.finInst}
-                    rate={loan.rate}
-                    name={loan.name}
-                    amount={loan.amount}
-                  />
-                ))}
-              </div>
+            {/* 신용 대출 리스트 */}
+            <div className="mt-2 pr-4 pl-4 w-full flex-col">
+              {loanList.map((loan: Loan, index: number) => (
+                <LoanCard
+                  isHana={index === 0 ? true : false}
+                  logoSrcUrl={loan.logoSrcUrl}
+                  finInst={loan.finInst}
+                  rate={loan.rate}
+                  name={loan.name}
+                  amount={loan.amount}
+                />
+              ))}
             </div>
           </TabPanel>
         </TabPanels>

@@ -1,4 +1,5 @@
 import Navbar from '../components/template/Navbar';
+import SideLayout from '../components/template/SideLayout';
 
 export default function Main() {
   return (
@@ -15,7 +16,7 @@ export default function Main() {
       </div>
 
       {/* 사이드 바 Contents */}
-      <div className="w-[590px] h-svh left-[-1px] top-0 absolute">
+      {/* <div className="w-[590px] h-svh left-[-1px] top-0 absolute">
         <div className="w-[590px] h-svh left-0 top-0 absolute bg-white/75 backdrop-blur-[10px]" />
         <div className="w-[392px] h-[407px] left-[146px] top-[42px] absolute">
           <div className="w-[392px] h-[330px] left-0 top-[77px] absolute">
@@ -93,7 +94,8 @@ export default function Main() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+      <SideLayout />
     </div>
   );
 }

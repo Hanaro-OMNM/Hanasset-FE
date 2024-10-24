@@ -1,5 +1,5 @@
+import MainSideLayout from '../components/template/MainSideLayout';
 import Navbar from '../components/template/Navbar';
-import SideLayout from '../components/template/SideLayout';
 
 export default function Main() {
   return (
@@ -95,7 +95,7 @@ export default function Main() {
           </div>
         </div>
       </div> */}
-      <SideLayout />
+      <MainSideLayout />
     </div>
   );
 }

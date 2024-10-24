@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
         href="/"
         className="w-[55px] h-[79.54px] mt-4 mb-10 flex flex-col items-center justify-center"
       >
-        <img className="w-[50px] h-[50.34px]" src={Logo} alt="Logo Image" />
+        <img className="w-[50px] h-[50px]" src={Logo} alt="Logo Image" />
         <div className="w-[50px] text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
           OMNM
         </div>
@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
       {/* 메뉴 버튼들 일단은 그냥 div로 구성한 상태 -> 추후 리팩토링 예정 */}
       <div className="w-[58px] h-[300px] mb-[9rem] flex flex-col items-center justify-between">
         <div className="w-[58px] h-[87px] flex flex-col items-center">
-          {/* 선택된 버튼은 배경색 #008485로 변함 */}
+          {/* 선택된 버튼은 배경색 #008485로 변함, 글자에 mt-2 추가 */}
           <div className="w-[50px] h-[50px] bg-[#008485] rounded-lg shadow flex items-center justify-center">
             <FaHome className="w-[25px] h-[25px]" color="#ffffff" />
           </div>

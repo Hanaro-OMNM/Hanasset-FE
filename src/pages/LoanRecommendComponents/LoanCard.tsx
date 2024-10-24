@@ -101,6 +101,7 @@ interface LoanCardProps {
   name: string;
   rate: string;
   amount: string;
+  loanDetailUrl: string;
 }
 
 const LoanCard: React.FC<LoanCardProps> = ({
@@ -110,10 +111,15 @@ const LoanCard: React.FC<LoanCardProps> = ({
   name,
   rate,
   amount,
+  loanDetailUrl,
 }) => {
+  const onClick = () => {
+    console.log('대출 상세보기 화면으로 넘어가야 해요 주소:', loanDetailUrl);
+  };
+
   return (
     <div>
-      <button className="mb-3 w-full">
+      <button className="mb-3 w-full" onClick={onClick}>
         <div
           className={clsx(
             isHana && 'bg-hanaGreen80 p-4 rounded-lg shadow flex gap-2',

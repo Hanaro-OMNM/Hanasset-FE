@@ -1,4 +1,3 @@
-// components/DoughnutChart.tsx
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
@@ -16,7 +15,8 @@ interface DoughnutChartProps {
   options?: object;
 }
 
-export default function DoughnutChart({ data, options }: DoughnutChartProps) {
+export default function DoughnutChart({}: DoughnutChartProps) {
+  // 더미 데이터
   const defaultData = {
     labels: ['자동차', '부동산', '현금', '적금'],
     datasets: [
@@ -50,7 +50,5 @@ export default function DoughnutChart({ data, options }: DoughnutChartProps) {
     },
   };
 
-  return (
-    <Doughnut data={data || defaultData} options={options || defaultOptions} />
-  );
+  return <Doughnut data={defaultData} options={defaultOptions} />;
 }

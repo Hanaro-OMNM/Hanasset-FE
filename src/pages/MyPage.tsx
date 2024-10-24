@@ -1,4 +1,3 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { PiBuildingApartment } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
 import CommonBackground from '../components/atoms/CommonBackground';
@@ -7,23 +6,12 @@ import RegisterButtonGroup from '../components/atoms/RegisterPageButtonGroup';
 import SemiTitle from '../components/atoms/SemiTitle';
 import Swiper from '../components/atoms/Swiper';
 
-ChartJS.register(ArcElement, Tooltip, Legend, Title);
-
 interface Asset {
   name: string;
 }
 
 export default function MyPage() {
-  const navigate = useNavigate();
-
-  const handleRegister = (assetType: 'car' | 'home') => {
-    navigate('/assetRegister', { state: { assetType } });
-  };
-
-  const interestAreas = ['성수', '홍대', '신촌', '합정', '건대', '종로'];
-
-  const itemsPerPage = 2;
-
+  // 더미데이터
   const assets: Asset[] = [
     { name: '서울 성동구 아차산로 111 2층' },
     { name: '아파트 2' },
@@ -33,6 +21,17 @@ export default function MyPage() {
     { name: '아파트 6' },
   ];
 
+  const interestAreas = ['성수', '홍대', '신촌', '합정', '건대', '종로'];
+
+  const navigate = useNavigate();
+
+  // car, home에 따라 assetRegister 페이지에서 글자, 이미지가 변경되도록
+  const handleRegister = (assetType: 'car' | 'home') => {
+    navigate('/assetRegister', { state: { assetType } });
+  };
+
+  const itemsPerPage = 2;
+  // swiper 컴포넌트가 1차원 배열만 받음 // 내 관심 아파트 참고
   const slides: Asset[][] = Array.from(
     { length: Math.ceil(assets.length / itemsPerPage) },
     (_, index) => assets.slice(index * itemsPerPage, (index + 1) * itemsPerPage)
@@ -84,6 +83,7 @@ export default function MyPage() {
               ))}
             </div>
           )}
+          // 화면에 보이는 슬라이드 수 조절
           spaceBetween={30}
           slidesPerView={1}
         />

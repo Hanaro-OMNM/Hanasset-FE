@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
+import AssetRegister from './pages/AssetRegister.tsx';
 import LoanRecommend from './pages/LoanRecommned.tsx';
 import Main from './pages/Main.tsx';
 import MyPage from './pages/MyPage.tsx';
@@ -24,6 +25,7 @@ function App() {
           <Route path="/property-form" element={<PropertyForm />} />
           <Route path="/property-confirm" element={<TestPropertyConfirm />} />
           <Route path="/property-agree" element={<PropertyAgree />} />
+          <Route path="/assetRegister" element={<AssetRegister />} />
         </Routes>
       </Layout>
     </div>

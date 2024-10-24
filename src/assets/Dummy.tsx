@@ -41,3 +41,70 @@ export const realEstateData = [
     imageUrl: real_estate_4,
   },
 ];
+
+export const realEstateImages = [
+  'src/assets/img/img1.jpg',
+  'src/assets/img/img2.jpg',
+  'src/assets/img/img3.jpg',
+];
+
+export const realEstateTypeInfoData = {
+  area: '161Am²',
+  areaSize: '95세대',
+  supply: '161.26m²/149.59m²',
+  rooms: '5',
+  bathrooms: '2',
+  exclusiveRate: '92.76%',
+  managementFee: '452,564',
+  floorPlanImage: 'src/assets/img/floor.jpg',
+  floorPlanLink:
+    'https://land.naver.com/info/groundPlanGallery.naver?rletNo=754&ptpId=4&newComplex=Y', // 네이버부동산 링크
+};
+
+export const realEstatePropertyInfoProps = {
+  title: '트리마제 102동 중간층',
+  rentType: '전세',
+  price: '17억',
+  description: '아파트 | 95/69m² | 5,884만원/3.3m²',
+};
+
+export const realEstatePropertyDetailsProps = {
+  propertyNumber: '142573590',
+  availableDate: '2024.11.10 이후',
+  managementFee: '45만',
+  parkingInfo: '총 주차 588대 / 세대당 주차 1대',
+  direction: '남서향',
+  totalFloors: '12층',
+  currentFloor: '3층',
+  area: '95세대',
+};
+
+export const realEstateMarketSectionProps = {
+  sizeInfo: '126Am² / 84.82m²',
+  jeonseMarketInfoCardProps: {
+    type: '전세',
+    price: '23억 6,000',
+    date: '24.10.11',
+    floor: 36,
+    averagePrice: '23억 5,385',
+  },
+  wolseMarketInfoCardProps: {
+    type: '월세',
+    price: '10억 / 620',
+    date: '24.07.06',
+    floor: 30,
+  },
+};
+
+export const realEstateBasicInfoList = [
+  '사용승인일 1976.07.23(49년차)',
+  '서울특별시 영등포구 여의도동 32',
+  '329세대 / 3개동',
+  '주차 1대 / 총 329대',
+  '최고 15층',
+  '계단식, 복도식(현관구조)',
+  '지역난방도시가스',
+  '용적률 ~% / 건폐율 ~%',
+  '한양주택(건설사)',
+  '관리사무소 02-123-1234',
+];

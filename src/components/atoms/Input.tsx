@@ -35,7 +35,7 @@ const Input: React.FC<InputProps> = (props) => {
   const handleBlur = () => setIsFocused(false);
 
   return (
-    <div className={clsx('w-full max-w-md px-2', props.className)}>
+    <div className={clsx('w-full max-w-md ', props.className)}>
       {props.label && (
         <label className="text-xs font-medium text-gray-500">
           {props.label}
@@ -57,7 +57,7 @@ const Input: React.FC<InputProps> = (props) => {
           onClick={props.onClick}
           value={value}
           onChange={props.onChange}
-          placeholder={isFocused || value ? '' : '0'}
+          placeholder={props.isAmount ? '0' : props.placeholder}
           className={clsx(
             'flex-grow border rounded p-2 transition duration-200 outline-none pr-10 text-left',
             {
@@ -72,7 +72,7 @@ const Input: React.FC<InputProps> = (props) => {
         />
         {props.isAmount && (
           <span
-            className={clsx('absolute right-2 top-2', {
+            className={clsx('absolute top-2', {
               'text-red-500': props.error, // 에러 상태일 때 빨간색
               'text-gray-500': !props.error, // 에러가 아닐 때 기본 색상
             })}

@@ -7,7 +7,8 @@ import MyPage from './pages/MyPage.tsx';
 import PropertyAgree from './pages/PropertyAgree.tsx';
 import RealEstateDetail from './pages/RealEstateDetail.tsx';
 import RealEstateList from './pages/RealEstateList/RealEstateList.tsx';
-import TestPropertyConfirm from './pages/property/PropertyConfirm.tsx';
+//데이터가 없어서 test 컴포넌트 import(임시)
+import TestPropertyConfirm from './pages/property/TestPropertyConfirm.tsx';
 import PropertyForm from './pages/property/form/PropertyForm.tsx';
 
 function App() {

@@ -4,10 +4,14 @@ import HintText from '../../../components/atoms/HintText';
 import Input from '../../../components/atoms/Input';
 import NoItemButton from '../../../components/atoms/NoItemButton';
 
-export default function CarForm() {
-  const [carNumber, setCarNumber] = useState('');
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+interface CarFormProps {
+  onNext: (hasCar: boolean) => void; // onNext prop을 받아서 다음 단계로 이동
+}
+
+export default function CarForm({ onNext }: CarFormProps) {
+  const [carNumber, setCarNumber] = useState<string>('');
+  const [error, setError] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleCarNumberChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -21,18 +25,20 @@ export default function CarForm() {
     if (!isValid) {
       setError(true);
       setErrorMessage('7자리나 8자리의 자동차 번호를 알려주세요.');
+      onNext(false);
     } else {
       setError(false);
       setErrorMessage('');
+      onNext(true);
     }
   };
 
   const handleNoCarClick = () => {
-    console.log('No car button clicked');
+    console.log('no car');
   };
 
   return (
-    <div className="flex flex-col justify-center items-center mt-5">
+    <div className="p-4">
       <InputLabel text="자동차 번호를 입력하세요" />
       <div className="mt-5">
         <Input

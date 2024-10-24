@@ -1,7 +1,6 @@
-import React from 'react';
-import Button from '../../components/atoms/Button';
+import { useNavigate } from 'react-router-dom';
 import FormTitle from '../../components/atoms/FormTitle';
-import PropertyItem from '../property/PropertyItem';
+import PropertyItem from './PropertyItem';
 
 interface PropertyConfirmProps {
   job: string;
@@ -11,47 +10,49 @@ interface PropertyConfirmProps {
   confirmationDate: string;
 }
 
-const PropertyConfirm: React.FC<PropertyConfirmProps> = ({
+export default function PropertyConfirm({
   job,
   income,
   vehicleOwnership,
   propertyOwnership,
   confirmationDate,
-}) => {
+}: PropertyConfirmProps) {
+  const navigate = useNavigate();
+  const handleEditJob = () => {
+    navigate('/property-form?funnel-step=job');
+  };
+
+  const handleEditIncome = () => {
+    navigate('/property-form?funnel-step=income');
+  };
+
+  const handleEditVehicle = () => {
+    navigate('/property-form?funnel-step=car');
+  };
+
+  const handleEditProperty = () => {
+    navigate('/property-form?funnel-step=apart');
+  };
+
   return (
-    <div className="max-w-md mx-auto p-5 bg-white rounded-lg shadow-md">
+    <div className="bg-white rounded-md p-7 min-h-[90vh] mb-2 shadow-md">
       <FormTitle text="입력한 정보가 맞나요?" />
       <p className="text-gray-500">{confirmationDate}에 입력</p>
 
       <div className="mt-4">
-        <PropertyItem label="직업" value={job} />
-        <PropertyItem label="소득" value={income} />
-        <PropertyItem label="보유 자동차" value={vehicleOwnership || '없음'} />
-        <PropertyItem label="보유 주택" value={propertyOwnership || '없음'} />
+        <PropertyItem label="직업" value={job} onClick={handleEditJob} />
+        <PropertyItem label="소득" value={income} onClick={handleEditIncome} />
+        <PropertyItem
+          label="보유 자동차"
+          value={vehicleOwnership || '없음'}
+          onClick={handleEditVehicle}
+        />
+        <PropertyItem
+          label="보유 주택"
+          value={propertyOwnership || '없음'}
+          onClick={handleEditProperty}
+        />
       </div>
-      <Button text="대출 추천 받기" />
     </div>
   );
-};
-
-// 자체적으로 값을 대입해 테스트할 수 있는 컴포넌트(임시 test코드-삭제 예정)
-const TestPropertyConfirm = () => {
-  // 테스트 데이터
-  const testJob = '소프트웨어 엔지니어';
-  const testIncome = '5,000만원';
-  const testVehicleOwnership = '자동차 있음';
-  const testPropertyOwnership = '아파트 소유';
-  const testConfirmationDate = '2024년 10월 23일';
-
-  return (
-    <PropertyConfirm
-      job={testJob}
-      income={testIncome}
-      vehicleOwnership={testVehicleOwnership}
-      propertyOwnership={testPropertyOwnership}
-      confirmationDate={testConfirmationDate}
-    />
-  );
-};
-
-export default TestPropertyConfirm;
+}

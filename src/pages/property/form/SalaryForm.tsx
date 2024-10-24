@@ -3,12 +3,16 @@ import FormTitle from '../../../components/atoms/FormTitle';
 import Input from '../../../components/atoms/Input';
 
 interface AssetInfoInputProps {
-  formType: 'income' | 'loan'; // 'income' 또는 'loan' 중 하나로 설정=> Title과 input label 설정
+  formType: 'income' | 'loan'; // 'income' 또는 'loan' 중 하나로 설정
+  onNext: (isValid: boolean) => void;
 }
 
-const AssetInfoInput: React.FC<AssetInfoInputProps> = ({ formType }) => {
+const AssetInfoInput: React.FC<AssetInfoInputProps> = ({
+  formType,
+  onNext,
+}) => {
   const [amount, setAmount] = useState<string>('');
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,9 +28,11 @@ const AssetInfoInput: React.FC<AssetInfoInputProps> = ({ formType }) => {
     ) {
       setError(true);
       setErrorMessage('0보다 큰 정수를 입력해주세요.');
+      onNext(false);
     } else {
       setError(false);
       setErrorMessage('');
+      onNext(true);
     }
   };
 
@@ -38,7 +44,7 @@ const AssetInfoInput: React.FC<AssetInfoInputProps> = ({ formType }) => {
             ? '소득정보를 입력하세요'
             : '이미 받은 대출은 얼마인가요?'
         }
-      />{' '}
+      />
       <div className="mt-5">
         <Input
           name="amount"

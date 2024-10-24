@@ -17,14 +17,17 @@ const joblist: JobOption[] = [
 export default function JobForm() {
   const [selectedJob, setSelectedJob] = useState<JobOption>(joblist[0]);
 
+  const handleJobChange = (job: JobOption) => {
+    setSelectedJob(job);
+  };
+
   return (
-    <div className="flex flex-col justify-center items-center mt-5">
+    <div className="p-4">
       <FormRadio<JobOption>
         items={joblist}
         label="직업을 선택하세요"
         selectedItem={selectedJob}
-        onChange={setSelectedJob}
-        //항목을 보여줄 방식
+        onChange={handleJobChange}
         display={(item) => (
           <p className="text-lg font-extrabold">{item.name}</p>
         )}

@@ -13,11 +13,11 @@ export default function ApartForm() {
   };
 
   const handleNoApartmentClick = () => {
-    console.log('No apartment button clicked');
+    console.log('no Car');
   };
 
   return (
-    <div className="flex flex-col justify-center items-center mt-5">
+    <div className="p-4">
       <InputLabel text="아파트 주소를 입력하세요" />
       <div>
         <Input

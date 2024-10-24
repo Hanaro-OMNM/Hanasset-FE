@@ -49,7 +49,7 @@ export default function ApartListForm() {
   return (
     <div className="mt-5 flex flex-col items-center justify-center">
       <div className="w-full">
-        <FormTitle text="아파트 주소를 입력하세요" /> {/* 제목 레이블 */}
+        <FormTitle text="아파트 주소를 입력하세요" />
         <div>
           <Input
             value={apartmentAddress}

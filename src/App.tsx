@@ -1,3 +1,4 @@
+import { NavermapsProvider } from 'react-naver-maps';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
@@ -16,17 +17,19 @@ function App() {
   return (
     <div className="App">
       <Layout>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/my-page" element={<MyPage />} />
-          <Route path="/loan-recommend" element={<LoanRecommend />} />
-          <Route path="/real-estate-list" element={<RealEstateList />} />
-          <Route path="/real-estate-detail" element={<RealEstateDetail />} />
-          <Route path="/property-form" element={<PropertyForm />} />
-          <Route path="/property-confirm" element={<TestPropertyConfirm />} />
-          <Route path="/property-agree" element={<PropertyAgree />} />
-          <Route path="/assetRegister" element={<AssetRegister />} />
-        </Routes>
+        <NavermapsProvider ncpClientId={import.meta.env.VITE_MAP_CLIENT_ID}>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/my-page" element={<MyPage />} />
+            <Route path="/loan-recommend" element={<LoanRecommend />} />
+            <Route path="/real-estate-list" element={<RealEstateList />} />
+            <Route path="/real-estate-detail" element={<RealEstateDetail />} />
+            <Route path="/property-form" element={<PropertyForm />} />
+            <Route path="/property-confirm" element={<TestPropertyConfirm />} />
+            <Route path="/property-agree" element={<PropertyAgree />} />
+            <Route path="/assetRegister" element={<AssetRegister />} />
+          </Routes>
+        </NavermapsProvider>
       </Layout>
     </div>
   );

@@ -109,7 +109,7 @@ export const realEstateBasicInfoList = [
   '관리사무소 02-123-1234',
 ];
 
-export var accidentDeath = {
+export const accidentDeath = {
   searchResult: {
     accidentDeath: [
       {

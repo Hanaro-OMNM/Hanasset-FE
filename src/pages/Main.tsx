@@ -7,7 +7,7 @@ import {
   Overlay,
   useMap,
 } from 'react-naver-maps';
-import { useState, useCallback, useRef, useEffect, CSSProperties } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { accidentDeath } from '../assets/Dummy.tsx';
 import googleMap from '../assets/img/mapCompanyType/구글 지도.png';
 import naverMap from '../assets/img/mapCompanyType/네이버 지도.png';
@@ -93,9 +93,9 @@ function MarkerCluster() {
     gridSize: 120,
     icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
     indexGenerator: [10, 100, 200, 500, 1000],
-    stylingFunction: (clusterMarker, count) => {
+    stylingFunction: (clusterMarker: any, count: number) => {
       clusterMarker.getElement().querySelector('div:first-child').innerText =
-        count;
+        count.toString();
     },
   });
 
@@ -104,7 +104,7 @@ function MarkerCluster() {
 
 export default function Main() {
   const naverMaps = useNavermaps();
-  const mapRef = useRef(null);
+  const mapRef = useRef<naver.maps.Map | null>(null);
 
   const [showControlPanel, setShowControlPanel] = useState(false);
   const [mapType, setMapType] = useState(naverMaps.MapTypeId.NORMAL);

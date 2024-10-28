@@ -5,15 +5,16 @@ import { useState } from 'react';
 import Logo from '../../assets/img/logo.png';
 import Profile from '../../assets/img/profile_ex.jpg';
 import MainSideLayout from '../template/MainSideLayout';
+import ConsultantLayout from './ConsultantLayout.tsx';
 import MyPageLayout from './MyPageLayout.tsx';
 
 // MyPageLayout 컴포넌트 import
 
 const Navbar: React.FC = () => {
   // 상태 관리: 홈, 지도, 마이홈의 활성 상태를 관리
-  const [activePage, setActivePage] = useState<'home' | 'map' | 'myPage'>(
-    'home'
-  );
+  const [activePage, setActivePage] = useState<
+    'home' | 'map' | 'consultant' | 'myPage'
+  >('home');
 
   return (
     <div className="space-x-16">
@@ -73,18 +74,18 @@ const Navbar: React.FC = () => {
 
           {/* 상담 버튼 */}
           <button
-            onClick={() => setActivePage('home')} // 상담 버튼 클릭 시 'myPage'로 설정
+            onClick={() => setActivePage('consultant')} // 상담 버튼 클릭 시 'myPage'로 설정
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
               className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                activePage === 'myPage'
+                activePage === 'consultant'
                   ? 'bg-[#008485] shadow mb-2'
                   : 'bg-transparent'
               }`}
             >
               <MdChat
-                className={`w-6 h-6 ${activePage === 'myPage' ? 'text-white' : 'text-black'}`}
+                className={`w-6 h-6 ${activePage === 'consultant' ? 'text-white' : 'text-black'}`}
               />
             </div>
             <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
@@ -121,6 +122,7 @@ const Navbar: React.FC = () => {
       </div>
       {activePage === 'home' && <MainSideLayout />}
       {activePage === 'map' && <></>}
+      {activePage === 'consultant' && <ConsultantLayout />}
       {activePage === 'myPage' && <MyPageLayout />}
     </div>
   );

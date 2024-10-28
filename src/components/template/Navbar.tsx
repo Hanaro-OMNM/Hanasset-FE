@@ -5,10 +5,8 @@ import { useState } from 'react';
 import Logo from '../../assets/img/logo.png';
 import Profile from '../../assets/img/profile_ex.jpg';
 import MainSideLayout from '../template/MainSideLayout';
-import ConsultantLayout from './ConsultantLayout.tsx';
+import ConsultingLayout from './ConsultingLayout.tsx';
 import MyPageLayout from './MyPageLayout.tsx';
-
-// MyPageLayout 컴포넌트 import
 
 const Navbar: React.FC = () => {
   // 상태 관리: 홈, 지도, 마이홈의 활성 상태를 관리
@@ -122,7 +120,7 @@ const Navbar: React.FC = () => {
       </div>
       {activePage === 'home' && <MainSideLayout />}
       {activePage === 'map' && <></>}
-      {activePage === 'consultant' && <ConsultantLayout />}
+      {activePage === 'consultant' && <ConsultingLayout />}
       {activePage === 'myPage' && <MyPageLayout />}
     </div>
   );

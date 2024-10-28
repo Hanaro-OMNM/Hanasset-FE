@@ -1,16 +1,16 @@
 import { PiBuildingApartment } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
-import CommonBackground from '../components/atoms/CommonBackground';
-import DoughnutChart from '../components/atoms/DoughnutChart';
-import RegisterButtonGroup from '../components/atoms/RegisterPageButtonGroup';
-import SemiTitle from '../components/atoms/SemiTitle';
-import Swiper from '../components/atoms/Swiper';
+import CommonBackground from '../atoms/CommonBackground.tsx';
+import DoughnutChart from '../atoms/DoughnutChart.tsx';
+import RegisterButtonGroup from '../atoms/RegisterPageButtonGroup.tsx';
+import SemiTitle from '../atoms/SemiTitle.tsx';
+import Swiper from '../atoms/Swiper.tsx';
 
 interface Asset {
   name: string;
 }
 
-export default function MyPage() {
+export default function MyPageLayout() {
   // 더미데이터
   const assets: Asset[] = [
     { name: '서울 성동구 아차산로 111 2층' },
@@ -38,7 +38,7 @@ export default function MyPage() {
   );
 
   return (
-    <div className="w-[320px] p-6 bg-bgColor mr-auto">
+    <div className="w-[420px] p-6 backdrop-blur-[10px] absolute top-0 left-2 h-full overflow-y-auto bg-white/75">
       {/* 내 자산 ==> 사용자 자산 차트로 보여줌 */}
       <div>
         <SemiTitle>내 자산</SemiTitle>

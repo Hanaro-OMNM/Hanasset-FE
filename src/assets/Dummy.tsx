@@ -1,7 +1,7 @@
-import real_estate_1 from '../assets/img/real_estate_1.png';
-import real_estate_2 from '../assets/img/real_estate_2.png';
-import real_estate_3 from '../assets/img/real_estate_3.png';
-import real_estate_4 from '../assets/img/real_estate_4.png';
+import real_estate_1 from '../assets/img/realEstate/real_estate_1.png';
+import real_estate_2 from '../assets/img/realEstate/real_estate_2.png';
+import real_estate_3 from '../assets/img/realEstate/real_estate_3.png';
+import real_estate_4 from '../assets/img/realEstate/real_estate_4.png';
 
 export const realEstateData = [
   {

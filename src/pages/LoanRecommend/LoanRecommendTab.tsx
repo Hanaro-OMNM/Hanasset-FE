@@ -4,12 +4,12 @@ import React, { useState, useEffect } from 'react';
 import LoanCard from './LoanCard';
 import OrderButton from './OrderButton';
 
+// Dummy Datas
 interface Loan {
-  logoSrcUrl: string;
-  finInst: string;
   name: string;
-  rate: string;
-  amount: string;
+  rate: number;
+  limit: number;
+  newDsr: number;
   loanDetailUrl: string;
 }
 
@@ -41,7 +41,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({ loanList }) => {
                   'w-40 h-12 bg-hanaGreen text-hanaSilver20 text-center rounded-2xl'
               )}
             >
-              전세 대출
+              하나은행 대출
             </button>
           )}
         </Tab>
@@ -53,7 +53,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({ loanList }) => {
                   'w-40 h-12 bg-hanaGreen text-hanaSilver20 rounded-2xl'
               )}
             >
-              신용 대출
+              버팀목 대출
             </button>
           )}
         </Tab>
@@ -74,24 +74,26 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({ loanList }) => {
             />
           </div>
         </div>
+
         <TabPanel>
-          {/* 전세 대출 리스트 */}
-          <div className="mt-2 mr-4 ml-4">전세 대출 리스트가 들어가야 해요</div>
-        </TabPanel>
-        <TabPanel>
-          {/* 신용 대출 리스트 */}
+          {/* 하나은행 대출 리스트 */}
           <div className="mt-2 pr-4 pl-4 w-full flex-col">
             {loanList.map((loan: Loan, index: number) => (
               <LoanCard
-                isHana={index === 0 ? true : false}
-                logoSrcUrl={loan.logoSrcUrl}
-                finInst={loan.finInst}
-                rate={loan.rate}
+                isBest={index === 0 ? true : false}
                 name={loan.name}
-                amount={loan.amount}
+                rate={loan.rate}
+                limit={loan.limit}
+                newDsr={loan.newDsr}
                 loanDetailUrl={loan.loanDetailUrl}
               />
             ))}
+          </div>
+        </TabPanel>
+        <TabPanel>
+          {/* 버팀목 대출 리스트 */}
+          <div className="mt-2 mr-4 ml-4">
+            버팀목 대출 리스트가 들어가야 해요
           </div>
         </TabPanel>
       </TabPanels>

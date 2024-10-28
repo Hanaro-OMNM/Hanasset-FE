@@ -1,47 +1,47 @@
 // LoanInfoPage.tsx
 import { useState } from 'react';
-import AssetInfo from './LoanRecommendComponents/AssetInfo';
-import LoanFoundMessage from './LoanRecommendComponents/LoanFoundMessage';
-import LoanRecommendTab from './LoanRecommendComponents/LoanRecommendTab';
+import AssetInfo from './LoanRecommend/AssetInfo';
+import LoanFoundMessage from './LoanRecommend/LoanFoundMessage';
+import LoanRecommendTab from './LoanRecommend/LoanRecommendTab';
 
 // Dummy Datas
 interface Loan {
-  logoSrcUrl: string;
-  finInst: string;
   name: string;
-  rate: string;
-  amount: string;
+  rate: number;
+  limit: number;
+  newDsr: number;
   loanDetailUrl: string;
 }
 
-const hanaBankLoan: Loan = {
-  logoSrcUrl: 'https://www.hanafn.com/assets/img/ko/info/img-hana-symbol.png',
-  finInst: '하나은행',
-  name: '하나신용대출',
-  rate: '8.4%',
-  amount: '1,300만원',
+const hanaYouthJeonseLoan: Loan = {
+  name: '하나 청년전세론',
+  rate: 4.453,
+  limit: 2,
+  newDsr: 20,
   loanDetailUrl: '',
 };
 
-const kbCardLoan: Loan = {
-  logoSrcUrl: 'https://www.kbfg.com/kor/images/about/pc/img_symbol_logo.jpg',
-  finInst: 'KB국민카드',
-  name: 'KB국민이지플러스',
-  rate: '14.3%',
-  amount: '2,200만원',
+const seoulYouthLoan: Loan = {
+  name: '서울특별시 청년임차 보증금 대출',
+  rate: 4.52,
+  limit: 2,
+  newDsr: 25,
   loanDetailUrl: '',
 };
 
-const kbBankLoan: Loan = {
-  logoSrcUrl: 'https://www.kbfg.com/kor/images/about/pc/img_symbol_logo.jpg',
-  finInst: 'KB국민은행',
-  name: 'KB비상금대출',
-  rate: '12.5%',
-  amount: '2,000만원',
+const jeonseSecurityLoan: Loan = {
+  name: '전세안심금대출',
+  rate: 4.71,
+  limit: 2,
+  newDsr: 30,
   loanDetailUrl: '',
 };
 
-const loanList: Loan[] = [hanaBankLoan, kbCardLoan, kbBankLoan];
+const loanList: Loan[] = [
+  hanaYouthJeonseLoan,
+  seoulYouthLoan,
+  jeonseSecurityLoan,
+];
 
 const LoanInfoPage: React.FC = () => {
   const [assets, setAssets] = useState(100); // 자산 금액을 위한 state

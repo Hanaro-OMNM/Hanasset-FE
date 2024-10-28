@@ -1,72 +1,17 @@
 import clsx from 'clsx';
 
-// LogoImage Components
-interface LogoImageProps {
-  logoSrcUrl: string;
-}
-
-const LogoImage: React.FC<LogoImageProps> = ({ logoSrcUrl }) => {
-  return (
-    <div className="w-12 h-12 rounded-[10%]">
-      <img
-        className="h-full w-full rounded-md bg-hanaBlack20 object-cover"
-        src={logoSrcUrl}
-        alt="fin_inst_logo"
-      />
-    </div>
-  );
-};
-
-// FinInst Components
-interface FinInstProps {
-  isHana: boolean;
-  finInst: string;
-}
-
-const FinInst: React.FC<FinInstProps> = ({ isHana, finInst }) => {
-  return (
-    <h5
-      className={clsx(
-        isHana && 'mt-1 h-5 text-hanaBlack20 text-sm font-semibold mb-auto',
-        !isHana && 'mt-1 h-5 text-hanaBlack80 text-sm font-semibold mb-auto'
-      )}
-    >
-      {finInst}
-    </h5>
-  );
-};
-
-// LoanRate Components
-interface LoanRateProps {
-  isHana: boolean;
-  rate: string;
-}
-
-const LoanRate: React.FC<LoanRateProps> = ({ isHana, rate }) => {
-  return (
-    <h6
-      className={clsx(
-        isHana && 'h-5 text-hanaGold20 text-xs font-semibold mt-auto',
-        !isHana && 'h-5 text-black text-xs font-semibold mt-auto'
-      )}
-    >
-      {rate}
-    </h6>
-  );
-};
-
 // LoanName Components
 interface LoanNameProps {
-  isHana: boolean;
+  isBest: boolean;
   name: string;
 }
 
-const LoanName: React.FC<LoanNameProps> = ({ isHana, name }) => {
+const LoanName: React.FC<LoanNameProps> = ({ isBest, name }) => {
   return (
     <h6
       className={clsx(
-        isHana && 'mt-1 h-5 text-hanaSilver40 text-xs font-medium align-middle',
-        !isHana && 'mt-1 h-5 text-hanaSilver text-xs font-medium align-middle'
+        isBest && 'mb-1 text-hanaBlack20 text-lg font-semibold text-left',
+        !isBest && 'mb-1 text-hanaBlack80 text-lg font-semibold text-left'
       )}
     >
       {name}
@@ -74,43 +19,79 @@ const LoanName: React.FC<LoanNameProps> = ({ isHana, name }) => {
   );
 };
 
-// LoanAmount Components
-interface LoanAmountProps {
-  isHana: boolean;
-  amount: string;
+// LoanRate Components
+interface LoanRateProps {
+  isBest: boolean;
+  rate: number;
 }
 
-const LoanAmount: React.FC<LoanAmountProps> = ({ isHana, amount }) => {
+const LoanRate: React.FC<LoanRateProps> = ({ isBest, rate }) => {
   return (
     <h6
       className={clsx(
-        isHana && 'h-5 text-hanaGold20 text-xs font-semibold',
-        !isHana && 'h-5 text-black text-xs font-semibold'
+        isBest && 'h-5 text-hanaGold20 text-xs font-semibold mt-auto',
+        !isBest && 'h-5 text-hanaBlack60 text-xs font-semibold mt-auto'
       )}
     >
-      {amount}
+      {`${rate}%`}
+    </h6>
+  );
+};
+
+// LoanLimit Components
+interface LoanLimitProps {
+  isBest: boolean;
+  limit: number;
+}
+
+const LoanLimit: React.FC<LoanLimitProps> = ({ isBest, limit }) => {
+  return (
+    <h6
+      className={clsx(
+        isBest && 'h-5 text-hanaGold20 text-xs font-semibold',
+        !isBest && 'h-5 text-hanaBlack60 text-xs font-semibold'
+      )}
+    >
+      {`${limit}억원`}
+    </h6>
+  );
+};
+
+// LoanNewDsr Components
+interface LoanNewDsrProps {
+  isBest: boolean;
+  newDsr: number;
+}
+
+const LoanNewDsr: React.FC<LoanNewDsrProps> = ({ isBest, newDsr }) => {
+  return (
+    <h6
+      className={clsx(
+        isBest && 'h-5 text-hanaGold20 text-xs font-semibold',
+        !isBest && 'h-5 text-hanaBlack60 text-xs font-semibold'
+      )}
+    >
+      {`DSR ${newDsr}%`}
     </h6>
   );
 };
 
 // LoanCard Components
 interface LoanCardProps {
-  isHana: boolean;
-  logoSrcUrl: string;
-  finInst: string;
+  isBest: boolean;
   name: string;
-  rate: string;
-  amount: string;
+  rate: number;
+  limit: number;
+  newDsr: number;
   loanDetailUrl: string;
 }
 
 const LoanCard: React.FC<LoanCardProps> = ({
-  isHana,
-  logoSrcUrl,
-  finInst,
+  isBest,
   name,
   rate,
-  amount,
+  limit,
+  newDsr,
   loanDetailUrl,
 }) => {
   const onClick = () => {
@@ -122,20 +103,17 @@ const LoanCard: React.FC<LoanCardProps> = ({
       <button className="mb-3 w-full" onClick={onClick}>
         <div
           className={clsx(
-            isHana && 'bg-hanaGreen80 p-4 rounded-lg shadow flex gap-2',
-            !isHana && 'bg-hanaSilver20 p-4 rounded-lg shadow flex gap-2'
+            isBest && 'bg-hanaGreen80 p-4 rounded-lg shadow',
+            !isBest && 'bg-hanaSilver20 p-4 rounded-lg shadow'
           )}
         >
-          <LogoImage logoSrcUrl={logoSrcUrl} />
-
-          <div className="w-24 flex-col justify-center items-center">
-            <FinInst isHana={isHana} finInst={finInst} />
-            <LoanRate isHana={isHana} rate={rate} />
-          </div>
-
-          <div className="flex-col justify-center">
-            <LoanName isHana={isHana} name={name} />
-            <LoanAmount isHana={isHana} amount={amount} />
+          <div className="flex-col">
+            <LoanName isBest={isBest} name={name} />
+            <div className="mt-1 pt-1 flex justify-between">
+              <LoanRate isBest={isBest} rate={rate} />
+              <LoanLimit isBest={isBest} limit={limit} />
+              <LoanNewDsr isBest={isBest} newDsr={newDsr} />
+            </div>
           </div>
         </div>
       </button>

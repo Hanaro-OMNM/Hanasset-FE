@@ -8,7 +8,7 @@ import {
   useMap,
 } from 'react-naver-maps';
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { accidentDeath } from '../assets/Dummy.tsx';
+import { estateData } from '../assets/Dummy.tsx';
 import googleMap from '../assets/img/mapCompanyType/구글 지도.png';
 import naverMap from '../assets/img/mapCompanyType/네이버 지도.png';
 import kakaoMap from '../assets/img/mapCompanyType/카카오 지도.png';
@@ -22,7 +22,6 @@ function MarkerCluster() {
   const map = useMap();
   const [MarkerClustering, setMarkerClustering] = useState<any>(null);
 
-  // 동적 import로 makeMarkerClustering을 한 번만 불러오도록 설정
   useEffect(() => {
     let isMounted = true;
     import('../assets/MarkerClustering.js')
@@ -40,7 +39,6 @@ function MarkerCluster() {
     };
   }, []);
 
-  // MarkerClustering이 로드될 때까지 컴포넌트 렌더링을 중단
   if (!MarkerClustering) return null;
 
   const htmlMarker1 = {
@@ -49,7 +47,6 @@ function MarkerCluster() {
     size: navermaps.Size(40, 40),
     anchor: navermaps.Point(20, 20),
   };
-
   const htmlMarker2 = {
     content:
       '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(https://navermaps.github.io/maps.js.ncp/docs/img/cluster-marker-2.png);background-size:contain;"></div>',
@@ -75,27 +72,37 @@ function MarkerCluster() {
     anchor: navermaps.Point(20, 20),
   };
 
-  const data = accidentDeath.searchResult.accidentDeath;
-  const markers = data.map(
-    (spot) =>
-      new naver.maps.Marker({
-        position: new naver.maps.LatLng(spot.grd_la, spot.grd_lo),
-        draggable: true,
+  const markers = estateData.map(
+    (item) =>
+      new navermaps.Marker({
+        position: new navermaps.LatLng(item.lat, item.lng),
+        title: item.atclNm,
+        map: null,
       })
   );
 
   const cluster = new MarkerClustering({
     minClusterSize: 2,
-    maxZoom: 8,
+    maxZoom: 21,
     map,
     markers,
     disableClickZoom: false,
-    gridSize: 120,
+    gridSize: 400,
     icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
-    indexGenerator: [10, 100, 200, 500, 1000],
+    indexGenerator: [5, 20, 50, 100, 250, 500],
     stylingFunction: (clusterMarker: any, count: number) => {
-      clusterMarker.getElement().querySelector('div:first-child').innerText =
-        count.toString();
+      const clusterContent = clusterMarker.getElement().querySelector('div:first-child');
+      clusterContent.innerText = count.toString();
+
+      // 스타일 크기 설정
+      const size = count < 20 ? 40 : count < 50 ? 50 : count < 100 ? 60 : 70;
+      clusterContent.style.width = `${size}px`;
+      clusterContent.style.height = `${size}px`;
+      clusterContent.style.lineHeight = `${size}px`;
+
+      // 글자 크기 및 배경 색 설정
+      clusterContent.style.fontSize = count < 20 ? '12px' : count < 50 ? '14px' : '16px';
+      clusterContent.style.backgroundColor = count < 20 ? 'lightblue' : count < 50 ? 'lightgreen' : 'lightcoral';
     },
   });
 

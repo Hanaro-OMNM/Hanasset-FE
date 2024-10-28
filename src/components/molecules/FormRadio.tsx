@@ -36,9 +36,7 @@ export default function FormRadio<T>({
               }
             >
               <div className="flex w-full items-center justify-between">
-                <div>
-                  {display(item)} {/* 항목을 보여줄 때 display 함수 사용 */}
-                </div>
+                <div>{display(item)}</div>
               </div>
             </Radio>
           ))}

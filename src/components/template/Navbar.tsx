@@ -1,5 +1,6 @@
 import { FaHome, FaMap } from 'react-icons/fa';
 import { FaHouseUser } from 'react-icons/fa6';
+import { MdChat } from 'react-icons/md';
 import { useState } from 'react';
 import Logo from '../../assets/img/logo.png';
 import Profile from '../../assets/img/profile_ex.jpg';
@@ -15,34 +16,36 @@ const Navbar: React.FC = () => {
   );
 
   return (
-    <div className="flex space-x-16">
-      <div className="left-0 top-0 p-2 h-full absolute bg-white shadow border-r border-[#e7e7e7] items-center">
+    <div className="space-x-16">
+      <div className="left-0 top-0 p-2 h-full absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center">
         <a
           href="/"
           className="mt-4 mb-10 flex flex-col items-center justify-center"
         >
-          <img className="w-12 h-12" src={Logo} alt="Logo Image" />
-          <div className="text-black text-base font-bold font-sans tracking-tight text-center">
+          <img className="w-10 h-10" src={Logo} alt="Logo Image" />
+          <div className="text-black text-sm font-bold font-sans tracking-tight text-center">
             OMNM
           </div>
         </a>
         {/* 메뉴 버튼들 */}
-        <div className="w-14 h-72 mb-32 flex flex-col items-center justify-between">
+        <div className="w-14 h-96 mb-32 flex flex-col items-center justify-between">
           {/* 홈 버튼 */}
           <button
             onClick={() => setActivePage('home')} // 홈 버튼 클릭 시 'home'으로 설정
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg shadow flex items-center justify-center ${
-                activePage === 'home' ? 'bg-[#008485]' : 'bg-transparent'
+              className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                activePage === 'home'
+                  ? 'bg-[#008485] shadow mb-2'
+                  : 'bg-transparent'
               }`}
             >
               <FaHome
                 className={`w-6 h-6 ${activePage === 'home' ? 'text-white' : 'text-black'}`}
               />
             </div>
-            <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center mt-2">
+            <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
               홈
             </div>
           </button>
@@ -53,8 +56,10 @@ const Navbar: React.FC = () => {
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg shadow flex items-center justify-center ${
-                activePage === 'map' ? 'bg-[#008485]' : 'bg-transparent'
+              className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                activePage === 'map'
+                  ? 'bg-[#008485] shadow mb-2'
+                  : 'bg-transparent'
               }`}
             >
               <FaMap
@@ -66,14 +71,37 @@ const Navbar: React.FC = () => {
             </div>
           </button>
 
+          {/* 상담 버튼 */}
+          <button
+            onClick={() => setActivePage('home')} // 상담 버튼 클릭 시 'myPage'로 설정
+            className="w-14 h-20 flex flex-col items-center"
+          >
+            <div
+              className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                activePage === 'myPage'
+                  ? 'bg-[#008485] shadow mb-2'
+                  : 'bg-transparent'
+              }`}
+            >
+              <MdChat
+                className={`w-6 h-6 ${activePage === 'myPage' ? 'text-white' : 'text-black'}`}
+              />
+            </div>
+            <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
+              상담
+            </div>
+          </button>
+
           {/* 마이홈 버튼 */}
           <button
             onClick={() => setActivePage('myPage')} // 마이홈 버튼 클릭 시 'myPage'로 설정
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg shadow flex items-center justify-center ${
-                activePage === 'myPage' ? 'bg-[#008485]' : 'bg-transparent'
+              className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                activePage === 'myPage'
+                  ? 'bg-[#008485] shadow mb-2'
+                  : 'bg-transparent'
               }`}
             >
               <FaHouseUser
@@ -86,7 +114,7 @@ const Navbar: React.FC = () => {
           </button>
         </div>
         <img
-          className="w-14 h-14 rounded-full"
+          className="w-12 h-12 rounded-full"
           src={Profile}
           alt="Profile Image"
         />

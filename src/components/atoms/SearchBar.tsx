@@ -9,7 +9,7 @@ const SearchBar: React.FC = () => {
           className="border-2 border-gray-200 bg-white w-full h-10 px-5 pr-16 rounded-lg text-sm focus:border-[#ABCEC8] focus:outline-none"
           type="text"
           name="search"
-          placeholder="아파트 이름 검색"
+          placeholder="아파트 검색"
           style={{ WebkitAppearance: 'none' }} // 기본 x 버튼 숨기기
         />
         <button

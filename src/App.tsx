@@ -3,16 +3,17 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
 import AssetRegister from './pages/AssetRegister.tsx';
+import LoanDetail from './pages/LoanDetail.tsx';
 import LoanRecommend from './pages/LoanRecommned.tsx';
+import Login from './pages/Login.tsx';
 import Main from './pages/Main.tsx';
 import PropertyAgree from './pages/PropertyAgree.tsx';
 import RealEstateDetail from './pages/RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateList from './pages/RealEstateList/RealEstateList.tsx';
+import SignUp from './pages/SignUp.tsx';
 //데이터가 없어서 test 컴포넌트 import(임시)
 import TestPropertyConfirm from './pages/property/TestPropertyConfirm.tsx';
 import PropertyForm from './pages/property/form/PropertyForm.tsx';
-import Login from './pages/Login.tsx';
-import SignUp from './pages/SignUp.tsx';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/loan-recommend" element={<LoanRecommend />} />
+            <Route path="/loan-detail" element={<LoanDetail />} />
             <Route path="/real-estate-list" element={<RealEstateList />} />
             <Route path="/real-estate-detail" element={<RealEstateDetail />} />
             <Route path="/property-from" element={<PropertyForm />} />

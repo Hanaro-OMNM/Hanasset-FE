@@ -11,6 +11,7 @@ import PropertyAgree from './pages/PropertyAgree.tsx';
 import RealEstateDetail from './pages/RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateList from './pages/RealEstateList/RealEstateList.tsx';
 import SignUp from './pages/SignUp.tsx';
+import GuestInfo from './pages/consultant/GuestInfo.tsx';
 //데이터가 없어서 test 컴포넌트 import(임시)
 import TestPropertyConfirm from './pages/property/TestPropertyConfirm.tsx';
 import PropertyForm from './pages/property/form/PropertyForm.tsx';
@@ -32,6 +33,7 @@ function App() {
             <Route path="/assetRegister" element={<AssetRegister />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signUp" element={<SignUp />} />
+            <Route path="/consultant/guest-info" element={<GuestInfo />} />
           </Routes>
         </Layout>
       </NavermapsProvider>

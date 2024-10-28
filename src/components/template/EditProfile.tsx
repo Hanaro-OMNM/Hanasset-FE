@@ -6,7 +6,11 @@ interface EditProfileProps {
   onEdit: () => void;
 }
 
-export default function EditProfile({ imageSrc, name, onEdit }: EditProfileProps) {
+export default function EditProfile({
+  imageSrc,
+  name,
+  onEdit,
+}: EditProfileProps) {
   return (
     <div className="relative flex flex-col items-center mb-8">
       {/* 프로필 이미지 */}

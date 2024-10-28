@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import ConfirmModal from '../atoms/EditProfileModal';
 import Input from '../atoms/Input';
+
 export default function EditProfilePage() {
   const navigate = useNavigate();
 
@@ -57,47 +58,49 @@ export default function EditProfilePage() {
       <div className="space-y-2">
         <label className="block text-gray-700 font-medium">이름</label>
         <Input
-            type="text"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="이름을 입력하세요"
-            required={true}
-            error={!username} 
-            errorMessage=" "
-            className="w-full"
-            inputClassName="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-hanaGreen"
-            />
+          type="text"
+          name="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="이름을 입력하세요"
+          required={true}
+          error={!username}
+          errorMessage=" "
+          className="w-full"
+          inputClassName="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-hanaGreen"
+        />
       </div>
 
       {/* 비밀번호 변경 */}
       <div className="space-y-2">
         <label className="block text-gray-700 font-medium">현재 비밀번호</label>
         <Input
-            type="password"
-            name="currentPassword"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="현재 비밀번호를 입력하세요"
-            required={true}
-            error={!password} 
-            errorMessage=" "
-            className="w-full"
-            inputClassName="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-hanaGreen"
-            />
-        <label className="block text-gray-700 font-medium mt-4">새 비밀번호</label>
+          type="password"
+          name="currentPassword"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="현재 비밀번호를 입력하세요"
+          required={true}
+          error={!password}
+          errorMessage=" "
+          className="w-full"
+          inputClassName="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-hanaGreen"
+        />
+        <label className="block text-gray-700 font-medium mt-4">
+          새 비밀번호
+        </label>
         <Input
-            type="password"
-            name="newPassword"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            placeholder="새 비밀번호를 입력하세요"
-            required={true}
-            error={!newPassword} 
-            errorMessage=" "
-            className="w-full mt-4"
-            inputClassName="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-hanaGreen"
-            />
+          type="password"
+          name="newPassword"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          placeholder="새 비밀번호를 입력하세요"
+          required={true}
+          error={!newPassword}
+          errorMessage=" "
+          className="w-full mt-4"
+          inputClassName="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-hanaGreen"
+        />
       </div>
 
       {/* 저장 및 회원 탈퇴 버튼 */}

@@ -30,9 +30,7 @@ export default function RegisterButton({
           <BsFillSendFill />
         </div>
         <div className="flex flex-col w-full">
-          <div className="text-gray-800 text-base leading-tight">
-            {title}
-          </div>
+          <div className="text-gray-800 text-base leading-tight">{title}</div>
           <div className="text-hanaSilver80 text-xs font-normal">
             {description}
           </div>

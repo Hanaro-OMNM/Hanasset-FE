@@ -16,14 +16,14 @@ const Navbar: React.FC = () => {
   );
 
   return (
-    <div className="flex space-x-16">
-      <div className="left-0 top-0 p-2 h-full absolute bg-white shadow border-r border-[#e7e7e7] items-center">
+    <div className="space-x-16">
+      <div className="left-0 top-0 p-2 h-full absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center">
         <a
           href="/"
           className="mt-4 mb-10 flex flex-col items-center justify-center"
         >
           <img className="w-10 h-10" src={Logo} alt="Logo Image" />
-          <div className="text-black text-base font-bold font-sans tracking-tight text-center">
+          <div className="text-black text-sm font-bold font-sans tracking-tight text-center">
             OMNM
           </div>
         </a>

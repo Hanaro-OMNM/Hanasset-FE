@@ -3,6 +3,60 @@ import real_estate_2 from '../assets/img/realEstate/real_estate_2.png';
 import real_estate_3 from '../assets/img/realEstate/real_estate_3.png';
 import real_estate_4 from '../assets/img/realEstate/real_estate_4.png';
 
+export interface Guest {
+  stressDsr: number;
+}
+
+export interface LoanDetail {
+  type: string;
+  name: string;
+  rate: number;
+  outline: string;
+  amount: number;
+  detail: string;
+  targetGuest: string;
+  targetHouse: string;
+  period: string;
+  paybackMethod: string;
+  rateCalculateMethod: string;
+  loanApplyUrl: string;
+}
+
+export const dummyGuest: Guest = {
+  stressDsr: 40,
+};
+
+export const dummyLoanDetail: LoanDetail = {
+  type: '전(월)세 대출',
+  name: '하나 청년전세론',
+  outline:
+    '청년층 주거비용 경감을 위해 임차보증금의 90%이내, 최대 2억원까지(전세,반전세 계약 모두 가능합니다)',
+  rate: 4.453,
+  amount: 2,
+  detail:
+    '만 19세이상 만 34세 이하의 무주택(배우자 포함)세대주를 대상으로 한국주택금융공사의 보증서 담보로 임차보증금의 90%범위 내에서 최대 2억원까지 주택의 전세자금을 지원해드리는 상품입니다.',
+  targetGuest: `주택임대차계약을 체결한 국민인 거주자로 아래의 조건을 모두 충족하는 손님 
+      - 임차보증금액주)이 7억원(수도권 외 5억원) 초과하는 경우 대출 불가 
+      주)월세가 있는 경우 월세보증금 및 월세에 대해 전월세전환율을 적용하여 계산한 금액 
+      (월세보증금+(월세X12÷전월세전환율)) 
+      만 19세 이상 만 34세 이하인 무주택 세대주 
+      임차보증금의 5%이상을 지급한 임차인 
+      본인과 배우자의 합산한 연소득이 7천만원 이하인 손님 `,
+  targetHouse: '공부상(등기부등본 등) 주거용 주택(미등기 주택도 가능)',
+  period: `6개월이상 3년이내 (단, 임대차 계약기간 범위내)
+(만 34세 이하 임차인은 임대차 계약 기간 범위에서 횟수 제한없이 기한연장 가능하며, 만 35세 이상 임차인은 1회에 한하여 기한연장 가능. 이후 연장불가)`,
+  paybackMethod: '만기일시상환',
+  rateCalculateMethod: `대출금에 연이율과 대출일수를 곱한 후 이를 365일(윤년인 경우 366일)로 나누어 산출하되 원단위 미만은 절사
+원리금균등분할상환대출의 월별이자 계산은 대출원금에 연이율을 곱한 다음 12로 나누어 계산
+일수계산은 여신당일로부터 기일 또는 상환일(일부상환 및 분할상환 포함) 전일까지로 한다.(한편넣기)
+위 내용에도 불구하고 다음의 여신은 여신당일부터 기일 또는 상환일까지로 한다.
+1. 대출 당일에 회수되는 대출금 / 2. 대외기관으로부터 자금을 차입하는 대출금으로서 이자를 상환일까지 지급하는 대출금 /
+3. 연체기간이 1일인 연체대출채권 및 지급보증대지급금 / 4. 대여유가증권
+원금 균등분할상환대출 : 대출금액 x 대출이자율 x 이자일수 ÷ 365(윤년은 366일)
+원리금 균등분할상환대출 : 대출금액 × 대출이자율 ÷ 12`,
+  loanApplyUrl: '',
+};
+
 export const realEstateData = [
   {
     type: '아파트',

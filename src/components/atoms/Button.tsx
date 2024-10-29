@@ -17,7 +17,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <div
-      className={`w-full h-12 px-4 py-3 rounded-xl flex justify-center items-center gap-2 transition 
+      className={`w-full px-4 py-2 rounded-xl flex justify-center items-center gap-2 transition 
       ${
         version === 'ver1'
           ? disabled
@@ -33,7 +33,7 @@ export default function Button({
         type={type}
         onClick={onClick}
         disabled={disabled}
-        className={`w-full h-full text-md font-semibold font-['Inter'] 
+        className={`w-full h-full text-md font-['Inter'] 
           ${version === 'ver1' ? 'text-white' : disabled ? 'text-hanaBlack40' : 'text-hanaGreen'}
         `}
       >

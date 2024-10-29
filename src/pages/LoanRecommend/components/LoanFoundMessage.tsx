@@ -4,7 +4,7 @@ interface LoanFoundMessageProps {
 
 const LoanFoundMessage: React.FC<LoanFoundMessageProps> = ({ isFound }) => {
   return (
-    <p className="ml-4 mt-4 mb-6 pl-2 text-hanaBlack80 font-semibold">
+    <p className="ml-4 mt-4 mb-4 pl-2 text-hanaBlack80 font-semibold">
       {isFound
         ? '나에게 맞는 대출 상품을 찾았어요'
         : '대출 상품을 찾지 못했어요'}

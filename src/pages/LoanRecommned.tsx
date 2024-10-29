@@ -75,7 +75,7 @@ const LoanInfoPage: React.FC = () => {
 
       <DsrInfo dsr={dummyGuest.stressDsr} />
       <LoanFoundMessage isFound={true} />
-      <LoanRecommendTab loanList={loanList} />
+      <LoanRecommendTab hanaLoanList={loanList} beotimmogLoanList={[]} />
 
       <Button text="실시간 채팅 상담 예약하기" />
     </div>

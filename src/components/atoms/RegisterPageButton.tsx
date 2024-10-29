@@ -19,13 +19,13 @@ export default function RegisterButton({
 }: RegisterButtonProps) {
   return (
     <button
-      className={`w-full bg-white pt-5 pb-5 px-4 flex items-center shadow-md hover:shadow-lg 
+      className={`w-full hover:transition-transform transform hover:scale-105 
       hover:bg-hanaGreen10 transition-all duration-300 ease-in-out focus:outline-none
       ${roundedTop ? 'rounded-t-lg' : ''} 
       ${roundedBottom ? 'rounded-b-lg' : ''}`}
       onClick={() => onClick(type)}
     >
-      <div className="flex items-center w-full">
+      <div className="flex items-center w-full p-4">
         <div className="text-hanaGreen text-xl w-5">
           <BsFillSendFill />
         </div>

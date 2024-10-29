@@ -1,10 +1,9 @@
-// ChatHeader.tsx
 import { HiBell } from 'react-icons/hi';
 import React from 'react';
 
 type ChatHeaderProps = {
   advisorName: string;
-  advisorImage: string; // 상담사 이미지 경로를 위한 prop 추가
+  advisorImage: string;
 };
 
 const ChatHeader: React.FC<ChatHeaderProps> = ({
@@ -16,9 +15,9 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <img
-            src={advisorImage} // 상담사 프로필 사진 경로
+            src={advisorImage}
             alt="Advisor"
-            className="w-6 h-6 rounded-full mr-2" // 크기와 스타일 조정
+            className="w-6 h-6 rounded-full mr-2"
           />
           <span className="text-md font-bold text-hanaBlack80">
             {advisorName}
@@ -35,7 +34,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
           </button>
         </div>
       </div>
-      {/* 아래에 위치한 수평선 */}
+
       <hr className="mt-3 border-t border-hanaSilver40" />
     </div>
   );

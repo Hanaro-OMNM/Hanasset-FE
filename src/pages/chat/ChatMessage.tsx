@@ -1,20 +1,19 @@
-// ChatMessage.tsx
 import React from 'react';
 
 type ChatMessageProps = {
   sender: 'user' | 'bot';
   message: string;
-  lastMessageTime?: string | null; // 표시할 시간
-  advisorName?: string; // 상담사 이름 prop 추가
-  advisorImage?: string; // 상담사 이미지 경로 prop 추가
+  lastMessageTime?: string | null;
+  advisorName?: string;
+  advisorImage?: string;
 };
 
 const ChatMessage: React.FC<ChatMessageProps> = ({
   sender,
   message,
   lastMessageTime,
-  advisorName, // 상담사 이름 prop
-  advisorImage, // 상담사 이미지 prop
+  advisorName,
+  advisorImage,
 }) => {
   const isUser = sender === 'user';
 
@@ -36,13 +35,13 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
           {/* 상담사 프로필 사진 */}
           {!isUser && advisorImage && (
             <img
-              src={advisorImage} // 상담사 프로필 사진 경로
+              src={advisorImage}
               alt="Advisor"
-              className="w-6 h-6 rounded-full mr-2" // 크기와 스타일 조정
+              className="w-6 h-6 rounded-full mr-2"
             />
           )}
 
-          {/* 상담사 이름 표시 (bot일 때) */}
+          {/* 상담사 이름 표시 */}
           {!isUser && advisorName && (
             <span className="text-hanaGreen text-xs font-bold">
               {advisorName}
@@ -61,7 +60,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
         </div>
       </div>
 
-      {/* 시간 표시 (bot일 때 오른쪽, 시간이 변했을 때만 표시) */}
+      {/* 시간 표시 (상담사일 때 오른쪽, 시간이 변했을 때만 표시) */}
       {!isUser && lastMessageTime && (
         <span className="ml-1 text-[10px] text-gray-400">
           {lastMessageTime}

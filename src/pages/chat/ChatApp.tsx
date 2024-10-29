@@ -58,13 +58,12 @@ const ChatApp: React.FC = () => {
         time: getCurrentTime(),
       };
       setMessages((prevMessages) => [...prevMessages, botReply]);
-      setLastMessageTime(botReply.time); // 마지막 메시지 시간을 업데이트
+      setLastMessageTime(botReply.time);
     }, 1000);
   };
 
   return (
     <div className="flex flex-col w-full min-h-screen items-center h-full p-4 bg-gray-100">
-      {/* ChatHeader 컴포넌트 사용 */}
       <ChatHeader advisorName="하나은행 상담사" advisorImage={logo} />
       <div className="flex-1 w-full max-w-md p-4 bg-hanaSilver20 shadow overflow-y-auto max-h-screen space-y-4">
         {messages.map((msg, index) => (
@@ -77,7 +76,7 @@ const ChatApp: React.FC = () => {
                 ? msg.time
                 : null
             }
-            advisorName={msg.sender === 'bot' ? '하나은행 상담사' : undefined} // 상담사 이름 prop 전달
+            advisorName={msg.sender === 'bot' ? '하나은행 상담사' : undefined}
             advisorImage={logo}
           />
         ))}

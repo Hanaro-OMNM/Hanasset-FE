@@ -84,7 +84,7 @@ const Navbar: React.FC = () => {
               }`}
             >
               <MdChat
-                className={`w-6 h-6 ${activePage === 'myPage' ? 'text-white' : 'text-black'}`}
+                className={`w-6 h-6 ${activePage === 'mychat' ? 'text-white' : 'text-black'}`}
               />
             </div>
             <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">

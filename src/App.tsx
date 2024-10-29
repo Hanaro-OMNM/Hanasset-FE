@@ -2,6 +2,7 @@ import { NavermapsProvider } from 'react-naver-maps';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
+import MyChatLayout from './components/template/MyChatLayout.tsx';
 import LoanDetail from './pages/LoanDetail.tsx';
 import LoanRecommend from './pages/LoanRecommned.tsx';
 import LoanReservation from './pages/LoanReservation/LoanReservation.tsx';
@@ -42,6 +43,8 @@ function App() {
               element={<GuestWaiting />}
             />
             <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
+            {/* 임시 */}
+            <Route path="/mychat" element={<MyChatLayout />} />
           </Routes>
         </Layout>
       </NavermapsProvider>

@@ -1,5 +1,6 @@
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
 import React, { useState } from 'react';
+import logo from '../../assets/img/logo.png';
 import ChatHeader from './ChatHeader';
 import ChatMessage from './ChatMessage';
 
@@ -64,7 +65,7 @@ const ChatApp: React.FC = () => {
   return (
     <div className="flex flex-col w-full min-h-screen items-center h-full p-4 bg-gray-100">
       {/* ChatHeader 컴포넌트 사용 */}
-      <ChatHeader advisorName="하나은행 상담사" />
+      <ChatHeader advisorName="하나은행 상담사" advisorImage={logo} />
       <div className="flex-1 w-full max-w-md p-4 bg-hanaSilver20 shadow overflow-y-auto max-h-screen space-y-4">
         {messages.map((msg, index) => (
           <ChatMessage
@@ -77,6 +78,7 @@ const ChatApp: React.FC = () => {
                 : null
             }
             advisorName={msg.sender === 'bot' ? '하나은행 상담사' : undefined} // 상담사 이름 prop 전달
+            advisorImage={logo}
           />
         ))}
       </div>

@@ -4,14 +4,22 @@ import React from 'react';
 
 type ChatHeaderProps = {
   advisorName: string;
+  advisorImage: string; // 상담사 이미지 경로를 위한 prop 추가
 };
 
-const ChatHeader: React.FC<ChatHeaderProps> = ({ advisorName }) => {
+const ChatHeader: React.FC<ChatHeaderProps> = ({
+  advisorName,
+  advisorImage,
+}) => {
   return (
     <div className="w-full max-w-md p-3 bg-white justify-center">
       <div className="flex justify-between items-center">
         <div className="flex items-center">
-          <div className="w-5 h-5 rounded-full bg-teal-500 mr-2"></div>
+          <img
+            src={advisorImage} // 상담사 프로필 사진 경로
+            alt="Advisor"
+            className="w-6 h-6 rounded-full mr-2" // 크기와 스타일 조정
+          />
           <span className="text-md font-bold text-hanaBlack80">
             {advisorName}
           </span>

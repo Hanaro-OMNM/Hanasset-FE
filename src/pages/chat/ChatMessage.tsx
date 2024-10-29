@@ -1,20 +1,20 @@
 // ChatMessage.tsx
 import React from 'react';
-import logo from '../../assets/img/logo.png';
-import userProfile from '../../assets/img/profile_ex.jpg';
 
 type ChatMessageProps = {
   sender: 'user' | 'bot';
   message: string;
   lastMessageTime?: string | null; // 표시할 시간
   advisorName?: string; // 상담사 이름 prop 추가
+  advisorImage?: string; // 상담사 이미지 경로 prop 추가
 };
 
 const ChatMessage: React.FC<ChatMessageProps> = ({
   sender,
   message,
   lastMessageTime,
-  advisorName, // prop으로 받기
+  advisorName, // 상담사 이름 prop
+  advisorImage, // 상담사 이미지 prop
 }) => {
   const isUser = sender === 'user';
 
@@ -34,19 +34,11 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
           className={`flex mb-1 ${isUser ? 'flex-row-reverse' : 'flex-row'} items-center`}
         >
           {/* 상담사 프로필 사진 */}
-          {!isUser && (
+          {!isUser && advisorImage && (
             <img
-              src={logo} // 상담사 프로필 사진 경로
+              src={advisorImage} // 상담사 프로필 사진 경로
               alt="Advisor"
               className="w-6 h-6 rounded-full mr-2" // 크기와 스타일 조정
-            />
-          )}
-          {/* 사용자 프로필 사진 */}
-          {isUser && (
-            <img
-              src={userProfile} // 사용자 프로필 사진 경로
-              alt="User"
-              className="w-6 h-6 rounded-full ml-2" // 크기와 스타일 조정
             />
           )}
 

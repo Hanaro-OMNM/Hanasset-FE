@@ -21,9 +21,12 @@ interface Consultating {
 }
 
 export default function MyPageLayout() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'car' | 'main'>(
-    'main'
-  );
+  const [currentPage, setCurrentPage] = useState<
+    'home' | 'car' | 'main' | 'editProfile'
+  >('main');
+  const handleEditProfile = () => {
+    setCurrentPage('editProfile');
+  };
 
   const profile = {
     imageSrc: profileImage,
@@ -64,7 +67,7 @@ export default function MyPageLayout() {
           <EditProfile
             imageSrc={profile.imageSrc}
             name={profile.name}
-            onEdit={() => console.log('프로필 편집')}
+            onEdit={handleEditProfile}
           />
 
           <SemiTitle>내 상담 내역</SemiTitle>
@@ -134,13 +137,13 @@ export default function MyPageLayout() {
             />
           </div>
         </>
+      ) : currentPage === 'editProfile' ? (
+        <EditProfileLayout onBack={() => setCurrentPage('main')} />
       ) : (
-        <div>
-          <AssetRegister
-            assetType={currentPage}
-            onBack={() => setCurrentPage('main')}
-          />
-        </div>
+        <AssetRegister
+          assetType={currentPage}
+          onBack={() => setCurrentPage('main')}
+        />
       )}
     </div>
   );

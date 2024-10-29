@@ -1,11 +1,12 @@
-import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import ConfirmModal from '../atoms/EditProfileModal';
 import Input from '../atoms/Input';
 
-export default function EditProfilePage() {
-  const navigate = useNavigate();
+interface EditProfilePageProps {
+  onBack: () => void;
+}
 
+export default function EditProfilePage({ onBack }: EditProfilePageProps) {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [newPassword, setNewPassword] = useState<string>('');
@@ -23,7 +24,7 @@ export default function EditProfilePage() {
 
   const handleSaveChanges = () => {
     alert('사용자 정보가 저장되었습니다.');
-    navigate('/mypage');
+    onBack();
   };
 
   const openModal = () => setShowModal(true);
@@ -32,11 +33,11 @@ export default function EditProfilePage() {
   const handleDeleteAccount = () => {
     alert('회원탈퇴가 완료되었습니다.');
     setShowModal(false);
+    onBack();
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-white shadow-lg rounded-lg space-y-8">
-      {/* 프로필 이미지 수정 */}
+    <div>
       <div className="space-y-2">
         <label className="block text-gray-700 font-medium">프로필 이미지</label>
         <div className="flex items-center space-x-4">
@@ -54,7 +55,6 @@ export default function EditProfilePage() {
         </div>
       </div>
 
-      {/* 사용자 이름 수정 */}
       <div className="space-y-2">
         <label className="block text-gray-700 font-medium">이름</label>
         <Input
@@ -71,7 +71,6 @@ export default function EditProfilePage() {
         />
       </div>
 
-      {/* 비밀번호 변경 */}
       <div className="space-y-2">
         <label className="block text-gray-700 font-medium">현재 비밀번호</label>
         <Input
@@ -103,7 +102,6 @@ export default function EditProfilePage() {
         />
       </div>
 
-      {/* 저장 및 회원 탈퇴 버튼 */}
       <div className="flex flex-col items-center gap-3">
         <button
           onClick={handleSaveChanges}
@@ -117,9 +115,15 @@ export default function EditProfilePage() {
         >
           회원탈퇴
         </button>
+        <button
+          onClick={handleSaveChanges}
+          className="px-4 py-2 w-full bg-hanaGreen60 text-white font-medium rounded-lg shadow hover:bg-hanaGreen transition duration-300"
+        >
+          뒤로가기
+        </button>{' '}
+        {/* 뒤로가기 버튼 헤더 없어서 임시로 만들어둠 */}
       </div>
 
-      {/* 회원 탈퇴 확인 모달 */}
       {showModal && (
         <ConfirmModal
           message="정말로 회원탈퇴 하시겠습니까?"

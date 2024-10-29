@@ -47,8 +47,15 @@ const MainSideLayout: React.FC = () => {
           </div>
 
           {/* 카테고리별 골라보기 */}
-          <div className="w-full max-w-md px-4 mt-10">
+          {/* 버튼에 useState를 활용해 필터 페이지로 연결되는 부분 구현 필요 */}
+          <div className="w-full max-w-md px-4 mt-16">
             <h2 className="text-xl font-bold mb-6">카테고리별 골라보기</h2>
+            <div className="w-full grid grid-cols-2 gap-4 px-4">
+              <div className="bg-gray-200 h-24">1</div>
+              <div className="bg-gray-300 h-24">2</div>
+              <div className="bg-gray-400 h-24">3</div>
+              <div className="bg-gray-500 h-24">4</div>
+            </div>
           </div>
         </div>
       </div>

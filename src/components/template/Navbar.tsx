@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Logo from '../../assets/img/logo.png';
 import Profile from '../../assets/img/profile_ex.jpg';
 import MainSideLayout from '../template/MainSideLayout';
-import ConsultingLayout from './ConsultingLayout.tsx';
+import ConsultingTabLayout from './ConsultingTabLayout.tsx';
 import MyPageLayout from './MyPageLayout.tsx';
 
 const Navbar: React.FC = () => {
@@ -120,7 +120,7 @@ const Navbar: React.FC = () => {
       </div>
       {activePage === 'home' && <MainSideLayout />}
       {activePage === 'map' && <></>}
-      {activePage === 'consultant' && <ConsultingLayout />}
+      {activePage === 'consultant' && <ConsultingTabLayout />}
       {activePage === 'myPage' && <MyPageLayout />}
     </div>
   );

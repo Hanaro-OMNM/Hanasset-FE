@@ -3,7 +3,11 @@
 */
 
 const SearchHeader: React.FC = () => {
-  return <div>검색창</div>;
+  return (
+    <div className="w-[420px] max-w-[420px] h-16 absolute bg-white">
+      으아아아ㅏ아아아앙
+    </div>
+  );
 };
 
 export default SearchHeader;

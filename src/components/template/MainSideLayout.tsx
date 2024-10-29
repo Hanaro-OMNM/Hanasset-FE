@@ -21,9 +21,15 @@ const MainSideLayout: React.FC = () => {
 
   useEffect(() => {
     // LocalStorage에서 값을 가져오고 없으면 기본값으로 설정
-    const storedCity = localStorage.getItem('city') || '시/도';
-    const storedGungu = localStorage.getItem('gungu') || '시/군/구';
-    const storedDong = localStorage.getItem('dong') || '읍/면/동';
+    const storedCity = JSON.parse(
+      localStorage.getItem('currCity') || '"시/도"'
+    );
+    const storedGungu = JSON.parse(
+      localStorage.getItem('currGungu') || '"시/군/구"'
+    );
+    const storedDong = JSON.parse(
+      localStorage.getItem('currDong') || '"읍/면/동"'
+    );
 
     setCity(storedCity);
     setGungu(storedGungu);

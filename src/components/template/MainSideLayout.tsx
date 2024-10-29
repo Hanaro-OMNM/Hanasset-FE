@@ -46,16 +46,26 @@ const MainSideLayout: React.FC = () => {
             <div className="w-full max-w-md px-4 mt-10">
               <h2 className="text-xl font-bold mb-6">주소로 골라보기</h2>
               <div className="w-full flex justify-around items-center">
+                {/* 시/도 버튼 */}
                 <button
                   type="button"
                   className="w-24 h-12 rounded-[10px] bg-white drop-shadow-[0_4px_6px_rgba(93,149,136,0.5)] transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-103 duration-300 hover:text-hanaGreen"
-                  onClick={() => setActivePage('city')}
+                  onClick={() => {
+                    // local storage에서 key 값 삭제
+                    localStorage.removeItem('currCity');
+                    localStorage.removeItem('currGungu');
+                    localStorage.removeItem('currDong');
+
+                    // 페이지 이동
+                    setActivePage('city');
+                  }}
                 >
                   <span className="font-semibold hover:font-bold">
                     {currCity}
                   </span>
                 </button>
 
+                {/* 시/군/구 버튼 */}
                 <button
                   type="button"
                   className={`w-24 h-12 rounded-[10px] bg-white drop-shadow-[0_4px_6px_rgba(93,149,136,0.5)] transition ease-in-out delay-50 ${
@@ -63,13 +73,21 @@ const MainSideLayout: React.FC = () => {
                       ? 'text-gray-400 cursor-not-allowed'
                       : 'hover:-translate-y-1 hover:scale-103 duration-300 hover:text-hanaGreen'
                   }`}
-                  onClick={() => setActivePage('gungu')}
+                  onClick={() => {
+                    // local storage에서 key 값 삭제
+                    localStorage.removeItem('currGungu');
+                    localStorage.removeItem('currDong');
+
+                    // 페이지 이동
+                    setActivePage('gungu');
+                  }}
                 >
                   <span className="font-semibold hover:font-bold">
                     {currGungu}
                   </span>
                 </button>
 
+                {/* 읍/면/동 버튼 */}
                 <button
                   type="button"
                   className={`w-24 h-12 rounded-[10px] bg-white drop-shadow-[0_4px_6px_rgba(93,149,136,0.5)] transition ease-in-out delay-50 ${
@@ -77,7 +95,13 @@ const MainSideLayout: React.FC = () => {
                       ? 'text-gray-400 cursor-not-allowed'
                       : 'hover:-translate-y-1 hover:scale-103 duration-300 hover:text-hanaGreen'
                   }`}
-                  onClick={() => setActivePage('dong')}
+                  onClick={() => {
+                    // local storage에서 key 값 삭제
+                    localStorage.removeItem('currDong');
+
+                    // 페이지 이동
+                    setActivePage('dong');
+                  }}
                 >
                   <span className="font-semibold hover:font-bold">
                     {currDong}

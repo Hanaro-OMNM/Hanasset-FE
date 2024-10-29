@@ -25,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/loan-recommend" element={<LoanRecommend />} />
+            <Route path="/loan-reservation" element={<LoanReservation />} />
             <Route path="/loan-detail" element={<LoanDetail />} />
             <Route path="/real-estate-list" element={<RealEstateList />} />
             <Route path="/real-estate-detail" element={<RealEstateDetail />} />
@@ -38,20 +39,6 @@ function App() {
           </Routes>
         </Layout>
       </NavermapsProvider>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/my-page" element={<MyPage />} />
-          <Route path="/loan-recommend" element={<LoanRecommend />} />
-          <Route path="/loan-reservation" element={<LoanReservation />} />
-          <Route path="/real-estate-list" element={<RealEstateList />} />
-          <Route path="/real-estate-detail" element={<RealEstateDetail />} />
-          <Route path="/property-form" element={<PropertyForm />} />
-          <Route path="/property-confirm" element={<TestPropertyConfirm />} />
-          <Route path="/property-agree" element={<PropertyAgree />} />
-          <Route path="/assetRegister" element={<AssetRegister />} />
-        </Routes>
-      </Layout>
     </div>
   );
 }

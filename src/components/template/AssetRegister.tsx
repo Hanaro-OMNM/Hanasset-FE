@@ -6,7 +6,6 @@ import CommonBackground from '../atoms/CommonBackground';
 interface AssetRegisterProps {
   assetType: 'home' | 'car';
   onBack: () => void;
-  onClick?: () => void;
 }
 
 export default function AssetRegister({

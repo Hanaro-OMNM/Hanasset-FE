@@ -14,7 +14,7 @@ import EditProfileLayout from '../template/EditProfileLayout';
 interface Asset {
   name: string;
 }
-interface Consultation {
+interface Consultating {
   title: string;
   date: string;
   time: string;
@@ -30,7 +30,7 @@ export default function MyPageLayout() {
     name: '김손님',
   };
 
-  const consultations: Consultation[] = [
+  const consultatings: Consultating[] = [
     { title: '전세금 안심 대출', date: '2024.09.12', time: '13:04' },
     { title: '하나 청년전세론', date: '2024.08.27', time: '16:34' },
   ];
@@ -69,16 +69,16 @@ export default function MyPageLayout() {
 
           <SemiTitle>내 상담 내역</SemiTitle>
           <CommonBackground className="p-5">
-            {consultations.map((consultation, index) => (
+            {consultatings.map((consultating, index) => (
               <div
                 key={index}
                 onClick={handleConsultant}
                 className="border-b last:border-none py-4 flex items-center justify-between hover:transition-transform transform hover:scale-105"
               >
                 <button className="w-full text-left">
-                  <h3 className="text-lg">{consultation.title}</h3>
+                  <h3 className="text-lg">{consultating.title}</h3>
                   <p className="text-xs text-gray-500">
-                    마지막 상담: {consultation.date} {consultation.time}
+                    마지막 상담: {consultating.date} {consultating.time}
                   </p>
                 </button>
                 <AiOutlineRight className="text-gray-400 text-xl" />

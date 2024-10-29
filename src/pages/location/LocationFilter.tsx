@@ -31,7 +31,7 @@ const LocationFilter = ({ locationType }: LocationFilterLayoutProps) => {
               </button>
 
               <input
-                className="bg-white w-80 h-10 px-5 pr-16 rounded-lg text-sm focus:border-[#ABCEC8] focus:outline-none"
+                className="bg-white w-80 h-10 px-5 pr-16 rounded-lg text-sm focus:border-hanaGreen40 focus:outline-none"
                 type="text"
                 name="search"
                 placeholder="아파트 이름, 지역명 검색"
@@ -46,13 +46,13 @@ const LocationFilter = ({ locationType }: LocationFilterLayoutProps) => {
               {isFocused || searchText ? (
                 <button
                   type="button"
-                  className="hover:text-[#ABCEC8]"
+                  className="hover:text-hanaGreen40"
                   onClick={handleClear}
                 >
                   <FaRegTimesCircle />
                 </button>
               ) : (
-                <button type="submit" className="hover:text-[#ABCEC8]">
+                <button type="submit" className="hover:text-hanaGreen40">
                   <FaSearch />
                 </button>
               )}

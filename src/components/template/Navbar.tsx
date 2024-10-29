@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
             <div
               className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                 activePage === 'home'
-                  ? 'bg-[#008485] shadow mb-2'
+                  ? 'bg-hanaGreen shadow mb-2'
                   : 'bg-transparent'
               }`}
             >
@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
             <div
               className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                 activePage === 'map'
-                  ? 'bg-[#008485] shadow mb-2'
+                  ? 'bg-hanaGreen shadow mb-2'
                   : 'bg-transparent'
               }`}
             >
@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
             <div
               className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                 activePage === 'consultant'
-                  ? 'bg-[#008485] shadow mb-2'
+                  ? 'bg-hanaGreen shadow mb-2'
                   : 'bg-transparent'
               }`}
             >
@@ -99,7 +99,7 @@ const Navbar: React.FC = () => {
             <div
               className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                 activePage === 'myPage'
-                  ? 'bg-[#008485] shadow mb-2'
+                  ? 'bg-hanaGreen shadow mb-2'
                   : 'bg-transparent'
               }`}
             >

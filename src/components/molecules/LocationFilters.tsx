@@ -61,14 +61,14 @@ const LocationFilter = ({ locationType }: LocationFilterProps) => {
       <div className="w-full bg-white p-4">
         {/* <아이콘> 시/도 > 시/군/구 > 읍/면/동 */}
         <div className="flex items-center mb-10">
-          <div className="flex items-center justify-center w-7 h-7 rounded-full bg-[#ABCEC8] mr-4">
+          <div className="flex items-center justify-center w-7 h-7 rounded-full bg-hanaGreen40 mr-4">
             <HiOutlineOfficeBuilding color="white" />
           </div>
-          <div className="text-[#ABCEC8] mr-2">{currCity}</div>
+          <div className="text-hanaGreen40 mr-2">{currCity}</div>
           <MdNavigateNext color="#ABCEC8" className="mr-2" />
-          <div className="text-[#ABCEC8] mr-2">{currGungu}</div>
+          <div className="text-hanaGreen40 mr-2">{currGungu}</div>
           <MdNavigateNext color="#ABCEC8" className="mr-2" />
-          <div className="text-[#ABCEC8] mr-2">{currDong}</div>
+          <div className="text-hanaGreen40 mr-2">{currDong}</div>
         </div>
 
         {/* 지역 선택 버튼 */}

@@ -1707,3 +1707,15 @@ export const accidentDeath = {
   },
   resultCode: 'Success',
 };
+
+export const initialExpandedState = {
+  '13:00 ~ 13:30': false,
+  '13:30 ~ 14:00': false,
+  '14:00 ~ 14:30': false,
+};
+
+export const consultationData: { [key: string]: string[] } = {
+  '13:00 ~ 13:30': ['이순님', '김철수', '박영희', '이민수'],
+  '13:30 ~ 14:00': ['최지훈', '이소라', '김영수', '이정민'],
+  '14:00 ~ 14:30': ['이순신', '강민재', '이상호', '홍길동'],
+};

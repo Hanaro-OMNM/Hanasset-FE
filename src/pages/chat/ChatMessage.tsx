@@ -1,59 +1,61 @@
 import React from 'react';
 
 type ChatMessageProps = {
-  sender: 'user' | 'bot';
+  subject: 'sender' | 'responser';
   message: string;
   lastMessageTime?: string | null;
-  advisorName?: string;
-  advisorImage?: string;
+  responserName?: string;
+  responserImage?: string;
 };
 
 const ChatMessage: React.FC<ChatMessageProps> = ({
-  sender,
+  subject,
   message,
   lastMessageTime,
-  advisorName,
-  advisorImage,
+  responserName,
+  responserImage,
 }) => {
-  const isUser = sender === 'user';
+  const issender = subject === 'sender';
 
   return (
     <div
-      className={`flex ${isUser ? 'justify-end' : 'justify-start'}  items-end`}
+      className={`flex ${issender ? 'justify-end' : 'justify-start'}  items-end`}
     >
-      {/* 시간 표시 (user일 때 왼쪽, 시간이 변했을 때만 표시) */}
-      {isUser && lastMessageTime && (
+      {/* 시간 표시 (sender일 때 왼쪽, 시간이 변했을 때만 표시) */}
+      {issender && lastMessageTime && (
         <span className="mr-1 text-[10px] text-gray-400">
           {lastMessageTime}
         </span>
       )}
 
-      <div className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}>
+      <div
+        className={`flex flex-col ${issender ? 'items-end' : 'items-start'}`}
+      >
         <div
-          className={`flex mb-1 ${isUser ? 'flex-row-reverse' : 'flex-row'} items-center`}
+          className={`flex mb-1 ${issender ? 'flex-row-reverse' : 'flex-row'} items-center`}
         >
           {/* 상담사 프로필 사진 */}
-          {!isUser && advisorImage && (
+          {!issender && responserImage && (
             <img
-              src={advisorImage}
-              alt="Advisor"
+              src={responserImage}
+              alt="responser"
               className="w-6 h-6 rounded-full mr-2"
             />
           )}
 
           {/* 상담사 이름 표시 */}
-          {!isUser && advisorName && (
+          {!issender && responserName && (
             <span className="text-hanaGreen text-xs font-bold">
-              {advisorName}
+              {responserName}
             </span>
           )}
         </div>
         <div
           className={`p-3 max-w-64 rounded-lg text-xs ${
-            isUser ? 'bg-hanaGreen80 text-white' : 'bg-hanaGreen40'
+            issender ? 'bg-hanaGreen80 text-white' : 'bg-hanaGreen40'
           }`}
           style={{
-            borderRadius: isUser ? '15px 15px 0 15px' : '15px 15px 15px 0',
+            borderRadius: issender ? '15px 15px 0 15px' : '15px 15px 15px 0',
           }}
         >
           <p>{message}</p>
@@ -61,7 +63,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
       </div>
 
       {/* 시간 표시 (상담사일 때 오른쪽, 시간이 변했을 때만 표시) */}
-      {!isUser && lastMessageTime && (
+      {!issender && lastMessageTime && (
         <span className="ml-1 text-[10px] text-gray-400">
           {lastMessageTime}
         </span>

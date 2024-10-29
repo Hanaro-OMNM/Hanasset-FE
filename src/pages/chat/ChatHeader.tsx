@@ -2,25 +2,25 @@ import { HiBell } from 'react-icons/hi';
 import React from 'react';
 
 type ChatHeaderProps = {
-  advisorName: string;
-  advisorImage: string;
+  responserName: string;
+  responserImage: string;
 };
 
 const ChatHeader: React.FC<ChatHeaderProps> = ({
-  advisorName,
-  advisorImage,
+  responserName,
+  responserImage,
 }) => {
   return (
-    <div className="w-full max-w-md p-3 bg-white justify-center">
+    <div className="w-full max-w-lg p-3 bg-white justify-center">
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <img
-            src={advisorImage}
-            alt="Advisor"
+            src={responserImage}
+            alt="responser"
             className="w-6 h-6 rounded-full mr-2"
           />
           <span className="text-md font-bold text-hanaBlack80">
-            {advisorName}
+            {responserName}
           </span>
           <div className="w-2 h-2 rounded-full bg-red-500 mx-2"></div>
         </div>

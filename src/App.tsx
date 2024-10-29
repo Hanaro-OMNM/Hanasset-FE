@@ -37,7 +37,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/consultant/guest-info" element={<GuestInfo />} />
-            <Route path="/live-chat" element={<ChatApp />} />
+            <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
           </Routes>
         </Layout>
       </NavermapsProvider>

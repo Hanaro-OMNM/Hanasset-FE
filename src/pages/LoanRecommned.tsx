@@ -1,8 +1,9 @@
 // LoanInfoPage.tsx
 import { useState } from 'react';
+import { dummyGuest } from '../assets/Dummy';
 import Button from '../components/atoms/Button';
-// import LoanProgressBar from '../components/atoms/LoanProgressBar';
 import AssetInfo from './LoanRecommend/components/AssetInfo';
+import DsrInfo from './LoanRecommend/components/DsrInfo';
 import LoanFoundMessage from './LoanRecommend/components/LoanFoundMessage';
 import LoanRecommendTab from './LoanRecommend/components/LoanRecommendTab';
 
@@ -72,6 +73,7 @@ const LoanInfoPage: React.FC = () => {
         />
       </div>
 
+      <DsrInfo dsr={dummyGuest.stressDsr} />
       <LoanFoundMessage isFound={true} />
       <LoanRecommendTab loanList={loanList} />
 

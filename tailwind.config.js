@@ -18,7 +18,7 @@ export default {
         hanaGreen20: '#F5F9F8',
 
         /* hanaRed*/
-        hanaRed: '#E90061',
+        hanaRed: '#CB1136',
         hanaRed80: '#D3514F',
         hanaRed60: '#DB8174',
         hanaRed40: '#E7ACA0',

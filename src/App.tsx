@@ -5,6 +5,7 @@ import Layout from './components/template/Layout.tsx';
 import AssetRegister from './pages/AssetRegister.tsx';
 import LoanDetail from './pages/LoanDetail.tsx';
 import LoanRecommend from './pages/LoanRecommned.tsx';
+import LoanReservation from './pages/LoanReservation/LoanReservation.tsx';
 import Login from './pages/Login.tsx';
 import Main from './pages/Main.tsx';
 import PropertyAgree from './pages/PropertyAgree.tsx';
@@ -25,6 +26,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/loan-recommend" element={<LoanRecommend />} />
+            <Route path="/loan-reservation" element={<LoanReservation />} />
             <Route path="/loan-detail" element={<LoanDetail />} />
             <Route path="/real-estate-list" element={<RealEstateList />} />
             <Route path="/real-estate-detail" element={<RealEstateDetail />} />

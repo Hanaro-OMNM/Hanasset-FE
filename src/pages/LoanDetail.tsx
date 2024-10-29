@@ -1,12 +1,12 @@
 import { IoChevronBack } from 'react-icons/io5';
 import { dummyGuest } from '../assets/Dummy';
 import { dummyLoanDetail } from '../assets/Dummy';
+import LoanProgressBar from '../components/atoms/LoanProgressBar';
 import InstructionCard from './LoanDetail/components/InstructionCard';
 import LoanDetailAccentInfo from './LoanDetail/components/LoanDetailAccentInfo';
 import LoanDetailCard from './LoanDetail/components/LoanDetailCard';
 import LoanDetailDisclosure from './LoanDetail/components/LoanDetailDisclosure';
 import LoanDetailHint from './LoanDetail/components/LoanDetailHint';
-import LoanDetailProgressBar from './LoanDetail/components/LoanDetailProgressBar';
 
 const LoanDetail: React.FC = () => {
   return (
@@ -42,7 +42,7 @@ const LoanDetail: React.FC = () => {
         title={'스트레스 DSR'}
         content={`${dummyGuest.stressDsr}%`}
       />
-      <LoanDetailProgressBar rate={dummyGuest.stressDsr} />
+      <LoanProgressBar rate={dummyGuest.stressDsr} />
       {/* 스트레스 DSR 설명 */}
       <InstructionCard
         title={'스트레스 DSR이란?'}

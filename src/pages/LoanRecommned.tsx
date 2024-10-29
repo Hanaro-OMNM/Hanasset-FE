@@ -1,8 +1,10 @@
 // LoanInfoPage.tsx
 import { useState } from 'react';
-import AssetInfo from './LoanRecommend/AssetInfo';
-import LoanFoundMessage from './LoanRecommend/LoanFoundMessage';
-import LoanRecommendTab from './LoanRecommend/LoanRecommendTab';
+import Button from '../components/atoms/Button';
+// import LoanProgressBar from '../components/atoms/LoanProgressBar';
+import AssetInfo from './LoanRecommend/components/AssetInfo';
+import LoanFoundMessage from './LoanRecommend/components/LoanFoundMessage';
+import LoanRecommendTab from './LoanRecommend/components/LoanRecommendTab';
 
 // Dummy Datas
 interface Loan {
@@ -72,6 +74,8 @@ const LoanInfoPage: React.FC = () => {
 
       <LoanFoundMessage isFound={true} />
       <LoanRecommendTab loanList={loanList} />
+
+      <Button text="실시간 채팅 상담 예약하기" />
     </div>
   );
 };

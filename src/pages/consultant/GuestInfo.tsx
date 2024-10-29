@@ -1,4 +1,4 @@
-import LoanRecommendTab from '../LoanRecommendComponents/LoanRecommendTab';
+// import LoanRecommendTab from '../LoanRecommendComponents/LoanRecommendTab';
 
 export default function GestInfo() {
   interface Loan {
@@ -61,7 +61,7 @@ export default function GestInfo() {
 
       <h2 className="text-xl font-bold mt-4">대출 상품 리스트</h2>
       <hr className="border-t border-gray-300 my-2" />
-      <LoanRecommendTab loanList={loanList} />
+      {/* <LoanRecommendTab loanList={loanList} /> */}
 
       <h2 className="text-xl font-bold mt-4">상담이력</h2>
       <hr className="border-t border-gray-300 my-2" />

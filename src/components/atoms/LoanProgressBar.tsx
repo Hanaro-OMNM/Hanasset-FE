@@ -1,10 +1,8 @@
-interface LoanDetailProgressBarProps {
+interface LoanProgressBarProps {
   rate: number;
 }
 
-const LoanDetailProgressBar: React.FC<LoanDetailProgressBarProps> = ({
-  rate,
-}) => {
+const LoanProgressBar: React.FC<LoanProgressBarProps> = ({ rate }) => {
   return (
     <div>
       <div className="ml-8 mr-8 bg-hanaSilver60 rounded-full h-6">
@@ -19,4 +17,4 @@ const LoanDetailProgressBar: React.FC<LoanDetailProgressBarProps> = ({
   );
 };
 
-export default LoanDetailProgressBar;
+export default LoanProgressBar;

@@ -1,8 +1,6 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import clsx from 'clsx';
-import React, { useState, useEffect } from 'react';
 import LoanCard from './LoanCard';
-import OrderButton from './OrderButton';
 
 // Dummy Datas
 interface Loan {
@@ -18,17 +16,6 @@ interface LoanRecommendTabProps {
 }
 
 const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({ loanList }) => {
-  const [activate, setActivate] = useState(true);
-
-  const orderOnClick = () => {
-    console.log('정렬해요.', activate);
-    setActivate((activate) => !activate);
-  };
-
-  useEffect(() => {
-    console.log('우선 순위 변경 로직 동작이 필요해요');
-  }, [activate]);
-
   return (
     <TabGroup>
       <TabList className={'flex gap-3'}>
@@ -59,22 +46,6 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({ loanList }) => {
         </Tab>
       </TabList>
       <TabPanels>
-        <div className="mt-4">
-          {/* 우선 순위 선택 */}
-          <div className="ml-4 pl-3 flex gap-2">
-            <OrderButton
-              activate={activate}
-              onClick={orderOnClick}
-              text="금리 낮은 순"
-            />
-            <OrderButton
-              activate={!activate}
-              onClick={orderOnClick}
-              text="한도 높은 순"
-            />
-          </div>
-        </div>
-
         <TabPanel>
           {/* 하나은행 대출 리스트 */}
           <div className="mt-2 pr-4 pl-4 w-full flex-col">

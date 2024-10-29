@@ -49,7 +49,7 @@ export default function GestInfo() {
   return (
     <div className="max-w-[420px] min-h-screen bg-gray-100 p-6">
       <h2 className="text-lg font-bold mt-4">손님정보</h2>
-
+      <hr className="border-t border-gray-300 my-2" />
       <p className="text-sm mb-1">이름: 이순님</p>
 
       <h2 className="text-lg font-bold mt-4">매물정보</h2>

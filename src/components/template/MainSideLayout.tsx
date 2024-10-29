@@ -58,7 +58,11 @@ const MainSideLayout: React.FC = () => {
 
                 <button
                   type="button"
-                  className="w-24 h-12 rounded-[10px] bg-white drop-shadow-[0_4px_6px_rgba(93,149,136,0.5)] transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-103 duration-300 hover:text-hanaGreen"
+                  className={`w-24 h-12 rounded-[10px] bg-white drop-shadow-[0_4px_6px_rgba(93,149,136,0.5)] transition ease-in-out delay-50 ${
+                    currCity === '시/도'
+                      ? 'text-gray-400 cursor-not-allowed'
+                      : 'hover:-translate-y-1 hover:scale-103 duration-300 hover:text-hanaGreen'
+                  }`}
                   onClick={() => setActivePage('gungu')}
                 >
                   <span className="font-semibold hover:font-bold">
@@ -68,7 +72,11 @@ const MainSideLayout: React.FC = () => {
 
                 <button
                   type="button"
-                  className="w-24 h-12 rounded-[10px] bg-white drop-shadow-[0_4px_6px_rgba(93,149,136,0.5)] transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-103 duration-300 hover:text-hanaGreen"
+                  className={`w-24 h-12 rounded-[10px] bg-white drop-shadow-[0_4px_6px_rgba(93,149,136,0.5)] transition ease-in-out delay-50 ${
+                    currCity === '시/도' || currGungu === '시/군/구'
+                      ? 'text-gray-400 cursor-not-allowed'
+                      : 'hover:-translate-y-1 hover:scale-103 duration-300 hover:text-hanaGreen'
+                  }`}
                   onClick={() => setActivePage('dong')}
                 >
                   <span className="font-semibold hover:font-bold">

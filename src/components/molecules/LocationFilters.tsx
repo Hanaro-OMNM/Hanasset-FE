@@ -8,10 +8,13 @@ interface LocationFilterProps {
 }
 
 const LocationFilter = ({ locationType }: LocationFilterProps) => {
-  const currCity: string = '서울시';
-  const currGungu: string = '송파구';
-  const currDong: string = '풍납1동';
+  let currCity: string = '시/도';
+  let currGungu: string = '시/군/구';
+  const currDong: string = JSON.parse(
+    localStorage.getItem('currDong') || '"읍/면/동"'
+  );
 
+  // city, gungu, dong은 일단 더미 데이터
   const city: string[] = [
     '서울',
     '경기',
@@ -50,9 +53,12 @@ const LocationFilter = ({ locationType }: LocationFilterProps) => {
   } else if (locationType === 'gungu') {
     storedLocations = JSON.parse(localStorage.getItem('gungu') || '[]');
     storedKey = 'currGungu';
+    currCity = JSON.parse(localStorage.getItem('currCity') || '"시/도"');
   } else {
     storedLocations = JSON.parse(localStorage.getItem('dong') || '[]');
     storedKey = 'currDong';
+    currCity = JSON.parse(localStorage.getItem('currCity') || '"시/도"');
+    currGungu = JSON.parse(localStorage.getItem('currGungu') || '"시/군/구"');
   }
 
   return (
@@ -64,9 +70,25 @@ const LocationFilter = ({ locationType }: LocationFilterProps) => {
           <div className="flex items-center justify-center w-7 h-7 rounded-full bg-hanaGreen40 mr-4">
             <HiOutlineOfficeBuilding color="white" />
           </div>
-          <div className="text-hanaGreen40 mr-2">{currCity}</div>
+          <div
+            className={`text-hanaGreen40 mr-2 ${
+              locationType === 'gungu'
+                ? 'font-bold text-hanaGreen80'
+                : locationType === 'dong'
+                  ? 'font-bold text-hanaGreen80'
+                  : ''
+            }`}
+          >
+            {currCity}
+          </div>
           <MdNavigateNext color="#ABCEC8" className="mr-2" />
-          <div className="text-hanaGreen40 mr-2">{currGungu}</div>
+          <div
+            className={`text-hanaGreen40 mr-2 ${
+              locationType === 'dong' ? 'font-bold text-hanaGreen80' : ''
+            }`}
+          >
+            {currGungu}
+          </div>
           <MdNavigateNext color="#ABCEC8" className="mr-2" />
           <div className="text-hanaGreen40 mr-2">{currDong}</div>
         </div>

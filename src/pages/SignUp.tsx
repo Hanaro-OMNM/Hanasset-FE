@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Input from '../components/atoms/Input'; 
-import SocialLoginGroup  from '../components/molecules/SocialLoginGroup'
+import { useState } from 'react';
+import Input from '../components/atoms/Input';
+import SocialLoginGroup from '../components/molecules/SocialLoginGroup';
 
 export default function SignupPage() {
   const [email, setEmail] = useState('');
@@ -21,9 +21,9 @@ export default function SignupPage() {
 
   const getLabelClass = (value: string) =>
     value
-      ? 'top-[-8px] left-4 text-sm text-hanaGreen60 bg-white px-1' 
-      : 'top-1/2 left-4 transform -translate-y-1/2 text-md text-gray-500'; 
-      
+      ? 'top-[-8px] left-4 text-sm text-hanaGreen60 bg-white px-1'
+      : 'top-1/2 left-4 transform -translate-y-1/2 text-md text-gray-500';
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 w-[320px]">
       <div className="w-[300px] max-w-md p-8 space-y-8 bg-white shadow-lg rounded-lg">
@@ -98,7 +98,7 @@ export default function SignupPage() {
         >
           회원가입
         </button>
-        <div className='flex justify-center space-x-8'>
+        <div className="flex justify-center space-x-8">
           <SocialLoginGroup />
         </div>
         <p className="text-center text-sm text-gray-600">

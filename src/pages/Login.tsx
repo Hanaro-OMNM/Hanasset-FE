@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Input from '../components/atoms/Input'; 
+import { useState } from 'react';
+import Input from '../components/atoms/Input';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -19,13 +19,15 @@ export default function LoginPage() {
 
   const getLabelClass = (value: string) =>
     value
-      ? 'top-0 left-4 text-sm text-hanaGreen60 bg-white px-1 -translate-y-1/2' 
+      ? 'top-0 left-4 text-sm text-hanaGreen60 bg-white px-1 -translate-y-1/2'
       : 'top-1/2 left-4 transform -translate-y-1/2 text-md text-gray-500';
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 w-[320px]">
       <div className="w-[300px] max-w-md p-8 space-y-8 bg-white shadow-lg rounded-lg">
-        <h2 className="text-3xl font-extrabold text-center text-black">로그인</h2>
+        <h2 className="text-3xl font-extrabold text-center text-black">
+          로그인
+        </h2>
 
         {/* 이메일 입력 */}
         <div className="relative">
@@ -37,7 +39,6 @@ export default function LoginPage() {
             placeholder=" "
             error={error && !email}
             errorMessage=" "
-
           />
           <label
             className={`absolute transition-all duration-200 ease-in-out ${getLabelClass(

@@ -19,21 +19,19 @@ export default function RegisterButton({
 }: RegisterButtonProps) {
   return (
     <button
-      className={`focus:bg-gray-300 focus:outline-0 w-full bg-white pt-4 pb-4 
-      hover:border-gray-300 active:border-gray-300
-      ${roundedTop ? 'rounded-t-[10px]' : ''} 
-      ${roundedBottom ? 'rounded-b-[10px]' : ''}`}
+      className={`w-full hover:transition-transform transform hover:scale-105 
+      hover:bg-hanaGreen10 transition-all duration-300 ease-in-out focus:outline-none
+      ${roundedTop ? 'rounded-t-lg' : ''} 
+      ${roundedBottom ? 'rounded-b-lg' : ''}`}
       onClick={() => onClick(type)}
     >
-      <div className="flex">
-        <div className="content-center pl-3">
+      <div className="flex items-center w-full p-4">
+        <div className="text-hanaGreen text-xl w-5">
           <BsFillSendFill />
         </div>
-        <div className="justify-center w-full pr-3">
-          <div className="text-black text-sm font-normal font-['Inter'] leading-tight">
-            {title}
-          </div>
-          <div className="text-hanaSilver80 text-xs font-normal font-['Inter'] tracking-tight">
+        <div className="flex flex-col w-full">
+          <div className="text-gray-800 text-base leading-tight">{title}</div>
+          <div className="text-hanaSilver80 text-xs font-normal">
             {description}
           </div>
         </div>

@@ -15,10 +15,10 @@ import kakaoMap from '../assets/img/mapCompanyType/카카오 지도.png';
 import satellite from '../assets/img/mapType/위성지도.png';
 import general from '../assets/img/mapType/일반지도.png';
 import topographic from '../assets/img/mapType/지형지도.png';
-import Navbar from '../components/template/Navbar';
+import { Navbar } from '../components/template/Navbar';
 
-function MarkerCluster() {
-  const navermaps = useNavermaps();
+function MarkerCluster({ zoomLevel, onMarkerClick }) {
+  const naverMaps = useNavermaps();
   const map = useMap();
   const [MarkerClustering, setMarkerClustering] = useState<any>(null);
 
@@ -43,59 +43,123 @@ function MarkerCluster() {
   // MarkerClustering이 로드될 때까지 컴포넌트 렌더링을 중단
   if (!MarkerClustering) return null;
 
+  const hanaGreenGradient = 'linear-gradient(135deg, #3DA35D, #6DCE97)'; // hanaGreen 색상 그라디언트
+
   const htmlMarker1 = {
-    content:
-      '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(https://navermaps.github.io/maps.js.ncp/docs/img/cluster-marker-1.png);background-size:contain;"></div>',
-    size: navermaps.Size(40, 40),
-    anchor: navermaps.Point(20, 20),
+    content: `<div style="cursor:pointer;width:45px;height:45px;line-height:45px;font-size:11px;color:white;text-align:center;font-weight:bold;border-radius:50%;background:${hanaGreenGradient};"></div>`,
+    size: naverMaps.Size(45, 45),
+    anchor: naverMaps.Point(22, 22),
   };
 
   const htmlMarker2 = {
-    content:
-      '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(https://navermaps.github.io/maps.js.ncp/docs/img/cluster-marker-2.png);background-size:contain;"></div>',
-    size: navermaps.Size(40, 40),
-    anchor: navermaps.Point(20, 20),
-  };
-  const htmlMarker3 = {
-    content:
-      '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(https://navermaps.github.io/maps.js.ncp/docs/img/cluster-marker-3.png);background-size:contain;"></div>',
-    size: navermaps.Size(40, 40),
-    anchor: navermaps.Point(20, 20),
-  };
-  const htmlMarker4 = {
-    content:
-      '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(https://navermaps.github.io/maps.js.ncp/docs/img/cluster-marker-4.png);background-size:contain;"></div>',
-    size: navermaps.Size(40, 40),
-    anchor: navermaps.Point(20, 20),
-  };
-  const htmlMarker5 = {
-    content:
-      '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(https://navermaps.github.io/maps.js.ncp/docs/img/cluster-marker-5.png);background-size:contain;"></div>',
-    size: navermaps.Size(40, 40),
-    anchor: navermaps.Point(20, 20),
+    content: `<div style="cursor:pointer;width:50px;height:50px;line-height:50px;font-size:12px;color:white;text-align:center;font-weight:bold;border-radius:50%;background:${hanaGreenGradient};"></div>`,
+    size: naverMaps.Size(50, 50),
+    anchor: naverMaps.Point(25, 25),
   };
 
-  const data = accidentDeath.searchResult.accidentDeath;
-  const markers = data.map(
-    (spot) =>
-      new naver.maps.Marker({
-        position: new naver.maps.LatLng(spot.grd_la, spot.grd_lo),
-        draggable: true,
-      })
-  );
+  const htmlMarker3 = {
+    content: `<div style="cursor:pointer;width:55px;height:55px;line-height:55px;font-size:13px;color:white;text-align:center;font-weight:bold;border-radius:50%;background:${hanaGreenGradient};"></div>`,
+    size: naverMaps.Size(55, 55),
+    anchor: naverMaps.Point(27, 27),
+  };
+
+  const htmlMarker4 = {
+    content: `<div style="cursor:pointer;width:60px;height:60px;line-height:60px;font-size:14px;color:white;text-align:center;font-weight:bold;border-radius:50%;background:${hanaGreenGradient};"></div>`,
+    size: naverMaps.Size(60, 60),
+    anchor: naverMaps.Point(30, 30),
+  };
+
+  const htmlMarker5 = {
+    content: `<div style="cursor:pointer;width:65px;height:65px;line-height:65px;font-size:15px;color:white;text-align:center;font-weight:bold;border-radius:50%;background:${hanaGreenGradient};"></div>`,
+    size: naverMaps.Size(65, 65),
+    anchor: naverMaps.Point(32, 32),
+  };
+
+  const markers = estateData.map((item) => {
+    const priceText =
+      item.prc >= 10000
+        ? `${Math.floor(item.prc / 10000)}억`
+        : `${item.prc}만원`;
+
+    const marker = new naverMaps.Marker({
+      position: new naverMaps.LatLng(item.lat, item.lng),
+      title: `${item.tradTpNm} ${item.prc}만원`,
+      icon: {
+        content: `
+      <div style="
+        background: #2D4E6F;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+        text-align: center;
+      " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <div style="
+          background: #FFFFFF;
+          color: #2D4E6F;
+          border-radius: 5px;
+          padding: 2px 5px;
+          font-size: 10px;
+          font-weight: bold;
+        ">
+          ${item.tradTpNm}
+        </div>
+        <div style="margin-top: 4px;">
+          ${priceText}
+        </div>
+      </div>`,
+        size: naverMaps.Size(50, 50),
+        anchor: naverMaps.Point(25, 25),
+      },
+      map: null,
+    });
+
+    // onClick 이벤트 추가
+    marker.addListener('click', () => {
+      onMarkerClick(item); // 클릭 시 해당 아이템 전달
+    });
+
+    return marker;
+  });
 
   const cluster = new MarkerClustering({
     minClusterSize: 2,
-    maxZoom: 8,
+    maxZoom: 21,
     map,
     markers,
     disableClickZoom: false,
-    gridSize: 120,
+    gridSize: 1000,
     icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
-    indexGenerator: [10, 100, 200, 500, 1000],
+    indexGenerator: [5, 20, 50, 100, 250, 500],
     stylingFunction: (clusterMarker: any, count: number) => {
-      clusterMarker.getElement().querySelector('div:first-child').innerText =
-        count.toString();
+      const clusterContent = clusterMarker.getElement();
+
+      // clusterContent가 null이 아닌지 확인
+      if (clusterContent) {
+        const firstChild = clusterContent.querySelector('div:first-child');
+
+        // firstChild가 존재하는 경우에만 innerText 설정
+        if (firstChild) {
+          firstChild.innerText = count.toString();
+          const size =
+            count < 20 ? 40 : count < 50 ? 50 : count < 100 ? 60 : 70;
+
+          firstChild.style.width = `${size}px`;
+          firstChild.style.height = `${size}px`;
+          firstChild.style.lineHeight = `${size}px`;
+          firstChild.style.fontSize =
+            count < 20 ? '12px' : count < 50 ? '14px' : '16px';
+          firstChild.style.backgroundColor =
+            count < 20 ? 'lightblue' : count < 50 ? 'lightgreen' : 'lightcoral';
+        }
+      }
     },
   });
 
@@ -108,6 +172,7 @@ export default function Main() {
 
   const [showControlPanel, setShowControlPanel] = useState(false);
   const [mapType, setMapType] = useState(naverMaps.MapTypeId.NORMAL);
+  const [selectedEstate, setSelectedEstate] = useState(false); // 선택된 매물 상태
 
   const handleZoomIn = () => {
     if (mapRef.current) {
@@ -127,14 +192,12 @@ export default function Main() {
     setMapType(type);
   };
 
-  const navermaps = useNavermaps();
   const [zoom, setZoom] = useState(13);
   const [center, setCenter] = useState(
-    new navermaps.LatLng(37.3595704, 127.105399)
+    new naverMaps.LatLng(37.3595704, 127.105399)
   );
 
   const handleZoomChanged = useCallback((newZoom: number) => {
-    console.log(`zoom: ${newZoom}`);
     setZoom(newZoom);
   }, []);
 
@@ -143,7 +206,7 @@ export default function Main() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setCenter(new navermaps.LatLng(latitude, longitude));
+          setCenter(new naverMaps.LatLng(latitude, longitude));
         },
         (error) =>
           console.error('Error occurred while fetching location:', error),
@@ -366,16 +429,14 @@ export default function Main() {
           disableDoubleClickZoom={false}
           disableTwoFingerTapZoom={false}
           tileTransition={true}
-          minZoom={5}
+          minZoom={7}
           maxZoom={21}
           scaleControl={true}
         >
-          <MarkerCluster />
+          <MarkerCluster zoomLevel={zoom} onMarkerClick={setSelectedEstate} />
         </NaverMap>
       </MapDiv>
-
-      {/* Navbar 호출 */}
-      <Navbar />
+      <Navbar state={selectedEstate} />
     </div>
   );
 }

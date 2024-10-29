@@ -8,14 +8,20 @@ import MainSideLayout from '../template/MainSideLayout';
 import ConsultingTabLayout from './ConsultingTabLayout.tsx';
 import MyPageLayout from './MyPageLayout.tsx';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  state: boolean;
+}
+
+// MyPageLayout 컴포넌트 import
+export const Navbar: React.FC<NavbarProps> = ({ state }) => {
   // 상태 관리: 홈, 지도, 마이홈의 활성 상태를 관리
   const [activePage, setActivePage] = useState<
-    'home' | 'map' | 'consultant' | 'myPage'
+    'home' | 'map' | 'myPage' | 'consultant'
   >('home');
 
   return (
     <div className="space-x-16">
+      {state}
       <div className="left-0 top-0 p-2 h-full absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center">
         <a
           href="/"
@@ -69,7 +75,6 @@ const Navbar: React.FC = () => {
               지도
             </div>
           </button>
-
           {/* 상담 버튼 */}
           <button
             onClick={() => setActivePage('consultant')} // 상담 버튼 클릭 시 'myPage'로 설정
@@ -125,5 +130,3 @@ const Navbar: React.FC = () => {
     </div>
   );
 };
-
-export default Navbar;

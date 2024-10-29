@@ -2,7 +2,6 @@ import { NavermapsProvider } from 'react-naver-maps';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
-import AssetRegister from './pages/AssetRegister.tsx';
 import LoanDetail from './pages/LoanDetail.tsx';
 import LoanRecommend from './pages/LoanRecommned.tsx';
 import Login from './pages/Login.tsx';
@@ -31,7 +30,6 @@ function App() {
             <Route path="/property-from" element={<PropertyForm />} />
             <Route path="/property-confirm" element={<TestPropertyConfirm />} />
             <Route path="/property-agree" element={<PropertyAgree />} />
-            <Route path="/assetRegister" element={<AssetRegister />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/consultant/guest-info" element={<GuestInfo />} />

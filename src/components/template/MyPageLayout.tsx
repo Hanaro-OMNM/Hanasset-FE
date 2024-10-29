@@ -1,3 +1,4 @@
+import { AiOutlineRight } from 'react-icons/ai';
 import { PiBuildingApartment } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
 import profileImage from '../../assets/img/profile_ex.jpg';
@@ -8,10 +9,16 @@ import Swiper from '../atoms/Swiper.tsx';
 import EditProfile from '../template/EditProfile.tsx';
 import EditProfileLayout from '../template/EditProfileLayout.tsx';
 
+//
+
 interface Asset {
   name: string;
 }
-
+interface Consultation {
+  title: string;
+  date: string;
+  time: string;
+}
 export default function MyPageLayout() {
   // 더미데이터
   const profile = {
@@ -21,6 +28,11 @@ export default function MyPageLayout() {
   const handleEditProfile = () => {
     navigate('/모달로할까');
   };
+
+  const consultations: Consultation[] = [
+    { title: '전세금 안심 대출', date: '2024.09.12', time: '13:04' },
+    { title: '하나 청년전세론', date: '2024.08.27', time: '16:34' },
+  ];
 
   const assets: Asset[] = [
     { name: '서울 성동구 아차산로 111 2층' },
@@ -37,9 +49,12 @@ export default function MyPageLayout() {
 
   // car, home에 따라 assetRegister 페이지에서 글자, 이미지가 변경되도록
   const handleRegister = (assetType: 'car' | 'home') => {
-    navigate('/assetRegister', { state: { assetType } });
+    navigate('/assetRegister', { replace: true, state: { assetType } });
   };
 
+  const handleConsultant = () => {
+    console.log('상담페이지, 채팅으로 이동해야지');
+  };
   const itemsPerPage = 2;
   // swiper 컴포넌트가 1차원 배열만 받음 // 내 관심 아파트 참고
   const slides: Asset[][] = Array.from(
@@ -55,8 +70,37 @@ export default function MyPageLayout() {
         name={profile.name}
         onEdit={handleEditProfile}
       />
+
+      {/* 내 상담 내역 */}
+      <SemiTitle>내 상담 내역</SemiTitle>
+      <CommonBackground className="p-5">
+        <div className="w-full">
+          {consultations.map((consultation, index) => (
+            <div
+              key={index}
+              onClick={handleConsultant}
+              className="border-b last:border-none py-4 flex items-center justify-between hover:transition-transform transform hover:scale-105"
+            >
+              <button className="w-full text-left">
+                <h3 className="text-lg">{consultation.title}</h3>
+                <p className="text-xs text-gray-500">
+                  마지막 상담: {consultation.date} {consultation.time}
+                </p>
+              </button>
+              <AiOutlineRight className="text-gray-400 text-xl" />
+            </div>
+          ))}
+        </div>
+        <button
+          onClick={handleConsultant}
+          className="mt-6 w-full bg-hanaGreen60 hover:bg-hanaGreen80 text-white py-2 px-4 rounded-xl"
+        >
+          상담 내역 더 보기
+        </button>
+      </CommonBackground>
+
       {/*부동산/자동차 ==> 페이지 이동*/}
-      <div>
+      <div className="mt-10">
         <RegisterButtonGroup onRegister={handleRegister} />
       </div>
 

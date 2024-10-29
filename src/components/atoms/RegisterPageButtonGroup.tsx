@@ -1,4 +1,5 @@
 import RegisterButton from '../atoms/RegisterPageButton';
+import CommonBackground from './CommonBackground';
 
 interface RegisterButtonGroupProps {
   onRegister: (type: 'home' | 'car') => void;
@@ -8,7 +9,7 @@ export default function RegisterButtonGroup({
   onRegister,
 }: RegisterButtonGroupProps) {
   return (
-    <div className="w-full bg-white my-10 h-full rounded-[10px]">
+    <CommonBackground className="p-5">
       <RegisterButton
         type="home"
         onClick={onRegister}
@@ -24,6 +25,6 @@ export default function RegisterButtonGroup({
         description="자동차 등록하고 관리하기"
         roundedBottom
       />
-    </div>
+    </CommonBackground>
   );
 }

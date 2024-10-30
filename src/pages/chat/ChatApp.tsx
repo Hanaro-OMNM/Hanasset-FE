@@ -1,5 +1,5 @@
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import logo from '../../assets/img/logo.png';
 import profile from '../../assets/img/profile_ex.jpg';
 import ChatHeader from './ChatHeader';
@@ -34,6 +34,16 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
       time: getCurrentTime(),
     },
   ]);
+
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const [inputValue, setInputValue] = useState('');
   const [lastMessageTime, setLastMessageTime] = useState<string | null>(null);
@@ -92,6 +102,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
             responserImage={accessor === 'guest' ? logo : profile}
           />
         ))}
+        <div ref={messagesEndRef} />
       </div>
 
       <div className="flex w-full p-5 bg-hanaGreen60 ">

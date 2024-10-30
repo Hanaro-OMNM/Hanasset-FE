@@ -8,7 +8,7 @@ import {
   useMap,
 } from 'react-naver-maps';
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { accidentDeath } from '../assets/Dummy.tsx';
+import { estateData } from '../assets/Dummy.tsx';
 import googleMap from '../assets/img/mapCompanyType/구글 지도.png';
 import naverMap from '../assets/img/mapCompanyType/네이버 지도.png';
 import kakaoMap from '../assets/img/mapCompanyType/카카오 지도.png';
@@ -22,7 +22,6 @@ function MarkerCluster({ zoomLevel, onMarkerClick }) {
   const map = useMap();
   const [MarkerClustering, setMarkerClustering] = useState<any>(null);
 
-  // 동적 import로 makeMarkerClustering을 한 번만 불러오도록 설정
   useEffect(() => {
     let isMounted = true;
     import('../assets/MarkerClustering.js')
@@ -40,7 +39,6 @@ function MarkerCluster({ zoomLevel, onMarkerClick }) {
     };
   }, []);
 
-  // MarkerClustering이 로드될 때까지 컴포넌트 렌더링을 중단
   if (!MarkerClustering) return null;
 
   const hanaGreenGradient = 'linear-gradient(135deg, #3DA35D, #6DCE97)'; // hanaGreen 색상 그라디언트
@@ -50,7 +48,6 @@ function MarkerCluster({ zoomLevel, onMarkerClick }) {
     size: naverMaps.Size(45, 45),
     anchor: naverMaps.Point(22, 22),
   };
-
   const htmlMarker2 = {
     content: `<div style="cursor:pointer;width:50px;height:50px;line-height:50px;font-size:12px;color:white;text-align:center;font-weight:bold;border-radius:50%;background:${hanaGreenGradient};"></div>`,
     size: naverMaps.Size(50, 50),

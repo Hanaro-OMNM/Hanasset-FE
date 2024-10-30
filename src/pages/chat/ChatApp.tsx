@@ -72,12 +72,12 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
   };
 
   return (
-    <div className="flex flex-col w-full min-h-screen items-center h-full bg-gray-100">
+    <div className="flex flex-col h-screen w-full items-center">
       <ChatHeader
         responserName={accessor === 'guest' ? '하나은행 상담사' : '고객1'}
         responserImage={accessor === 'guest' ? logo : profile}
       />
-      <div className="flex-1 w-full max-w-lg p-4 bg-hanaSilver20 shadow overflow-y-auto max-h-[calc(100vh-120px)] space-y-4">
+      <div className="flex-1 w-full max-w-lg p-4 bg-hanaSilver20 shadow overflow-y-auto space-y-4">
         {messages.map((msg, index) => (
           <ChatMessage
             key={msg.id}

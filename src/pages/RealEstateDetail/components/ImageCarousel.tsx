@@ -1,3 +1,4 @@
+import { FiChevronLeft } from 'react-icons/fi';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
@@ -5,8 +6,12 @@ import React from 'react';
 
 interface ImageCarouselProps {
   images: string[];
+  onBackClick: () => void;
 }
-const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
+const ImageCarousel: React.FC<ImageCarouselProps> = ({
+  images,
+  onBackClick,
+}) => {
   const settings = {
     dots: false,
     arrows: true,
@@ -17,6 +22,9 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
   };
   return (
     <div className="relative w-full h-64 overflow-hidden">
+      <button className="absolute top-30 text-white z-30" onClick={onBackClick}>
+        <FiChevronLeft className="w-[30px] h-[30px] mr-4" />
+      </button>
       <Slider {...settings}>
         {images.map((src, index) => (
           <div key={index}>

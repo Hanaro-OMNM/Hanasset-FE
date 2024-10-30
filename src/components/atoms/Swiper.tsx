@@ -4,12 +4,16 @@ import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import React from 'react';
 
+interface PaginationProps {
+  clickable: boolean;
+}
+
 interface SwiperProps<T> {
   items: T[];
   renderItem: (item: T) => React.ReactNode;
   spaceBetween?: number;
   slidesPerView?: number;
-  pagination?: boolean;
+  pagination?: PaginationProps;
 }
 
 export default function SwiperComponent<T>({
@@ -17,7 +21,7 @@ export default function SwiperComponent<T>({
   renderItem,
   spaceBetween = 20,
   slidesPerView = 1.3,
-  pagination = true,
+  pagination = { clickable: true },
 }: SwiperProps<T>) {
   return (
     <Swiper

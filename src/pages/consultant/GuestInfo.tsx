@@ -57,7 +57,7 @@ export default function GestInfo() {
 
       {/* 채팅 */}
       <div className="w-screen">
-        <ChatApp accessor="guest" />
+        <ChatApp accessor="consultant" />
       </div>
 
       {/* 고객 정보 */}

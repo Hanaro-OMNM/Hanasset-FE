@@ -119,9 +119,8 @@ export default function EditProfilePage({ onBack }: EditProfilePageProps) {
           onClick={handleSaveChanges}
           className="px-4 py-2 w-full bg-hanaGreen60 text-white font-medium rounded-lg shadow hover:bg-hanaGreen transition duration-300"
         >
-          뒤로가기
-        </button>{' '}
-        {/* 뒤로가기 버튼 헤더 없어서 임시로 만들어둠 */}
+          닫기
+        </button>
       </div>
 
       {showModal && (

@@ -1,6 +1,4 @@
 import LoanRecommendTab from '../LoanRecommendComponents/LoanRecommendTab';
-import ChatApp from '../chat/ChatApp';
-import GuestWaiting from '../consultant/GuestWaiting';
 
 export default function GestInfo() {
   interface Loan {
@@ -49,61 +47,48 @@ export default function GestInfo() {
   ];
 
   return (
-    <>
-      {/* 상담 예약 */}
-      <div>
-        <GuestWaiting></GuestWaiting>
-      </div>
-
-      {/* 채팅 */}
-      <div className="w-screen">
-        <ChatApp accessor="consultant" />
-      </div>
-
-      {/* 고객 정보 */}
-      <div className="flex h-screen">
-        <div className="max-w-[420px] bg-gray-100 p-6 overflow-hidden">
-          <div className="h-full overflow-y-auto max-h-screen scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400">
-            <h2 className="text-lg font-bold mt-4">손님정보</h2>
-            <hr className="border-t border-gray-300 my-2" />
-            <p className="text-sm mb-1">이름: 이순님</p>
-            <h2 className="text-lg font-bold mt-4">매물정보</h2>
-            <hr className="border-t border-gray-300 my-2" />
-            <p className="text-sm mb-1">전세: 32억</p>
-            <p className="text-sm mb-1">아파트: 서초푸르지오(써밋)</p>
-            <p className="text-sm mb-1">101동 1701호, 100.97㎡</p>
-            <p className="text-sm mb-1">서울특별시 성동구 왕십리로 16</p>
-            <h2 className="text-xl font-bold mt-4">대출 상품 리스트</h2>
-            <hr className="border-t border-gray-300 my-2" />
-            <LoanRecommendTab loanList={loanList} />
-            <h2 className="text-xl font-bold mt-4">상담이력</h2>
-            <hr className="border-t border-gray-300 my-2" />
-            <table className="min-w-full">
-              <thead>
-                <tr className="text-left">
-                  <th className="py-2">상담 ID</th>
-                  <th className="py-2">인입시간</th>
-                  <th className="py-2">담당자</th>
+    <div className="flex h-screen">
+      <div className="max-w-[420px] bg-gray-100 p-6 overflow-hidden">
+        <div className="h-full overflow-y-auto max-h-screen scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400">
+          <h2 className="text-lg font-bold mt-4">손님정보</h2>
+          <hr className="border-t border-gray-300 my-2" />
+          <p className="text-sm mb-1">이름: 이순님</p>
+          <h2 className="text-lg font-bold mt-4">매물정보</h2>
+          <hr className="border-t border-gray-300 my-2" />
+          <p className="text-sm mb-1">전세: 32억</p>
+          <p className="text-sm mb-1">아파트: 서초푸르지오(써밋)</p>
+          <p className="text-sm mb-1">101동 1701호, 100.97㎡</p>
+          <p className="text-sm mb-1">서울특별시 성동구 왕십리로 16</p>
+          <h2 className="text-xl font-bold mt-4">대출 상품 리스트</h2>
+          <hr className="border-t border-gray-300 my-2" />
+          <LoanRecommendTab loanList={loanList} />
+          <h2 className="text-xl font-bold mt-4">상담이력</h2>
+          <hr className="border-t border-gray-300 my-2" />
+          <table className="min-w-full">
+            <thead>
+              <tr className="text-left">
+                <th className="py-2">상담 ID</th>
+                <th className="py-2">인입시간</th>
+                <th className="py-2">담당자</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dummyConsultationData.map((data, index) => (
+                <tr key={index} className="border-b text-left">
+                  <td className="py-2">{data.id}</td>
+                  <td className="py-2">{data.time}</td>
+                  <td className="py-2">{data.agent}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {dummyConsultationData.map((data, index) => (
-                  <tr key={index} className="border-b text-left">
-                    <td className="py-2">{data.id}</td>
-                    <td className="py-2">{data.time}</td>
-                    <td className="py-2">{data.agent}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="flex justify-center mt-4">
-              <button className="bg-hanaGreen80 text-white py-2 px-4 rounded-full">
-                더보기
-              </button>
-            </div>
+              ))}
+            </tbody>
+          </table>
+          <div className="flex justify-center mt-4">
+            <button className="bg-hanaGreen80 text-white py-2 px-4 rounded-full">
+              더보기
+            </button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

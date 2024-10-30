@@ -27,7 +27,7 @@ interface RealEstateDetailProps {
     dealType: string;
     imageUrl: string;
   };
-  onBackClick?: any;
+  onBackClick: () => void;
 }
 
 export default function RealEstateDetail({
@@ -35,7 +35,6 @@ export default function RealEstateDetail({
   onBackClick,
 }: RealEstateDetailProps) {
   const [activeTab, setActiveTab] = useState(0);
-  console.log(estate);
 
   const tabData = [
     { label: '시세', isActive: activeTab === 0 },

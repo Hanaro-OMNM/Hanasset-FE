@@ -6,6 +6,16 @@ import DropdownCombobox from '../../atoms/Dropdown.tsx';
 import SemiTitle from '../../atoms/SemiTitle.tsx';
 import RealEstateCard from './RealEstateCard.tsx';
 
+type estateProps = {
+  type: string;
+  location: string;
+  price: string;
+  size: string;
+  description: string;
+  dealType: string;
+  imageUrl: string;
+};
+
 const sortItems = [
   '최신순',
   '낮은가격순',
@@ -22,15 +32,15 @@ export default function RealEstateLayout({
   onBackClick,
 }: RealEstateLayoutProps) {
   const [selectedItem, setSelectedItem] = useState(sortItems[0]);
-  const [selectedEstate, setSelectedEstate] = useState(null); // 선택된 매물 상태 추가
+  const [selectedEstate, setSelectedEstate] = useState<estateProps | null>(
+    null
+  ); // 초기값을 null로 설정
   const [showRealEstate, setShowRealEstate] = useState(true);
   const realEstateCount = 27;
 
-  const handleCardClick = (estate: any) => {
+  const handleCardClick = (estate: estateProps) => {
     setSelectedEstate(estate); // 선택된 매물 정보 설정
   };
-
-  console.log(showRealEstate);
 
   return (
     <>

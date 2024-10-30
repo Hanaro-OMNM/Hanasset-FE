@@ -30,9 +30,7 @@ const DropdownCombobox: React.FC<ComboboxProps> = ({
     <Combobox value={selectedItem} onChange={setSelectedItem}>
       <div className={`relative w-28 ${comboboxClassName}`}>
         {/* Combobox Input */}
-        <div
-          className={`text-sm relative flex items-center rounded-md px-3 py-2`}
-        >
+        <div className="text-sm relative flex items-center rounded-md px-3 py-2">
           <Combobox.Button className="flex items-center w-full">
             {/* Input과 아이콘을 수평 정렬 */}
             <Combobox.Input

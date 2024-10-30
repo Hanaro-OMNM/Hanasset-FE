@@ -2,8 +2,8 @@ import { FaChevronLeft } from 'react-icons/fa';
 import { FaSearch } from 'react-icons/fa';
 import { FaRegTimesCircle } from 'react-icons/fa';
 import { useState } from 'react';
-import LocationFilters from '../../components/molecules/LocationFilters';
 import MainSideLayout from '../../components/template/MainSideLayout';
+import LocationFilters from './LocationFilters';
 
 interface LocationFilterLayoutProps {
   locationType: 'city' | 'gungu' | 'dong' | '';
@@ -20,12 +20,12 @@ const LocationFilter = ({ locationType }: LocationFilterLayoutProps) => {
   };
 
   return (
-    <div className="w-[420px]">
+    <div className="w-420">
       {activePage === 'curr' ? (
         <div className="top-0 absolute pl-2">
-          <div className="w-[420px] max-w-[420px] h-svh bg-white/75 backdrop-blur-[5px]">
+          <div className="w-420 max-w-[420px] h-svh bg-white/75 backdrop-blur-[5px]">
             {/* 헤더 */}
-            <div className="w-[420px] max-w-[420px] h-16 fixed top-0 bg-white border-b border-gray-200 z-10 px-4 py-2 flex justify-between items-center">
+            <div className="w-420 max-w-[420px] h-16 fixed top-0 bg-white border-b border-gray-200 z-10 px-4 py-2 flex justify-between items-center">
               <button type="button" onClick={() => setActivePage('back')}>
                 <FaChevronLeft />
               </button>

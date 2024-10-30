@@ -48,6 +48,9 @@ export default {
       screens: {
         xs: '420px', // 420px 이하에서만 적용할 수 있는 사용자 정의 단위 추가
       },
+      width: {
+        420: '420px',
+      },
     },
   },
   plugins: [require('tailwind-scrollbar-hide'), require('tailwind-scrollbar')],

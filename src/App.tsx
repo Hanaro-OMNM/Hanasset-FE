@@ -31,7 +31,7 @@ function App() {
             <Route path="/loan-reservation" element={<LoanReservation />} />
             <Route path="/real-estate-list" element={<RealEstateList />} />
             <Route path="/real-estate-detail" element={<RealEstateDetail />} />
-            <Route path="/property-from" element={<PropertyForm />} />
+            <Route path="/property-form" element={<PropertyForm />} />
             <Route path="/property-confirm" element={<TestPropertyConfirm />} />
             <Route path="/property-agree" element={<PropertyAgree />} />
             <Route path="/login" element={<Login />} />

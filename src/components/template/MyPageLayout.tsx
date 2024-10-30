@@ -10,6 +10,7 @@ import Swiper from '../atoms/Swiper';
 import AssetRegister from '../template/AssetRegister';
 import EditProfile from '../template/EditProfile';
 import EditProfileLayout from '../template/EditProfileLayout';
+import MyEstateList from './MyEstateList';
 
 interface Asset {
   name: string;
@@ -112,7 +113,7 @@ export default function MyPageLayout() {
           </div>
 
           <div>
-            <SemiTitle>내 관심 아파트</SemiTitle>
+            <SemiTitle>내 관심 매물</SemiTitle>
             <Swiper
               items={slides}
               renderItem={(pageAssets) => (
@@ -136,6 +137,13 @@ export default function MyPageLayout() {
               slidesPerView={1}
             />
           </div>
+
+          {/* 관심 매물 더보기 */}
+          <div>
+            <SemiTitle>내 관심 매물 더보기</SemiTitle>
+            <MyEstateList />
+          </div>
+          {/* 화면 전환 */}
         </>
       ) : currentPage === 'editProfile' ? (
         <EditProfileLayout onBack={() => setCurrentPage('main')} />

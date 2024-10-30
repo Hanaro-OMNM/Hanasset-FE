@@ -12,6 +12,7 @@ import PropertyAgree from './pages/PropertyAgree.tsx';
 import RealEstateDetail from './pages/RealEstateDetail/RealEstateDetail.tsx';
 import SignUp from './pages/SignUp.tsx';
 import ChatApp from './pages/chat/ChatApp.tsx';
+import Consultant from './pages/consultant/Consultant.tsx';
 import GuestInfo from './pages/consultant/GuestInfo.tsx';
 import GuestWaiting from './pages/consultant/GuestWaiting.tsx';
 //데이터가 없어서 test 컴포넌트 import(임시)
@@ -36,6 +37,7 @@ function App() {
             <Route path="/property-agree" element={<PropertyAgree />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signUp" element={<SignUp />} />
+            <Route path="/consultant" element={<Consultant />} />
             <Route path="/consultant/guest-info" element={<GuestInfo />} />
             <Route
               path="/consultant/guest-waiting"

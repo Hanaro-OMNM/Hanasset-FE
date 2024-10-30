@@ -76,7 +76,7 @@ const ConsultingTabLayout: React.FC = () => {
                     {consulting.title}
                   </h3>
                   <p className="text-xs text-gray-500">
-                    마지막 상담: {consulting.date}
+                    상담 일시: {consulting.date}
                   </p>
                 </button>
                 <AiOutlineRight className="text-gray-400 text-xl" />

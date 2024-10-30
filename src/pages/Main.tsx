@@ -373,6 +373,8 @@ export default function Main() {
           <MarkerCluster />
         </NaverMap>
       </MapDiv>
+
+      {/* Navbar 호출 */}
       <Navbar />
     </div>
   );

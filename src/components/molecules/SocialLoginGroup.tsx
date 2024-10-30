@@ -1,6 +1,6 @@
 // components/atoms/SocialLoginGroup.tsx
-import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 
 const SocialLoginGroup: React.FC = () => {
   const handleGoogleLogin = () => {
@@ -20,9 +20,18 @@ const SocialLoginGroup: React.FC = () => {
 
   return (
     <div className="flex justify-center space-x-8">
-      <FcGoogle onClick={handleGoogleLogin} className="w-6 h-6 cursor-pointer" />
-      <FaFacebook onClick={handleFacebookLogin} className="w-6 h-6 cursor-pointer" />
-      <FaInstagram onClick={handleInstagramLogin} className="w-6 h-6 cursor-pointer" />
+      <FcGoogle
+        onClick={handleGoogleLogin}
+        className="w-6 h-6 cursor-pointer"
+      />
+      <FaFacebook
+        onClick={handleFacebookLogin}
+        className="w-6 h-6 cursor-pointer"
+      />
+      <FaInstagram
+        onClick={handleInstagramLogin}
+        className="w-6 h-6 cursor-pointer"
+      />
     </div>
   );
 };

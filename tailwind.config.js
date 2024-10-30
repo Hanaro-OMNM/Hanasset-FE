@@ -18,7 +18,7 @@ export default {
         hanaGreen20: '#F5F9F8',
 
         /* hanaRed*/
-        hanaRed: '#E90061',
+        hanaRed: '#CB1136',
         hanaRed80: '#D3514F',
         hanaRed60: '#DB8174',
         hanaRed40: '#E7ACA0',
@@ -45,7 +45,10 @@ export default {
         hanaBlack40: '#B5B6B6',
         hanaBlack20: '#F7F7F7',
       },
+      screens: {
+        xs: '420px', // 420px 이하에서만 적용할 수 있는 사용자 정의 단위 추가
+      },
     },
   },
-  plugins: [require('tailwind-scrollbar-hide')],
+  plugins: [require('tailwind-scrollbar-hide'), require('tailwind-scrollbar')],
 };

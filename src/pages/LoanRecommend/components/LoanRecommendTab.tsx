@@ -82,7 +82,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
       <TabPanels>
         <TabPanel>
           {/* 하나은행 대출 리스트 */}
-          <div className="mt-4 pr-4 pl-4 w-full flex-col">
+          <div className="mt-4 px-4 w-full flex-col">
             {hanaLoanList.map((loan: Loan, index: number) => (
               <LoanCard
                 key={index}
@@ -100,7 +100,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
           <div
             className={clsx(
               showCount < hanaLoanList.length &&
-                'ml-4 mr-4 mb-4 text-hanaBlack60 text-center',
+                'mx-4 mb-4 text-hanaBlack60 text-center',
               showCount >= hanaLoanList.length && 'hidden'
             )}
           >
@@ -110,7 +110,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
         <TabPanel>
           {/* 버팀목 대출 리스트 */}
           {/* 하나은행 대출 리스트 */}
-          <div className="mt-4 pr-4 pl-4 w-full flex-col">
+          <div className="mt-4 px-4 w-full flex-col">
             {beotimmogLoanList.map((loan: Loan, index: number) => (
               <LoanCard
                 key={index}
@@ -128,7 +128,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
           <div
             className={clsx(
               showCount < beotimmogLoanList.length &&
-                'ml-4 mr-4 mb-4 text-hanaBlack60 text-center',
+                'mx-4 mb-4 text-hanaBlack60 text-center',
               showCount >= beotimmogLoanList.length && 'hidden'
             )}
           >

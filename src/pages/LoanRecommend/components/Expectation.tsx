@@ -41,11 +41,11 @@ const Expectation: React.FC<ExpectationProps> = ({ totalPrice, maxLoan }) => {
         </div>
         <div className="flex-col text-hanaBlack80 text-center">
           <div className="text-sm text-hanaSilver80">자본금</div>
-          <div className="">{capital.toFixed(1)}억</div>
+          <div>{capital.toFixed(1)}억</div>
         </div>
         <div className="flex-col text-hanaBlack80 text-center">
           <div className="text-sm text-hanaSilver80">대출금</div>
-          <div className="">
+          <div>
             {Math.min(Number(totalPrice - capital), maxLoan).toFixed(1)}억
           </div>
         </div>

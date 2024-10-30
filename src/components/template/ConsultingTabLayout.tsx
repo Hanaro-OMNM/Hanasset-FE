@@ -1,17 +1,27 @@
 import { AiOutlineRight } from 'react-icons/ai';
 import { FaRegCalendarCheck } from 'react-icons/fa';
-import { IoMdCalendar } from 'react-icons/io';
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
 import React from 'react';
 import CommonBackground from '../atoms/CommonBackground';
 import SemiTitle from '../atoms/SemiTitle';
+import UpcomingConsultingComponent from '../molecules/UpcomingConsulting';
 
-const consultationHistory = [
+type Consulting = {
+  title: string;
+  date: string;
+};
+
+const consultingHistory: Consulting[] = [
   { title: '롯데캐슬엠파이어', date: '2024.10.27 19:07' },
   { title: '광장아파트', date: '2024.10.27 19:07' },
   { title: '푸르지오벨라르테', date: '2024.10.27 19:07' },
   { title: '비둘기 아파트', date: '2024.10.27 19:07' },
 ];
+
+const upcomingConsulting: Consulting = {
+  title: '롯데캐슬엠파이어',
+  date: '2024.10.27 19:07',
+};
 
 const ConsultingTabLayout: React.FC = () => {
   /*
@@ -44,18 +54,9 @@ const ConsultingTabLayout: React.FC = () => {
             </p>
 
             <div className="bg-white shadow-sm p-4 rounded-lg flex items-center justify-between cursor-pointer">
-              <div className="flex items-center">
-                <div className="rounded-full w-10 h-10 p-2 mr-3 bg-yellow-100">
-                  <IoMdCalendar className="w-6 h-6 text-yellow-500 " />
-                </div>
-
-                <div>
-                  <p className=" text-gray-800 font-bold">롯데캐슬엠파이어</p>
-                  <p className="text-sm text-gray-600">
-                    2024년 10월 28일 13시 20분
-                  </p>
-                </div>
-              </div>
+              <UpcomingConsultingComponent
+                upcomingConsulting={upcomingConsulting}
+              />
               <button className="text-gray-400 ">
                 <span className="sr-only">View details</span>
                 <PiPaperPlaneRightFill />
@@ -65,17 +66,17 @@ const ConsultingTabLayout: React.FC = () => {
 
           <SemiTitle>지난 상담 내역</SemiTitle>
           <CommonBackground className="p-5">
-            {consultationHistory.map((consultation, index) => (
+            {consultingHistory.map((consulting, index) => (
               <div
                 key={index}
                 className="border-b last:border-none py-4 flex items-center justify-between hover:transition-transform transform hover:scale-105"
               >
                 <button className="w-full text-left">
-                  <h3 className="text-md font-semibold text-hanaBlack80">
-                    {consultation.title}
+                  <h3 className="text-md font-semibold text-hanaBlack">
+                    {consulting.title}
                   </h3>
                   <p className="text-xs text-gray-500">
-                    마지막 상담: {consultation.date}
+                    마지막 상담: {consulting.date}
                   </p>
                 </button>
                 <AiOutlineRight className="text-gray-400 text-xl" />

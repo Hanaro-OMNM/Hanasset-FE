@@ -17,14 +17,15 @@ import general from '../assets/img/mapType/일반지도.png';
 import topographic from '../assets/img/mapType/지형지도.png';
 import { Navbar } from '../components/template/Navbar';
 
-function MarkerCluster({ zoomLevel, onMarkerClick }) {
+function MarkerCluster({ onMarkerClick }) {
   const naverMaps = useNavermaps();
   const map = useMap();
-  const [MarkerClustering, setMarkerClustering] = useState<any>(null);
+  const [MarkerClustering, setMarkerClustering] =
+    useState<naver.maps.map>(null);
 
   useEffect(() => {
     let isMounted = true;
-    import('../assets/MarkerClustering.js')
+    import('../assets/MarkerClustering.js'!)
       .then((module) => {
         if (isMounted) {
           setMarkerClustering(() => module.makeMarkerClustering(window.naver));
@@ -120,7 +121,7 @@ function MarkerCluster({ zoomLevel, onMarkerClick }) {
 
     // onClick 이벤트 추가
     marker.addListener('click', () => {
-      onMarkerClick(item); // 클릭 시 해당 아이템 전달
+      onMarkerClick(true); // 클릭 시 해당 아이템 전달
     });
 
     return marker;
@@ -135,7 +136,7 @@ function MarkerCluster({ zoomLevel, onMarkerClick }) {
     gridSize: 1000,
     icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
     indexGenerator: [5, 20, 50, 100, 250, 500],
-    stylingFunction: (clusterMarker: any, count: number) => {
+    stylingFunction: (clusterMarker: naver.maps.Map, count: number) => {
       const clusterContent = clusterMarker.getElement();
 
       // clusterContent가 null이 아닌지 확인
@@ -169,7 +170,8 @@ export default function Main() {
 
   const [showControlPanel, setShowControlPanel] = useState(false);
   const [mapType, setMapType] = useState(naverMaps.MapTypeId.NORMAL);
-  const [selectedEstate, setSelectedEstate] = useState(false); // 선택된 매물 상태
+  const [selectedEstate, setSelectedEstate] = useState(false);
+  const handleTabChange = () => setSelectedEstate(false);
 
   const handleZoomIn = () => {
     if (mapRef.current) {
@@ -430,10 +432,10 @@ export default function Main() {
           maxZoom={21}
           scaleControl={true}
         >
-          <MarkerCluster zoomLevel={zoom} onMarkerClick={setSelectedEstate} />
+          <MarkerCluster onMarkerClick={setSelectedEstate} />
         </NaverMap>
       </MapDiv>
-      <Navbar state={selectedEstate} />
+      <Navbar state={selectedEstate} onTabChange={handleTabChange} />
     </div>
   );
 }

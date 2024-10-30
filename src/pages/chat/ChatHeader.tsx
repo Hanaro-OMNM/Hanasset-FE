@@ -11,7 +11,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
   responserImage,
 }) => {
   return (
-    <div className="w-full max-w-lg p-3 bg-white justify-center">
+    <div className="w-full p-3 bg-white justify-center">
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <img

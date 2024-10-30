@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import FormTitle from '../../components/atoms/FormTitle';
+import RegisterButtonGroup from '../../components/atoms/RegisterPageButtonGroup';
 import PropertyItem from './PropertyItem';
 
 interface PropertyConfirmProps {
@@ -40,17 +41,15 @@ export default function PropertyConfirm({
       <p className="text-gray-500">{confirmationDate}에 입력</p>
 
       <div className="mt-4">
-        <PropertyItem label="직업" value={job} onClick={handleEditJob} />
-        <PropertyItem label="소득" value={income} onClick={handleEditIncome} />
-        <PropertyItem
-          label="보유 자동차"
-          value={vehicleOwnership || '없음'}
-          onClick={handleEditVehicle}
-        />
-        <PropertyItem
-          label="보유 주택"
-          value={propertyOwnership || '없음'}
-          onClick={handleEditProperty}
+        <RegisterButtonGroup
+          job={''}
+          income={''}
+          vehicleOwnership={''}
+          propertyOwnership={''}
+          confirmationDate={''}
+          onRegister={function (type: 'home' | 'car' | 'job' | 'income'): void {
+            throw new Error('Function not implemented.');
+          }}
         />
       </div>
     </div>

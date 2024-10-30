@@ -1,28 +1,33 @@
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { AiOutlineRight } from 'react-icons/ai';
 
 interface PropertyItemProps {
+  type: 'home' | 'car' | 'job' | 'income';
   label: string;
   value: string;
-  onClick?: () => void;
+  onClick: (type: 'home' | 'car' | 'job' | 'income') => void;
+  roundedTop?: boolean;
+  roundedBottom?: boolean;
 }
 
 export default function PropertyItem({
+  type,
   label,
   value,
   onClick,
 }: PropertyItemProps) {
   return (
-    <div
-      className="flex justify-between items-center py-4 cursor-pointer"
-      onClick={onClick}
+    <button
+      className={`w-full hover:transition-transform transform hover:scale-105 
+      hover:bg-hanaGreen10 transition-all duration-300 ease-in-out focus:outline-none flex justify-between py-5 `}
+      onClick={() => onClick(type)}
     >
-      <span className="text-hanaBlack60 text-sm ">{label}</span>
+      <span className="text-hanaBlack60 text-md ">{label}</span>
       <div className="flex items-center">
         <span className="text-hanaBlack80 text-md font-bold">
           {value || '없음'}
         </span>
-        <MdOutlineKeyboardArrowRight className="ml-2 text-gray-600" />
+        <AiOutlineRight className="text-gray-400 text-lg ml-2" />
       </div>
-    </div>
+    </button>
   );
 }

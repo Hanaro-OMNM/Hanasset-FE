@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import LocationFilter from '../../pages/location/LocationFilter';
 import CommonBackground from '../atoms/CommonBackground';
-// import RecentCheckedButton from '../atoms/RecentCheckedButton';
+import RecentCheckedButton from '../atoms/RecentCheckedButton';
 import SearchBar from '../atoms/SearchBar';
 
-// type House = {
-//   title: string;
-//   description: string;
-// };
+type House = {
+  title: string;
+  description: string;
+  address: string;
+};
 
 const MainSideLayout: React.FC = () => {
   // 지역 골라보기 버튼들 눌렀을 때 페이지 이동을 위한 state
@@ -38,9 +39,11 @@ const MainSideLayout: React.FC = () => {
   }, []);
 
   // 최근에 확인한 매물 리스트
-  // const recentHouses: 'none' | House[] = JSON.parse(
-  //   localStorage.getItem('recents') || 'none'
-  // );
+  const recentHouses: 'none' | House[] = (() => {
+    const recents = localStorage.getItem('recents');
+
+    return recents ? JSON.parse(recents) : 'none';
+  })();
 
   return (
     <div className="w-[420px]">
@@ -122,8 +125,8 @@ const MainSideLayout: React.FC = () => {
               <h2 className="text-xl font-bold mb-6">최근에 확인한 매물</h2>
               <div className="w-full">
                 <CommonBackground className="p-5">
-                  <div>최근에 확인한 매물이 없습니다.</div>
-                  {/* {recentHouses === 'none' ? (
+                  {/* <div>최근에 확인한 매물이 없습니다.</div> */}
+                  {recentHouses === 'none' ? (
                     <div>최근에 확인한 매물이 없습니다.</div>
                   ) : (
                     recentHouses.map((house: House, index: number) => (
@@ -133,12 +136,13 @@ const MainSideLayout: React.FC = () => {
                           // onClick={() => {}}
                           title={house.title}
                           description={house.description}
+                          address={house.address}
                           roundedTop={index === 0}
                         />
                         {index < recentHouses.length - 1 && <hr />}
                       </div>
                     ))
-                  )} */}
+                  )}
                 </CommonBackground>
               </div>
             </div>

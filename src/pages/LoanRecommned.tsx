@@ -3,9 +3,9 @@ import { IoChevronBack } from 'react-icons/io5';
 import { dummyGuest } from '../assets/Dummy';
 import Button from '../components/atoms/Button';
 import DsrInfo from './LoanRecommend/components/DsrInfo';
-import Expectation from './LoanRecommend/components/Expectation';
 import LoanFoundMessage from './LoanRecommend/components/LoanFoundMessage';
 import LoanRecommendTab from './LoanRecommend/components/LoanRecommendTab';
+import Expectation from './LoanRecommend/components/LoanSlider';
 
 // Dummy Datas
 interface Loan {

@@ -1,5 +1,6 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import clsx from 'clsx';
+import { useState } from 'react';
 import LoanCard from './LoanCard';
 
 // Dummy Datas
@@ -40,6 +41,11 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
   hanaLoanList,
   beotimmogLoanList,
 }) => {
+  const [showCount, setShowCount] = useState(3);
+  const onClick = () => {
+    setShowCount((showCount) => showCount + 3);
+  };
+
   // 대출 리스트 전처리
   hanaLoanList = loanListPreProcessing(hanaLoanList);
   beotimmogLoanList = loanListPreProcessing(beotimmogLoanList);
@@ -81,6 +87,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
               <LoanCard
                 key={index}
                 isBest={index === 0 ? true : false}
+                isShow={index < showCount ? true : false}
                 name={loan.name}
                 rate={loan.rate}
                 limit={loan.limit}
@@ -88,6 +95,16 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                 loanDetailUrl={loan.loanDetailUrl}
               />
             ))}
+          </div>
+          {/* 더 보기 */}
+          <div
+            className={clsx(
+              showCount < hanaLoanList.length &&
+                'ml-4 mr-4 mb-4 text-hanaBlack60 text-center',
+              showCount >= hanaLoanList.length && 'hidden'
+            )}
+          >
+            <button onClick={onClick}>더 보기</button>
           </div>
         </TabPanel>
         <TabPanel>
@@ -98,6 +115,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
               <LoanCard
                 key={index}
                 isBest={index === 0 ? true : false}
+                isShow={index < showCount ? true : false}
                 name={loan.name}
                 rate={loan.rate}
                 limit={loan.limit}
@@ -105,6 +123,16 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                 loanDetailUrl={loan.loanDetailUrl}
               />
             ))}
+          </div>
+          {/* 더 보기 */}
+          <div
+            className={clsx(
+              showCount < beotimmogLoanList.length &&
+                'ml-4 mr-4 mb-4 text-hanaBlack60 text-center',
+              showCount >= beotimmogLoanList.length && 'hidden'
+            )}
+          >
+            <button onClick={onClick}>더 보기</button>
           </div>
         </TabPanel>
       </TabPanels>

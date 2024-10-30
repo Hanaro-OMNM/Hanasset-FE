@@ -79,6 +79,7 @@ const LoanNewDsr: React.FC<LoanNewDsrProps> = ({ isBest, newDsr }) => {
 // LoanCard Components
 interface LoanCardProps {
   isBest: boolean;
+  isShow: boolean;
   name: string;
   rate: number;
   limit: number;
@@ -88,6 +89,7 @@ interface LoanCardProps {
 
 const LoanCard: React.FC<LoanCardProps> = ({
   isBest,
+  isShow,
   name,
   rate,
   limit,
@@ -99,7 +101,7 @@ const LoanCard: React.FC<LoanCardProps> = ({
   };
 
   return (
-    <div>
+    <div className={clsx(!isShow && 'hidden')}>
       <button className="mb-3 w-full" onClick={onClick}>
         <div
           className={clsx(

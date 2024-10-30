@@ -1,16 +1,16 @@
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import ApartForm from '../../pages/property/form/ApartForm';
 import ApartListForm from '../../pages/property/form/ApartListForm';
-import CarForm from '../../pages/property/form/CarForm';
-import ConfirmLoan from '../../pages/property/form/ConfirmLoan';
+import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
 import JobForm from '../../pages/property/form/JobForm';
+import OwnPropertyForm from '../../pages/property/form/OwnPropertyForm';
 import SalaryForm from '../../pages/property/form/SalaryForm';
 import Button from '../atoms/Button';
 import CommonBackground from '../atoms/CommonBackground';
+import SemiTitle from '../atoms/SemiTitle';
 
 interface AssetRegisterProps {
-  assetType: 'home' | 'car' | 'job' | 'income';
+  assetType: 'home' | 'family' | 'job' | 'income' | 'loan';
   onBack: () => void;
 }
 
@@ -18,14 +18,16 @@ export default function PropertyForm({
   assetType,
   onBack,
 }: AssetRegisterProps) {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [validCarForm, setValidCarForm] = useState(false);
+  const [isMarried, setIsMarried] = useState(false);
+  const [hasChildren, setHasChildren] = useState(false);
+
   const [validLoanForm, setValidLoanForm] = useState(false);
   const [validSalaryForm, setValidSalaryForm] = useState(false);
 
-  const handleCarFormNext = (hasCar: boolean) => {
-    setValidCarForm(hasCar);
+  // FamilyStatusForm 컴포넌트에서 전달받은 결혼 여부와 자녀 유무를 업데이트
+  const handleFamilyStatusNext = (married: boolean, children: boolean) => {
+    setIsMarried(married);
+    setHasChildren(children);
   };
 
   const handleLoanDecision = (hasLoan: boolean) => {
@@ -37,7 +39,6 @@ export default function PropertyForm({
   };
 
   //아래 주석은 지우면 안됩니다(useEffect 관리 주석)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const forms = [
     { key: 'job', component: <JobForm />, valid: true },
     {
@@ -46,9 +47,9 @@ export default function PropertyForm({
       valid: validSalaryForm,
     },
     {
-      key: 'car',
-      component: <CarForm onNext={handleCarFormNext} />,
-      valid: validCarForm,
+      key: 'family',
+      component: <FamilyStatusForm onNext={handleFamilyStatusNext} />,
+      valid: isMarried,
     },
     {
       key: 'apart',
@@ -58,11 +59,6 @@ export default function PropertyForm({
     { key: 'apartlist', component: <ApartListForm />, valid: true },
     {
       key: 'loan',
-      component: <ConfirmLoan onNext={handleLoanDecision} />,
-      valid: validLoanForm,
-    },
-    {
-      key: 'loaninfo',
       component: <SalaryForm formType="loan" onNext={handleSalaryFormNext} />,
       valid: validSalaryForm,
     },
@@ -75,10 +71,12 @@ export default function PropertyForm({
         return forms.findIndex((form) => form.key === 'job');
       case 'income':
         return forms.findIndex((form) => form.key === 'income');
-      case 'car':
-        return forms.findIndex((form) => form.key === 'car');
+      case 'family':
+        return forms.findIndex((form) => form.key === 'family');
       case 'home':
         return forms.findIndex((form) => form.key === 'apart');
+      case 'loan':
+        return forms.findIndex((form) => form.key === 'loan');
       default:
         return 0;
     }
@@ -98,7 +96,8 @@ export default function PropertyForm({
   };
 
   return (
-    <div>
+    <div className="mt-10">
+      <SemiTitle>자산 입력받기</SemiTitle>
       <CommonBackground className="mb-10">
         {forms[currentStep].component}
       </CommonBackground>

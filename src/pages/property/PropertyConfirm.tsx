@@ -47,7 +47,9 @@ export default function PropertyConfirm({
           vehicleOwnership={''}
           propertyOwnership={''}
           confirmationDate={''}
-          onRegister={function (type: 'home' | 'car' | 'job' | 'income'): void {
+          onRegister={function (
+            type: 'home' | 'family' | 'job' | 'income' | 'loan'
+          ): void {
             throw new Error('Function not implemented.');
           }}
         />

@@ -7,7 +7,6 @@ import CommonBackground from '../atoms/CommonBackground';
 import RegisterButtonGroup from '../atoms/RegisterPageButtonGroup';
 import SemiTitle from '../atoms/SemiTitle';
 import Swiper from '../atoms/Swiper';
-import AssetRegister from '../template/AssetRegister';
 import EditProfile from '../template/EditProfile';
 import EditProfileLayout from '../template/EditProfileLayout';
 import PropertyRegister from './PropertyRegister';
@@ -15,15 +14,10 @@ import PropertyRegister from './PropertyRegister';
 interface Asset {
   name: string;
 }
-interface Consultating {
-  title: string;
-  date: string;
-  time: string;
-}
 
 export default function MyPageLayout() {
   const [currentPage, setCurrentPage] = useState<
-    'home' | 'car' | 'main' | 'editProfile' | 'job' | 'income'
+    'home' | 'family' | 'job' | 'income' | 'loan'
   >('main');
   const handleEditProfile = () => {
     setCurrentPage('editProfile');
@@ -33,11 +27,6 @@ export default function MyPageLayout() {
     imageSrc: profileImage,
     name: '김손님',
   };
-
-  const consultatings: Consultating[] = [
-    { title: '전세금 안심 대출', date: '2024.09.12', time: '13:04' },
-    { title: '하나 청년전세론', date: '2024.08.27', time: '16:34' },
-  ];
 
   const assets: Asset[] = [
     { name: '서울 성동구 아차산로 111 2층' },
@@ -53,13 +42,15 @@ export default function MyPageLayout() {
     (_, index) => assets.slice(index * itemsPerPage, (index + 1) * itemsPerPage)
   );
 
-  const handleRegister = (type: 'home' | 'car' | 'job' | 'income') => {
+  const handleRegister = (
+    type: 'home' | 'family' | 'job' | 'income' | 'loan'
+  ) => {
     setCurrentPage(type);
   };
 
-  const handleConsultant = () => {
-    console.log('상담 페이지로 이동');
-  };
+  // const handleConsultant = () => {
+  //   console.log('상담 페이지로 이동');
+  // };
 
   return (
     <div className="w-[420px] p-6 backdrop-blur-[10px] absolute top-0 left-2 h-full overflow-y-auto bg-white/75">

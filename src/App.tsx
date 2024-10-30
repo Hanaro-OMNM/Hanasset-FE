@@ -14,9 +14,9 @@ import SignUp from './pages/SignUp.tsx';
 import ChatApp from './pages/chat/ChatApp.tsx';
 import GuestInfo from './pages/consultant/GuestInfo.tsx';
 import GuestWaiting from './pages/consultant/GuestWaiting.tsx';
+// import PropertyForm from './pages/property/PropertyForm.tsx';
 //데이터가 없어서 test 컴포넌트 import(임시)
 import TestPropertyConfirm from './pages/property/TestPropertyConfirm.tsx';
-import PropertyForm from './pages/property/form/PropertyForm.tsx';
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
             <Route path="/loan-reservation" element={<LoanReservation />} />
             <Route path="/real-estate-list" element={<RealEstateList />} />
             <Route path="/real-estate-detail" element={<RealEstateDetail />} />
-            <Route path="/property-form" element={<PropertyForm />} />
+            {/* <Route path="/property-form" element={<PropertyForm />} /> */}
             <Route path="/property-confirm" element={<TestPropertyConfirm />} />
             <Route path="/property-agree" element={<PropertyAgree />} />
             <Route path="/login" element={<Login />} />

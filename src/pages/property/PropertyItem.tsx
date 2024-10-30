@@ -1,10 +1,10 @@
 import { AiOutlineRight } from 'react-icons/ai';
 
 interface PropertyItemProps {
-  type: 'home' | 'car' | 'job' | 'income';
+  type: 'home' | 'family' | 'job' | 'income' | 'loan';
   label: string;
   value: string;
-  onClick: (type: 'home' | 'car' | 'job' | 'income') => void;
+  onClick: (type: 'home' | 'family' | 'job' | 'income' | 'loan') => void;
   roundedTop?: boolean;
   roundedBottom?: boolean;
 }

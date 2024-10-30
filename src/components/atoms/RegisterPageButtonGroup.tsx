@@ -7,7 +7,7 @@ interface RegisterButtonGroupProp {
   vehicleOwnership: string;
   propertyOwnership: string;
   confirmationDate: string;
-  onRegister: (type: 'home' | 'car' | 'job' | 'income') => void;
+  onRegister: (type: 'home' | 'family' | 'job' | 'income' | 'loan') => void;
 }
 
 export default function RegisterButtonGroup({
@@ -23,14 +23,14 @@ export default function RegisterButtonGroup({
       <hr></hr>
       <PropertyItem
         type="income"
-        label="소득"
+        label="연소득"
         value={income}
         onClick={onRegister}
       />
       <hr></hr>
       <PropertyItem
-        type="car"
-        label="보유 자동차"
+        type="family"
+        label="결혼자녀유무"
         value={vehicleOwnership || '없음'}
         onClick={onRegister}
       />
@@ -38,6 +38,13 @@ export default function RegisterButtonGroup({
       <PropertyItem
         type="home"
         label="보유 주택"
+        value={propertyOwnership || '없음'}
+        onClick={onRegister}
+      />
+      <hr></hr>
+      <PropertyItem
+        type="loan"
+        label="보유 대출"
         value={propertyOwnership || '없음'}
         onClick={onRegister}
       />

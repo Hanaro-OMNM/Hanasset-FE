@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import LocationFilter from '../../pages/location/LocationFilter';
+import CommonBackground from '../atoms/CommonBackground';
+// import RecentCheckedButton from '../atoms/RecentCheckedButton';
 import SearchBar from '../atoms/SearchBar';
 
-/*
-  MainSideLayout?
-  - 사이드바 영역 말하는 것입니다.
-    피그마 보면 불투명한 영역
-*/
+// type House = {
+//   title: string;
+//   description: string;
+// };
 
 const MainSideLayout: React.FC = () => {
   // 지역 골라보기 버튼들 눌렀을 때 페이지 이동을 위한 state
@@ -35,6 +36,11 @@ const MainSideLayout: React.FC = () => {
     setGungu(storedGungu);
     setDong(storedDong);
   }, []);
+
+  // 최근에 확인한 매물 리스트
+  // const recentHouses: 'none' | House[] = JSON.parse(
+  //   localStorage.getItem('recents') || 'none'
+  // );
 
   return (
     <div className="w-[420px]">
@@ -113,12 +119,27 @@ const MainSideLayout: React.FC = () => {
             </div>
 
             <div className="w-full max-w-md px-4 mt-16">
-              <h2 className="text-xl font-bold mb-6">카테고리별 골라보기</h2>
-              <div className="w-full grid grid-cols-2 gap-4 px-4">
-                <div className="bg-gray-200 h-24">1</div>
-                <div className="bg-gray-300 h-24">2</div>
-                <div className="bg-gray-400 h-24">3</div>
-                <div className="bg-gray-500 h-24">4</div>
+              <h2 className="text-xl font-bold mb-6">최근에 확인한 매물</h2>
+              <div className="w-full">
+                <CommonBackground className="p-5">
+                  <div>최근에 확인한 매물이 없습니다.</div>
+                  {/* {recentHouses === 'none' ? (
+                    <div>최근에 확인한 매물이 없습니다.</div>
+                  ) : (
+                    recentHouses.map((house: House, index: number) => (
+                      <div key={index}>
+                        <RecentCheckedButton
+                          // type="apt"
+                          // onClick={() => {}}
+                          title={house.title}
+                          description={house.description}
+                          roundedTop={index === 0}
+                        />
+                        {index < recentHouses.length - 1 && <hr />}
+                      </div>
+                    ))
+                  )} */}
+                </CommonBackground>
               </div>
             </div>
           </div>

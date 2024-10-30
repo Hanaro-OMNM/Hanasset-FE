@@ -1,5 +1,7 @@
+import { ReactNode } from 'react';
+
 interface TextTitleProps {
-  children: string;
+  children: ReactNode;
 }
 
 export default function SemiTitle({ children }: TextTitleProps) {

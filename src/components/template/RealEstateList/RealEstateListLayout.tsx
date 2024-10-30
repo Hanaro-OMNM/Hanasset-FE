@@ -2,6 +2,7 @@ import { FiChevronLeft } from 'react-icons/fi';
 import { useState } from 'react';
 import { realEstateData } from '../../../assets/Dummy.tsx';
 import DropdownCombobox from '../../atoms/Dropdown.tsx';
+import SemiTitle from '../../components/atoms/SemiTitle.tsx';
 import RealEstateCard from './RealEstateCard.tsx';
 
 const sortItems = [
@@ -18,7 +19,7 @@ export default function RealEstateLayout() {
   const realEstateCount = 27;
 
   return (
-    <div className="w-[500px] top-0 absolute pl-2 h-full md:w-2/3 lg:w-1/3 bg-white rounded-xl shadow border-2 p-4 flex flex-col min-h-0">
+    <div className="w-[420px] top-0 absolute pl-2 h-full md:w-2/3 lg:w-1/3 bg-white rounded-xl shadow border-2 p-4 flex flex-col min-h-0">
       <div className="flex items-center mb-4">
         <FiChevronLeft className="w-[30px] h-[30px] mr-4" />
         <div className="flex-1 text-center">
@@ -28,9 +29,9 @@ export default function RealEstateLayout() {
         </div>
       </div>
       <div className="flex justify-between items-center mb-4">
-        <span className="text-sm text-[#b1b1b1]">
-          {realEstateCount}개의 매물
-        </span>
+        <div className="">
+          <SemiTitle>{realEstateCount}개의 매물</SemiTitle>
+        </div>
         <DropdownCombobox
           items={sortItems}
           selectedItem={selectedItem}

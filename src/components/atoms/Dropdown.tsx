@@ -1,5 +1,4 @@
 import { Combobox } from '@headlessui/react';
-import { AiOutlineCheck } from 'react-icons/ai';
 import { FiChevronDown } from 'react-icons/fi';
 import { useState } from 'react';
 
@@ -29,16 +28,18 @@ const DropdownCombobox: React.FC<ComboboxProps> = ({
 
   return (
     <Combobox value={selectedItem} onChange={setSelectedItem}>
-      <div className={`relative w-32 ${comboboxClassName}`}>
+      <div className={`relative w-28 ${comboboxClassName}`}>
         {/* Combobox Input */}
-        <div className="font-semibold text-sm relative w-full flex items-center space-x-2 rounded-md px-3 py-2 bg-white">
-          <Combobox.Input
-            className="w-full border-none focus:ring-0 text-black"
-            placeholder="입력"
-            onChange={(event) => setQuery(event.target.value)}
-            displayValue={(item: string) => item}
-          />
-          <Combobox.Button>
+        <div className="text-sm relative flex items-center rounded-md px-3 py-2">
+          <Combobox.Button className="flex items-center w-full">
+            {/* Input과 아이콘을 수평 정렬 */}
+            <Combobox.Input
+              className="w-full border-none text-black focus:outline-none"
+              placeholder="입력"
+              onChange={(event) => setQuery(event.target.value)}
+              displayValue={(item: string) => item}
+              readOnly
+            />
             <FiChevronDown
               className="w-5 h-5 text-hanaGreen"
               aria-hidden="true"
@@ -54,8 +55,8 @@ const DropdownCombobox: React.FC<ComboboxProps> = ({
                 key={index}
                 value={item}
                 className={({ active }) =>
-                  `cursor-pointer select-none relative py-2 pl-10 pr-4 ${
-                    active ? 'bg-hanaGreen text-white' : 'text-black'
+                  `cursor-pointer select-none relative py-2 pl-4 ${
+                    active ? 'bg-white' : 'text-black'
                   } ${optionClassName}`
                 }
               >
@@ -68,14 +69,6 @@ const DropdownCombobox: React.FC<ComboboxProps> = ({
                     >
                       {item}
                     </span>
-                    {selected && (
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-white">
-                        <AiOutlineCheck
-                          className="w-5 h-5"
-                          aria-hidden="true"
-                        />
-                      </span>
-                    )}
                   </>
                 )}
               </Combobox.Option>

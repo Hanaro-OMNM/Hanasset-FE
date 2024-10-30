@@ -77,7 +77,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
         responserName={accessor === 'guest' ? '하나은행 상담사' : '고객1'}
         responserImage={accessor === 'guest' ? logo : profile}
       />
-      <div className="flex-1 w-full px-4 md:px-8 py-4 bg-hanaSilver20 shadow overflow-y-auto space-y-4">
+      <div className="flex-1 w-full px-4 md:px-8 py-4 bg-hanaSilver20 shadow overflow-y-auto scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400 space-y-4">
         {messages.map((msg, index) => (
           <ChatMessage
             key={msg.id}

@@ -100,7 +100,9 @@ export default function MyPageLayout() {
           </div>
 
           <div className="h-32">
-            <SemiTitle>내 관심 지역</SemiTitle>
+            <div className="mt-10">
+              <SemiTitle>내 관심 지역</SemiTitle>
+            </div>
             <Swiper
               items={interestAreas}
               pagination={false}
@@ -113,7 +115,7 @@ export default function MyPageLayout() {
           </div>
 
           <div>
-            <SemiTitle>내 관심 매물</SemiTitle>
+            <SemiTitle>내 관심 아파트</SemiTitle>
             <Swiper
               items={slides}
               renderItem={(pageAssets) => (

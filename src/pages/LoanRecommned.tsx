@@ -1,77 +1,71 @@
 // LoanInfoPage.tsx
-import { useState } from 'react';
-import AssetInfo from './LoanRecommendComponents/AssetInfo';
-import LoanFoundMessage from './LoanRecommendComponents/LoanFoundMessage';
-import LoanRecommendTab from './LoanRecommendComponents/LoanRecommendTab';
+import { IoChevronBack } from 'react-icons/io5';
+import { dummyGuest } from '../assets/Dummy';
+import Button from '../components/atoms/Button';
+import DsrInfo from './LoanRecommend/components/DsrInfo';
+import Expectation from './LoanRecommend/components/Expectation';
+import LoanFoundMessage from './LoanRecommend/components/LoanFoundMessage';
+import LoanRecommendTab from './LoanRecommend/components/LoanRecommendTab';
 
 // Dummy Datas
 interface Loan {
-  logoSrcUrl: string;
-  finInst: string;
   name: string;
-  rate: string;
-  amount: string;
+  rate: number;
+  limit: number;
+  newDsr: number;
   loanDetailUrl: string;
 }
 
-const hanaBankLoan: Loan = {
-  logoSrcUrl: 'https://www.hanafn.com/assets/img/ko/info/img-hana-symbol.png',
-  finInst: '하나은행',
-  name: '하나신용대출',
-  rate: '8.4%',
-  amount: '1,300만원',
+const hanaYouthJeonseLoan: Loan = {
+  name: '하나 청년전세론',
+  rate: 4.453,
+  limit: 2,
+  newDsr: 20,
   loanDetailUrl: '',
 };
 
-const kbCardLoan: Loan = {
-  logoSrcUrl: 'https://www.kbfg.com/kor/images/about/pc/img_symbol_logo.jpg',
-  finInst: 'KB국민카드',
-  name: 'KB국민이지플러스',
-  rate: '14.3%',
-  amount: '2,200만원',
+const seoulYouthLoan: Loan = {
+  name: '서울특별시 청년임차 보증금 대출',
+  rate: 4.52,
+  limit: 2,
+  newDsr: 25,
   loanDetailUrl: '',
 };
 
-const kbBankLoan: Loan = {
-  logoSrcUrl: 'https://www.kbfg.com/kor/images/about/pc/img_symbol_logo.jpg',
-  finInst: 'KB국민은행',
-  name: 'KB비상금대출',
-  rate: '12.5%',
-  amount: '2,000만원',
+const jeonseSecurityLoan: Loan = {
+  name: '전세안심금대출',
+  rate: 4.71,
+  limit: 2,
+  newDsr: 30,
   loanDetailUrl: '',
 };
 
-const loanList: Loan[] = [hanaBankLoan, kbCardLoan, kbBankLoan];
+const loanList: Loan[] = [
+  hanaYouthJeonseLoan,
+  seoulYouthLoan,
+  jeonseSecurityLoan,
+];
 
 const LoanInfoPage: React.FC = () => {
-  const [assets, setAssets] = useState(100); // 자산 금액을 위한 state
-
   return (
     <div className="min-h-screen bg-[#f4f6f9]">
       {/* 헤더 */}
-      <div className="flex h-12 mb-4 bg-hanaSilver20 items-center justify-start gap-2">
-        <button>뒤로가기</button>
+      <div className="flex h-12 mb-4 pl-8 bg-hanaSilver20 items-center justify-start gap-2">
+        <button>
+          <IoChevronBack className="text-hanaBlack80 text-xl" />
+        </button>
         <h1 className="text-hanaBlack80 text-lg font-semibold">
-          맞춤 상품 안내
+          맞춤 대출 상품 안내
         </h1>
       </div>
 
-      <AssetInfo amount={100} />
+      <Expectation totalPrice={10} maxLoan={5} />
 
-      {/* 자본금 + 대출금 조절하는 range input */}
-      <div className="flex justify-center mt-4 mb-4">
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={assets}
-          onChange={(e) => setAssets(Number(e.target.value))}
-          className="w-3/4"
-        />
-      </div>
-
+      <DsrInfo dsr={dummyGuest.stressDsr} />
       <LoanFoundMessage isFound={true} />
-      <LoanRecommendTab loanList={loanList} />
+      <LoanRecommendTab hanaLoanList={loanList} beotimmogLoanList={[]} />
+
+      <Button text="실시간 채팅 상담 예약하기" />
     </div>
   );
 };

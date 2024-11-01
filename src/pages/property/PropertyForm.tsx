@@ -1,13 +1,13 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Button from '../../../components/atoms/Button';
-import FormLayout from '../../../components/template/FormLayout';
-import ApartForm from '../form/ApartForm';
-import ApartListForm from '../form/ApartListForm';
-import CarForm from '../form/CarForm';
-import ConfirmLoan from '../form/ConfirmLoan';
-import SalaryForm from '../form/SalaryForm';
-import JobForm from './JobForm';
+import Button from '../../components/atoms/Button';
+import FormLayout from '../../components/template/FormLayout';
+import ApartForm from './form/ApartForm';
+import ApartListForm from './form/ApartListForm';
+import FamilyStatusForm from './form/FamilyStatusForm';
+import JobForm from './form/JobForm';
+import OwnPropertyForm from './form/OwnPropertyForm';
+import SalaryForm from './form/SalaryForm';
 
 export default function PropertyForm() {
   const location = useLocation();
@@ -58,7 +58,7 @@ export default function PropertyForm() {
     },
     {
       key: 'car',
-      component: <CarForm onNext={handleCarFormNext} />,
+      component: <FamilyStatusForm onNext={handleCarFormNext} />,
       valid: validCarForm,
     },
     {
@@ -69,7 +69,7 @@ export default function PropertyForm() {
     { key: 'apartlist', component: <ApartListForm />, valid: true },
     {
       key: 'loan',
-      component: <ConfirmLoan onNext={handleLoanDecision} />,
+      component: <OwnPropertyForm onNext={handleLoanDecision} />,
       valid: validLoanForm,
     },
     {

@@ -17,7 +17,23 @@ import PropertyInfo from './components/PropertyInfo';
 import Tabs from './components/Tabs';
 import TypeInfo from './components/TypeInfo';
 
-export default function RealEstateDetail() {
+interface RealEstateDetailProps {
+  estate: {
+    type: string;
+    location: string;
+    price: string;
+    size: string;
+    description: string;
+    dealType: string;
+    imageUrl: string;
+  };
+  onBackClick: () => void;
+}
+
+export default function RealEstateDetail({
+  estate,
+  onBackClick,
+}: RealEstateDetailProps) {
   const [activeTab, setActiveTab] = useState(0);
 
   const tabData = [
@@ -38,7 +54,7 @@ export default function RealEstateDetail() {
 
   return (
     <RealEstateDetailLayout>
-      <ImageCarousel images={realEstateImages} />
+      <ImageCarousel images={realEstateImages} onBackClick={onBackClick} />
       <PropertyInfo {...realEstatePropertyInfoProps} />
       <Tabs tabs={tabData} onTabClick={handleTabClick} />
 

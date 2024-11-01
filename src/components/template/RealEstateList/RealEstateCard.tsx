@@ -1,5 +1,4 @@
 import React from 'react';
-import CommonBackground from '../../components/atoms/CommonBackground';
 
 interface RealEstateCardProps {
   type: string;
@@ -9,6 +8,7 @@ interface RealEstateCardProps {
   description: string;
   dealType: string;
   imageUrl: string;
+  onClick: () => void; // 클릭 핸들러 추가
 }
 
 const RealEstateCard: React.FC<RealEstateCardProps> = ({
@@ -19,6 +19,7 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
   description,
   dealType,
   imageUrl,
+  onClick,
 }) => {
   const truncateText = (text: string) => {
     if (text.length > 9) {
@@ -28,14 +29,13 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
   };
   // 텍스트 길이가 9자를 초과하면 말줄임표를 추가 (텍스트 태그별로 길이 재정의해야 함)
   return (
-    <div className="flex w-full relative font-sans">
-      <div className="flex hover:transition-transform transform hover:scale-105 border-b p-5">
+    <button className="flex relative font-sans" onClick={onClick}>
+      <div className="pl-2 flex hover:transition-transform transform py-3 hover:bg-hanaGreen20 hover:text-gray-600">
         <img
-          className="w-[180px] h-[180px] object-cover pb-2 flex-shrink-0 rounded-3xl"
+          className="w-[180px] h-[180px] object-cover flex-shrink-0 rounded-3xl"
           src={imageUrl}
           alt={`${type} 이미지`}
         />
-
         <div className="flex flex-col justify-center p-4 flex-grow min-w-0">
           {dealType === '매매' ? (
             <div className="flex text-sm font-bold mb-2 items-center">
@@ -71,7 +71,8 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
           </p>
         </div>
       </div>
-    </div>
+      <hr className="border-2 solid lightgray; margin: 10px 0;" />
+    </button>
   );
 };
 

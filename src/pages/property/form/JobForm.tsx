@@ -6,12 +6,14 @@ interface JobOption {
 }
 
 const joblist: JobOption[] = [
-  { name: '직장인' },
+  { name: '중소·중견기업 직장인' },
+  { name: '대기업 직장인' },
   { name: '개인사업자' },
   { name: '임대사업자' },
   { name: '공무원' },
-  { name: '기타' },
+  { name: '군인' },
   { name: '무직' },
+  { name: '기타' },
 ];
 
 export default function JobForm() {
@@ -22,7 +24,7 @@ export default function JobForm() {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-8">
       <FormRadio<JobOption>
         items={joblist}
         label="직업을 선택하세요"

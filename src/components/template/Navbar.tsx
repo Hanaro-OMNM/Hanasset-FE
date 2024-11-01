@@ -1,18 +1,37 @@
 import { FaHome, FaMap } from 'react-icons/fa';
 import { FaHouseUser } from 'react-icons/fa6';
 import { MdChat } from 'react-icons/md';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Logo from '../../assets/img/logo.png';
 import Profile from '../../assets/img/profile_ex.jpg';
 import MainSideLayout from '../template/MainSideLayout';
 import ConsultingTabLayout from './ConsultingTabLayout.tsx';
 import MyPageLayout from './MyPageLayout.tsx';
+import RealEstateLayout from './RealEstateList/RealEstateListLayout.tsx';
 
-const Navbar: React.FC = () => {
-  // 상태 관리: 홈, 지도, 마이홈의 활성 상태를 관리
+interface NavbarProps {
+  state?: boolean;
+  onTabChange?: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
   const [activePage, setActivePage] = useState<
-    'home' | 'map' | 'consultant' | 'myPage'
+    'home' | 'map' | 'myPage' | 'consultant' | 'estateList'
   >('home');
+
+  // 선택된 매물이 있으면 자동으로 'estateList' 페이지로 이동하도록 설정
+  useEffect(() => {
+    if (state) {
+      setActivePage('estateList');
+    }
+  }, [state]);
+
+  const handleSetActivePage = (
+    page: 'home' | 'map' | 'myPage' | 'consultant' | 'estateList'
+  ) => {
+    setActivePage(page);
+    onTabChange!(); // 탭이 변경될 때마다 onTabChange 호출하여 Main의 estateState 초기화
+  };
 
   return (
     <div className="space-x-16">
@@ -26,19 +45,13 @@ const Navbar: React.FC = () => {
             OMNM
           </div>
         </a>
-        {/* 메뉴 버튼들 */}
         <div className="w-14 h-96 mb-32 flex flex-col items-center justify-between">
-          {/* 홈 버튼 */}
           <button
-            onClick={() => setActivePage('home')} // 홈 버튼 클릭 시 'home'으로 설정
+            onClick={() => handleSetActivePage('home')}
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                activePage === 'home'
-                  ? 'bg-hanaGreen shadow mb-2'
-                  : 'bg-transparent'
-              }`}
+              className={`w-12 h-12 rounded-lg flex items-center justify-center ${activePage === 'home' ? 'bg-hanaGreen shadow mb-2' : 'bg-transparent'}`}
             >
               <FaHome
                 className={`w-6 h-6 ${activePage === 'home' ? 'text-white' : 'text-black'}`}
@@ -51,15 +64,11 @@ const Navbar: React.FC = () => {
 
           {/* 지도 버튼 */}
           <button
-            onClick={() => setActivePage('map')} // 지도 버튼 클릭 시 'map'으로 설정
+            onClick={() => handleSetActivePage('map')}
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                activePage === 'map'
-                  ? 'bg-hanaGreen shadow mb-2'
-                  : 'bg-transparent'
-              }`}
+              className={`w-12 h-12 rounded-lg flex items-center justify-center ${activePage === 'map' ? 'bg-hanaGreen shadow mb-2' : 'bg-transparent'}`}
             >
               <FaMap
                 className={`w-6 h-6 ${activePage === 'map' ? 'text-white' : 'text-black'}`}
@@ -72,15 +81,11 @@ const Navbar: React.FC = () => {
 
           {/* 상담 버튼 */}
           <button
-            onClick={() => setActivePage('consultant')} // 상담 버튼 클릭 시 'myPage'로 설정
+            onClick={() => handleSetActivePage('consultant')}
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                activePage === 'consultant'
-                  ? 'bg-hanaGreen shadow mb-2'
-                  : 'bg-transparent'
-              }`}
+              className={`w-12 h-12 rounded-lg flex items-center justify-center ${activePage === 'consultant' ? 'bg-hanaGreen shadow mb-2' : 'bg-transparent'}`}
             >
               <MdChat
                 className={`w-6 h-6 ${activePage === 'consultant' ? 'text-white' : 'text-black'}`}
@@ -93,15 +98,11 @@ const Navbar: React.FC = () => {
 
           {/* 마이홈 버튼 */}
           <button
-            onClick={() => setActivePage('myPage')} // 마이홈 버튼 클릭 시 'myPage'로 설정
+            onClick={() => handleSetActivePage('myPage')}
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                activePage === 'myPage'
-                  ? 'bg-hanaGreen shadow mb-2'
-                  : 'bg-transparent'
-              }`}
+              className={`w-12 h-12 rounded-lg flex items-center justify-center ${activePage === 'myPage' ? 'bg-hanaGreen shadow mb-2' : 'bg-transparent'}`}
             >
               <FaHouseUser
                 className={`w-6 h-6 ${activePage === 'myPage' ? 'text-white' : 'text-black'}`}
@@ -122,8 +123,9 @@ const Navbar: React.FC = () => {
       {activePage === 'map' && <></>}
       {activePage === 'consultant' && <ConsultingTabLayout />}
       {activePage === 'myPage' && <MyPageLayout />}
+      {activePage === 'estateList' && (
+        <RealEstateLayout onBackClick={() => handleSetActivePage('map')} />
+      )}
     </div>
   );
 };
-
-export default Navbar;

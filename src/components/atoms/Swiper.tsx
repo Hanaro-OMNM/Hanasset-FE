@@ -29,7 +29,7 @@ export default function SwiperComponent<T>({
       spaceBetween={spaceBetween}
       slidesPerView={slidesPerView}
       modules={[Pagination]}
-      className="mt-3 mb-10l"
+      className="mt-3"
     >
       {items.map((item, index) => (
         <SwiperSlide key={index}>{renderItem(item)}</SwiperSlide>

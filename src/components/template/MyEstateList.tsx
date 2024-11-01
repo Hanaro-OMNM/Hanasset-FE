@@ -1,6 +1,12 @@
 import { useState } from 'react';
+import Button from '../atoms/Button';
 import Checkbox from '../atoms/Checkbox';
 import CommonBackground from '../atoms/CommonBackground';
+import SemiTitle from '../atoms/SemiTitle';
+
+interface MyEstateListProps {
+  onBack: () => void;
+}
 
 const apartments = [
   {
@@ -26,7 +32,7 @@ const apartments = [
 ];
 const MAX_SELECTION = 3;
 
-export default function MyEstateList() {
+export default function MyEstateList({ onBack }: MyEstateListProps) {
   const [checkedItems, setCheckedItems] = useState<boolean[]>(
     Array(apartments.length).fill(false)
   );
@@ -46,6 +52,9 @@ export default function MyEstateList() {
 
   return (
     <div>
+      <div className="mt-8 mb-5 ">
+        <SemiTitle>내 관심 매물</SemiTitle>
+      </div>
       <CommonBackground>
         {apartments.map((apartment, index) => (
           <button
@@ -77,6 +86,7 @@ export default function MyEstateList() {
             </label>
           </button>
         ))}
+        <Button onClick={onBack} text="닫기" />
       </CommonBackground>
     </div>
   );

@@ -1,6 +1,6 @@
 import { AiOutlineRight } from 'react-icons/ai';
 import { PiBuildingApartment } from 'react-icons/pi';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import profileImage from '../../assets/img/profile_ex.jpg';
 import Button from '../atoms/Button';
 import CommonBackground from '../atoms/CommonBackground';
@@ -69,51 +69,27 @@ export default function MyPageLayout() {
             onEdit={handleEditProfile}
           />
 
-          <SemiTitle>내 상담 내역</SemiTitle>
-          <CommonBackground className="p-5">
-            {consultatings.map((consultating, index) => (
-              <div
-                key={index}
-                onClick={handleConsultant}
-                className="border-b last:border-none py-4 flex items-center justify-between hover:transition-transform transform hover:scale-105"
-              >
-                <button className="w-full text-left">
-                  <h3 className="text-lg">{consultating.title}</h3>
-                  <p className="text-xs text-gray-500">
-                    마지막 상담: {consultating.date} {consultating.time}
-                  </p>
-                </button>
-                <AiOutlineRight className="text-gray-400 text-xl" />
-              </div>
-            ))}
-            <Button
-              text="상담 내역 더 보기"
-              onClick={handleConsultant}
-              version="ver1"
-            />
-          </CommonBackground>
-
-          <div className="mt-10">
-            <RegisterButtonGroup onRegister={handleRegister} />
-          </div>
-
+          {/* 내 관심 지역 */}
           <div className="h-32">
             <div className="mt-10">
               <SemiTitle>내 관심 지역</SemiTitle>
             </div>
             <Swiper
               items={interestAreas}
-              pagination={{ clickable: false }}
+              pagination={{ clickable: true }}
               renderItem={(item) => (
-                <CommonBackground className="ml-1 h-20 flex items-center justify-center rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
+                <CommonBackground className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
                   {item}
                 </CommonBackground>
               )}
             />
           </div>
 
-          <div className="mt-20">
-            <SemiTitle>내 관심 아파트</SemiTitle>
+          {/* 내 관심 아파트 */}
+          <div className="mt-10">
+            <div className="mb-5">
+              <SemiTitle>내 관심 아파트</SemiTitle>
+            </div>
             <div className="flex flex-col gap-4 mr-1 ml-1">
               {assets.slice(0, 3).map((asset, index) => (
                 <button key={index} className="w-full">

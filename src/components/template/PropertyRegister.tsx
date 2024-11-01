@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import ApartForm from '../../pages/property/form/ApartForm';
 import ApartListForm from '../../pages/property/form/ApartListForm';
 import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
 import JobForm from '../../pages/property/form/JobForm';
@@ -10,7 +9,14 @@ import CommonBackground from '../atoms/CommonBackground';
 import SemiTitle from '../atoms/SemiTitle';
 
 interface AssetRegisterProps {
-  assetType: 'home' | 'family' | 'job' | 'income' | 'loan';
+  assetType:
+    | 'home'
+    | 'family'
+    | 'main'
+    | 'editProfile'
+    | 'job'
+    | 'income'
+    | 'loan';
   onBack: () => void;
 }
 
@@ -18,19 +24,23 @@ export default function PropertyForm({
   assetType,
   onBack,
 }: AssetRegisterProps) {
-  const [isMarried, setIsMarried] = useState(false);
-  const [hasChildren, setHasChildren] = useState(false);
+  const [isMarried, setIsMarried] = useState(true);
+  const [hasChildren, setHasChildren] = useState(true);
 
   const [validLoanForm, setValidLoanForm] = useState(false);
   const [validSalaryForm, setValidSalaryForm] = useState(false);
 
   // FamilyStatusForm 컴포넌트에서 전달받은 결혼 여부와 자녀 유무를 업데이트
   const handleFamilyStatusNext = (married: boolean, children: boolean) => {
+    console.log(isMarried);
+    console.log(hasChildren);
     setIsMarried(married);
     setHasChildren(children);
   };
 
+  //아직 의미 x 함수 (수정 예정)
   const handleLoanDecision = (hasLoan: boolean) => {
+    console.log(validLoanForm);
     setValidLoanForm(hasLoan);
   };
 
@@ -49,17 +59,23 @@ export default function PropertyForm({
     {
       key: 'family',
       component: <FamilyStatusForm onNext={handleFamilyStatusNext} />,
-      valid: isMarried,
+      valid: true,
     },
     {
-      key: 'apart',
-      component: <ApartForm />,
+      key: 'home',
+      component: <OwnPropertyForm onNext={handleLoanDecision} />,
       valid: true,
     },
     { key: 'apartlist', component: <ApartListForm />, valid: true },
     {
       key: 'loan',
-      component: <SalaryForm formType="loan" onNext={handleSalaryFormNext} />,
+      component: (
+        <SalaryForm
+          formType="loan"
+          onNext={handleSalaryFormNext}
+          onBack={onBack}
+        />
+      ),
       valid: validSalaryForm,
     },
   ];
@@ -74,7 +90,7 @@ export default function PropertyForm({
       case 'family':
         return forms.findIndex((form) => form.key === 'family');
       case 'home':
-        return forms.findIndex((form) => form.key === 'apart');
+        return forms.findIndex((form) => form.key === 'home');
       case 'loan':
         return forms.findIndex((form) => form.key === 'loan');
       default:
@@ -87,6 +103,9 @@ export default function PropertyForm({
   // 다음 폼으로 이동하는 함수
   const handleNextStep = () => {
     const currentForm = forms[currentStep];
+
+    //의미 없는 코드(오류방지용)
+    setCurrentStep(getInitialStep(assetType));
 
     if (currentForm.valid) {
       onBack();
@@ -102,7 +121,7 @@ export default function PropertyForm({
         {forms[currentStep].component}
       </CommonBackground>
       <Button
-        text="메인화면으로 돌아가기"
+        text="저장 후 메인화면으로 돌아가기"
         onClick={handleNextStep}
         version="ver2"
       />

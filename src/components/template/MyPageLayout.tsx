@@ -1,8 +1,6 @@
-import { AiOutlineRight } from 'react-icons/ai';
 import { PiBuildingApartment } from 'react-icons/pi';
 import { useState } from 'react';
 import profileImage from '../../assets/img/profile_ex.jpg';
-import Button from '../atoms/Button';
 import CommonBackground from '../atoms/CommonBackground';
 import RegisterButtonGroup from '../atoms/RegisterPageButtonGroup';
 import SemiTitle from '../atoms/SemiTitle';
@@ -17,7 +15,7 @@ interface Asset {
 
 export default function MyPageLayout() {
   const [currentPage, setCurrentPage] = useState<
-    'home' | 'family' | 'job' | 'income' | 'loan'
+    'home' | 'family' | 'main' | 'editProfile' | 'job' | 'income' | 'loan'
   >('main');
   const handleEditProfile = () => {
     setCurrentPage('editProfile');
@@ -43,7 +41,7 @@ export default function MyPageLayout() {
   );
 
   const handleRegister = (
-    type: 'home' | 'family' | 'job' | 'income' | 'loan'
+    type: 'home' | 'family' | 'main' | 'editProfile' | 'job' | 'income' | 'loan'
   ) => {
     setCurrentPage(type);
   };

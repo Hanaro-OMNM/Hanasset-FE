@@ -7,7 +7,9 @@ interface RegisterButtonGroupProp {
   vehicleOwnership: string;
   propertyOwnership: string;
   confirmationDate: string;
-  onRegister: (type: 'home' | 'family' | 'job' | 'income' | 'loan') => void;
+  onRegister: (
+    type: 'home' | 'family' | 'main' | 'editProfile' | 'job' | 'income' | 'loan'
+  ) => void;
 }
 
 export default function RegisterButtonGroup({

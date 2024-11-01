@@ -23,19 +23,16 @@ export default function FamilyStatusForm({ onNext }: FamilyStatusFormProps) {
     childrenStatusOptions[1]
   );
 
-  // 결혼 여부 변경 핸들러
   const handleMaritalStatusChange = (status: Option) => {
     setSelectedMaritalStatus(status);
     triggerOnNext(status, selectedChildrenStatus);
   };
 
-  // 자녀 여부 변경 핸들러
   const handleChildrenStatusChange = (status: Option) => {
     setSelectedChildrenStatus(status);
     triggerOnNext(selectedMaritalStatus, status);
   };
 
-  // 두 선택 값에 따라 onNext 호출
   const triggerOnNext = (maritalStatus: Option, childrenStatus: Option) => {
     const isMarried = maritalStatus.name === '결혼함';
     const hasChildren = childrenStatus.name === '자녀 있음';

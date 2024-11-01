@@ -46,10 +46,6 @@ export default function MyPageLayout() {
     setCurrentPage(type);
   };
 
-  // const handleConsultant = () => {
-  //   console.log('상담 페이지로 이동');
-  // };
-
   return (
     <div className="w-[420px] p-6 backdrop-blur-[10px] absolute top-0 left-2 h-full overflow-y-auto bg-white/75">
       {currentPage === 'main' ? (

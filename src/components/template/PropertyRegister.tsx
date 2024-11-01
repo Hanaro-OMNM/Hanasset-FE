@@ -30,7 +30,6 @@ export default function PropertyForm({
   const [validLoanForm, setValidLoanForm] = useState(false);
   const [validSalaryForm, setValidSalaryForm] = useState(false);
 
-  // FamilyStatusForm 컴포넌트에서 전달받은 결혼 여부와 자녀 유무를 업데이트
   const handleFamilyStatusNext = (married: boolean, children: boolean) => {
     console.log(isMarried);
     console.log(hasChildren);
@@ -48,7 +47,6 @@ export default function PropertyForm({
     setValidSalaryForm(hasSalary);
   };
 
-  //아래 주석은 지우면 안됩니다(useEffect 관리 주석)
   const forms = [
     { key: 'job', component: <JobForm />, valid: true },
     {
@@ -100,7 +98,6 @@ export default function PropertyForm({
 
   const [currentStep, setCurrentStep] = useState(getInitialStep(assetType));
 
-  // 다음 폼으로 이동하는 함수
   const handleNextStep = () => {
     const currentForm = forms[currentStep];
 

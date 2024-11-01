@@ -36,8 +36,8 @@ function App() {
               path="/consultant/guest-waiting"
               element={<GuestWaiting />}
             />
-            <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
             {/* 임시 */}
+            <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
           </Routes>
         </Layout>
       </NavermapsProvider>

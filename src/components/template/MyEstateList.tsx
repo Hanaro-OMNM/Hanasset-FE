@@ -66,6 +66,7 @@ const apartments = [
     address: '서울 성수동 아차산로 111',
   },
 ];
+
 const MAX_SELECTION = 3;
 
 const itemsPerPage = 5;

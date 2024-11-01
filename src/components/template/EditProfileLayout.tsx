@@ -26,6 +26,9 @@ export default function EditProfilePage({ onBack }: EditProfilePageProps) {
     alert('사용자 정보가 저장되었습니다.');
     onBack();
   };
+  const handleCloseChanges = () => {
+    onBack();
+  };
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -116,7 +119,7 @@ export default function EditProfilePage({ onBack }: EditProfilePageProps) {
           회원탈퇴
         </button>
         <button
-          onClick={handleSaveChanges}
+          onClick={handleCloseChanges}
           className="px-4 py-2 w-full bg-hanaGreen60 text-white font-medium rounded-lg shadow hover:bg-hanaGreen transition duration-300"
         >
           닫기

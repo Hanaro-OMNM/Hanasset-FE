@@ -11,57 +11,74 @@ interface MyEstateListProps {
 
 const apartments = [
   {
-    name: '롯데캐슬엠파이어',
+    id: 1,
+    name: '엠파이어1',
     detail: '105동 1609호',
     address: '서울 성수동 아차산로 111',
   },
   {
-    name: '롯데캐슬엠파이어',
+    id: 2,
+    name: '엠파이어2',
     detail: '105동 1609호',
     address: '서울 성수동 아차산로 111',
   },
   {
-    name: '엠파이어',
+    id: 3,
+    name: '엠파이어3',
     detail: '102동 804호',
     address: '서울 성수동 아차산로 111',
   },
   {
-    name: '롯데캐슬',
-    detail: '203동 301호',
-    address: '서울 성수동 아차산로 111',
-  },
-  {
-    name: '롯데엠파 444',
+    id: 4,
+    name: '엠파이어 4',
     detail: '501동 1702호',
     address: '서울 성수동 아차산로 111',
   },
   {
+    id: 5,
     name: '롯데엠파 5',
     detail: '501동 1702호',
     address: '서울 성수동 아차산로 111',
   },
   {
+    id: 6,
     name: '롯데엠파 6',
     detail: '501동 1702호',
     address: '서울 성수동 아차산로 111',
   },
   {
+    id: 7,
     name: '롯데엠파 7',
     detail: '501동 1702호',
     address: '서울 성수동 아차산로 111',
   },
   {
+    id: 8,
     name: '롯데엠파 8',
     detail: '501동 1702호',
     address: '서울 성수동 아차산로 111',
   },
   {
+    id: 9,
     name: '롯데엠파 9',
     detail: '501동 1702호',
     address: '서울 성수동 아차산로 111',
   },
   {
+    id: 10,
     name: '롯데엠파 10',
+    detail: '501동 1702호',
+    address: '서울 성수동 아차산로 111',
+  },
+  {
+    id: 11,
+    name: '롯데엠파 11',
+    detail: '501동 1702호',
+    address: '서울 성수동 아차산로 111',
+  },
+  {
+    id: 12,
+    name: '롯데엠파 12',
     detail: '501동 1702호',
     address: '서울 성수동 아차산로 111',
   },
@@ -96,17 +113,17 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
 
   return (
     <div>
-      <div className="mt-5 mb-5 ">
+      <div className="mb-5 ">
         <SemiTitle>내 관심 매물</SemiTitle>
       </div>
       <CommonBackground>
         <Swiper
           items={slides}
           renderItem={(pageApartments) => (
-            <div className="flex flex-col mr-1 ml-1 mb-10">
-              {pageApartments.map((apartment, index) => (
+            <div className="mb-8">
+              {pageApartments.map((apartment) => (
                 <button
-                  key={index}
+                  key={apartment.id}
                   className="w-full items-start rounded-lg hover:transition-transform transform hover:scale-105"
                 >
                   <label>
@@ -114,9 +131,9 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
                       <div className="content-center">
                         <Checkbox
                           aria-label={apartment.name}
-                          checked={checkedItems[index]}
+                          checked={checkedItems[apartment.id]}
                           onChange={(checked) =>
-                            handleItemChange(index, checked)
+                            handleItemChange(apartment.id, checked)
                           }
                         />
                       </div>

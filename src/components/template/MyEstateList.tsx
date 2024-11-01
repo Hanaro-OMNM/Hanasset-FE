@@ -113,7 +113,7 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
 
   return (
     <div>
-      <div className="mb-5 ">
+      <div className="mb-4">
         <SemiTitle>내 관심 매물</SemiTitle>
       </div>
       <CommonBackground>
@@ -158,10 +158,10 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
           spaceBetween={30}
           slidesPerView={1}
         />
-        <div className="pb-3 pr-3 pl-3">
-          <Button onClick={onBack} text="닫기" />
-        </div>
       </CommonBackground>
+      <div className="pt-4">
+        <Button onClick={onBack} text="닫기" />
+      </div>
     </div>
   );
 }

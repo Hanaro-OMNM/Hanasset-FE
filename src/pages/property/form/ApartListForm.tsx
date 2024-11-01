@@ -22,13 +22,15 @@ const apartments: Apartment[] = [
     info: '서울특별시 서초구 반포대로 100',
   },
 ];
+
+//apartinfo 더미 데이터(사용 예정)
 //apart선택후 apartmentInfo가 전달되도록 prop을 바꿔야하도록 구현 예정
 // const apartInfoList: Apartment[] = [
 //   { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
 //   { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
 //   { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
 //   { name: '18평 (전용 35.93m)', info: '9억 6,000만원' },
-// ]; //apartinfo 더미 데이터(사용 예정)
+// ];
 
 export default function ApartListForm() {
   const [selectedApartment, setSelectedApartment] = useState<Apartment>(

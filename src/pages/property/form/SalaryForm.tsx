@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import FormTitle from '../../../components/atoms/FormTitle';
 import Input from '../../../components/atoms/Input';
+import NoItemButton from '../../../components/atoms/NoItemButton';
 
 interface AssetInfoInputProps {
   formType: 'income' | 'loan'; // 'income' 또는 'loan' 중 하나로 설정
   onNext: (isValid: boolean) => void;
+  onBack?: () => void;
 }
 
 const AssetInfoInput: React.FC<AssetInfoInputProps> = ({
   formType,
   onNext,
+  onBack,
 }) => {
   const [amount, setAmount] = useState<string>('');
   const [error, setError] = useState<boolean>(true);
@@ -37,7 +40,7 @@ const AssetInfoInput: React.FC<AssetInfoInputProps> = ({
   };
 
   return (
-    <div className="p-4">
+    <div className="p-8">
       <FormTitle
         text={
           formType === 'income'
@@ -45,7 +48,7 @@ const AssetInfoInput: React.FC<AssetInfoInputProps> = ({
             : '이미 받은 대출은 얼마인가요?'
         }
       />
-      <div className="mt-5">
+      <div className="mt-5 ">
         <Input
           name="amount"
           value={amount}
@@ -57,6 +60,9 @@ const AssetInfoInput: React.FC<AssetInfoInputProps> = ({
           inputClassName="px-5 bg-hanaBlack20 rounded-md placeholder-gray-400 border-2 border-transparent"
         />
       </div>
+      {formType === 'loan' && (
+        <NoItemButton text={'보유 대출이 없어요'} onClick={onBack} />
+      )}
     </div>
   );
 };

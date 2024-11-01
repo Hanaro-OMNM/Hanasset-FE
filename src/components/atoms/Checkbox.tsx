@@ -1,6 +1,5 @@
 import { Switch } from '@headlessui/react';
 import { AiOutlineCheck } from 'react-icons/ai';
-import { useState } from 'react';
 
 interface CheckboxProps {
   name?: string;
@@ -17,27 +16,27 @@ const Checkbox: React.FC<CheckboxProps> = ({
   labelClassName = '',
   switchClassName = '',
 }) => {
-  const [enabled, setEnabled] = useState(checked); // 초기 상태 설정
-
-  // 상태 변경 함수
   const handleToggle = (state: boolean) => {
-    setEnabled(state);
     onChange(state);
   };
 
   return (
     <div className="flex items-center space-x-2">
       <Switch
-        checked={enabled}
+        checked={checked}
         onChange={handleToggle}
-        className={`relative inline-flex items-center justify-center w-[20px] h-[20px] rounded-md border transition-all duration-200 ${
-          enabled
-            ? 'bg-hanaGreen border-hanaGreen'
-            : 'bg-white border-hanaGreen'
-        } ${switchClassName}`}
+        className={`relative inline-flex items-center justify-center w-[30px] h-[30px] rounded-md transition-all duration-200 ${
+          switchClassName
+        }`}
         id={name}
       >
-        {enabled && <AiOutlineCheck className="text-white w-[12px] h-[12px]" />}
+        <AiOutlineCheck
+          className={`w-[30px] h-[30px] ${
+            checked
+              ? 'text-hanaGreen border border-hanaGreen rounded-md'
+              : 'text-hanaSilver60 border rounded-md'
+          }`}
+        />
       </Switch>
       {name && (
         <label

@@ -2,7 +2,7 @@ import React from 'react';
 
 interface NoItemButtonProps {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const NoItemButton: React.FC<NoItemButtonProps> = ({ text, onClick }) => {

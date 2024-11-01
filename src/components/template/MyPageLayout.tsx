@@ -3,12 +3,13 @@ import { useState } from 'react';
 import profileImage from '../../assets/img/profile_ex.jpg';
 import Button from '../atoms/Button';
 import CommonBackground from '../atoms/CommonBackground';
+import RegisterButtonGroup from '../atoms/RegisterPageButtonGroup';
 import SemiTitle from '../atoms/SemiTitle';
 import Swiper from '../atoms/Swiper';
-import AssetRegister from '../template/AssetRegister';
 import EditProfile from '../template/EditProfile';
 import EditProfileLayout from '../template/EditProfileLayout';
 import MyEstateList from './MyEstateList';
+import PropertyRegister from './PropertyRegister';
 
 interface Asset {
   name: string;
@@ -25,6 +26,7 @@ export default function MyPageLayout() {
     | 'loan'
     | 'EstateList'
   >('main');
+
   const handleEditProfile = () => {
     setCurrentPage('editProfile');
   };
@@ -47,7 +49,15 @@ export default function MyPageLayout() {
   const interestAreas = ['성수', '홍대', '신촌'];
 
   const handleRegister = (
-    type: 'home' | 'family' | 'main' | 'editProfile' | 'job' | 'income' | 'loan'
+    type:
+      | 'home'
+      | 'family'
+      | 'main'
+      | 'editProfile'
+      | 'job'
+      | 'income'
+      | 'loan'
+      | 'EstateList'
   ) => {
     setCurrentPage(type);
   };
@@ -61,6 +71,17 @@ export default function MyPageLayout() {
             name={profile.name}
             onEdit={handleEditProfile}
           />
+          <div className="mt-10">
+            <SemiTitle>내 정보</SemiTitle>
+            <RegisterButtonGroup
+              onRegister={handleRegister}
+              job={'중소,중견기업 직장인'}
+              income={'6000만원'}
+              vehicleOwnership={''}
+              propertyOwnership={''}
+              confirmationDate={''}
+            />
+          </div>
 
           {/* 내 관심 지역 */}
           <div className="h-32">
@@ -107,7 +128,7 @@ export default function MyPageLayout() {
       ) : currentPage === 'EstateList' ? (
         <MyEstateList onBack={() => setCurrentPage('main')} />
       ) : (
-        <AssetRegister
+        <PropertyRegister
           assetType={currentPage}
           onBack={() => setCurrentPage('main')}
         />

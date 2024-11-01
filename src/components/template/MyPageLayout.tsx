@@ -1,10 +1,8 @@
-import { AiOutlineRight } from 'react-icons/ai';
 import { PiBuildingApartment } from 'react-icons/pi';
 import { useState } from 'react';
 import profileImage from '../../assets/img/profile_ex.jpg';
 import Button from '../atoms/Button';
 import CommonBackground from '../atoms/CommonBackground';
-import RegisterButtonGroup from '../atoms/RegisterPageButtonGroup';
 import SemiTitle from '../atoms/SemiTitle';
 import Swiper from '../atoms/Swiper';
 import AssetRegister from '../template/AssetRegister';
@@ -15,15 +13,17 @@ import MyEstateList from './MyEstateList';
 interface Asset {
   name: string;
 }
-interface Consultating {
-  title: string;
-  date: string;
-  time: string;
-}
 
 export default function MyPageLayout() {
   const [currentPage, setCurrentPage] = useState<
-    'home' | 'car' | 'main' | 'editProfile' | 'EstateList'
+    | 'home'
+    | 'family'
+    | 'main'
+    | 'editProfile'
+    | 'job'
+    | 'income'
+    | 'loan'
+    | 'EstateList'
   >('main');
   const handleEditProfile = () => {
     setCurrentPage('editProfile');
@@ -36,11 +36,6 @@ export default function MyPageLayout() {
     name: '김손님',
   };
 
-  const consultatings: Consultating[] = [
-    { title: '전세금 안심 대출', date: '2024.09.12', time: '13:04' },
-    { title: '하나 청년전세론', date: '2024.08.27', time: '16:34' },
-  ];
-
   const assets: Asset[] = [
     { name: '서울 성동구 아차산로 111 2층' },
     { name: '서울 성동구 금호산8길 14' },
@@ -51,12 +46,10 @@ export default function MyPageLayout() {
 
   const interestAreas = ['성수', '홍대', '신촌'];
 
-  const handleRegister = (type: 'home' | 'car') => {
+  const handleRegister = (
+    type: 'home' | 'family' | 'main' | 'editProfile' | 'job' | 'income' | 'loan'
+  ) => {
     setCurrentPage(type);
-  };
-
-  const handleConsultant = () => {
-    console.log('상담 페이지로 이동');
   };
 
   return (

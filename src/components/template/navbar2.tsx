@@ -48,22 +48,24 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
             </div>
           </div>
         </a>
-
-        {/* 아이콘 버튼들을 감싸는 컨테이너 */}
-        <div className="w-14 flex flex-col items-center space-y-4 flex-grow">
+        <div className="w-14 flex flex-col items-center justify-between space-y-4">
           <button
             onClick={() => handleSetActivePage('home')}
             className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center ${
+                activePage === 'home'
+                  ? 'bg-hanaGreen shadow mb-2'
+                  : 'bg-transparent'
+              }`}
             >
               <FaHome
-                className={`w-10 h-10 ${activePage === 'home' ? 'text-hanaGreen' : 'text-gray-300'} hover:scale-105`}
+                className={`w-10 h-10 ${activePage === 'home' ? 'text-white' : 'text-gray-300'}`}
               />
               <div
                 className={`tracking-tight text-center text-xs ${
-                  activePage === 'home' ? 'text-hanaGreen' : 'text-gray-300'
+                  activePage === 'home' ? 'text-white' : 'text-gray-300'
                 }`}
               >
                 홈
@@ -71,19 +73,24 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
             </div>
           </button>
 
+          {/* 지도 버튼 */}
           <button
             onClick={() => handleSetActivePage('map')}
             className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center ${
+                activePage === 'map'
+                  ? 'bg-hanaGreen shadow mb-2'
+                  : 'bg-transparent'
+              }`}
             >
               <FaMap
-                className={`w-10 h-10 ${activePage === 'map' ? 'text-hanaGreen' : 'text-gray-300'} hover:scale-105`}
+                className={`w-10 h-10 ${activePage === 'map' ? 'text-white' : 'text-gray-300'}`}
               />
               <div
                 className={`tracking-tight text-center text-xs ${
-                  activePage === 'map' ? 'text-hanaGreen' : 'text-gray-300'
+                  activePage === 'map' ? 'text-white' : 'text-gray-300'
                 }`}
               >
                 지도
@@ -91,21 +98,24 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
             </div>
           </button>
 
+          {/* 상담 버튼 */}
           <button
             onClick={() => handleSetActivePage('consultant')}
             className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center ${
+                activePage === 'consultant'
+                  ? 'bg-hanaGreen shadow mb-2'
+                  : 'bg-transparent'
+              }`}
             >
               <MdChat
-                className={`w-10 h-10 ${activePage === 'consultant' ? 'text-hanaGreen' : 'text-gray-300'} hover:scale-105`}
+                className={`w-10 h-10  ${activePage === 'consultant' ? 'text-white' : 'text-gray-300'}`}
               />
               <div
                 className={`tracking-tight text-center text-xs ${
-                  activePage === 'consultant'
-                    ? 'text-hanaGreen'
-                    : 'text-gray-300'
+                  activePage === 'consultant' ? 'text-white' : 'text-gray-300'
                 }`}
               >
                 상담
@@ -113,19 +123,24 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
             </div>
           </button>
 
+          {/* 마이홈 버튼 */}
           <button
             onClick={() => handleSetActivePage('myPage')}
             className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center ${
+                activePage === 'myPage'
+                  ? 'bg-hanaGreen shadow mb-2'
+                  : 'bg-transparent'
+              }`}
             >
               <FaHouseUser
-                className={`w-10 h-10 ${activePage === 'myPage' ? 'text-hanaGreen' : 'text-gray-300'} hover:scale-105`}
+                className={`w-10 h-10 ${activePage === 'myPage' ? 'text-white' : 'text-gray-300'}`}
               />
               <div
                 className={`tracking-tight text-center text-xs ${
-                  activePage === 'myPage' ? 'text-hanaGreen' : 'text-gray-300'
+                  activePage === 'myPage' ? 'text-white' : 'text-gray-300'
                 }`}
               >
                 마이홈
@@ -133,17 +148,12 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
             </div>
           </button>
         </div>
-
-        {/* 프로필 이미지를 맨 아래로 배치 */}
-        <div className="mb-4">
-          <img
-            className="w-12 h-12 rounded-full"
-            src={Profile}
-            alt="Profile Image"
-          />
-        </div>
+        <img
+          className="w-12 h-12 rounded-full"
+          src={Profile}
+          alt="Profile Image"
+        />
       </div>
-
       {activePage === 'home' && <MainSideLayout />}
       {activePage === 'map' && <></>}
       {activePage === 'consultant' && <ConsultingTabLayout />}

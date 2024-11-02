@@ -65,7 +65,7 @@ export default function MyPageLayout() {
   return (
     <div className="w-[500px]">
       <div className=" top-0 absolute pl-4 animate-slideInRight">
-        <div className="w-[420px] p-6 backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/75 scrollbar-hide">
+        <div className="w-[420px] p-6 backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/85 scrollbar-hide">
           {currentPage === 'main' ? (
             <>
               <EditProfile

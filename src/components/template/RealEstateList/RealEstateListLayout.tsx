@@ -44,7 +44,7 @@ export default function RealEstateLayout({
 
   return (
     <>
-      <div className="w-[420px] top-0 left-2 absolute h-full bg-white/75 backdrop-blur-[10px] p-4 flex flex-col min-h-0">
+      <div className="w-[420px] top-0 left-2 absolute h-full bg-white/85 backdrop-blur-[10px] p-4 flex flex-col min-h-0">
         <div className="flex items-center mb-4">
           <button onClick={onBackClick}>
             <FiChevronLeft className="w-[30px] h-[30px] mr-4" />

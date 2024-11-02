@@ -2,7 +2,6 @@ import { FaHome, FaMap } from 'react-icons/fa';
 import { FaHouseUser } from 'react-icons/fa6';
 import { MdChat } from 'react-icons/md';
 import { useState, useEffect } from 'react';
-import Logo from '../../assets/img/logo.png';
 import Profile from '../../assets/img/profile_ex.jpg';
 import MainSideLayout from '../template/MainSideLayout';
 import ConsultingTabLayout from './ConsultingTabLayout.tsx';
@@ -35,30 +34,42 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
 
   return (
     <div className="space-x-16">
-      <div className="left-0 top-0 p-2 h-full absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center">
+      <div className="left-0 top-0 w-20 h-full absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center p">
         <a
           href="/"
           className="mt-4 mb-10 flex flex-col items-center justify-center"
         >
-          <img className="w-10 h-10" src={Logo} alt="Logo Image" />
-          <div className="text-black text-sm font-bold font-sans tracking-tight text-center">
-            OMNM
+          <div className="flex">
+            <div className="text-hanaNavy text-sm text-center font-fontBold">
+              Map
+            </div>
+            <div className="text-hanaGreen text-sm text-center font-fontBold">
+              Hana
+            </div>
           </div>
         </a>
-        <div className="w-14 h-96 mb-32 flex flex-col items-center justify-between">
+        <div className="w-14 flex flex-col items-center justify-between">
           <button
             onClick={() => handleSetActivePage('home')}
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${activePage === 'home' ? 'bg-hanaGreen shadow mb-2' : 'bg-transparent'}`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center ${
+                activePage === 'home'
+                  ? 'bg-hanaGreen shadow mb-2'
+                  : 'bg-transparent'
+              }`}
             >
               <FaHome
-                className={`w-6 h-6 ${activePage === 'home' ? 'text-white' : 'text-black'}`}
+                className={`w-10 h-10 ${activePage === 'home' ? 'text-white' : 'text-gray-300'}`}
               />
-            </div>
-            <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
-              홈
+              <div
+                className={`tracking-tight text-center text-xs ${
+                  activePage === 'home' ? 'text-white' : 'text-gray-300'
+                }`}
+              >
+                홈
+              </div>
             </div>
           </button>
 
@@ -68,14 +79,22 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${activePage === 'map' ? 'bg-hanaGreen shadow mb-2' : 'bg-transparent'}`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center ${
+                activePage === 'map'
+                  ? 'bg-hanaGreen shadow mb-2'
+                  : 'bg-transparent'
+              }`}
             >
               <FaMap
-                className={`w-6 h-6 ${activePage === 'map' ? 'text-white' : 'text-black'}`}
+                className={`w-10 h-10 ${activePage === 'map' ? 'text-white' : 'text-gray-300'}`}
               />
-            </div>
-            <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
-              지도
+              <div
+                className={`tracking-tight text-center text-sm ${
+                  activePage === 'map' ? 'text-white' : 'text-gray-300'
+                }`}
+              >
+                지도
+              </div>
             </div>
           </button>
 
@@ -85,14 +104,22 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${activePage === 'consultant' ? 'bg-hanaGreen shadow mb-2' : 'bg-transparent'}`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center ${
+                activePage === 'consultant'
+                  ? 'bg-hanaGreen shadow mb-2'
+                  : 'bg-transparent'
+              }`}
             >
               <MdChat
-                className={`w-6 h-6 ${activePage === 'consultant' ? 'text-white' : 'text-black'}`}
+                className={`w-10 h-10  ${activePage === 'consultant' ? 'text-white' : 'text-gray-300'}`}
               />
-            </div>
-            <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
-              상담
+              <div
+                className={`tracking-tight text-center text-sm ${
+                  activePage === 'consultant' ? 'text-white' : 'text-gray-300'
+                }`}
+              >
+                상담
+              </div>
             </div>
           </button>
 
@@ -102,14 +129,22 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${activePage === 'myPage' ? 'bg-hanaGreen shadow mb-2' : 'bg-transparent'}`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center ${
+                activePage === 'myPage'
+                  ? 'bg-hanaGreen shadow mb-2'
+                  : 'bg-transparent'
+              }`}
             >
               <FaHouseUser
-                className={`w-6 h-6 ${activePage === 'myPage' ? 'text-white' : 'text-black'}`}
+                className={`w-10 h-10 ${activePage === 'myPage' ? 'text-white' : 'text-gray-300'}`}
               />
-            </div>
-            <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
-              마이홈
+              <div
+                className={`tracking-tight text-center text-xs ${
+                  activePage === 'myPage' ? 'text-white' : 'text-gray-300'
+                }`}
+              >
+                마이홈
+              </div>
             </div>
           </button>
         </div>

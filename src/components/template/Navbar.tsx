@@ -1,7 +1,8 @@
 import { FaHome, FaMap } from 'react-icons/fa';
 import { FaHouseUser } from 'react-icons/fa6';
 import { MdChat } from 'react-icons/md';
-import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import Logo from '../../assets/img/logo.png';
 import Profile from '../../assets/img/profile_ex.jpg';
 import MainSideLayout from '../template/MainSideLayout';
@@ -12,12 +13,19 @@ import RealEstateLayout from './RealEstateList/RealEstateListLayout.tsx';
 interface NavbarProps {
   state?: boolean;
   onTabChange?: () => void;
+  children: React.ReactNode;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  state,
+  onTabChange,
+  children,
+}) => {
   const [activePage, setActivePage] = useState<
     'home' | 'map' | 'myPage' | 'consultant' | 'estateList'
   >('home');
+
+  const navigate = useNavigate();
 
   // 선택된 매물이 있으면 자동으로 'estateList' 페이지로 이동하도록 설정
   useEffect(() => {
@@ -47,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
         </a>
         <div className="w-14 h-96 mb-32 flex flex-col items-center justify-between">
           <button
-            onClick={() => handleSetActivePage('home')}
+            onClick={() => navigate('/')}
             className="w-14 h-20 flex flex-col items-center"
           >
             <div
@@ -119,13 +127,14 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
           alt="Profile Image"
         />
       </div>
-      {activePage === 'home' && <MainSideLayout />}
-      {activePage === 'map' && <></>}
-      {activePage === 'consultant' && <ConsultingTabLayout />}
-      {activePage === 'myPage' && <MyPageLayout />}
-      {activePage === 'estateList' && (
-        <RealEstateLayout onBackClick={() => handleSetActivePage('map')} />
-      )}
+      <div>{children}</div>
+      {/*{activePage === 'home' && <MainSideLayout />}*/}
+      {/*{activePage === 'map' && <></>}*/}
+      {/*{activePage === 'consultant' && <ConsultingTabLayout />}*/}
+      {/*{activePage === 'myPage' && <MyPageLayout />}*/}
+      {/*{activePage === 'estateList' && (*/}
+      {/*  <RealEstateLayout onBackClick={() => handleSetActivePage('map')} />*/}
+      {/*)}*/}
     </div>
   );
 };

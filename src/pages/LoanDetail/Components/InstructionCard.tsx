@@ -13,7 +13,7 @@ interface ContentProps {
 }
 
 const Content: React.FC<ContentProps> = ({ content }) => {
-  return <p className="text-hanaSilver80">{content}</p>;
+  return <p className="text-hanaSilver80 text-xs">{content}</p>;
 };
 
 interface InstructionProps {

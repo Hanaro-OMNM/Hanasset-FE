@@ -171,7 +171,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
 
       {activePage === 'home' && <MainSideLayout />}
       {activePage === 'map' && <></>}
-      {activePage === 'consultant' && <LoanDetail />}
+      {activePage === 'consultant' && <ConsultingTabLayout />}
       {activePage === 'myPage' && <MyPageLayout />}
       {activePage === 'estateList' && (
         <RealEstateLayout onBackClick={() => handleSetActivePage('map')} />

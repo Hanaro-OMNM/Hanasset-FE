@@ -37,7 +37,12 @@ const Input: React.FC<InputProps> = (props) => {
   return (
     <div className={clsx('w-full max-w-md ', props.className)}>
       {props.label && (
-        <label className="text-xs font-medium text-gray-500">
+        <label
+          className={clsx('text-xs font-medium', {
+            'text-red-400': props.error, // 포커스 시 에러가 있을 때 빨간색
+            'text-gray-500': !(isFocused && props.error), // 기본 색상
+          })}
+        >
           {props.label}
         </label>
       )}
@@ -59,11 +64,11 @@ const Input: React.FC<InputProps> = (props) => {
           onChange={props.onChange}
           placeholder={props.isAmount ? '0' : props.placeholder}
           className={clsx(
-            ' flex-grow border rounded p-2 transition duration-200 outline-none pr-10 text-left text-hanaBlack80',
+            'flex-grow border-3 rounded p-2 transition duration-200 focus:outline-none pr-10 text-left  bg-white  text-hanaBlack80 ',
             {
-              'border-gray-300': isFocused && !props.error,
-
-              'border-red-300 bg-red-100': isFocused && props.error,
+              'border-opacity-10 border-gray-500': !isFocused,
+              'border-red-400 ': props.error,
+              'border-opacity-30 border-gray-400': isFocused && !props.error,
               'w-full': !props.isAmount,
             },
             props.inputClassName
@@ -74,8 +79,8 @@ const Input: React.FC<InputProps> = (props) => {
         {props.isAmount && (
           <span
             className={clsx('absolute top-2 mx-2', {
-              'text-red-500': props.error, // 에러 상태일 때 빨간색
-              'text-gray-500': !props.error, // 에러가 아닐 때 기본 색상
+              'text-red-500': props.error,
+              'text-gray-500': !props.error,
             })}
           >
             만원

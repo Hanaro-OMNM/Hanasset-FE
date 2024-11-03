@@ -26,7 +26,7 @@ export default function OwnPropertyForm({ onNext }: OwnPropertyFormProps) {
   };
 
   return (
-    <div className="p-8">
+    <div className="pb-10">
       <FormRadio<OwnPropertyOption>
         items={ownPropertyList}
         label="부동산 자산을 가지고 있나요? "

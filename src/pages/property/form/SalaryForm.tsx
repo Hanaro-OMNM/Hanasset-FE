@@ -48,7 +48,8 @@ const AssetInfoInput: React.FC<AssetInfoInputProps> = ({
             : '이미 받은 대출은 얼마인가요?'
         }
       />
-      <div className="mt-5 ">
+
+      <div className="mt-10 ">
         <Input
           name="amount"
           value={amount}

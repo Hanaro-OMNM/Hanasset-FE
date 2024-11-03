@@ -1,4 +1,5 @@
 import { Radio, RadioGroup } from '@headlessui/react';
+import { FaRegCheckCircle } from 'react-icons/fa';
 
 interface FormRadioProps<T> {
   items: T[];
@@ -16,9 +17,11 @@ export default function FormRadio<T>({
   display,
 }: FormRadioProps<T>) {
   return (
-    <div className="w-full px-4">
-      <div className="mx-auto w-full max-w-md">
-        <h2 className="mb-4 text-xl font-extrabold">{label}</h2>
+    <div className="w-full p-4 ">
+      <div className="mx-auto w-full max-w-md ">
+        <h2 className="flex justify-center text-2xl font-extrabold my-10">
+          {label}
+        </h2>
         <RadioGroup
           value={selectedItem}
           onChange={onChange}
@@ -31,13 +34,14 @@ export default function FormRadio<T>({
               value={item}
               className={
                 ({ checked }) =>
-                  `group relative flex cursor-pointer rounded-lg py-4 px-5 transition focus:outline-none
-                ${checked ? 'text-hanaBlack80 bg-gray-100' : 'text-hanaBlack40'}` // checked 여부에 따라 배경 색상 변경
+                  `group relative flex cursor-pointer rounded-xl p-5 transition text-lg focus:outline-none border-4 
+                ${checked ? 'text-hanaBlack bg-hanaGreen20 border-hanaGreen60' : 'text-hanaBlack40 border-gray-100/5'}` // checked 여부에 따라 배경 색상 변경
               }
             >
-              <div className="flex w-full items-center justify-between">
+              <div className="flex w-full items-center justify-between  ">
                 <div>{display(item)}</div>
               </div>
+              <FaRegCheckCircle className="size-6 fill-hanaGreen60 opacity-0 transition group-data-[checked]:opacity-100" />
             </Radio>
           ))}
         </RadioGroup>

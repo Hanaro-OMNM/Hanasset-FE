@@ -2,6 +2,7 @@ import { NavermapsProvider } from 'react-naver-maps';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
+import PropertyForm from './components/template/PropertyRegister.tsx';
 import RealEstateList from './components/template/RealEstateList/RealEstateListLayout.tsx';
 import LoanDetail from './pages/LoanDetail.tsx';
 import LoanRecommend from './pages/LoanRecommned.tsx';
@@ -15,6 +16,7 @@ import ChatApp from './pages/chat/ChatApp.tsx';
 import Consultant from './pages/consultant/Consultant.tsx';
 import GuestInfo from './pages/consultant/GuestInfo.tsx';
 import GuestWaiting from './pages/consultant/GuestWaiting.tsx';
+import TestPropertyConfirm from './pages/property/TestPropertyConfirm.tsx';
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/consultant" element={<Consultant />} />
             <Route path="/consultant/guest-info" element={<GuestInfo />} />
+            <Route path="/property-form" element={<TestPropertyConfirm />} />
+
             <Route
               path="/consultant/guest-waiting"
               element={<GuestWaiting />}

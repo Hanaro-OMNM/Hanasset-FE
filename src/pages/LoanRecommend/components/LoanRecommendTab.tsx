@@ -54,7 +54,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
 
   return (
     <TabGroup>
-      <TabList className={'flex gap-3'}>
+      <TabList className="flex gap-3 justify-center">
         {/* 대출 종류 선택 */}
         <Tab className="ml-4 w-40 h-12 bg-hanaSilver40 text-hanaBlack80 font-semibold rounded-2xl">
           {({ selected }) => (
@@ -107,7 +107,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
               showCount >= hanaLoanList.length && 'hidden'
             )}
           >
-            <button onClick={onClick}>관심 매물 보기</button>
+            <button onClick={onClick}>더 보기</button>
           </div>
         </TabPanel>
         <TabPanel>

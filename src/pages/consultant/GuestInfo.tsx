@@ -1,6 +1,6 @@
 import { PiBuildingApartment } from 'react-icons/pi';
 import { useState } from 'react';
-import { dummyGuest, dummyLoanList } from '../../assets/Dummy';
+import { dummyGuest } from '../../assets/Dummy';
 import { dummyLoanGroup } from '../../assets/Dummy';
 import { dummyConsultationData } from '../../assets/Dummy';
 import { dummyRealEstateList } from '../../assets/Dummy';

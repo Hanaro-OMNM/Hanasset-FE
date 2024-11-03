@@ -3,7 +3,6 @@ import { FaSearch } from 'react-icons/fa';
 import { FaRegTimesCircle } from 'react-icons/fa';
 import { useState } from 'react';
 import LocationFilters from '../../components/molecules/LocationFilters';
-import MainSideLayout from '../../components/template/MainSideLayout';
 
 interface LocationFilterLayoutProps {
   locationType: 'city' | 'gungu' | 'dong' | '';
@@ -63,7 +62,7 @@ const LocationFilter = ({ locationType }: LocationFilterLayoutProps) => {
           </div>
         </div>
       ) : (
-        <MainSideLayout />
+        <></>
       )}
     </div>
   );

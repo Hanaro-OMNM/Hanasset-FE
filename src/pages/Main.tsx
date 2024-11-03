@@ -1,6 +1,14 @@
+import { MdNavigateNext } from 'react-icons/md';
 import { useEffect, useState } from 'react';
+import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import LocationFilter from './location/LocationFilter.tsx';
+
+type House = {
+  title: string;
+  description: string;
+  address: string;
+};
 
 export default function Main() {
   const [activePage, setActivePage] = useState<
@@ -29,6 +37,13 @@ export default function Main() {
     setDong(storedDong);
   }, []);
 
+  // 최근 확인한 매물 리스트
+  const recentHouses: 'none' | House[] = (() => {
+    const recents = localStorage.getItem('recents');
+
+    return recents ? JSON.parse(recents) : 'none';
+  })();
+
   return (
     <div>
       <div className="w-430">
@@ -41,11 +56,12 @@ export default function Main() {
                 <h2 className="text-xl text-slate-800 font-bold mb-6">
                   주소로 골라보기
                 </h2>
-                <div className="w-full flex justify-around items-center">
+
+                <CommonBackground className="flex items-center">
                   {/* 시/도 버튼 */}
                   <button
                     type="button"
-                    className="w-24 h-12 rounded-[10px] bg-white drop-shadow-[0_4px_6px_rgba(93,149,136,0.5)] transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-103 duration-300 hover:text-hanaGreen"
+                    className="w-1/3 h-14 flex justify-center items-center text-slate-800 hover:text-hanaGreen"
                     onClick={() => {
                       // local storage에서 key 값 삭제
                       localStorage.removeItem('currCity');
@@ -56,18 +72,21 @@ export default function Main() {
                       setActivePage('city');
                     }}
                   >
-                    <span className="font-semibold hover:font-bold">
-                      {currCity}
-                    </span>
+                    <div className="group relative px-2">
+                      <span className="font-semibold">{currCity}</span>
+                      <span className="absolute -bottom-1 left-0 w-0 transition-all duration-300 h-0.5 bg-hanaGreen80 group-hover:w-full"></span>
+                    </div>
                   </button>
+
+                  <MdNavigateNext color="#ABCEC8" />
 
                   {/* 시/군/구 버튼 */}
                   <button
                     type="button"
-                    className={`w-24 h-12 rounded-[10px] bg-white drop-shadow-[0_4px_6px_rgba(93,149,136,0.5)] transition ease-in-out delay-50 ${
+                    className={`w-1/3 h-14 flex justify-center items-center ${
                       currCity === '시/도'
                         ? 'text-gray-400'
-                        : 'hover:-translate-y-1 hover:scale-103 duration-300 hover:text-hanaGreen hover:font-bold'
+                        : 'text-slate-800 hover:text-hanaGreen hover:font-bold'
                     }`}
                     onClick={() => {
                       // local storage에서 key 값 삭제
@@ -79,16 +98,23 @@ export default function Main() {
                     }}
                     disabled={currCity === '시/도'} // '시/도'일 때 버튼 비활성화
                   >
-                    <span className="font-semibold">{currGungu}</span>
+                    <div className="group relative px-2">
+                      <span className="font-semibold">{currGungu}</span>
+                      <span
+                        className={`absolute -bottom-1 left-0 w-0 transition-all duration-300 h-0.5 bg-hanaGreen80 ${currCity === '시/도' ? '' : 'group-hover:w-full'}`}
+                      ></span>
+                    </div>
                   </button>
+
+                  <MdNavigateNext color="#ABCEC8" />
 
                   {/* 읍/면/동 버튼 */}
                   <button
                     type="button"
-                    className={`w-24 h-12 rounded-[10px] bg-white drop-shadow-[0_4px_6px_rgba(93,149,136,0.5)] transition ease-in-out delay-50 ${
+                    className={`w-1/3 h-14 flex justify-center items-center ${
                       currCity === '시/도' || currGungu === '시/군/구'
                         ? 'text-gray-400'
-                        : 'hover:-translate-y-1 hover:scale-103 duration-300 hover:text-hanaGreen hover:font-bold'
+                        : 'text-slate-800 hover:text-hanaGreen hover:font-bold'
                     }`}
                     onClick={() => {
                       // local storage에서 key 값 삭제
@@ -99,21 +125,27 @@ export default function Main() {
                     }}
                     disabled={currCity === '시/도' || currGungu === '시/군/구'} // '시/도' or '시/군/구'일 때 버튼 비활성화
                   >
-                    <span className="font-semibold">{currDong}</span>
+                    <div className="group relative px-2">
+                      <span className="font-semibold">{currDong}</span>
+                      <span
+                        className={`absolute -bottom-1 left-0 w-0 transition-all duration-300 h-0.5 bg-hanaGreen80 ${currCity === '시/도' || currGungu === '시/군/구' ? '' : 'group-hover:w-full'}`}
+                      ></span>
+                    </div>
                   </button>
-                </div>
+                </CommonBackground>
               </div>
 
               <div className="w-full max-w-md mt-16">
                 <h2 className="text-xl text-slate-800 font-bold mb-6">
                   최근에 확인한 매물
                 </h2>
-                <div className="w-full grid grid-cols-2 gap-4 px-4">
-                  <div className="bg-gray-200 h-24">1</div>
-                  <div className="bg-gray-300 h-24">2</div>
-                  <div className="bg-gray-400 h-24">3</div>
-                  <div className="bg-gray-500 h-24">4</div>
-                </div>
+                <CommonBackground className="w-full px-5 py-3">
+                  {recentHouses === 'none' ? (
+                    <div>아직 둘러본 매물이 없네요.</div>
+                  ) : (
+                    <div></div>
+                  )}
+                </CommonBackground>
               </div>
             </div>
           </div>

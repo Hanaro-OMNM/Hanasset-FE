@@ -25,7 +25,7 @@ const LocationFilterDong = () => {
   const dong: string[] = ['강일동', '길동', '천호동', '암사동', '성내동'];
 
   // 배열을 JSON 문자열로 변환하여 로컬 스토리지에 저장
-  localStorage.setItem('gungu', JSON.stringify(dong));
+  localStorage.setItem('dong', JSON.stringify(dong));
 
   const storedLocations: string[] = JSON.parse(
     localStorage.getItem('dong') || '[]'

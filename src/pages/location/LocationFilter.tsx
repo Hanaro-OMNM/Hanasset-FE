@@ -27,7 +27,7 @@ const LocationFilter = ({ locationType }: LocationFilterLayoutProps) => {
         <div className="top-0 absolute pl-2">
           <div className="w-430 max-w-[430px] h-svh bg-white/75 backdrop-blur-[5px]">
             {/* 헤더 */}
-            <div className="w-430 max-w-[430px] h-16 fixed top-0 bg-white border-b border-gray-200 z-10 px-4 py-2 flex justify-between items-center">
+            <div className="w-430 max-w-[430px] h-16 fixed top-0 bg-white border-b-4 border-gray-200 z-10 px-4 py-2 flex justify-between items-center">
               <button type="button" onClick={() => setActivePage('back')}>
                 <FaChevronLeft color="#1e293b" />
               </button>

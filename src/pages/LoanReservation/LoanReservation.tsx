@@ -1,99 +1,174 @@
+import { PiBuildingApartment } from 'react-icons/pi';
 import { useState } from 'react';
 import Button from '../../components/atoms/Button';
-import CustomSelect from '../../components/atoms/CustomSelect';
+import CommonBackground from '../../components/atoms/CommonBackground';
 
 export default function LoanReservation() {
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
-  const [selectedProp, setSelectedProp] =
-    useState<string>('(전세) 부동산 매물');
+
+  interface Asset {
+    name: string;
+  }
+  const assets: Asset[] = [
+    { name: '서울 성동구 아차산로 111 2층' },
+    { name: '서울 성동구 금호산8길 14' },
+    { name: '서울 용산구 백범로 329' },
+  ];
 
   const dateOptions = [
-    { value: '2024-10-22', label: '2024-10-22 (화)', disabled: false },
-    { value: '2024-10-23', label: '2024-10-23 (수)', disabled: false },
-    { value: '2024-10-24', label: '2024-10-24 (목)', disabled: true }, // 예시로 비활성화
-    { value: '2024-10-28', label: '2024-10-28 (월)', disabled: false },
-    { value: '2024-11-04', label: '2024-11-04 (월)', disabled: false },
+    { month: '10', day: '22', weekday: '화', disabled: false },
+    { month: '10', day: '23', weekday: '수', disabled: false },
+    { month: '10', day: '24', weekday: '목', disabled: true }, // Example disabled date
+    { month: '10', day: '28', weekday: '금', disabled: false },
+    { month: '11', day: '04', weekday: '월', disabled: false },
   ];
 
-  const timeOptions = [
-    { value: '09:00', label: '9:00', disabled: true },
-    { value: '10:00', label: '10:00', disabled: false },
-    { value: '11:00', label: '11:00', disabled: true },
-    { value: '12:00', label: '12:00', disabled: false },
-    { value: '14:00', label: '14:00', disabled: false },
-    { value: '15:00', label: '15:00', disabled: false },
-  ];
+  const generateTimeOptions = () => {
+    const options = [];
+    for (let hour = 9; hour <= 17; hour++) {
+      options.push({
+        value: `${hour.toString().padStart(2, '0')}:00`,
+        label: `${hour}:00`,
+        disabled: false,
+        period: hour < 12 ? 'AM' : 'PM',
+      });
+      if (hour < 17) {
+        options.push({
+          value: `${hour.toString().padStart(2, '0')}:30`,
+          label: `${hour}:30`,
+          disabled: true,
+          period: hour < 12 ? 'AM' : 'PM',
+        });
+      }
+    }
+    return options;
+  };
+
+  const timeOptions = generateTimeOptions();
 
   const handleDateChange = (value: string) => {
     setSelectedDate(value);
-
-    console.log('선택된 날짜:', selectedDate);
-  };
-
-  //임시 함수(의미 x)
-  const handlePropChange = () => {
-    setSelectedProp('(전세) 부동산 매물');
-
-    console.log('선택된 날짜:', selectedDate);
   };
 
   const handleTimeChange = (value: string) => {
     setSelectedTime(value);
-    console.log('선택된 시간:', selectedTime);
   };
 
   return (
-    <div className="bg-bgColor shadow-md rounded-lg p-6 w-96 min-h-screen flex flex-col items-center ">
+    <div className="bg-bgColor shadow-md rounded-lg p-6 w-full min-h-screen flex flex-col items-center">
       <h1 className="text-xl font-bold mb-4 text-hanaBlack80">
         실시간 채팅상담을 통해 편리한 대출 상담을 받아보세요!
       </h1>
       <form>
         <div className="mb-10">
-          <div className="mb-4">
-            <span
-              className="text-sm font-medium text-gray-700"
-              onClick={handlePropChange}
-            >
-              선택 부동산 매물
-            </span>
-            <div className="mt-3 flex items-center full h-11 appearance-none rounded-lg shadow-md bg-white py-1 px-3 text-md text-hanaBlack80 focus:outline-none focus:border-hanaSilver60">
-              <span>{selectedProp}</span>
+          <div className="mb-10">
+            <h2 className="text-lg font-semibold mb-4">선택 부동산 매물</h2>
+            <div className="flex flex-col gap-4 mr-1 ml-1">
+              {assets.map((asset, index) => (
+                <button key={index} className="w-full">
+                  <CommonBackground className="flex p-4 h-20 rounded-lg shadow-md ">
+                    <div className="w-full  flex h-full items-center p-4">
+                      <PiBuildingApartment className="text-2xl text-hanaGreen" />
+                      <div className="text-gray-800 font-medium ml-5">
+                        {asset.name}
+                      </div>
+                    </div>
+                  </CommonBackground>
+                </button>
+              ))}
             </div>
           </div>
-          {/* 예약 날짜 선택 */}
+
+          {/* Date Selection */}
           <div className="mb-4">
-            <CustomSelect
-              label="예약 날짜"
-              description=""
-              options={dateOptions}
-              onChange={handleDateChange}
-            />
+            <h2 className="text-lg font-semibold mb-4">날짜 선택</h2>
+            <div className="grid grid-cols-5 gap-2">
+              {dateOptions.map((date, index) => (
+                <div
+                  key={index}
+                  className={`flex flex-col items-center p-4 rounded-lg ${
+                    date.disabled
+                      ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                      : selectedDate === `${date.month}-${date.day}`
+                        ? 'bg-hanaGreen text-white' // hanaGreen 사용
+                        : 'bg-white text-black cursor-pointer'
+                  }`}
+                  onClick={() =>
+                    !date.disabled &&
+                    handleDateChange(`${date.month}-${date.day}`)
+                  }
+                >
+                  <span className="text-sm font-medium">{date.month}월</span>
+                  <span className="text-xl font-bold">{date.day}</span>
+                  <span className="text-sm ">{date.weekday}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* 예약 시간 선택 */}
+          {/* Time Selection */}
           <div className="mb-4">
-            <CustomSelect
-              label="예약 시간"
-              description=""
-              options={timeOptions}
-              onChange={handleTimeChange}
-            />
+            <div className="font-semibold mb-2">오전</div>
+            <div className="grid grid-cols-3 gap-2 mb-4">
+              {timeOptions
+                .filter((time) => time.period === 'AM')
+                .map((time, index) => (
+                  <div
+                    key={index}
+                    className={`px-4 py-2 rounded-lg text-center ${
+                      time.disabled
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : selectedTime === time.value
+                          ? 'bg-hanaGreen text-white' // hanaGreen 사용
+                          : 'bg-white text-hanaBlack80 cursor-pointer'
+                    }`}
+                    onClick={() =>
+                      !time.disabled && handleTimeChange(time.value)
+                    }
+                  >
+                    {time.label}
+                  </div>
+                ))}
+            </div>
+
+            <div className="font-semibold mb-2">오후</div>
+            <div className="grid grid-cols-3 gap-2">
+              {timeOptions
+                .filter((time) => time.period === 'PM')
+                .map((time, index) => (
+                  <div
+                    key={index}
+                    className={`px-4 py-2 rounded-lg text-center ${
+                      time.disabled
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : selectedTime === time.value
+                          ? 'bg-hanaGreen text-white' // hanaGreen 사용
+                          : 'bg-white text-hanaBlack80 cursor-pointer'
+                    }`}
+                    onClick={() =>
+                      !time.disabled && handleTimeChange(time.value)
+                    }
+                  >
+                    {time.label}
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
 
-        {/* 이용 안내 */}
+        {/* User Guide */}
         <div className="w-full text-xs text-hanaBlack60 bg-white flex flex-col p-3 rounded-md mb-10">
           <ul className="list-disc pl-5">
             <li>
-              선택 가능한 상담은 신청 당일부터 10일 이내입니다. (영업일 기준)
+              선택 가능한 상담은 신청 당일부터 영업일 기준 5일 이내입니다.
             </li>
             <li>
               30분 단위로 신청 가능하며, 신청한 시간은 기본적으로 확정됩니다.
             </li>
             <li>예약이 마감된 날짜 및 시간은 선택할 수 없습니다.</li>
             <li>채팅예약 당일에는 예약건을 취소할 수 없습니다.</li>
-            <li>신중히 상담 예약을 진행해주시기 바랍니다. </li>
+            <li>신중히 상담 예약을 진행해주시기 바랍니다.</li>
           </ul>
         </div>
 

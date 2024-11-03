@@ -7,7 +7,6 @@ import OwnPropertyForm from '../../pages/property/form/OwnPropertyForm';
 import SalaryForm from '../../pages/property/form/SalaryForm';
 import Button from '../atoms/Button';
 import CommonBackground from '../atoms/CommonBackground';
-import SemiTitle from '../atoms/SemiTitle';
 
 interface AssetRegisterProps {
   assetType:
@@ -114,7 +113,7 @@ export default function PropertyForm({
 
   return (
     <div>
-      <div className="flex h-12 mb-4 pl-1 bg-hanaSilver20 gap-2 items-center">
+      <div className="flex h-12 mb-4 pl-1 gap-2 items-center">
         <button className="items-center" onClick={onBack}>
           <IoChevronBack className="text-hanaBlack80 text-xl" />
         </button>

@@ -15,6 +15,7 @@ interface Loan {
 interface LoanRecommendTabProps {
   hanaLoanList: Loan[];
   beotimmogLoanList: Loan[];
+  onLoanDetailButtonClick: () => void;
 }
 
 // 대출 리스트 정렬 순서 및 최소 개수 전처리
@@ -40,6 +41,7 @@ const loanListPreProcessing = (loanList: Loan[]) => {
 const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
   hanaLoanList,
   beotimmogLoanList,
+  onLoanDetailButtonClick,
 }) => {
   const [showCount, setShowCount] = useState(3);
   const onClick = () => {
@@ -52,7 +54,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
 
   return (
     <TabGroup className={'mb-4'}>
-      <TabList className={'flex gap-3'}>
+      <TabList className="flex gap-3 justify-center">
         {/* 대출 종류 선택 */}
         <Tab className="ml-4 mb-4 w-40 h-12 bg-hanaSilver40 text-hanaBlack80 font-semibold rounded-2xl">
           {({ selected }) => (
@@ -93,6 +95,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                 limit={loan.limit}
                 newDsr={loan.newDsr}
                 loanDetailUrl={loan.loanDetailUrl}
+                onLoanDetailButtonClick={onLoanDetailButtonClick}
               />
             ))}
           </div>
@@ -121,6 +124,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                 limit={loan.limit}
                 newDsr={loan.newDsr}
                 loanDetailUrl={loan.loanDetailUrl}
+                onLoanDetailButtonClick={onLoanDetailButtonClick}
               />
             ))}
           </div>

@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import React from 'react';
 import MapLayout from '../template/MapLayout/MapLayout.tsx';
 
@@ -6,10 +7,19 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const location = useLocation();
+  const isConsultantPage = location.pathname.startsWith('/consultant');
+
   return (
-    <MapLayout>
-      <main>{children}</main>
-    </MapLayout>
+    <div>
+      {isConsultantPage ? (
+        <main>{children}</main>
+      ) : (
+        <MapLayout>
+          <main>{children}</main>
+        </MapLayout>
+      )}
+    </div>
   );
 };
 

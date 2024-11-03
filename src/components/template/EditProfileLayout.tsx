@@ -43,7 +43,7 @@ export default function EditProfilePage({ onBack }: EditProfilePageProps) {
   return (
     <div>
       <div className="space-y-2">
-        <div className="flex h-12 mb-4 pl-1 bg-hanaSilver20 gap-2 items-center">
+        <div className="flex h-12 mb-4 pl-1 gap-2 items-center">
           <button className="items-center" onClick={handleCloseChanges}>
             <IoChevronBack className="text-hanaBlack80 text-xl" />
           </button>

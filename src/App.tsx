@@ -30,8 +30,6 @@ function App() {
             <Route path="/my-page" element={<MyPage />} />
             <Route path="/loan-recommend" element={<LoanRecommend />} />
             <Route path="/loan-reservation" element={<LoanReservation />} />
-            <Route path="/loan-detail" element={<LoanDetail />} />
-            <Route path="/loan-reservation" element={<LoanReservation />} />
             <Route path="/real-estate-list" element={<RealEstateList />} />
             <Route path="/property-agree" element={<PropertyAgree />} />
             <Route path="/login" element={<Login />} />

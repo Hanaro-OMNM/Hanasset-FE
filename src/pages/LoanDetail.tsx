@@ -2,20 +2,24 @@ import { IoChevronBack } from 'react-icons/io5';
 import { dummyGuest } from '../assets/Dummy';
 import { dummyLoanDetail } from '../assets/Dummy';
 import LoanProgressBar from '../components/atoms/LoanProgressBar';
-import InstructionCard from './LoanDetail/Components/InstructionCard';
-import LoanDetailAccentInfo from './LoanDetail/Components/LoanDetailAccentInfo';
-import LoanDetailCard from './LoanDetail/Components/LoanDetailCard';
-import LoanDetailDisclosure from './LoanDetail/Components/LoanDetailDisclosure';
-import LoanDetailHint from './LoanDetail/Components/LoanDetailHint';
+import InstructionCard from './LoanDetail/components/InstructionCard.tsx';
+import LoanDetailAccentInfo from './LoanDetail/components/LoanDetailAccentInfo';
+import LoanDetailCard from './LoanDetail/components/LoanDetailCard';
+import LoanDetailDisclosure from './LoanDetail/components/LoanDetailDisclosure';
+import LoanDetailHint from './LoanDetail/components/LoanDetailHint';
 
-const LoanDetail: React.FC = () => {
+interface LoanDetailProps {
+  onHide: () => void;
+}
+
+const LoanDetail: React.FC<LoanDetailProps> = ({ onHide }) => {
   return (
     <div className="w-430">
       <div className="top-0 absolute pl-2">
         <div className="w-430 max-w-[430px] h-svh min-h-screen bg-[#f4f6f9] overflow-y-auto">
           {/* 헤더 */}
           <div className="w-430 max-w-[430px] h-16 fixed top-0 bg-white/75 border-b-4 border-gray-200 z-10 px-4 py-2 flex items-center">
-            <button>
+            <button className="items-center" onClick={onHide}>
               <IoChevronBack className="text-hanaBlack80 text-xl mr-10" />
             </button>
             <h1 className="text-hanaBlack80 text-lg font-semibold">

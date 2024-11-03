@@ -1,8 +1,9 @@
-// LoanInfoPage.tsx
 import { IoChevronBack } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { dummyGuest } from '../assets/Dummy';
 import Button from '../components/atoms/Button';
+import LoanDetail from './LoanDetail.tsx';
 import DsrInfo from './LoanRecommend/components/DsrInfo';
 import Expectation from './LoanRecommend/components/Expectation';
 import LoanFoundMessage from './LoanRecommend/components/LoanFoundMessage';
@@ -49,6 +50,10 @@ const loanList: Loan[] = [
 
 const LoanInfoPage: React.FC = () => {
   const navigate = useNavigate();
+  const [showDetail, setShowDetail] = useState(false);
+  const handleShowDetail = () => {
+    setShowDetail(true);
+  };
 
   return (
     <div className="w-430">
@@ -69,12 +74,21 @@ const LoanInfoPage: React.FC = () => {
 
             <DsrInfo dsr={dummyGuest.stressDsr} />
             <LoanFoundMessage isFound={true} />
-            <LoanRecommendTab hanaLoanList={loanList} beotimmogLoanList={[]} />
+            <LoanRecommendTab
+              hanaLoanList={loanList}
+              beotimmogLoanList={[]}
+              onLoanDetailButtonClick={handleShowDetail}
+            />
 
             <Button text="실시간 채팅 상담 예약하기" />
           </div>
         </div>
       </div>
+      {showDetail && (
+        <div className="w-[430px] h-full absolute top-0 left-[490px] bg-[#f4f6f9]">
+          <LoanDetail onHide={() => setShowDetail(false)} />
+        </div>
+      )}
     </div>
   );
 };

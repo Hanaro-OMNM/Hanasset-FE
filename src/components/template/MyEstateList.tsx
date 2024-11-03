@@ -115,7 +115,7 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
 
   return (
     <div>
-      <div className="flex h-12 mb-2 pl-1 bg-hanaSilver20 gap-2 items-center">
+      <div className="flex h-12 mb-2 pl-1 gap-2 items-center">
         <button className="items-center" onClick={onBack}>
           <IoChevronBack className="text-hanaBlack80 text-xl" />
         </button>

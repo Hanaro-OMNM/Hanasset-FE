@@ -3,9 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
 import Consulting from './pages/Consulting.tsx';
-import LoanDetail from './pages/LoanDetail.tsx';
 import LoanRecommend from './pages/LoanRecommned.tsx';
-import LoanReservation from './pages/LoanReservation/LoanReservation.tsx';
 import Login from './pages/Login.tsx';
 import Main from './pages/Main.tsx';
 import MyPage from './pages/MyPage.tsx';
@@ -29,7 +27,6 @@ function App() {
             <Route path="/consulting" element={<Consulting />} />
             <Route path="/my-page" element={<MyPage />} />
             <Route path="/loan-recommend" element={<LoanRecommend />} />
-            <Route path="/loan-reservation" element={<LoanReservation />} />
             <Route path="/real-estate-list" element={<RealEstateList />} />
             <Route path="/property-agree" element={<PropertyAgree />} />
             <Route path="/login" element={<Login />} />

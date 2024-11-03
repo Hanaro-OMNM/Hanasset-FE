@@ -1,7 +1,8 @@
-import { FaHome, FaMap } from 'react-icons/fa';
-import { FaHouseUser } from 'react-icons/fa6';
-import { MdChat } from 'react-icons/md';
 import { useState, useEffect } from 'react';
+import Consultant from '../../assets/img/main/consultant.jpeg';
+import Home from '../../assets/img/main/home.jpeg';
+import Map from '../../assets/img/main/map.jpeg';
+import Mypage from '../../assets/img/main/mypage.jpeg';
 import Profile from '../../assets/img/profile_ex.jpg';
 import MainSideLayout from '../template/MainSideLayout';
 import ConsultingTabLayout from './ConsultingTabLayout.tsx';
@@ -18,7 +19,6 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
     'home' | 'map' | 'myPage' | 'consultant' | 'estateList'
   >('home');
 
-  // 선택된 매물이 있으면 자동으로 'estateList' 페이지로 이동하도록 설정
   useEffect(() => {
     if (state) {
       setActivePage('estateList');
@@ -29,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
     page: 'home' | 'map' | 'myPage' | 'consultant' | 'estateList'
   ) => {
     setActivePage(page);
-    onTabChange!(); // 탭이 변경될 때마다 onTabChange 호출하여 Main의 estateState 초기화
+    onTabChange && onTabChange(); // 탭이 변경될 때마다 onTabChange 호출하여 Main의 estateState 초기화
   };
 
   return (
@@ -50,7 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
         </a>
 
         {/* 아이콘 버튼들을 감싸는 컨테이너 */}
-        <div className="w-14 flex flex-col items-center space-y-4 flex-grow">
+        <div className="w-14 flex flex-col items-center space-y-5 flex-grow">
           <button
             onClick={() => handleSetActivePage('home')}
             className="flex flex-col items-center"
@@ -58,8 +58,14 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
             <div
               className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
             >
-              <FaHome
-                className={`w-10 h-10 ${activePage === 'home' ? 'text-hanaGreen' : 'text-gray-300'} hover:scale-105`}
+              <img
+                src={Home}
+                alt="Home Icon"
+                className={`h-10 transition duration-200 transform ${
+                  activePage === 'home'
+                    ? ''
+                    : 'grayscale hover:grayscale-0 hover:scale-105'
+                }`}
               />
               <div
                 className={`tracking-tight text-center text-xs ${
@@ -78,8 +84,14 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
             <div
               className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
             >
-              <FaMap
-                className={`w-10 h-10 ${activePage === 'map' ? 'text-hanaGreen' : 'text-gray-300'} hover:scale-105`}
+              <img
+                src={Map}
+                alt="Map Icon"
+                className={`h-10 transition duration-200 transform ${
+                  activePage === 'map'
+                    ? ''
+                    : 'grayscale hover:grayscale-0 hover:scale-105'
+                }`}
               />
               <div
                 className={`tracking-tight text-center text-xs ${
@@ -98,8 +110,14 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
             <div
               className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
             >
-              <MdChat
-                className={`w-10 h-10 ${activePage === 'consultant' ? 'text-hanaGreen' : 'text-gray-300'} hover:scale-105`}
+              <img
+                src={Consultant}
+                alt="Consultant Icon"
+                className={`h-10 transition duration-200 transform ${
+                  activePage === 'consultant'
+                    ? ''
+                    : 'grayscale hover:grayscale-0 hover:scale-105'
+                }`}
               />
               <div
                 className={`tracking-tight text-center text-xs ${
@@ -120,8 +138,14 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
             <div
               className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
             >
-              <FaHouseUser
-                className={`w-10 h-10 ${activePage === 'myPage' ? 'text-hanaGreen' : 'text-gray-300'} hover:scale-105`}
+              <img
+                src={Mypage}
+                alt="Mypage Icon"
+                className={`h-10 transition duration-200 transform ${
+                  activePage === 'myPage'
+                    ? ''
+                    : 'grayscale hover:grayscale-0 hover:scale-105'
+                }`}
               />
               <div
                 className={`tracking-tight text-center text-xs ${

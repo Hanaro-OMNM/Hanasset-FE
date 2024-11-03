@@ -9,7 +9,7 @@ export default {
     extend: {
       colors: {
         /*bg컬러*/
-        bgColor: '#f4f6f9',
+        bgColor: '#F5F9F8',
         hanaNavy: '#3A4058',
         /* hanaGreen*/
         hanaGreen: '#0B9B97',

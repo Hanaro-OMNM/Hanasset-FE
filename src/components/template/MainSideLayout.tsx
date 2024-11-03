@@ -40,7 +40,7 @@ const MainSideLayout: React.FC = () => {
     <div className="w-[420px]">
       {activePage === 'main' ? (
         <div className="top-0 absolute pl-4 animate-slideInRight">
-          <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/85 backdrop-blur-[5px]">
+          <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/80 backdrop-blur-[5px]">
             <SearchBar />
 
             <div className="w-full max-w-md px-4 mt-10">

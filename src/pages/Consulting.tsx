@@ -63,7 +63,7 @@ const Consulting: React.FC = () => {
           </div>
 
           <SemiTitle>지난 상담 내역</SemiTitle>
-          <CommonBackground className="p-5">
+          <CommonBackground className="p-5 mt-4">
             {consultingHistory.map((consulting, index) => (
               <div
                 key={index}

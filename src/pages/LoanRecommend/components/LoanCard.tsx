@@ -85,6 +85,7 @@ interface LoanCardProps {
   limit: number;
   newDsr: number;
   loanDetailUrl: string;
+  onLoanDetailButtonClick: () => void;
 }
 
 const LoanCard: React.FC<LoanCardProps> = ({
@@ -94,15 +95,11 @@ const LoanCard: React.FC<LoanCardProps> = ({
   rate,
   limit,
   newDsr,
-  loanDetailUrl,
+  onLoanDetailButtonClick,
 }) => {
-  const onClick = () => {
-    console.log('대출 상세보기 화면으로 넘어가야 해요 주소:', loanDetailUrl);
-  };
-
   return (
     <div className={clsx(!isShow && 'hidden')}>
-      <button className="mb-3 w-full" onClick={onClick}>
+      <button className="mb-3 w-full" onClick={onLoanDetailButtonClick}>
         <div
           className={clsx(
             'p-4 rounded-lg shadow transition-transform duration-100',

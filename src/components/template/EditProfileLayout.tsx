@@ -1,3 +1,4 @@
+import { IoChevronBack } from 'react-icons/io5';
 import React, { useState } from 'react';
 import ConfirmModal from '../atoms/EditProfileModal';
 import Input from '../atoms/Input';
@@ -42,7 +43,14 @@ export default function EditProfilePage({ onBack }: EditProfilePageProps) {
   return (
     <div>
       <div className="space-y-2">
-        <label className="block text-gray-700 font-medium">프로필 이미지</label>
+        <div className="flex h-12 mb-4 pl-1 gap-2 items-center">
+          <button className="items-center" onClick={handleCloseChanges}>
+            <IoChevronBack className="text-hanaBlack80 text-xl" />
+          </button>
+          <h1 className="text-hanaBlack80 text-lg font-semibold ">
+            프로필 이미지
+          </h1>
+        </div>
         <div className="flex items-center space-x-4">
           <img
             src={profileImage || 'https://via.placeholder.com/100'}

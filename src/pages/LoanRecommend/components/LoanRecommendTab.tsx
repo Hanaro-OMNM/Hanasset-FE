@@ -17,6 +17,7 @@ interface Loan {
 interface LoanRecommendTabProps {
   hanaLoanList: Loan[];
   beotimmogLoanList: Loan[];
+  onLoanDetailButtonClick: () => void;
 }
 
 // 대출 리스트 정렬 순서 및 최소 개수 전처리
@@ -42,6 +43,7 @@ const loanListPreProcessing = (loanList: Loan[]) => {
 const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
   hanaLoanList,
   beotimmogLoanList,
+  onLoanDetailButtonClick,
 }) => {
   const [showCount, setShowCount] = useState(3);
   const onClick = () => {
@@ -59,6 +61,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
       <CommonBackground>
         <TabGroup>
           <TabList className="flex pl-5">
+            {/* 대출 종류 선택 */}
             <Tab className="h-12 w-32 bg-white text-hanaBlack80 font-fontMedium focus:outline-none">
               {({ selected }) => (
                 <button
@@ -88,7 +91,6 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
               )}
             </Tab>
           </TabList>
-
           <TabPanels>
             <TabPanel>
               {/* 하나은행 대출 리스트 */}
@@ -104,9 +106,10 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                       limit={loan.limit}
                       newDsr={loan.newDsr}
                       loanDetailUrl={loan.loanDetailUrl}
+                      onLoanDetailButtonClick={onLoanDetailButtonClick}
                     />
                   ))}
-                  {/* 더 보기 버튼 */}
+
                   <div
                     className={clsx(
                       showCount < hanaLoanList.length &&
@@ -121,11 +124,11 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                 <LoanFoundMessage isFound={false} />
               )}
             </TabPanel>
-
             <TabPanel>
               {/* 버팀목 대출 리스트 */}
+              {/* 하나은행 대출 리스트 */}
               {isBeotimmogLoanFound ? (
-                <div className="mt-4 px-4 w-full flex-col animate-fadeInUp">
+                <div className="mt-4 px-4 w-full flex-col">
                   {beotimmogLoanList.map((loan: Loan, index: number) => (
                     <LoanCard
                       key={index}
@@ -136,9 +139,9 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                       limit={loan.limit}
                       newDsr={loan.newDsr}
                       loanDetailUrl={loan.loanDetailUrl}
+                      onLoanDetailButtonClick={onLoanDetailButtonClick}
                     />
                   ))}
-                  {/* 더 보기 버튼 */}
                   <div
                     className={clsx(
                       showCount < beotimmogLoanList.length &&

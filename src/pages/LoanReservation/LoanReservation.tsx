@@ -111,7 +111,10 @@ export default function LoanReservation() {
                 </ul>
               </div>
 
-              <Button text="실시간 채팅 상담 예약하기" />
+              <Button
+                onClick={() => alert('예약되었습니다.')}
+                text="실시간 채팅 상담 예약하기"
+              />
             </form>
           </CommonBackground>
         </div>

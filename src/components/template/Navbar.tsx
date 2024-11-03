@@ -1,37 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import Consultant from '../../assets/img/main/consultant.jpeg';
 import Home from '../../assets/img/main/home.jpeg';
 import Map from '../../assets/img/main/map.jpeg';
 import Mypage from '../../assets/img/main/mypage.jpeg';
 import Profile from '../../assets/img/profile_ex.jpg';
-import LoanDetail from '../../pages/LoanDetail.tsx';
-import MainSideLayout from '../template/MainSideLayout';
-import ConsultingTabLayout from './ConsultingTabLayout.tsx';
-import MyPageLayout from './MyPageLayout.tsx';
-import RealEstateLayout from './RealEstateList/RealEstateListLayout.tsx';
 
 interface NavbarProps {
   state?: boolean;
-  onTabChange?: () => void;
+  children: React.ReactNode;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
-  const [activePage, setActivePage] = useState<
-    'home' | 'map' | 'myPage' | 'consultant' | 'estateList'
-  >('home');
+export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  // 선택된 매물이 있으면 자동으로 'estateList' 페이지로 이동하도록 설정
   useEffect(() => {
     if (state) {
-      setActivePage('estateList');
+      navigate('/real-estate-list');
     }
   }, [state]);
-
-  const handleSetActivePage = (
-    page: 'home' | 'map' | 'myPage' | 'consultant' | 'estateList'
-  ) => {
-    setActivePage(page);
-    onTabChange && onTabChange(); // 탭이 변경될 때마다 onTabChange 호출하여 Main의 estateState 초기화
-  };
 
   return (
     <div className="space-x-16">
@@ -53,108 +42,107 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
         {/* 아이콘 버튼들을 감싸는 컨테이너 */}
         <div className="w-14 flex flex-col items-center space-y-5 flex-grow">
           <button
-            onClick={() => handleSetActivePage('home')}
+            onClick={() => navigate('/home')}
             className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200 ${location.pathname === '/home'}`}
             >
               <img
                 src={Home}
                 alt="Home Icon"
                 className={`h-10 transition duration-200 transform ${
-                  activePage === 'home'
+                  location.pathname === '/home'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
               />
-              <div
-                className={`tracking-tight text-center text-xs ${
-                  activePage === 'home' ? 'text-hanaGreen' : 'text-gray-300'
-                }`}
-              >
-                홈
-              </div>
+            </div>
+            <div
+              className={`tracking-tight text-center text-xs ${location.pathname === '/home' ? 'text-hanaGreen' : 'text-gray-300'}`}
+            >
+              홈
             </div>
           </button>
 
+          {/* 지도 버튼 */}
           <button
-            onClick={() => handleSetActivePage('map')}
+            onClick={() => navigate('/')}
             className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200 ${location.pathname === '/'}`}
             >
               <img
                 src={Map}
                 alt="Map Icon"
                 className={`h-10 transition duration-200 transform ${
-                  activePage === 'map'
+                  location.pathname === '/'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
               />
-              <div
-                className={`tracking-tight text-center text-xs ${
-                  activePage === 'map' ? 'text-hanaGreen' : 'text-gray-300'
-                }`}
-              >
-                지도
-              </div>
+            </div>
+            <div
+              className={`tracking-tight text-center text-xs  ${
+                location.pathname === '/' ? 'text-hanaGreen' : 'text-gray-300'
+              }`}
+            >
+              지도
             </div>
           </button>
 
+          {/* 상담 버튼 */}
           <button
-            onClick={() => handleSetActivePage('consultant')}
+            onClick={() => navigate('/consulting')}
             className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200 ${location.pathname === '/consulting'}`}
             >
               <img
                 src={Consultant}
                 alt="Consultant Icon"
                 className={`h-10 transition duration-200 transform ${
-                  activePage === 'consultant'
+                  location.pathname === '/consulting'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
               />
-              <div
-                className={`tracking-tight text-center text-xs ${
-                  activePage === 'consultant'
-                    ? 'text-hanaGreen'
-                    : 'text-gray-300'
-                }`}
-              >
-                상담
-              </div>
+            </div>
+            <div
+              className={`tracking-tight text-center text-xs  ${
+                location.pathname === '/' ? 'text-hanaGreen' : 'text-gray-300'
+              }`}
+            >
+              상담
             </div>
           </button>
 
+          {/* 마이홈 버튼 */}
           <button
-            onClick={() => handleSetActivePage('myPage')}
+            onClick={() => navigate('/my-page')}
             className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200 ${location.pathname === '/my-page'}`}
             >
               <img
                 src={Mypage}
                 alt="Mypage Icon"
                 className={`h-10 transition duration-200 transform ${
-                  activePage === 'myPage'
+                  location.pathname === '/my-page'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
               />
-              <div
-                className={`tracking-tight text-center text-xs ${
-                  activePage === 'myPage' ? 'text-hanaGreen' : 'text-gray-300'
-                }`}
-              >
-                마이홈
-              </div>
+            </div>
+            <div
+              className={`tracking-tight text-center text-xs  ${
+                location.pathname === '/' ? 'text-hanaGreen' : 'text-gray-300'
+              }`}
+            >
+              마이홈
             </div>
           </button>
         </div>
@@ -168,14 +156,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
           />
         </div>
       </div>
-
-      {activePage === 'home' && <MainSideLayout />}
-      {activePage === 'map' && <></>}
-      {activePage === 'consultant' && <ConsultingTabLayout />}
-      {activePage === 'myPage' && <MyPageLayout />}
-      {activePage === 'estateList' && (
-        <RealEstateLayout onBackClick={() => handleSetActivePage('map')} />
-      )}
+      <div>{children}</div>
     </div>
   );
 };

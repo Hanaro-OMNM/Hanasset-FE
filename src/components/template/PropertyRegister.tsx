@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { IoChevronBack } from 'react-icons/io5';
+import React, { useState } from 'react';
 import ApartListForm from '../../pages/property/form/ApartListForm';
 import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
 import JobForm from '../../pages/property/form/JobForm';
@@ -6,7 +7,6 @@ import OwnPropertyForm from '../../pages/property/form/OwnPropertyForm';
 import SalaryForm from '../../pages/property/form/SalaryForm';
 import Button from '../atoms/Button';
 import CommonBackground from '../atoms/CommonBackground';
-import SemiTitle from '../atoms/SemiTitle';
 
 interface AssetRegisterProps {
   assetType:
@@ -112,7 +112,12 @@ export default function PropertyForm({
   };
 
   return (
-    <div className="mt-10 p-6 animate-slideInRight">
+    <div className="p-6 animate-slideInRight">
+      <div className="mt-10 p-6">
+        <button className="items-center" onClick={onBack}>
+          <IoChevronBack className="text-hanaBlack80 text-xl" />
+        </button>
+      </div>
       <CommonBackground className="mb-10">
         {forms[currentStep].component}
         <div className="pl-5 pr-5 pb-5">

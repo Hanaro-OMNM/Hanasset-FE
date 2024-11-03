@@ -61,12 +61,17 @@ export default {
       },
       animation: {
         fadeInUp: 'fadeInUp 0.5s ease-out forwards',
+        fadeInRight: 'fadeInRight 0.5s ease-out forwards',
         slideInRight: 'slideInRight 0.5s ease-out forwards',
       },
       keyframes: {
         fadeInUp: {
           '0%': { transform: 'translateY(10px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        fadeInRight: {
+          '0%': { transform: 'translateX(-10px)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
         },
         slideInRight: {
           '0%': { transform: 'translateX(-100%)', opacity: '0' },

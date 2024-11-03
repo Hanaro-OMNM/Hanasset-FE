@@ -1,17 +1,16 @@
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import { PiBuildingApartment } from 'react-icons/pi';
 import { useState } from 'react';
-import House from '../../assets/img/house.png';
-import People from '../../assets/img/main/people.png';
-import Button from '../atoms/Button';
-import CommonBackground from '../atoms/CommonBackground';
-import RegisterButtonGroup from '../atoms/RegisterPageButtonGroup';
-import SemiTitle from '../atoms/SemiTitle';
-import Swiper from '../atoms/Swiper';
-import EditProfile from '../template/EditProfile';
-import EditProfileLayout from '../template/EditProfileLayout';
-import MyEstateList from './MyEstateList';
-import PropertyRegister from './PropertyRegister';
+import House from '../assets/img/house.png';
+import People from '../assets/img/main/people.png';
+import Button from '../components/atoms/Button';
+import CommonBackground from '../components/atoms/CommonBackground';
+import RegisterButtonGroup from '../components/atoms/RegisterPageButtonGroup';
+import SemiTitle from '../components/atoms/SemiTitle';
+import Swiper from '../components/atoms/Swiper';
+import EditProfile from '../components/template/EditProfile';
+import EditProfileLayout from '../components/template/EditProfileLayout';
+import MyEstateList from '../components/template/MyEstateList';
+import PropertyRegister from '../components/template/PropertyRegister';
 
 interface Asset {
   name: string;
@@ -36,7 +35,7 @@ export default function MyPageLayout() {
     setCurrentPage('EstateList');
   };
   const profile = {
-    name: '김하나',
+    name: '김손님',
   };
 
   const assets: Asset[] = [
@@ -65,7 +64,7 @@ export default function MyPageLayout() {
 
   return (
     <div className="w-[500px]">
-      <div className=" top-0 absolute pl-4 animate-slideInRight">
+      <div className="top-0 absolute pl-4 animate-slideInRight">
         <div className="w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/75 scrollbar-hide">
           {currentPage === 'main' ? (
             <>
@@ -100,7 +99,7 @@ export default function MyPageLayout() {
                     items={interestAreas}
                     pagination={{ clickable: true }}
                     renderItem={(item) => (
-                      <CommonBackground className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md ">
+                      <CommonBackground className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
                         {item}
                       </CommonBackground>
                     )}
@@ -138,7 +137,6 @@ export default function MyPageLayout() {
                   </CommonBackground>
                 </div>
               </div>
-
               {/* 화면 전환 */}
             </>
           ) : currentPage === 'editProfile' ? (
@@ -155,7 +153,4 @@ export default function MyPageLayout() {
       </div>
     </div>
   );
-}
-{
-  /* <EditProfile name={profile.name} onEdit={handleEditProfile} /> */
 }

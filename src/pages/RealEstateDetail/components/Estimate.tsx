@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import ProgressBar from '../components/ProgressBar';
 
@@ -6,6 +7,8 @@ interface EstimateProps {
 }
 
 const Estimate: React.FC<EstimateProps> = ({ totalAsset }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white rounded-lg shadow p-6 mt-6">
       <h2 className="text-2xl font-bold mb-4">예산</h2>
@@ -63,7 +66,10 @@ const Estimate: React.FC<EstimateProps> = ({ totalAsset }) => {
       </div>
 
       <div className="flex justify-center">
-        <button className="bg-hanaGreen60 text-white my-4 py-2 px-4 rounded-lg w-full hover:bg-hanaColor2">
+        <button
+          onClick={() => navigate('/loan-recommend')}
+          className="bg-hanaGreen60 text-white my-4 py-2 px-4 rounded-lg w-full hover:bg-hanaColor2"
+        >
           대출금리 / 금액 확인하기
         </button>
       </div>

@@ -2,9 +2,9 @@ import { AiOutlineRight } from 'react-icons/ai';
 import { FaRegCalendarCheck } from 'react-icons/fa';
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
 import React from 'react';
-import CommonBackground from '../atoms/CommonBackground';
-import SemiTitle from '../atoms/SemiTitle';
-import UpcomingConsultingComponent from '../molecules/UpcomingConsulting';
+import CommonBackground from '../components/atoms/CommonBackground';
+import SemiTitle from '../components/atoms/SemiTitle';
+import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting';
 
 type Consulting = {
   title: string;

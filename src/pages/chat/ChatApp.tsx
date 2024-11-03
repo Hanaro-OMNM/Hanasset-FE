@@ -88,7 +88,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
           <div className=" top-0 absolute pl-4 animate-slideInRight">
             <div className="w-[420px] absolute top-0 left-4 flex flex-col h-screen items-center">
               <ChatHeader
-                responserName={'하나은행 상담사'}
+                responserName="하나은행 상담사"
                 responserImage={logo}
               />
               <div className="flex-1 w-full px-4 md:px-8 py-4 bg-hanaSilver20 shadow overflow-y-auto scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400 space-y-4">
@@ -109,7 +109,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
                 <div ref={messagesEndRef} />
               </div>
 
-              <div className="flex w-full p-5 bg-hanaGreen60 ">
+              <div className="flex w-full p-5 bg-hanaGreen60">
                 <input
                   type="text"
                   value={inputValue}
@@ -122,7 +122,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
                   onClick={handleSendMessage}
                   className="flex items-center justify-center p-2 ml-2 rounded-full bg-hanaGreen80 text-white hover:bg-hanaGreen transition duration-150 ease-in-out"
                 >
-                  <PiPaperPlaneRightFill className="h-5 w-5 " />
+                  <PiPaperPlaneRightFill className="h-5 w-5" />
                 </button>
               </div>
             </div>
@@ -142,14 +142,14 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
                     ? msg.time
                     : null
                 }
-                responserName={'고객1'}
+                responserName="고객1"
                 responserImage={profile}
               />
             ))}
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="flex w-full p-5 bg-hanaGreen60 ">
+          <div className="flex w-full p-5 bg-hanaGreen60">
             <input
               type="text"
               value={inputValue}
@@ -162,7 +162,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
               onClick={handleSendMessage}
               className="flex items-center justify-center p-2 ml-2 rounded-full bg-hanaGreen80 text-white hover:bg-hanaGreen transition duration-150 ease-in-out"
             >
-              <PiPaperPlaneRightFill className="h-5 w-5 " />
+              <PiPaperPlaneRightFill className="h-5 w-5" />
             </button>
           </div>
         </div>

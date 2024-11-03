@@ -1,21 +1,21 @@
 import { PiBuildingApartment } from 'react-icons/pi';
 import { useState } from 'react';
-import profileImage from '../../assets/img/profile_ex.jpg';
-import Button from '../atoms/Button';
-import CommonBackground from '../atoms/CommonBackground';
-import RegisterButtonGroup from '../atoms/RegisterPageButtonGroup';
-import SemiTitle from '../atoms/SemiTitle';
-import Swiper from '../atoms/Swiper';
-import EditProfile from '../template/EditProfile';
-import EditProfileLayout from '../template/EditProfileLayout';
-import MyEstateList from './MyEstateList';
-import PropertyRegister from './PropertyRegister';
+import profileImage from '../assets/img/profile_ex.jpg';
+import Button from '../components/atoms/Button.tsx';
+import CommonBackground from '../components/atoms/CommonBackground.tsx';
+import RegisterButtonGroup from '../components/atoms/RegisterPageButtonGroup.tsx';
+import SemiTitle from '../components/atoms/SemiTitle.tsx';
+import Swiper from '../components/atoms/Swiper.tsx';
+import EditProfile from '../components/template/EditProfile.tsx';
+import EditProfileLayout from '../components/template/EditProfileLayout.tsx';
+import MyEstateList from '../components/template/MyEstateList.tsx';
+import PropertyRegister from '../components/template/PropertyRegister.tsx';
 
 interface Asset {
   name: string;
 }
 
-export default function MyPageLayout() {
+export default function MyPage() {
   const [currentPage, setCurrentPage] = useState<
     | 'home'
     | 'family'
@@ -63,7 +63,7 @@ export default function MyPageLayout() {
   };
 
   return (
-    <div className="w-[420px] p-6 backdrop-blur-[10px] absolute top-0 left-2 h-full overflow-y-auto bg-white/75">
+    <div className="w-[430px] backdrop-blur-[10px] overflow-y-auto bg-white/75 top-0 absolute pl-2 pt-3 h-full">
       {currentPage === 'main' ? (
         <>
           <EditProfile
@@ -117,7 +117,9 @@ export default function MyPageLayout() {
                   </CommonBackground>
                 </button>
               ))}
-              <Button text="더보기" onClick={handleEstate} />
+              <div className="pb-4">
+                <Button text="관심 매물 대출 상담하기" onClick={handleEstate} />
+              </div>
             </div>
           </div>
 

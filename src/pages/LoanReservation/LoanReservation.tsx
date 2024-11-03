@@ -44,7 +44,7 @@ export default function LoanReservation() {
   };
 
   return (
-    <div className="bg-bgColor shadow-md rounded-lg p-6 w-96 min-h-screen flex flex-col items-center ">
+    <div className="w-[430px] top-0 absolute backdrop-blur-[10px] bg-white/75 overflow-y-auto p-6 h-full flex flex-col items-center ">
       <h1 className="text-xl font-bold mb-4 text-hanaBlack80">
         실시간 채팅상담을 통해 편리한 대출 상담을 받아보세요!
       </h1>
@@ -97,7 +97,10 @@ export default function LoanReservation() {
           </ul>
         </div>
 
-        <Button text="실시간 채팅 상담 예약하기" />
+        <Button
+          onClick={() => alert('예약되었습니다.')}
+          text="실시간 채팅 상담 예약하기"
+        />
       </form>
     </div>
   );

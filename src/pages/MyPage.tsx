@@ -63,7 +63,7 @@ export default function MyPage() {
   };
 
   return (
-    <div className="w-[430px] backdrop-blur-[10px] overflow-y-auto bg-white/75 top-0 absolute pl-2 pt-3 h-full">
+    <div className="w-430 backdrop-blur-[10px] overflow-y-auto bg-white/75 top-0 absolute pl-2 pt-3 h-full">
       {currentPage === 'main' ? (
         <>
           <EditProfile

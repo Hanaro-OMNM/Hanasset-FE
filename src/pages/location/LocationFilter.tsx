@@ -2,7 +2,10 @@ import { FaChevronLeft } from 'react-icons/fa';
 import { FaSearch } from 'react-icons/fa';
 import { FaRegTimesCircle } from 'react-icons/fa';
 import { useState } from 'react';
-import LocationFilters from './LocationFilters';
+import Main from '../Main';
+import LocationFilterCity from './LocationFiltersC';
+import LocationFilterDong from './LocationFiltersD';
+import LocationFilterGungu from './LocationFiltersG';
 
 interface LocationFilterLayoutProps {
   locationType: 'city' | 'gungu' | 'dong' | '';
@@ -19,14 +22,14 @@ const LocationFilter = ({ locationType }: LocationFilterLayoutProps) => {
   };
 
   return (
-    <div className="w-420">
+    <div className="w-430">
       {activePage === 'curr' ? (
         <div className="top-0 absolute pl-2">
-          <div className="w-420 max-w-[420px] h-svh bg-white/75 backdrop-blur-[5px]">
+          <div className="w-430 max-w-[430px] h-svh bg-white/75 backdrop-blur-[5px]">
             {/* 헤더 */}
-            <div className="w-420 max-w-[420px] h-16 fixed top-0 bg-white border-b border-gray-200 z-10 px-4 py-2 flex justify-between items-center">
+            <div className="w-430 max-w-[430px] h-16 fixed top-0 bg-white border-b border-gray-200 z-10 px-4 py-2 flex justify-between items-center">
               <button type="button" onClick={() => setActivePage('back')}>
-                <FaChevronLeft />
+                <FaChevronLeft color="#1e293b" />
               </button>
 
               <input
@@ -48,21 +51,25 @@ const LocationFilter = ({ locationType }: LocationFilterLayoutProps) => {
                   className="hover:text-hanaGreen40"
                   onClick={handleClear}
                 >
-                  <FaRegTimesCircle />
+                  <FaRegTimesCircle color="#1e293b" />
                 </button>
               ) : (
                 <button type="submit" className="hover:text-hanaGreen40">
-                  <FaSearch />
+                  <FaSearch color="#1e293b" />
                 </button>
               )}
             </div>
 
-            {/* 지역 선택 필터 보여주기 */}
-            <LocationFilters locationType={locationType} />
+            <div className="w-full px-5 pt-24">
+              {/* 지역 선택 필터 보여주기 */}
+              {locationType === 'city' && <LocationFilterCity />}
+              {locationType === 'gungu' && <LocationFilterGungu />}
+              {locationType === 'dong' && <LocationFilterDong />}
+            </div>
           </div>
         </div>
       ) : (
-        <></>
+        <Main />
       )}
     </div>
   );

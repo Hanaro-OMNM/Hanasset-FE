@@ -11,7 +11,7 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-md px-4 mt-6">
+    <div className="w-full max-w-md mt-6">
       <div className="pt-2 relative mx-auto text-gray-600">
         <input
           className="border-2 border-gray-200 bg-white w-full h-10 px-5 pr-16 rounded-lg text-sm focus:border-[#ABCEC8] focus:outline-none"

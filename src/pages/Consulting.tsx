@@ -26,23 +26,16 @@ const upcomingConsulting: Consulting = {
 
 const Consulting: React.FC = () => {
   const navigate = useNavigate();
-  /*
-    ConsultingTabLayout이란?
-    
-    : Navbar에서 "상담" 버튼 눌렀을 때 나오는 사이드바 부분입니다. 
-    ConsultantLayout이랑 혼동 주의! 
-
-  */
 
   return (
-    <div className="w-[500px]">
+    <div className="w-430">
       <div className=" top-0 absolute pl-2">
-        <div className="w-[430px] max-w-[430px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px]">
-          <h1 className="text-xl font-bold flex justify-center p-10">
+        <div className="w-430 max-w-[430px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px]">
+          <h1 className="text-xl text-slate-800 font-bold flex justify-center p-10">
             상담현황 확인하기
           </h1>
 
-          <div className=" mb-8">
+          <div className="mb-8">
             <div className="flex items-center">
               <span className=" text-hanaGreen mr-2">
                 <FaRegCalendarCheck />

@@ -46,7 +46,7 @@ export default {
         hanaBlack20: '#F7F7F7',
       },
       screens: {
-        xs: '420px', // 420px 이하에서만 적용할 수 있는 사용자 정의 단위 추가
+        xs: '430px', // 420px 이하에서만 적용할 수 있는 사용자 정의 단위 추가
       },
       width: {
         430: '430px',

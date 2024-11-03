@@ -4,9 +4,9 @@ import './App.css';
 import Layout from './components/template/Layout.tsx';
 import PropertyForm from './components/template/PropertyRegister.tsx';
 import RealEstateList from './components/template/RealEstateList/RealEstateListLayout.tsx';
+import ChatReservation from './pages/ChatReservation/ChatReservation.tsx';
 import LoanDetail from './pages/LoanDetail.tsx';
 import LoanRecommend from './pages/LoanRecommned.tsx';
-import LoanReservation from './pages/LoanReservation/LoanReservation.tsx';
 import Login from './pages/Login.tsx';
 import Main from './pages/Main.tsx';
 import PropertyAgree from './pages/PropertyAgree.tsx';
@@ -26,9 +26,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/loan-recommend" element={<LoanRecommend />} />
-            <Route path="/loan-reservation" element={<LoanReservation />} />
+            <Route path="/chat-reservation" element={<ChatReservation />} />
             <Route path="/loan-detail" element={<LoanDetail />} />
-            <Route path="/loan-reservation" element={<LoanReservation />} />
+
             <Route path="/real-estate-list" element={<RealEstateList />} />
             <Route path="/real-estate-detail" element={<RealEstateDetail />} />
             <Route path="/property-agree" element={<PropertyAgree />} />
@@ -37,7 +37,6 @@ function App() {
             <Route path="/consultant" element={<Consultant />} />
             <Route path="/consultant/guest-info" element={<GuestInfo />} />
             <Route path="/property-form" element={<TestPropertyConfirm />} />
-
             <Route
               path="/consultant/guest-waiting"
               element={<GuestWaiting />}

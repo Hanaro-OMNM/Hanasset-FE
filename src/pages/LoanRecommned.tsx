@@ -1,6 +1,7 @@
 // LoanInfoPage.tsx
 import { IoChevronBack } from 'react-icons/io5';
 import { dummyGuest } from '../assets/Dummy';
+import Money from '../assets/img/money.jpg';
 import Button from '../components/atoms/Button';
 import DsrInfo from './LoanRecommend/components/DsrInfo';
 import Expectation from './LoanRecommend/components/Expectation';
@@ -45,27 +46,40 @@ const loanList: Loan[] = [
   seoulYouthLoan,
   jeonseSecurityLoan,
 ];
-
+const profile = {
+  name: '김하나',
+};
 const LoanInfoPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#f4f6f9]">
-      {/* 헤더 */}
-      <div className="flex h-12 mb-4 pl-8 bg-hanaSilver20 items-center justify-start gap-2">
-        <button>
-          <IoChevronBack className="text-hanaBlack80 text-xl" />
-        </button>
-        <h1 className="text-hanaBlack80 text-lg font-semibold">
-          맞춤 대출 상품 안내
-        </h1>
+    <div className="w-[500px]">
+      <div className=" top-0 absolute pl-4 animate-slideInRight">
+        <div className="w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/75 scrollbar-hide">
+          {/* 헤더 */}
+          <div className="flex h-12 mb-4 pl-8 bg-hanaSilver20 items-center justify-start gap-2">
+            <button>
+              <IoChevronBack className="text-hanaBlack80 text-xl" />
+            </button>
+            <h1 className="text-hanaBlack text-xl font-fontMedium pl-6 ">
+              맞춤 대출 상품 안내
+            </h1>
+          </div>
+          <div className="font-fontMedium text-2xl pl-6">
+            {profile.name}님의
+          </div>
+          <div className="pl-6 flex">
+            <div className="flex font-fontBold text-2xl">맞춤 대출 상품</div>
+            <div className="font-fontMedium text-2xl "> 입니다.</div>
+          </div>
+          <Expectation totalPrice={10} maxLoan={5} />
+          <DsrInfo dsr={dummyGuest.stressDsr} />
+          <LoanFoundMessage isFound={true} />
+
+          <LoanRecommendTab hanaLoanList={loanList} beotimmogLoanList={[]} />
+          <div className="pl-6 pr-6 pb-4">
+            <Button text="실시간 채팅 상담 예약하기" />
+          </div>
+        </div>
       </div>
-
-      <Expectation totalPrice={10} maxLoan={5} />
-
-      <DsrInfo dsr={dummyGuest.stressDsr} />
-      <LoanFoundMessage isFound={true} />
-      <LoanRecommendTab hanaLoanList={loanList} beotimmogLoanList={[]} />
-
-      <Button text="실시간 채팅 상담 예약하기" />
     </div>
   );
 };

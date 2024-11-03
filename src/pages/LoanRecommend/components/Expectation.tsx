@@ -1,5 +1,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import CommonBackground from '../../../components/atoms/CommonBackground';
+import SemiTitle from '../../../components/atoms/SemiTitle';
 import LoanSlider from '../../../components/molecules/LoanSlider';
 
 interface ExpectationProps {
@@ -12,45 +14,46 @@ const Expectation: React.FC<ExpectationProps> = ({ totalPrice, maxLoan }) => {
   const shortage = Math.max(0, totalPrice - (capital + maxLoan));
 
   return (
-    <div className="w-full mb-4 p-6">
-      <p className="text-hanaBlack80 font-semibold">예상 대출금</p>
-
-      {/* Slider */}
-      <LoanSlider
-        capital={capital}
-        totalPrice={totalPrice}
-        maxLoan={maxLoan}
-        onChange={setCapital}
-      />
-
-      {/* 정보 표시 */}
-      <div className="flex justify-end gap-4 mt-4  font-semibold">
-        <div
-          className={clsx(
-            shortage > 0 &&
-              'bg-hanaRed40 w-48 h-8 text-hanaGold20 text-xs font-semibold rounded-md p-2 shadow-lg',
-            shortage === 0 && 'hidden '
-          )}
-          style={{ left: `${(capital / totalPrice) * 100}%` }}
-        >
-          앗 대출 한도를 넘었어요 &nbsp;
-          {/* <div className="text-red-500">부족: </div> */}
-          <span className="text-hanaRed font-extrabold">
-            {shortage.toFixed(1)}억
-          </span>
-        </div>
-        <div className="flex-col text-hanaBlack80 text-center">
-          <div className="text-sm text-hanaSilver80">자본금</div>
-          <div>{capital.toFixed(1)}억</div>
-        </div>
-        <div className="flex-col text-hanaBlack80 text-center">
-          <div className="text-sm text-hanaSilver80">대출금</div>
-          <div>
-            {Math.min(Number(totalPrice - capital), maxLoan).toFixed(1)}억
+    <>
+      <div className="w-full mb-4 p-6">
+        <SemiTitle>예상 대출금</SemiTitle>
+        <CommonBackground className="p-6 h-40">
+          <div
+            className={clsx(
+              'bg-hanaRed40 w-48 h-8 text-hanaGold20 text-xs rounded-md p-2 shadow-lg',
+              shortage > 0 ? 'visible' : 'invisible' // visible 상태를 조정하여 공간 고정
+            )}
+            style={{ left: `${(capital / totalPrice) * 100}%` }}
+          >
+            ⚠️ 앗 대출 한도를 넘었어요 &nbsp;
+            <span className="text-hanaRed font-fontBold">
+              {shortage.toFixed(1)}억
+            </span>
           </div>
-        </div>
+          {/* Slider */}
+          <LoanSlider
+            capital={capital}
+            totalPrice={totalPrice}
+            maxLoan={maxLoan}
+            onChange={setCapital}
+          />
+
+          {/* 정보 표시 */}
+          <div className="flex justify-around mt-4 font-fontLight">
+            <div className="flex-col text-hanaBlack80 text-center">
+              <div className="text-sm text-hanaSilver80">자본금</div>
+              <div>{capital.toFixed(1)}억</div>
+            </div>
+            <div className="flex-col text-hanaBlack80 text-center">
+              <div className="text-sm text-hanaSilver80">대출금</div>
+              <div>
+                {Math.min(Number(totalPrice - capital), maxLoan).toFixed(1)}억
+              </div>
+            </div>
+          </div>
+        </CommonBackground>
       </div>
-    </div>
+    </>
   );
 };
 export default Expectation;

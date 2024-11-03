@@ -4,6 +4,7 @@ import { FaRegTimesCircle } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import CommonBackground from '../../components/atoms/CommonBackground';
+import RecentCheckedButton from '../../components/atoms/RecentCheckedButton';
 
 const SearchResult = () => {
   const navigate = useNavigate();
@@ -71,7 +72,8 @@ const SearchResult = () => {
               지역 검색 결과
             </h2>
             <CommonBackground className="w-full px-5 py-3">
-              <div>일치하는 매물이 없습니다. 다른 검색어로 시도해 보세요.</div>
+              <RecentCheckedButton title="서울특별시 송파구" />
+              <RecentCheckedButton title="서울특별시 송파구 가락동" />
             </CommonBackground>
           </div>
         </div>

@@ -50,20 +50,20 @@ export default function RealEstateLayout({
             <FiChevronLeft className="w-[30px] h-[30px] mr-4" />
           </button>
           <div className="flex-1 text-center mr-4">
-            <div className="text-black text-xl font-bold font-['Noto Sans KR'] tracking-tight">
+            <div className="text-black text-xl font-fontMedium tracking-tight">
               영등포구 여의도동
             </div>
           </div>
         </div>
         <div className="flex justify-between items-center my-2">
           <div className="flex items-center">
-            <SemiTitle>{realEstateCount}개의 매물</SemiTitle>
+            <div>{realEstateCount}개의 매물</div>
           </div>
           <DropdownCombobox
             items={sortItems}
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
-            comboboxClassName="border-gray-300 w-[130px] bg-white/75 backdrop-blur-[10px]"
+            comboboxClassName="border-gray-300 w-[130px] bg-white"
             optionClassName="hover:bg-gray-200"
           />
         </div>

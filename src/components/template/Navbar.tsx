@@ -4,7 +4,7 @@ import Home from '../../assets/img/main/home.jpeg';
 import Map from '../../assets/img/main/map.jpeg';
 import Mypage from '../../assets/img/main/mypage.jpeg';
 import Profile from '../../assets/img/profile_ex.jpg';
-import LoanReservation from '../../pages/LoanReservation/LoanReservation.tsx';
+import LoanDetail from '../../pages/LoanDetail.tsx';
 import MainSideLayout from '../template/MainSideLayout';
 import ConsultingTabLayout from './ConsultingTabLayout.tsx';
 import MyPageLayout from './MyPageLayout.tsx';
@@ -171,7 +171,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, onTabChange }) => {
 
       {activePage === 'home' && <MainSideLayout />}
       {activePage === 'map' && <></>}
-      {activePage === 'consultant' && <LoanReservation />}
+      {activePage === 'consultant' && <LoanDetail />}
       {activePage === 'myPage' && <MyPageLayout />}
       {activePage === 'estateList' && (
         <RealEstateLayout onBackClick={() => handleSetActivePage('map')} />

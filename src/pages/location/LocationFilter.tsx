@@ -2,7 +2,7 @@ import { FaChevronLeft } from 'react-icons/fa';
 import { FaSearch } from 'react-icons/fa';
 import { FaRegTimesCircle } from 'react-icons/fa';
 import { useState } from 'react';
-import LocationFilters from '../../components/molecules/LocationFilters';
+import LocationFilters from './LocationFilters';
 
 interface LocationFilterLayoutProps {
   locationType: 'city' | 'gungu' | 'dong' | '';

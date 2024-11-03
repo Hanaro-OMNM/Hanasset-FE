@@ -16,6 +16,7 @@ import ChatApp from './pages/chat/ChatApp.tsx';
 import Consultant from './pages/consultant/Consultant.tsx';
 import GuestInfo from './pages/consultant/GuestInfo.tsx';
 import GuestWaiting from './pages/consultant/GuestWaiting.tsx';
+import SearchResult from './pages/search/SearchResult.tsx';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
               element={<GuestWaiting />}
             />
             <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
+            <Route path="/search-result" element={<SearchResult />} />
           </Routes>
         </Layout>
       </NavermapsProvider>

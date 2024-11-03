@@ -82,7 +82,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
   };
 
   return (
-    <div className="flex flex-col h-screen w-full items-center min-w-96">
+    <div className="w-[430px] absolute top-0 flex flex-col h-screen items-center min-w-96">
       <ChatHeader
         responserName={accessor === 'guest' ? '하나은행 상담사' : '고객1'}
         responserImage={accessor === 'guest' ? logo : profile}

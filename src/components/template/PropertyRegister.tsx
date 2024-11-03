@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { IoChevronBack } from 'react-icons/io5';
+import React, { useState } from 'react';
 import ApartListForm from '../../pages/property/form/ApartListForm';
 import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
 import JobForm from '../../pages/property/form/JobForm';
@@ -112,9 +113,16 @@ export default function PropertyForm({
   };
 
   return (
-    <div className="mt-10">
-      <SemiTitle>자산 입력받기</SemiTitle>
-      <CommonBackground className="mb-10">
+    <div>
+      <div className="flex h-12 mb-4 pl-1 bg-hanaSilver20 gap-2 items-center">
+        <button className="items-center" onClick={onBack}>
+          <IoChevronBack className="text-hanaBlack80 text-xl" />
+        </button>
+        <h1 className="text-hanaBlack80 text-lg font-semibold ">
+          자산 수정하기
+        </h1>
+      </div>
+      <CommonBackground className="mt-5 mb-10">
         {forms[currentStep].component}
       </CommonBackground>
       <Button

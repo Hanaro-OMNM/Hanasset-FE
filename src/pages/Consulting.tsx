@@ -1,10 +1,11 @@
 import { AiOutlineRight } from 'react-icons/ai';
 import { FaRegCalendarCheck } from 'react-icons/fa';
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
+import { useLocation, useNavigate } from 'react-router-dom';
 import React from 'react';
-import CommonBackground from '../atoms/CommonBackground';
-import SemiTitle from '../atoms/SemiTitle';
-import UpcomingConsultingComponent from '../molecules/UpcomingConsulting';
+import CommonBackground from '../components/atoms/CommonBackground.tsx';
+import SemiTitle from '../components/atoms/SemiTitle.tsx';
+import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting.tsx';
 
 type Consulting = {
   title: string;
@@ -23,7 +24,8 @@ const upcomingConsulting: Consulting = {
   date: '2024.10.27 19:07',
 };
 
-const ConsultingTabLayout: React.FC = () => {
+const Consulting: React.FC = () => {
+  const navigate = useNavigate();
   /*
     ConsultingTabLayout이란?
     
@@ -35,7 +37,7 @@ const ConsultingTabLayout: React.FC = () => {
   return (
     <div className="w-[500px]">
       <div className=" top-0 absolute pl-2">
-        <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px]">
+        <div className="w-[430px] max-w-[430px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px]">
           <h1 className="text-xl font-bold flex justify-center p-10">
             상담현황 확인하기
           </h1>
@@ -57,7 +59,10 @@ const ConsultingTabLayout: React.FC = () => {
               <UpcomingConsultingComponent
                 upcomingConsulting={upcomingConsulting}
               />
-              <button className="text-gray-400 ">
+              <button
+                className="text-gray-400"
+                onClick={() => navigate('/live-chat')}
+              >
                 <span className="sr-only">View details</span>
                 <PiPaperPlaneRightFill />
               </button>
@@ -88,4 +93,4 @@ const ConsultingTabLayout: React.FC = () => {
     </div>
   );
 };
-export default ConsultingTabLayout;
+export default Consulting;

@@ -1,5 +1,6 @@
 // LoanInfoPage.tsx
 import { IoChevronBack } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 import { dummyGuest } from '../assets/Dummy';
 import Button from '../components/atoms/Button';
 import DsrInfo from './LoanRecommend/components/DsrInfo';
@@ -47,14 +48,16 @@ const loanList: Loan[] = [
 ];
 
 const LoanInfoPage: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-[#f4f6f9]">
+    <div className="absolute top-0 h-full overflow-y-auto min-h-screen bg-[#f4f6f9]">
       {/* 헤더 */}
-      <div className="flex h-12 mb-4 pl-8 bg-hanaSilver20 items-center justify-start gap-2">
-        <button>
+      <div className="flex h-12 mb-4 pl-1 bg-hanaSilver20 gap-2 items-center">
+        <button className="items-center" onClick={() => navigate('/')}>
           <IoChevronBack className="text-hanaBlack80 text-xl" />
         </button>
-        <h1 className="text-hanaBlack80 text-lg font-semibold">
+        <h1 className="text-hanaBlack80 text-lg font-semibold ">
           맞춤 대출 상품 안내
         </h1>
       </div>

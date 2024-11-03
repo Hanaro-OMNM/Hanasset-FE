@@ -1,7 +1,8 @@
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { FaLocationCrosshairs } from 'react-icons/fa6';
 import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
-import React, { useState, useCallback, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import Footer from '../Footer.tsx';
 import MapMarkerCluster from '../MapLayout/MapMarkerCluster.tsx';
 import MapPanel from '../MapLayout/MapPannel.tsx';
@@ -18,7 +19,13 @@ export default function MapLayout({ children }: LayoutProps) {
   const [showControlPanel, setShowControlPanel] = useState(false);
   const [mapType, setMapType] = useState(naverMaps.MapTypeId.NORMAL);
   const [selectedEstate, setSelectedEstate] = useState(false);
-  const handleTabChange = () => setSelectedEstate(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (selectedEstate && location.pathname !== '/real-estate-list') {
+      setSelectedEstate(false);
+    }
+  }, [location.pathname]); // 의존성 배열에 location.pathname만 추가
 
   const handleZoomIn = () => {
     if (mapRef.current) {
@@ -38,8 +45,6 @@ export default function MapLayout({ children }: LayoutProps) {
   const [center, setCenter] = useState(
     new naverMaps.LatLng(37.5483852, 127.0683781)
   );
-
-  console.log(naverMaps.LatLng);
 
   const handleZoomChanged = useCallback((newZoom: number) => {
     setZoom(newZoom);
@@ -130,9 +135,7 @@ export default function MapLayout({ children }: LayoutProps) {
         </NaverMap>
       </MapDiv>
       <div className="hidden xs:block">
-        <Navbar state={selectedEstate} onTabChange={handleTabChange}>
-          {children}
-        </Navbar>
+        <Navbar state={selectedEstate}>{children}</Navbar>
       </div>
 
       <div className="block xs:hidden">

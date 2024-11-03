@@ -111,7 +111,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-          className="flex-1 px-4 rounded-full focus:outline-none text-sm"
+          className="flex-1 px-4 rounded-full  text-sm border-2 focus:border-hanaGreen80 focus:outline-none"
           placeholder="메세지를 입력해주세요..."
         />
         <button

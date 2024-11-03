@@ -1,9 +1,11 @@
 import { PiBuildingApartment } from 'react-icons/pi';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Button from '../../components/atoms/Button';
 import CommonBackground from '../../components/atoms/CommonBackground';
 
 export default function ChatReservation() {
+  const nav = useNavigate();
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
 
@@ -54,7 +56,10 @@ export default function ChatReservation() {
   const handleTimeChange = (value: string) => {
     setSelectedTime(value);
   };
-
+  const handleSubmit = () => {
+    alert('예약이 완료되었습니다');
+    nav('/');
+  };
   return (
     <div className="w-[500px]">
       <div className=" top-0 absolute pl-4 animate-slideInRight">
@@ -181,7 +186,7 @@ export default function ChatReservation() {
                 </ul>
               </div>
 
-              <Button text="실시간 채팅 상담 예약하기" />
+              <Button text="실시간 채팅 상담 예약하기" onClick={handleSubmit} />
             </form>
           </CommonBackground>
         </div>

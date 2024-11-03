@@ -51,10 +51,10 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
   beotimmogLoanList = loanListPreProcessing(beotimmogLoanList);
 
   return (
-    <TabGroup>
+    <TabGroup className={'mb-4'}>
       <TabList className={'flex gap-3'}>
         {/* 대출 종류 선택 */}
-        <Tab className="ml-4 w-40 h-12 bg-hanaSilver40 text-hanaBlack80 font-semibold rounded-2xl">
+        <Tab className="ml-4 mb-4 w-40 h-12 bg-hanaSilver40 text-hanaBlack80 font-semibold rounded-2xl">
           {({ selected }) => (
             <button
               className={clsx(

@@ -63,78 +63,85 @@ export default function MyPage() {
   };
 
   return (
-    <div className="w-430 backdrop-blur-[10px] overflow-y-auto bg-white/75 top-0 absolute pl-2 pt-3 h-full">
-      {currentPage === 'main' ? (
-        <>
-          <EditProfile
-            imageSrc={profile.imageSrc}
-            name={profile.name}
-            onEdit={handleEditProfile}
-          />
-          <div className="mt-10">
-            <SemiTitle>내 정보</SemiTitle>
-            <RegisterButtonGroup
-              onRegister={handleRegister}
-              job={'중소,중견기업 직장인'}
-              income={'6000만원'}
-              vehicleOwnership={''}
-              propertyOwnership={''}
-              confirmationDate={''}
-            />
-          </div>
-
-          {/* 내 관심 지역 */}
-          <div className="h-32">
-            <div className="mt-10">
-              <SemiTitle>내 관심 지역</SemiTitle>
-            </div>
-            <Swiper
-              items={interestAreas}
-              pagination={{ clickable: true }}
-              renderItem={(item) => (
-                <CommonBackground className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
-                  {item}
-                </CommonBackground>
-              )}
-            />
-          </div>
-
-          {/* 내 관심 아파트 */}
-          <div className="mt-10">
-            <div className="mb-5">
-              <SemiTitle>내 관심 아파트</SemiTitle>
-            </div>
-            <div className="flex flex-col gap-4 mr-1 ml-1">
-              {assets.slice(0, 3).map((asset, index) => (
-                <button key={index} className="w-full">
-                  <CommonBackground className="flex p-4 h-20 rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
-                    <div className="w-full hover:transition-transform transform hover:scale-105 flex h-full items-center">
-                      <PiBuildingApartment className="text-2xl text-hanaGreen" />
-                      <div className="text-gray-800 font-medium ml-5">
-                        {asset.name}
-                      </div>
-                    </div>
-                  </CommonBackground>
-                </button>
-              ))}
-              <div className="pb-4">
-                <Button text="관심 매물 대출 상담하기" onClick={handleEstate} />
+    <div className="w-430">
+      <div className="top-0 absolute pl-2">
+        <div className="w-430 max-w-[430px] h-svh bg-white/75 backdrop-blur-[5px] overflow-y-auto px-5">
+          {currentPage === 'main' ? (
+            <>
+              <EditProfile
+                imageSrc={profile.imageSrc}
+                name={profile.name}
+                onEdit={handleEditProfile}
+              />
+              <div className="mt-10">
+                <SemiTitle>내 정보</SemiTitle>
+                <RegisterButtonGroup
+                  onRegister={handleRegister}
+                  job={'중소,중견기업 직장인'}
+                  income={'6000만원'}
+                  vehicleOwnership={''}
+                  propertyOwnership={''}
+                  confirmationDate={''}
+                />
               </div>
-            </div>
-          </div>
 
-          {/* 화면 전환 */}
-        </>
-      ) : currentPage === 'editProfile' ? (
-        <EditProfileLayout onBack={() => setCurrentPage('main')} />
-      ) : currentPage === 'EstateList' ? (
-        <MyEstateList onBack={() => setCurrentPage('main')} />
-      ) : (
-        <PropertyRegister
-          assetType={currentPage}
-          onBack={() => setCurrentPage('main')}
-        />
-      )}
+              {/* 내 관심 지역 */}
+              <div className="h-32">
+                <div className="mt-10">
+                  <SemiTitle>내 관심 지역</SemiTitle>
+                </div>
+                <Swiper
+                  items={interestAreas}
+                  pagination={{ clickable: true }}
+                  renderItem={(item) => (
+                    <CommonBackground className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
+                      {item}
+                    </CommonBackground>
+                  )}
+                />
+              </div>
+
+              {/* 내 관심 아파트 */}
+              <div className="mt-10">
+                <div className="mb-5">
+                  <SemiTitle>내 관심 아파트</SemiTitle>
+                </div>
+                <div className="flex flex-col gap-4 mr-1 ml-1">
+                  {assets.slice(0, 3).map((asset, index) => (
+                    <button key={index} className="w-full">
+                      <CommonBackground className="flex p-4 h-20 rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
+                        <div className="w-full hover:transition-transform transform hover:scale-105 flex h-full items-center">
+                          <PiBuildingApartment className="text-2xl text-hanaGreen" />
+                          <div className="text-gray-800 font-medium ml-5">
+                            {asset.name}
+                          </div>
+                        </div>
+                      </CommonBackground>
+                    </button>
+                  ))}
+                  <div className="pb-4">
+                    <Button
+                      text="관심 매물 대출 상담하기"
+                      onClick={handleEstate}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 화면 전환 */}
+            </>
+          ) : currentPage === 'editProfile' ? (
+            <EditProfileLayout onBack={() => setCurrentPage('main')} />
+          ) : currentPage === 'EstateList' ? (
+            <MyEstateList onBack={() => setCurrentPage('main')} />
+          ) : (
+            <PropertyRegister
+              assetType={currentPage}
+              onBack={() => setCurrentPage('main')}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 }

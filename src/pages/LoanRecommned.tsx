@@ -51,24 +51,30 @@ const LoanInfoPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="absolute top-0 h-full overflow-y-auto min-h-screen bg-[#f4f6f9]">
-      {/* 헤더 */}
-      <div className="flex h-12 mb-4 pl-1 bg-hanaSilver20 gap-2 items-center">
-        <button className="items-center" onClick={() => navigate('/')}>
-          <IoChevronBack className="text-hanaBlack80 text-xl" />
-        </button>
-        <h1 className="text-hanaBlack80 text-lg font-semibold ">
-          맞춤 대출 상품 안내
-        </h1>
+    <div className="w-430">
+      <div className="top-0 absolute pl-2">
+        <div className="w-430 max-w-[430px] h-svh overflow-y-auto min-h-screen bg-[#f4f6f9]">
+          {/* 헤더 */}
+          <div className="w-430 max-w-[430px] h-16 fixed top-0 bg-white/75 border-b-4 border-gray-200 z-10 px-4 py-2 flex items-center">
+            <button className="items-center" onClick={() => navigate('/')}>
+              <IoChevronBack className="text-hanaBlack80 text-xl mr-10" />
+            </button>
+            <h1 className="text-hanaBlack80 text-lg font-semibold ">
+              맞춤 대출 상품 안내
+            </h1>
+          </div>
+
+          <div className="w-full px-5 pt-20">
+            <Expectation totalPrice={10} maxLoan={5} />
+
+            <DsrInfo dsr={dummyGuest.stressDsr} />
+            <LoanFoundMessage isFound={true} />
+            <LoanRecommendTab hanaLoanList={loanList} beotimmogLoanList={[]} />
+
+            <Button text="실시간 채팅 상담 예약하기" />
+          </div>
+        </div>
       </div>
-
-      <Expectation totalPrice={10} maxLoan={5} />
-
-      <DsrInfo dsr={dummyGuest.stressDsr} />
-      <LoanFoundMessage isFound={true} />
-      <LoanRecommendTab hanaLoanList={loanList} beotimmogLoanList={[]} />
-
-      <Button text="실시간 채팅 상담 예약하기" />
     </div>
   );
 };

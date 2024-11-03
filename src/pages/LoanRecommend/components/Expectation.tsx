@@ -12,9 +12,8 @@ const Expectation: React.FC<ExpectationProps> = ({ totalPrice, maxLoan }) => {
   const shortage = Math.max(0, totalPrice - (capital + maxLoan));
 
   return (
-    <div className="w-full mb-4 p-6">
+    <div className="w-full mb-4 py-5">
       <p className="text-hanaBlack80 font-semibold">예상 대출금</p>
-
       {/* Slider */}
       <LoanSlider
         capital={capital}

@@ -30,7 +30,7 @@ const Consulting: React.FC = () => {
   return (
     <div className="w-430">
       <div className=" top-0 absolute pl-2">
-        <div className="w-430 max-w-[430px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px]">
+        <div className="w-430 max-w-[430px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px] overflow-y-auto">
           <h1 className="text-xl text-slate-800 font-bold flex justify-center p-10">
             상담현황 확인하기
           </h1>

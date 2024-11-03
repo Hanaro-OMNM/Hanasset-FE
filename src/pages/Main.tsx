@@ -49,7 +49,7 @@ export default function Main() {
       <div className="w-430">
         {activePage === 'main' ? (
           <div className="top-0 absolute pl-2">
-            <div className="w-430 max-w-[430px] h-svh px-5 absolute bg-white/75 backdrop-blur-[5px]">
+            <div className="w-430 max-w-[430px] h-svh px-5 absolute bg-white/75 backdrop-blur-[5px] overflow-y-auto">
               <SearchBar />
 
               <div className="w-full max-w-md mt-10">
@@ -139,6 +139,7 @@ export default function Main() {
                 <h2 className="text-xl text-slate-800 font-bold mb-6">
                   최근에 확인한 매물
                 </h2>
+                {/* 여기에는 캐러셀 적용할 예정 */}
                 <CommonBackground className="w-full px-5 py-3">
                   {recentHouses === 'none' ? (
                     <div>아직 둘러본 매물이 없네요.</div>

@@ -41,49 +41,54 @@ export default function RealEstateLayout() {
   const navigate = useNavigate();
 
   return (
-    <>
-      <div className="w-[430px] pl-2 h-full bg-white/75 backdrop-blur-[10px] top-0 absolute overflow-y-auto">
-        <div className="flex h-12 mb-4 gap-2 items-center">
-          <button className="items-center" onClick={() => navigate('/')}>
-            <IoChevronBack className="text-hanaBlack80 text-xl" />
-          </button>
-          <h1 className="text-hanaBlack80 text-lg font-semibold ">
-            맞춤 대출 상품 안내
-          </h1>
-        </div>
-        <div className="flex justify-between items-center my-2">
-          <div className="flex items-center font-bold ">
-            <SemiTitle>{realEstateCount}개의 매물</SemiTitle>
+    <div className="w-430">
+      <div className="top-0 absolute pl-2">
+        <div className="w-430 max-w-[430px] h-svh bg-white/75 backdrop-blur-[10px] overflow-y-auto">
+          {/* 헤더 */}
+          <div className="w-430 max-w-[430px] h-16 fixed top-0 bg-white border-b-4 border-gray-200 z-10 px-4 py-2 flex items-center">
+            <button className="items-center" onClick={() => navigate('/')}>
+              <IoChevronBack className="text-hanaBlack80 text-xl mr-10" />
+            </button>
+            <h1 className="text-hanaBlack80 text-lg font-semibold ">
+              맞춤 대출 상품 안내
+            </h1>
           </div>
-          <DropdownCombobox
-            items={sortItems}
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-            comboboxClassName="border-gray-300 w-[130px] bg-white/75 backdrop-blur-[10px]"
-            optionClassName="hover:bg-gray-200"
-          />
-        </div>
-        <div className="flex-grow min-h-0 overflow-y-auto">
-          {realEstateData.map((item, index) => (
-            <div key={index} className="border-b">
-              {/* 카드 클릭 시 handleCardClick 호출 */}
-              <RealEstateCard
-                {...item}
-                onClick={() => {
-                  handleCardClick(item);
-                  setShowRealEstate(true);
-                }}
-              />
+
+          <div className="flex justify-between items-center my-2 px-5 pt-20">
+            <div className="flex items-center font-bold ">
+              <SemiTitle>{realEstateCount}개의 매물</SemiTitle>
             </div>
-          ))}
+            <DropdownCombobox
+              items={sortItems}
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+              comboboxClassName="border-gray-300 w-[130px] bg-white/75"
+              optionClassName="hover:bg-gray-200"
+            />
+          </div>
+
+          <div className="flex-grow min-h-0 overflow-y-auto px-2">
+            {realEstateData.map((item, index) => (
+              <div key={index} className="border-b">
+                {/* 카드 클릭 시 handleCardClick 호출 */}
+                <RealEstateCard
+                  {...item}
+                  onClick={() => {
+                    handleCardClick(item);
+                    setShowRealEstate(true);
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
+        {showRealEstate && selectedEstate && (
+          <RealEstateDetail
+            estate={selectedEstate}
+            onBackClick={() => setShowRealEstate(false)}
+          />
+        )}
       </div>
-      {showRealEstate && selectedEstate && (
-        <RealEstateDetail
-          estate={selectedEstate}
-          onBackClick={() => setShowRealEstate(false)}
-        />
-      )}
-    </>
+    </div>
   );
 }

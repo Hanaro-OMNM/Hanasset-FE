@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import ProgressBar from '../components/ProgressBar';
+import Expectation from '../../LoanRecommend/components/Expectation';
 
 interface EstimateProps {
   totalAsset: number;
@@ -52,7 +52,7 @@ const Estimate: React.FC<EstimateProps> = ({ totalAsset }) => {
 
       <hr className="my-4 border-gray-300" />
       <div className="container mx-auto">
-        <ProgressBar totalAsset={totalAsset} maxLoan={18} />
+        <Expectation totalPrice={10} maxLoan={5} />
       </div>
 
       <div className="flex justify-end items-center">

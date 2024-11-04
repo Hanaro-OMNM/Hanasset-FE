@@ -2,6 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 채팅 슬라이드 효과 */
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-5%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(5%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-left {
+  animation: slide-in-left 0.5s ease-out forwards;
+}
+
+.slide-in-right {
+  animation: slide-in-right 0.5s ease-out forwards;
+}
 @font-face {
   font-family: 'FontBold';
   src: url('./fonts/Hana2-Bold.ttf') format('truetype');

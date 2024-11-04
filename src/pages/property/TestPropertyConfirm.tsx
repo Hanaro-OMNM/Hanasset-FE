@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/atoms/Button';
-import FormLayout from '../../components/template/FormLayout';
 import PropertyConfirm from './PropertyConfirm';
 
 const TestPropertyConfirm = () => {
@@ -18,7 +17,7 @@ const TestPropertyConfirm = () => {
   };
 
   return (
-    <FormLayout>
+    <div>
       <PropertyConfirm
         job={testJob}
         income={testIncome}
@@ -27,7 +26,7 @@ const TestPropertyConfirm = () => {
         confirmationDate={testConfirmationDate}
       />
       <Button text="대출 추천 받기" onClick={handleSubmit} />
-    </FormLayout>
+    </div>
   );
 };
 

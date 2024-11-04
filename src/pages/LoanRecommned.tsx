@@ -79,7 +79,7 @@ const LoanInfoPage: React.FC = () => {
               <div className="flex font-fontBold text-2xl">맞춤 대출 상품</div>
               <div className="font-fontMedium text-2xl "> 입니다.</div>
             </div>
-            <Expectation totalPrice={10} maxLoan={5} />
+            <Expectation title="예상 대출금" totalPrice={10} maxLoan={5} />
             <DsrInfo dsr={dummyGuest.stressDsr} />
             <LoanFoundMessage isFound={true} />
             <LoanRecommendTab

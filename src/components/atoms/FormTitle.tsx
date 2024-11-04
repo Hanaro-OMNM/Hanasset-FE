@@ -6,7 +6,7 @@ interface FormTitleProps {
 
 const FormTitle: React.FC<FormTitleProps> = ({ text }) => {
   return (
-    <h2 className="w-full  text-black text-xl font-extrabold tracking-tight text-left">
+    <h2 className="w-full text-black text-xl font-extrabold tracking-tight flex justify-center">
       {text}
     </h2>
   );

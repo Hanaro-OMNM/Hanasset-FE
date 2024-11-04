@@ -2,8 +2,10 @@ import { AiOutlineRight } from 'react-icons/ai';
 import { FaRegCalendarCheck } from 'react-icons/fa';
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import React from 'react';
 import CommonBackground from '../components/atoms/CommonBackground';
+import MobileHeader from '../components/atoms/MobileHeader';
 import SemiTitle from '../components/atoms/SemiTitle';
 import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting';
 
@@ -26,18 +28,27 @@ const upcomingConsulting: Consulting = {
 
 const Consulting: React.FC = () => {
   const navigate = useNavigate();
+  const [isActive, setIsActive] = useState(true);
+  /*
+    ConsultingTabLayout이란?
+
+    : Navbar에서 "상담" 버튼 눌렀을 때 나오는 사이드바 부분입니다.
+    ConsultantLayout이랑 혼동 주의!
+
+  */
 
   return (
     <div className="w-[500px]">
-      <div className=" top-0 absolute pl-4 animate-slideInRight">
-        <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px] overflow-y-auto">
-          <h1 className="text-xl text-slate-800 font-bold flex justify-center p-10">
-            상담현황 확인하기
-          </h1>
+      <div className="top-0 absolute pl-4 animate-slideInRight">
+        <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px]">
+          <MobileHeader
+            title="상담현황 확인하기"
+            onBack={() => navigate('/')}
+          />
 
           <div className="mb-8">
             <div className="flex items-center">
-              <span className=" text-hanaGreen mr-2">
+              <span className="text-hanaGreen mr-2">
                 <FaRegCalendarCheck />
               </span>
               <h2 className="text-lg font-semibold text-hanaGreen">
@@ -47,19 +58,22 @@ const Consulting: React.FC = () => {
             <p className="text-xs text-hanaGreen60 mb-4">
               채팅방은 예약 시간이 되면 활성화 됩니다.
             </p>
-
-            <div className="bg-white shadow-sm p-4 rounded-lg flex items-center justify-between cursor-pointer">
-              <UpcomingConsultingComponent
-                upcomingConsulting={upcomingConsulting}
-              />
-              <button
-                className="text-gray-400"
+            <CommonBackground className="p-1">
+              <div
+                className="p-4 rounded-lg flex items-center justify-between cursor-pointer hover:transition-transform transform hover:scale-105"
                 onClick={() => navigate('/live-chat')}
               >
-                <span className="sr-only">View details</span>
-                <PiPaperPlaneRightFill />
-              </button>
-            </div>
+                <UpcomingConsultingComponent
+                  upcomingConsulting={upcomingConsulting}
+                />
+                <button
+                  className={isActive ? 'text-yellow-400' : 'text-gray-400'}
+                >
+                  <span className="sr-only">View details</span>
+                  <PiPaperPlaneRightFill className="w-6 h-6" />
+                </button>
+              </div>
+            </CommonBackground>
           </div>
 
           <SemiTitle>지난 상담 내역</SemiTitle>

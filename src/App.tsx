@@ -4,7 +4,6 @@ import './App.css';
 import Layout from './components/template/Layout.tsx';
 import Consulting from './pages/Consulting.tsx';
 import LoanRecommend from './pages/LoanRecommned.tsx';
-import LoanReservation from './pages/LoanReservation/LoanReservation.tsx';
 import Login from './pages/Login.tsx';
 import Main from './pages/Main.tsx';
 import MyPage from './pages/MyPage.tsx';
@@ -13,6 +12,7 @@ import RealEstateList from './pages/RealEstateList/RealEstateList.tsx';
 import SignUp from './pages/SignUp.tsx';
 import ChatApp from './pages/chat/ChatApp.tsx';
 import Consultant from './pages/consultant/Consultant.tsx';
+import ChatReservation from './pages/reservation/ChatReservation.tsx';
 import SearchResult from './pages/search/SearchResult.tsx';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
             <Route path="/consulting" element={<Consulting />} />
             <Route path="/my-page" element={<MyPage />} />
             <Route path="/loan-recommend" element={<LoanRecommend />} />
-            <Route path="/loan-reservation" element={<LoanReservation />} />
+            <Route path="/chat-reservation" element={<ChatReservation />} />
             <Route path="/real-estate-list" element={<RealEstateList />} />
             <Route path="/property-agree" element={<PropertyAgree />} />
             <Route path="/login" element={<Login />} />

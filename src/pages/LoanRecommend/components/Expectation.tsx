@@ -5,17 +5,22 @@ import SemiTitle from '../../../components/atoms/SemiTitle';
 import LoanSlider from '../../../components/molecules/LoanSlider';
 
 interface ExpectationProps {
+  title?: string;
   totalPrice: number;
   maxLoan: number; // 최대 대출 가능 금액
 }
-const Expectation: React.FC<ExpectationProps> = ({ totalPrice, maxLoan }) => {
+const Expectation: React.FC<ExpectationProps> = ({
+  title,
+  totalPrice,
+  maxLoan,
+}) => {
   // 자본금, 대출금, 부족 금액 계산
   const [capital, setCapital] = useState(totalPrice - maxLoan);
   const shortage = Math.max(0, totalPrice - (capital + maxLoan));
 
   return (
     <div className="w-full mb-4 p-6">
-      <SemiTitle>예상 대출금</SemiTitle>
+      {title && <SemiTitle>{title}</SemiTitle>}
       <CommonBackground className="p-6 h-40">
         <div
           className={clsx(

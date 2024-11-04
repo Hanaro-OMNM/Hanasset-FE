@@ -6,6 +6,11 @@ import real_estate_4 from '../assets/img/realEstate/real_estate_4.png';
 export interface Guest {
   name: string;
   age: number;
+  job: string;
+  income: number;
+  family: boolean;
+  home: boolean;
+  loan: number;
   stressDsr: number;
 }
 
@@ -43,6 +48,11 @@ export interface RealEstate {
 export const dummyGuest: Guest = {
   name: '이순신',
   age: 32,
+  job: '중소',
+  income: 6000,
+  family: false,
+  home: false,
+  loan: 0,
   stressDsr: 40,
 };
 

@@ -56,7 +56,7 @@ const DropdownCombobox: React.FC<ComboboxProps> = ({
                 value={item}
                 className={({ active }) =>
                   `cursor-pointer select-none relative py-2 pl-4 ${
-                    active ? 'bg-white' : 'text-black'
+                    active ? 'bg-white' : 'text-black '
                   } ${optionClassName}`
                 }
               >
@@ -64,7 +64,7 @@ const DropdownCombobox: React.FC<ComboboxProps> = ({
                   <>
                     <span
                       className={`block truncate ${
-                        selected ? 'font-medium' : 'font-normal'
+                        selected ? 'font-medium ' : 'font-normal'
                       }`}
                     >
                       {item}

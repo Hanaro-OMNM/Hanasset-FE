@@ -4,7 +4,7 @@ import GuestWaiting from './GuestWaiting';
 
 export default function Consultant() {
   return (
-    <>
+    <div className="flex justify-center">
       {/* 상담 예약 */}
       <div>
         <GuestWaiting />
@@ -19,6 +19,6 @@ export default function Consultant() {
       <div>
         <GuestInfo />
       </div>
-    </>
+    </div>
   );
 }

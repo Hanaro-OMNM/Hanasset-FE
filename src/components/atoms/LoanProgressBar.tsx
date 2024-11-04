@@ -7,7 +7,7 @@ const LoanProgressBar: React.FC<LoanProgressBarProps> = ({ rate }) => {
     <div>
       <div className="ml-6 mr-6 mb-8 bg-hanaSilver60 rounded-full h-4">
         <div
-          className="bg-hanaGreen rounded-full h-4"
+          className="bg-hanaColor2 rounded-full h-4"
           style={{
             width: `${rate}%`,
           }}

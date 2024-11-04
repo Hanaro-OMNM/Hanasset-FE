@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ApartListForm from '../../pages/property/form/ApartListForm';
 import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
 import JobForm from '../../pages/property/form/JobForm';
@@ -6,7 +6,7 @@ import OwnPropertyForm from '../../pages/property/form/OwnPropertyForm';
 import SalaryForm from '../../pages/property/form/SalaryForm';
 import Button from '../atoms/Button';
 import CommonBackground from '../atoms/CommonBackground';
-import SemiTitle from '../atoms/SemiTitle';
+import MobileHeader from '../atoms/MobileHeader';
 
 interface AssetRegisterProps {
   assetType:
@@ -112,9 +112,9 @@ export default function PropertyForm({
   };
 
   return (
-    <div className="mt-10">
-      <SemiTitle>자산 입력받기</SemiTitle>
-      <CommonBackground className="mb-10">
+    <div className="px-5">
+      <MobileHeader title="자산 수정하기" onBack={onBack} />
+      <CommonBackground className="mt-5 mb-10 ">
         {forms[currentStep].component}
       </CommonBackground>
       <Button

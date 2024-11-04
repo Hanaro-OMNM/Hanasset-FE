@@ -1,8 +1,9 @@
+import { IoChevronBack } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Button from '../atoms/Button';
 import Checkbox from '../atoms/Checkbox';
 import CommonBackground from '../atoms/CommonBackground';
-import SemiTitle from '../atoms/SemiTitle';
 import Swiper from '../atoms/Swiper';
 
 interface MyEstateListProps {
@@ -94,6 +95,7 @@ const slides = Array.from(
 );
 
 export default function MyEstateList({ onBack }: MyEstateListProps) {
+  const navigate = useNavigate();
   const [checkedItems, setCheckedItems] = useState<boolean[]>(
     Array(apartments.length).fill(false)
   );
@@ -113,8 +115,13 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
 
   return (
     <div>
-      <div className="mb-4">
-        <SemiTitle>내 관심 매물</SemiTitle>
+      <div className="flex h-12 mb-2 pl-1 gap-2 items-center">
+        <button className="items-center" onClick={onBack}>
+          <IoChevronBack className="text-hanaBlack80 text-xl" />
+        </button>
+        <h1 className="text-hanaBlack80 text-lg font-semibold ">
+          내 관심 매물
+        </h1>
       </div>
       <CommonBackground>
         <Swiper
@@ -159,8 +166,11 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
           slidesPerView={1}
         />
       </CommonBackground>
-      <div className="pt-4">
-        <Button onClick={onBack} text="닫기" />
+      <div className="pt-4 pb-2">
+        <Button
+          onClick={() => navigate('/loan-reservation')}
+          text="상담 예약하기"
+        />
       </div>
     </div>
   );

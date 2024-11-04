@@ -19,7 +19,7 @@ export default function FormRadio<T>({
   return (
     <div className="w-full p-4 ">
       <div className="mx-auto w-full max-w-md ">
-        <h2 className="flex justify-center text-2xl font-extrabold my-10">
+        <h2 className="flex justify-center text-xl font-extrabold my-7">
           {label}
         </h2>
         <RadioGroup
@@ -34,7 +34,7 @@ export default function FormRadio<T>({
               value={item}
               className={
                 ({ checked }) =>
-                  `group relative flex cursor-pointer rounded-xl p-5 transition text-lg focus:outline-none border-2
+                  `group relative flex cursor-pointer rounded-xl p-5 transition text-md focus:outline-none border-2
                 ${checked ? 'text-hanaBlack bg-hanaGreen20 border-hanaGreen60' : 'text-hanaBlack40 border-gray-100/5'}` // checked 여부에 따라 배경 색상 변경
               }
             >

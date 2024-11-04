@@ -1,14 +1,14 @@
+import SemiTitle from '../../../components/atoms/SemiTitle';
+
 interface LoanFoundMessageProps {
   isFound: boolean;
 }
 
 const LoanFoundMessage: React.FC<LoanFoundMessageProps> = ({ isFound }) => {
   return (
-    <p className="ml-4 my-4 pl-2 text-hanaBlack80 font-semibold">
-      {isFound
-        ? '나에게 맞는 대출 상품을 찾았어요'
-        : '대출 상품을 찾지 못했어요'}
-    </p>
+    <div className="pl-6">
+      <SemiTitle>{isFound ? '' : '대출 상품을 찾지 못했어요'}</SemiTitle>
+    </div>
   );
 };
 

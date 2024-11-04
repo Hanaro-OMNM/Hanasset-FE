@@ -10,7 +10,7 @@ export default function CommonBackground({
   className = '',
 }: CommonBackgroundProps) {
   return (
-    <div className={`w-full  bg-white rounded-[15px] shadow ${className}`}>
+    <div className={`w-full  bg-white rounded-[15px] shadow-md ${className}`}>
       {children}
     </div>
   );

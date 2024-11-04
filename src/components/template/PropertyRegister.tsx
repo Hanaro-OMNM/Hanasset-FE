@@ -1,5 +1,5 @@
 import { IoChevronBack } from 'react-icons/io5';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ApartListForm from '../../pages/property/form/ApartListForm';
 import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
 import JobForm from '../../pages/property/form/JobForm';
@@ -112,23 +112,19 @@ export default function PropertyForm({
   };
 
   return (
-    <div>
+    <div className="p-6 animate-slideInRight">
       <div className="flex h-12 mb-4 pl-1 gap-2 items-center">
         <button className="items-center" onClick={onBack}>
           <IoChevronBack className="text-hanaBlack80 text-xl" />
         </button>
-        <h1 className="text-hanaBlack80 text-lg font-semibold ">
-          자산 수정하기
-        </h1>
+        <h1 className="text-hanaBlack80 text-lg font-semibold ">마이 페이지</h1>
       </div>
-      <CommonBackground className="mt-5 mb-10">
+      <CommonBackground className="my-10">
         {forms[currentStep].component}
+        <div className="px-5 pb-5">
+          <Button text="저장" onClick={handleNextStep} version="ver1" />
+        </div>
       </CommonBackground>
-      <Button
-        text="저장 후 메인화면으로 돌아가기"
-        onClick={handleNextStep}
-        version="ver2"
-      />
     </div>
   );
 }

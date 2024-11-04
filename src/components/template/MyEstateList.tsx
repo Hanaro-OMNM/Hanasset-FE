@@ -114,63 +114,65 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
   };
 
   return (
-    <div>
+    <div className="animate-fadeInRight">
       <div className="flex h-12 mb-2 pl-1 gap-2 items-center">
         <button className="items-center" onClick={onBack}>
           <IoChevronBack className="text-hanaBlack80 text-xl" />
         </button>
-        <h1 className="text-hanaBlack80 text-lg font-semibold ">
+        <h1 className="text-hanaBlack80 text-lg font-fontMedium">
           내 관심 매물
         </h1>
       </div>
-      <CommonBackground>
-        <Swiper
-          items={slides}
-          renderItem={(pageApartments) => (
-            <div className="mb-8">
-              {pageApartments.map((apartment) => (
-                <button
-                  key={apartment.id}
-                  className="w-full items-start rounded-lg hover:transition-transform transform hover:scale-105"
-                >
-                  <label>
-                    <div className="content-center flex p-5">
-                      <div className="content-center">
-                        <Checkbox
-                          aria-label={apartment.name}
-                          checked={checkedItems[apartment.id]}
-                          onChange={(checked) =>
-                            handleItemChange(apartment.id, checked)
-                          }
-                        />
+      <div className="p-6">
+        <CommonBackground>
+          <Swiper
+            items={slides}
+            renderItem={(pageApartments) => (
+              <div className="mb-8">
+                {pageApartments.map((apartment) => (
+                  <button
+                    key={apartment.id}
+                    className="w-full items-start rounded-lg hover:transition-transform transform hover:scale-105"
+                  >
+                    <label>
+                      <div className="content-center flex p-5">
+                        <div className="content-center">
+                          <Checkbox
+                            aria-label={apartment.name}
+                            checked={checkedItems[apartment.id]}
+                            onChange={(checked) =>
+                              handleItemChange(apartment.id, checked)
+                            }
+                          />
+                        </div>
+                        <div className="pl-7">
+                          <div className="text-hanaGreen text-lg text-left">
+                            {apartment.name}
+                          </div>
+                          <div className="text-hanaBlack80 text-sm text-left">
+                            {apartment.detail}
+                          </div>
+                          <div className="text-hanaSilver80 text-xs">
+                            {apartment.address}
+                          </div>
+                        </div>
                       </div>
-                      <div className="pl-7">
-                        <div className="text-hanaGreen text-lg text-left">
-                          {apartment.name}
-                        </div>
-                        <div className="text-hanaBlack80 text-sm text-left">
-                          {apartment.detail}
-                        </div>
-                        <div className="text-hanaSilver80 text-xs">
-                          {apartment.address}
-                        </div>
-                      </div>
-                    </div>
-                    <hr className="ml-3 mr-3" />
-                  </label>
-                </button>
-              ))}
-            </div>
-          )}
-          spaceBetween={30}
-          slidesPerView={1}
-        />
-      </CommonBackground>
-      <div className="pt-4 pb-2">
-        <Button
-          onClick={() => navigate('/loan-reservation')}
-          text="상담 예약하기"
-        />
+                      <hr className="ml-3 mr-3" />
+                    </label>
+                  </button>
+                ))}
+              </div>
+            )}
+            spaceBetween={30}
+            slidesPerView={1}
+          />
+          <div className="p-2">
+            <Button
+              onClick={() => navigate('/loan-reservation')}
+              text="상담 예약하기"
+            />
+          </div>
+        </CommonBackground>
       </div>
     </div>
   );

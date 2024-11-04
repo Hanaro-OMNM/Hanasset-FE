@@ -82,45 +82,91 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
   };
 
   return (
-    <div className="w-[430px] absolute top-0 flex flex-col h-screen items-center min-w-96">
-      <ChatHeader
-        responserName={accessor === 'guest' ? '하나은행 상담사' : '고객1'}
-        responserImage={accessor === 'guest' ? logo : profile}
-      />
-      <div className="flex-1 w-full px-4 md:px-8 py-4 bg-hanaSilver20 shadow overflow-y-auto scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400 space-y-4">
-        {messages.map((msg, index) => (
-          <ChatMessage
-            key={msg.id}
-            subject={msg.subject}
-            message={msg.message}
-            lastMessageTime={
-              index === 0 || msg.time !== messages[index - 1].time
-                ? msg.time
-                : null
-            }
-            responserName={accessor === 'guest' ? '하나은행 상담사' : '고객1'}
-            responserImage={accessor === 'guest' ? logo : profile}
-          />
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
+    <div>
+      {accessor === 'guest' ? (
+        <div className="w-[500px]">
+          <div className=" top-0 absolute pl-4 animate-slideInRight">
+            <div className="w-[420px] absolute top-0 left-4 flex flex-col h-screen items-center">
+              <ChatHeader
+                responserName="하나은행 상담사"
+                responserImage={logo}
+              />
+              <div className="flex-1 w-full px-4 md:px-8 py-4 bg-hanaSilver20 shadow overflow-y-auto scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400 space-y-4">
+                {messages.map((msg, index) => (
+                  <ChatMessage
+                    key={msg.id}
+                    subject={msg.subject}
+                    message={msg.message}
+                    lastMessageTime={
+                      index === 0 || msg.time !== messages[index - 1].time
+                        ? msg.time
+                        : null
+                    }
+                    responserName="하나은행 상담사"
+                    responserImage={logo}
+                  />
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
 
-      <div className="flex w-full p-5 bg-hanaGreen60 ">
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-          className="flex-1 px-4 rounded-full focus:outline-none text-sm"
-          placeholder="메세지를 입력해주세요..."
-        />
-        <button
-          onClick={handleSendMessage}
-          className="flex items-center justify-center p-2 ml-2 rounded-full bg-hanaGreen80 text-white hover:bg-hanaGreen transition duration-150 ease-in-out"
-        >
-          <PiPaperPlaneRightFill className="h-5 w-5 " />
-        </button>
-      </div>
+              <div className="flex w-full p-5 bg-hanaGreen60">
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                  className="flex-1 px-4 rounded-full focus:outline-none text-sm"
+                  placeholder="메세지를 입력해주세요..."
+                />
+                <button
+                  onClick={handleSendMessage}
+                  className="flex items-center justify-center p-2 ml-2 rounded-full bg-hanaGreen80 text-white hover:bg-hanaGreen transition duration-150 ease-in-out"
+                >
+                  <PiPaperPlaneRightFill className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col h-screen w-full items-center min-w-96">
+          <ChatHeader responserName={'고객1'} responserImage={profile} />
+          <div className="flex-1 w-full px-4 md:px-8 py-4 bg-hanaSilver20 shadow overflow-y-auto scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400 space-y-4">
+            {messages.map((msg, index) => (
+              <ChatMessage
+                key={msg.id}
+                subject={msg.subject}
+                message={msg.message}
+                lastMessageTime={
+                  index === 0 || msg.time !== messages[index - 1].time
+                    ? msg.time
+                    : null
+                }
+                responserName="고객1"
+                responserImage={profile}
+              />
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+
+          <div className="flex w-full p-5 bg-hanaGreen60">
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+              className="flex-1 px-4 rounded-full focus:outline-none text-sm"
+              placeholder="메세지를 입력해주세요..."
+            />
+            <button
+              onClick={handleSendMessage}
+              className="flex items-center justify-center p-2 ml-2 rounded-full bg-hanaGreen80 text-white hover:bg-hanaGreen transition duration-150 ease-in-out"
+            >
+              <PiPaperPlaneRightFill className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import { AiOutlineRight } from 'react-icons/ai';
 import { FaRegCalendarCheck } from 'react-icons/fa';
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import CommonBackground from '../components/atoms/CommonBackground.tsx';
-import SemiTitle from '../components/atoms/SemiTitle.tsx';
-import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting.tsx';
+import CommonBackground from '../components/atoms/CommonBackground';
+import SemiTitle from '../components/atoms/SemiTitle';
+import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting';
 
 type Consulting = {
   title: string;
@@ -28,16 +28,16 @@ const Consulting: React.FC = () => {
   const navigate = useNavigate();
   /*
     ConsultingTabLayout이란?
-    
-    : Navbar에서 "상담" 버튼 눌렀을 때 나오는 사이드바 부분입니다. 
-    ConsultantLayout이랑 혼동 주의! 
+
+    : Navbar에서 "상담" 버튼 눌렀을 때 나오는 사이드바 부분입니다.
+    ConsultantLayout이랑 혼동 주의!
 
   */
 
   return (
     <div className="w-[500px]">
-      <div className=" top-0 absolute pl-2">
-        <div className="w-[430px] max-w-[430px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px]">
+      <div className=" top-0 absolute pl-4 animate-slideInRight">
+        <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px]">
           <h1 className="text-xl font-bold flex justify-center p-10">
             상담현황 확인하기
           </h1>

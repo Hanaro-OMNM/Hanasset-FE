@@ -4,8 +4,8 @@ interface FormLayoutProps {
 
 export default function RealEstateDetailLayout({ children }: FormLayoutProps) {
   return (
-    <div>
-      <div className="absolute top-0 left-[490px] w-[430px] bg-gray-100 h-full overflow-y-auto">
+    <div className="top-0 absolute pl-4 animate-slideInRight">
+      <div className="w-[420px] bg-white/75 absolute backdrop-blur-[10px] left-[420px] overflow-y-auto h-screen scrollbar-hide">
         {children}
       </div>
     </div>

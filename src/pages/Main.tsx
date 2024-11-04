@@ -1,5 +1,5 @@
-import { MdNavigateNext } from 'react-icons/md';
 import { useEffect, useState } from 'react';
+import { MdNavigateNext } from 'react-icons/md';
 import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import LocationFilter from './location/LocationFilter.tsx';
@@ -46,10 +46,10 @@ export default function Main() {
 
   return (
     <div>
-      <div className="w-430">
+      <div className="w-[420px]">
         {activePage === 'main' ? (
-          <div className="top-0 absolute pl-2">
-            <div className="w-430 max-w-[430px] h-svh px-5 absolute bg-white/75 backdrop-blur-[5px] overflow-y-auto">
+          <div className="top-0 absolute pl-4 animate-slideInRight">
+            <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/75 backdrop-blur-[5px]">
               <SearchBar />
 
               <div className="w-full max-w-md mt-10">
@@ -151,7 +151,10 @@ export default function Main() {
             </div>
           </div>
         ) : (
-          <LocationFilter locationType={activePage} />
+          <LocationFilter
+            locationType={activePage}
+            onBack={() => setActivePage('main')}
+          />
         )}
       </div>
     </div>

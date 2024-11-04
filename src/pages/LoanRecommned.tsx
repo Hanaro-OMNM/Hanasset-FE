@@ -48,6 +48,10 @@ const loanList: Loan[] = [
   jeonseSecurityLoan,
 ];
 
+const profile = {
+  name: '김하나',
+};
+
 const LoanInfoPage: React.FC = () => {
   const navigate = useNavigate();
   const [showDetail, setShowDetail] = useState(false);
@@ -56,22 +60,26 @@ const LoanInfoPage: React.FC = () => {
   };
 
   return (
-    <div className="w-430">
-      <div className="top-0 absolute pl-2">
-        <div className="w-430 max-w-[430px] h-svh overflow-y-auto min-h-screen bg-[#f4f6f9]">
-          {/* 헤더 */}
-          <div className="w-430 max-w-[430px] h-16 fixed top-0 bg-white/75 border-b-4 border-gray-200 z-10 px-4 py-2 flex items-center">
-            <button className="items-center" onClick={() => navigate('/')}>
-              <IoChevronBack className="text-hanaBlack80 text-xl mr-10" />
-            </button>
-            <h1 className="text-hanaBlack80 text-lg font-semibold ">
-              맞춤 대출 상품 안내
-            </h1>
-          </div>
-
-          <div className="w-full px-5 pt-20">
+    <div className="flex">
+      <div className="w-[500px]">
+        <div className=" top-0 absolute pl-4 animate-slideInRight">
+          <div className="w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/75 scrollbar-hide">
+            <div className="flex h-12 mb-4 pl-1 gap-2 items-center">
+              <button className="items-center" onClick={() => navigate('/')}>
+                <IoChevronBack className="text-hanaBlack80 text-xl" />
+              </button>
+              <h1 className="text-hanaBlack80 text-lg font-semibold ">
+                맞춤 대출 상품 안내
+              </h1>
+            </div>
+            <div className="font-fontMedium text-2xl pl-6">
+              {profile.name}님의
+            </div>
+            <div className="pl-6 flex">
+              <div className="flex font-fontBold text-2xl">맞춤 대출 상품</div>
+              <div className="font-fontMedium text-2xl "> 입니다.</div>
+            </div>
             <Expectation totalPrice={10} maxLoan={5} />
-
             <DsrInfo dsr={dummyGuest.stressDsr} />
             <LoanFoundMessage isFound={true} />
             <LoanRecommendTab
@@ -79,13 +87,14 @@ const LoanInfoPage: React.FC = () => {
               beotimmogLoanList={[]}
               onLoanDetailButtonClick={handleShowDetail}
             />
-
-            <Button text="실시간 채팅 상담 예약하기" />
+            <div className="pl-6 pr-6 pb-4">
+              <Button text="실시간 채팅 상담 예약하기" />
+            </div>
           </div>
         </div>
       </div>
       {showDetail && (
-        <div className="w-[430px] h-full absolute top-0 left-[490px] bg-[#f4f6f9]">
+        <div className="w-[420px] h-full absolute top-0 left-[490px]">
           <LoanDetail onHide={() => setShowDetail(false)} />
         </div>
       )}

@@ -1,9 +1,9 @@
-import { FaHome, FaMap } from 'react-icons/fa';
-import { FaHouseUser } from 'react-icons/fa6';
-import { MdChat } from 'react-icons/md';
 import { useNavigate, useLocation } from 'react-router-dom';
 import React, { useEffect } from 'react';
-import Logo from '../../assets/img/logo.png';
+import Consultant from '../../assets/img/main/consultant.jpeg';
+import Home from '../../assets/img/main/home.jpeg';
+import Map from '../../assets/img/main/map.jpeg';
+import Mypage from '../../assets/img/main/mypage.jpeg';
 import Profile from '../../assets/img/profile_ex.jpg';
 
 interface NavbarProps {
@@ -14,6 +14,7 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
   const navigate = useNavigate();
   const location = useLocation();
+
   // 선택된 매물이 있으면 자동으로 'estateList' 페이지로 이동하도록 설정
   useEffect(() => {
     if (state) {
@@ -23,92 +24,145 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
 
   return (
     <div className="space-x-16">
-      <div className="left-0 top-0 p-2 h-full absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center">
+      <div className="left-0 top-0 w-20 h-full absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center">
         <a
           href="/"
           className="mt-4 mb-10 flex flex-col items-center justify-center"
         >
-          <img className="w-10 h-10" src={Logo} alt="Logo Image" />
-          <div className="text-black text-sm font-bold font-sans tracking-tight text-center">
-            OMNM
+          <div className="flex">
+            <div className="text-hanaNavy text-sm text-center font-fontBold">
+              Map
+            </div>
+            <div className="text-hanaGreen text-sm text-center font-fontBold">
+              Hana
+            </div>
           </div>
         </a>
-        <div className="w-14 h-96 mb-32 flex flex-col items-center justify-between">
+        <div className="w-14 flex flex-col items-center space-y-10 flex-grow">
           <button
             onClick={() => navigate('/home')}
-            className="w-14 h-20 flex flex-col items-center"
+            className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${location.pathname === '/home' ? 'bg-hanaGreen shadow mb-2' : 'bg-transparent'}`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200 ${location.pathname === '/home'}`}
             >
-              <FaHome
-                className={`w-6 h-6 ${location.pathname === '/home' ? 'text-white' : 'text-black'}`}
+              <img
+                src={Home}
+                alt="Home Icon"
+                className={`h-10 transition duration-200 transform ${
+                  location.pathname === '/home'
+                    ? ''
+                    : 'grayscale hover:grayscale-0 hover:scale-105'
+                }`}
               />
-            </div>
-            <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
-              홈
+              <div
+                className={`tracking-tight text-center text-xs ${
+                  location.pathname === '/home'
+                    ? 'text-hanaGreen'
+                    : 'text-gray-300'
+                }`}
+              >
+                홈
+              </div>
             </div>
           </button>
 
           {/* 지도 버튼 */}
           <button
             onClick={() => navigate('/')}
-            className="w-14 h-20 flex flex-col items-center"
+            className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${location.pathname === '/' ? 'bg-hanaGreen shadow mb-2' : 'bg-transparent'}`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
             >
-              <FaMap
-                className={`w-6 h-6 ${location.pathname === '/' ? 'text-white' : 'text-black'}`}
+              <img
+                src={Map}
+                alt="Map Icon"
+                className={`h-10 transition duration-200 transform ${
+                  location.pathname === '/'
+                    ? ''
+                    : 'grayscale hover:grayscale-0 hover:scale-105'
+                }`}
               />
-            </div>
-            <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
-              지도
+              <div
+                className={`tracking-tight text-center text-xs ${
+                  location.pathname === '/' ? 'text-hanaGreen' : 'text-gray-300'
+                }`}
+              >
+                지도
+              </div>
             </div>
           </button>
 
           {/* 상담 버튼 */}
           <button
             onClick={() => navigate('/consulting')}
-            className="w-14 h-20 flex flex-col items-center"
+            className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${location.pathname === '/consulting' ? 'bg-hanaGreen shadow mb-2' : 'bg-transparent'}`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
             >
-              <MdChat
-                className={`w-6 h-6 ${location.pathname === '/consulting' ? 'text-white' : 'text-black'}`}
+              <img
+                src={Consultant}
+                alt="Consultant Icon"
+                className={`h-10 transition duration-200 transform ${
+                  location.pathname === '/consulting'
+                    ? ''
+                    : 'grayscale hover:grayscale-0 hover:scale-105'
+                }`}
               />
-            </div>
-            <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
-              상담
+              <div
+                className={`tracking-tight text-center text-xs ${
+                  location.pathname === '/consulting'
+                    ? 'text-hanaGreen'
+                    : 'text-gray-300'
+                }`}
+              >
+                상담
+              </div>
             </div>
           </button>
 
           {/* 마이홈 버튼 */}
           <button
             onClick={() => navigate('/my-page')}
-            className="w-14 h-20 flex flex-col items-center"
+            className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex items-center justify-center ${location.pathname === '/my-page' ? 'bg-hanaGreen shadow mb-2' : 'bg-transparent'}`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
             >
-              <FaHouseUser
-                className={`w-6 h-6 ${location.pathname === '/my-page' ? 'text-white' : 'text-black'}`}
+              <img
+                src={Mypage}
+                alt="Mypage Icon"
+                className={`h-10 transition duration-200 transform ${
+                  location.pathname === '/my-page'
+                    ? ''
+                    : 'grayscale hover:grayscale-0 hover:scale-105'
+                }`}
               />
-            </div>
-            <div className="text-black text-base font-bold font-['Noto Sans KR'] tracking-tight text-center">
-              마이홈
+              <div
+                className={`tracking-tight text-center text-xs ${
+                  location.pathname === '/my-page'
+                    ? 'text-hanaGreen'
+                    : 'text-gray-300'
+                }`}
+              >
+                마이홈
+              </div>
             </div>
           </button>
         </div>
-        <img
-          className="w-12 h-12 rounded-full"
-          src={Profile}
-          alt="Profile Image"
-        />
+
+        {/* 프로필 이미지를 맨 아래로 배치 */}
+        <div className="mb-4">
+          <img
+            className="w-12 h-12 rounded-full"
+            src={Profile}
+            alt="Profile Image"
+          />
+        </div>
       </div>
       <div>{children}</div>
-      {/*  <RealEstateLayout onBackClick={() => handleSetActivePage('map')} />*/}
     </div>
   );
 };

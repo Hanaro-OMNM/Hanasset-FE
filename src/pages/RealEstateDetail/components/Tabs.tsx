@@ -20,8 +20,8 @@ const Tabs: React.FC<TabsProps> = ({ tabs, onTabClick }) => {
             onClick={() => onTabClick(index)}
             className={`px-4 py-2 rounded-full text-xs font-semibold transition-colors duration-300 ${
               tab.isActive
-                ? 'bg-[#008485] text-white'
-                : 'bg-transparent text-gray-800'
+                ? 'bg-hanaColor2 text-white'
+                : 'bg-transparent text-gray-400  hover:text-gray-800'
             }`}
           >
             {tab.label}

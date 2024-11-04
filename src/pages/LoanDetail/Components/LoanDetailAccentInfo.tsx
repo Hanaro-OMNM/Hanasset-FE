@@ -14,7 +14,7 @@ interface ContentProps {
 
 const Content: React.FC<ContentProps> = ({ content }) => {
   return (
-    <h2 className="h-10 text-hanaGreen text-2xl font-semibold">{content}</h2>
+    <h2 className="h-10 text-hanaColor2 text-2xl font-semibold">{content}</h2>
   );
 };
 

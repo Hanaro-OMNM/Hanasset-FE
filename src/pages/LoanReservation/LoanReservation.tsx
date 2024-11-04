@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import LoanReservationIMG from '../../assets/img/LoanReservation.jpg';
 import Button from '../../components/atoms/Button';
+import CommonBackground from '../../components/atoms/CommonBackground';
 import CustomSelect from '../../components/atoms/CustomSelect';
 
 export default function LoanReservation() {
@@ -44,68 +46,76 @@ export default function LoanReservation() {
   };
 
   return (
-    <div className="w-430">
-      <div className="top-0 absolute pl-2">
-        <div className="w-430 h-svh backdrop-blur-[10px] bg-white/75 overflow-y-auto px-5 py-6 flex flex-col items-center ">
-          <h1 className="text-xl font-bold mb-4 text-hanaBlack80">
-            실시간 채팅상담을 통해 편리한 대출 상담을 받아보세요!
-          </h1>
-          <form>
-            <div className="mb-10">
-              <div className="mb-4">
-                <span
-                  className="text-sm font-medium text-gray-700"
-                  onClick={handlePropChange}
-                >
-                  선택 부동산 매물
-                </span>
-                <div className="mt-3 flex items-center full h-11 appearance-none rounded-lg shadow-md bg-white py-1 px-3 text-md text-hanaBlack80 focus:outline-none focus:border-hanaSilver60">
-                  <span>{selectedProp}</span>
+    <div className="w-[500px]">
+      <div className=" top-0 absolute pl-4 animate-slideInRight">
+        <div className="p-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/75 scrollbar-hide">
+          <div className="text-2xl font-fontMedium mb-4 text-hanaBlack">
+            실시간 채팅상담을 통해
+          </div>
+          <div className="text-2xl font-fontMedium mb-4 text-hanaBlack">
+            편리한 대출 상담을 받아보세요!
+          </div>
+          <CommonBackground className="p-6">
+            <form>
+              <div>
+                <img src={LoanReservationIMG}></img>
+              </div>
+              <div className="mb-10">
+                <div className="mb-4">
+                  <span
+                    className="text-sm font-medium text-gray-700"
+                    onClick={handlePropChange}
+                  >
+                    선택 부동산 매물
+                  </span>
+                  <div className="mt-3 flex items-center full h-11 appearance-none rounded-lg shadow-md bg-white py-1 px-3 text-md text-hanaBlack80 focus:outline-none focus:border-hanaSilver60">
+                    <span>{selectedProp}</span>
+                  </div>
+                </div>
+                {/* 예약 날짜 선택 */}
+                <div className="mb-4">
+                  <CustomSelect
+                    label="예약 날짜"
+                    description=""
+                    options={dateOptions}
+                    onChange={handleDateChange}
+                  />
+                </div>
+
+                {/* 예약 시간 선택 */}
+                <div className="mb-4">
+                  <CustomSelect
+                    label="예약 시간"
+                    description=""
+                    options={timeOptions}
+                    onChange={handleTimeChange}
+                  />
                 </div>
               </div>
-              {/* 예약 날짜 선택 */}
-              <div className="mb-4">
-                <CustomSelect
-                  label="예약 날짜"
-                  description=""
-                  options={dateOptions}
-                  onChange={handleDateChange}
-                />
+
+              {/* 이용 안내 */}
+              <div className="w-full text-xs text-hanaBlack60 bg-white flex flex-col p-3 rounded-md mb-10">
+                <ul className="list-disc pl-5">
+                  <li>
+                    선택 가능한 상담은 신청 당일부터 10일 이내입니다. (영업일
+                    기준)
+                  </li>
+                  <li>
+                    30분 단위로 신청 가능하며, 신청한 시간은 기본적으로
+                    확정됩니다.
+                  </li>
+                  <li>예약이 마감된 날짜 및 시간은 선택할 수 없습니다.</li>
+                  <li>채팅예약 당일에는 예약건을 취소할 수 없습니다.</li>
+                  <li>신중히 상담 예약을 진행해주시기 바랍니다.</li>
+                </ul>
               </div>
 
-              {/* 예약 시간 선택 */}
-              <div className="mb-4">
-                <CustomSelect
-                  label="예약 시간"
-                  description=""
-                  options={timeOptions}
-                  onChange={handleTimeChange}
-                />
-              </div>
-            </div>
-
-            {/* 이용 안내 */}
-            <div className="w-full text-xs text-hanaBlack60 bg-white flex flex-col p-3 rounded-md mb-10">
-              <ul className="list-disc pl-5">
-                <li>
-                  선택 가능한 상담은 신청 당일부터 10일 이내입니다. (영업일
-                  기준)
-                </li>
-                <li>
-                  30분 단위로 신청 가능하며, 신청한 시간은 기본적으로
-                  확정됩니다.
-                </li>
-                <li>예약이 마감된 날짜 및 시간은 선택할 수 없습니다.</li>
-                <li>채팅예약 당일에는 예약건을 취소할 수 없습니다.</li>
-                <li>신중히 상담 예약을 진행해주시기 바랍니다. </li>
-              </ul>
-            </div>
-
-            <Button
-              onClick={() => alert('예약되었습니다.')}
-              text="실시간 채팅 상담 예약하기"
-            />
-          </form>
+              <Button
+                onClick={() => alert('예약되었습니다.')}
+                text="실시간 채팅 상담 예약하기"
+              />
+            </form>
+          </CommonBackground>
         </div>
       </div>
     </div>

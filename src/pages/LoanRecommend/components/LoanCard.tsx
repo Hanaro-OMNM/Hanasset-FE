@@ -10,8 +10,8 @@ const LoanName: React.FC<LoanNameProps> = ({ isBest, name }) => {
   return (
     <h6
       className={clsx(
-        isBest && 'mb-1 text-hanaBlack20 text-lg font-semibold text-left',
-        !isBest && 'mb-1 text-hanaBlack80 text-lg font-semibold text-left'
+        isBest && 'mb-1 text-hanaBlack20 text-lg  text-left',
+        !isBest && 'mb-1 text-hanaBlack80 text-lg text-left'
       )}
     >
       {name}
@@ -102,8 +102,9 @@ const LoanCard: React.FC<LoanCardProps> = ({
       <button className="mb-3 w-full" onClick={onLoanDetailButtonClick}>
         <div
           className={clsx(
-            isBest && 'bg-hanaGreen80 p-4 rounded-lg shadow',
-            !isBest && 'bg-hanaSilver20 p-4 rounded-lg shadow'
+            'p-4 rounded-lg shadow transition-transform duration-100',
+            isBest ? 'bg-hanaColor2' : 'bg-hanaSilver20',
+            'hover:shadow-lg hover:scale-105'
           )}
         >
           <div className="flex-col">

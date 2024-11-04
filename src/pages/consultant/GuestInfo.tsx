@@ -13,7 +13,7 @@ import GuestDetailInfo from './GuestDetailInfo';
 import SemiTitle from './SemiTitle';
 
 export default function GuestInfo() {
-  const [loanIndex, setLoanIndex] = useState(2);
+  const [loanIndex, setLoanIndex] = useState(0);
 
   const itemsPerPage = 1;
   const slides: RealEstate[][] = Array.from(

@@ -39,7 +39,7 @@ const Consulting: React.FC = () => {
 
   return (
     <div className="w-[500px]">
-      <div className=" top-0 absolute pl-4 animate-slideInRight">
+      <div className="top-0 absolute pl-4 animate-slideInRight">
         <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px]">
           <MobileHeader
             title="상담현황 확인하기"
@@ -48,7 +48,7 @@ const Consulting: React.FC = () => {
 
           <div className="mb-8">
             <div className="flex items-center">
-              <span className=" text-hanaGreen mr-2">
+              <span className="text-hanaGreen mr-2">
                 <FaRegCalendarCheck />
               </span>
               <h2 className="text-lg font-semibold text-hanaGreen">
@@ -60,7 +60,7 @@ const Consulting: React.FC = () => {
             </p>
             <CommonBackground className="p-1">
               <div
-                className=" p-4 rounded-lg flex items-center justify-between cursor-pointer hover:transition-transform transform hover:scale-105"
+                className="p-4 rounded-lg flex items-center justify-between cursor-pointer hover:transition-transform transform hover:scale-105"
                 onClick={() => navigate('/live-chat')}
               >
                 <UpcomingConsultingComponent

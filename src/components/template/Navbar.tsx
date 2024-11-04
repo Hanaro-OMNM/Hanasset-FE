@@ -29,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
           href="/"
           className="mt-4 mb-10 flex flex-col items-center justify-center"
         >
-          <div className="flex ">
+          <div className="flex">
             <div className="text-hanaNavy text-sm text-center font-fontBold">
               Map
             </div>

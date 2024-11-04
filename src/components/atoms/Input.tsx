@@ -35,7 +35,7 @@ const Input: React.FC<InputProps> = (props) => {
   const handleBlur = () => setIsFocused(false);
 
   return (
-    <div className={clsx('w-full max-w-md ', props.className)}>
+    <div className={clsx('w-full max-w-md', props.className)}>
       {props.label && (
         <label
           className={clsx('text-xs font-medium', {
@@ -64,7 +64,7 @@ const Input: React.FC<InputProps> = (props) => {
           onChange={props.onChange}
           placeholder={props.isAmount ? '0' : props.placeholder}
           className={clsx(
-            'flex-grow  rounded-xl p-2 focus:outline-none pr-10 text-left border-2  bg-white text-hanaBlack80',
+            'flex-grow rounded-xl p-2 focus:outline-none pr-10 text-left border-2 bg-white text-hanaBlack80',
             {
               ' !border-opacity-60 !border-red-400': props.error, // 포커스 시 빨간 테두리
               ' !border-opacity-50 !border-hanaGreen40 ': !props.error, // 포커스 시 기본 테두리
@@ -82,7 +82,7 @@ const Input: React.FC<InputProps> = (props) => {
               'text-gray-500': !props.error, // 에러가 아닐 때 기본 색상
             })}
           >
-            만원
+            만 원
           </span>
         )}
       </div>

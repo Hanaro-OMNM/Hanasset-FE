@@ -83,7 +83,7 @@ export default function MyPage() {
                   <RegisterButtonGroup
                     onRegister={handleRegister}
                     job={'중소,중견기업 직장인'}
-                    income={'6000만원'}
+                    income={'6000만 원'}
                     vehicleOwnership={''}
                     propertyOwnership={''}
                     confirmationDate={''}

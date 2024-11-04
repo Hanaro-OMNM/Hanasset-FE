@@ -66,7 +66,7 @@ export default function ChatReservation() {
   };
 
   const onBack = (): void => {
-    window.history.back(); // 브라우저의 이전 페이지로 이동
+    window.history.back();
   };
 
   return (
@@ -78,7 +78,7 @@ export default function ChatReservation() {
           실시간 채팅상담을 통해
           <br className="mb-4" /> 편리한 대출 상담을 받아보세요!
         </div>
-        <img src={reserve_hand} alt="" className="" />
+        <img src={reserve_hand} alt="reservation_img" />
         <CommonBackground className="p-5 min-h-screen h-auto">
           <div className="flex flex-col my-5">
             <h2 className="text-lg font-semibold mb-4">선택 부동산 매물</h2>

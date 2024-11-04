@@ -128,7 +128,7 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
                     className="w-full items-start rounded-lg hover:transition-transform transform hover:scale-105"
                   >
                     <label>
-                      <div className="content-center flex p-5 ">
+                      <div className="content-center flex p-5">
                         <div className="content-center pl-5">
                           <Checkbox
                             aria-label={apartment.name}

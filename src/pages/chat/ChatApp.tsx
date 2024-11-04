@@ -83,8 +83,8 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
 
   return (
     <div>
-      <div className="">
-        <div className=" top-0 absolute pl-4 animate-fadeInRight">
+      <div>
+        <div className="top-0 absolute pl-4 animate-fadeInRight">
           {accessor === 'guest' ? (
             <div className="flex flex-col h-screen w-full items-center min-w-[420px]">
               <ChatHeader
@@ -114,7 +114,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                  className="flex-1 px-4 rounded-full  text-sm border-2 focus:border-hanaGreen80 focus:outline-none"
+                  className="flex-1 px-4 rounded-full text-sm border-2 focus:border-hanaGreen80 focus:outline-none"
                   placeholder="메세지를 입력해주세요..."
                 />
                 <button
@@ -151,7 +151,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                  className="flex-1 px-4 rounded-full  text-sm border-2 focus:border-hanaGreen80 focus:outline-none"
+                  className="flex-1 px-4 rounded-full text-sm border-2 focus:border-hanaGreen80 focus:outline-none"
                   placeholder="메세지를 입력해주세요..."
                 />
                 <button

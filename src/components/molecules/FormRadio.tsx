@@ -17,8 +17,8 @@ export default function FormRadio<T>({
   display,
 }: FormRadioProps<T>) {
   return (
-    <div className="w-full p-4 ">
-      <div className="mx-auto w-full max-w-md ">
+    <div className="w-full p-4">
+      <div className="mx-auto w-full max-w-md">
         <h2 className="flex justify-center text-xl font-extrabold my-7">
           {label}
         </h2>
@@ -38,7 +38,7 @@ export default function FormRadio<T>({
                 ${checked ? 'text-hanaBlack bg-hanaGreen20 border-hanaGreen60' : 'text-hanaBlack40 border-gray-100/5'}` // checked 여부에 따라 배경 색상 변경
               }
             >
-              <div className="flex w-full items-center justify-between  ">
+              <div className="flex w-full items-center justify-between">
                 <div>{display(item)}</div>
               </div>
               <FaRegCheckCircle className="size-6 fill-hanaGreen60 opacity-0 transition group-data-[checked]:opacity-100" />

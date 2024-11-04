@@ -51,6 +51,9 @@ export default {
       screens: {
         xs: '420px',
       },
+      width: {
+        420: '420px',
+      },
       fontFamily: {
         fontBold: ['FontBold', 'sans-serif'],
         fontCm: ['FontCM', 'sans-serif'],

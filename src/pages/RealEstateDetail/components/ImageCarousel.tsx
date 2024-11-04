@@ -22,7 +22,10 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
   };
   return (
     <div className="relative w-full h-64 overflow-hidden">
-      <button className="absolute top-30 text-white z-30" onClick={onBackClick}>
+      <button
+        className="absolute top-30 text-white z-30 mt-3 ml-2"
+        onClick={onBackClick}
+      >
         <FiChevronLeft className="w-[30px] h-[30px] mr-4" />
       </button>
       <Slider {...settings}>

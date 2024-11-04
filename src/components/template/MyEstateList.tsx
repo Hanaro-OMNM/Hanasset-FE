@@ -1,4 +1,3 @@
-import { IoChevronBack } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Button from '../atoms/Button';

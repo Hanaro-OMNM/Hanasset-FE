@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import React from 'react';
 import CommonBackground from '../components/atoms/CommonBackground';
+import MobileHeader from '../components/atoms/MobileHeader';
 import SemiTitle from '../components/atoms/SemiTitle';
 import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting';
 
@@ -40,9 +41,10 @@ const Consulting: React.FC = () => {
     <div className="w-[500px]">
       <div className=" top-0 absolute pl-4 animate-slideInRight">
         <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px]">
-          <h1 className="text-xl font-bold flex justify-center p-10">
-            상담현황 확인하기
-          </h1>
+          <MobileHeader
+            title="상담현황 확인하기"
+            onBack={() => navigate('/')}
+          />
 
           <div className=" mb-8">
             <div className="flex items-center">

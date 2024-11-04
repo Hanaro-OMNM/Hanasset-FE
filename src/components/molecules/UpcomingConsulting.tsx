@@ -33,7 +33,7 @@ const UpcomingConsultingComponent = ({ upcomingConsulting }: Props) => {
         </p>
         <p className="text-sm text-gray-600">
           {isConsultingAvailable
-            ? upcomingConsulting.date
+            ? `상담 일시: ${upcomingConsulting.date}`
             : '아직 예정된 상담이 없네요!'}
         </p>
       </div>

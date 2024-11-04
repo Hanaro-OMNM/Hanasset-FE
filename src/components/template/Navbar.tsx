@@ -34,7 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               Map
             </div>
             <div className="text-hanaGreen text-sm text-center font-fontBold">
-              Hana
+              HANA
             </div>
           </div>
         </a>

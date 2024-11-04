@@ -1,9 +1,9 @@
-import { IoChevronBack } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Button from '../atoms/Button';
 import Checkbox from '../atoms/Checkbox';
 import CommonBackground from '../atoms/CommonBackground';
+import MobileHeader from '../atoms/MobileHeader';
 import Swiper from '../atoms/Swiper';
 
 interface MyEstateListProps {
@@ -115,15 +115,8 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
 
   return (
     <div className="animate-fadeInRight">
-      <div className="flex h-12 mb-2 pl-1 gap-2 items-center">
-        <button className="items-center" onClick={onBack}>
-          <IoChevronBack className="text-hanaBlack80 text-xl" />
-        </button>
-        <h1 className="text-hanaBlack80 text-lg font-fontMedium">
-          내 관심 매물
-        </h1>
-      </div>
-      <div className="p-6">
+      <div className="px-6">
+        <MobileHeader title="내 관심매물" onBack={onBack} />
         <CommonBackground>
           <Swiper
             items={slides}
@@ -136,7 +129,7 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
                   >
                     <label>
                       <div className="content-center flex p-5">
-                        <div className="content-center">
+                        <div className="content-center pl-5">
                           <Checkbox
                             aria-label={apartment.name}
                             checked={checkedItems[apartment.id]}
@@ -168,7 +161,7 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
           />
           <div className="p-2">
             <Button
-              onClick={() => navigate('/loan-reservation')}
+              onClick={() => navigate('/chat-reservation')}
               text="상담 예약하기"
             />
           </div>

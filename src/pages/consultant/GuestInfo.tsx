@@ -22,16 +22,6 @@ export default function GuestInfo() {
     setShowDetail(true);
   };
 
-  const itemsPerPage = 1;
-  const slides: RealEstate[][] = Array.from(
-    { length: Math.ceil(dummyRealEstateList.length / itemsPerPage) },
-    (_, index) =>
-      dummyRealEstateList.slice(
-        index * itemsPerPage,
-        (index + 1) * itemsPerPage
-      )
-  );
-
   const addOnClick = () => {
     setConsultingDataShowCount(
       (consultingDataShowCount) => consultingDataShowCount + 3
@@ -48,13 +38,18 @@ export default function GuestInfo() {
       {showDetail ? (
         <LoanDetail onHide={() => setShowDetail(false)} />
       ) : (
-        <div className="max-w-[500px] bg-gray-100 p-4 overflow-hidden">
+        <div className="max-w-[500px] bg-gray-100 p-6 overflow-hidden">
           <div className="h-full overflow-y-auto max-h-screen scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400">
             <div>
               <SemiTitle title="손님 정보" />
               <GuestDetailInfo
                 name={dummyGuest.name}
                 age={dummyGuest.age}
+                job={dummyGuest.job}
+                income={dummyGuest.income}
+                family={dummyGuest.family}
+                home={dummyGuest.home}
+                loan={dummyGuest.loan}
                 dsr={dummyGuest.stressDsr}
               />
             </div>
@@ -64,30 +59,24 @@ export default function GuestInfo() {
               <SemiTitle title="매물 정보" />
               <div className="h-32">
                 <Swiper
-                  items={slides}
-                  renderItem={(pageRealEstateList) => (
+                  items={dummyRealEstateList}
+                  renderItem={(realEstate) => (
                     <div className="flex flex-col gap-4 h-32 mr-1 ml-1">
-                      {pageRealEstateList.map((realEstate, index) => (
-                        <div>
-                          <button
-                            key={index}
-                            className="w-full transition-transform transform hover:scale-105"
-                            onClick={() => swiperClick(index)}
-                          >
-                            <CommonBackground className="flex items-center p-4 h-20 rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
-                              <PiBuildingApartment className="text-2xl text-hanaGreen" />
-                              <div className="ml-4 text-hanaBlack font-medium text-left">
-                                {realEstate.name} ({realEstate.rentType})
-                                <div className="text-sm text-hanaBlack80">
-                                  {realEstate.location}, {realEstate.size}
-                                  <br />
-                                  {realEstate.address}
-                                </div>
+                      <div>
+                        <button className="w-full transition-transform transform hover:scale-105">
+                          <CommonBackground className="flex items-center p-4 h-20 rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
+                            <PiBuildingApartment className="text-2xl text-hanaGreen" />
+                            <div className="ml-4 text-hanaBlack font-medium text-left">
+                              {realEstate.name} ({realEstate.rentType})
+                              <div className="text-sm text-hanaBlack80">
+                                {realEstate.location}, {realEstate.size}
+                                <br />
+                                {realEstate.address}
                               </div>
-                            </CommonBackground>
-                          </button>
-                        </div>
-                      ))}
+                            </div>
+                          </CommonBackground>
+                        </button>
+                      </div>
                     </div>
                   )}
                   spaceBetween={30}

@@ -63,7 +63,10 @@ export default function GuestInfo() {
                   renderItem={(realEstate) => (
                     <div className="flex flex-col gap-4 h-32 mr-1 ml-1">
                       <div>
-                        <button className="w-full transition-transform transform hover:scale-105">
+                        <button
+                          onClick={() => swiperClick(realEstate.id)}
+                          className="w-full transition-transform transform hover:scale-105"
+                        >
                           <CommonBackground className="flex items-center p-4 h-20 rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
                             <PiBuildingApartment className="text-2xl text-hanaGreen" />
                             <div className="ml-4 text-hanaBlack font-medium text-left">

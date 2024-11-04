@@ -38,6 +38,7 @@ export interface LoanDetail {
 }
 
 export interface RealEstate {
+  id: number;
   name: string;
   rentType: '전세' | '월세';
   location: string;
@@ -137,6 +138,7 @@ export const dummyConsultationData = [
 
 export const dummyRealEstateList: RealEstate[] = [
   {
+    id: 0,
     name: '서초푸르지오(써밋)',
     rentType: '전세',
     location: '103동 1201호',
@@ -144,6 +146,7 @@ export const dummyRealEstateList: RealEstate[] = [
     address: '서울특별시 성동구 왕십리로 16',
   },
   {
+    id: 1,
     name: '트리마제',
     rentType: '월세',
     location: '104동 1502호',
@@ -151,6 +154,7 @@ export const dummyRealEstateList: RealEstate[] = [
     address: '서울특별시 성동구 왕십리로 16',
   },
   {
+    id: 2,
     name: '올림픽파크포레온',
     rentType: '전세',
     location: '105동 1803호',

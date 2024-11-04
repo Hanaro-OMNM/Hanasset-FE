@@ -13,6 +13,7 @@ import SignUp from './pages/SignUp.tsx';
 import ChatApp from './pages/chat/ChatApp.tsx';
 import Consultant from './pages/consultant/Consultant.tsx';
 import ChatReservation from './pages/reservation/ChatReservation.tsx';
+import SearchResult from './pages/search/SearchResult.tsx';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/consultant" element={<Consultant />} />
             <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
+            <Route path="/search-result" element={<SearchResult />} />
           </Routes>
         </Layout>
       </NavermapsProvider>

@@ -16,7 +16,7 @@ interface Asset {
   name: string;
 }
 
-export default function MyPageLayout() {
+export default function MyPage() {
   const [currentPage, setCurrentPage] = useState<
     | 'home'
     | 'family'
@@ -35,7 +35,7 @@ export default function MyPageLayout() {
     setCurrentPage('EstateList');
   };
   const profile = {
-    name: '김손님',
+    name: '김하나',
   };
 
   const assets: Asset[] = [
@@ -99,7 +99,7 @@ export default function MyPageLayout() {
                     items={interestAreas}
                     pagination={{ clickable: true }}
                     renderItem={(item) => (
-                      <CommonBackground className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
+                      <CommonBackground className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md">
                         {item}
                       </CommonBackground>
                     )}
@@ -118,7 +118,7 @@ export default function MyPageLayout() {
                     <div className="flex flex-col gap-4 mr-1 ml-1">
                       {assets.slice(0, 3).map((asset, index) => (
                         <div key={index} className="w-full">
-                          <div className="">
+                          <div>
                             <div className="w-full hover:transition-transform transform hover:scale-105 flex h-full">
                               <div className="text-gray-400 font-fontRegular ml-5 w-full text-center">
                                 {asset.name}

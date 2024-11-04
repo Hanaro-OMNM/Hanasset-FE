@@ -30,7 +30,7 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
   // 텍스트 길이가 9자를 초과하면 말줄임표를 추가 (텍스트 태그별로 길이 재정의해야 함)
   return (
     <button className="flex relative" onClick={onClick}>
-      <div className="pl-2 flex hover:transition-transform transform py-3 hover:bg-white hover:text-gray-600">
+      <div className="pl-2 flex hover:transition-transform transform py-4 hover:bg-white hover:text-gray-600">
         <img
           className="w-[100px] h-[100px] object-cover flex-shrink-0 rounded-3xl"
           src={imageUrl}

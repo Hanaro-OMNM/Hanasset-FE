@@ -120,7 +120,7 @@ export default function MyPage() {
                         <div key={index} className="w-full">
                           <div>
                             <div className="w-full hover:transition-transform transform hover:scale-105 flex h-full">
-                              <div className="text-gray-400 font-fontRegular ml-5 w-full text-center">
+                              <div className="text-gray-400 font-fontRegular ml-5">
                                 {asset.name}
                               </div>
                             </div>

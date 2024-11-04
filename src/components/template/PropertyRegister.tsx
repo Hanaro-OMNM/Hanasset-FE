@@ -1,5 +1,5 @@
 import { IoChevronBack } from 'react-icons/io5';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ApartListForm from '../../pages/property/form/ApartListForm';
 import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
 import JobForm from '../../pages/property/form/JobForm';
@@ -113,14 +113,15 @@ export default function PropertyForm({
 
   return (
     <div className="p-6 animate-slideInRight">
-      <div className="mt-10 p-6">
+      <div className="flex h-12 mb-4 pl-1 gap-2 items-center">
         <button className="items-center" onClick={onBack}>
           <IoChevronBack className="text-hanaBlack80 text-xl" />
         </button>
+        <h1 className="text-hanaBlack80 text-lg font-semibold ">마이 페이지</h1>
       </div>
-      <CommonBackground className="mb-10">
+      <CommonBackground className="my-10">
         {forms[currentStep].component}
-        <div className="pl-5 pr-5 pb-5">
+        <div className="px-5 pb-5">
           <Button text="저장" onClick={handleNextStep} version="ver1" />
         </div>
       </CommonBackground>

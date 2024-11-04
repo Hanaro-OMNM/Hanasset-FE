@@ -55,7 +55,6 @@ export default function LoanReservation() {
           <div className="text-2xl font-fontMedium mb-4 text-hanaBlack">
             편리한 대출 상담을 받아보세요!
           </div>
-
           <CommonBackground className="p-6">
             <form>
               <div>
@@ -95,7 +94,7 @@ export default function LoanReservation() {
               </div>
 
               {/* 이용 안내 */}
-              <div className="w-full text-xs text-hanaBlack60 bg-white flex flex-col p-3 rounded-md mb-3">
+              <div className="w-full text-xs text-hanaBlack60 bg-white flex flex-col p-3 rounded-md mb-10">
                 <ul className="list-disc pl-5">
                   <li>
                     선택 가능한 상담은 신청 당일부터 10일 이내입니다. (영업일
@@ -107,7 +106,7 @@ export default function LoanReservation() {
                   </li>
                   <li>예약이 마감된 날짜 및 시간은 선택할 수 없습니다.</li>
                   <li>채팅예약 당일에는 예약건을 취소할 수 없습니다.</li>
-                  <li>신중히 상담 예약을 진행해주시기 바랍니다. </li>
+                  <li>신중히 상담 예약을 진행해주시기 바랍니다.</li>
                 </ul>
               </div>
 

@@ -74,7 +74,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
         </div>
         <div
           ref={messageRef} // useRef로 요소를 참조합니다.
-          className={`p-3 max-w-64 rounded-lg text-xs ${
+          className={`p-3 max-w-64 rounded-lg shadow-sm text-xs ${
             isSender ? 'bg-hanaGreen80 text-white' : 'bg-hanaGreen40'
           }`}
           style={{

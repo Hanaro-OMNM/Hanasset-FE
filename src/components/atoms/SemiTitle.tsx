@@ -5,9 +5,5 @@ interface TextTitleProps {
 }
 
 export default function SemiTitle({ children }: TextTitleProps) {
-  return (
-    <div className="text-base font-semibold text-hanaGreen px-2 border-l-4 border-hanaGreen60">
-      {children}
-    </div>
-  );
+  return <div className="font-fontBold text-fontNavy text-lg">{children}</div>;
 }

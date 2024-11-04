@@ -116,12 +116,10 @@ export default function PropertyForm({
       <MobileHeader title="자산 수정하기" onBack={onBack} />
       <CommonBackground className="mt-5 mb-10 ">
         {forms[currentStep].component}
+        <div className="px-5 pb-5">
+          <Button text="저장" onClick={handleNextStep} version="ver1" />
+        </div>
       </CommonBackground>
-      <Button
-        text="저장 후 메인화면으로 돌아가기"
-        onClick={handleNextStep}
-        version="ver2"
-      />
     </div>
   );
 }

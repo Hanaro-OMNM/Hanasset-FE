@@ -31,3 +31,36 @@
 .slide-in-right {
   animation: slide-in-right 0.5s ease-out forwards; /* 시간을 늘리고 ease-out 적용 */
 }
+@font-face {
+  font-family: 'FontBold';
+  src: url('./fonts/Hana2-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'FontCM';
+  src: url('./fonts/Hana2-CM.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'FontHeavy';
+  src: url('./fonts/Hana2-Heavy.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'FontLight';
+  src: url('./fonts/Hana2-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'FontMedium';
+  src: url('./fonts/Hana2-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'FontRegular';
+  src: url('./fonts/Hana2-Regular.ttf') format('truetype');
+}
+
+body {
+  font-family: 'FontLight';
+}

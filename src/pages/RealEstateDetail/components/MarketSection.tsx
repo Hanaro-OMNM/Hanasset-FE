@@ -28,8 +28,8 @@ const MarketSection: React.FC<MarketSectionProps> = ({
   return (
     <div className="bg-white rounded-lg shadow p-6 mt-10">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold">시세</h2>
-        <p className="text-sm text-gray-500">{sizeInfo} (평형)</p>
+        <div className="text-2xl font-bold">시세</div>
+        <p className="text-xs text-gray-500">{sizeInfo} (평형)</p>
       </div>
       <div className="flex border-t">
         <MarketInfoCard {...jeonseMarketInfoCardProps} />

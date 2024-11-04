@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
 import Consulting from './pages/Consulting.tsx';
-import LoanDetail from './pages/LoanDetail.tsx';
 import LoanRecommend from './pages/LoanRecommned.tsx';
 import Login from './pages/Login.tsx';
 import Main from './pages/Main.tsx';
@@ -13,9 +12,7 @@ import RealEstateList from './pages/RealEstateList/RealEstateList.tsx';
 import SignUp from './pages/SignUp.tsx';
 import ChatApp from './pages/chat/ChatApp.tsx';
 import Consultant from './pages/consultant/Consultant.tsx';
-import GuestInfo from './pages/consultant/GuestInfo.tsx';
-import GuestWaiting from './pages/consultant/GuestWaiting.tsx';
-import ChatReservation from './pages/reeservation/ChatReservation.tsx';
+import ChatReservation from './pages/reservation/ChatReservation.tsx';
 
 function App() {
   return (
@@ -34,11 +31,6 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/consultant" element={<Consultant />} />
-            <Route path="/consultant/guest-info" element={<GuestInfo />} />
-            <Route
-              path="/consultant/guest-waiting"
-              element={<GuestWaiting />}
-            />
             <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
           </Routes>
         </Layout>

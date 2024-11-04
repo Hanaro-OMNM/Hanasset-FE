@@ -35,10 +35,11 @@ const LoanDetailDisclosure: React.FC<LoanDetailDisclosureProps> = ({
   return (
     <div className="m-4 p-6 rounded-lg bg-hanaSilver20 text-hanaSilver">
       <Disclosure>
-        <DisclosureButton className={'flex w-full justify-between '}>
-          <Title title={title} /> <FaChevronDown className="text-hanaBlack80" />
+        <DisclosureButton className="flex w-full justify-between transition duration-150 transform hover:scale-105 ">
+          <Title title={title} />
+          <FaChevronDown className="text-hanaSilver80 " />
         </DisclosureButton>
-        <DisclosurePanel className={'pt-2'}>
+        <DisclosurePanel className={'pt-2 text-xs animate-fadeInUp'}>
           <Content content={content} />
         </DisclosurePanel>
       </Disclosure>

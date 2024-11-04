@@ -1,9 +1,11 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import clsx from 'clsx';
 import { useState } from 'react';
+import CommonBackground from '../../../components/atoms/CommonBackground';
 import LoanCard from './LoanCard';
+import LoanFoundMessage from './LoanFoundMessage';
 
-// Dummy Datas
+// Dummy Data
 interface Loan {
   name: string;
   rate: number;
@@ -48,99 +50,115 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
     setShowCount((showCount) => showCount + 3);
   };
 
-  // 대출 리스트 전처리
   hanaLoanList = loanListPreProcessing(hanaLoanList);
   beotimmogLoanList = loanListPreProcessing(beotimmogLoanList);
 
+  const isHanaLoanFound = hanaLoanList.length > 0;
+  const isBeotimmogLoanFound = beotimmogLoanList.length > 0;
+
   return (
-    <TabGroup>
-      <TabList className="flex gap-3 justify-center">
-        {/* 대출 종류 선택 */}
-        <Tab className="ml-4 w-40 h-12 bg-hanaSilver40 text-hanaBlack80 font-semibold rounded-2xl">
-          {({ selected }) => (
-            <button
-              className={clsx(
-                selected &&
-                  'w-40 h-12 bg-hanaGreen text-hanaSilver20 text-center rounded-2xl'
+    <div className="w-full p-6">
+      <CommonBackground>
+        <TabGroup>
+          <TabList className="flex pl-5">
+            {/* 대출 종류 선택 */}
+            <Tab className="h-12 w-32 bg-white text-hanaBlack80 font-fontMedium focus:outline-none">
+              {({ selected }) => (
+                <button
+                  className={clsx(
+                    'w-full h-full transition-colors duration-200',
+                    selected
+                      ? 'text-hanaColor2 border-b-2 border-hanaColor2'
+                      : 'text-hanaSilver60 hover:text-hanaSilver60 hover:border-b-2 hover:border-hanaSilver60'
+                  )}
+                >
+                  하나은행 대출
+                </button>
               )}
-            >
-              하나은행 대출
-            </button>
-          )}
-        </Tab>
-        <Tab className="mr-4 w-40 h-12 bg-hanaSilver40 text-hanaBlack80 font-semibold rounded-2xl">
-          {({ selected }) => (
-            <button
-              className={clsx(
-                selected &&
-                  'w-40 h-12 bg-hanaGreen text-hanaSilver20 rounded-2xl'
+            </Tab>
+            <Tab className="h-12 w-32 bg-white text-hanaBlack80 font-fontMedium focus:outline-none">
+              {({ selected }) => (
+                <button
+                  className={clsx(
+                    'w-full h-full transition-colors duration-200',
+                    selected
+                      ? 'text-hanaColor2 border-b-2 border-hanaColor2'
+                      : 'text-hanaSilver60 hover:text-hanaSilver60 hover:border-b-2 hover:border-hanaSilver60'
+                  )}
+                >
+                  버팀목 대출
+                </button>
               )}
-            >
-              버팀목 대출
-            </button>
-          )}
-        </Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>
-          {/* 하나은행 대출 리스트 */}
-          <div className="mt-4 px-4 w-full flex-col">
-            {hanaLoanList.map((loan: Loan, index: number) => (
-              <LoanCard
-                key={index}
-                isBest={index === 0 ? true : false}
-                isShow={index < showCount ? true : false}
-                name={loan.name}
-                rate={loan.rate}
-                limit={loan.limit}
-                newDsr={loan.newDsr}
-                loanDetailUrl={loan.loanDetailUrl}
-                onLoanDetailButtonClick={onLoanDetailButtonClick}
-              />
-            ))}
-          </div>
-          {/* 더 보기 */}
-          <div
-            className={clsx(
-              showCount < hanaLoanList.length &&
-                'mx-4 mb-4 text-hanaBlack60 text-center',
-              showCount >= hanaLoanList.length && 'hidden'
-            )}
-          >
-            <button onClick={onClick}>더 보기</button>
-          </div>
-        </TabPanel>
-        <TabPanel>
-          {/* 버팀목 대출 리스트 */}
-          {/* 하나은행 대출 리스트 */}
-          <div className="mt-4 px-4 w-full flex-col">
-            {beotimmogLoanList.map((loan: Loan, index: number) => (
-              <LoanCard
-                key={index}
-                isBest={index === 0 ? true : false}
-                isShow={index < showCount ? true : false}
-                name={loan.name}
-                rate={loan.rate}
-                limit={loan.limit}
-                newDsr={loan.newDsr}
-                loanDetailUrl={loan.loanDetailUrl}
-                onLoanDetailButtonClick={onLoanDetailButtonClick}
-              />
-            ))}
-          </div>
-          {/* 더 보기 */}
-          <div
-            className={clsx(
-              showCount < beotimmogLoanList.length &&
-                'mx-4 mb-4 text-hanaBlack60 text-center',
-              showCount >= beotimmogLoanList.length && 'hidden'
-            )}
-          >
-            <button onClick={onClick}>더 보기</button>
-          </div>
-        </TabPanel>
-      </TabPanels>
-    </TabGroup>
+            </Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              {/* 하나은행 대출 리스트 */}
+              {isHanaLoanFound ? (
+                <div className="mt-4 px-4 w-full flex-col animate-fadeInUp">
+                  {hanaLoanList.map((loan: Loan, index: number) => (
+                    <LoanCard
+                      key={index}
+                      isBest={index === 0 ? true : false}
+                      isShow={index < showCount ? true : false}
+                      name={loan.name}
+                      rate={loan.rate}
+                      limit={loan.limit}
+                      newDsr={loan.newDsr}
+                      loanDetailUrl={loan.loanDetailUrl}
+                      onLoanDetailButtonClick={onLoanDetailButtonClick}
+                    />
+                  ))}
+                  {/* 더 보기 버튼 */}
+                  <div
+                    className={clsx(
+                      showCount < hanaLoanList.length &&
+                        'mx-4 mb-4 text-hanaBlack60 text-center',
+                      showCount >= hanaLoanList.length && 'hidden'
+                    )}
+                  >
+                    <button onClick={onClick}>더 보기</button>
+                  </div>
+                </div>
+              ) : (
+                <LoanFoundMessage isFound={false} />
+              )}
+            </TabPanel>
+            <TabPanel>
+              {/* 버팀목 대출 리스트 */}
+              {isBeotimmogLoanFound ? (
+                <div className="mt-4 px-4 w-full flex-col animate-fadeInUp">
+                  {beotimmogLoanList.map((loan: Loan, index: number) => (
+                    <LoanCard
+                      key={index}
+                      isBest={index === 0 ? true : false}
+                      isShow={index < showCount ? true : false}
+                      name={loan.name}
+                      rate={loan.rate}
+                      limit={loan.limit}
+                      newDsr={loan.newDsr}
+                      loanDetailUrl={loan.loanDetailUrl}
+                      onLoanDetailButtonClick={onLoanDetailButtonClick}
+                    />
+                  ))}
+                  <div
+                    className={clsx(
+                      showCount < beotimmogLoanList.length &&
+                        'mx-4 mb-4 text-hanaBlack60 text-center',
+                      showCount >= beotimmogLoanList.length && 'hidden'
+                    )}
+                  >
+                    <button onClick={onClick}>더 보기</button>
+                  </div>
+                </div>
+              ) : (
+                <LoanFoundMessage isFound={false} />
+              )}
+            </TabPanel>
+          </TabPanels>
+        </TabGroup>
+      </CommonBackground>
+    </div>
   );
 };
 

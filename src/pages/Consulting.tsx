@@ -4,9 +4,9 @@ import { PiPaperPlaneRightFill } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import React from 'react';
-import CommonBackground from '../components/atoms/CommonBackground.tsx';
-import SemiTitle from '../components/atoms/SemiTitle.tsx';
-import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting.tsx';
+import CommonBackground from '../components/atoms/CommonBackground';
+import SemiTitle from '../components/atoms/SemiTitle';
+import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting';
 
 type Consulting = {
   title: string;
@@ -30,16 +30,16 @@ const Consulting: React.FC = () => {
   const [isActive, setIsActive] = useState(true);
   /*
     ConsultingTabLayout이란?
-    
-    : Navbar에서 "상담" 버튼 눌렀을 때 나오는 사이드바 부분입니다. 
-    ConsultantLayout이랑 혼동 주의! 
+
+    : Navbar에서 "상담" 버튼 눌렀을 때 나오는 사이드바 부분입니다.
+    ConsultantLayout이랑 혼동 주의!
 
   */
 
   return (
     <div className="w-[500px]">
-      <div className=" top-0 absolute ">
-        <div className="w-[430px] max-w-[430px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px]">
+      <div className=" top-0 absolute pl-4 animate-slideInRight">
+        <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px]">
           <h1 className="text-xl font-bold flex justify-center p-10">
             상담현황 확인하기
           </h1>
@@ -56,21 +56,22 @@ const Consulting: React.FC = () => {
             <p className="text-xs text-hanaGreen60 mb-4">
               채팅방은 예약 시간이 되면 활성화 됩니다.
             </p>
-
-            <div
-              className="bg-white shadow-sm p-4 rounded-lg flex items-center justify-between cursor-pointer "
-              onClick={() => navigate('/live-chat')}
-            >
-              <UpcomingConsultingComponent
-                upcomingConsulting={upcomingConsulting}
-              />
-              <button
-                className={isActive ? 'text-yellow-400' : 'text-gray-400'}
+            <CommonBackground className="p-1">
+              <div
+                className=" p-4 rounded-lg flex items-center justify-between cursor-pointer hover:transition-transform transform hover:scale-105"
+                onClick={() => navigate('/live-chat')}
               >
-                <span className="sr-only">View details</span>
-                <PiPaperPlaneRightFill className="w-6 h-6" />
-              </button>
-            </div>
+                <UpcomingConsultingComponent
+                  upcomingConsulting={upcomingConsulting}
+                />
+                <button
+                  className={isActive ? 'text-yellow-400' : 'text-gray-400'}
+                >
+                  <span className="sr-only">View details</span>
+                  <PiPaperPlaneRightFill className="w-6 h-6" />
+                </button>
+              </div>
+            </CommonBackground>
           </div>
 
           <SemiTitle>지난 상담 내역</SemiTitle>

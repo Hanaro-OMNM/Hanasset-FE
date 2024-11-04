@@ -1,5 +1,5 @@
 import { Switch } from '@headlessui/react';
-import { AiOutlineCheck } from 'react-icons/ai';
+import { PiCheckCircleThin } from 'react-icons/pi';
 
 interface CheckboxProps {
   name?: string;
@@ -30,11 +30,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
         }`}
         id={name}
       >
-        <AiOutlineCheck
-          className={`w-[30px] h-[30px] ${
-            checked
-              ? 'text-hanaGreen border border-hanaGreen rounded-md'
-              : 'text-hanaSilver60 border rounded-md'
+        <PiCheckCircleThin
+          className={`w-[35px] h-[35px] ${
+            checked ? 'text-hanaGreen ' : 'text-hanaSilver60 '
           }`}
         />
       </Switch>

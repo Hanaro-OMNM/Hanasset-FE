@@ -43,7 +43,7 @@ export default function MapLayout({ children }: LayoutProps) {
 
   const [zoom, setZoom] = useState(13);
   const [center, setCenter] = useState(
-    new naverMaps.LatLng(37.5483852, 127.0683781)
+    new naverMaps.LatLng(37.438902, 126.904998)
   );
 
   const handleZoomChanged = useCallback((newZoom: number) => {

@@ -2,21 +2,25 @@ import { IoChevronBack } from 'react-icons/io5';
 import { dummyGuest } from '../assets/Dummy';
 import { dummyLoanDetail } from '../assets/Dummy';
 import LoanProgressBar from '../components/atoms/LoanProgressBar';
-import InstructionCard from './LoanDetail/components/InstructionCard';
+import InstructionCard from './LoanDetail/components/InstructionCard.tsx';
 import LoanDetailAccentInfo from './LoanDetail/components/LoanDetailAccentInfo';
 import LoanDetailCard from './LoanDetail/components/LoanDetailCard';
 import LoanDetailDisclosure from './LoanDetail/components/LoanDetailDisclosure';
 import LoanDetailHint from './LoanDetail/components/LoanDetailHint';
 
-const LoanDetail: React.FC = () => {
+interface LoanDetailProps {
+  onHide: () => void;
+}
+
+const LoanDetail: React.FC<LoanDetailProps> = ({ onHide }) => {
   return (
-    <div className="min-h-screen bg-[#f4f6f9]">
+    <div className="w-[430px] h-full bg-[#f4f6f9] overflow-y-auto">
       {/* 헤더 */}
-      <div className="flex h-12 mb-4 pl-8 bg-hanaSilver20 items-center justify-start gap-2">
-        <button>
+      <div className="flex h-12 mb-4 pl-1 bg-hanaSilver20 gap-2 items-center">
+        <button className="items-center" onClick={onHide}>
           <IoChevronBack className="text-hanaBlack80 text-xl" />
         </button>
-        <h1 className="text-hanaBlack80 text-lg font-semibold">
+        <h1 className="text-hanaBlack80 text-lg font-semibold ">
           대출 상세 정보
         </h1>
       </div>

@@ -1,6 +1,7 @@
 import { AiOutlineRight } from 'react-icons/ai';
 import { FaRegCalendarCheck } from 'react-icons/fa';
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import CommonBackground from '../components/atoms/CommonBackground';
 import SemiTitle from '../components/atoms/SemiTitle';
@@ -23,12 +24,13 @@ const upcomingConsulting: Consulting = {
   date: '2024.10.27 19:07',
 };
 
-const ConsultingTabLayout: React.FC = () => {
+const Consulting: React.FC = () => {
+  const navigate = useNavigate();
   /*
     ConsultingTabLayout이란?
-    
-    : Navbar에서 "상담" 버튼 눌렀을 때 나오는 사이드바 부분입니다. 
-    ConsultantLayout이랑 혼동 주의! 
+
+    : Navbar에서 "상담" 버튼 눌렀을 때 나오는 사이드바 부분입니다.
+    ConsultantLayout이랑 혼동 주의!
 
   */
 
@@ -57,7 +59,10 @@ const ConsultingTabLayout: React.FC = () => {
               <UpcomingConsultingComponent
                 upcomingConsulting={upcomingConsulting}
               />
-              <button className="text-gray-400 ">
+              <button
+                className="text-gray-400"
+                onClick={() => navigate('/live-chat')}
+              >
                 <span className="sr-only">View details</span>
                 <PiPaperPlaneRightFill />
               </button>
@@ -88,4 +93,4 @@ const ConsultingTabLayout: React.FC = () => {
     </div>
   );
 };
-export default ConsultingTabLayout;
+export default Consulting;

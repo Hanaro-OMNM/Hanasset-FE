@@ -49,7 +49,7 @@ const AssetInfoInput: React.FC<AssetInfoInputProps> = ({
         }
       />
 
-      <div className="mt-10 ">
+      <div className="mt-10">
         <Input
           name="amount"
           value={amount}

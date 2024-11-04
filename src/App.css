@@ -26,11 +26,11 @@
 }
 
 .slide-in-left {
-  animation: slide-in-left 0.5s ease-out forwards; /* 시간을 늘리고 ease-out 적용 */
+  animation: slide-in-left 0.5s ease-out forwards;
 }
 
 .slide-in-right {
-  animation: slide-in-right 0.5s ease-out forwards; /* 시간을 늘리고 ease-out 적용 */
+  animation: slide-in-right 0.5s ease-out forwards;
 }
 @font-face {
   font-family: 'FontBold';

@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Consultant from '../../assets/img/main/consultant.jpeg';
 import Home from '../../assets/img/main/home.jpeg';
 import Map from '../../assets/img/main/map.jpeg';
@@ -24,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
 
   return (
     <div className="space-x-16">
-      <div className="left-0 top-0 w-20 h-full absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center p">
+      <div className="left-0 top-0 w-20 h-full absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center">
         <a
           href="/"
           className="mt-4 mb-10 flex flex-col items-center justify-center"
@@ -38,9 +38,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
             </div>
           </div>
         </a>
-
-        {/* 아이콘 버튼들을 감싸는 컨테이너 */}
-        <div className="w-14 flex flex-col items-center space-y-5 flex-grow">
+        <div className="w-14 flex flex-col items-center space-y-10 flex-grow">
           <button
             onClick={() => navigate('/home')}
             className="flex flex-col items-center"
@@ -57,11 +55,15 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
               />
-            </div>
-            <div
-              className={`tracking-tight text-center text-xs ${location.pathname === '/home' ? 'text-hanaGreen' : 'text-gray-300'}`}
-            >
-              홈
+              <div
+                className={`tracking-tight text-center text-xs ${
+                  location.pathname === '/home'
+                    ? 'text-hanaGreen'
+                    : 'text-gray-300'
+                }`}
+              >
+                홈
+              </div>
             </div>
           </button>
 
@@ -71,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
             className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200 ${location.pathname === '/'}`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
             >
               <img
                 src={Map}
@@ -82,13 +84,13 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
               />
-            </div>
-            <div
-              className={`tracking-tight text-center text-xs  ${
-                location.pathname === '/' ? 'text-hanaGreen' : 'text-gray-300'
-              }`}
-            >
-              지도
+              <div
+                className={`tracking-tight text-center text-xs ${
+                  location.pathname === '/' ? 'text-hanaGreen' : 'text-gray-300'
+                }`}
+              >
+                지도
+              </div>
             </div>
           </button>
 
@@ -98,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
             className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200 ${location.pathname === '/consulting'}`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
             >
               <img
                 src={Consultant}
@@ -109,13 +111,15 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
               />
-            </div>
-            <div
-              className={`tracking-tight text-center text-xs  ${
-                location.pathname === '/' ? 'text-hanaGreen' : 'text-gray-300'
-              }`}
-            >
-              상담
+              <div
+                className={`tracking-tight text-center text-xs ${
+                  location.pathname === '/consulting'
+                    ? 'text-hanaGreen'
+                    : 'text-gray-300'
+                }`}
+              >
+                상담
+              </div>
             </div>
           </button>
 
@@ -125,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
             className="flex flex-col items-center"
           >
             <div
-              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200 ${location.pathname === '/my-page'}`}
+              className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
             >
               <img
                 src={Mypage}
@@ -136,13 +140,15 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
               />
-            </div>
-            <div
-              className={`tracking-tight text-center text-xs  ${
-                location.pathname === '/' ? 'text-hanaGreen' : 'text-gray-300'
-              }`}
-            >
-              마이홈
+              <div
+                className={`tracking-tight text-center text-xs ${
+                  location.pathname === '/my-page'
+                    ? 'text-hanaGreen'
+                    : 'text-gray-300'
+                }`}
+              >
+                마이홈
+              </div>
             </div>
           </button>
         </div>

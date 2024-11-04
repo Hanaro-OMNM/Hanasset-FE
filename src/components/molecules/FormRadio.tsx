@@ -34,7 +34,7 @@ export default function FormRadio<T>({
               value={item}
               className={
                 ({ checked }) =>
-                  `group relative flex cursor-pointer rounded-xl p-5 transition text-lg focus:outline-none border-4 
+                  `group relative flex cursor-pointer rounded-xl p-5 transition text-lg focus:outline-none border-2
                 ${checked ? 'text-hanaBlack bg-hanaGreen20 border-hanaGreen60' : 'text-hanaBlack40 border-gray-100/5'}` // checked 여부에 따라 배경 색상 변경
               }
             >

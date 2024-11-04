@@ -1,3 +1,5 @@
+import React, { useRef, useEffect } from 'react';
+
 type ChatMessageProps = {
   subject: 'sender' | 'responser';
   message: string;
@@ -14,6 +16,32 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   responserImage,
 }) => {
   const isSender = subject === 'sender';
+  const messageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const messageElement = messageRef.current;
+
+    if (messageElement) {
+      // 애니메이션 클래스를 추가합니다.
+      messageElement.classList.add(
+        isSender ? 'slide-in-right' : 'slide-in-left'
+      );
+
+      // 애니메이션이 끝난 후 클래스 제거
+      const handleAnimationEnd = () => {
+        messageElement.classList.remove(
+          isSender ? 'slide-in-right' : 'slide-in-left'
+        );
+      };
+
+      messageElement.addEventListener('animationend', handleAnimationEnd);
+
+      // 이벤트 클린업
+      return () => {
+        messageElement.removeEventListener('animationend', handleAnimationEnd);
+      };
+    }
+  }, [isSender]);
 
   return (
     <div
@@ -45,9 +73,10 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
           )}
         </div>
         <div
-          className={`p-3 max-w-64 rounded-lg text-xs  ${
-            isSender ? 'slide-in-right' : 'slide-in-left'
-          } ${isSender ? 'bg-hanaGreen80 text-white' : 'bg-hanaGreen40'}`}
+          ref={messageRef} // useRef로 요소를 참조합니다.
+          className={`p-3 max-w-64 rounded-lg text-xs ${
+            isSender ? 'bg-hanaGreen80 text-white' : 'bg-hanaGreen40'
+          }`}
           style={{
             borderRadius: isSender ? '15px 15px 0 15px' : '15px 15px 15px 0',
           }}

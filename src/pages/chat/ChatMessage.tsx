@@ -18,16 +18,15 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   const isSender = subject === 'sender';
   const messageRef = useRef<HTMLDivElement>(null);
 
+  //채팅 메세지 애니메이션 효과 추가
   useEffect(() => {
     const messageElement = messageRef.current;
 
     if (messageElement) {
-      // 애니메이션 클래스를 추가합니다.
       messageElement.classList.add(
         isSender ? 'slide-in-right' : 'slide-in-left'
       );
 
-      // 애니메이션이 끝난 후 클래스 제거
       const handleAnimationEnd = () => {
         messageElement.classList.remove(
           isSender ? 'slide-in-right' : 'slide-in-left'
@@ -36,7 +35,6 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
 
       messageElement.addEventListener('animationend', handleAnimationEnd);
 
-      // 이벤트 클린업
       return () => {
         messageElement.removeEventListener('animationend', handleAnimationEnd);
       };
@@ -73,7 +71,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
           )}
         </div>
         <div
-          ref={messageRef} // useRef로 요소를 참조합니다.
+          ref={messageRef}
           className={`p-3 max-w-64 rounded-lg shadow-sm text-xs ${
             isSender ? 'bg-hanaGreen80 text-white' : 'bg-hanaGreen40'
           }`}

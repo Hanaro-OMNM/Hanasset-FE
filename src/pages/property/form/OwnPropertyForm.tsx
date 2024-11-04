@@ -19,10 +19,9 @@ export default function OwnPropertyForm({ onNext }: OwnPropertyFormProps) {
     ownPropertyList[0]
   );
 
-  // 자산 보유 여부를 선택한 후 다음 단계로 이동
   const handlePropertyChange = (property: OwnPropertyOption) => {
     setSelectedProperty(property);
-    onNext(property.name === '있음'); // 선택한 값에 따라 hasProperty 값을 결정
+    onNext(property.name === '있음');
   };
 
   return (

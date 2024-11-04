@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Button from '../../components/atoms/Button';
-import FormLayout from '../../components/template/FormLayout';
 import ApartForm from './form/ApartForm';
 import ApartListForm from './form/ApartListForm';
 import FamilyStatusForm from './form/FamilyStatusForm';
@@ -92,11 +91,11 @@ export default function PropertyForm() {
   }, [forms, location]);
 
   return (
-    <FormLayout>
+    <div>
       <div className="bg-white rounded-md p-3 min-h-[90vh] mb-2 shadow-md">
         {forms[currentStep].component}
       </div>
       <Button text="다음으로" version="ver1" onClick={handleNextStep} />
-    </FormLayout>
+    </div>
   );
 }

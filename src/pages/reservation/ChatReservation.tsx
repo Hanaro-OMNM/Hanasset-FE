@@ -1,19 +1,14 @@
 // ChatReservation.tsx
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import reserve_hand from '../../assets/img/reserve_img.png';
 import Button from '../../components/atoms/Button';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import MobileHeader from '../../components/atoms/MobileHeader';
 import AssetItem from './AssetItem';
-// 새로 만든 컴포넌트
 import DatePicker from './DatePicker';
-// 새로 만든 컴포넌트
 import TimePicker from './TimePicker';
-// 새로 만든 컴포넌트
 import UserGuide from './UserGuide';
-
-// 새로 만든 컴포넌트
 
 export default function ChatReservation() {
   const nav = useNavigate();
@@ -87,11 +82,9 @@ export default function ChatReservation() {
         <CommonBackground className="p-5 min-h-screen h-auto">
           <div className="flex flex-col my-5">
             <h2 className="text-lg font-semibold mb-4">선택 부동산 매물</h2>
-            {/* <CommonBackground className="p-2"> */}
             {assets.map((asset, index) => (
               <AssetItem key={index} name={asset.name} />
             ))}
-            {/* </CommonBackground> */}
           </div>
           <DatePicker
             dateOptions={dateOptions}

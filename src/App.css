@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 채팅 슬라이드 효과 */
 @keyframes slide-in-left {
   0% {
     transform: translateX(-5%);

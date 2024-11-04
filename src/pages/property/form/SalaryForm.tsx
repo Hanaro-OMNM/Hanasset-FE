@@ -4,7 +4,7 @@ import Input from '../../../components/atoms/Input';
 import NoItemButton from '../../../components/atoms/NoItemButton';
 
 interface AssetInfoInputProps {
-  formType: 'income' | 'loan'; // 'income' 또는 'loan' 중 하나로 설정
+  formType: 'income' | 'loan';
   onNext: (isValid: boolean) => void;
   onBack?: () => void;
 }

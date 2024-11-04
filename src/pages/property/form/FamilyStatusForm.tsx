@@ -2,7 +2,7 @@ import { useState } from 'react';
 import FormRadio from '../../../components/molecules/FormRadio';
 
 interface Option {
-  value: string; // '결혼함'|'미혼'|'자녀 있음'|'자녀 없음'
+  value: string;
 }
 
 const options: Option[] = [

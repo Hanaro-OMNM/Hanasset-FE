@@ -1,6 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import React, { useEffect } from 'react';
-import preview from '../../assets/img/Preview.png';
 import Consultant from '../../assets/img/main/consultant.jpeg';
 import Home from '../../assets/img/main/home.jpeg';
 import Map from '../../assets/img/main/map.jpeg';

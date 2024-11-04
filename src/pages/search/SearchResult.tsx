@@ -21,13 +21,13 @@ const SearchResult = () => {
   };
 
   return (
-    <div className="w-430">
-      <div className="top-0 absolute pl-2">
-        <div className="w-430 max-w-[430px] h-svh bg-white/75 backdrop-blur-[5px] overflow-y-auto">
+    <div className="w-[420px]">
+      <div className="top-0 absolute pl-4 animate-slideInRight">
+        <div className="w-[420px] max-w-[420px] h-svh bg-white/75 backdrop-blur-[5px] absolute overflow-y-auto">
           {/* 헤더 */}
-          <div className="w-430 max-w-[430px] h-16 fixed top-0 bg-white border-b-4 border-gray-200 z-10 px-4 py-2 flex justify-between items-center">
+          <div className="w-[420px] max-w-[420px] h-16 fixed top-0 bg-white border-b border-gray-200 z-10 px-4 py-2 flex justify-between items-center">
             <button type="button" onClick={() => navigate('/home')}>
-              <FaChevronLeft color="#1e293b" />
+              <FaChevronLeft />
             </button>
 
             <input

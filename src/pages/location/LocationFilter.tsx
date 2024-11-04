@@ -30,14 +30,14 @@ const LocationFilter = ({ locationType }: LocationFilterLayoutProps) => {
   return (
     <div className="w-[420px]">
       {activePage === 'curr' ? (
-        <div className="top-0 absolute pl-4  animate-slideInRight">
+        <div className="top-0 absolute pl-4 animate-slideInRight">
           <div className="w-[420px] max-w-[420px] h-svh bg-white/75 backdrop-blur-[5px] overflow-y-auto absolute">
             {/* 헤더 */}
             <form onSubmit={handleSubmit}>
-            <div className="w-[420px] max-w-[420px] h-16 fixed top-0 bg-white border-b border-gray-200 z-10 px-4 py-2 flex justify-between items-center">
-              <button type="button" onClick={() => setActivePage('back')}>
-                <FaChevronLeft />
-              </button>
+              <div className="w-[420px] max-w-[420px] h-16 fixed top-0 bg-white border-b border-gray-200 z-10 px-4 py-2 flex justify-between items-center">
+                <button type="button" onClick={() => setActivePage('back')}>
+                  <FaChevronLeft />
+                </button>
 
                 <input
                   className="bg-white w-80 h-10 px-5 pr-16 rounded-lg text-sm focus:border-hanaGreen40 focus:outline-none"

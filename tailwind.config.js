@@ -52,7 +52,7 @@ export default {
         xs: '420px',
       },
       width: {
-        430: '420px',
+        420: '420px',
       },
       fontFamily: {
         fontBold: ['FontBold', 'sans-serif'],
@@ -79,7 +79,7 @@ export default {
         slideInRight: {
           '0%': { transform: 'translateX(-100%)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
-        }
+        },
       },
     },
   },

@@ -29,7 +29,7 @@ const Consulting: React.FC = () => {
 
   return (
     <div className="w-[500px]">
-      <div className=" top-0 absolute pl-4 2 animate-slideInRight">
+      <div className=" top-0 absolute pl-4 animate-slideInRight">
         <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/75 backdrop-blur-[10px] overflow-y-auto">
           <h1 className="text-xl text-slate-800 font-bold flex justify-center p-10">
             상담현황 확인하기

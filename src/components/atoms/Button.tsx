@@ -33,7 +33,7 @@ export default function Button({
         type={type}
         onClick={onClick}
         disabled={disabled}
-        className={`w-full h-full text-md font-['Inter'] 
+        className={`w-full h-full text-md
           ${version === 'ver1' ? 'text-white' : disabled ? 'text-hanaBlack40' : 'text-hanaGreen'}
         `}
       >

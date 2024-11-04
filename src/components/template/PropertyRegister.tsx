@@ -112,7 +112,7 @@ export default function PropertyForm({
   };
 
   return (
-    <div className="px-5">
+    <div className="px-5 animate-fadeInRight">
       <MobileHeader title="자산 수정하기" onBack={onBack} />
       <CommonBackground className="mt-5 mb-10 ">
         {forms[currentStep].component}

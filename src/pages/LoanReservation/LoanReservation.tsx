@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import LoanReservationIMG from '../../assets/img/LoanReservation.jpg';
 import Button from '../../components/atoms/Button';
@@ -5,6 +6,7 @@ import CommonBackground from '../../components/atoms/CommonBackground';
 import CustomSelect from '../../components/atoms/CustomSelect';
 
 export default function LoanReservation() {
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [selectedProp, setSelectedProp] =
@@ -111,7 +113,10 @@ export default function LoanReservation() {
               </div>
 
               <Button
-                onClick={() => alert('예약되었습니다.')}
+                onClick={() => {
+                  alert('예약되었습니다.');
+                  navigate('/home');
+                }}
                 text="실시간 채팅 상담 예약하기"
               />
             </form>

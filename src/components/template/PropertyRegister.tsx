@@ -112,7 +112,7 @@ export default function PropertyForm({
   };
 
   return (
-    <div className="p-6 animate-slideInRight">
+    <div className="p-6 animate-fadeInRight">
       <div className="flex h-12 mb-4 pl-1 gap-2 items-center">
         <button className="items-center" onClick={onBack}>
           <IoChevronBack className="text-hanaBlack80 text-xl" />

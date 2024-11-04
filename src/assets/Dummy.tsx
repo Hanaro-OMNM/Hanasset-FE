@@ -4,7 +4,22 @@ import real_estate_3 from '../assets/img/realEstate/real_estate_3.png';
 import real_estate_4 from '../assets/img/realEstate/real_estate_4.png';
 
 export interface Guest {
+  name: string;
+  age: number;
+  job: string;
+  income: number;
+  family: boolean;
+  home: boolean;
+  loan: number;
   stressDsr: number;
+}
+
+export interface Loan {
+  name: string;
+  rate: number;
+  limit: number;
+  newDsr: number;
+  loanDetailUrl: string;
 }
 
 export interface LoanDetail {
@@ -22,9 +37,66 @@ export interface LoanDetail {
   loanApplyUrl: string;
 }
 
+export interface RealEstate {
+  id: number;
+  name: string;
+  rentType: '전세' | '월세';
+  location: string;
+  size: string;
+  address: string;
+}
+
 export const dummyGuest: Guest = {
+  name: '이순신',
+  age: 32,
+  job: '중소',
+  income: 6000,
+  family: false,
+  home: false,
+  loan: 0,
   stressDsr: 40,
 };
+
+export const hanaYouthJeonseLoan: Loan = {
+  name: '하나 청년전세론',
+  rate: 4.453,
+  limit: 2,
+  newDsr: 20,
+  loanDetailUrl: '',
+};
+
+export const seoulYouthLoan: Loan = {
+  name: '서울특별시 청년임차 보증금 대출',
+  rate: 4.52,
+  limit: 2,
+  newDsr: 25,
+  loanDetailUrl: '',
+};
+
+export const welfareGuardianJeonseLoan: Loan = {
+  name: '복지지킴이전세론',
+  rate: 4.383,
+  limit: 2,
+  newDsr: 25,
+  loanDetailUrl: '',
+};
+
+export const jeonseSecurityLoan: Loan = {
+  name: '전세안심금대출',
+  rate: 4.71,
+  limit: 2,
+  newDsr: 30,
+  loanDetailUrl: '',
+};
+
+export const dummyLoanList: Loan[] = [
+  hanaYouthJeonseLoan,
+  seoulYouthLoan,
+  welfareGuardianJeonseLoan,
+  jeonseSecurityLoan,
+];
+
+export const dummyLoanGroup: Loan[][] = [dummyLoanList, [], []];
 
 export const dummyLoanDetail: LoanDetail = {
   type: '전(월)세 대출',
@@ -56,6 +128,40 @@ export const dummyLoanDetail: LoanDetail = {
 원리금 균등분할상환대출 : 대출금액 × 대출이자율 ÷ 12`,
   loanApplyUrl: '',
 };
+
+export const dummyConsultationData = [
+  { id: 'V123AWE1', time: '2024.10.27 19:07:23', agent: '이인수' },
+  { id: 'V123AWE2', time: '2024.10.28 14:22:10', agent: '김철수' },
+  { id: 'V123AWE3', time: '2024.10.29 09:15:45', agent: '박영희' },
+  { id: 'V123AWE4', time: '2024.10.30 11:30:00', agent: '최민수' },
+];
+
+export const dummyRealEstateList: RealEstate[] = [
+  {
+    id: 0,
+    name: '서초푸르지오(써밋)',
+    rentType: '전세',
+    location: '103동 1201호',
+    size: '100.97㎡',
+    address: '서울특별시 성동구 왕십리로 16',
+  },
+  {
+    id: 1,
+    name: '트리마제',
+    rentType: '월세',
+    location: '104동 1502호',
+    size: '85.42㎡',
+    address: '서울특별시 성동구 왕십리로 16',
+  },
+  {
+    id: 2,
+    name: '올림픽파크포레온',
+    rentType: '전세',
+    location: '105동 1803호',
+    size: '120.50㎡',
+    address: '서울특별시 성동구 왕십리로 16',
+  },
+];
 
 export const realEstateData = [
   {

@@ -42,7 +42,7 @@ const TransactionTable: React.FC = () => {
           {['전체', '전세', '월세'].map((type) => (
             <button
               key={type}
-              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 
                 ${
                   filter === type
                     ? 'bg-[#008485] text-white shadow-lg'
@@ -70,7 +70,7 @@ const TransactionTable: React.FC = () => {
           {filteredTransactions
             .slice(0, visibleCount)
             .map((transaction, index) => (
-              <tr key={index} className="hover:bg-gray-50">
+              <tr key={index} className="hover:bg-gray-50 animate-fadeInUp">
                 <td className="border px-4 py-2 text-right">
                   {transaction.date}
                 </td>

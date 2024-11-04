@@ -22,7 +22,7 @@ export default function Button({
         version === 'ver1'
           ? disabled
             ? 'bg-hanaBlack40 cursor-not-allowed'
-            : 'bg-hanaGreen60 hover:bg-hanaGreen focus:bg-hanaGreen'
+            : 'bg-hanaGreen40 hover:bg-hanaColor2 focus:bg-hanaColor2'
           : disabled
             ? 'bg-white shadow border-2 border-hanaBlack40 cursor-not-allowed'
             : 'bg-white shadow border-2 border-hanaGreen'

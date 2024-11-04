@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import LocationFilter from './location/LocationFilter.tsx';
 
@@ -7,13 +7,11 @@ export default function Main() {
     'city' | 'gungu' | 'dong' | 'main'
   >('main');
 
-  // 일단 시/도, 시/군/구, 읍/면/동 정보는 로컬 스토리지에서 가져오는 걸로 (추후 DB 연동이 되겠죠?)
   const [currCity, setCity] = useState<string>('시/도');
   const [currGungu, setGungu] = useState<string>('시/군/구');
   const [currDong, setDong] = useState<string>('읍/면/동');
 
   useEffect(() => {
-    // LocalStorage에서 값을 가져오고 없으면 기본값으로 설정
     const storedCity = JSON.parse(
       localStorage.getItem('currCity') || '"시/도"'
     );
@@ -33,7 +31,7 @@ export default function Main() {
     <div>
       <div className="w-[420px]">
         {activePage === 'main' ? (
-          <div className="top-0 absolute pl-2">
+          <div className="top-0 absolute pl-4 animate-slideInRight">
             <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/75 backdrop-blur-[5px]">
               <SearchBar />
 
@@ -84,7 +82,10 @@ export default function Main() {
             </div>
           </div>
         ) : (
-          <LocationFilter locationType={activePage} />
+          <LocationFilter
+            locationType={activePage}
+            onBack={() => setActivePage('main')}
+          />
         )}
       </div>
     </div>

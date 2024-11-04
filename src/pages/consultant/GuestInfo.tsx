@@ -4,7 +4,7 @@ import Swiper from '../../components/atoms/Swiper';
 
 // import LoanRecommendTab from '../LoanRecommendComponents/LoanRecommendTab';
 
-export default function GestInfo() {
+export default function GuestInfo() {
   interface Loan {
     logoSrcUrl: string;
     finInst: string;

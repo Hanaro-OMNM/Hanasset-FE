@@ -7,8 +7,10 @@ interface PropertyItemProps {
   onClick: (
     type: 'home' | 'family' | 'main' | 'editProfile' | 'job' | 'income' | 'loan'
   ) => void;
-  roundedTop?: boolean;
-  roundedBottom?: boolean;
+  className?: string;
+  labelClassName?: string;
+  labelColorClassName?: string; // label 글씨 색상용 추가 prop
+  valueColorClassName?: string; // value 글씨 색상용 추가 prop
 }
 
 export default function PropertyItem({
@@ -16,16 +18,22 @@ export default function PropertyItem({
   label,
   value,
   onClick,
+  className = '',
+  labelClassName = '',
+  labelColorClassName = 'text-hanaBlack60',
+  valueColorClassName = 'text-hanaBlack80',
 }: PropertyItemProps) {
   return (
     <button
       className={`w-full hover:transition-transform transform hover:scale-105 
-      hover:bg-hanaGreen10 transition-all duration-300 ease-in-out focus:outline-none flex justify-between py-5 `}
+      hover:bg-hanaGreen10 transition-all duration-300 ease-in-out focus:outline-none flex justify-between py-5 ${className}`}
       onClick={() => onClick(type)}
     >
-      <span className="text-hanaBlack60 text-md ">{label}</span>
+      <span className={`text-md ${labelClassName} ${labelColorClassName}`}>
+        {label}
+      </span>
       <div className="flex items-center">
-        <span className="text-hanaBlack80 text-md font-bold">
+        <span className={`text-md font-bold ${valueColorClassName}`}>
           {value || '없음'}
         </span>
         <AiOutlineRight className="text-gray-400 text-lg ml-2" />

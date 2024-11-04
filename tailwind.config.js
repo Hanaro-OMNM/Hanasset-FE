@@ -9,9 +9,12 @@ export default {
     extend: {
       colors: {
         /*bg컬러*/
-        bgColor: '#f4f6f9',
+        bgColor: '#F5F9F8',
+        hanaNavy: '#3A4058',
+        hanaColor1: '#E0FBF5',
+        hanaColor2: '#00CC9C',
         /* hanaGreen*/
-        hanaGreen: '#008485',
+        hanaGreen: '#0B9B97',
         hanaGreen80: '#5D9588',
         hanaGreen60: '#ABCEC8',
         hanaGreen40: '#D9E9E6',
@@ -46,7 +49,34 @@ export default {
         hanaBlack20: '#F7F7F7',
       },
       screens: {
-        xs: '420px', // 420px 이하에서만 적용할 수 있는 사용자 정의 단위 추가
+        xs: '420px',
+      },
+      fontFamily: {
+        fontBold: ['FontBold', 'sans-serif'],
+        fontCm: ['FontCM', 'sans-serif'],
+        fontHeavy: ['FontHeavy', 'sans-serif'],
+        fontLight: ['FontLight', 'sans-serif'],
+        fontMedium: ['FontMedium', 'sans-serif'],
+        fontRegular: ['FontRegular', 'sans-serif'],
+      },
+      animation: {
+        fadeInUp: 'fadeInUp 0.5s ease-out forwards',
+        fadeInRight: 'fadeInRight 0.5s ease-out forwards',
+        slideInRight: 'slideInRight 0.5s ease-out forwards',
+      },
+      keyframes: {
+        fadeInUp: {
+          '0%': { transform: 'translateY(10px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        fadeInRight: {
+          '0%': { transform: 'translateX(-10px)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        slideInRight: {
+          '0%': { transform: 'translateX(-100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
       },
     },
   },

@@ -32,7 +32,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
       >
         <PiCheckCircleThin
           className={`w-[35px] h-[35px] ${
-            checked ? 'text-hanaGreen ' : 'text-hanaSilver60 '
+            checked ? 'text-hanaGreen' : 'text-hanaSilver60'
           }`}
         />
       </Switch>

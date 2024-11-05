@@ -2,7 +2,6 @@ import { PiBuildingApartment } from 'react-icons/pi';
 import { useState } from 'react';
 import { dummyLoanGroup } from '../assets/Dummy';
 import { dummyRealEstateList } from '../assets/Dummy';
-import { RealEstate } from '../assets/Dummy';
 import { dummyGuest } from '../assets/Dummy';
 import CommonBackground from '../components/atoms/CommonBackground';
 import Swiper from '../components/atoms/Swiper';

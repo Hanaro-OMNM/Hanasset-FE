@@ -20,16 +20,6 @@ const GuestChatDetail: React.FC = () => {
     setShowDetail(true);
   };
 
-  const itemsPerPage = 1;
-  const slides: RealEstate[][] = Array.from(
-    { length: Math.ceil(dummyRealEstateList.length / itemsPerPage) },
-    (_, index) =>
-      dummyRealEstateList.slice(
-        index * itemsPerPage,
-        (index + 1) * itemsPerPage
-      )
-  );
-
   const swiperClick = (index: number) => {
     setLoanIndex(index);
     console.log(loanIndex, index);
@@ -46,30 +36,27 @@ const GuestChatDetail: React.FC = () => {
             <div>
               <SemiTitle title="매물 정보" />
               <Swiper
-                items={slides}
-                renderItem={(pageRealEstateList) => (
+                items={dummyRealEstateList}
+                renderItem={(realEstate) => (
                   <div className="flex flex-col gap-4 h-32 mr-1 ml-1">
-                    {pageRealEstateList.map((realEstate, index) => (
-                      <div>
-                        <button
-                          key={index}
-                          className="w-full transition-transform transform hover:scale-105"
-                          onClick={() => swiperClick(index)}
-                        >
-                          <CommonBackground className="flex items-center p-4 h-20 rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
-                            <PiBuildingApartment className="text-2xl text-hanaGreen" />
-                            <div className="ml-4 text-hanaBlack font-medium text-left">
-                              {realEstate.name} ({realEstate.rentType})
-                              <div className="text-sm text-hanaBlack80">
-                                {realEstate.location}, {realEstate.size}
-                                <br />
-                                {realEstate.address}
-                              </div>
+                    <div>
+                      <button
+                        onClick={() => swiperClick(realEstate.id)}
+                        className="w-full transition-transform transform hover:scale-105"
+                      >
+                        <CommonBackground className="flex items-center p-4 h-20 rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
+                          <PiBuildingApartment className="text-2xl text-hanaGreen" />
+                          <div className="ml-4 text-hanaBlack font-medium text-left">
+                            {realEstate.name} ({realEstate.rentType})
+                            <div className="text-sm text-hanaBlack80">
+                              {realEstate.location}, {realEstate.size}
+                              <br />
+                              {realEstate.address}
                             </div>
-                          </CommonBackground>
-                        </button>
-                      </div>
-                    ))}
+                          </div>
+                        </CommonBackground>
+                      </button>
+                    </div>
                   </div>
                 )}
                 spaceBetween={30}

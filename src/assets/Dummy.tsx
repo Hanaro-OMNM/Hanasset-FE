@@ -6,6 +6,11 @@ import real_estate_4 from '../assets/img/realEstate/real_estate_4.png';
 export interface Guest {
   name: string;
   age: number;
+  job: string;
+  income: number;
+  family: boolean;
+  home: boolean;
+  loan: number;
   stressDsr: number;
 }
 
@@ -33,6 +38,7 @@ export interface LoanDetail {
 }
 
 export interface RealEstate {
+  id: number;
   name: string;
   rentType: '전세' | '월세';
   location: string;
@@ -43,6 +49,11 @@ export interface RealEstate {
 export const dummyGuest: Guest = {
   name: '이순신',
   age: 32,
+  job: '중소',
+  income: 6000,
+  family: false,
+  home: false,
+  loan: 0,
   stressDsr: 40,
 };
 
@@ -127,6 +138,7 @@ export const dummyConsultationData = [
 
 export const dummyRealEstateList: RealEstate[] = [
   {
+    id: 0,
     name: '서초푸르지오(써밋)',
     rentType: '전세',
     location: '103동 1201호',
@@ -134,6 +146,7 @@ export const dummyRealEstateList: RealEstate[] = [
     address: '서울특별시 성동구 왕십리로 16',
   },
   {
+    id: 1,
     name: '트리마제',
     rentType: '월세',
     location: '104동 1502호',
@@ -141,6 +154,7 @@ export const dummyRealEstateList: RealEstate[] = [
     address: '서울특별시 성동구 왕십리로 16',
   },
   {
+    id: 2,
     name: '올림픽파크포레온',
     rentType: '전세',
     location: '105동 1803호',

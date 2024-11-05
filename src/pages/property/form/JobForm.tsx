@@ -24,7 +24,7 @@ export default function JobForm() {
   };
 
   return (
-    <div className="p-8">
+    <div className="pb-10">
       <FormRadio<JobOption>
         items={joblist}
         label="직업을 선택하세요"

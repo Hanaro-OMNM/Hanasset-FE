@@ -83,7 +83,7 @@ export default function MyPage() {
                   <RegisterButtonGroup
                     onRegister={handleRegister}
                     job={'중소,중견기업 직장인'}
-                    income={'6000만원'}
+                    income={'6000만 원'}
                     vehicleOwnership={''}
                     propertyOwnership={''}
                     confirmationDate={''}
@@ -120,7 +120,7 @@ export default function MyPage() {
                         <div key={index} className="w-full">
                           <div>
                             <div className="w-full hover:transition-transform transform hover:scale-105 flex h-full">
-                              <div className="text-gray-400 font-fontRegular ml-5 w-full text-center">
+                              <div className="text-gray-400 font-fontRegular ml-5">
                                 {asset.name}
                               </div>
                             </div>

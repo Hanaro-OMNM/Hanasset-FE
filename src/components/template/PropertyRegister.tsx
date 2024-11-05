@@ -1,5 +1,4 @@
-import { IoChevronBack } from 'react-icons/io5';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ApartListForm from '../../pages/property/form/ApartListForm';
 import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
 import JobForm from '../../pages/property/form/JobForm';
@@ -7,6 +6,7 @@ import OwnPropertyForm from '../../pages/property/form/OwnPropertyForm';
 import SalaryForm from '../../pages/property/form/SalaryForm';
 import Button from '../atoms/Button';
 import CommonBackground from '../atoms/CommonBackground';
+import MobileHeader from '../atoms/MobileHeader';
 
 interface AssetRegisterProps {
   assetType:
@@ -112,14 +112,9 @@ export default function PropertyForm({
   };
 
   return (
-    <div className="p-6 animate-slideInRight">
-      <div className="flex h-12 mb-4 pl-1 gap-2 items-center">
-        <button className="items-center" onClick={onBack}>
-          <IoChevronBack className="text-hanaBlack80 text-xl" />
-        </button>
-        <h1 className="text-hanaBlack80 text-lg font-semibold ">마이 페이지</h1>
-      </div>
-      <CommonBackground className="my-10">
+    <div className="px-5 animate-fadeInRight">
+      <MobileHeader title="자산 수정하기" onBack={onBack} />
+      <CommonBackground className="mt-5 mb-10">
         {forms[currentStep].component}
         <div className="px-5 pb-5">
           <Button text="저장" onClick={handleNextStep} version="ver1" />

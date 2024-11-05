@@ -7,4 +7,7 @@ export default defineConfig({
   optimizeDeps: {
     include: ['swiper/react', 'swiper'],
   },
+  server: {
+    host: '0.0.0.0', // 네트워크 접근 허용
+  },
 });

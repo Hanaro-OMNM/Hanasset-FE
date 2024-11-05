@@ -4,7 +4,7 @@ import Input from '../../../components/atoms/Input';
 import NoItemButton from '../../../components/atoms/NoItemButton';
 
 interface AssetInfoInputProps {
-  formType: 'income' | 'loan'; // 'income' 또는 'loan' 중 하나로 설정
+  formType: 'income' | 'loan';
   onNext: (isValid: boolean) => void;
   onBack?: () => void;
 }
@@ -48,7 +48,8 @@ const AssetInfoInput: React.FC<AssetInfoInputProps> = ({
             : '이미 받은 대출은 얼마인가요?'
         }
       />
-      <div className="mt-5 ">
+
+      <div className="mt-10">
         <Input
           name="amount"
           value={amount}

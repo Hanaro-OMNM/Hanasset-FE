@@ -45,7 +45,6 @@ const Consulting: React.FC = () => {
             title="상담현황 확인하기"
             onBack={() => navigate('/')}
           />
-
           <div className="mb-8">
             <div className="flex items-center">
               <span className="text-hanaGreen mr-2">
@@ -75,7 +74,6 @@ const Consulting: React.FC = () => {
               </div>
             </CommonBackground>
           </div>
-
           <SemiTitle>지난 상담 내역</SemiTitle>
           <CommonBackground className="p-5 mt-4">
             {consultingHistory.map((consulting, index) => (

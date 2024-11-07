@@ -36,7 +36,6 @@ const Consulting: React.FC = () => {
     ConsultantLayout이랑 혼동 주의!
 
   */
-
   return (
     <div className="w-[500px]">
       <div className="top-0 absolute pl-4 animate-slideInRight">

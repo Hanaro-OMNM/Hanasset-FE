@@ -1,14 +1,19 @@
 import { FaTimes } from 'react-icons/fa';
 import { useState } from 'react';
-import Greeting from '../assets/img/login/HanaGreeting.png';
-import Input from '../components/atoms/Input';
+import Greeting from '../../../assets/img/login/HanaGreeting.png';
+import Input from '../../atoms/Input.tsx';
 
 interface LoginPageProps {
   onLoginSuccess: () => void;
   onClose: () => void;
+  onSignUpPage: () => void;
 }
 
-export default function LoginPage({ onLoginSuccess, onClose }: LoginPageProps) {
+export default function LoginPage({
+  onLoginSuccess,
+  onClose,
+  onSignUpPage,
+}: LoginPageProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
@@ -22,7 +27,7 @@ export default function LoginPage({ onLoginSuccess, onClose }: LoginPageProps) {
   };
 
   return (
-    <div className="bg-white w-[320px] h-[500px] rounded-lg shadow-lg animate-fadeInRight">
+    <div>
       <div className="flex items-center justify-center my-4">
         <div className="font-bold">로그인</div>
         <button
@@ -73,7 +78,9 @@ export default function LoginPage({ onLoginSuccess, onClose }: LoginPageProps) {
         </button>
         <div className="text-xs text-center py-2">
           아직 MapHana에 가입하지 않으셨나요?
-          <button className="ml-1 my-1 text-hanaGreen">회원가입</button>
+          <button onClick={onSignUpPage} className="ml-1 my-1 text-hanaGreen">
+            회원가입
+          </button>
         </div>
       </div>
     </div>

@@ -3,9 +3,9 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
+import Modal from './components/template/Modal/Modal.tsx';
 import Consulting from './pages/Consulting.tsx';
 import LoanRecommend from './pages/LoanRecommned.tsx';
-import LoginPage from './pages/Login.tsx';
 import Main from './pages/Main.tsx';
 import MyPage from './pages/MyPage.tsx';
 import PropertyAgree from './pages/PropertyAgree.tsx';
@@ -24,7 +24,10 @@ function App() {
 
   useEffect(() => {
     // 로그인하지 않은 상태에서 허용된 페이지 외 접근 시 로그인 모달을 열고 리다이렉션
-    if (!isSignedIn && !['/', '/home'].includes(location.pathname)) {
+    if (
+      !isSignedIn &&
+      !['/', '/home', '/real-estate-list'].includes(location.pathname)
+    ) {
       setIsLoginModalOpen(true);
       navigate('/'); // 로그인 페이지로 리다이렉트
     }
@@ -57,7 +60,7 @@ function App() {
           </Routes>
           {isLoginModalOpen && (
             <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-              <LoginPage
+              <Modal
                 onLoginSuccess={handleLoginSuccess}
                 onClose={closeLoginModal}
               />

@@ -45,7 +45,7 @@ const TransactionTable: React.FC = () => {
               className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 
                 ${
                   filter === type
-                    ? 'bg-[#008485] text-white shadow-lg'
+                    ? 'bg-hanaColor2 text-white shadow-lg'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               onClick={() => setFilter(type as '전세' | '월세' | '전체')}
@@ -91,7 +91,7 @@ const TransactionTable: React.FC = () => {
       {/* 더 보기 버튼 */}
       {visibleCount < filteredTransactions.length && (
         <button
-          className="mt-3 mx-auto block text-[#008485] font-semibold hover:underline transition-all duration-200"
+          className="mt-3 mx-auto block text-hanaColor2 font-semibold hover:underline transition-all duration-200"
           onClick={handleLoadMore}
         >
           더 보기

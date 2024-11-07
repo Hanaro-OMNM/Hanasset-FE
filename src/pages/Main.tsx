@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { MdNavigateNext } from 'react-icons/md';
+import { useEffect, useState } from 'react';
 import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import LocationFilter from './location/LocationFilter.tsx';
@@ -49,7 +49,7 @@ export default function Main() {
       <div className="w-[420px]">
         {activePage === 'main' ? (
           <div className="top-0 absolute pl-4 animate-slideInRight">
-            <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-white/75 backdrop-blur-[5px]">
+            <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-gray-50/90 backdrop-blur-[5px]">
               <SearchBar />
 
               <div className="w-full max-w-md mt-10">

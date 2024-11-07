@@ -1,9 +1,12 @@
-import { BsThreeDotsVertical } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import Back1 from '../assets/img/back1.jpg';
+import Back2 from '../assets/img/back2.png';
+import Back3 from '../assets/img/back3.jpg';
 import House from '../assets/img/house.png';
 import People from '../assets/img/main/people.png';
-import Button from '../components/atoms/Button';
 import CommonBackground from '../components/atoms/CommonBackground';
+import MobileHeader from '../components/atoms/MobileHeader';
 import RegisterButtonGroup from '../components/atoms/RegisterPageButtonGroup';
 import SemiTitle from '../components/atoms/SemiTitle';
 import Swiper from '../components/atoms/Swiper';
@@ -46,7 +49,11 @@ export default function MyPage() {
     { name: '아파트 5' },
   ];
 
-  const interestAreas = ['성수', '홍대', '신촌'];
+  const interestAreas = [
+    { name: '성수', image: Back1 },
+    { name: '홍대', image: Back2 },
+    { name: '신촌', image: Back3 },
+  ];
 
   const handleRegister = (
     type:
@@ -61,13 +68,18 @@ export default function MyPage() {
   ) => {
     setCurrentPage(type);
   };
+  const navigate = useNavigate();
 
   return (
     <div className="w-[500px]">
       <div className="top-0 absolute pl-4 animate-slideInRight">
-        <div className="w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/75 scrollbar-hide">
+        <div className="w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/90 scrollbar-hide">
           {currentPage === 'main' ? (
             <>
+              <MobileHeader
+                title="내 정보 확인하기"
+                onBack={() => navigate('/')}
+              />
               <div>
                 <div className="text-2xl font-fontMedium pt-6 pl-6 ">
                   안녕하세요
@@ -77,7 +89,7 @@ export default function MyPage() {
                   <img src={People}></img>
                 </div>
               </div>
-              <div className="pt-5 p-6 bg-gradient-to-b from-white to-hanaGreen20">
+              <div className="pt-5 p-6">
                 <div className="mt-10">
                   <SemiTitle>내 정보</SemiTitle>
                   <RegisterButtonGroup
@@ -99,8 +111,16 @@ export default function MyPage() {
                     items={interestAreas}
                     pagination={{ clickable: true }}
                     renderItem={(item) => (
-                      <CommonBackground className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md">
-                        {item}
+                      <CommonBackground className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md relative overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="absolute inset-0 w-full h-full object-cover opacity-70"
+                        />
+                        <div className="absolute inset-0 bg-black opacity-30"></div>
+                        <span className="relative text-white font-semibold">
+                          {item.name}
+                        </span>
                       </CommonBackground>
                     )}
                   />
@@ -111,30 +131,36 @@ export default function MyPage() {
                   <div className="mb-5">
                     <SemiTitle>내 관심 매물</SemiTitle>
                   </div>
-                  <CommonBackground>
-                    <div>
-                      <img src={House}></img>
-                    </div>
-                    <div className="flex flex-col gap-4 mr-1 ml-1">
-                      {assets.slice(0, 3).map((asset, index) => (
-                        <div key={index} className="w-full">
-                          <div>
-                            <div className="w-full hover:transition-transform transform hover:scale-105 flex h-full">
-                              <div className="text-gray-400 font-fontRegular ml-5">
-                                {asset.name}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                      <div>
-                        <BsThreeDotsVertical className="text-gray-400 w-full" />
+                  <div className="grid grid-cols-2 gap-4">
+                    {assets.slice(0, 4).map((asset, index) => (
+                      <div
+                        key={index}
+                        onClick={index === 0 ? handleEstate : undefined}
+                        className={`${
+                          index === 0
+                            ? 'bg-hanaColor2 hover:opacity-90'
+                            : 'bg-white hover:scale-105'
+                        } rounded-lg flex flex-col items-center justify-center p-4 shadow-md transition-transform duration-200 ease-in-out cursor-pointer`}
+                      >
+                        {index === 0 ? (
+                          <span className="text-4xl text-white font-semibold">
+                            +
+                          </span>
+                        ) : (
+                          <>
+                            <img
+                              src={House}
+                              alt="asset icon"
+                              className="h-16 w-16 mb-2"
+                            />
+                            <span className="text-gray-600 font-sm font-fontCm text-center">
+                              {asset.name}
+                            </span>
+                          </>
+                        )}
                       </div>
-                      <div className="pl-5 pr-5 pb-5">
-                        <Button text="더보기" onClick={handleEstate} />
-                      </div>
-                    </div>
-                  </CommonBackground>
+                    ))}
+                  </div>
                 </div>
               </div>
               {/* 화면 전환 */}

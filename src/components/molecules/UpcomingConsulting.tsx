@@ -26,7 +26,7 @@ const UpcomingConsultingComponent = ({ upcomingConsulting }: Props) => {
         />
       </div>
       <div>
-        <p className="text-gray-800 font-bold">
+        <p className="text-gray-800 font-fontMedium text-lg">
           {isConsultingAvailable
             ? upcomingConsulting.title
             : '상담 예약하러 가기'}

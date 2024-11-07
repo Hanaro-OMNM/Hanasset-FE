@@ -71,7 +71,7 @@ export default function ChatReservation() {
 
   return (
     <div className="top-0 absolute pl-4 animate-fadeInRight">
-      <div className="p-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen overflow-y-auto bg-white/75 scrollbar-hide">
+      <div className="p-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen overflow-y-auto bg-gray-50/90 scrollbar-hide">
         <MobileHeader onBack={onBack} title="채팅 예약하기" />
 
         <div className="text-2xl font-fontMedium mb-4 text-hanaBlack">

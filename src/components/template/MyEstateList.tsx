@@ -139,7 +139,10 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
                           />
                         </div>
                         <div className="pl-7">
-                          <div className="text-hanaGreen text-lg text-left">
+                          <div
+                            className="text-hanaGreen text-lg font-fontCm
+                           text-left"
+                          >
                             {apartment.name}
                           </div>
                           <div className="text-hanaBlack80 text-sm text-left">

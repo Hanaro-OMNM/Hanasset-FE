@@ -1,6 +1,7 @@
 import { FaTimes } from 'react-icons/fa';
 import { useState } from 'react';
 import Greeting from '../../../assets/img/login/HanaGreeting.png';
+import { CookieUtils } from '../../../utils/CookieUtils.ts';
 import Input from '../../atoms/Input.tsx';
 
 interface LoginPageProps {
@@ -23,7 +24,11 @@ export default function LoginPage({
       setError(true);
       return;
     }
-    onLoginSuccess();
+
+    // 임시 쿠키 설정 (예: 1일 동안 유효)
+    CookieUtils.setCookie('connect.sid', 'temporary-session-id', 1);
+
+    onLoginSuccess(); // 로그인 성공 후 추가 로직
   };
 
   return (

@@ -1,10 +1,7 @@
 import { FaTimes, FaCamera } from 'react-icons/fa';
 import { FiChevronLeft } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
-import Input from '../../atoms/Input.tsx';
-
-// import SocialLoginGroup from '../../molecules/SocialLoginGroup.tsx';
+import ModalInput from '../../atoms/ModalInput.tsx';
 
 interface SignUpPageProps {
   onSignUpSuccess?: () => void;
@@ -12,11 +9,7 @@ interface SignUpPageProps {
   onSignUpPage: () => void;
 }
 
-export default function SignUpPage({
-  onSignUpPage,
-  onClose,
-  // onSignUpSuccess
-}: SignUpPageProps) {
+export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
   const [profileImage, setProfileImage] = useState(
     'https://via.placeholder.com/100'
   );
@@ -24,22 +17,55 @@ export default function SignUpPage({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState(false);
+  const [errors, setErrors] = useState({
+    userName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
 
   const handleProfileImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      setProfileImage(URL.createObjectURL(file)); // 업로드한 파일 URL을 상태로 설정
+      setProfileImage(URL.createObjectURL(file));
     }
   };
-  const navigate = useNavigate();
+
+  const validateInputs = () => {
+    let valid = true;
+    const newErrors = {
+      userName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    };
+
+    // 유효성 검사
+    if (!userName) {
+      newErrors.userName = '닉네임을 입력하세요.';
+      valid = false;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = '올바른 이메일 주소를 입력하세요.';
+      valid = false;
+    }
+    if (!password || password.length < 8) {
+      newErrors.password = '비밀번호는 최소 8자 이상이어야 합니다.';
+      valid = false;
+    }
+    if (confirmPassword !== password) {
+      newErrors.confirmPassword = '비밀번호가 일치하지 않습니다.';
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
 
   const handleSignup = () => {
-    if (!email || !password || password !== confirmPassword) {
-      setError(true);
-      return;
+    if (validateInputs()) {
+      onSignUpPage();
     }
-    navigate('/login');
   };
 
   return (
@@ -78,44 +104,46 @@ export default function SignUpPage({
           />
         </label>
       </div>
-      <div className="relative space-y-4 p-4">
-        <Input
+
+      <div className="relative space-y-2 p-4">
+        <ModalInput
           name="userName"
-          type="userName"
+          type="text"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
           placeholder="닉네임"
-          error={error && !userName}
-          errorMessage=" "
+          error={!!errors.userName}
+          errorMessage={errors.userName}
         />
-        <Input
+        <ModalInput
           name="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="아이디"
-          error={error && !email}
-          errorMessage=" "
+          placeholder="이메일"
+          error={!!errors.email}
+          errorMessage={errors.email}
         />
-        <Input
+        <ModalInput
           name="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="비밀번호"
-          error={error && !password}
-          errorMessage=" "
+          error={!!errors.password}
+          errorMessage={errors.password}
         />
-        <Input
+        <ModalInput
           name="confirmPassword"
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder="비밀번호 확인"
-          error={error && password !== confirmPassword}
-          errorMessage=" "
+          error={!!errors.confirmPassword}
+          errorMessage={errors.confirmPassword}
         />
       </div>
+
       <div className="flex justify-center flex-col">
         <button
           onClick={handleSignup}

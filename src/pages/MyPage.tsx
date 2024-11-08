@@ -1,5 +1,6 @@
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import House from '../assets/img/house.png';
 import People from '../assets/img/main/people.png';
 import Button from '../components/atoms/Button';
@@ -11,6 +12,7 @@ import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
 import MyEstateList from '../components/template/MyEstateList';
 import PropertyRegister from '../components/template/PropertyRegister';
+import { CookieUtils } from '../utils/CookieUtils.ts';
 
 interface Asset {
   name: string;
@@ -27,6 +29,8 @@ export default function MyPage() {
     | 'loan'
     | 'EstateList'
   >('main');
+
+  const navigate = useNavigate();
 
   const handleEditProfile = () => {
     setCurrentPage('editProfile');
@@ -72,6 +76,15 @@ export default function MyPage() {
                 <div className="text-2xl font-fontMedium pt-6 pl-6 ">
                   안녕하세요
                 </div>
+                <button
+                  onClick={() => {
+                    CookieUtils.removeCookieValue('connect.sid');
+                    navigate('/'); // 로그인 페이지로 리다이렉트
+                  }}
+                  className="absolute text-white top-6 right-10 px-2 py-1 text-xs bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
+                >
+                  로그아웃
+                </button>
                 <EditProfile name={profile.name} onEdit={handleEditProfile} />
                 <div className="h-52">
                   <img src={People}></img>

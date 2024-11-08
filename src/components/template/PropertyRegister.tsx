@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ApartListForm from '../../pages/property/form/ApartListForm';
 import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
 import JobForm from '../../pages/property/form/JobForm';

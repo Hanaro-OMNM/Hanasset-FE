@@ -25,58 +25,58 @@ const GuestChatDetail: React.FC = () => {
   };
 
   return (
-    <div className="w-[500px]">
-      <div className=" top-0 absolute pl-4 animate-slideInRight">
-        {showDetail ? (
+    <div className="top-0 absolute pl-4 animate-slideInRight">
+      {showDetail ? (
+        <div className="absolute left-[420px]">
           <LoanDetail onHide={() => setShowDetail(false)} />
-        ) : (
-          <div className="w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-2 overflow-y-auto bg-white/75 scrollbar-hide">
-            {/* 매물 정보 */}
-            <div>
-              <SemiTitle title="매물 정보" />
-              <Swiper
-                items={dummyRealEstateList}
-                renderItem={(realEstate) => (
-                  <div className="flex flex-col gap-4 h-32 mr-1 ml-1">
-                    <div>
-                      <button
-                        onClick={() => swiperClick(realEstate.id)}
-                        className="w-full transition-transform transform hover:scale-105"
-                      >
-                        <CommonBackground className="flex items-center p-4 h-20 rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
-                          <PiBuildingApartment className="text-2xl text-hanaGreen" />
-                          <div className="ml-4 text-hanaBlack font-medium text-left">
-                            {realEstate.name} ({realEstate.rentType})
-                            <div className="text-sm text-hanaBlack80">
-                              {realEstate.location}, {realEstate.size}
-                              <br />
-                              {realEstate.address}
-                            </div>
+        </div>
+      ) : (
+        <div className="w-[420px] backdrop-blur-[10px] absolute px-4 top-0 h-screen left-[420px] overflow-y-auto bg-white/75 scrollbar-hide">
+          {/* 매물 정보 */}
+          <div>
+            <SemiTitle title="매물 정보" />
+            <Swiper
+              items={dummyRealEstateList}
+              renderItem={(realEstate) => (
+                <div className="flex flex-col gap-4 h-32 mr-1 ml-1">
+                  <div>
+                    <button
+                      onClick={() => swiperClick(realEstate.id)}
+                      className="w-full transition-transform transform hover:scale-105"
+                    >
+                      <CommonBackground className="flex items-center p-4 h-20 rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
+                        <PiBuildingApartment className="text-2xl text-hanaGreen" />
+                        <div className="ml-4 text-hanaBlack font-medium text-left">
+                          {realEstate.name} ({realEstate.rentType})
+                          <div className="text-sm text-hanaBlack80">
+                            {realEstate.location}, {realEstate.size}
+                            <br />
+                            {realEstate.address}
                           </div>
-                        </CommonBackground>
-                      </button>
-                    </div>
+                        </div>
+                      </CommonBackground>
+                    </button>
                   </div>
-                )}
-                spaceBetween={30}
-                slidesPerView={1}
-              />
-            </div>
-
-            {/* 대출 상품 리스트 */}
-            <div>
-              <SemiTitle title="대출 상품 리스트" />
-              <Expectation totalPrice={10} maxLoan={5} />
-              <DsrInfo dsr={dummyGuest.stressDsr} />
-              <LoanRecommendTab
-                hanaLoanList={dummyLoanGroup[loanIndex]}
-                beotimmogLoanList={[]}
-                onLoanDetailButtonClick={handleShowDetail}
-              />
-            </div>
+                </div>
+              )}
+              spaceBetween={30}
+              slidesPerView={1}
+            />
           </div>
-        )}
-      </div>
+
+          {/* 대출 상품 리스트 */}
+          <div>
+            <SemiTitle title="대출 상품 리스트" />
+            <Expectation totalPrice={10} maxLoan={5} />
+            <DsrInfo dsr={dummyGuest.stressDsr} />
+            <LoanRecommendTab
+              hanaLoanList={dummyLoanGroup[loanIndex]}
+              beotimmogLoanList={[]}
+              onLoanDetailButtonClick={handleShowDetail}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

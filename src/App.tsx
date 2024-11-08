@@ -46,7 +46,7 @@ function App() {
       <NavermapsProvider ncpClientId={import.meta.env.VITE_MAP_CLIENT_ID}>
         <Layout>
           <Routes>
-            <Route path="/" element={<> </>} />
+            <Route path="/" element={<></>} />
             <Route path="/home" element={<Main />} />
             <Route path="/consulting" element={<Consulting />} />
             <Route path="/my-page" element={<MyPage />} />

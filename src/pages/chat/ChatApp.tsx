@@ -2,6 +2,7 @@ import { PiPaperPlaneRightFill } from 'react-icons/pi';
 import React, { useState, useEffect, useRef } from 'react';
 import logo from '../../assets/img/logo.png';
 import profile from '../../assets/img/profile_ex.jpg';
+import GuestChatDetail from '../GuestChatDetail';
 import ChatHeader from './ChatHeader';
 import ChatMessage from './ChatMessage';
 
@@ -125,6 +126,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
                 </button>
               </div>
             </div>
+            <GuestChatDetail />
           </div>
         ) : (
           <div className="flex flex-col h-screen w-full items-center">

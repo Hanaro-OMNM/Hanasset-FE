@@ -1,6 +1,6 @@
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import House from '../assets/img/house.png';
 import People from '../assets/img/main/people.png';
 import Button from '../components/atoms/Button';
@@ -87,7 +87,7 @@ export default function MyPage() {
                 </button>
                 <EditProfile name={profile.name} onEdit={handleEditProfile} />
                 <div className="h-52">
-                  <img src={People}></img>
+                  <img src={People} alt="people" />
                 </div>
               </div>
               <div className="pt-5 p-6 bg-gradient-to-b from-white to-hanaGreen20">
@@ -126,7 +126,7 @@ export default function MyPage() {
                   </div>
                   <CommonBackground>
                     <div>
-                      <img src={House}></img>
+                      <img src={House} alt="house" />
                     </div>
                     <div className="flex flex-col gap-4 mr-1 ml-1">
                       {assets.slice(0, 3).map((asset, index) => (

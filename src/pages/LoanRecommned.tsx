@@ -88,7 +88,7 @@ const LoanInfoPage: React.FC = () => {
               onLoanDetailButtonClick={handleShowDetail}
             />
             <div className="pl-6 pr-6 pb-4">
-              <Button text="실시간 채팅 상담 예약하기" />
+              <Button text="관심 매물 등록하기" />
             </div>
           </div>
         </div>

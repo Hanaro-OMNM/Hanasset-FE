@@ -1,3 +1,4 @@
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { NavermapsProvider } from 'react-naver-maps';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -17,57 +18,64 @@ import SearchResult from './pages/search/SearchResult.tsx';
 import { CookieUtils } from './utils/CookieUtils.ts';
 
 function App() {
-  const isSignedIn = CookieUtils.getCookieValue('connect.sid');
+  const isLogin = CookieUtils.getCookieValue('connect.sid');
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   useEffect(() => {
-    // 로그인하지 않은 상태에서 허용된 페이지 외 접근 시 로그인 모달을 열고 리다이렉션
-    if (
-      !isSignedIn &&
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+
+    if (code) {
+      CookieUtils.setCookie('connect.sid', 'temporary-session-id', 1);
+      setIsLoginModalOpen(false);
+    } else if (
+      !isLogin &&
       !['/', '/home', '/real-estate-list'].includes(location.pathname)
     ) {
       setIsLoginModalOpen(true);
-      navigate('/'); // 로그인 페이지로 리다이렉트
+      navigate('/');
     }
-  }, [isSignedIn, location.pathname, navigate]);
+  }, [isLogin, location.pathname, navigate]);
 
   const handleLoginSuccess = () => {
-    setIsLoginModalOpen(false); // 로그인 성공 시 모달 닫기
+    setIsLoginModalOpen(false);
   };
 
   const closeLoginModal = () => {
-    setIsLoginModalOpen(false); // 모달을 닫아도 현재 페이지 유지
+    setIsLoginModalOpen(false);
   };
 
   return (
     <div className="App">
-      <NavermapsProvider ncpClientId={import.meta.env.VITE_MAP_CLIENT_ID}>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<></>} />
-            <Route path="/home" element={<Main />} />
-            <Route path="/consulting" element={<Consulting />} />
-            <Route path="/my-page" element={<MyPage />} />
-            <Route path="/loan-recommend" element={<LoanRecommend />} />
-            <Route path="/chat-reservation" element={<ChatReservation />} />
-            <Route path="/real-estate-list" element={<RealEstateList />} />
-            <Route path="/property-agree" element={<PropertyAgree />} />
-            <Route path="/consultant" element={<Consultant />} />
-            <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
-            <Route path="/search-result" element={<SearchResult />} />
-          </Routes>
-          {isLoginModalOpen && (
-            <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-              <Modal
-                onLoginSuccess={handleLoginSuccess}
-                onClose={closeLoginModal}
-              />
-            </div>
-          )}
-        </Layout>
-      </NavermapsProvider>
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+        <NavermapsProvider ncpClientId={import.meta.env.VITE_MAP_CLIENT_ID}>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<></>} />
+              <Route path="/home" element={<Main />} />
+              <Route path="/consulting" element={<Consulting />} />
+              <Route path="/my-page" element={<MyPage />} />
+              <Route path="/loan-recommend" element={<LoanRecommend />} />
+              <Route path="/chat-reservation" element={<ChatReservation />} />
+              <Route path="/real-estate-list" element={<RealEstateList />} />
+              <Route path="/property-agree" element={<PropertyAgree />} />
+              <Route path="/consultant" element={<Consultant />} />
+              <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
+              <Route path="/search-result" element={<SearchResult />} />
+            </Routes>
+            {isLoginModalOpen && (
+              <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                <Modal
+                  onLoginSuccess={handleLoginSuccess}
+                  onClose={closeLoginModal}
+                />
+              </div>
+            )}
+          </Layout>
+        </NavermapsProvider>
+      </GoogleOAuthProvider>
     </div>
   );
 }

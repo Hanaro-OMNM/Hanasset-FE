@@ -28,8 +28,7 @@ export default function LoginPage({
 
     // 임시 쿠키 설정 (예: 1일 동안 유효)
     CookieUtils.setCookie('connect.sid', 'temporary-session-id', 1);
-
-    onLoginSuccess(); // 로그인 성공 후 추가 로직
+    onLoginSuccess();
   };
 
   return (
@@ -94,7 +93,7 @@ export default function LoginPage({
         <span className="px-3 text-sm text-gray-500">또는</span>
         <div className="border-t w-1/3"></div>
       </div>
-      <SocialLoginGroup />
+      <SocialLoginGroup onLoginSuccess={onLoginSuccess} />
     </div>
   );
 }

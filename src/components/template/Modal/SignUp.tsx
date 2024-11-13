@@ -10,9 +10,7 @@ interface SignUpPageProps {
 }
 
 export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
-  const [profileImage, setProfileImage] = useState(
-    'https://via.placeholder.com/100'
-  );
+  const [profileImage, setProfileImage] = useState('https://placehold.co/100');
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

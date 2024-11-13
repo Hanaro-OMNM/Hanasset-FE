@@ -1,5 +1,5 @@
 // components/atoms/SocialLoginGroup.tsx
-import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
 const SocialLoginGroup: React.FC = () => {
@@ -14,7 +14,7 @@ const SocialLoginGroup: React.FC = () => {
   };
 
   const handleInstagramLogin = () => {
-    console.log('인스타그램 로그인');
+    console.log('깃허브 로그인');
     // 인스타그램 로그인 로직 추가
   };
 
@@ -28,7 +28,7 @@ const SocialLoginGroup: React.FC = () => {
         onClick={handleFacebookLogin}
         className="w-6 h-6 cursor-pointer"
       />
-      <FaInstagram
+      <FaGithub
         onClick={handleInstagramLogin}
         className="w-6 h-6 cursor-pointer"
       />

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Greeting from '../../../assets/img/login/HanaGreeting.png';
 import { CookieUtils } from '../../../utils/CookieUtils.ts';
 import Input from '../../atoms/Input.tsx';
+import SocialLoginGroup from '../../molecules/SocialLoginGroup.tsx';
 
 interface LoginPageProps {
   onLoginSuccess: () => void;
@@ -33,7 +34,7 @@ export default function LoginPage({
 
   return (
     <div>
-      <div className="flex items-center justify-center my-4">
+      <div className="flex items-center justify-center my-3">
         <div className="font-bold">로그인</div>
         <button
           className="absolute top-4 right-2 text-gray-500 hover:text-gray-700"
@@ -49,7 +50,7 @@ export default function LoginPage({
       <div className="flex justify-center">
         <img src={Greeting} alt="인사" />
       </div>
-      <div className="space-y-4 p-4">
+      <div className="space-y-4 px-4 pt-2">
         <div className="relative">
           <Input
             name="email"
@@ -81,13 +82,19 @@ export default function LoginPage({
         >
           로그인
         </button>
-        <div className="text-xs text-center py-2">
+        <div className="text-xs text-center py-1">
           아직 MapHana에 가입하지 않으셨나요?
           <button onClick={onSignUpPage} className="ml-1 my-1 text-hanaGreen">
             회원가입
           </button>
         </div>
       </div>
+      <div className="flex items-center justify-center mb-1">
+        <div className="border-t w-1/3"></div>
+        <span className="px-3 text-sm text-gray-500">또는</span>
+        <div className="border-t w-1/3"></div>
+      </div>
+      <SocialLoginGroup />
     </div>
   );
 }

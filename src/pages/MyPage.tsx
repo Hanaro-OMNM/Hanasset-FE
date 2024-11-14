@@ -1,4 +1,5 @@
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import House from '../assets/img/house.png';
 import People from '../assets/img/main/people.png';
@@ -11,6 +12,7 @@ import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
 import MyEstateList from '../components/template/MyEstateList';
 import PropertyRegister from '../components/template/PropertyRegister';
+import { CookieUtils } from '../utils/CookieUtils.ts';
 
 interface Asset {
   name: string;
@@ -27,6 +29,8 @@ export default function MyPage() {
     | 'loan'
     | 'EstateList'
   >('main');
+
+  const navigate = useNavigate();
 
   const handleEditProfile = () => {
     setCurrentPage('editProfile');
@@ -72,9 +76,18 @@ export default function MyPage() {
                 <div className="text-2xl font-fontMedium pt-6 pl-6 ">
                   안녕하세요
                 </div>
+                <button
+                  onClick={() => {
+                    CookieUtils.removeCookieValue('connect.sid');
+                    navigate('/'); // 로그인 페이지로 리다이렉트
+                  }}
+                  className="absolute text-white top-6 right-10 px-2 py-1 text-xs bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
+                >
+                  로그아웃
+                </button>
                 <EditProfile name={profile.name} onEdit={handleEditProfile} />
                 <div className="h-52">
-                  <img src={People}></img>
+                  <img src={People} alt="people" />
                 </div>
               </div>
               <div className="pt-5 p-6 bg-gradient-to-b from-white to-hanaGreen20">
@@ -113,7 +126,7 @@ export default function MyPage() {
                   </div>
                   <CommonBackground>
                     <div>
-                      <img src={House}></img>
+                      <img src={House} alt="house" />
                     </div>
                     <div className="flex flex-col gap-4 mr-1 ml-1">
                       {assets.slice(0, 3).map((asset, index) => (

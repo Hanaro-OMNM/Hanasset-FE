@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { MdNavigateNext } from 'react-icons/md';
+import { useEffect, useState } from 'react';
 import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import LocationFilter from './location/LocationFilter.tsx';

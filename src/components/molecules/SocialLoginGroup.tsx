@@ -1,39 +1,44 @@
-// components/atoms/SocialLoginGroup.tsx
-import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { useGoogleLogin } from '@react-oauth/google';
+import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+import { CookieUtils } from '../../utils/CookieUtils.ts';
 
-const SocialLoginGroup: React.FC = () => {
-  const handleGoogleLogin = () => {
-    console.log('구글 로그인');
-    // 구글 로그인 로직 추가
-  };
+interface LoginProps {
+  onLoginSuccess: () => void;
+}
 
-  const handleFacebookLogin = () => {
-    console.log('페이스북 로그인');
-    // 페이스북 로그인 로직 추가
-  };
+function SocialLoginGroup({ onLoginSuccess }: LoginProps) {
+  const handleGoogleLogin = useGoogleLogin({
+    scope: 'email profile',
+    onSuccess: async (response) => {
+      if (response.access_token) {
+        // 임시 쿠키 설정 (예: 1일 동안 유효)
+        CookieUtils.setCookie('connect.sid', 'temporary-session-id', 1);
+        onLoginSuccess();
+      }
+    },
+    onError: (errorResponse) => {
+      console.error(errorResponse);
+    },
+    flow: 'implicit',
+  });
 
-  const handleInstagramLogin = () => {
-    console.log('인스타그램 로그인');
-    // 인스타그램 로그인 로직 추가
+  const handleGithubLogin = () => {
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_GITHUB_REDIRECT_URI}&scope=user`;
   };
 
   return (
     <div className="flex justify-center space-x-8">
       <FcGoogle
-        onClick={handleGoogleLogin}
+        onClick={() => handleGoogleLogin()}
         className="w-6 h-6 cursor-pointer"
       />
-      <FaFacebook
-        onClick={handleFacebookLogin}
-        className="w-6 h-6 cursor-pointer"
-      />
-      <FaInstagram
-        onClick={handleInstagramLogin}
+      <FaGithub
+        onClick={handleGithubLogin}
         className="w-6 h-6 cursor-pointer"
       />
     </div>
   );
-};
+}
 
 export default SocialLoginGroup;

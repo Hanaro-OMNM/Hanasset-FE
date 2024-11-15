@@ -44,7 +44,7 @@ const Consulting: React.FC = () => {
             title="상담현황 확인하기"
             onBack={() => navigate('/')}
           />
-          <div className="mb-8">
+          <div className="mt-6 mb-8">
             <div>
               <div className="text-2xl font-fontMedium ">김하나님의</div>
               <div className="font-fontBold text-2xl">상담 현황</div>

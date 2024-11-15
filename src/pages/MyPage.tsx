@@ -77,21 +77,24 @@ export default function MyPage() {
         <div className="pl-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/90 scrollbar-hide">
           {currentPage === 'main' ? (
             <>
-              <MobileHeader
-                title="내 정보 확인하기"
-                onBack={() => navigate('/')}
-              />
-              <div>
-                <div className="text-2xl font-fontMedium pt-6">안녕하세요</div>
+              <div className="flex justify-between items-center">
+                <MobileHeader
+                  title="내 정보 확인하기"
+                  onBack={() => navigate('/')}
+                />
                 <button
                   onClick={() => {
                     CookieUtils.removeCookieValue('connect.sid');
                     navigate('/'); // 로그인 페이지로 리다이렉트
                   }}
-                  className="absolute text-white top-6 right-10 px-2 py-1 text-xs bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
+                  className="flex items-center justify-center text-center h-8 text-white px-4 py-1 mr-4 text-xs bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
                 >
                   로그아웃
                 </button>
+              </div>
+
+              <div>
+                <div className="text-2xl font-fontMedium pt-6">안녕하세요</div>
                 <EditProfile name={profile.name} onEdit={handleEditProfile} />
                 <div className="h-52">
                   <img src={People} alt="people" />

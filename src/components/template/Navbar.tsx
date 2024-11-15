@@ -30,10 +30,10 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
           className="mt-4 mb-5 flex flex-col items-center justify-center"
         >
           <div className="flex flex-col">
-            <div className="text-hanaColor2 text-md text-center font-fontBold ">
+            <div className="text-hanaColor2 text-md text-center font-fontBold">
               hana
             </div>
-            <div className="text-hanaNavy text-md text-center font-fontBold ">
+            <div className="text-hanaNavy text-md text-center font-fontBold">
               asset
             </div>
           </div>

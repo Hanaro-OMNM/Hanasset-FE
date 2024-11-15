@@ -46,7 +46,7 @@ const Consulting: React.FC = () => {
           />
           <div className="mt-6 mb-8">
             <div>
-              <div className="text-2xl font-fontMedium ">김하나님의</div>
+              <div className="text-2xl font-fontMedium">김하나님의</div>
               <div className="font-fontBold text-2xl">상담 현황</div>
             </div>
             <p className="text-xs mt-2 text-hanaGreen60 mb-4">

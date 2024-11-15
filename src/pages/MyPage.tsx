@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import Back1 from '../assets/img/back1.jpg';
-import Back2 from '../assets/img/back2.png';
-import Back3 from '../assets/img/back3.jpg';
+import Background1 from '../assets/img/background1.jpg';
+import Background2 from '../assets/img/background2.png';
+import Background3 from '../assets/img/background3.jpg';
 import House from '../assets/img/house.png';
 import People from '../assets/img/main/people.png';
 import CommonBackground from '../components/atoms/CommonBackground';
@@ -52,9 +52,9 @@ export default function MyPage() {
   ];
 
   const interestAreas = [
-    { name: '성수', image: Back1 },
-    { name: '홍대', image: Back2 },
-    { name: '신촌', image: Back3 },
+    { name: '성수', image: Background1 },
+    { name: '홍대', image: Background2 },
+    { name: '신촌', image: Background3 },
   ];
 
   const handleRegister = (

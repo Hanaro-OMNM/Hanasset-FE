@@ -27,11 +27,14 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
       <div className="left-0 top-0 w-16 h-full absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center">
         <a
           href="/"
-          className="mt-4 mb-10 flex flex-col items-center justify-center"
+          className="mt-4 mb-5 flex flex-col items-center justify-center"
         >
-          <div className="flex">
-            <div className="text-hanaColor2 text-xs text-center font-fontBold ">
-              로고 머하지
+          <div className="flex flex-col">
+            <div className="text-hanaColor2 text-md text-center font-fontBold ">
+              hana
+            </div>
+            <div className="text-hanaNavy text-md text-center font-fontBold ">
+              asset
             </div>
           </div>
         </a>

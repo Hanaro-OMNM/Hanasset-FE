@@ -32,7 +32,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 : selectedTime === time.value
                   ? 'bg-hanaColor2 text-white'
-                  : 'bg-white text-hanaBlack80 cursor-pointer hover:bg-hanaColor1'
+                  : 'bg-white text-hanaBlack80 cursor-pointer hover:bg-hanaSilver40'
             }`}
             onClick={() => !time.disabled && onTimeChange(time.value)}
           >
@@ -53,7 +53,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 : selectedTime === time.value
                   ? 'bg-hanaColor2 text-white'
-                  : 'bg-white text-hanaBlack80 cursor-pointer hover:bg-hanaColor1'
+                  : 'bg-white text-hanaBlack80 cursor-pointer hover:bg-hanaSilver40'
             }`}
             onClick={() => !time.disabled && onTimeChange(time.value)}
           >

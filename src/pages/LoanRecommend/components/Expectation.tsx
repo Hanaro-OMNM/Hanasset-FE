@@ -19,7 +19,7 @@ const Expectation: React.FC<ExpectationProps> = ({
   const shortage = Math.max(0, totalPrice - (capital + maxLoan));
 
   return (
-    <div className="w-full mb-4 p-6">
+    <div className="w-full mb-4 py-6">
       {title && <SemiTitle>{title}</SemiTitle>}
       <CommonBackground className="p-6 h-40">
         <div

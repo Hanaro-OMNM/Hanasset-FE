@@ -57,7 +57,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
   const isBeotimmogLoanFound = beotimmogLoanList.length > 0;
 
   return (
-    <div className="w-full p-6">
+    <div className="w-full py-6">
       <CommonBackground>
         <TabGroup>
           <TabList className="flex pl-5">

@@ -115,8 +115,8 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
 
   return (
     <div className="animate-fadeInRight">
-      <div className="px-6">
-        <MobileHeader title="내 관심매물" onBack={onBack} />
+      <div className="pr-6">
+        <MobileHeader title="내 관심 매물" onBack={onBack} />
         <CommonBackground>
           <Swiper
             items={slides}

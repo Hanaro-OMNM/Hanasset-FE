@@ -14,6 +14,7 @@ import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
 import MyEstateList from '../components/template/MyEstateList';
 import PropertyRegister from '../components/template/PropertyRegister';
+import { CookieUtils } from '../utils/CookieUtils.ts';
 
 interface Asset {
   name: string;
@@ -30,6 +31,7 @@ export default function MyPage() {
     | 'loan'
     | 'EstateList'
   >('main');
+  const navigate = useNavigate();
 
   const handleEditProfile = () => {
     setCurrentPage('editProfile');
@@ -68,12 +70,11 @@ export default function MyPage() {
   ) => {
     setCurrentPage(type);
   };
-  const navigate = useNavigate();
 
   return (
     <div className="w-[500px]">
       <div className="top-0 absolute pl-4 animate-slideInRight">
-        <div className="w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/90 scrollbar-hide">
+        <div className="pl-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/90 scrollbar-hide">
           {currentPage === 'main' ? (
             <>
               <MobileHeader
@@ -81,15 +82,22 @@ export default function MyPage() {
                 onBack={() => navigate('/')}
               />
               <div>
-                <div className="text-2xl font-fontMedium pt-6 pl-6 ">
-                  안녕하세요
-                </div>
+                <div className="text-2xl font-fontMedium pt-6">안녕하세요</div>
+                <button
+                  onClick={() => {
+                    CookieUtils.removeCookieValue('connect.sid');
+                    navigate('/'); // 로그인 페이지로 리다이렉트
+                  }}
+                  className="absolute text-white top-6 right-10 px-2 py-1 text-xs bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
+                >
+                  로그아웃
+                </button>
                 <EditProfile name={profile.name} onEdit={handleEditProfile} />
                 <div className="h-52">
-                  <img src={People}></img>
+                  <img src={People} alt="people" />
                 </div>
               </div>
-              <div className="pt-5 p-6">
+              <div className="pt-5 pr-6">
                 <div className="mt-10">
                   <SemiTitle>내 정보</SemiTitle>
                   <RegisterButtonGroup
@@ -127,7 +135,7 @@ export default function MyPage() {
                 </div>
 
                 {/* 내 관심 아파트 */}
-                <div className="mt-10">
+                <div className="mt-10 mb-5">
                   <div className="mb-5">
                     <SemiTitle>내 관심 매물</SemiTitle>
                   </div>

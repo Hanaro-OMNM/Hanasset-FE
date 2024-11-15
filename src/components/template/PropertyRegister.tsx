@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ApartListForm from '../../pages/property/form/ApartListForm';
 import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
 import JobForm from '../../pages/property/form/JobForm';
@@ -112,7 +112,7 @@ export default function PropertyForm({
   };
 
   return (
-    <div className="px-5 animate-fadeInRight">
+    <div className="animate-fadeInRight pr-5">
       <MobileHeader title="자산 수정하기" onBack={onBack} />
       <CommonBackground className="mt-5 mb-10">
         {forms[currentStep].component}

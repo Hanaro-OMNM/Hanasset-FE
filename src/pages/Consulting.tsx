@@ -36,7 +36,6 @@ const Consulting: React.FC = () => {
     ConsultantLayout이랑 혼동 주의!
 
   */
-
   return (
     <div className="w-[500px]">
       <div className="top-0 absolute pl-4 animate-slideInRight">
@@ -45,7 +44,6 @@ const Consulting: React.FC = () => {
             title="상담현황 확인하기"
             onBack={() => navigate('/')}
           />
-
           <div className="mb-8">
             <div>
               <div className="text-2xl font-fontMedium ">김하나님의</div>
@@ -72,7 +70,6 @@ const Consulting: React.FC = () => {
               </div>
             </CommonBackground>
           </div>
-
           <SemiTitle>지난 상담 내역</SemiTitle>
           <CommonBackground className="p-5 mt-4 mb-4">
             {consultingHistory.map((consulting, index) => (

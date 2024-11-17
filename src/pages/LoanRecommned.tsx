@@ -2,51 +2,14 @@ import { IoChevronBack } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { dummyGuest } from '../assets/Dummy';
+import { dummyLoanList } from '../assets/Dummy';
+import { dummyBeotimmogLoanList } from '../assets/Dummy';
 import Button from '../components/atoms/Button';
 import LoanDetail from './LoanDetail.tsx';
 import DsrInfo from './LoanRecommend/components/DsrInfo';
 import Expectation from './LoanRecommend/components/Expectation';
 import LoanFoundMessage from './LoanRecommend/components/LoanFoundMessage';
 import LoanRecommendTab from './LoanRecommend/components/LoanRecommendTab';
-
-// Dummy Datas
-interface Loan {
-  name: string;
-  rate: number;
-  limit: number;
-  newDsr: number;
-  loanDetailUrl: string;
-}
-
-const hanaYouthJeonseLoan: Loan = {
-  name: '하나 청년전세론',
-  rate: 4.453,
-  limit: 2,
-  newDsr: 20,
-  loanDetailUrl: '',
-};
-
-const seoulYouthLoan: Loan = {
-  name: '서울특별시 청년임차 보증금 대출',
-  rate: 4.52,
-  limit: 2,
-  newDsr: 25,
-  loanDetailUrl: '',
-};
-
-const jeonseSecurityLoan: Loan = {
-  name: '전세안심금대출',
-  rate: 4.71,
-  limit: 2,
-  newDsr: 30,
-  loanDetailUrl: '',
-};
-
-const loanList: Loan[] = [
-  hanaYouthJeonseLoan,
-  seoulYouthLoan,
-  jeonseSecurityLoan,
-];
 
 const profile = {
   name: '김하나',
@@ -83,8 +46,8 @@ const LoanInfoPage: React.FC = () => {
             <DsrInfo dsr={dummyGuest.stressDsr} />
             <LoanFoundMessage isFound={true} />
             <LoanRecommendTab
-              hanaLoanList={loanList}
-              beotimmogLoanList={[]}
+              hanaLoanList={dummyLoanList}
+              beotimmogLoanList={dummyBeotimmogLoanList}
               onLoanDetailButtonClick={handleShowDetail}
             />
             <div className="pl-6 pr-6 pb-4">

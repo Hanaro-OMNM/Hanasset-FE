@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { dummyLoanGroup } from '../assets/Dummy';
 import { dummyRealEstateList } from '../assets/Dummy';
 import { dummyGuest } from '../assets/Dummy';
+import { dummyBeotimmogLoanGroup } from '../assets/Dummy';
 import CommonBackground from '../components/atoms/CommonBackground';
 import Swiper from '../components/atoms/Swiper';
 import LoanDetail from './LoanDetail';
@@ -71,7 +72,7 @@ const GuestChatDetail: React.FC = () => {
             <DsrInfo dsr={dummyGuest.stressDsr} />
             <LoanRecommendTab
               hanaLoanList={dummyLoanGroup[loanIndex]}
-              beotimmogLoanList={[]}
+              beotimmogLoanList={dummyBeotimmogLoanGroup[loanIndex]}
               onLoanDetailButtonClick={handleShowDetail}
             />
           </div>

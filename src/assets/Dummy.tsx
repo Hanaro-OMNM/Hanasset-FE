@@ -54,7 +54,7 @@ export const dummyGuest: Guest = {
   family: false,
   home: false,
   loan: 0,
-  stressDsr: 40,
+  stressDsr: 10,
 };
 
 export const hanaYouthJeonseLoan: Loan = {

@@ -89,6 +89,30 @@ export const jeonseSecurityLoan: Loan = {
   loanDetailUrl: '',
 };
 
+export const beotimmogYoungWarrantyWolseLoan: Loan = {
+  name: '버팀목 청년전용보증부월세대출',
+  rate: 1.3,
+  limit: 0.45,
+  newDsr: 23,
+  loanDetailUrl: '',
+};
+
+export const beotimmogSmallBusinessJeonseLoan: Loan = {
+  name: '버팀목 중소기업취업청년 전세자금대출',
+  rate: 1.5,
+  limit: 1,
+  newDsr: 28,
+  loanDetailUrl: '',
+};
+
+export const beotimmogJeonseLoan: Loan = {
+  name: '버팀목전세자금대출',
+  rate: 2.0,
+  limit: 3,
+  newDsr: 32,
+  loanDetailUrl: '',
+};
+
 export const dummyLoanList: Loan[] = [
   hanaYouthJeonseLoan,
   seoulYouthLoan,
@@ -96,7 +120,18 @@ export const dummyLoanList: Loan[] = [
   jeonseSecurityLoan,
 ];
 
+export const dummyBeotimmogLoanList: Loan[] = [
+  beotimmogYoungWarrantyWolseLoan,
+  beotimmogSmallBusinessJeonseLoan,
+  beotimmogJeonseLoan,
+];
+
 export const dummyLoanGroup: Loan[][] = [dummyLoanList, [], []];
+export const dummyBeotimmogLoanGroup: Loan[][] = [
+  dummyBeotimmogLoanList,
+  [],
+  [],
+];
 
 export const dummyLoanDetail: LoanDetail = {
   type: '전(월)세 대출',

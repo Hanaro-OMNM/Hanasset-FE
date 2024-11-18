@@ -31,7 +31,10 @@ export default function RealEstateLayout() {
   return (
     <div className="top-0 absolute pl-4 animate-fadeInRight">
       <div className="w-[420px] px-2 pt-2 bg-gray-50/90 absolute backdrop-blur-[10px] left-4 overflow-y-auto h-screen scrollbar-hide">
-        <MobileHeader title="내 관심 매물" onBack={() => navigate('/')} />
+        <MobileHeader
+          title="내 관심 매물"
+          onBack={() => navigate('/my-page')}
+        />
         <div className="flex-grow min-h-0 overflow-y-auto">
           {realEstateData.map((item, index) => (
             <div key={index} className="border-b">

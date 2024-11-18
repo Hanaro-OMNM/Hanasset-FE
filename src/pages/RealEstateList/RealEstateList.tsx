@@ -40,7 +40,7 @@ export default function RealEstateLayout() {
 
   return (
     <div className="top-0 absolute pl-4 animate-slideInRight">
-      <div className="w-[420px] px-2 pt-2 bg-gray-50/90 absolute backdrop-blur-[10px] left-4 overflow-y-auto h-screen scrollbar-hide">
+      <div className="w-[420px] px-2 pt-2 bg-white/70 absolute backdrop-blur-[10px] left-4 overflow-y-auto h-screen scrollbar-hide">
         <MobileHeader title="영등포구 영등포동" onBack={() => navigate('/')} />
         <div className="flex justify-between items-center my-2">
           <div className="flex items-center font-bold ml-1">

@@ -29,7 +29,7 @@ const LoanDetail: React.FC<LoanDetailProps> = ({ onHide }) => {
         </div>
         <div className="p-5">
           <CommonBackground>
-            <div className="py-3">
+            <div className="py-3 mx-4 px-2">
               {/* 대출 정보 카드 */}
               <LoanDetailCard
                 type={dummyLoanDetail.type}

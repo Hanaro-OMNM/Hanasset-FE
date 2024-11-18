@@ -1,12 +1,13 @@
 import { AiOutlineRight } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import React from 'react';
 import Consultant from '../assets/img/consultantPg.png';
 import CommonBackground from '../components/atoms/CommonBackground';
 import MobileHeader from '../components/atoms/MobileHeader';
 import SemiTitle from '../components/atoms/SemiTitle';
 import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting';
+import loanReservationAtom from '../recoil/loanReservation';
 
 type Consulting = {
   title: string;
@@ -20,21 +21,10 @@ const consultingHistory: Consulting[] = [
   { title: '비둘기 아파트', date: '2024.10.27 19:07' },
 ];
 
-const upcomingConsulting: Consulting = {
-  title: '롯데캐슬엠파이어',
-  date: '2024.10.27 19:07',
-};
-
 const Consulting: React.FC = () => {
   const navigate = useNavigate();
-  const [isActive, setIsActive] = useState(true);
-  /*
-    ConsultingTabLayout이란?
+  const [upcomingConsulting] = useRecoilState(loanReservationAtom);
 
-    : Navbar에서 "상담" 버튼 눌렀을 때 나오는 사이드바 부분입니다.
-    ConsultantLayout이랑 혼동 주의!
-
-  */
   return (
     <div className="top-0 absolute pl-4 animate-slideInRight">
       <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-gray-50/90 backdrop-blur-[10px] overflow-y-auto scrollbar-hide">
@@ -48,22 +38,9 @@ const Consulting: React.FC = () => {
             채팅방은 예약 시간이 되면 활성화 됩니다.
           </p>
           <img src={Consultant}></img>
-
-          <CommonBackground className="p-1">
-            <div
-              className="p-4 rounded-lg flex items-center justify-between cursor-pointer hover:transition-transform transform hover:scale-105"
-              onClick={() =>
-                navigate(isActive ? '/live-chat' : '/select-estate')
-              }
-            >
-              <UpcomingConsultingComponent
-                upcomingConsulting={upcomingConsulting}
-                isActive={isActive}
-              />
-            </div>
-          </CommonBackground>
-          {/* 발표용 임시버튼 */}
-          <button onClick={() => setIsActive(!isActive)}>set</button>
+          <UpcomingConsultingComponent
+            upcomingConsulting={upcomingConsulting}
+          />
         </div>
         <SemiTitle>지난 상담 내역</SemiTitle>
         <CommonBackground className="p-5 mt-4 mb-4">

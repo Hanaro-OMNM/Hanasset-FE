@@ -7,7 +7,7 @@ interface EditProfileProps {
 
 export default function EditProfile({ name, onEdit }: EditProfileProps) {
   return (
-    <div className="pl-6">
+    <div>
       {/* 수정 아이콘 */}
       <button
         onClick={onEdit}

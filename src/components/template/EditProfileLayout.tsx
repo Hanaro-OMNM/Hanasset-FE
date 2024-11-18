@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import CommonBackground from '../atoms/CommonBackground';
 import ConfirmModal from '../atoms/EditProfileModal';
 import Input from '../atoms/Input';
+import MobileHeader from '../atoms/MobileHeader';
 
 interface EditProfilePageProps {
   onBack: () => void;
@@ -44,15 +45,8 @@ export default function EditProfilePage({ onBack }: EditProfilePageProps) {
   return (
     <>
       <div className="animate-fadeInRight">
-        <div className="flex h-12 mb-4 pl-1 gap-2 items-center">
-          <button className="items-center" onClick={handleCloseChanges}>
-            <IoChevronBack className="text-hanaBlack80 text-xl" />
-          </button>
-          <h1 className="text-hanaBlack80 text-lg font-semibold ">
-            프로필 이미지
-          </h1>
-        </div>
-        <div className="p-6">
+        <MobileHeader title="프로필 수정하기" onBack={onBack}></MobileHeader>
+        <div className="pr-6">
           <CommonBackground className="p-4">
             <div className="space-y-2">
               <div className="flex items-center space-x-4">

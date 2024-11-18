@@ -1,6 +1,7 @@
+import Papa from 'papaparse';
 import { HiOutlineOfficeBuilding } from 'react-icons/hi';
 import { MdNavigateNext } from 'react-icons/md';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import LocationFilterCity from './LocationFiltersC';
 import LocationFilterDong from './LocationFiltersD';
@@ -17,18 +18,35 @@ const LocationFilterGungu = () => {
   const currDong: string = '읍/면/동';
 
   // 일단 더미 데이터
-  const gungu: string[] = [
-    '강동구',
-    '강남구',
-    '송파구',
-    '영등포구',
-    '성동구',
-    '광진구',
-    '동작구',
-  ];
+  const [gungu, setGungu] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchGungu = new Set<string>();
+      await fetch('src/assets/output.csv')
+        .then((response) => response.text())
+        .then((csvString) => {
+          Papa.parse<string>(csvString, {
+            complete: (results) => {
+              results.data.forEach((row) => {
+                if (row[1] && row[1].startsWith(currCity)) {
+                  const gunguName = row[1].split(' ')[1];
+                  if (gunguName) {
+                    fetchGungu.add(gunguName);
+                  }
+                }
+              });
+              setGungu(fetchGungu);
+            },
+          });
+        });
+    };
+
+    fetchData();
+  }, []);
 
   // 배열을 JSON 문자열로 변환하여 로컬 스토리지에 저장
-  localStorage.setItem('gungu', JSON.stringify(gungu));
+  localStorage.setItem('gungu', JSON.stringify(Array.from(gungu)));
 
   const storedLocations: string[] = JSON.parse(
     localStorage.getItem('gungu') || '[]'

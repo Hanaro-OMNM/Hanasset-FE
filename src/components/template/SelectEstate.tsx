@@ -6,10 +6,6 @@ import CommonBackground from '../atoms/CommonBackground';
 import MobileHeader from '../atoms/MobileHeader';
 import Swiper from '../atoms/Swiper';
 
-interface MyEstateListProps {
-  onBack: () => void;
-}
-
 const apartments = [
   {
     id: 1,
@@ -94,7 +90,7 @@ const slides = Array.from(
     apartments.slice(index * itemsPerPage, (index + 1) * itemsPerPage)
 );
 
-export default function MyEstateList({ onBack }: MyEstateListProps) {
+export default function SelectEstate() {
   const navigate = useNavigate();
   const [checkedItems, setCheckedItems] = useState<boolean[]>(
     Array(apartments.length).fill(false)
@@ -114,9 +110,12 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
   };
 
   return (
-    <div className="animate-fadeInRight">
-      <div className="px-6">
-        <MobileHeader title="내 관심매물" onBack={onBack} />
+    <div className="top-0 absolute pl-4 animate-fadeInRight">
+      <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-gray-50/90 backdrop-blur-[10px] overflow-y-auto scrollbar-hide">
+        <MobileHeader
+          title="내 관심 매물"
+          onBack={() => navigate('/consulting')}
+        />
         <CommonBackground>
           <Swiper
             items={slides}
@@ -139,7 +138,7 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
                           />
                         </div>
                         <div className="pl-7">
-                          <div className="text-hanaGreen text-lg text-left">
+                          <div className="text-hanaGreen text-lg font-fontCm text-left">
                             {apartment.name}
                           </div>
                           <div className="text-hanaBlack80 text-sm text-left">
@@ -159,7 +158,7 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
             spaceBetween={30}
             slidesPerView={1}
           />
-          <div className="p-2">
+          <div className="p-2 mb-5">
             <Button
               onClick={() => navigate('/chat-reservation')}
               text="상담 예약하기"

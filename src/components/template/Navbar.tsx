@@ -23,22 +23,22 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
   }, [state]);
 
   return (
-    <div className="space-x-16">
-      <div className="left-0 top-0 w-20 h-full absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center">
+    <div className="space-x-12">
+      <div className="left-0 top-0 w-16 h-full absolute bg-white shadow border-r border-[#e7e7e7] flex flex-col items-center">
         <a
           href="/"
-          className="mt-4 mb-10 flex flex-col items-center justify-center"
+          className="mt-4 mb-5 flex flex-col items-center justify-center"
         >
-          <div className="flex">
-            <div className="text-hanaNavy text-sm text-center font-fontBold">
-              Map
+          <div className="flex flex-col">
+            <div className="text-hanaColor2 text-md text-center font-fontBold">
+              hana
             </div>
-            <div className="text-hanaGreen text-sm text-center font-fontBold">
-              HANA
+            <div className="text-hanaNavy text-md text-center font-fontBold">
+              asset
             </div>
           </div>
         </a>
-        <div className="w-14 flex flex-col items-center space-y-10 flex-grow">
+        <div className="w-14 flex flex-col items-center space-y-6 flex-grow">
           <button
             onClick={() => navigate('/home')}
             className="flex flex-col items-center"
@@ -49,7 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               <img
                 src={Home}
                 alt="Home Icon"
-                className={`h-10 transition duration-200 transform ${
+                className={`h-8 transition duration-200 transform ${
                   location.pathname === '/home'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
@@ -58,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               <div
                 className={`tracking-tight text-center text-xs ${
                   location.pathname === '/home'
-                    ? 'text-hanaGreen'
+                    ? 'text-hanaColor2'
                     : 'text-gray-300'
                 }`}
               >
@@ -78,7 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               <img
                 src={Map}
                 alt="Map Icon"
-                className={`h-10 transition duration-200 transform ${
+                className={`h-8 transition duration-200 transform ${
                   location.pathname === '/'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
@@ -86,7 +86,9 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               />
               <div
                 className={`tracking-tight text-center text-xs ${
-                  location.pathname === '/' ? 'text-hanaGreen' : 'text-gray-300'
+                  location.pathname === '/'
+                    ? 'text-hanaColor2'
+                    : 'text-gray-300'
                 }`}
               >
                 지도
@@ -105,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               <img
                 src={Consultant}
                 alt="Consultant Icon"
-                className={`h-10 transition duration-200 transform ${
+                className={`h-8 transition duration-200 transform ${
                   location.pathname === '/consulting'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
@@ -114,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               <div
                 className={`tracking-tight text-center text-xs ${
                   location.pathname === '/consulting'
-                    ? 'text-hanaGreen'
+                    ? 'text-hanaColor2'
                     : 'text-gray-300'
                 }`}
               >
@@ -134,7 +136,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               <img
                 src={Mypage}
                 alt="Mypage Icon"
-                className={`h-10 transition duration-200 transform ${
+                className={`h-8 transition duration-200 transform ${
                   location.pathname === '/my-page'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
@@ -143,7 +145,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               <div
                 className={`tracking-tight text-center text-xs ${
                   location.pathname === '/my-page'
-                    ? 'text-hanaGreen'
+                    ? 'text-hanaColor2'
                     : 'text-gray-300'
                 }`}
               >

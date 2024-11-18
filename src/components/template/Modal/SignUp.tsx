@@ -145,13 +145,13 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
       <div className="flex justify-center flex-col">
         <button
           onClick={handleSignup}
-          className="mx-4 py-1 text-white bg-hanaGreen60 hover:bg-hanaGreen rounded-md transition"
+          className="mx-4 py-1 text-white bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
         >
           회원가입
         </button>
-        <div className="text-xs text-center py-1">
+        <div className="text-xs text-center py-1 mt-2">
           이미 계정이 있으신가요?{' '}
-          <button onClick={onSignUpPage} className="ml-1 my-1 text-hanaGreen">
+          <button onClick={onSignUpPage} className="ml-1 my-1 text-hanaColor2">
             로그인
           </button>
         </div>

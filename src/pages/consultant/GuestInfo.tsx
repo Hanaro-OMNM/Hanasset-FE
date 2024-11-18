@@ -38,7 +38,7 @@ export default function GuestInfo() {
       {showDetail ? (
         <LoanDetail onHide={() => setShowDetail(false)} />
       ) : (
-        <div className="max-w-[500px] bg-gray-100 p-6 overflow-hidden">
+        <div className="max-w-[420px] bg-gray-100 p-6 overflow-hidden">
           <div className="h-full overflow-y-auto max-h-screen scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400">
             <div className="flex flex-col gap-y-4">
               <div>

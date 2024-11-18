@@ -1,12 +1,24 @@
+import Papa from 'papaparse';
 import { HiOutlineOfficeBuilding } from 'react-icons/hi';
 import { MdNavigateNext } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { useState, useEffect } from 'react';
 import CommonBackground from '../../components/atoms/CommonBackground';
+import centerAtom from '../../recoil/center';
 import LocationFilterCity from './LocationFiltersC';
 import LocationFilterGungu from './LocationFiltersG';
 
+type Info = {
+  code: string;
+  address: string;
+  lat: number;
+  lng: number;
+};
+
 const LocationFilterDong = () => {
+  const setCenter = useSetRecoilState(centerAtom);
+
   const navigate = useNavigate();
 
   const [activePage, setActivePage] = useState<'city' | 'gungu' | 'dong' | ''>(
@@ -22,15 +34,50 @@ const LocationFilterDong = () => {
   const currDong: string = '읍/면/동';
 
   // 일단 더미 데이터
-  const dong: string[] = ['강일동', '길동', '천호동', '암사동', '성내동'];
+  const [dong, setDong] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchDong = new Set<string>();
+      const fetchInfo: Array<Info> = [];
+
+      await fetch('src/assets/output.csv')
+        .then((response) => response.text())
+        .then((csvString) => {
+          Papa.parse<string>(csvString, {
+            complete: (results) => {
+              results.data.forEach((row) => {
+                if (row[1] && row[1].startsWith(currCity + ' ' + currGungu)) {
+                  const dongName = row[1].split(' ')[2];
+                  if (dongName) {
+                    fetchDong.add(dongName);
+                    fetchInfo.push({
+                      code: row[0] || '',
+                      address: row[1] || '',
+                      lat: parseFloat(row[3] || '0'),
+                      lng: parseFloat(row[2] || '0'),
+                    });
+                  }
+                }
+              });
+              setDong(fetchDong);
+              localStorage.setItem('info', JSON.stringify(fetchInfo));
+            },
+          });
+        });
+    };
+
+    fetchData();
+  }, []);
 
   // 배열을 JSON 문자열로 변환하여 로컬 스토리지에 저장
-  localStorage.setItem('dong', JSON.stringify(dong));
+  localStorage.setItem('dong', JSON.stringify(Array.from(dong)));
 
   const storedLocations: string[] = JSON.parse(
     localStorage.getItem('dong') || '[]'
   );
   const storedKey: string = 'currDong';
+  const info: Info[] = JSON.parse(localStorage.getItem('info') || '[]');
 
   return (
     <div>
@@ -72,6 +119,16 @@ const LocationFilterDong = () => {
                   onClick={() => {
                     localStorage.setItem(storedKey, JSON.stringify(name));
                     navigate('/');
+                    const fullAddress = `${currCity} ${currGungu} ${name}`;
+                    const selected = info.find(
+                      (item) => item.address === fullAddress
+                    );
+                    if (!selected) return;
+                    const { lat, lng } = selected;
+                    setCenter({
+                      lat,
+                      lng,
+                    });
                   }}
                 >
                   <span className="font-medium text-slate-800 hover:font-bold">

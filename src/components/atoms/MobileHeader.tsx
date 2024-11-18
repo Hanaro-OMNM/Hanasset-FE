@@ -8,8 +8,11 @@ interface HeaderProps {
 
 const MobileHeader: React.FC<HeaderProps> = ({ title, onBack }) => {
   return (
-    <div className="flex h-12 mb-4 gap-2 items-center">
-      <button className="flex justify-center" onClick={onBack}>
+    <div className="flex items-center h-12">
+      <button
+        className="flex items-center justify-center mr-2"
+        onClick={onBack}
+      >
         <IoChevronBack className="text-hanaBlack80 text-xl" />
       </button>
       <h1 className="text-hanaBlack80 text-lg font-semibold">{title}</h1>

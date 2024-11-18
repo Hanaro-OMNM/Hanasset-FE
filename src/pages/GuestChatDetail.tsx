@@ -26,7 +26,7 @@ const GuestChatDetail: React.FC = () => {
   };
 
   return (
-    <div className="top-0 absolute pl-4 animate-slideInRight">
+    <div className="top-0 absolute animate-slideInRight">
       {showDetail ? (
         <div className="absolute left-[420px]">
           <LoanDetail onHide={() => setShowDetail(false)} />

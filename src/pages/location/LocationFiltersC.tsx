@@ -13,16 +13,20 @@ const LocationFilterCity = () => {
 
   // 일단 더미 데이터
   const city: string[] = [
-    '서울',
-    '경기',
-    '인천',
-    '부산',
-    '울산',
-    '대구',
-    '광주',
-    '강원',
-    '세종',
-    '충북',
+    '서울특별시',
+    '인천광역시',
+    '광주광역시',
+    '대전광역시',
+    '울산광역시',
+    '경기도',
+    '충청북도',
+    '충청남도',
+    '전라남도',
+    '경상북도',
+    '경상남도',
+    '제주특별자치도',
+    '강원특별자치도',
+    '전북특별자치도',
   ];
 
   // 배열을 JSON 문자열로 변환하여 로컬 스토리지에 저장
@@ -54,7 +58,7 @@ const LocationFilterCity = () => {
             </div>
 
             {/* 지역 선택 버튼 */}
-            <div className="w-full grid grid-cols-3 gap-4 px-4 pb-6">
+            <div className="w-full grid grid-cols-3 gap-4 px-4 pb-6 text-sm">
               {storedLocations.map((name) => (
                 <button
                   key={name}

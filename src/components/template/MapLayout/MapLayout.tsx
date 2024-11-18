@@ -2,7 +2,9 @@ import { FaPlus, FaMinus } from 'react-icons/fa';
 import { FaLocationCrosshairs } from 'react-icons/fa6';
 import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
 import { useLocation } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import React, { useState, useCallback, useRef, useEffect } from 'react';
+import centerAtom from '../../../recoil/center/index.ts';
 import Footer from '../Footer.tsx';
 import MapMarkerCluster from '../MapLayout/MapMarkerCluster.tsx';
 import MapPanel from '../MapLayout/MapPannel.tsx';
@@ -42,20 +44,25 @@ export default function MapLayout({ children }: LayoutProps) {
   };
 
   const [zoom, setZoom] = useState(13);
-  const [center, setCenter] = useState(
-    new naverMaps.LatLng(37.438902, 126.904998)
-  );
+  const [center, setCenter] = useRecoilState(centerAtom);
 
   const handleZoomChanged = useCallback((newZoom: number) => {
     setZoom(newZoom);
   }, []);
+
+  const handleCenterChanged = () => {
+    if (mapRef.current) {
+      const newCenter = mapRef.current.getCenter();
+      setCenter({ lat: newCenter.lat(), lng: newCenter.lng() });
+    }
+  };
 
   const handleLocateMe = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setCenter(new naverMaps.LatLng(latitude, longitude));
+          setCenter({ lat: latitude, lng: longitude });
         },
         (error) =>
           console.error('Error occurred while fetching location:', error),
@@ -116,7 +123,8 @@ export default function MapLayout({ children }: LayoutProps) {
           ref={mapRef}
           mapTypeId={mapType}
           zoomControl={false}
-          center={center}
+          center={new naverMaps.LatLng(center.lat, center.lng)}
+          onCenterChanged={handleCenterChanged}
           defaultZoom={zoom}
           onZoomChanged={handleZoomChanged}
           draggable={true}

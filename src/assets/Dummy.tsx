@@ -126,6 +126,7 @@ export const dummyLoanList: Loan[] = [
 export const dummyLoanList2: Loan[] = [seoulYouthLoan, jeonseSecurityLoan];
 
 export const dummyBeotimmogLoanList: Loan[] = [
+  beotimmogYoungWarrantyWolseLoan,
   beotimmogSmallBusinessJeonseLoan,
   beotimmogJeonseLoan,
 ];
@@ -142,7 +143,7 @@ export const dummyLoanGroup: Loan[][] = [
 ];
 export const dummyBeotimmogLoanGroup: Loan[][] = [
   dummyBeotimmogLoanList,
-  dummyBeotimmogLoanList2,
+  dummyBeotimmogLoanList,
   dummyBeotimmogLoanList2,
 ];
 

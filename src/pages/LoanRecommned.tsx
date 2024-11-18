@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { dummyGuest } from '../assets/Dummy';
 import { dummyLoanList } from '../assets/Dummy';
@@ -16,7 +15,6 @@ const profile = {
 };
 
 const LoanInfoPage: React.FC = () => {
-  const navigate = useNavigate();
   const [showDetail, setShowDetail] = useState(false);
   const handleShowDetail = () => {
     setShowDetail(true);

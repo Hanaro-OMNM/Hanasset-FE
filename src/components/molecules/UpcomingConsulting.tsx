@@ -9,7 +9,6 @@ type Consulting = {
 type Props = {
   upcomingConsulting: Consulting | null;
   isActive: boolean;
-  onButtonClick?: () => void;
 };
 
 const UpcomingConsultingComponent = ({

@@ -13,7 +13,7 @@ import Swiper from '../components/atoms/Swiper';
 import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
 import PropertyRegister from '../components/template/PropertyRegister';
-import MyEstateList from '../components/template/SelectEstate.tsx';
+import SelectEstate from '../components/template/SelectEstate.tsx';
 import { CookieUtils } from '../utils/CookieUtils.ts';
 
 interface Asset {
@@ -178,7 +178,7 @@ export default function MyPage() {
         ) : currentPage === 'editProfile' ? (
           <EditProfileLayout onBack={() => setCurrentPage('main')} />
         ) : currentPage === 'EstateList' ? (
-          <MyEstateList onBack={() => setCurrentPage('main')} />
+          <SelectEstate />
         ) : (
           <PropertyRegister
             assetType={currentPage}

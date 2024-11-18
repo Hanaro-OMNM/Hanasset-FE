@@ -90,7 +90,7 @@ const slides = Array.from(
     apartments.slice(index * itemsPerPage, (index + 1) * itemsPerPage)
 );
 
-export default function MyEstateList() {
+export default function SelectEstate() {
   const navigate = useNavigate();
   const [checkedItems, setCheckedItems] = useState<boolean[]>(
     Array(apartments.length).fill(false)

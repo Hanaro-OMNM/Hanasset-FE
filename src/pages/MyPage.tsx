@@ -12,8 +12,8 @@ import SemiTitle from '../components/atoms/SemiTitle';
 import Swiper from '../components/atoms/Swiper';
 import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
+import MyEstateList from '../components/template/MyEstateList.tsx';
 import PropertyRegister from '../components/template/PropertyRegister';
-import SelectEstate from '../components/template/SelectEstate.tsx';
 import { CookieUtils } from '../utils/CookieUtils.ts';
 
 interface Asset {
@@ -37,7 +37,7 @@ export default function MyPage() {
     setCurrentPage('editProfile');
   };
   const handleEstate = () => {
-    setCurrentPage('EstateList');
+    navigate('/my-estate-list');
   };
   const profile = {
     name: '김하나',
@@ -72,7 +72,7 @@ export default function MyPage() {
   };
 
   return (
-    <div className="top-0 absolute pl-4 animate-slideInRight">
+    <div className="top-0 absolute animate-fdeInRight">
       <div className="pl-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/90 scrollbar-hide">
         {currentPage === 'main' ? (
           <>
@@ -145,7 +145,7 @@ export default function MyPage() {
                   {assets.slice(0, 4).map((asset, index) => (
                     <div
                       key={index}
-                      onClick={index === 0 ? handleEstate : undefined}
+                      onClick={handleEstate}
                       className={`${
                         index === 0
                           ? 'bg-hanaColor2 hover:opacity-90'
@@ -173,12 +173,13 @@ export default function MyPage() {
                 </div>
               </div>
             </div>
+
             {/* 화면 전환 */}
           </>
         ) : currentPage === 'editProfile' ? (
           <EditProfileLayout onBack={() => setCurrentPage('main')} />
         ) : currentPage === 'EstateList' ? (
-          <SelectEstate />
+          <MyEstateList />
         ) : (
           <PropertyRegister
             assetType={currentPage}

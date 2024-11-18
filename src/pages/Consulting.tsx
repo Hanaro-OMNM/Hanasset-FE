@@ -62,6 +62,7 @@ const Consulting: React.FC = () => {
               />
             </div>
           </CommonBackground>
+          {/* 발표용 임시버튼 */}
           <button onClick={() => setIsActive(!isActive)}>set</button>
         </div>
         <SemiTitle>지난 상담 내역</SemiTitle>

@@ -194,7 +194,7 @@ export const realEstateData = [
   {
     type: '아파트',
     location: '서초푸르지오(써밋)',
-    price: '11억 5,000만',
+    price: '1,000만 / 630만',
     size: '17층, 100.97m², 관리비 30만',
     description: '갭투자가능',
     dealType: '월세',

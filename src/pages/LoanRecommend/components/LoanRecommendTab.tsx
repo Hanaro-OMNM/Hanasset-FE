@@ -117,7 +117,9 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                       showCount >= hanaLoanList.length && 'hidden'
                     )}
                   >
-                    <button onClick={onClick}>더 보기</button>
+                    <button onClick={onClick} className="mb-2">
+                      더 보기
+                    </button>
                   </div>
                 </div>
               ) : (
@@ -148,7 +150,9 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                       showCount >= beotimmogLoanList.length && 'hidden'
                     )}
                   >
-                    <button onClick={onClick}>더 보기</button>
+                    <button onClick={onClick} className="mb-2">
+                      더 보기
+                    </button>
                   </div>
                 </div>
               ) : (

@@ -37,7 +37,7 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
           alt={`${type} 이미지`}
         />
         <div className="flex flex-col justify-center p-4 flex-grow min-w-0">
-          {dealType === '매매' ? (
+          {dealType === '전세' ? (
             <div className="flex text-sm font-bold mb-2 items-center">
               <div className="text-hanaGreen flex-shrink-0 text-xl">
                 {dealType}

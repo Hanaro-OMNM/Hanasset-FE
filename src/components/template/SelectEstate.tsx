@@ -110,7 +110,7 @@ export default function SelectEstate() {
   };
 
   return (
-    <div className="top-0 absolute pl-4 animate-fadeInRight">
+    <div className="top-0 absolute animate-fadeInRight">
       <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-gray-50/90 backdrop-blur-[10px] overflow-y-auto scrollbar-hide">
         <MobileHeader
           title="내 관심 매물"

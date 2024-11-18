@@ -6,9 +6,9 @@ import { dummyGuest } from '../assets/Dummy';
 import { dummyBeotimmogLoanGroup } from '../assets/Dummy';
 import CommonBackground from '../components/atoms/CommonBackground';
 import Swiper from '../components/atoms/Swiper';
+import FixedExpectation from './GuestChatDetail/FixedExpectation';
 import LoanDetail from './LoanDetail';
 import DsrInfo from './LoanRecommend/components/DsrInfo';
-import Expectation from './LoanRecommend/components/Expectation';
 import LoanRecommendTab from './LoanRecommend/components/LoanRecommendTab';
 import SemiTitle from './consultant/SemiTitle';
 
@@ -68,7 +68,11 @@ const GuestChatDetail: React.FC = () => {
           {/* 대출 상품 리스트 */}
           <div>
             <SemiTitle title="대출 상품 리스트" />
-            <Expectation totalPrice={10} maxLoan={5} />
+            <FixedExpectation
+              capital={dummyGuest.capital}
+              totalPrice={dummyRealEstateList[loanIndex].price}
+              maxLoan={5}
+            />
             <DsrInfo dsr={dummyGuest.stressDsr} />
             <LoanRecommendTab
               hanaLoanList={dummyLoanGroup[loanIndex]}

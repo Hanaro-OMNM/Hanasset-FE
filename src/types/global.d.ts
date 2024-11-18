@@ -10,3 +10,10 @@ declare global {
     naver: typeof maps; // naver의 실제 타입으로 설정
   }
 }
+
+export type selectedEstateType = {
+  id: number;
+  name: string;
+  detail: string;
+  address: string;
+};

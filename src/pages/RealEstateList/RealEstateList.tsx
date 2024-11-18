@@ -39,41 +39,37 @@ export default function RealEstateLayout() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-[500px]">
-      <div className="top-0 absolute pl-4 animate-slideInRight">
-        <div className="w-[420px] px-2 pt-2 bg-gray-50/90 absolute backdrop-blur-[10px] left-4 overflow-y-auto h-screen scrollbar-hide">
-          <MobileHeader
-            title="영등포구 영등포동"
-            onBack={() => navigate('/')}
+    <div className="top-0 absolute pl-4 animate-slideInRight">
+      <div className="w-[420px] px-2 pt-2 bg-gray-50/90 absolute backdrop-blur-[10px] left-4 overflow-y-auto h-screen scrollbar-hide">
+        <MobileHeader title="영등포구 영등포동" onBack={() => navigate('/')} />
+        <div className="flex justify-between items-center my-2">
+          <div className="flex items-center font-bold ml-1">
+            <div>{realEstateCount}개의 매물</div>
+          </div>
+          <DropdownCombobox
+            items={sortItems}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+            comboboxClassName="border-gray-300 w-[130px] bg-white"
+            optionClassName="hover:bg-gray-200"
           />
-          <div className="flex justify-between items-center my-2">
-            <div className="flex items-center font-bold ml-1">
-              <div>{realEstateCount}개의 매물</div>
+        </div>
+        <div className="flex-grow min-h-0 overflow-y-auto">
+          {realEstateData.map((item, index) => (
+            <div key={index} className="border-b">
+              {/* 카드 클릭 시 handleCardClick 호출 */}
+              <RealEstateCard
+                {...item}
+                onClick={() => {
+                  handleCardClick(item);
+                  setShowRealEstate(true);
+                }}
+              />
             </div>
-            <DropdownCombobox
-              items={sortItems}
-              selectedItem={selectedItem}
-              setSelectedItem={setSelectedItem}
-              comboboxClassName="border-gray-300 w-[130px] bg-white"
-              optionClassName="hover:bg-gray-200"
-            />
-          </div>
-          <div className="flex-grow min-h-0 overflow-y-auto">
-            {realEstateData.map((item, index) => (
-              <div key={index} className="border-b">
-                {/* 카드 클릭 시 handleCardClick 호출 */}
-                <RealEstateCard
-                  {...item}
-                  onClick={() => {
-                    handleCardClick(item);
-                    setShowRealEstate(true);
-                  }}
-                />
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </div>
+
       {showRealEstate && selectedEstate && (
         <RealEstateDetail
           estate={selectedEstate}

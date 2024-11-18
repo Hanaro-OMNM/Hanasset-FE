@@ -62,7 +62,7 @@ export default function ChatReservation() {
 
   const handleSubmit = () => {
     alert('예약이 완료되었습니다');
-    nav('/');
+    nav('/consulting');
   };
 
   const onBack = (): void => {

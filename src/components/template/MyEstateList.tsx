@@ -115,8 +115,8 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
 
   return (
     <div className="animate-fadeInRight">
-      <div className="px-6">
-        <MobileHeader title="내 관심매물" onBack={onBack} />
+      <div className="pr-6">
+        <MobileHeader title="내 관심 매물" onBack={onBack} />
         <CommonBackground>
           <Swiper
             items={slides}
@@ -139,7 +139,7 @@ export default function MyEstateList({ onBack }: MyEstateListProps) {
                           />
                         </div>
                         <div className="pl-7">
-                          <div className="text-hanaGreen text-lg text-left">
+                          <div className="text-hanaGreen text-lg font-fontCm text-left">
                             {apartment.name}
                           </div>
                           <div className="text-hanaBlack80 text-sm text-left">

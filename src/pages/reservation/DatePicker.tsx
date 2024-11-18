@@ -30,7 +30,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
               ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
               : selectedDate === `${date.month}-${date.day}`
                 ? 'bg-hanaColor2 text-white'
-                : 'bg-white text-black cursor-pointer hover:bg-hanaColor1'
+                : 'bg-white text-black cursor-pointer hover:bg-hanaSilver40'
           }`}
           onClick={() =>
             !date.disabled && onDateChange(`${date.month}-${date.day}`)

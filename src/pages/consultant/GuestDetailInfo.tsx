@@ -1,5 +1,3 @@
-import DsrInfo from '../LoanRecommend/components/DsrInfo';
-
 interface GuestDetailInfoProps {
   name: string;
   age: number;

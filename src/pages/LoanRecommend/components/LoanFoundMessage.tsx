@@ -5,11 +5,7 @@ interface LoanFoundMessageProps {
 }
 
 const LoanFoundMessage: React.FC<LoanFoundMessageProps> = ({ isFound }) => {
-  return (
-    <div className="pl-6">
-      <SemiTitle>{isFound ? '' : '대출 상품을 찾지 못했어요'}</SemiTitle>
-    </div>
-  );
+  return <SemiTitle>{isFound ? '' : '대출 상품을 찾지 못했어요'}</SemiTitle>;
 };
 
 export default LoanFoundMessage;

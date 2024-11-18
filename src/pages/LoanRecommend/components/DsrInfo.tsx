@@ -1,3 +1,4 @@
+import CommonBackground from '../../../components/atoms/CommonBackground';
 import LoanProgressBar from '../../../components/atoms/LoanProgressBar';
 
 interface DsrInfoProps {
@@ -7,10 +8,10 @@ interface DsrInfoProps {
 const DsrInfo: React.FC<DsrInfoProps> = ({ dsr }) => {
   return (
     <div>
-      <p className="ml-6 my-2 text-hanaBlack80 font-semibold">
-        현재 DSR {dsr}%
-      </p>
-      <LoanProgressBar rate={dsr} />
+      <CommonBackground className="p-7">
+        <p className="my-2 text-hanaBlack80 font-semibold">현재 DSR {dsr}%</p>
+        <LoanProgressBar rate={dsr} />
+      </CommonBackground>
     </div>
   );
 };

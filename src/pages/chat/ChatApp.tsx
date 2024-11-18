@@ -74,7 +74,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
         user: 'consultant',
         subject: 'responser',
         message:
-          '알겠습니다. 고객님의 매출과 대출 상품 리스트를 확인하였습니다.',
+          '알겠습니다. 고객님의 매출과 대출 상품 리스트를 확인하였습니다. 상담은 선택된 매물 중 첫번째 매물부터 시작됩니다.',
         time: getCurrentTime(),
       };
       setMessages((prevMessages) => [...prevMessages, responserReply]);

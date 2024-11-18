@@ -12,8 +12,8 @@ import SemiTitle from '../components/atoms/SemiTitle';
 import Swiper from '../components/atoms/Swiper';
 import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
-import MyEstateList from '../components/template/MyEstateList';
 import PropertyRegister from '../components/template/PropertyRegister';
+import MyEstateList from '../components/template/SelectEstate.tsx';
 import { CookieUtils } from '../utils/CookieUtils.ts';
 
 interface Asset {

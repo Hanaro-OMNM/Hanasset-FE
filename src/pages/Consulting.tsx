@@ -53,7 +53,7 @@ const Consulting: React.FC = () => {
             <div
               className="p-4 rounded-lg flex items-center justify-between cursor-pointer hover:transition-transform transform hover:scale-105"
               onClick={() =>
-                navigate(isActive ? '/live-chat' : '/chat-reservation')
+                navigate(isActive ? '/live-chat' : '/select-estate')
               }
             >
               <UpcomingConsultingComponent

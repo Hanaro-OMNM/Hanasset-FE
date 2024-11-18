@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
 import Modal from './components/template/Modal/Modal.tsx';
+import SelectEstate from './components/template/SelectEstate.tsx';
 import Consulting from './pages/Consulting.tsx';
 import LoanRecommend from './pages/LoanRecommned.tsx';
 import Main from './pages/Main.tsx';
@@ -62,6 +63,7 @@ function App() {
                 <Route path="/loan-recommend" element={<LoanRecommend />} />
                 <Route path="/chat-reservation" element={<ChatReservation />} />
                 <Route path="/real-estate-list" element={<RealEstateList />} />
+                <Route path="/select-estate" element={<SelectEstate />} />
                 <Route path="/property-agree" element={<PropertyAgree />} />
                 <Route path="/consultant" element={<Consultant />} />
                 <Route

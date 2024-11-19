@@ -1,25 +1,23 @@
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
+import { realEstateData } from '../assets/Dummy.tsx';
 import Background1 from '../assets/img/background1.jpg';
 import Background2 from '../assets/img/background2.png';
 import Background3 from '../assets/img/background3.jpg';
 import People from '../assets/img/main/people.png';
-import MyEstateList1 from '../assets/img/myEstateList1.png';
 import MyEstateList2 from '../assets/img/myEstateList2.png';
-import MyEstateList3 from '../assets/img/myEstateList3.png';
 import CommonBackground from '../components/atoms/CommonBackground';
 import MobileHeader from '../components/atoms/MobileHeader';
-import RegisterButtonGroup from '../components/atoms/RegisterPageButtonGroup';
 import SemiTitle from '../components/atoms/SemiTitle';
 import Swiper from '../components/atoms/Swiper';
 import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
 import MyEstateList from '../components/template/MyEstateList.tsx';
-import PropertyRegister from '../components/template/PropertyRegister';
-import centerAtom from '../recoil/center/atom.ts';
 import PropertyManage from '../components/template/PropertyManage.tsx';
+import centerAtom from '../recoil/center/atom.ts';
 import { CookieUtils } from '../utils/CookieUtils.ts';
+import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import PropertyGroup from './property/PropertyGroup.tsx';
 
 interface BookmarkedLocation {
@@ -31,12 +29,9 @@ interface BookmarkedLocation {
   };
 }
 
-interface Asset {
-  name: string;
-}
-
 export default function MyPage() {
   const setCenter = useSetRecoilState(centerAtom);
+  const [showRealEstate, setShowRealEstate] = useState(false);
 
   const [currentPage, setCurrentPage] = useState<
     | 'home'
@@ -107,24 +102,10 @@ export default function MyPage() {
     name: '김하나',
   };
 
-  const assets: Asset[] = [
-    { name: '서울 성동구 아차산로 111 2층' },
-    { name: '서울 성동구 금호산8길 14' },
-    { name: '서울 용산구 백범로 329' },
-    { name: '아파트 4' },
-    { name: '아파트 5' },
-  ];
-
   const backgrounds = [
     { image: Background1 },
     { image: Background2 },
     { image: Background3 },
-  ];
-
-  const interestApt = [
-    { name: '서울 성동구 아차산로 111 2층', image: MyEstateList1 },
-    { name: '서울 성동구 금호산8길 14', image: MyEstateList2 },
-    { name: '서울 용산구 백범로 329', image: MyEstateList3 },
   ];
 
   // 관심 지역 + 배경사진 모음
@@ -155,7 +136,7 @@ export default function MyPage() {
 
   return (
     <div className="top-0 absolute animate-fadeInRight">
-      <div className="pl-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/90 scrollbar-hide">
+      <div className="pl-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-gray-50/90 scrollbar-hide">
         {currentPage === 'main' ? (
           <>
             <div className="flex justify-between items-center">
@@ -222,41 +203,33 @@ export default function MyPage() {
 
               {/* 내 관심 아파트 */}
               <div className="mt-10 mb-5">
-                <div className="mb-5">
+                <div className="mb-5 flex">
                   <SemiTitle>내 관심 매물</SemiTitle>
+                  <div
+                    className="ml-2 px-4 text-md text-white font-semibold bg-hanaColor2 hover:opacity-90' hover:scale-105 rounded-lg flex flex-col items-center justify-center shadow-md transition-transform duration-200 ease-in-out cursor-pointer"
+                    onClick={handleEstate}
+                  >
+                    더보기
+                  </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  {assets.slice(0, 4).map((asset, index) => {
-                    const matchingInterest = interestApt.find(
-                      (interest) => interest.name === asset.name
-                    );
-
+                  {realEstateData.slice(0, 2).map((asset, index) => {
                     return (
                       <div
                         key={index}
-                        onClick={handleEstate}
-                        className={`${
-                          index === 0
-                            ? 'bg-hanaColor2 hover:opacity-90'
-                            : 'bg-white hover:scale-105'
-                        } rounded-lg flex flex-col items-center justify-center p-4 shadow-md transition-transform duration-200 ease-in-out cursor-pointer`}
+                        onClick={() => setShowRealEstate(true)}
+                        className="bg-white hover:scale-105 rounded-lg flex flex-col items-center justify-center p-4 shadow-md transition-transform duration-200 ease-in-out cursor-pointer"
                       >
-                        {index === 0 ? (
-                          <span className="text-4xl text-white font-semibold">
-                            +
+                        <>
+                          <img
+                            src={MyEstateList2}
+                            alt={asset.location}
+                            className="h-16 w-16 mb-2"
+                          />
+                          <span className="text-gray-600 font-sm font-fontCm text-center">
+                            {asset.location}
                           </span>
-                        ) : (
-                          <>
-                            <img
-                              src={matchingInterest?.image || MyEstateList1}
-                              alt={asset.name}
-                              className="h-16 w-16 mb-2"
-                            />
-                            <span className="text-gray-600 font-sm font-fontCm text-center">
-                              {asset.name}
-                            </span>
-                          </>
-                        )}
+                        </>
                       </div>
                     );
                   })}
@@ -277,6 +250,9 @@ export default function MyPage() {
           />
         )}
       </div>
+      {showRealEstate && (
+        <RealEstateDetail onBackClick={() => setShowRealEstate(false)} />
+      )}
     </div>
   );
 }

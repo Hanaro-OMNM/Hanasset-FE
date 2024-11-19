@@ -226,6 +226,7 @@ export const realEstatePropertyInfoProps = {
   rentType: '전세',
   price: '20억',
   description: '아파트 | 95/69m² | 5,884만원/3.3m²',
+  isStarHighlighted: false,
 };
 
 export const realEstatePropertyDetailsProps = {

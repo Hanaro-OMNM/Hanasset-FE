@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { selectedEstateType } from '../../types/global';
 import Button from '../atoms/Button';
 import Checkbox from '../atoms/Checkbox';
 import CommonBackground from '../atoms/CommonBackground';
@@ -95,6 +96,7 @@ export default function SelectEstate() {
   const [checkedItems, setCheckedItems] = useState<boolean[]>(
     Array(apartments.length).fill(false)
   );
+  const selectedItems: selectedEstateType[] = [];
 
   const handleItemChange = (index: number, checked: boolean) => {
     const selectedCount = checkedItems.filter((item) => item).length;
@@ -109,20 +111,27 @@ export default function SelectEstate() {
     setCheckedItems(updatedCheckedItems);
   };
 
+  const onBack = (): void => {
+    window.history.back();
+  };
+
+  checkedItems.map((items, index) => {
+    if (items) {
+      selectedItems.push(apartments[index - 1]);
+    }
+  });
+
   return (
-    <div className="top-0 absolute animate-fadeInRight">
+    <div className="top-0 absolute pl-4 animate-fadeInRight">
       <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-gray-50/90 backdrop-blur-[10px] overflow-y-auto scrollbar-hide">
-        <MobileHeader
-          title="내 관심 매물"
-          onBack={() => navigate('/consulting')}
-        />
+        <MobileHeader title="내 관심 매물" onBack={onBack} />
         <CommonBackground>
           <Swiper
             items={slides}
             renderItem={(pageApartments) => (
               <div className="mb-8">
                 {pageApartments.map((apartment) => (
-                  <button
+                  <div
                     key={apartment.id}
                     className="w-full items-start rounded-lg hover:transition-transform transform hover:scale-105"
                   >
@@ -151,7 +160,7 @@ export default function SelectEstate() {
                       </div>
                       <hr className="ml-3 mr-3" />
                     </label>
-                  </button>
+                  </div>
                 ))}
               </div>
             )}
@@ -160,7 +169,9 @@ export default function SelectEstate() {
           />
           <div className="p-2 mb-5">
             <Button
-              onClick={() => navigate('/chat-reservation')}
+              onClick={() =>
+                navigate('/chat-reservation', { state: { selectedItems } })
+              }
               text="상담 예약하기"
             />
           </div>

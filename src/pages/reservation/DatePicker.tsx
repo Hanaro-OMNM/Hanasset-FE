@@ -2,10 +2,9 @@
 import React from 'react';
 
 interface DateOption {
-  month: string;
-  day: string;
+  month: number;
+  day: number;
   weekday: string;
-  disabled: boolean;
 }
 
 interface DatePickerProps {
@@ -26,15 +25,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
         <div
           key={index}
           className={`flex flex-col items-center p-4 rounded-lg shadow-md ${
-            date.disabled
-              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              : selectedDate === `${date.month}-${date.day}`
-                ? 'bg-hanaColor2 text-white'
-                : 'bg-white text-black cursor-pointer hover:bg-hanaSilver40'
+            selectedDate === `${date.month}-${date.day}`
+              ? 'bg-hanaColor2 text-white'
+              : 'bg-white text-black cursor-pointer hover:bg-hanaSilver40'
           }`}
-          onClick={() =>
-            !date.disabled && onDateChange(`${date.month}-${date.day}`)
-          }
+          onClick={() => onDateChange(`${date.month}-${date.day}`)}
         >
           <span className="text-xs font-medium">{date.month}월</span>
           <span className="text-lg font-bold">{date.day}</span>

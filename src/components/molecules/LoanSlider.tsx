@@ -38,7 +38,7 @@ const LoanSlider: React.FC<LoanSliderProps> = ({
   }
 
   return (
-    <div>
+    <div className="px-2">
       <input
         type="range"
         min="0"

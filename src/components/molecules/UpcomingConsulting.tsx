@@ -118,12 +118,13 @@ const UpcomingConsultingComponent = ({
           onClick={() => setReservationDateTime(new Date())}
         />
         <button
-          onClick={() =>
+          onClick={() => {
             setUpcomingConsulting({
               reservationInfo: [],
               reservationTime: undefined,
-            })
-          }
+            });
+            setReservationDateTime(new Date());
+          }}
           className="ml-6 w-32 flex items-center justify-center text-center text-white px-4 py-2 text-md bg-hanaRed20 rounded-xl hover:bg-hanaRed transition duration-150 ease-in-out"
         >
           상담 삭제

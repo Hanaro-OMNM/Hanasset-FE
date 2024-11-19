@@ -23,7 +23,8 @@ const consultingHistory: Consulting[] = [
 
 const Consulting: React.FC = () => {
   const navigate = useNavigate();
-  const [upcomingConsulting] = useRecoilState(loanReservationAtom);
+  const [upcomingConsulting, setUpcomingConsulting] =
+    useRecoilState(loanReservationAtom);
 
   return (
     <div className="top-0 absolute pl-4 animate-slideInRight">
@@ -37,9 +38,10 @@ const Consulting: React.FC = () => {
           <p className="text-xs mt-2 text-hanaGreen60 mb-4">
             채팅방은 예약 시간이 되면 활성화 됩니다.
           </p>
-          <img src={Consultant}></img>
+          <img src={Consultant} alt="상담 화면"></img>
           <UpcomingConsultingComponent
             upcomingConsulting={upcomingConsulting}
+            setUpcomingConsulting={setUpcomingConsulting}
           />
         </div>
         <SemiTitle>지난 상담 내역</SemiTitle>

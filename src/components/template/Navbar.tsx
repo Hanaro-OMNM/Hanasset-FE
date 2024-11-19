@@ -4,7 +4,6 @@ import Consultant from '../../assets/img/main/consultant.jpeg';
 import Home from '../../assets/img/main/home.jpeg';
 import Map from '../../assets/img/main/map.jpeg';
 import Mypage from '../../assets/img/main/mypage.jpeg';
-import Profile from '../../assets/img/profile_ex.jpg';
 
 interface NavbarProps {
   state?: boolean;
@@ -153,15 +152,6 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               </div>
             </div>
           </button>
-        </div>
-
-        {/* 프로필 이미지를 맨 아래로 배치 */}
-        <div className="mb-4">
-          <img
-            className="w-12 h-12 rounded-full"
-            src={Profile}
-            alt="Profile Image"
-          />
         </div>
       </div>
       <div>{children}</div>

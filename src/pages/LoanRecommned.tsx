@@ -71,7 +71,9 @@ const LoanInfoPage: React.FC = () => {
         <div className="w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/75 scrollbar-hide">
           <div className="px-6">
             <MobileHeader title="맞춤 대출 상품 안내" onBack={onBack} />
-            <div className="font-fontMedium text-2xl">{profile.name}님의</div>
+            <div className="font-fontMedium text-2xl mt-5">
+              {profile.name}님의
+            </div>
             <div className="flex">
               <div className="flex font-fontBold text-2xl">맞춤 대출 상품</div>
               <div className="font-fontMedium text-2xl"> 입니다.</div>

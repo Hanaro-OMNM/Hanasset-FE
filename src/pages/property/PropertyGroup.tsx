@@ -8,12 +8,21 @@ import {
   hasHomeState,
   loanAmountState,
   hasLoanState,
+  equityAmountState,
 } from '../../recoil/asset/atom';
 import PropertyItem from './PropertyItem';
 
 interface PropertyGroupProp {
   onRegister: (
-    type: 'home' | 'family' | 'main' | 'editProfile' | 'job' | 'income' | 'loan'
+    type:
+      | 'home'
+      | 'family'
+      | 'main'
+      | 'editProfile'
+      | 'job'
+      | 'income'
+      | 'loan'
+      | 'equity'
   ) => void;
 }
 
@@ -25,6 +34,7 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
   const hasHome = useRecoilValue(hasHomeState);
   const loanAmount = useRecoilValue(loanAmountState);
   const hasLoan = useRecoilValue(hasLoanState);
+  const equity = useRecoilValue(equityAmountState);
 
   let familyStatus = '';
   if (isMarried) {
@@ -51,6 +61,15 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
         onClick={onRegister}
         labelClassName="bg-[#F9F1EC] p-1 rounded-lg"
         labelColorClassName="text-hanaRed60 font-fontBold w-24"
+      />
+      <hr />
+      <PropertyItem
+        type="equity"
+        label="자본금"
+        value={equity ? `${equity.toLocaleString()}만 원` : '없음'}
+        onClick={onRegister}
+        labelClassName="bg-red-100 p-1 rounded-lg"
+        labelColorClassName="text-hanaRed80 font-fontBold w-24"
       />
       <hr />
       <PropertyItem

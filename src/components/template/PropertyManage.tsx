@@ -14,7 +14,8 @@ interface AssetRegisterProps {
     | 'editProfile'
     | 'job'
     | 'income'
-    | 'loan';
+    | 'loan'
+    | 'equity';
   onBack: () => void;
 }
 
@@ -39,6 +40,17 @@ export default function PropertyForm({
       component: (
         <AmountForm
           formType="income"
+          onBack={onBack}
+          onValid={handleAmountFormValid}
+        />
+      ),
+      valid: validAmountForm,
+    },
+    {
+      key: 'equity',
+      component: (
+        <AmountForm
+          formType="equity"
           onBack={onBack}
           onValid={handleAmountFormValid}
         />
@@ -74,6 +86,8 @@ export default function PropertyForm({
         return forms.findIndex((form) => form.key === 'job');
       case 'income':
         return forms.findIndex((form) => form.key === 'income');
+      case 'equity':
+        return forms.findIndex((form) => form.key === 'equity');
       case 'family':
         return forms.findIndex((form) => form.key === 'family');
       case 'home':

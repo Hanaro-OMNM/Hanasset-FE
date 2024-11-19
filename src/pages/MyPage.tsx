@@ -32,6 +32,7 @@ export default function MyPage() {
     | 'income'
     | 'loan'
     | 'EstateList'
+    | 'equity'
   >('main');
   const navigate = useNavigate();
 
@@ -74,6 +75,7 @@ export default function MyPage() {
       | 'income'
       | 'loan'
       | 'EstateList'
+      | 'equity'
   ) => {
     setCurrentPage(type);
   };

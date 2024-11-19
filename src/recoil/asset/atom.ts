@@ -12,6 +12,12 @@ export const incomeAmountState = atom<number>({
   default: 0,
 });
 
+//
+export const equityAmountState = atom<number>({
+  key: 'equityAmountState',
+  default: 0,
+});
+
 // 결혼 상태
 export const isMarriedState = atom<boolean>({
   key: 'isMarriedState',

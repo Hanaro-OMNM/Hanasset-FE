@@ -1,11 +1,27 @@
 import { AiOutlineRight } from 'react-icons/ai';
 
 interface PropertyItemProps {
-  type: 'home' | 'family' | 'main' | 'editProfile' | 'job' | 'income' | 'loan';
+  type:
+    | 'home'
+    | 'family'
+    | 'main'
+    | 'editProfile'
+    | 'job'
+    | 'income'
+    | 'loan'
+    | 'equity';
   label: string;
   value: string;
   onClick: (
-    type: 'home' | 'family' | 'main' | 'editProfile' | 'job' | 'income' | 'loan'
+    type:
+      | 'home'
+      | 'family'
+      | 'main'
+      | 'editProfile'
+      | 'job'
+      | 'income'
+      | 'loan'
+      | 'equity'
   ) => void;
   className?: string;
   labelClassName?: string;

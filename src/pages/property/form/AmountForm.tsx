@@ -4,35 +4,28 @@ import Button from '../../../components/atoms/Button';
 import FormTitle from '../../../components/atoms/FormTitle';
 import Input from '../../../components/atoms/Input';
 import NoItemButton from '../../../components/atoms/NoItemButton';
-import {
-  incomeAmountState,
-  loanAmountState,
-  hasLoanState,
-  equityAmountState, // 자본금 상태 임포트
-} from '../../../recoil/asset/atom';
+import { assetState } from '../../../recoil/asset/atom';
 
 interface AssetInfoInputProps {
-  formType: 'income' | 'loan' | 'equity'; // equity 타입 추가
-  onValid: (isValid: boolean) => void;
+  formType: 'income' | 'loan' | 'equity';
   onBack: () => void;
 }
 
-export default function AmountForm({
-  formType,
-  onValid,
-  onBack,
-}: AssetInfoInputProps) {
-  const [incomeAmount, setIncomeAmount] = useRecoilState(incomeAmountState);
-  const [loanAmount, setLoanAmount] = useRecoilState(loanAmountState);
-  const [hasLoan, setHasLoan] = useRecoilState(hasLoanState);
-  const [equityAmount, setEquityAmount] = useRecoilState(equityAmountState); // 자본금 상태 추가
+export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
+  const [asset, setAsset] = useRecoilState(assetState); // Accessing assetState atom
+
+  // Get values from assetState
+  const incomeAmount = asset.incomeAmount;
+  const loanAmount = asset.loanAmount;
+  const equityAmount = asset.equityAmount;
+  const hasLoan = asset.hasLoan;
 
   const initialAmount =
     formType === 'income'
       ? incomeAmount
       : formType === 'loan'
         ? loanAmount
-        : equityAmount; // formType에 따라 자본금 상태도 처리
+        : equityAmount;
 
   const [localAmount, setLocalAmount] = useState<number>(initialAmount);
   const [error, setError] = useState<boolean>(false);
@@ -52,13 +45,12 @@ export default function AmountForm({
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
-    // 입력값이 빈 문자열일 경우 0으로 설정
+    // Handle empty string input
     if (value === '') {
       setLocalAmount(0);
       setError(false);
       setErrorMessage('');
       setIsValid(false);
-      onValid(false);
     } else {
       const numericValue = Number(value);
 
@@ -66,34 +58,30 @@ export default function AmountForm({
         setError(true);
         setErrorMessage('정수를 입력해주세요.');
         setIsValid(false);
-        onValid(false);
       } else if (numericValue <= 0) {
         setError(true);
         setErrorMessage('0보다 큰 값을 입력해주세요.');
         setIsValid(false);
-        onValid(false);
       } else {
         setError(false);
         setErrorMessage('');
         setIsValid(true);
         setLocalAmount(numericValue);
-        onValid(true);
       }
     }
   };
 
-  // 대출이 없을 때 처리
+  // Handling case when loan is not available
   const handleNoLoan = () => {
     setLocalAmount(0);
-    setHasLoan(false);
-    setLoanAmount(0);
+    setAsset({ ...asset, hasLoan: false, loanAmount: 0 });
     onBack();
   };
 
-  // 자본금이 없을 때 처리
+  // Handling case when equity is not available
   const handleNoEquity = () => {
     setLocalAmount(0);
-    setEquityAmount(0);
+    setAsset({ ...asset, equityAmount: 0 });
     onBack();
   };
 
@@ -104,12 +92,15 @@ export default function AmountForm({
 
     if (isValid) {
       if (formType === 'income') {
-        setIncomeAmount(localAmount);
+        setAsset({ ...asset, incomeAmount: localAmount });
       } else if (formType === 'loan') {
-        setLoanAmount(localAmount);
-        setHasLoan(localAmount > 0);
+        setAsset({
+          ...asset,
+          loanAmount: localAmount,
+          hasLoan: localAmount > 0,
+        });
       } else {
-        setEquityAmount(localAmount); // 자본금 상태 업데이트
+        setAsset({ ...asset, equityAmount: localAmount });
       }
       onBack();
     } else {
@@ -125,7 +116,7 @@ export default function AmountForm({
             ? '소득정보를 입력하세요'
             : formType === 'loan'
               ? '이미 받은 대출은 얼마인가요?'
-              : '자본금을 입력해주세요' // equity 타입일 때 텍스트 변경
+              : '자본금을 입력해주세요'
         }
       />
 
@@ -139,7 +130,7 @@ export default function AmountForm({
               ? '세전 연소득'
               : formType === 'loan'
                 ? '이미 받은 대출 금액'
-                : '자본금 금액' // equity 타입일 때 라벨 변경
+                : '자본금 금액'
           }
           error={error}
           errorMessage={errorMessage}
@@ -155,7 +146,6 @@ export default function AmountForm({
         <NoItemButton text={'보유 대출이 없어요'} onClick={handleNoLoan} />
       )}
 
-      {/* 자본금이 없을 경우 버튼 추가 */}
       {formType === 'equity' && (
         <NoItemButton text={'보유 자본금이 없어요'} onClick={handleNoEquity} />
       )}

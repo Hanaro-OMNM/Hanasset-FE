@@ -2,7 +2,7 @@ import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import Button from '../../../components/atoms/Button';
 import FormRadio from '../../../components/molecules/FormRadio';
-import { hasHomeState } from '../../../recoil/asset/atom';
+import { assetState } from '../../../recoil/asset/atom';
 
 interface Option {
   value: string;
@@ -15,8 +15,9 @@ interface OwnPropertyFormProps {
 const options: Option[] = [{ value: '있음' }, { value: '없음' }];
 
 export default function OwnPropertyForm({ onBack }: OwnPropertyFormProps) {
-  const [hasHome, setHasHome] = useRecoilState(hasHomeState);
-  const [localHasHome, setLocalHasHome] = useState(hasHome);
+  const [asset, setAsset] = useRecoilState(assetState);
+
+  const [localHasHome, setLocalHasHome] = useState(asset.hasHome);
 
   const selectedItem = localHasHome ? options[0] : options[1];
 
@@ -26,7 +27,10 @@ export default function OwnPropertyForm({ onBack }: OwnPropertyFormProps) {
   };
 
   const handleSave = () => {
-    setHasHome(localHasHome);
+    setAsset({
+      ...asset,
+      hasHome: localHasHome,
+    });
     onBack();
   };
 

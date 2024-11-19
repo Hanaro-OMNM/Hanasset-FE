@@ -2,7 +2,7 @@ import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import Button from '../../../components/atoms/Button';
 import FormRadio from '../../../components/molecules/FormRadio';
-import { isMarriedState, hasChildrenState } from '../../../recoil/asset/atom';
+import { assetState } from '../../../recoil/asset/atom';
 
 interface Option {
   value: string;
@@ -20,11 +20,10 @@ interface FamilyStatusFormProps {
 }
 
 export default function FamilyStatusForm({ onBack }: FamilyStatusFormProps) {
-  const [isMarried, setIsMarried] = useRecoilState(isMarriedState);
-  const [hasChildren, setHasChildren] = useRecoilState(hasChildrenState);
+  const [asset, setAsset] = useRecoilState(assetState);
 
-  const [localIsMarried, setLocalIsMarried] = useState(isMarried);
-  const [localHasChildren, setLocalHasChildren] = useState(hasChildren);
+  const [localIsMarried, setLocalIsMarried] = useState(asset.isMarried);
+  const [localHasChildren, setLocalHasChildren] = useState(asset.hasChildren);
 
   const selectedStatus =
     localIsMarried && localHasChildren
@@ -44,8 +43,11 @@ export default function FamilyStatusForm({ onBack }: FamilyStatusFormProps) {
   };
 
   const handleSave = () => {
-    setIsMarried(localIsMarried);
-    setHasChildren(localHasChildren);
+    setAsset({
+      ...asset,
+      isMarried: localIsMarried,
+      hasChildren: localHasChildren,
+    });
 
     onBack();
   };

@@ -1,48 +1,26 @@
 import { atom } from 'recoil';
 
-// 직업 종류
-export const jobTypeState = atom<string>({
-  key: 'jobTypeState',
-  default: '없음',
-});
+interface AssetState {
+  jobType: string; // 직업 종류
+  incomeAmount: number; // 연수입
+  equityAmount: number; // 자본금
+  isMarried: boolean; // 결혼 상태
+  hasChildren: boolean; // 자녀 여부
+  hasHome: boolean; // 주택 소유 여부
+  hasLoan: boolean; // 대출 여부
+  loanAmount: number; // 대출 금액
+}
 
-// 연수입
-export const incomeAmountState = atom<number>({
-  key: 'incomeAmountState',
-  default: 0,
-});
-
-//
-export const equityAmountState = atom<number>({
-  key: 'equityAmountState',
-  default: 0,
-});
-
-// 결혼 상태
-export const isMarriedState = atom<boolean>({
-  key: 'isMarriedState',
-  default: false,
-});
-
-// 자녀 여부
-export const hasChildrenState = atom<boolean>({
-  key: 'hasChildrenState',
-  default: false,
-});
-
-// 주택 소유 여부
-export const hasHomeState = atom<boolean>({
-  key: 'hasHomeState',
-  default: false,
-});
-
-// 대출 여부와 금액
-export const hasLoanState = atom<boolean>({
-  key: 'hasLoanState',
-  default: false,
-});
-
-export const loanAmountState = atom<number>({
-  key: 'loanAmountState',
-  default: 0,
+export const assetState = atom<AssetState>({
+  key: 'assetState',
+  default: {
+    jobType: '없음',
+    incomeAmount: 0,
+    equityAmount: 0,
+    isMarried: false,
+    hasChildren: false,
+    hasHome: false,
+    hasLoan: false,
+    loanAmount: 0,
+  },
 });

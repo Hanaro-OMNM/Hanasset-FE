@@ -2,7 +2,7 @@ import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import Button from '../../../components/atoms/Button';
 import FormRadio from '../../../components/molecules/FormRadio';
-import { jobTypeState } from '../../../recoil/asset/atom';
+import { assetState } from '../../../recoil/asset/atom';
 
 interface Option {
   value: string;
@@ -24,7 +24,8 @@ interface JobFormProps {
 }
 
 export default function JobForm({ onBack }: JobFormProps) {
-  const [jobType, setJobType] = useRecoilState(jobTypeState);
+  const [asset, setAsset] = useRecoilState(assetState);
+  const jobType = asset.jobType;
   const [localJobType, setLocalJobType] = useState<string>(jobType);
 
   const handleJobChange = (job: Option) => {
@@ -32,7 +33,10 @@ export default function JobForm({ onBack }: JobFormProps) {
   };
 
   const handleSave = () => {
-    setJobType(localJobType);
+    setAsset({
+      ...asset,
+      jobType: localJobType,
+    });
     onBack();
   };
 

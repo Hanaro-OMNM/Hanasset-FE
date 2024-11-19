@@ -25,10 +25,6 @@ export default function PropertyForm({
 }: AssetRegisterProps) {
   const [validAmountForm, setValidAmountForm] = useState(true);
 
-  const handleAmountFormValid = (hasAmount: boolean) => {
-    setValidAmountForm(hasAmount);
-  };
-
   const forms = [
     {
       key: 'job',
@@ -37,24 +33,12 @@ export default function PropertyForm({
     },
     {
       key: 'income',
-      component: (
-        <AmountForm
-          formType="income"
-          onBack={onBack}
-          onValid={handleAmountFormValid}
-        />
-      ),
+      component: <AmountForm formType="income" onBack={onBack} />,
       valid: validAmountForm,
     },
     {
       key: 'equity',
-      component: (
-        <AmountForm
-          formType="equity"
-          onBack={onBack}
-          onValid={handleAmountFormValid}
-        />
-      ),
+      component: <AmountForm formType="equity" onBack={onBack} />,
       valid: validAmountForm,
     },
     {
@@ -69,13 +53,7 @@ export default function PropertyForm({
     },
     {
       key: 'loan',
-      component: (
-        <AmountForm
-          formType="loan"
-          onValid={handleAmountFormValid}
-          onBack={onBack}
-        />
-      ),
+      component: <AmountForm formType="loan" onBack={onBack} />,
       valid: validAmountForm,
     },
   ];

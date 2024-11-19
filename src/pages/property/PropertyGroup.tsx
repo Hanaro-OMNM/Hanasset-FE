@@ -1,15 +1,7 @@
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
+// Import Asset type
 import CommonBackground from '../../components/atoms/CommonBackground';
-import {
-  jobTypeState,
-  incomeAmountState,
-  hasChildrenState,
-  isMarriedState,
-  hasHomeState,
-  loanAmountState,
-  hasLoanState,
-  equityAmountState,
-} from '../../recoil/asset/atom';
+import { assetState } from '../../recoil/asset/atom';
 import PropertyItem from './PropertyItem';
 
 interface PropertyGroupProp {
@@ -26,16 +18,30 @@ interface PropertyGroupProp {
   ) => void;
 }
 
-export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
-  const job = useRecoilValue(jobTypeState);
-  const income = useRecoilValue(incomeAmountState);
-  const hasChildren = useRecoilValue(hasChildrenState);
-  const isMarried = useRecoilValue(isMarriedState);
-  const hasHome = useRecoilValue(hasHomeState);
-  const loanAmount = useRecoilValue(loanAmountState);
-  const hasLoan = useRecoilValue(hasLoanState);
-  const equity = useRecoilValue(equityAmountState);
+interface AssetState {
+  jobType: string; // 직업 종류
+  incomeAmount: number; // 연수입
+  equityAmount: number; // 자본금
+  isMarried: boolean; // 결혼 상태
+  hasChildren: boolean; // 자녀 여부
+  hasHome: boolean; // 주택 소유 여부
+  hasLoan: boolean; // 대출 여부
+  loanAmount: number; // 대출 금액
+}
 
+export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
+  const [asset, setAsset] = useRecoilState<AssetState>(assetState); // Explicitly typing assetState
+
+  const jobType = asset.jobType;
+  const incomeAmount = asset.incomeAmount;
+  const hasChildren = asset.hasChildren;
+  const isMarried = asset.isMarried;
+  const hasHome = asset.hasHome;
+  const loanAmount = asset.loanAmount;
+  const hasLoan = asset.hasLoan;
+  const equityAmount = asset.equityAmount;
+
+  // Combine family status logic directly in the component
   let familyStatus = '';
   if (isMarried) {
     familyStatus = hasChildren ? '결혼/자녀 있음' : '결혼/자녀 없음';
@@ -48,7 +54,7 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
       <PropertyItem
         type="job"
         label="직업"
-        value={job || '없음'}
+        value={jobType || '없음'}
         onClick={onRegister}
         labelClassName="bg-[#E0FBF5] p-1 rounded-lg"
         labelColorClassName="text-[#00CC9C] font-fontBold w-20"
@@ -57,7 +63,7 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
       <PropertyItem
         type="income"
         label="연소득"
-        value={income ? `${income.toLocaleString()}만 원` : '없음'}
+        value={incomeAmount ? `${incomeAmount.toLocaleString()}만 원` : '없음'}
         onClick={onRegister}
         labelClassName="bg-[#F9F1EC] p-1 rounded-lg"
         labelColorClassName="text-hanaRed60 font-fontBold w-24"
@@ -66,7 +72,7 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
       <PropertyItem
         type="equity"
         label="자본금"
-        value={equity ? `${equity.toLocaleString()}만 원` : '없음'}
+        value={equityAmount ? `${equityAmount.toLocaleString()}만 원` : '없음'}
         onClick={onRegister}
         labelClassName="bg-red-100 p-1 rounded-lg"
         labelColorClassName="text-hanaRed80 font-fontBold w-24"

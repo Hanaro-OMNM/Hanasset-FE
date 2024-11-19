@@ -91,7 +91,7 @@ export default function MyPage() {
               <button
                 onClick={() => {
                   CookieUtils.removeCookieValue('connect.sid');
-                  navigate('/'); // 로그인 페이지로 리다이렉트
+                  navigate('/');
                 }}
                 className="flex items-center justify-center text-center h-8 text-white px-4 py-1 mr-4 text-xs bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
               >
@@ -150,7 +150,6 @@ export default function MyPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   {assets.slice(0, 4).map((asset, index) => {
-                    // 해당 asset.name에 맞는 이미지를 interestApt 배열에서 찾기
                     const matchingInterest = interestApt.find(
                       (interest) => interest.name === asset.name
                     );
@@ -171,9 +170,8 @@ export default function MyPage() {
                           </span>
                         ) : (
                           <>
-                            {/* 해당 asset.name에 매칭되는 이미지를 동적으로 렌더링 */}
                             <img
-                              src={matchingInterest?.image || MyEstateList1} // 매칭되는 이미지가 없으면 기본값 사용
+                              src={matchingInterest?.image || MyEstateList1}
                               alt={asset.name}
                               className="h-16 w-16 mb-2"
                             />

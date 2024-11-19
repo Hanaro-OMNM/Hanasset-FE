@@ -184,6 +184,7 @@ export default function Main() {
                       pagination={{ clickable: true }}
                       renderItem={(recentRealEstateData) => (
                         <RealEstateCard
+                          isStarFilled={false}
                           {...recentRealEstateData}
                           onClick={() => {
                             handleCardClick(recentRealEstateData);
@@ -201,6 +202,7 @@ export default function Main() {
 
             {showRealEstate && selectedEstate && (
               <RealEstateDetail
+                isStarFilled={false}
                 estate={selectedEstate}
                 onBackClick={() => setShowRealEstate(false)}
               />

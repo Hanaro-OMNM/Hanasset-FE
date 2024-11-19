@@ -6,7 +6,7 @@ interface PropertyInfoProps {
   rentType: string;
   price: string;
   description: string;
-  isStarHighlighted: boolean;
+  isStarFilled: boolean;
 }
 
 const PropertyInfo: React.FC<PropertyInfoProps> = ({
@@ -14,12 +14,12 @@ const PropertyInfo: React.FC<PropertyInfoProps> = ({
   rentType,
   price,
   description,
-  isStarHighlighted,
+  isStarFilled,
 }) => {
   return (
     <>
       <div className="w-full ml-96">
-        <PropertyStar isHighlighted={isStarHighlighted} />
+        <PropertyStar isFilled={isStarFilled} />
       </div>
       <div className="p-4 flex flex-col justify-center items-center">
         <p className="text-lg font-semibold">{title}</p>

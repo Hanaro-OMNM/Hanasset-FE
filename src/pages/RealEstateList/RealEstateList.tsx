@@ -110,6 +110,7 @@ export default function RealEstateLayout() {
             <div key={index} className="border-b">
               {/* 카드 클릭 시 handleCardClick 호출 */}
               <RealEstateCard
+                isStarFilled={false}
                 {...item}
                 onClick={() => {
                   handleCardClick(item);
@@ -123,6 +124,7 @@ export default function RealEstateLayout() {
 
       {showRealEstate && selectedEstate && (
         <RealEstateDetail
+          isStarFilled={false}
           estate={selectedEstate}
           onBackClick={() => setShowRealEstate(false)}
         />

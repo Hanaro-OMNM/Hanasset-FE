@@ -9,7 +9,8 @@ interface RealEstateCardProps {
   description: string;
   dealType: string;
   imageUrl: string;
-  onClick: () => void; // 클릭 핸들러 추가
+  onClick: () => void;
+  isStarFilled: boolean;
 }
 
 const RealEstateCard: React.FC<RealEstateCardProps> = ({
@@ -21,6 +22,7 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
   dealType,
   imageUrl,
   onClick,
+  isStarFilled,
 }) => {
   const truncateText = (text: string) => {
     if (text.length > 9) {
@@ -72,7 +74,7 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
           </p>
         </div>
       </div>
-      <Star isHighlighted={true} />
+      <Star isFilled={isStarFilled} />
       <hr className="border-2 solid lightgray; margin: 10px 0;" />
     </button>
   );

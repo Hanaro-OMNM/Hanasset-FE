@@ -28,11 +28,13 @@ interface RealEstateDetailProps {
     imageUrl: string;
   };
   onBackClick: () => void;
+  isStarFilled: boolean;
 }
 
 export default function RealEstateDetail({
   estate,
   onBackClick,
+  isStarFilled,
 }: RealEstateDetailProps) {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -52,10 +54,18 @@ export default function RealEstateDetail({
     }
   };
 
+  console.log(estate);
+
   return (
     <RealEstateDetailLayout>
       <ImageCarousel images={realEstateImages} onBackClick={onBackClick} />
-      <PropertyInfo {...realEstatePropertyInfoProps} />
+      <PropertyInfo
+        title={realEstatePropertyInfoProps.title}
+        rentType={realEstatePropertyInfoProps.rentType}
+        price={realEstatePropertyInfoProps.price}
+        description={realEstatePropertyInfoProps.description}
+        isStarFilled={isStarFilled}
+      />
       <Tabs tabs={tabData} onTabClick={handleTabClick} />
 
       <div id="시세">

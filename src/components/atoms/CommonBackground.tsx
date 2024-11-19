@@ -13,7 +13,7 @@ export default function CommonBackground({
 }: CommonBackgroundProps) {
   return (
     <div
-      className={`w-full  bg-white rounded-[15px] shadow-md ${className}`}
+      className={`w-full bg-white rounded-[15px] shadow-md ${className}`}
       onClick={onClick}
     >
       {children}

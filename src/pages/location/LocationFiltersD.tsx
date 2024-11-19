@@ -24,6 +24,7 @@ const LocationFilterDong = () => {
   const [activePage, setActivePage] = useState<'city' | 'gungu' | 'dong' | ''>(
     'dong'
   );
+  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 
   const currCity: string = JSON.parse(
     localStorage.getItem('currCity') || '"시/도"'
@@ -79,6 +80,21 @@ const LocationFilterDong = () => {
   const storedKey: string = 'currDong';
   const info: Info[] = JSON.parse(localStorage.getItem('info') || '[]');
 
+  const handleNavigateToMap = () => {
+    if (!selectedLocation) return; // 선택된 지역이 없으면 아무 작업도 하지 않음
+
+    localStorage.setItem(storedKey, JSON.stringify(selectedLocation));
+
+    const fullAddress = `${currCity} ${currGungu} ${selectedLocation}`;
+    const selected = info.find((item) => item.address === fullAddress);
+
+    if (!selected) return;
+
+    const { lat, lng } = selected;
+    setCenter({ lat, lng });
+    navigate('/');
+  };
+
   return (
     <div>
       {activePage === 'dong' ? (
@@ -86,7 +102,7 @@ const LocationFilterDong = () => {
           <h2 className="text-xl text-slate-800 font-bold mb-6">
             주소로 골라보기
           </h2>
-          <CommonBackground className="p-4">
+          <CommonBackground className="p-4 flex flex-col">
             {/* <아이콘> 시/도 > 시/군/구 > 읍/면/동 */}
             <div className="flex items-center mb-10">
               <div className="flex items-center justify-center w-7 h-7 rounded-full bg-hanaGreen40 mr-4">
@@ -117,18 +133,7 @@ const LocationFilterDong = () => {
                   type="button"
                   className="w-24 h-12 rounded-[10px] bg-[#eeeeee]"
                   onClick={() => {
-                    localStorage.setItem(storedKey, JSON.stringify(name));
-                    navigate('/');
-                    const fullAddress = `${currCity} ${currGungu} ${name}`;
-                    const selected = info.find(
-                      (item) => item.address === fullAddress
-                    );
-                    if (!selected) return;
-                    const { lat, lng } = selected;
-                    setCenter({
-                      lat,
-                      lng,
-                    });
+                    setSelectedLocation(name);
                   }}
                 >
                   <span className="font-medium text-slate-800 hover:font-bold">
@@ -137,6 +142,17 @@ const LocationFilterDong = () => {
                 </button>
               ))}
             </div>
+
+            {/* 지도로 이동 버튼 */}
+            {selectedLocation && ( // 선택된 지역이 있을 때만 버튼 표시
+              <button
+                type="button"
+                className="mt-4 p-2 bg-hanaGreen text-white rounded"
+                onClick={handleNavigateToMap} // 지도 이동 로직 실행
+              >
+                지도로 이동하기
+              </button>
+            )}
           </CommonBackground>
         </div>
       ) : activePage === 'city' ? (

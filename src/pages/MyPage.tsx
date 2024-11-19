@@ -1,3 +1,4 @@
+import { AiOutlineLogout } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
@@ -144,20 +145,34 @@ export default function MyPage() {
                 title="내 정보 확인하기"
                 onBack={() => navigate('/')}
               />
-              <button
-                onClick={() => {
-                  CookieUtils.removeCookieValue('connect.sid');
-                  navigate('/');
-                }}
-                className="flex items-center justify-center text-center h-8 text-white px-4 py-1 mr-10 mt-3 text-xs bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
-              >
-                로그아웃
-              </button>
             </div>
 
             <div>
-              <div className="text-2xl font-fontMedium pt-6">안녕하세요</div>
-              <EditProfile name={profile.name} onEdit={handleEditProfile} />
+              <div className="flex justify-between">
+                <div>
+                  <div className="text-2xl font-fontMedium pt-6">
+                    안녕하세요
+                  </div>
+                  <div className="font-fontBold text-2xl">
+                    {profile.name}
+                    <span className="font-fontMedium text-2xl">님</span>
+                  </div>
+                </div>
+                <div className="flex pt-6 pr-8 gap-2">
+                  <EditProfile onEdit={handleEditProfile} />
+                  <div>
+                    <button
+                      onClick={() => {
+                        CookieUtils.removeCookieValue('connect.sid');
+                        navigate('/');
+                      }}
+                      className="bg-hanaRed p-1 rounded-full shadow-md hover:bg-hanaRed20 transition duration-200"
+                    >
+                      <AiOutlineLogout className="text-xl text-white" />
+                    </button>
+                  </div>
+                </div>
+              </div>
               <div className="h-52">
                 <img src={People} alt="people" />
               </div>
@@ -251,7 +266,10 @@ export default function MyPage() {
         )}
       </div>
       {showRealEstate && (
-        <RealEstateDetail onBackClick={() => setShowRealEstate(false)} />
+        <RealEstateDetail
+          isStarFilled={true}
+          onBackClick={() => setShowRealEstate(false)}
+        />
       )}
     </div>
   );

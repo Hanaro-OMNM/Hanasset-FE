@@ -30,7 +30,7 @@ interface AssetState {
 }
 
 export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
-  const [asset, setAsset] = useRecoilState<AssetState>(assetState); // Explicitly typing assetState
+  const [asset] = useRecoilState<AssetState>(assetState); // Explicitly typing assetState
 
   const jobType = asset.jobType;
   const incomeAmount = asset.incomeAmount;

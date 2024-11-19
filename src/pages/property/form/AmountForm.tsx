@@ -16,7 +16,7 @@ interface AssetInfoInputProps {
   onBack: () => void;
 }
 
-export default function AssetInfoInput({
+export default function AmountForm({
   formType,
   onValid,
   onBack,

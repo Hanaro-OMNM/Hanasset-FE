@@ -1,5 +1,5 @@
 import FormTitle from '../../components/atoms/FormTitle';
-import RegisterButtonGroup from '../../components/atoms/RegisterButtonGroup';
+import RegisterButtonGroup from './PropertyGroup';
 
 interface PropertyConfirmProps {
   job: string;

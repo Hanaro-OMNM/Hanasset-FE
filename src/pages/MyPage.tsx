@@ -7,14 +7,14 @@ import House from '../assets/img/house.png';
 import People from '../assets/img/main/people.png';
 import CommonBackground from '../components/atoms/CommonBackground';
 import MobileHeader from '../components/atoms/MobileHeader';
-import RegisterButtonGroup from '../components/atoms/RegisterButtonGroup.tsx';
 import SemiTitle from '../components/atoms/SemiTitle';
 import Swiper from '../components/atoms/Swiper';
 import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
-import PropertyRegister from '../components/template/PropertyRegister';
+import PropertyManage from '../components/template/PropertyManage.tsx';
 import SelectEstate from '../components/template/SelectEstate.tsx';
 import { CookieUtils } from '../utils/CookieUtils.ts';
+import PropertyGroup from './property/PropertyGroup.tsx';
 
 interface Asset {
   name: string;
@@ -102,7 +102,7 @@ export default function MyPage() {
             <div className="pt-5 pr-6">
               <div className="mt-10">
                 <SemiTitle>내 정보</SemiTitle>
-                <RegisterButtonGroup onRegister={handleRegister} />
+                <PropertyGroup onRegister={handleRegister} />
               </div>
 
               {/* 내 관심 지역 */}
@@ -173,7 +173,7 @@ export default function MyPage() {
         ) : currentPage === 'EstateList' ? (
           <SelectEstate />
         ) : (
-          <PropertyRegister
+          <PropertyManage
             assetType={currentPage}
             onBack={() => setCurrentPage('main')}
           />

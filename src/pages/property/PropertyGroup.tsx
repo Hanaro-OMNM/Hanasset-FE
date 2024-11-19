@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import PropertyItem from '../../pages/property/PropertyItem';
+import CommonBackground from '../../components/atoms/CommonBackground';
 import {
   jobTypeState,
   incomeAmountState,
@@ -9,17 +9,15 @@ import {
   loanAmountState,
   hasLoanState,
 } from '../../recoil/asset/atom';
-import CommonBackground from './CommonBackground';
+import PropertyItem from './PropertyItem';
 
-interface RegisterButtonGroupProp {
+interface PropertyGroupProp {
   onRegister: (
     type: 'home' | 'family' | 'main' | 'editProfile' | 'job' | 'income' | 'loan'
   ) => void;
 }
 
-export default function RegisterButtonGroup({
-  onRegister,
-}: RegisterButtonGroupProp) {
+export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
   const job = useRecoilValue(jobTypeState);
   const income = useRecoilValue(incomeAmountState);
   const hasChildren = useRecoilValue(hasChildrenState);

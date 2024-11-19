@@ -1,4 +1,3 @@
-import { IoChevronBack } from 'react-icons/io5';
 import React, { useState } from 'react';
 import CommonBackground from '../atoms/CommonBackground';
 import ConfirmModal from '../atoms/EditProfileModal';
@@ -13,17 +12,8 @@ export default function EditProfilePage({ onBack }: EditProfilePageProps) {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [newPassword, setNewPassword] = useState<string>('');
-  const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [showModal, setShowModal] = useState<boolean>(false);
 
-  const handleProfileImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => setProfileImage(reader.result as string);
-      reader.readAsDataURL(file);
-    }
-  };
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleSaveChanges = () => {
     alert('사용자 정보가 저장되었습니다.');
@@ -48,22 +38,6 @@ export default function EditProfilePage({ onBack }: EditProfilePageProps) {
         <MobileHeader title="프로필 수정하기" onBack={onBack}></MobileHeader>
         <div className="pr-6">
           <CommonBackground className="p-4">
-            <div className="space-y-2">
-              <div className="flex items-center space-x-4">
-                <img
-                  src={profileImage || 'https://via.placeholder.com/100'}
-                  alt="프로필"
-                  className="w-24 h-24 rounded-full object-cover shadow-md"
-                />
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleProfileImageChange}
-                  className="focus:outline-none"
-                />
-              </div>
-            </div>
-
             <div className="space-y-2">
               <label className="block text-gray-700 font-medium mt-5">
                 이름

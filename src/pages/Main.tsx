@@ -1,13 +1,22 @@
 import { MdNavigateNext } from 'react-icons/md';
+// import { PiBuildingApartment } from 'react-icons/pi';
 import { useEffect, useState } from 'react';
+import { realEstateData } from '../assets/Dummy';
 import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
+import Swiper from '../components/atoms/Swiper';
+import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
+import RealEstateCard from './RealEstateList/RealEstateCard.tsx';
 import LocationFilter from './location/LocationFilter.tsx';
 
-type House = {
-  title: string;
+type estateProps = {
+  type: string;
+  location: string;
+  price: string;
+  size: string;
   description: string;
-  address: string;
+  dealType: string;
+  imageUrl: string;
 };
 
 export default function Main() {
@@ -19,6 +28,11 @@ export default function Main() {
   const [currCity, setCity] = useState<string>('시/도');
   const [currGungu, setGungu] = useState<string>('시/군/구');
   const [currDong, setDong] = useState<string>('읍/면/동');
+
+  const [selectedEstate, setSelectedEstate] = useState<estateProps | null>(
+    null
+  ); // 초기값을 null로 설정
+  const [showRealEstate, setShowRealEstate] = useState(true);
 
   useEffect(() => {
     // LocalStorage에서 값을 가져오고 없으면 기본값으로 설정
@@ -38,11 +52,28 @@ export default function Main() {
   }, []);
 
   // 최근 확인한 매물 리스트
-  const recentHouses: 'none' | House[] = (() => {
-    const recents = localStorage.getItem('recents');
+  const recentHouses: 'none' | string[] = (() => {
+    const recents = localStorage.getItem('recentVisitedList');
 
-    return recents ? JSON.parse(recents) : 'none';
+    try {
+      return recents ? JSON.parse(recents) : 'none';
+    } catch (e) {
+      console.error('Invalid JSON format in recentVisitedList:', e);
+      return 'none'; // 잘못된 JSON 데이터가 있는 경우 안전하게 'none' 반환
+    }
   })();
+
+  // 최근 확인한 매물 리스트와 매칭되는 더미 데이터 필터링
+  const recentRealEstateData: estateProps[] =
+    recentHouses !== 'none'
+      ? realEstateData.filter((estate) =>
+          recentHouses.includes(estate.location)
+        )
+      : [];
+
+  const handleCardClick = (estate: estateProps) => {
+    setSelectedEstate(estate); // 선택된 매물 정보 설정
+  };
 
   return (
     <div>
@@ -139,16 +170,37 @@ export default function Main() {
                 <h2 className="text-xl text-slate-800 font-bold mb-6">
                   최근에 확인한 매물
                 </h2>
-                {/* 여기에는 캐러셀 적용할 예정 */}
+
                 <CommonBackground className="w-full px-5 py-3">
                   {recentHouses === 'none' ? (
                     <div>아직 둘러본 매물이 없네요.</div>
                   ) : (
-                    <div></div>
+                    <Swiper
+                      items={recentRealEstateData}
+                      pagination={{ clickable: true }}
+                      renderItem={(recentRealEstateData) => (
+                        <RealEstateCard
+                          {...recentRealEstateData}
+                          onClick={() => {
+                            handleCardClick(recentRealEstateData);
+                            setShowRealEstate(true);
+                          }}
+                        />
+                      )}
+                      spaceBetween={30}
+                      slidesPerView={1}
+                    />
                   )}
                 </CommonBackground>
               </div>
             </div>
+
+            {showRealEstate && selectedEstate && (
+              <RealEstateDetail
+                estate={selectedEstate}
+                onBackClick={() => setShowRealEstate(false)}
+              />
+            )}
           </div>
         ) : (
           <LocationFilter

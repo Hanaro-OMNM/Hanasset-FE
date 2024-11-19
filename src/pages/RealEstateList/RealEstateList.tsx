@@ -34,13 +34,35 @@ export default function RealEstateLayout() {
 
   const handleCardClick = (estate: estateProps) => {
     setSelectedEstate(estate); // 선택된 매물 정보 설정
+
+    // 최근에 확인한 매물을 로컬 스토리지에 저장하는 로직
+    const key = 'recentVisitedList';
+    const existingList = localStorage.getItem(key);
+
+    if (existingList) {
+      // 기존 값이 있으면 파싱 후 배열의 맨 앞에 추가
+      const parsedList = JSON.parse(existingList) as string[];
+      // 중복 방지
+      if (!parsedList.includes(estate.location)) {
+        // 리스트 길이는 항상 3을 유지 -> 최근 확인한 매물은 항상 최대 3개만 유지
+        if (parsedList.length === 3) {
+          parsedList.pop();
+        }
+
+        parsedList.unshift(estate.location);
+        localStorage.setItem(key, JSON.stringify(parsedList));
+      }
+    } else {
+      // 기존 값이 없으면 새로운 배열 생성
+      localStorage.setItem(key, JSON.stringify([estate.location]));
+    }
   };
 
   const navigate = useNavigate();
 
   return (
     <div className="top-0 absolute pl-4 animate-slideInRight">
-      <div className="w-[420px] px-2 pt-2 bg-gray-50/90 absolute backdrop-blur-[10px] left-4 overflow-y-auto h-screen scrollbar-hide">
+      <div className="w-[420px] px-2 pt-2 bg-white/70 absolute backdrop-blur-[10px] left-4 overflow-y-auto h-screen scrollbar-hide">
         <MobileHeader title="영등포구 영등포동" onBack={() => navigate('/')} />
         <div className="flex justify-between items-center my-2">
           <div className="flex items-center font-bold ml-1">

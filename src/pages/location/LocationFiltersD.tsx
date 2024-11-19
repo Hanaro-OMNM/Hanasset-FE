@@ -1,10 +1,12 @@
 import Papa from 'papaparse';
+import { FaStar } from 'react-icons/fa';
 import { HiOutlineOfficeBuilding } from 'react-icons/hi';
 import { MdNavigateNext } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { useState, useEffect } from 'react';
 import CommonBackground from '../../components/atoms/CommonBackground';
+import MyLocationModal from '../../components/template/Modal/MyLocation';
 import centerAtom from '../../recoil/center';
 import LocationFilterCity from './LocationFiltersC';
 import LocationFilterGungu from './LocationFiltersG';
@@ -25,6 +27,7 @@ const LocationFilterDong = () => {
     'dong'
   );
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const currCity: string = JSON.parse(
     localStorage.getItem('currCity') || '"시/도"'
@@ -82,7 +85,6 @@ const LocationFilterDong = () => {
 
   const handleNavigateToMap = () => {
     if (!selectedLocation) return; // 선택된 지역이 없으면 아무 작업도 하지 않음
-
     localStorage.setItem(storedKey, JSON.stringify(selectedLocation));
 
     const fullAddress = `${currCity} ${currGungu} ${selectedLocation}`;
@@ -93,6 +95,33 @@ const LocationFilterDong = () => {
     const { lat, lng } = selected;
     setCenter({ lat, lng });
     navigate('/');
+  };
+
+  const handleBookmarkClick = () => {
+    if (!selectedLocation) return;
+    setIsModalOpen(true); // 모달 열기
+  };
+
+  const handleConfirmBookmark = () => {
+    if (selectedLocation) {
+      const savedLocations = JSON.parse(
+        localStorage.getItem('bookmarkedLocations') || '[]'
+      );
+      if (!savedLocations.includes(selectedLocation)) {
+        savedLocations.push(selectedLocation);
+        localStorage.setItem(
+          'bookmarkedLocations',
+          JSON.stringify(savedLocations)
+        );
+      }
+      alert(`${selectedLocation}이(가) 관심 지역으로 등록되었습니다.`);
+      handleNavigateToMap();
+    }
+    setIsModalOpen(false); // 모달 닫기
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false); // 모달 닫기
   };
 
   return (
@@ -131,7 +160,11 @@ const LocationFilterDong = () => {
                 <button
                   key={name}
                   type="button"
-                  className="w-24 h-12 rounded-[10px] bg-[#eeeeee]"
+                  className={`w-24 h-12 rounded-[10px] font-medium ${
+                    selectedLocation === name
+                      ? 'bg-hanaGreen60 text-white'
+                      : 'bg-[#eeeeee] text-slate-800'
+                  } hover:font-bold`}
                   onClick={() => {
                     setSelectedLocation(name);
                   }}
@@ -145,13 +178,50 @@ const LocationFilterDong = () => {
 
             {/* 지도로 이동 버튼 */}
             {selectedLocation && ( // 선택된 지역이 있을 때만 버튼 표시
-              <button
-                type="button"
-                className="mt-4 p-2 bg-hanaGreen text-white rounded"
-                onClick={handleNavigateToMap} // 지도 이동 로직 실행
-              >
-                지도로 이동하기
-              </button>
+              <div className="relative inline-flex items-center mt-4">
+                <button
+                  type="button"
+                  className="absolute right-2 p-2"
+                  onClick={handleBookmarkClick}
+                >
+                  <FaStar className="text-white hover:text-yellow-300" />
+                </button>
+
+                <button
+                  type="button"
+                  className="p-2 bg-hanaGreen80 text-white rounded flex-1"
+                  onClick={handleNavigateToMap} // 지도 이동 로직 실행
+                >
+                  지도로 이동하기
+                </button>
+              </div>
+            )}
+
+            {/* 모달 컴포넌트 */}
+            {isModalOpen && (
+              <MyLocationModal onClose={handleCloseModal}>
+                <div className="p-4">
+                  <p className="text-lg font-medium text-slate-800">
+                    내 관심 지역으로 등록하시겠습니까?
+                  </p>
+                  <div className="mt-4 flex justify-end space-x-4">
+                    <button
+                      type="button"
+                      className="px-4 py-2 bg-gray-200 text-gray-800 rounded"
+                      onClick={handleCloseModal}
+                    >
+                      취소
+                    </button>
+                    <button
+                      type="button"
+                      className="px-4 py-2 bg-hanaGreen80 text-white rounded"
+                      onClick={handleConfirmBookmark}
+                    >
+                      등록
+                    </button>
+                  </div>
+                </div>
+              </MyLocationModal>
             )}
           </CommonBackground>
         </div>

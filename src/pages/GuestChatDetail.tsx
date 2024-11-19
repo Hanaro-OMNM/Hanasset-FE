@@ -32,7 +32,7 @@ const GuestChatDetail: React.FC = () => {
           <LoanDetail onHide={() => setShowDetail(false)} />
         </div>
       ) : (
-        <div className="w-[420px] backdrop-blur-[10px] absolute px-4 top-0 h-screen left-[420px] overflow-y-auto bg-white/75 scrollbar-hide">
+        <div className="w-[420px] backdrop-blur-[10px] absolute px-4 top-0 h-screen left-[420px] overflow-y-auto bg-gray-50/90 scrollbar-hide">
           {/* 매물 정보 */}
           <div>
             <SemiTitle title="매물 정보" />

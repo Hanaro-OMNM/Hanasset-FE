@@ -16,7 +16,7 @@ interface LoanDetailProps {
 const LoanDetail: React.FC<LoanDetailProps> = ({ onHide }) => {
   return (
     <div className="animate-fadeInRight">
-      <div className="w-[420px] backdrop-blur-[10px] h-screen overflow-y-auto bg-white/75 scrollbar-hide">
+      <div className="w-[420px] backdrop-blur-[10px] h-screen overflow-y-auto bg-gray-50/90 scrollbar-hide">
         {/* 헤더 */}
         <div className="flex h-12 pl-1 gap-2 items-center">
           <button className="items-center" onClick={onHide}>

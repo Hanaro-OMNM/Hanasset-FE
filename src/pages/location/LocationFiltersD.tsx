@@ -1,10 +1,12 @@
 import Papa from 'papaparse';
+import { FaStar } from 'react-icons/fa';
 import { HiOutlineOfficeBuilding } from 'react-icons/hi';
 import { MdNavigateNext } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { useState, useEffect } from 'react';
 import CommonBackground from '../../components/atoms/CommonBackground';
+import MyLocationModal from '../../components/template/Modal/MyLocation';
 import centerAtom from '../../recoil/center';
 import LocationFilterCity from './LocationFiltersC';
 import LocationFilterGungu from './LocationFiltersG';
@@ -24,6 +26,13 @@ const LocationFilterDong = () => {
   const [activePage, setActivePage] = useState<'city' | 'gungu' | 'dong' | ''>(
     'dong'
   );
+  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+
+  const [bookmarkedLocations, setBookmarkedLocations] = useState<
+    Array<Record<string, Info>>
+  >(JSON.parse(localStorage.getItem('bookmarkedLocations') || '[]'));
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const currCity: string = JSON.parse(
     localStorage.getItem('currCity') || '"시/도"'
@@ -79,6 +88,117 @@ const LocationFilterDong = () => {
   const storedKey: string = 'currDong';
   const info: Info[] = JSON.parse(localStorage.getItem('info') || '[]');
 
+  const handleNavigateToMap = () => {
+    if (!selectedLocation) return; // 선택된 지역이 없으면 아무 작업도 하지 않음
+    localStorage.setItem(storedKey, JSON.stringify(selectedLocation));
+
+    const fullAddress = `${currCity} ${currGungu} ${selectedLocation}`;
+    const selected = info.find((item) => item.address === fullAddress);
+
+    if (!selected) return;
+
+    const { lat, lng } = selected;
+    setCenter({ lat, lng });
+    navigate('/');
+  };
+
+  // 관심 지역 추가/삭제 함수 업데이트
+  const handleBookmarkClick = () => {
+    if (!selectedLocation) return;
+
+    const isAlreadyBookmarked = bookmarkedLocations.some(
+      (entry) => entry[selectedLocation] !== undefined
+    );
+
+    if (isAlreadyBookmarked) {
+      // 관심 지역 삭제
+      const updatedLocations = bookmarkedLocations.filter(
+        (entry) => entry[selectedLocation] === undefined
+      );
+
+      setBookmarkedLocations(updatedLocations); // 상태 업데이트
+      localStorage.setItem(
+        'bookmarkedLocations',
+        JSON.stringify(updatedLocations)
+      );
+
+      alert(`${selectedLocation}이(가) 관심 지역에서 삭제되었습니다.`);
+    } else {
+      // 관심 지역 추가
+      setIsModalOpen(true); // 모달 열기
+    }
+  };
+
+  // 관심 지역 등록 확인 함수 업데이트
+  const handleConfirmBookmark = () => {
+    if (selectedLocation) {
+      const fullAddress = `${currCity} ${currGungu} ${selectedLocation}`;
+      const selected = info.find((item) => item.address === fullAddress);
+
+      if (!selected) {
+        alert('선택한 지역 정보를 찾을 수 없습니다.');
+        return;
+      }
+
+      const isAlreadyBookmarked = bookmarkedLocations.some(
+        (entry) => entry[selectedLocation] !== undefined
+      );
+
+      if (!isAlreadyBookmarked) {
+        if (bookmarkedLocations.length >= 3) {
+          const name = Object.keys(bookmarkedLocations[0])[0];
+
+          const userConfirmed = window.confirm(
+            `관심 지역은 총 세 개까지만 등록 가능합니다. 기존의 [${name}]을 삭제하고 [${selectedLocation}]을 추가하시겠어요?`
+          );
+
+          if (userConfirmed) {
+            const updatedLocations = [...bookmarkedLocations];
+            updatedLocations.shift(); // 첫 번째 지역 삭제
+            updatedLocations.push({ [selectedLocation]: selected });
+
+            setBookmarkedLocations(updatedLocations); // 상태 업데이트
+            localStorage.setItem(
+              'bookmarkedLocations',
+              JSON.stringify(updatedLocations)
+            );
+
+            alert(
+              `[${name}]이 삭제되고 [${selectedLocation}]이 관심 지역으로 등록되었습니다.`
+            );
+            handleNavigateToMap();
+          }
+        } else {
+          const updatedLocations = [
+            ...bookmarkedLocations,
+            { [selectedLocation]: selected },
+          ];
+
+          setBookmarkedLocations(updatedLocations); // 상태 업데이트
+          localStorage.setItem(
+            'bookmarkedLocations',
+            JSON.stringify(updatedLocations)
+          );
+
+          alert(`${selectedLocation}이(가) 관심 지역으로 등록되었습니다.`);
+          handleNavigateToMap();
+        }
+      }
+    }
+
+    setIsModalOpen(false); // 모달 닫기
+  };
+
+  // 모달 닫기
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  // 별 아이콘의 색상 동기화
+  const isBookmarked = selectedLocation
+    ? bookmarkedLocations.some((entry) => entry[selectedLocation] !== undefined)
+    : false;
+
   return (
     <div>
       {activePage === 'dong' ? (
@@ -86,7 +206,7 @@ const LocationFilterDong = () => {
           <h2 className="text-xl text-slate-800 font-bold mb-6">
             주소로 골라보기
           </h2>
-          <CommonBackground className="p-4">
+          <CommonBackground className="p-4 flex flex-col">
             {/* <아이콘> 시/도 > 시/군/구 > 읍/면/동 */}
             <div className="flex items-center mb-10">
               <div className="flex items-center justify-center w-7 h-7 rounded-full bg-hanaGreen40 mr-4">
@@ -115,20 +235,13 @@ const LocationFilterDong = () => {
                 <button
                   key={name}
                   type="button"
-                  className="w-24 h-12 rounded-[10px] bg-[#eeeeee]"
+                  className={`w-24 h-12 rounded-[10px] font-medium ${
+                    selectedLocation === name
+                      ? 'bg-hanaGreen60 text-white'
+                      : 'bg-[#eeeeee] text-slate-800'
+                  } hover:font-bold`}
                   onClick={() => {
-                    localStorage.setItem(storedKey, JSON.stringify(name));
-                    navigate('/');
-                    const fullAddress = `${currCity} ${currGungu} ${name}`;
-                    const selected = info.find(
-                      (item) => item.address === fullAddress
-                    );
-                    if (!selected) return;
-                    const { lat, lng } = selected;
-                    setCenter({
-                      lat,
-                      lng,
-                    });
+                    setSelectedLocation(name);
                   }}
                 >
                   <span className="font-medium text-slate-800 hover:font-bold">
@@ -137,6 +250,59 @@ const LocationFilterDong = () => {
                 </button>
               ))}
             </div>
+
+            {/* 지도로 이동 & 관심 지역 추가 버튼 */}
+            {selectedLocation && (
+              <div className="relative inline-flex items-center mt-4">
+                <button
+                  type="button"
+                  className="absolute right-2 p-2"
+                  onClick={handleBookmarkClick}
+                >
+                  {/* 관심 지역 추가 버튼 */}
+                  <FaStar
+                    className={`${
+                      isBookmarked ? 'text-yellow-300' : 'text-white'
+                    } hover:text-yellow-300`}
+                  />
+                </button>
+
+                <button
+                  type="button"
+                  className="p-2 bg-hanaGreen80 text-white rounded flex-1"
+                  onClick={handleNavigateToMap} // 지도 이동 로직 실행
+                >
+                  지도로 이동하기
+                </button>
+              </div>
+            )}
+
+            {/* 모달 컴포넌트 */}
+            {isModalOpen && (
+              <MyLocationModal onClose={handleCloseModal}>
+                <div className="p-4">
+                  <p className="text-lg font-medium text-slate-800">
+                    내 관심 지역으로 등록하시겠습니까?
+                  </p>
+                  <div className="mt-4 flex justify-end space-x-4">
+                    <button
+                      type="button"
+                      className="px-4 py-2 bg-gray-200 text-gray-800 rounded"
+                      onClick={handleCloseModal}
+                    >
+                      취소
+                    </button>
+                    <button
+                      type="button"
+                      className="px-4 py-2 bg-hanaGreen80 text-white rounded"
+                      onClick={handleConfirmBookmark}
+                    >
+                      등록
+                    </button>
+                  </div>
+                </div>
+              </MyLocationModal>
+            )}
           </CommonBackground>
         </div>
       ) : activePage === 'city' ? (

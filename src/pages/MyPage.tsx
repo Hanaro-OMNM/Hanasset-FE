@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { useEffect, useState } from 'react';
 import Background1 from '../assets/img/background1.jpg';
 import Background2 from '../assets/img/background2.png';
 import Background3 from '../assets/img/background3.jpg';
@@ -9,20 +10,34 @@ import MyEstateList2 from '../assets/img/myEstateList2.png';
 import MyEstateList3 from '../assets/img/myEstateList3.png';
 import CommonBackground from '../components/atoms/CommonBackground';
 import MobileHeader from '../components/atoms/MobileHeader';
+import RegisterButtonGroup from '../components/atoms/RegisterPageButtonGroup';
 import SemiTitle from '../components/atoms/SemiTitle';
 import Swiper from '../components/atoms/Swiper';
 import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
 import MyEstateList from '../components/template/MyEstateList.tsx';
+import PropertyRegister from '../components/template/PropertyRegister';
+import centerAtom from '../recoil/center/atom.ts';
 import PropertyManage from '../components/template/PropertyManage.tsx';
 import { CookieUtils } from '../utils/CookieUtils.ts';
 import PropertyGroup from './property/PropertyGroup.tsx';
+
+interface BookmarkedLocation {
+  [key: string]: {
+    code: string;
+    address: string;
+    lat: number;
+    lng: number;
+  };
+}
 
 interface Asset {
   name: string;
 }
 
 export default function MyPage() {
+  const setCenter = useSetRecoilState(centerAtom);
+
   const [currentPage, setCurrentPage] = useState<
     | 'home'
     | 'family'
@@ -34,6 +49,52 @@ export default function MyPage() {
     | 'EstateList'
     | 'equity'
   >('main');
+
+  const [interestAreas, setInterestAreas] = useState<
+    { name: string; lat: number; lng: number }[]
+  >([]);
+
+  // 로컬 스토리지에서 "관심 지역" 데이터 가져오기
+  useEffect(() => {
+    const savedLocations = localStorage.getItem('bookmarkedLocations');
+    if (savedLocations) {
+      try {
+        const parsedLocations: BookmarkedLocation[] =
+          JSON.parse(savedLocations);
+
+        // parsedLocations이 갖고 있는 모든 객체를 처리
+        const transformedLocations = parsedLocations.flatMap((item) =>
+          Object.entries(item).map(([key, value]) => {
+            const location = value as {
+              code: string;
+              address: string;
+              lat: number;
+              lng: number;
+            };
+            return {
+              name: key,
+              code: location.code,
+              address: location.address,
+              lat: location.lat,
+              lng: location.lng,
+            };
+          })
+        );
+
+        // lat, lng 포함 변환
+        const updatedInterestAreas = transformedLocations.map((location) => ({
+          name: location.name,
+          lat: location.lat,
+          lng: location.lng,
+        }));
+
+        setInterestAreas(updatedInterestAreas); // 상태 업데이트
+      } catch (error) {
+        console.error('Error parsing bookmarkedLocations:', error);
+      }
+    }
+  }, []);
+
   const navigate = useNavigate();
 
   const handleEditProfile = () => {
@@ -54,16 +115,23 @@ export default function MyPage() {
     { name: '아파트 5' },
   ];
 
-  const interestAreas = [
-    { name: '성수', image: Background1 },
-    { name: '홍대', image: Background2 },
-    { name: '신촌', image: Background3 },
+  const backgrounds = [
+    { image: Background1 },
+    { image: Background2 },
+    { image: Background3 },
   ];
+
   const interestApt = [
     { name: '서울 성동구 아차산로 111 2층', image: MyEstateList1 },
     { name: '서울 성동구 금호산8길 14', image: MyEstateList2 },
     { name: '서울 용산구 백범로 329', image: MyEstateList3 },
   ];
+
+  // 관심 지역 + 배경사진 모음
+  const combinedItems = interestAreas.map((area, index) => ({
+    ...area,
+    background: backgrounds[index],
+  }));
 
   const handleRegister = (
     type:
@@ -78,6 +146,11 @@ export default function MyPage() {
       | 'equity'
   ) => {
     setCurrentPage(type);
+  };
+
+  const handleNavigateToMap = (lat: number, lng: number) => {
+    setCenter({ lat, lng });
+    navigate('/');
   };
 
   return (
@@ -119,23 +192,32 @@ export default function MyPage() {
                 <div className="mt-10">
                   <SemiTitle>내 관심 지역</SemiTitle>
                 </div>
-                <Swiper
-                  items={interestAreas}
-                  pagination={{ clickable: true }}
-                  renderItem={(item) => (
-                    <CommonBackground className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md relative overflow-hidden">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="absolute inset-0 w-full h-full object-cover opacity-70"
-                      />
-                      <div className="absolute inset-0 bg-black opacity-30"></div>
-                      <span className="relative text-white font-semibold">
-                        {item.name}
-                      </span>
-                    </CommonBackground>
-                  )}
-                />
+                {interestAreas.length > 0 ? (
+                  <Swiper
+                    items={combinedItems}
+                    pagination={{ clickable: true }}
+                    renderItem={(item) => (
+                      <CommonBackground
+                        className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md relative overflow-hidden cursor-pointer"
+                        onClick={() => handleNavigateToMap(item.lat, item.lng)}
+                      >
+                        <img
+                          src={item.background.image}
+                          alt={item.name}
+                          className="absolute inset-0 w-full h-full object-cover opacity-70"
+                        />
+                        <div className="absolute inset-0 bg-black opacity-30"></div>
+                        <span className="relative text-white font-semibold">
+                          {item.name}
+                        </span>
+                      </CommonBackground>
+                    )}
+                  />
+                ) : (
+                  <div className="mt-5 text-gray-500 text-center">
+                    아직 등록한 관심 지역이 없습니다.
+                  </div>
+                )}
               </div>
 
               {/* 내 관심 아파트 */}

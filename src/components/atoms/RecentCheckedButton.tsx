@@ -2,7 +2,7 @@ import { FaLocationDot } from 'react-icons/fa6';
 
 interface RecentCheckedButtonProps {
   //   type: 'apt' | 'one-room' | 'officetel' | '';
-  //   onClick: (type: 'home' | 'car') => void;
+  onClick: () => void;
   title: string;
   roundedTop?: boolean;
   roundedBottom?: boolean;
@@ -10,7 +10,7 @@ interface RecentCheckedButtonProps {
 
 const RecentCheckedButton = ({
   //   type,
-  //   onClick,
+  onClick,
   title,
   roundedTop = false,
   roundedBottom = false,
@@ -21,7 +21,7 @@ const RecentCheckedButton = ({
       hover:bg-hanaGreen10 focus:outline-none
       ${roundedTop ? 'rounded-t-lg' : ''} 
       ${roundedBottom ? 'rounded-b-lg' : ''}`}
-      onClick={() => {}}
+      onClick={onClick}
     >
       <div className="flex items-center w-full py-4">
         <div className="text-hanaGreen text-xl w-5 mr-10">

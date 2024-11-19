@@ -7,7 +7,7 @@ import House from '../assets/img/house.png';
 import People from '../assets/img/main/people.png';
 import CommonBackground from '../components/atoms/CommonBackground';
 import MobileHeader from '../components/atoms/MobileHeader';
-import RegisterButtonGroup from '../components/atoms/RegisterPageButtonGroup';
+import RegisterButtonGroup from '../components/atoms/RegisterButtonGroup.tsx';
 import SemiTitle from '../components/atoms/SemiTitle';
 import Swiper from '../components/atoms/Swiper';
 import EditProfile from '../components/template/EditProfile';
@@ -102,14 +102,7 @@ export default function MyPage() {
             <div className="pt-5 pr-6">
               <div className="mt-10">
                 <SemiTitle>내 정보</SemiTitle>
-                <RegisterButtonGroup
-                  onRegister={handleRegister}
-                  job={'중소,중견기업 직장인'}
-                  income={'6000만 원'}
-                  vehicleOwnership={''}
-                  propertyOwnership={''}
-                  confirmationDate={''}
-                />
+                <RegisterButtonGroup onRegister={handleRegister} />
               </div>
 
               {/* 내 관심 지역 */}

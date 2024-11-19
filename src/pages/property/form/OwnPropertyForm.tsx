@@ -1,40 +1,49 @@
+import { useRecoilState } from 'recoil';
 import { useState } from 'react';
+import Button from '../../../components/atoms/Button';
 import FormRadio from '../../../components/molecules/FormRadio';
+import { hasHomeState } from '../../../recoil/asset/atom';
 
-interface OwnPropertyOption {
-  name: string;
+interface Option {
+  value: string;
 }
-
-const ownPropertyList: OwnPropertyOption[] = [
-  { name: '있음' },
-  { name: '없음' },
-];
 
 interface OwnPropertyFormProps {
-  onNext: (hasProperty: boolean) => void;
+  onBack: () => void;
 }
 
-export default function OwnPropertyForm({ onNext }: OwnPropertyFormProps) {
-  const [selectedProperty, setSelectedProperty] = useState<OwnPropertyOption>(
-    ownPropertyList[0]
-  );
+const options: Option[] = [{ value: '있음' }, { value: '없음' }];
 
-  const handlePropertyChange = (property: OwnPropertyOption) => {
-    setSelectedProperty(property);
-    onNext(property.name === '있음');
+export default function OwnPropertyForm({ onBack }: OwnPropertyFormProps) {
+  const [hasHome, setHasHome] = useRecoilState(hasHomeState);
+  const [localHasHome, setLocalHasHome] = useState(hasHome);
+
+  const selectedItem = localHasHome ? options[0] : options[1];
+
+  const handlePropertyChange = (property: Option) => {
+    const hasProperty = property.value === '있음';
+    setLocalHasHome(hasProperty);
+  };
+
+  const handleSave = () => {
+    setHasHome(localHasHome);
+    onBack();
   };
 
   return (
-    <div className="pb-10">
-      <FormRadio<OwnPropertyOption>
-        items={ownPropertyList}
-        label="부동산 자산을 가지고 있나요? "
-        selectedItem={selectedProperty}
+    <div className="p-8">
+      <FormRadio<Option>
+        items={options}
+        label="부동산 자산을 가지고 있나요?"
+        selectedItem={selectedItem}
         onChange={handlePropertyChange}
         display={(item) => (
-          <p className="text-lg font-extrabold">{item.name}</p>
+          <p className="text-lg font-extrabold">{item.value}</p>
         )}
       />
+      <div className="w-full mt-8">
+        <Button text="저장" onClick={handleSave} version="ver1" />
+      </div>
     </div>
   );
 }

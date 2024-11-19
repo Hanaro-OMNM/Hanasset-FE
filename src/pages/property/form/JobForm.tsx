@@ -1,39 +1,58 @@
+import { useRecoilState } from 'recoil';
 import { useState } from 'react';
+import Button from '../../../components/atoms/Button';
 import FormRadio from '../../../components/molecules/FormRadio';
+import { jobTypeState } from '../../../recoil/asset/atom';
 
-interface JobOption {
-  name: string;
+interface Option {
+  value: string;
 }
 
-const joblist: JobOption[] = [
-  { name: '중소·중견기업 직장인' },
-  { name: '대기업 직장인' },
-  { name: '개인사업자' },
-  { name: '임대사업자' },
-  { name: '공무원' },
-  { name: '군인' },
-  { name: '무직' },
-  { name: '기타' },
+const options: Option[] = [
+  { value: '중소·중견기업 직장인' },
+  { value: '대기업 직장인' },
+  { value: '개인사업자' },
+  { value: '임대사업자' },
+  { value: '공무원' },
+  { value: '군인' },
+  { value: '무직' },
+  { value: '기타' },
 ];
 
-export default function JobForm() {
-  const [selectedJob, setSelectedJob] = useState<JobOption>(joblist[0]);
+interface JobFormProps {
+  onBack: () => void;
+}
 
-  const handleJobChange = (job: JobOption) => {
-    setSelectedJob(job);
+export default function JobForm({ onBack }: JobFormProps) {
+  const [jobType, setJobType] = useRecoilState(jobTypeState);
+  const [localJobType, setLocalJobType] = useState<string>(jobType);
+
+  const handleJobChange = (job: Option) => {
+    setLocalJobType(job.value);
   };
 
+  const handleSave = () => {
+    setJobType(localJobType);
+    onBack();
+  };
+
+  const selectedItem: Option =
+    options.find((option) => option.value === localJobType) || options[0];
+
   return (
-    <div className="pb-10">
-      <FormRadio<JobOption>
-        items={joblist}
+    <div className="p-8">
+      <FormRadio<Option>
+        items={options}
         label="직업을 선택하세요"
-        selectedItem={selectedJob}
+        selectedItem={selectedItem}
         onChange={handleJobChange}
         display={(item) => (
-          <p className="text-lg font-extrabold">{item.name}</p>
+          <p className="text-lg font-extrabold">{item.value}</p>
         )}
       />
+      <div className="w-full mt-8">
+        <Button text="저장" onClick={handleSave} version="ver1" />
+      </div>
     </div>
   );
 }

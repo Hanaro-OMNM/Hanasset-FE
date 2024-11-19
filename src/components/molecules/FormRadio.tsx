@@ -6,7 +6,7 @@ interface FormRadioProps<T> {
   label: string;
   selectedItem: T;
   onChange: (item: T) => void;
-  display: (item: T) => React.ReactNode; // 각 항목을 어떻게 보여줄지 정의
+  display: (item: T) => React.ReactNode;
 }
 
 export default function FormRadio<T>({
@@ -17,9 +17,9 @@ export default function FormRadio<T>({
   display,
 }: FormRadioProps<T>) {
   return (
-    <div className="w-full p-4">
+    <div className="w-full">
       <div className="mx-auto w-full max-w-md">
-        <h2 className="flex justify-center text-xl font-extrabold my-7">
+        <h2 className="flex justify-center text-xl font-extrabold mb-7">
           {label}
         </h2>
         <RadioGroup

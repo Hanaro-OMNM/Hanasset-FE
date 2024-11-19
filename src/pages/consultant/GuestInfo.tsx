@@ -5,6 +5,7 @@ import { dummyGuest } from '../../assets/Dummy';
 import { dummyLoanGroup } from '../../assets/Dummy';
 import { dummyConsultationData } from '../../assets/Dummy';
 import { dummyRealEstateList } from '../../assets/Dummy';
+import { dummyBeotimmogLoanGroup } from '../../assets/Dummy';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import Swiper from '../../components/atoms/Swiper';
 import FixedExpectation from '../GuestChatDetail/FixedExpectation';
@@ -34,11 +35,11 @@ export default function GuestInfo() {
 
   return (
     <div className="flex h-screen">
-      {showDetail ? (
-        <LoanDetail onHide={() => setShowDetail(false)} />
-      ) : (
-        <div className="max-w-[420px] bg-gray-100 p-6 overflow-hidden">
-          <div className="h-full overflow-y-auto max-h-screen scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400">
+      <div className="max-w-[420px] bg-gray-100 p-6 overflow-hidden">
+        <div className="h-full overflow-y-auto max-h-screen scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400">
+          {showDetail ? (
+            <LoanDetail onHide={() => setShowDetail(false)} />
+          ) : (
             <div className="flex flex-col gap-y-4">
               <div>
                 <SemiTitle title="손님 정보" />
@@ -98,7 +99,7 @@ export default function GuestInfo() {
                 />
                 <LoanRecommendTab
                   hanaLoanList={dummyLoanGroup[loanIndex]}
-                  beotimmogLoanList={[]}
+                  beotimmogLoanList={dummyBeotimmogLoanGroup[loanIndex]}
                   onLoanDetailButtonClick={handleShowDetail}
                 />
               </div>
@@ -142,9 +143,9 @@ export default function GuestInfo() {
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }

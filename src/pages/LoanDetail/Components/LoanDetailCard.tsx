@@ -27,9 +27,7 @@ interface OutlineProps {
 
 const Outline: React.FC<OutlineProps> = ({ outline }) => {
   return (
-    <h5 className="w-80 text-hanaSilver text-sm font-semibold">
-      &nbsp;{outline}
-    </h5>
+    <h5 className="w-80 text-hanaSilver text-sm font-semibold">{outline}</h5>
   );
 };
 
@@ -46,7 +44,7 @@ const LoanDetailCard: React.FC<LoanDetailCardProps> = ({
 }) => {
   return (
     <div>
-      <div className="my-4 py-4 w-full flex-col gap-y-5 justify-start">
+      <div className="my-4 p-4 w-full flex-col gap-y-5 justify-start">
         <Type type={type} />
         <LoanName name={name} />
         <Outline outline={outline} />

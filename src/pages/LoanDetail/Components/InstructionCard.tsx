@@ -25,7 +25,7 @@ interface InstructionProps {
 
 const InstructionCard: React.FC<InstructionProps> = ({ title, content }) => {
   return (
-    <div className="rounded-lg bg-hanaSilver20 flex flex-col">
+    <div className="p-4 rounded-lg bg-hanaSilver20 flex flex-col">
       <div className="flex items-center mb-2">
         <FiAlertCircle className="w-5 h-5 text-hanaGold60 mr-2" />
         <Title title={title} />

@@ -35,7 +35,7 @@ const FixedProgressBar: React.FC<FixedProgressBarProps> = ({
     `;
   }
   return (
-    <div>
+    <div className="px-4">
       <div className="bg-hanaSilver60 rounded-full h-3">
         <div
           className="bg-hanaColor2 rounded-full h-3"

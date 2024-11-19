@@ -51,7 +51,7 @@ const LoanInfoPage: React.FC = () => {
         </div>
       </div>
       {showDetail && (
-        <div className="w-[420px] h-full absolute top-0 left-[484px]">
+        <div className="h-full absolute top-0 left-[484px]">
           <LoanDetail onHide={() => setShowDetail(false)} />
         </div>
       )}

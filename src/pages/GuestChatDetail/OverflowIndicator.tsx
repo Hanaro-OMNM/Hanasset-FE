@@ -14,7 +14,7 @@ const OverflowIndicator: React.FC<OverflowIndicatorProps> = ({
   return (
     <div
       className={clsx(
-        'bg-hanaRed40 w-56 h-8 text-hanaGold20 text-xs rounded-md p-2 mb-2 shadow-lg',
+        'bg-hanaRed40 w-56 h-8 text-hanaGold20 text-xs rounded-md p-2 mb-2 mx-4 shadow-lg',
         shortage > 0 ? 'visible' : 'invisible'
       )}
       style={{ left: `${(capital / totalPrice) * 100}%` }}

@@ -107,14 +107,16 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
                 src={Consultant}
                 alt="Consultant Icon"
                 className={`h-8 transition duration-200 transform ${
-                  location.pathname === '/consulting'
+                  location.pathname === '/consulting' ||
+                  location.pathname === '/live-chat'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
               />
               <div
                 className={`tracking-tight text-center text-xs ${
-                  location.pathname === '/consulting'
+                  location.pathname === '/consulting' ||
+                  location.pathname === '/live-chat'
                     ? 'text-hanaColor2'
                     : 'text-gray-300'
                 }`}
@@ -136,14 +138,16 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
                 src={Mypage}
                 alt="Mypage Icon"
                 className={`h-8 transition duration-200 transform ${
-                  location.pathname === '/my-page'
+                  location.pathname === '/my-page' ||
+                  location.pathname === '/my-estate-list'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
               />
               <div
                 className={`tracking-tight text-center text-xs ${
-                  location.pathname === '/my-page'
+                  location.pathname === '/my-page' ||
+                  location.pathname === '/my-estate-list'
                     ? 'text-hanaColor2'
                     : 'text-gray-300'
                 }`}

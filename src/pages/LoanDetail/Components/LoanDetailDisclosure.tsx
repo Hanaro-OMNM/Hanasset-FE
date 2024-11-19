@@ -20,7 +20,7 @@ interface ContentProps {
 }
 
 const Content: React.FC<ContentProps> = ({ content }) => {
-  return <h2>{content}</h2>;
+  return <p className="whitespace-pre-wrap">{content}</p>;
 };
 
 interface LoanDetailDisclosureProps {
@@ -33,7 +33,7 @@ const LoanDetailDisclosure: React.FC<LoanDetailDisclosureProps> = ({
   content,
 }) => {
   return (
-    <div className="my-4 py-6 rounded-lg bg-hanaSilver20 text-hanaSilver">
+    <div className="my-4 py-6 px-4 rounded-lg bg-hanaSilver20 text-hanaSilver">
       <Disclosure>
         <DisclosureButton className="group flex w-full justify-between transition duration-150 transform hover:scale-105 ">
           <Title title={title} />

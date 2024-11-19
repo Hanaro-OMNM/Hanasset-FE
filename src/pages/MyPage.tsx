@@ -164,7 +164,7 @@ export default function MyPage() {
                   CookieUtils.removeCookieValue('connect.sid');
                   navigate('/');
                 }}
-                className="flex items-center justify-center text-center h-8 text-white px-4 py-1 mr-4 text-xs bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
+                className="flex items-center justify-center text-center h-8 text-white px-4 py-1 mr-10 mt-3 text-xs bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
               >
                 로그아웃
               </button>

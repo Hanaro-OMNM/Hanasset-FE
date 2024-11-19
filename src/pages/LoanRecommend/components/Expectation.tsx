@@ -24,7 +24,7 @@ const Expectation: React.FC<ExpectationProps> = ({
       <CommonBackground className="p-6 h-40">
         <div
           className={clsx(
-            'bg-hanaRed40 w-48 h-8 text-hanaGold20 text-xs rounded-md p-2 shadow-lg',
+            'bg-hanaRed40 w-48 h-8 text-hanaGold20 text-xs rounded-md p-2 mx-2 shadow-lg',
             shortage > 0 ? 'visible' : 'invisible' // visible 상태를 조정하여 공간 고정
           )}
           style={{ left: `${(capital / totalPrice) * 100}%` }}

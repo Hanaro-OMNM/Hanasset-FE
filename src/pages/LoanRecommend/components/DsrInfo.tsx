@@ -8,8 +8,10 @@ interface DsrInfoProps {
 const DsrInfo: React.FC<DsrInfoProps> = ({ dsr }) => {
   return (
     <div>
-      <CommonBackground className="p-7">
-        <p className="my-2 text-hanaBlack80 font-semibold">현재 DSR {dsr}%</p>
+      <CommonBackground className="p-4">
+        <p className="my-2 px-4 text-hanaBlack80 font-semibold">
+          현재 DSR {dsr}%
+        </p>
         <LoanProgressBar rate={dsr} />
       </CommonBackground>
     </div>

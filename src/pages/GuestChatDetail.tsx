@@ -73,7 +73,7 @@ const GuestChatDetail: React.FC = () => {
               totalPrice={dummyRealEstateList[loanIndex].price}
               maxLoan={5}
             />
-            <DsrInfo dsr={dummyGuest.stressDsr} />
+            <DsrInfo dsr={dummyGuest.dsr} />
             <LoanRecommendTab
               hanaLoanList={dummyLoanGroup[loanIndex]}
               beotimmogLoanList={dummyBeotimmogLoanGroup[loanIndex]}

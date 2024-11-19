@@ -66,9 +66,13 @@ export default function Main() {
   // 최근 확인한 매물 리스트와 매칭되는 더미 데이터 필터링
   const recentRealEstateData: estateProps[] =
     recentHouses !== 'none'
-      ? realEstateData.filter((estate) =>
-          recentHouses.includes(estate.location)
-        )
+      ? realEstateData
+          .filter((estate) => recentHouses.includes(estate.location))
+          .sort(
+            (a, b) =>
+              recentHouses.indexOf(a.location) -
+              recentHouses.indexOf(b.location)
+          )
       : [];
 
   const handleCardClick = (estate: estateProps) => {

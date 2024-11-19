@@ -1,17 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { selectedEstateType } from '../../types/global';
 import Button from '../atoms/Button';
 import Checkbox from '../atoms/Checkbox';
 import CommonBackground from '../atoms/CommonBackground';
 import MobileHeader from '../atoms/MobileHeader';
 import Swiper from '../atoms/Swiper';
 
-type selectedItemsType = {
-  id: number;
-  name: string;
-  detail: string;
-  address: string;
-};
 const apartments = [
   {
     id: 1,
@@ -101,7 +96,7 @@ export default function SelectEstate() {
   const [checkedItems, setCheckedItems] = useState<boolean[]>(
     Array(apartments.length).fill(false)
   );
-  const selectedItems: selectedItemsType[] = [];
+  const selectedItems: selectedEstateType[] = [];
 
   const handleItemChange = (index: number, checked: boolean) => {
     const selectedCount = checkedItems.filter((item) => item).length;

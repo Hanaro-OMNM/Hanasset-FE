@@ -12,8 +12,8 @@ interface LoanReservationState {
 }
 
 type Props = {
-  upcomingConsulting: LoanReservationState; // LoanReservationState 타입의 상담 예약 정보
-  setUpcomingConsulting: (newState: LoanReservationState) => void; // 상태를 업데이트하는 함수
+  upcomingConsulting: LoanReservationState;
+  setUpcomingConsulting: (newState: LoanReservationState) => void;
 };
 
 const UpcomingConsultingComponent = ({

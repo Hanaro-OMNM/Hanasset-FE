@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 import { selectedEstateType } from '../../types/global';
 
 interface LoanReservationState {
-  reservationInfo: selectedEstateType[]; // `any[]`를 필요한 타입으로 수정할 수 있음
+  reservationInfo: selectedEstateType[];
   reservationTime: undefined | string;
 }
 

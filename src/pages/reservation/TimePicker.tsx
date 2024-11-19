@@ -34,7 +34,6 @@ const TimePicker: React.FC<TimePickerProps> = ({
 
   const timeOptions = generateTimeOptions();
 
-  // Parse selectedDate and determine today/tomorrow logic
   const today = new Date();
   const parsedDate = selectedDate
     ? Number(selectedDate.substring(selectedDate.lastIndexOf('-') + 1))

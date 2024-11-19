@@ -56,7 +56,7 @@ export default function ChatReservation() {
   const dateOptions = [
     { offset: 0 },
     { offset: 1 },
-    { offset: 2 }, // 오늘
+    { offset: 2 },
     { offset: 3 },
     { offset: 4 },
   ].map(({ offset }) => {

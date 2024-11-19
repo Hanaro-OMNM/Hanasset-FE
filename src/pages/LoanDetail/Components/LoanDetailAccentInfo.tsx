@@ -28,7 +28,7 @@ const LoanDetailAccentInfo: React.FC<LoanDetailAccentInfoProps> = ({
   content,
 }) => {
   return (
-    <div className="mt-4 ml-4 mr-4 pt-4 pl-4 pr-4">
+    <div className="mt-4 pt-4">
       <Title title={title} />
       <Content content={content} />
     </div>

@@ -46,7 +46,7 @@ const LoanDetailCard: React.FC<LoanDetailCardProps> = ({
 }) => {
   return (
     <div>
-      <div className="m-4 p-4 w-full flex-col gap-y-5 justify-start">
+      <div className="my-4 py-4 w-full flex-col gap-y-5 justify-start">
         <Type type={type} />
         <LoanName name={name} />
         <Outline outline={outline} />

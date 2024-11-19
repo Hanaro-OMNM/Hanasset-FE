@@ -12,6 +12,7 @@ export interface Guest {
   home: boolean;
   loan: number;
   stressDsr: number;
+  capital: number;
 }
 
 export interface Loan {
@@ -44,6 +45,7 @@ export interface RealEstate {
   location: string;
   size: string;
   address: string;
+  price: number;
 }
 
 export const dummyGuest: Guest = {
@@ -54,7 +56,8 @@ export const dummyGuest: Guest = {
   family: false,
   home: false,
   loan: 0,
-  stressDsr: 40,
+  stressDsr: 10,
+  capital: 3,
 };
 
 export const hanaYouthJeonseLoan: Loan = {
@@ -89,6 +92,30 @@ export const jeonseSecurityLoan: Loan = {
   loanDetailUrl: '',
 };
 
+export const beotimmogYoungWarrantyWolseLoan: Loan = {
+  name: '버팀목 청년전용보증부월세대출',
+  rate: 1.3,
+  limit: 0.45,
+  newDsr: 23,
+  loanDetailUrl: '',
+};
+
+export const beotimmogSmallBusinessJeonseLoan: Loan = {
+  name: '버팀목 중소기업취업청년 전세자금대출',
+  rate: 1.5,
+  limit: 1,
+  newDsr: 28,
+  loanDetailUrl: '',
+};
+
+export const beotimmogJeonseLoan: Loan = {
+  name: '버팀목전세자금대출',
+  rate: 2.0,
+  limit: 3,
+  newDsr: 32,
+  loanDetailUrl: '',
+};
+
 export const dummyLoanList: Loan[] = [
   hanaYouthJeonseLoan,
   seoulYouthLoan,
@@ -96,7 +123,29 @@ export const dummyLoanList: Loan[] = [
   jeonseSecurityLoan,
 ];
 
-export const dummyLoanGroup: Loan[][] = [dummyLoanList, [], []];
+export const dummyLoanList2: Loan[] = [seoulYouthLoan, jeonseSecurityLoan];
+
+export const dummyBeotimmogLoanList: Loan[] = [
+  beotimmogYoungWarrantyWolseLoan,
+  beotimmogSmallBusinessJeonseLoan,
+  beotimmogJeonseLoan,
+];
+
+export const dummyBeotimmogLoanList2: Loan[] = [
+  beotimmogSmallBusinessJeonseLoan,
+  beotimmogJeonseLoan,
+];
+
+export const dummyLoanGroup: Loan[][] = [
+  dummyLoanList,
+  dummyLoanList2,
+  dummyLoanList,
+];
+export const dummyBeotimmogLoanGroup: Loan[][] = [
+  dummyBeotimmogLoanList,
+  dummyBeotimmogLoanList,
+  dummyBeotimmogLoanList2,
+];
 
 export const dummyLoanDetail: LoanDetail = {
   type: '전(월)세 대출',
@@ -144,6 +193,7 @@ export const dummyRealEstateList: RealEstate[] = [
     location: '103동 1201호',
     size: '100.97㎡',
     address: '서울특별시 성동구 왕십리로 16',
+    price: 5,
   },
   {
     id: 1,
@@ -152,6 +202,7 @@ export const dummyRealEstateList: RealEstate[] = [
     location: '104동 1502호',
     size: '85.42㎡',
     address: '서울특별시 성동구 왕십리로 16',
+    price: 10,
   },
   {
     id: 2,
@@ -160,6 +211,7 @@ export const dummyRealEstateList: RealEstate[] = [
     location: '105동 1803호',
     size: '120.50㎡',
     address: '서울특별시 성동구 왕십리로 16',
+    price: 8,
   },
 ];
 

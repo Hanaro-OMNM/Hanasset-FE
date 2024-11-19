@@ -9,7 +9,8 @@ const SearchBar: React.FC = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [searchText, setSearchText] = useState('');
 
-  const handleClear = () => {
+  const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setSearchText('');
   };
 

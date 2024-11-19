@@ -18,12 +18,11 @@ type estateProps = {
 export default function RealEstateLayout() {
   const [selectedEstate, setSelectedEstate] = useState<estateProps | null>(
     null
-  ); // 초기값을 null로 설정
+  );
   const [showRealEstate, setShowRealEstate] = useState(true);
-  const realEstateCount = 27;
 
   const handleCardClick = (estate: estateProps) => {
-    setSelectedEstate(estate); // 선택된 매물 정보 설정
+    setSelectedEstate(estate);
   };
 
   const navigate = useNavigate();
@@ -37,7 +36,7 @@ export default function RealEstateLayout() {
         />
         <div className="flex-grow min-h-0 overflow-y-auto">
           {realEstateData.map((item, index) => (
-            <div key={index} className="border-b">
+            <div key={index} className="border-b flex">
               <RealEstateCard
                 {...item}
                 onClick={() => {

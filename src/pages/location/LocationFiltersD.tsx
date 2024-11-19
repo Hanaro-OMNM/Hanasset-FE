@@ -27,6 +27,11 @@ const LocationFilterDong = () => {
     'dong'
   );
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+
+  const [bookmarkedLocations, setBookmarkedLocations] = useState<
+    Array<Record<string, Info>>
+  >(JSON.parse(localStorage.getItem('bookmarkedLocations') || '[]'));
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const currCity: string = JSON.parse(
@@ -97,32 +102,102 @@ const LocationFilterDong = () => {
     navigate('/');
   };
 
+  // 관심 지역 추가/삭제 함수 업데이트
   const handleBookmarkClick = () => {
     if (!selectedLocation) return;
-    setIsModalOpen(true); // 모달 열기
+
+    const isAlreadyBookmarked = bookmarkedLocations.some(
+      (entry) => entry[selectedLocation] !== undefined
+    );
+
+    if (isAlreadyBookmarked) {
+      // 관심 지역 삭제
+      const updatedLocations = bookmarkedLocations.filter(
+        (entry) => entry[selectedLocation] === undefined
+      );
+
+      setBookmarkedLocations(updatedLocations); // 상태 업데이트
+      localStorage.setItem(
+        'bookmarkedLocations',
+        JSON.stringify(updatedLocations)
+      );
+
+      alert(`${selectedLocation}이(가) 관심 지역에서 삭제되었습니다.`);
+    } else {
+      // 관심 지역 추가
+      setIsModalOpen(true); // 모달 열기
+    }
   };
 
+  // 관심 지역 등록 확인 함수 업데이트
   const handleConfirmBookmark = () => {
     if (selectedLocation) {
-      const savedLocations = JSON.parse(
-        localStorage.getItem('bookmarkedLocations') || '[]'
-      );
-      if (!savedLocations.includes(selectedLocation)) {
-        savedLocations.push(selectedLocation);
-        localStorage.setItem(
-          'bookmarkedLocations',
-          JSON.stringify(savedLocations)
-        );
+      const fullAddress = `${currCity} ${currGungu} ${selectedLocation}`;
+      const selected = info.find((item) => item.address === fullAddress);
+
+      if (!selected) {
+        alert('선택한 지역 정보를 찾을 수 없습니다.');
+        return;
       }
-      alert(`${selectedLocation}이(가) 관심 지역으로 등록되었습니다.`);
-      handleNavigateToMap();
+
+      const isAlreadyBookmarked = bookmarkedLocations.some(
+        (entry) => entry[selectedLocation] !== undefined
+      );
+
+      if (!isAlreadyBookmarked) {
+        if (bookmarkedLocations.length >= 3) {
+          const name = Object.keys(bookmarkedLocations[0])[0];
+
+          const userConfirmed = window.confirm(
+            `관심 지역은 총 세 개까지만 등록 가능합니다. 기존의 [${name}]을 삭제하고 [${selectedLocation}]을 추가하시겠어요?`
+          );
+
+          if (userConfirmed) {
+            const updatedLocations = [...bookmarkedLocations];
+            updatedLocations.shift(); // 첫 번째 지역 삭제
+            updatedLocations.push({ [selectedLocation]: selected });
+
+            setBookmarkedLocations(updatedLocations); // 상태 업데이트
+            localStorage.setItem(
+              'bookmarkedLocations',
+              JSON.stringify(updatedLocations)
+            );
+
+            alert(
+              `[${name}]이 삭제되고 [${selectedLocation}]이 관심 지역으로 등록되었습니다.`
+            );
+            handleNavigateToMap();
+          }
+        } else {
+          const updatedLocations = [
+            ...bookmarkedLocations,
+            { [selectedLocation]: selected },
+          ];
+
+          setBookmarkedLocations(updatedLocations); // 상태 업데이트
+          localStorage.setItem(
+            'bookmarkedLocations',
+            JSON.stringify(updatedLocations)
+          );
+
+          alert(`${selectedLocation}이(가) 관심 지역으로 등록되었습니다.`);
+          handleNavigateToMap();
+        }
+      }
     }
+
     setIsModalOpen(false); // 모달 닫기
   };
 
+  // 모달 닫기
   const handleCloseModal = () => {
-    setIsModalOpen(false); // 모달 닫기
+    setIsModalOpen(false);
   };
+
+  // 별 아이콘의 색상 동기화
+  const isBookmarked = selectedLocation
+    ? bookmarkedLocations.some((entry) => entry[selectedLocation] !== undefined)
+    : false;
 
   return (
     <div>
@@ -176,15 +251,20 @@ const LocationFilterDong = () => {
               ))}
             </div>
 
-            {/* 지도로 이동 버튼 */}
-            {selectedLocation && ( // 선택된 지역이 있을 때만 버튼 표시
+            {/* 지도로 이동 & 관심 지역 추가 버튼 */}
+            {selectedLocation && (
               <div className="relative inline-flex items-center mt-4">
                 <button
                   type="button"
                   className="absolute right-2 p-2"
                   onClick={handleBookmarkClick}
                 >
-                  <FaStar className="text-white hover:text-yellow-300" />
+                  {/* 관심 지역 추가 버튼 */}
+                  <FaStar
+                    className={`${
+                      isBookmarked ? 'text-yellow-300' : 'text-white'
+                    } hover:text-yellow-300`}
+                  />
                 </button>
 
                 <button

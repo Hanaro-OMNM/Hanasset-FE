@@ -175,7 +175,7 @@ export default function Main() {
                   최근에 확인한 매물
                 </h2>
 
-                <CommonBackground className="w-full px-5 py-3">
+                <CommonBackground className="w-full px-2 py-3">
                   {recentHouses === 'none' ? (
                     <div>아직 둘러본 매물이 없네요.</div>
                   ) : (
@@ -207,10 +207,7 @@ export default function Main() {
             )}
           </div>
         ) : (
-          <LocationFilter
-            locationType={activePage}
-            onBack={() => setActivePage('main')}
-          />
+          <LocationFilter locationType={activePage} />
         )}
       </div>
     </div>

@@ -15,6 +15,7 @@ import MyPage from './pages/MyPage.tsx';
 import PropertyAgree from './pages/PropertyAgree.tsx';
 import RealEstateList from './pages/RealEstateList/RealEstateList.tsx';
 import ChatApp from './pages/chat/ChatApp.tsx';
+import ChatHistory from './pages/chat/ChatHistory.tsx';
 import Consultant from './pages/consultant/Consultant.tsx';
 import ChatReservation from './pages/reservation/ChatReservation.tsx';
 import SearchResult from './pages/search/SearchResult.tsx';
@@ -71,6 +72,10 @@ function App() {
                 <Route
                   path="/live-chat"
                   element={<ChatApp accessor="guest" />}
+                />
+                <Route
+                  path="/chat-history/:id"
+                  element={<ChatHistory accessor="guest" />}
                 />
                 <Route path="/search-result" element={<SearchResult />} />
               </Routes>

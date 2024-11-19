@@ -18,7 +18,7 @@ import Tabs from './components/Tabs';
 import TypeInfo from './components/TypeInfo';
 
 interface RealEstateDetailProps {
-  estate: {
+  estate?: {
     type: string;
     location: string;
     price: string;

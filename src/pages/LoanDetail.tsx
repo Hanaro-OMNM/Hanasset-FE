@@ -1,7 +1,6 @@
 import { IoChevronBack } from 'react-icons/io5';
 import { dummyGuest } from '../assets/Dummy';
 import { dummyLoanDetail } from '../assets/Dummy';
-// import Hana from '../assets/img/hana.png';
 import CommonBackground from '../components/atoms/CommonBackground';
 import LoanProgressBar from '../components/atoms/LoanProgressBar';
 import InstructionCard from './LoanDetail/Components/InstructionCard';
@@ -16,8 +15,8 @@ interface LoanDetailProps {
 
 const LoanDetail: React.FC<LoanDetailProps> = ({ onHide }) => {
   return (
-    <div className=" top-0 absolute animate-slideInRight">
-      <div className="w-[420px] backdrop-blur-[10px] absolute top-0 h-screen overflow-y-auto bg-white/75 scrollbar-hide">
+    <div className="animate-fadeInRight">
+      <div className="w-[420px] backdrop-blur-[10px] h-screen overflow-y-auto bg-white/75 scrollbar-hide">
         {/* 헤더 */}
         <div className="flex h-12 pl-1 gap-2 items-center">
           <button className="items-center" onClick={onHide}>

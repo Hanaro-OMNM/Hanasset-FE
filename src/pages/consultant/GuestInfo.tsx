@@ -60,7 +60,7 @@ export default function GuestInfo() {
                     <Swiper
                       items={dummyRealEstateList}
                       renderItem={(realEstate) => (
-                        <div className="flex flex-col gap-4 h-32 mr-1 ml-1">
+                        <div className="flex flex-col gap-4 h-32 mx-1">
                           <div>
                             <button
                               onClick={() => swiperClick(realEstate.id)}

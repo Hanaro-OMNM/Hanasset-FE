@@ -51,7 +51,7 @@ export default function GuestInfo() {
                   family={dummyGuest.family}
                   home={dummyGuest.home}
                   loan={dummyGuest.loan}
-                  dsr={dummyGuest.stressDsr}
+                  dsr={dummyGuest.dsr}
                 />
               </div>
 

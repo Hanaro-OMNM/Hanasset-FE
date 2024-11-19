@@ -20,7 +20,7 @@ interface ContentProps {
 }
 
 const Content: React.FC<ContentProps> = ({ content }) => {
-  return <h2>{content}</h2>;
+  return <p className="whitespace-pre-wrap">{content}</p>;
 };
 
 interface LoanDetailDisclosureProps {

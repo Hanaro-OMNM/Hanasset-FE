@@ -3,16 +3,18 @@ import { useState } from 'react';
 import Background1 from '../assets/img/background1.jpg';
 import Background2 from '../assets/img/background2.png';
 import Background3 from '../assets/img/background3.jpg';
-import House from '../assets/img/house.png';
 import People from '../assets/img/main/people.png';
+import MyEstateList1 from '../assets/img/myEstateList1.png';
+import MyEstateList2 from '../assets/img/myEstateList2.png';
+import MyEstateList3 from '../assets/img/myEstateList3.png';
 import CommonBackground from '../components/atoms/CommonBackground';
 import MobileHeader from '../components/atoms/MobileHeader';
 import SemiTitle from '../components/atoms/SemiTitle';
 import Swiper from '../components/atoms/Swiper';
 import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
+import MyEstateList from '../components/template/MyEstateList.tsx';
 import PropertyManage from '../components/template/PropertyManage.tsx';
-import SelectEstate from '../components/template/SelectEstate.tsx';
 import { CookieUtils } from '../utils/CookieUtils.ts';
 import PropertyGroup from './property/PropertyGroup.tsx';
 
@@ -37,7 +39,7 @@ export default function MyPage() {
     setCurrentPage('editProfile');
   };
   const handleEstate = () => {
-    setCurrentPage('EstateList');
+    navigate('/my-estate-list');
   };
   const profile = {
     name: '김하나',
@@ -56,6 +58,11 @@ export default function MyPage() {
     { name: '홍대', image: Background2 },
     { name: '신촌', image: Background3 },
   ];
+  const interestApt = [
+    { name: '서울 성동구 아차산로 111 2층', image: MyEstateList1 },
+    { name: '서울 성동구 금호산8길 14', image: MyEstateList2 },
+    { name: '서울 용산구 백범로 329', image: MyEstateList3 },
+  ];
 
   const handleRegister = (
     type:
@@ -72,7 +79,7 @@ export default function MyPage() {
   };
 
   return (
-    <div className="top-0 absolute pl-4 animate-slideInRight">
+    <div className="top-0 absolute animate-fadeInRight">
       <div className="pl-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/90 scrollbar-hide">
         {currentPage === 'main' ? (
           <>
@@ -84,9 +91,9 @@ export default function MyPage() {
               <button
                 onClick={() => {
                   CookieUtils.removeCookieValue('connect.sid');
-                  navigate('/'); // 로그인 페이지로 리다이렉트
+                  navigate('/');
                 }}
-                className="flex items-center justify-center text-center h-8 text-white px-4 py-1 mr-4 text-xs bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
+                className="flex items-center justify-center text-center h-8 text-white px-4 py-1 mr-10 mt-3 text-xs bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
               >
                 로그아웃
               </button>
@@ -135,43 +142,50 @@ export default function MyPage() {
                   <SemiTitle>내 관심 매물</SemiTitle>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  {assets.slice(0, 4).map((asset, index) => (
-                    <div
-                      key={index}
-                      onClick={index === 0 ? handleEstate : undefined}
-                      className={`${
-                        index === 0
-                          ? 'bg-hanaColor2 hover:opacity-90'
-                          : 'bg-white hover:scale-105'
-                      } rounded-lg flex flex-col items-center justify-center p-4 shadow-md transition-transform duration-200 ease-in-out cursor-pointer`}
-                    >
-                      {index === 0 ? (
-                        <span className="text-4xl text-white font-semibold">
-                          +
-                        </span>
-                      ) : (
-                        <>
-                          <img
-                            src={House}
-                            alt="asset icon"
-                            className="h-16 w-16 mb-2"
-                          />
-                          <span className="text-gray-600 font-sm font-fontCm text-center">
-                            {asset.name}
+                  {assets.slice(0, 4).map((asset, index) => {
+                    const matchingInterest = interestApt.find(
+                      (interest) => interest.name === asset.name
+                    );
+
+                    return (
+                      <div
+                        key={index}
+                        onClick={handleEstate}
+                        className={`${
+                          index === 0
+                            ? 'bg-hanaColor2 hover:opacity-90'
+                            : 'bg-white hover:scale-105'
+                        } rounded-lg flex flex-col items-center justify-center p-4 shadow-md transition-transform duration-200 ease-in-out cursor-pointer`}
+                      >
+                        {index === 0 ? (
+                          <span className="text-4xl text-white font-semibold">
+                            +
                           </span>
-                        </>
-                      )}
-                    </div>
-                  ))}
+                        ) : (
+                          <>
+                            <img
+                              src={matchingInterest?.image || MyEstateList1}
+                              alt={asset.name}
+                              className="h-16 w-16 mb-2"
+                            />
+                            <span className="text-gray-600 font-sm font-fontCm text-center">
+                              {asset.name}
+                            </span>
+                          </>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
+
             {/* 화면 전환 */}
           </>
         ) : currentPage === 'editProfile' ? (
           <EditProfileLayout onBack={() => setCurrentPage('main')} />
         ) : currentPage === 'EstateList' ? (
-          <SelectEstate />
+          <MyEstateList />
         ) : (
           <PropertyManage
             assetType={currentPage}

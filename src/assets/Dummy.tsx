@@ -1,7 +1,7 @@
-import real_estate_1 from '../assets/img/realEstate/real_estate_1.png';
-import real_estate_2 from '../assets/img/realEstate/real_estate_2.png';
-import real_estate_3 from '../assets/img/realEstate/real_estate_3.png';
-import real_estate_4 from '../assets/img/realEstate/real_estate_4.png';
+import real_estate_1 from '../assets/img/realEstate/real_estate_1.jpg';
+import real_estate_2 from '../assets/img/realEstate/real_estate_2.jpg';
+import real_estate_3 from '../assets/img/realEstate/real_estate_3.jpeg';
+import real_estate_4 from '../assets/img/realEstate/real_estate_4.jpg';
 
 export interface Guest {
   name: string;
@@ -11,7 +11,8 @@ export interface Guest {
   family: boolean;
   home: boolean;
   loan: number;
-  stressDsr: number;
+  dsr: number;
+  capital: number;
 }
 
 export interface Loan {
@@ -44,6 +45,7 @@ export interface RealEstate {
   location: string;
   size: string;
   address: string;
+  price: number;
 }
 
 export const dummyGuest: Guest = {
@@ -54,7 +56,8 @@ export const dummyGuest: Guest = {
   family: false,
   home: false,
   loan: 0,
-  stressDsr: 40,
+  dsr: 10,
+  capital: 3,
 };
 
 export const hanaYouthJeonseLoan: Loan = {
@@ -89,6 +92,30 @@ export const jeonseSecurityLoan: Loan = {
   loanDetailUrl: '',
 };
 
+export const beotimmogYoungWarrantyWolseLoan: Loan = {
+  name: '버팀목 청년전용보증부월세대출',
+  rate: 1.3,
+  limit: 0.45,
+  newDsr: 23,
+  loanDetailUrl: '',
+};
+
+export const beotimmogSmallBusinessJeonseLoan: Loan = {
+  name: '버팀목 중소기업취업청년 전세자금대출',
+  rate: 1.5,
+  limit: 1,
+  newDsr: 28,
+  loanDetailUrl: '',
+};
+
+export const beotimmogJeonseLoan: Loan = {
+  name: '버팀목전세자금대출',
+  rate: 2.0,
+  limit: 3,
+  newDsr: 32,
+  loanDetailUrl: '',
+};
+
 export const dummyLoanList: Loan[] = [
   hanaYouthJeonseLoan,
   seoulYouthLoan,
@@ -96,36 +123,65 @@ export const dummyLoanList: Loan[] = [
   jeonseSecurityLoan,
 ];
 
-export const dummyLoanGroup: Loan[][] = [dummyLoanList, [], []];
+export const dummyLoanList2: Loan[] = [seoulYouthLoan, jeonseSecurityLoan];
+
+export const dummyBeotimmogLoanList: Loan[] = [
+  beotimmogYoungWarrantyWolseLoan,
+  beotimmogSmallBusinessJeonseLoan,
+  beotimmogJeonseLoan,
+];
+
+export const dummyBeotimmogLoanList2: Loan[] = [
+  beotimmogSmallBusinessJeonseLoan,
+  beotimmogJeonseLoan,
+];
+
+export const dummyLoanGroup: Loan[][] = [
+  dummyLoanList,
+  dummyLoanList2,
+  dummyLoanList,
+];
+export const dummyBeotimmogLoanGroup: Loan[][] = [
+  dummyBeotimmogLoanList,
+  dummyBeotimmogLoanList,
+  dummyBeotimmogLoanList2,
+];
 
 export const dummyLoanDetail: LoanDetail = {
   type: '전(월)세 대출',
   name: '하나 청년전세론',
   outline:
-    '청년층 주거비용 경감을 위해 임차보증금의 90%이내, 최대 2억원까지(전세,반전세 계약 모두 가능합니다)',
+    '청년층 주거비용 경감을 위해 임차보증금의 90%이내, 최대 2억원까지(전세,반전세 계약 모두 가능해요)',
   rate: 4.453,
   amount: 2,
   detail:
-    '만 19세이상 만 34세 이하의 무주택(배우자 포함)세대주를 대상으로 한국주택금융공사의 보증서 담보로 임차보증금의 90%범위 내에서 최대 2억원까지 주택의 전세자금을 지원해드리는 상품입니다.',
+    '만 19세이상 만 34세 이하의 무주택(배우자 포함)세대주를 대상으로 한국주택금융공사의 보증서 담보로 임차보증금의 90%범위 내에서 최대 2억원까지 주택의 전세자금을 지원해드리는 상품이에요.',
   targetGuest: `주택임대차계약을 체결한 국민인 거주자로 아래의 조건을 모두 충족하는 손님 
-      - 임차보증금액주)이 7억원(수도권 외 5억원) 초과하는 경우 대출 불가 
-      주)월세가 있는 경우 월세보증금 및 월세에 대해 전월세전환율을 적용하여 계산한 금액 
-      (월세보증금+(월세X12÷전월세전환율)) 
-      만 19세 이상 만 34세 이하인 무주택 세대주 
-      임차보증금의 5%이상을 지급한 임차인 
-      본인과 배우자의 합산한 연소득이 7천만원 이하인 손님 `,
+
+- 임차보증금액*이 7억원(수도권 외 5억원) 초과하는 경우 대출 불가 
+  *월세가 있는 경우 월세보증금 및 월세에 대해 전월세전환율을 적용하여 계산한 금액 (월세보증금+(월세X12÷전월세전환율)) 
+- 만 19세 이상 만 34세 이하인 무주택 세대주 
+- 임차보증금의 5%이상을 지급한 임차인 
+- 본인과 배우자의 합산한 연소득이 7천만원 이하인 손님 `,
   targetHouse: '공부상(등기부등본 등) 주거용 주택(미등기 주택도 가능)',
   period: `6개월이상 3년이내 (단, 임대차 계약기간 범위내)
 (만 34세 이하 임차인은 임대차 계약 기간 범위에서 횟수 제한없이 기한연장 가능하며, 만 35세 이상 임차인은 1회에 한하여 기한연장 가능. 이후 연장불가)`,
   paybackMethod: '만기일시상환',
   rateCalculateMethod: `대출금에 연이율과 대출일수를 곱한 후 이를 365일(윤년인 경우 366일)로 나누어 산출하되 원단위 미만은 절사
+
 원리금균등분할상환대출의 월별이자 계산은 대출원금에 연이율을 곱한 다음 12로 나누어 계산
-일수계산은 여신당일로부터 기일 또는 상환일(일부상환 및 분할상환 포함) 전일까지로 한다.(한편넣기)
-위 내용에도 불구하고 다음의 여신은 여신당일부터 기일 또는 상환일까지로 한다.
-1. 대출 당일에 회수되는 대출금 / 2. 대외기관으로부터 자금을 차입하는 대출금으로서 이자를 상환일까지 지급하는 대출금 /
-3. 연체기간이 1일인 연체대출채권 및 지급보증대지급금 / 4. 대여유가증권
-원금 균등분할상환대출 : 대출금액 x 대출이자율 x 이자일수 ÷ 365(윤년은 366일)
-원리금 균등분할상환대출 : 대출금액 × 대출이자율 ÷ 12`,
+
+일수계산은 여신당일로부터 기일 또는 상환일(일부상환 및 분할상환 포함) 전일까지로 해요.(한편넣기)
+
+위 내용에도 불구하고 다음의 여신은 여신당일부터 기일 또는 상환일까지로 해요.
+
+1. 대출 당일에 회수되는 대출금
+2. 대외기관으로부터 자금을 차입하는 대출금으로서 이자를 상환일까지 지급하는 대출금
+3. 연체기간이 1일인 연체대출채권 및 지급보증대지급금
+4. 대여유가증권
+
+- 원금 균등분할상환대출 : 대출금액 x 대출이자율 x 이자일수 ÷ 365(윤년은 366일)
+- 원리금 균등분할상환대출 : 대출금액 × 대출이자율 ÷ 12`,
   loanApplyUrl: '',
 };
 
@@ -144,6 +200,7 @@ export const dummyRealEstateList: RealEstate[] = [
     location: '103동 1201호',
     size: '100.97㎡',
     address: '서울특별시 성동구 왕십리로 16',
+    price: 5,
   },
   {
     id: 1,
@@ -152,6 +209,7 @@ export const dummyRealEstateList: RealEstate[] = [
     location: '104동 1502호',
     size: '85.42㎡',
     address: '서울특별시 성동구 왕십리로 16',
+    price: 10,
   },
   {
     id: 2,
@@ -160,44 +218,45 @@ export const dummyRealEstateList: RealEstate[] = [
     location: '105동 1803호',
     size: '120.50㎡',
     address: '서울특별시 성동구 왕십리로 16',
+    price: 8,
   },
 ];
 
 export const realEstateData = [
   {
     type: '아파트',
-    location: '목화',
-    price: '24억',
+    location: '트리마제',
+    price: '20억',
     size: '6층, 73.06m², 관리비 20만',
     description: '매매O 주인직접 O 영구한강조망1..',
-    dealType: '매매',
+    dealType: '전세',
     imageUrl: real_estate_1,
   },
   {
     type: '아파트',
-    location: '공작',
-    price: '32억',
+    location: '헬리오시티',
+    price: '10억',
     size: '8층, 136.53m², 관리비 35만',
     description: '공작38 직접관리 여의나루 역세권..',
-    dealType: '매매',
+    dealType: '전세',
     imageUrl: real_estate_2,
   },
   {
     type: '아파트',
     location: '롯데캐슬아이비(주상복합)',
-    price: '32억',
+    price: '11억 7,500만',
     size: '25층, 191.62m², 관리비 60만',
     description: '아이비61 단독실진행 전세승계조건',
-    dealType: '매매',
+    dealType: '전세',
     imageUrl: real_estate_3,
   },
   {
     type: '아파트',
     location: '서초푸르지오(써밋)',
-    price: '32억',
+    price: '1,000만 / 630만',
     size: '17층, 100.97m², 관리비 30만',
     description: '갭투자가능',
-    dealType: '전세',
+    dealType: '월세',
     imageUrl: real_estate_4,
   },
 ];
@@ -224,8 +283,9 @@ export const realEstateTypeInfoData = {
 export const realEstatePropertyInfoProps = {
   title: '트리마제 102동 중간층',
   rentType: '전세',
-  price: '17억',
+  price: '20억',
   description: '아파트 | 95/69m² | 5,884만원/3.3m²',
+  isStarHighlighted: false,
 };
 
 export const realEstatePropertyDetailsProps = {
@@ -2375,6 +2435,136 @@ export const estateData = [
     cortarNo: '1154510300',
     lat: 37.448436,
     lng: 126.919526,
+  },
+  {
+    gu: '성동구',
+    atclNm: '금호(2차)',
+    rletTpCd: 'A01',
+    tradTpNm: '매매',
+    bildNm: '105동',
+    flrInfo: '21/25',
+    prc: 95000,
+    cpNm: '부동산뱅크',
+    cortarNo: '1154510187',
+    lat: 37.5435725,
+    lng: 127.0534042,
+  },
+  {
+    gu: '성동구',
+    atclNm: '금호(2차)',
+    rletTpCd: 'A01',
+    tradTpNm: '전세',
+    bildNm: '105동',
+    flrInfo: '21/25',
+    prc: 95000,
+    cpNm: '부동산뱅크',
+    cortarNo: '1154510187',
+    lat: 37.5435725,
+    lng: 127.0534042,
+  },
+  {
+    gu: '성동구',
+    atclNm: '금호(2차)',
+    rletTpCd: 'A01',
+    tradTpNm: '전세',
+    bildNm: '105동',
+    flrInfo: '21/25',
+    prc: 95000,
+    cpNm: '부동산뱅크',
+    cortarNo: '1154510187',
+    lat: 37.5435725,
+    lng: 127.0534042,
+  },
+  {
+    gu: '성동구',
+    atclNm: '성수동롯데캐슬파크',
+    rletTpCd: 'A01',
+    tradTpNm: '전세',
+    bildNm: '105동',
+    flrInfo: '21/25',
+    prc: 95000,
+    cpNm: '부동산뱅크',
+    cortarNo: '1154520000',
+    lat: 37.5460821,
+    lng: 127.0562355,
+  },
+  {
+    gu: '성동구',
+    atclNm: '금강아미움',
+    rletTpCd: 'A01',
+    tradTpNm: '전세',
+    bildNm: '105동',
+    flrInfo: '21/25',
+    prc: 95000,
+    cpNm: '부동산뱅크',
+    cortarNo: '1154520000',
+    lat: 37.5465874,
+    lng: 127.0597147,
+  },
+  {
+    gu: '성동구',
+    atclNm: '성수동아이파크',
+    rletTpCd: 'A01',
+    tradTpNm: '전세',
+    bildNm: '105동',
+    flrInfo: '21/25',
+    prc: 95000,
+    cpNm: '부동산뱅크',
+    cortarNo: '1154520000',
+    lat: 37.5471712,
+    lng: 127.0572177,
+  },
+  {
+    gu: '성동구',
+    atclNm: '성수동아이파크',
+    rletTpCd: 'A01',
+    tradTpNm: '전세',
+    bildNm: '105동',
+    flrInfo: '21/25',
+    prc: 95000,
+    cpNm: '부동산뱅크',
+    cortarNo: '1154520000',
+    lat: 37.5471712,
+    lng: 127.0572177,
+  },
+  {
+    gu: '성동구',
+    atclNm: '성수동아이파크',
+    rletTpCd: 'A01',
+    tradTpNm: '전세',
+    bildNm: '105동',
+    flrInfo: '21/25',
+    prc: 95000,
+    cpNm: '부동산뱅크',
+    cortarNo: '1154520000',
+    lat: 37.5471712,
+    lng: 127.0572177,
+  },
+  {
+    gu: '성동구',
+    atclNm: '성수동아이파크',
+    rletTpCd: 'A01',
+    tradTpNm: '전세',
+    bildNm: '105동',
+    flrInfo: '21/25',
+    prc: 95000,
+    cpNm: '부동산뱅크',
+    cortarNo: '1154520000',
+    lat: 37.5471712,
+    lng: 127.0572177,
+  },
+  {
+    gu: '성동구',
+    atclNm: '성수동아이파크',
+    rletTpCd: 'A01',
+    tradTpNm: '전세',
+    bildNm: '105동',
+    flrInfo: '21/25',
+    prc: 95000,
+    cpNm: '부동산뱅크',
+    cortarNo: '1154520000',
+    lat: 37.5471712,
+    lng: 127.0572177,
   },
 ];
 

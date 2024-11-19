@@ -4,7 +4,6 @@ import Consultant from '../../assets/img/main/consultant.jpeg';
 import Home from '../../assets/img/main/home.jpeg';
 import Map from '../../assets/img/main/map.jpeg';
 import Mypage from '../../assets/img/main/mypage.jpeg';
-import Profile from '../../assets/img/profile_ex.jpg';
 
 interface NavbarProps {
   state?: boolean;
@@ -108,14 +107,16 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
                 src={Consultant}
                 alt="Consultant Icon"
                 className={`h-8 transition duration-200 transform ${
-                  location.pathname === '/consulting'
+                  location.pathname === '/consulting' ||
+                  location.pathname === '/live-chat'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
               />
               <div
                 className={`tracking-tight text-center text-xs ${
-                  location.pathname === '/consulting'
+                  location.pathname === '/consulting' ||
+                  location.pathname === '/live-chat'
                     ? 'text-hanaColor2'
                     : 'text-gray-300'
                 }`}
@@ -137,14 +138,16 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
                 src={Mypage}
                 alt="Mypage Icon"
                 className={`h-8 transition duration-200 transform ${
-                  location.pathname === '/my-page'
+                  location.pathname === '/my-page' ||
+                  location.pathname === '/my-estate-list'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
               />
               <div
                 className={`tracking-tight text-center text-xs ${
-                  location.pathname === '/my-page'
+                  location.pathname === '/my-page' ||
+                  location.pathname === '/my-estate-list'
                     ? 'text-hanaColor2'
                     : 'text-gray-300'
                 }`}
@@ -153,15 +156,6 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               </div>
             </div>
           </button>
-        </div>
-
-        {/* 프로필 이미지를 맨 아래로 배치 */}
-        <div className="mb-4">
-          <img
-            className="w-12 h-12 rounded-full"
-            src={Profile}
-            alt="Profile Image"
-          />
         </div>
       </div>
       <div>{children}</div>

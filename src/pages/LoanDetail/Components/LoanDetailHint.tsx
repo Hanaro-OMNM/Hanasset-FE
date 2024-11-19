@@ -4,9 +4,7 @@ interface LoanDetailHintProps {
 
 const LoanDetailHint: React.FC<LoanDetailHintProps> = ({ content }) => {
   return (
-    <div className="ml-4 mr-4 mt-1 mb-2 pl-4 pr-4 text-xs text-hanaBlack60">
-      {content}
-    </div>
+    <div className="mt-1 mb-2 px-4 text-xs text-hanaBlack60">{content}</div>
   );
 };
 

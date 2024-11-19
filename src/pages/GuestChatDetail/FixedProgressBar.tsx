@@ -1,15 +1,13 @@
-interface LoanSliderProps {
+interface FixedProgressBarProps {
   capital: number;
   totalPrice: number;
   maxLoan: number;
-  onChange: (capital: number) => void;
 }
 
-const LoanSlider: React.FC<LoanSliderProps> = ({
+const FixedProgressBar: React.FC<FixedProgressBarProps> = ({
   capital,
   totalPrice,
   maxLoan,
-  onChange,
 }) => {
   let backgroundStyle;
 
@@ -36,23 +34,18 @@ const LoanSlider: React.FC<LoanSliderProps> = ({
       )
     `;
   }
-
   return (
-    <div className="px-2">
-      <input
-        type="range"
-        min="0"
-        max={totalPrice}
-        value={capital}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full accent-hanaGreen h-2 rounded-full appearance-none cursor-pointer"
-        style={{
-          background: backgroundStyle,
-          cursor: 'pointer',
-        }}
-      />
+    <div className="px-4">
+      <div className="bg-hanaSilver60 rounded-full h-3">
+        <div
+          className="bg-hanaColor2 rounded-full h-3"
+          style={{
+            background: backgroundStyle,
+          }}
+        ></div>
+      </div>
     </div>
   );
 };
 
-export default LoanSlider;
+export default FixedProgressBar;

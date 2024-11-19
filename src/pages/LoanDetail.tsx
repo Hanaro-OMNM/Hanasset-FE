@@ -4,11 +4,11 @@ import { dummyLoanDetail } from '../assets/Dummy';
 // import Hana from '../assets/img/hana.png';
 import CommonBackground from '../components/atoms/CommonBackground';
 import LoanProgressBar from '../components/atoms/LoanProgressBar';
-import InstructionCard from './LoanDetail/components/InstructionCard';
-import LoanDetailAccentInfo from './LoanDetail/components/LoanDetailAccentInfo';
-import LoanDetailCard from './LoanDetail/components/LoanDetailCard';
-import LoanDetailDisclosure from './LoanDetail/components/LoanDetailDisclosure';
-import LoanDetailHint from './LoanDetail/components/LoanDetailHint';
+import InstructionCard from './LoanDetail/Components/InstructionCard';
+import LoanDetailAccentInfo from './LoanDetail/Components/LoanDetailAccentInfo';
+import LoanDetailCard from './LoanDetail/Components/LoanDetailCard';
+import LoanDetailDisclosure from './LoanDetail/Components/LoanDetailDisclosure';
+import LoanDetailHint from './LoanDetail/Components/LoanDetailHint';
 
 interface LoanDetailProps {
   onHide: () => void;
@@ -16,8 +16,8 @@ interface LoanDetailProps {
 
 const LoanDetail: React.FC<LoanDetailProps> = ({ onHide }) => {
   return (
-    <div className=" top-0 absolute pl-4 animate-slideInRight">
-      <div className="w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-2 overflow-y-auto bg-white/75 scrollbar-hide">
+    <div className=" top-0 absolute animate-slideInRight">
+      <div className="w-[420px] backdrop-blur-[10px] absolute top-0 h-screen overflow-y-auto bg-white/75 scrollbar-hide">
         {/* 헤더 */}
         <div className="flex h-12 pl-1 gap-2 items-center">
           <button className="items-center" onClick={onHide}>
@@ -29,7 +29,7 @@ const LoanDetail: React.FC<LoanDetailProps> = ({ onHide }) => {
         </div>
         <div className="p-5">
           <CommonBackground>
-            <div className="py-3">
+            <div className="py-3 mx-4">
               {/* 대출 정보 카드 */}
               <LoanDetailCard
                 type={dummyLoanDetail.type}
@@ -47,15 +47,15 @@ const LoanDetail: React.FC<LoanDetailProps> = ({ onHide }) => {
               />
               <LoanDetailHint content="예상 금리와 한도예요. 서류 제출과정에서 신용 및 손님의 정보가 변동되면 금리와 한도가 변경될 수 있어요. 자세한 내용은 하나은행 홈페이지나 대출 상담을 통해 확인해주세요." />
               <LoanDetailAccentInfo
-                title={'스트레스 DSR'}
-                content={`${dummyGuest.stressDsr}%`}
+                title={'DSR'}
+                content={`${dummyGuest.dsr}%`}
               />
-              <LoanProgressBar rate={dummyGuest.stressDsr} />
-              {/* 스트레스 DSR 설명 */}
+              <LoanProgressBar rate={dummyGuest.dsr} />
+              {/* DSR 설명 */}
               <InstructionCard
-                title={'스트레스 DSR이란?'}
+                title={'DSR이란?'}
                 content={
-                  '스트레스 DSR에 대한 설명이 필요해요. 스트레스 DSR에 대한 설명이 필요해요. 스트레스 DSR에 대한 설명이 필요해요. 스트레스 DSR에 대한 설명이 필요해요. 스트레스 DSR에 대한 설명이 필요해요. '
+                  '내가 가지고 있는 모든 빚을 기준으로 빌릴 수 있는 돈의 상한선을 정하는 거예요.\n\n주택담보대출뿐만 아니라 학자금대출, 마이너스대출*, 자동차할부, 카드론 등 모든 대출의 원리금을 합한 총대출 상환액이 연 소득에서 차지하는 비중으로 대출 상환 능력을 심사하기 위한 지표예요.\n\n*마이너스대출은 빌린 금액이 아닌 한도금액, 즉 사용할 수 있는 마이너스대출 한도 전체를 더해요.\n\nDSR = (모든 주택담보대출 연간 총상환액(원금+이자) + 기타 부채 연간 총상환액(원금+이자)) / 연소득 × 100\n\n예를 들어 DSR 30%라면, 1년에 1억 원을 벌 때, 1년간 내는 대출 상환액이 3천만 원이에요. '
                 }
               />
               {/* 대출 상세 정보 */}

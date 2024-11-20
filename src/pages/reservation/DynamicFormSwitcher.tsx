@@ -3,6 +3,8 @@ import { useRecoilState } from 'recoil';
 import { useState, useEffect } from 'react';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import { assetState } from '../../recoil/asset/atom';
+import loanReservationAtom from '../../recoil/loanReservation/atom';
+import { selectedEstateType } from '../../types/global';
 import AmountForm from '../property/form/AmountForm';
 import FamilyStatusForm from '../property/form/FamilyStatusForm';
 import JobForm from '../property/form/JobForm';
@@ -65,16 +67,47 @@ const forms: FormConfig[] = [
   },
 ];
 
-export default function DynamicFormSwitcher() {
+interface DynamicFormSwitcherProps {
+  estateInfo: selectedEstateType[];
+  selectedDate: string;
+  selectedTime: string;
+}
+
+export default function DynamicFormSwitcher({
+  estateInfo,
+  selectedDate,
+  selectedTime,
+}: DynamicFormSwitcherProps) {
   const [asset] = useRecoilState<AssetState>(assetState);
   const [currentStep, setCurrentStep] = useState(
     forms.findIndex((form) => form.isUnValid(asset))
   );
   const nav = useNavigate();
+  const [selectedLoanReservation, setSelectedLoanReservation] =
+    useRecoilState(loanReservationAtom);
 
+  /*임시 수정 리팩토링 필요*/
   useEffect(() => {
     console.log(`현재 단계: ${currentStep}`);
-  }, [currentStep]);
+    if (currentStep < 0) {
+      if (!selectedLoanReservation.reservationTime) {
+        setSelectedLoanReservation({
+          reservationInfo: estateInfo,
+          reservationTime: selectedDate + ' ' + selectedTime,
+        });
+        //alert('상담이 정상적으로 예약되었습니다.'); --> useEffect 로컬에서 알림 두번 뜸
+        nav('/consulting');
+      }
+    }
+  }, [
+    currentStep,
+    estateInfo,
+    nav,
+    selectedDate,
+    selectedLoanReservation.reservationTime,
+    selectedTime,
+    setSelectedLoanReservation,
+  ]);
 
   const handleNext = () => {
     let nextStep = currentStep;
@@ -87,8 +120,14 @@ export default function DynamicFormSwitcher() {
     if (nextStep < forms.length - 1) {
       setCurrentStep(nextStep + 1);
     } else {
-      alert('상담이 정상적으로 예약되었습니다.');
-      nav('/consulting');
+      if (!selectedLoanReservation.reservationTime) {
+        setSelectedLoanReservation({
+          reservationInfo: estateInfo,
+          reservationTime: selectedDate + ' ' + selectedTime,
+        });
+        alert('상담이 정상적으로 예약되었습니다.');
+        nav('/consulting');
+      }
     }
   };
 

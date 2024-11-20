@@ -3087,7 +3087,8 @@ export const dummyChatData: Record<string, ChatMessageType[]> = {
       id: 1,
       user: 'consultant',
       subject: 'responser',
-      message: '안녕하세요, 롯데캐슬엠파이어 상담사입니다.',
+      message:
+        '안녕하세요, 요청하신 롯데캐슬 엠파이어 대출 상담을 진행할 하나은행 상담사 OOO입니다.',
       time: '10:00',
     },
     {
@@ -3141,7 +3142,8 @@ export const dummyChatData: Record<string, ChatMessageType[]> = {
       id: 1,
       user: 'consultant',
       subject: 'responser',
-      message: '안녕하세요, 광장아파트 상담사입니다.',
+      message:
+        '안녕하세요, 요청하신 광장아파트 대출 상담을 진행할 하나은행 상담사 OOO입니다.',
       time: '11:00',
     },
     {
@@ -3195,7 +3197,7 @@ export const dummyChatData: Record<string, ChatMessageType[]> = {
       id: 1,
       user: 'consultant',
       subject: 'responser',
-      message: '안녕하세요, 푸르지오벨라르테 상담사입니다.',
+      message: '안녕하세요, 하나은행 상담사입니다.',
       time: '12:00',
     },
     {
@@ -3249,7 +3251,8 @@ export const dummyChatData: Record<string, ChatMessageType[]> = {
       id: 1,
       user: 'consultant',
       subject: 'responser',
-      message: '안녕하세요, 힐스테이트 아파트 상담사입니다.',
+      message:
+        '안녕하세요, 요청하신 비둘기 아파트 대출 상담을 진행할 하나은행 상담사 OOO입니다.',
       time: '13:00',
     },
     {

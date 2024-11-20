@@ -46,23 +46,20 @@ export default function ChatReservation() {
 
   function getNextValidDate(baseDate: Date, offset: number) {
     const newDate = new Date(baseDate);
-    newDate.setDate(baseDate.getDate() + offset);
+    let daysAdded = 0;
 
-    while (isWeekend(newDate)) {
-      newDate.setDate(newDate.getDate() + Math.sign(offset));
+    while (daysAdded < offset) {
+      newDate.setDate(newDate.getDate() + 1);
+      if (!isWeekend(newDate)) {
+        daysAdded++;
+      }
     }
 
     return newDate;
   }
 
-  const dateOptions = [
-    { offset: 0 },
-    { offset: 1 },
-    { offset: 2 },
-    { offset: 3 },
-    { offset: 4 },
-  ].map(({ offset }) => {
-    const adjustedDate = getNextValidDate(day, offset);
+  const dateOptions = Array.from({ length: 5 }, (_, index) => {
+    const adjustedDate = getNextValidDate(day, index);
     return {
       month: adjustedDate.getMonth() + 1,
       day: adjustedDate.getDate(),

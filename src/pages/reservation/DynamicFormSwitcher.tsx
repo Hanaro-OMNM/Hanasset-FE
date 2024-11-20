@@ -74,7 +74,10 @@ export default function DynamicFormSwitcher() {
 
   useEffect(() => {
     console.log(`현재 단계: ${currentStep}`);
-  }, [currentStep]);
+    if (currentStep < 0) {
+      nav('/consulting');
+    }
+  }, [currentStep, nav]);
 
   const handleNext = () => {
     let nextStep = currentStep;

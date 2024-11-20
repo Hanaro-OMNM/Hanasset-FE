@@ -107,7 +107,9 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
                 alt="Consultant Icon"
                 className={`h-8 transition duration-200 transform ${
                   location.pathname === '/consulting' ||
-                  location.pathname === '/live-chat'
+                  location.pathname === '/live-chat' ||
+                  location.pathname === '/select-estate' ||
+                  location.pathname === '/chat-reservation'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
@@ -115,7 +117,9 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               <div
                 className={`tracking-tight text-center text-xs ${
                   location.pathname === '/consulting' ||
-                  location.pathname === '/live-chat'
+                  location.pathname === '/live-chat' ||
+                  location.pathname === '/select-estate' ||
+                  location.pathname === '/chat-reservation'
                     ? 'text-hanaColor2'
                     : 'text-gray-300'
                 }`}

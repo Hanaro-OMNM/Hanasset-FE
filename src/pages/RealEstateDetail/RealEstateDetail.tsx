@@ -54,7 +54,7 @@ export default function RealEstateDetail({
     }
   };
 
-  console.log(estate);
+  console.log(estate); // estate는 props로 받아오기 위한 객체 -> console.log()로 unused 에러 방지
 
   return (
     <RealEstateDetailLayout>

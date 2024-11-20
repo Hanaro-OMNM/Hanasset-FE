@@ -10,21 +10,26 @@ import UpcomingConsultingComponent from '../components/molecules/UpcomingConsult
 import loanReservationAtom from '../recoil/loanReservation';
 
 type Consulting = {
+  id: number;
   title: string;
   date: string;
 };
 
 const consultingHistory: Consulting[] = [
-  { title: '롯데캐슬엠파이어', date: '2024.10.27 19:07' },
-  { title: '광장아파트', date: '2024.10.27 19:07' },
-  { title: '푸르지오벨라르테', date: '2024.10.27 19:07' },
-  { title: '비둘기 아파트', date: '2024.10.27 19:07' },
+  { id: 1, title: '롯데캐슬엠파이어', date: '2024.10.27 19:07' },
+  { id: 2, title: '광장아파트', date: '2024.10.27 19:07' },
+  { id: 3, title: '푸르지오벨라르테', date: '2024.10.27 19:07' },
+  { id: 4, title: '비둘기 아파트', date: '2024.10.27 19:07' },
 ];
 
 const Consulting: React.FC = () => {
   const navigate = useNavigate();
   const [upcomingConsulting, setUpcomingConsulting] =
     useRecoilState(loanReservationAtom);
+
+  const handleHistoryClick = (id: number) => {
+    navigate(`/chat-history/${id}`);
+  };
 
   return (
     <div className="top-0 absolute pl-4 animate-slideInRight">
@@ -46,12 +51,15 @@ const Consulting: React.FC = () => {
         </div>
         <SemiTitle>지난 상담 내역</SemiTitle>
         <CommonBackground className="p-5 mt-4 mb-4">
-          {consultingHistory.map((consulting, index) => (
+          {consultingHistory.map((consulting) => (
             <div
-              key={index}
+              key={consulting.id}
               className="border-b last:border-none py-4 flex items-center justify-between hover:transition-transform transform hover:scale-105"
             >
-              <button className="w-full text-left">
+              <button
+                className="w-full text-left"
+                onClick={() => handleHistoryClick(consulting.id)}
+              >
                 <h3 className="text-md font-semibold text-hanaBlack">
                   {consulting.title}
                 </h3>

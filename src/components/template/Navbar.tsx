@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Consultant from '../../assets/img/main/consultant.jpeg';
 import Home from '../../assets/img/main/home.jpeg';
 import Map from '../../assets/img/main/map.jpeg';
-import Mypage from '../../assets/img/main/mypage.jpeg';
+import MyPage from '../../assets/img/main/mypage.jpeg';
 
 interface NavbarProps {
   state?: boolean;
@@ -14,7 +14,6 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // 선택된 매물이 있으면 자동으로 'estateList' 페이지로 이동하도록 설정
   useEffect(() => {
     if (state) {
       navigate('/real-estate-list');
@@ -30,10 +29,10 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
         >
           <div className="flex flex-col">
             <div className="text-hanaColor2 text-md text-center font-fontBold">
-              hana
+              Hana
             </div>
             <div className="text-hanaNavy text-md text-center font-fontBold">
-              asset
+              Asset
             </div>
           </div>
         </a>
@@ -108,7 +107,9 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
                 alt="Consultant Icon"
                 className={`h-8 transition duration-200 transform ${
                   location.pathname === '/consulting' ||
-                  location.pathname === '/live-chat'
+                  location.pathname === '/live-chat' ||
+                  location.pathname === '/select-estate' ||
+                  location.pathname === '/chat-reservation'
                     ? ''
                     : 'grayscale hover:grayscale-0 hover:scale-105'
                 }`}
@@ -116,7 +117,9 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               <div
                 className={`tracking-tight text-center text-xs ${
                   location.pathname === '/consulting' ||
-                  location.pathname === '/live-chat'
+                  location.pathname === '/live-chat' ||
+                  location.pathname === '/select-estate' ||
+                  location.pathname === '/chat-reservation'
                     ? 'text-hanaColor2'
                     : 'text-gray-300'
                 }`}
@@ -135,7 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
               className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center transition duration-200`}
             >
               <img
-                src={Mypage}
+                src={MyPage}
                 alt="Mypage Icon"
                 className={`h-8 transition duration-200 transform ${
                   location.pathname === '/my-page' ||

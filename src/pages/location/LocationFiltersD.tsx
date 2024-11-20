@@ -80,7 +80,7 @@ const LocationFilterDong = () => {
   }, []);
 
   // 배열을 JSON 문자열로 변환하여 로컬 스토리지에 저장
-  localStorage.setItem('dong', JSON.stringify(Array.from(dong)));
+  localStorage.setItem('dong', JSON.stringify(Array.from(dong).sort()));
 
   const storedLocations: string[] = JSON.parse(
     localStorage.getItem('dong') || '[]'

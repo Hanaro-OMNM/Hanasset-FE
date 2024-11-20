@@ -1,12 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Button from '../../components/atoms/Button';
+import SalaryForm from './form/AmountForm';
 import ApartForm from './form/ApartForm';
 import ApartListForm from './form/ApartListForm';
 import FamilyStatusForm from './form/FamilyStatusForm';
 import JobForm from './form/JobForm';
 import OwnPropertyForm from './form/OwnPropertyForm';
-import SalaryForm from './form/SalaryForm';
 
 export default function PropertyForm() {
   const location = useLocation();

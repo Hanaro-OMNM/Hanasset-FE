@@ -1,24 +1,25 @@
+import { AiOutlineLogout } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
+import { realEstateData } from '../assets/Dummy.tsx';
 import Background1 from '../assets/img/background1.jpg';
 import Background2 from '../assets/img/background2.png';
 import Background3 from '../assets/img/background3.jpg';
 import People from '../assets/img/main/people.png';
-import MyEstateList1 from '../assets/img/myEstateList1.png';
 import MyEstateList2 from '../assets/img/myEstateList2.png';
-import MyEstateList3 from '../assets/img/myEstateList3.png';
 import CommonBackground from '../components/atoms/CommonBackground';
 import MobileHeader from '../components/atoms/MobileHeader';
-import RegisterButtonGroup from '../components/atoms/RegisterPageButtonGroup';
 import SemiTitle from '../components/atoms/SemiTitle';
 import Swiper from '../components/atoms/Swiper';
 import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
 import MyEstateList from '../components/template/MyEstateList.tsx';
-import PropertyRegister from '../components/template/PropertyRegister';
+import PropertyManage from '../components/template/PropertyManage.tsx';
 import centerAtom from '../recoil/center/atom.ts';
 import { CookieUtils } from '../utils/CookieUtils.ts';
+import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
+import PropertyGroup from './property/PropertyGroup.tsx';
 
 interface BookmarkedLocation {
   [key: string]: {
@@ -29,12 +30,9 @@ interface BookmarkedLocation {
   };
 }
 
-interface Asset {
-  name: string;
-}
-
 export default function MyPage() {
   const setCenter = useSetRecoilState(centerAtom);
+  const [showRealEstate, setShowRealEstate] = useState(false);
 
   const [currentPage, setCurrentPage] = useState<
     | 'home'
@@ -45,6 +43,7 @@ export default function MyPage() {
     | 'income'
     | 'loan'
     | 'EstateList'
+    | 'equity'
   >('main');
 
   const [interestAreas, setInterestAreas] = useState<
@@ -104,24 +103,10 @@ export default function MyPage() {
     name: '김하나',
   };
 
-  const assets: Asset[] = [
-    { name: '서울 성동구 아차산로 111 2층' },
-    { name: '서울 성동구 금호산8길 14' },
-    { name: '서울 용산구 백범로 329' },
-    { name: '아파트 4' },
-    { name: '아파트 5' },
-  ];
-
   const backgrounds = [
     { image: Background1 },
     { image: Background2 },
     { image: Background3 },
-  ];
-
-  const interestApt = [
-    { name: '서울 성동구 아차산로 111 2층', image: MyEstateList1 },
-    { name: '서울 성동구 금호산8길 14', image: MyEstateList2 },
-    { name: '서울 용산구 백범로 329', image: MyEstateList3 },
   ];
 
   // 관심 지역 + 배경사진 모음
@@ -140,6 +125,7 @@ export default function MyPage() {
       | 'income'
       | 'loan'
       | 'EstateList'
+      | 'equity'
   ) => {
     setCurrentPage(type);
   };
@@ -151,7 +137,7 @@ export default function MyPage() {
 
   return (
     <div className="top-0 absolute animate-fadeInRight">
-      <div className="pl-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-white/90 scrollbar-hide">
+      <div className="pl-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-gray-50/90 scrollbar-hide">
         {currentPage === 'main' ? (
           <>
             <div className="flex justify-between items-center">
@@ -159,20 +145,34 @@ export default function MyPage() {
                 title="내 정보 확인하기"
                 onBack={() => navigate('/')}
               />
-              <button
-                onClick={() => {
-                  CookieUtils.removeCookieValue('connect.sid');
-                  navigate('/');
-                }}
-                className="flex items-center justify-center text-center h-8 text-white px-4 py-1 mr-10 mt-3 text-xs bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
-              >
-                로그아웃
-              </button>
             </div>
 
             <div>
-              <div className="text-2xl font-fontMedium pt-6">안녕하세요</div>
-              <EditProfile name={profile.name} onEdit={handleEditProfile} />
+              <div className="flex justify-between">
+                <div>
+                  <div className="text-2xl font-fontMedium pt-6">
+                    안녕하세요
+                  </div>
+                  <div className="font-fontBold text-2xl">
+                    {profile.name}
+                    <span className="font-fontMedium text-2xl">님</span>
+                  </div>
+                </div>
+                <div className="flex pt-6 pr-8 gap-2">
+                  <EditProfile onEdit={handleEditProfile} />
+                  <div>
+                    <button
+                      onClick={() => {
+                        CookieUtils.removeCookieValue('connect.sid');
+                        navigate('/');
+                      }}
+                      className="bg-hanaRed p-1 rounded-full shadow-md hover:bg-hanaRed20 transition duration-200"
+                    >
+                      <AiOutlineLogout className="text-xl text-white" />
+                    </button>
+                  </div>
+                </div>
+              </div>
               <div className="h-52">
                 <img src={People} alt="people" />
               </div>
@@ -180,14 +180,7 @@ export default function MyPage() {
             <div className="pt-5 pr-6">
               <div className="mt-10">
                 <SemiTitle>내 정보</SemiTitle>
-                <RegisterButtonGroup
-                  onRegister={handleRegister}
-                  job={'중소,중견기업 직장인'}
-                  income={'6000만 원'}
-                  vehicleOwnership={''}
-                  propertyOwnership={''}
-                  confirmationDate={''}
-                />
+                <PropertyGroup onRegister={handleRegister} />
               </div>
 
               {/* 내 관심 지역 */}
@@ -225,41 +218,33 @@ export default function MyPage() {
 
               {/* 내 관심 아파트 */}
               <div className="mt-10 mb-5">
-                <div className="mb-5">
+                <div className="mb-5 flex">
                   <SemiTitle>내 관심 매물</SemiTitle>
+                  <div
+                    className="ml-2 px-4 text-md text-white font-semibold bg-hanaColor2 hover:opacity-90' hover:scale-105 rounded-lg flex flex-col items-center justify-center shadow-md transition-transform duration-200 ease-in-out cursor-pointer"
+                    onClick={handleEstate}
+                  >
+                    더보기
+                  </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  {assets.slice(0, 4).map((asset, index) => {
-                    const matchingInterest = interestApt.find(
-                      (interest) => interest.name === asset.name
-                    );
-
+                  {realEstateData.slice(0, 2).map((asset, index) => {
                     return (
                       <div
                         key={index}
-                        onClick={handleEstate}
-                        className={`${
-                          index === 0
-                            ? 'bg-hanaColor2 hover:opacity-90'
-                            : 'bg-white hover:scale-105'
-                        } rounded-lg flex flex-col items-center justify-center p-4 shadow-md transition-transform duration-200 ease-in-out cursor-pointer`}
+                        onClick={() => setShowRealEstate(true)}
+                        className="bg-white hover:scale-105 rounded-lg flex flex-col items-center justify-center p-4 shadow-md transition-transform duration-200 ease-in-out cursor-pointer"
                       >
-                        {index === 0 ? (
-                          <span className="text-4xl text-white font-semibold">
-                            +
+                        <>
+                          <img
+                            src={MyEstateList2}
+                            alt={asset.location}
+                            className="h-16 w-16 mb-2"
+                          />
+                          <span className="text-gray-600 font-sm font-fontCm text-center">
+                            {asset.location}
                           </span>
-                        ) : (
-                          <>
-                            <img
-                              src={matchingInterest?.image || MyEstateList1}
-                              alt={asset.name}
-                              className="h-16 w-16 mb-2"
-                            />
-                            <span className="text-gray-600 font-sm font-fontCm text-center">
-                              {asset.name}
-                            </span>
-                          </>
-                        )}
+                        </>
                       </div>
                     );
                   })}
@@ -274,12 +259,18 @@ export default function MyPage() {
         ) : currentPage === 'EstateList' ? (
           <MyEstateList />
         ) : (
-          <PropertyRegister
+          <PropertyManage
             assetType={currentPage}
             onBack={() => setCurrentPage('main')}
           />
         )}
       </div>
+      {showRealEstate && (
+        <RealEstateDetail
+          isStarFilled={true}
+          onBackClick={() => setShowRealEstate(false)}
+        />
+      )}
     </div>
   );
 }

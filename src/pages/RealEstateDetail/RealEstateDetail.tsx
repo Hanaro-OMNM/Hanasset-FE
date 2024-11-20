@@ -18,7 +18,7 @@ import Tabs from './components/Tabs';
 import TypeInfo from './components/TypeInfo';
 
 interface RealEstateDetailProps {
-  estate: {
+  estate?: {
     type: string;
     location: string;
     price: string;
@@ -28,11 +28,13 @@ interface RealEstateDetailProps {
     imageUrl: string;
   };
   onBackClick: () => void;
+  isStarFilled: boolean;
 }
 
 export default function RealEstateDetail({
   estate,
   onBackClick,
+  isStarFilled,
 }: RealEstateDetailProps) {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -52,10 +54,18 @@ export default function RealEstateDetail({
     }
   };
 
+  console.log(estate); // estate는 props로 받아오기 위한 객체 -> console.log()로 unused 에러 방지
+
   return (
     <RealEstateDetailLayout>
       <ImageCarousel images={realEstateImages} onBackClick={onBackClick} />
-      <PropertyInfo {...realEstatePropertyInfoProps} />
+      <PropertyInfo
+        title={realEstatePropertyInfoProps.title}
+        rentType={realEstatePropertyInfoProps.rentType}
+        price={realEstatePropertyInfoProps.price}
+        description={realEstatePropertyInfoProps.description}
+        isStarFilled={isStarFilled}
+      />
       <Tabs tabs={tabData} onTabClick={handleTabClick} />
 
       <div id="시세">

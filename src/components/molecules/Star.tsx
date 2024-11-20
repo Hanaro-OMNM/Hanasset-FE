@@ -1,15 +1,21 @@
 import { CiStar } from 'react-icons/ci';
+import { FaStar } from 'react-icons/fa';
 import React from 'react';
 
 interface StarProps {
-  isHighlighted: boolean;
+  isFilled: boolean;
+  onClick?: () => void;
 }
 
-const Star: React.FC<StarProps> = ({ isHighlighted }) => {
+const Star: React.FC<StarProps> = ({ isFilled, onClick }) => {
   return (
-    <CiStar
-      className={`w-7 h-9 ${isHighlighted ? 'text-yellow-500' : 'text-hanaColor2'}`}
-    />
+    <div onClick={onClick} className="cursor-pointer">
+      {isFilled ? (
+        <FaStar className="text-hanaColor2 w-7 h-7" />
+      ) : (
+        <CiStar className="text-gray-400 w-7 h-7" />
+      )}
+    </div>
   );
 };
 

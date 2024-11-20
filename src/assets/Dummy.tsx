@@ -48,6 +48,14 @@ export interface RealEstate {
   price: number;
 }
 
+type ChatMessageType = {
+  id: number;
+  user: 'guest' | 'consultant';
+  subject: 'sender' | 'responser';
+  message: string;
+  time: string;
+};
+
 export const dummyGuest: Guest = {
   name: '이순신',
   age: 32,
@@ -285,7 +293,6 @@ export const realEstatePropertyInfoProps = {
   rentType: '전세',
   price: '20억',
   description: '아파트 | 95/69m² | 5,884만원/3.3m²',
-  isStarHighlighted: false,
 };
 
 export const realEstatePropertyDetailsProps = {
@@ -3072,4 +3079,224 @@ export const consultationData: { [key: string]: string[] } = {
   '13:00 ~ 13:30': ['이순님', '김철수', '박영희', '이민수'],
   '13:30 ~ 14:00': ['최지훈', '이소라', '김영수', '이정민'],
   '14:00 ~ 14:30': ['이순신', '강민재', '이상호', '홍길동'],
+};
+
+export const dummyChatData: Record<string, ChatMessageType[]> = {
+  '1': [
+    {
+      id: 1,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '안녕하세요, 요청하신 롯데캐슬 엠파이어 대출 상담을 진행할 하나은행 상담사 OOO입니다.',
+      time: '10:00',
+    },
+    {
+      id: 2,
+      user: 'guest',
+      subject: 'sender',
+      message: '안녕하세요. 롯데캐슬 엠파이어 매물에 대해 문의드립니다.',
+      time: '10:01',
+    },
+    {
+      id: 3,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '네, 어떤 부분이 궁금하신가요? 매물 정보나 대출 관련 문의를 말씀해주세요.',
+      time: '10:02',
+    },
+    {
+      id: 4,
+      user: 'guest',
+      subject: 'sender',
+      message: '매매 대출 금액과 조건이 어떻게 되는지 알고 싶습니다.',
+      time: '10:03',
+    },
+    {
+      id: 5,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '현재 매물의 매매가와 고객님의 자본금 정보를 알려주시면 대출 조건을 안내드리겠습니다.',
+      time: '10:04',
+    },
+    {
+      id: 6,
+      user: 'guest',
+      subject: 'sender',
+      message: '매매가는 6억이고, 자본금은 1억 5천만 원입니다.',
+      time: '10:05',
+    },
+    {
+      id: 7,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '감사합니다. 해당 조건에 적합한 대출 상품을 확인해드리겠습니다. 잠시만 기다려주세요.',
+      time: '10:06',
+    },
+  ],
+  '2': [
+    {
+      id: 1,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '안녕하세요, 요청하신 광장아파트 대출 상담을 진행할 하나은행 상담사 OOO입니다.',
+      time: '11:00',
+    },
+    {
+      id: 2,
+      user: 'guest',
+      subject: 'sender',
+      message: '안녕하세요. 광장아파트 전세 대출에 대해 문의드립니다.',
+      time: '11:01',
+    },
+    {
+      id: 3,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '네, 보증금과 자본금을 알려주시면 대출 가능 금액을 안내드리겠습니다.',
+      time: '11:02',
+    },
+    {
+      id: 4,
+      user: 'guest',
+      subject: 'sender',
+      message: '보증금은 2억 5천이고 자본금은 5천만 원입니다.',
+      time: '11:03',
+    },
+    {
+      id: 5,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '확인 감사합니다. 고객님께 적합한 대출 상품을 몇 가지 추천드리겠습니다. 금리와 한도 정보를 확인 후 알려드릴게요.',
+      time: '11:04',
+    },
+    {
+      id: 6,
+      user: 'guest',
+      subject: 'sender',
+      message: '감사합니다. 대출 한도가 가장 중요한 요소입니다.',
+      time: '11:05',
+    },
+    {
+      id: 7,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '알겠습니다. 대출 한도를 중심으로 조건을 확인하여 상세히 안내드리겠습니다.',
+      time: '11:06',
+    },
+  ],
+  '3': [
+    {
+      id: 1,
+      user: 'consultant',
+      subject: 'responser',
+      message: '안녕하세요, 하나은행 상담사입니다.',
+      time: '12:00',
+    },
+    {
+      id: 2,
+      user: 'guest',
+      subject: 'sender',
+      message: '안녕하세요. 매매 대출과 전세 대출의 차이를 알고 싶습니다.',
+      time: '12:02',
+    },
+    {
+      id: 3,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '네, 매매 대출은 매물을 구매하기 위해 필요한 대출이고, 전세 대출은 전세 보증금을 지원하기 위한 대출입니다.',
+      time: '12:03',
+    },
+    {
+      id: 4,
+      user: 'guest',
+      subject: 'sender',
+      message: '매매 대출을 받고 싶습니다. 조건은 어떻게 되나요?',
+      time: '12:04',
+    },
+    {
+      id: 5,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '매물의 매매가와 고객님의 자본금 정보를 주시면 적합한 상품을 추천드릴 수 있습니다.',
+      time: '12:05',
+    },
+    {
+      id: 6,
+      user: 'guest',
+      subject: 'sender',
+      message: '매매가는 8억이고 자본금은 2억입니다.',
+      time: '12:06',
+    },
+    {
+      id: 7,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '해당 조건을 기반으로 대출 가능 금액과 금리를 계산하여 안내드리겠습니다. 잠시만 기다려주세요.',
+      time: '12:07',
+    },
+  ],
+  '4': [
+    {
+      id: 1,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '안녕하세요, 요청하신 비둘기 아파트 대출 상담을 진행할 하나은행 상담사 OOO입니다.',
+      time: '13:00',
+    },
+    {
+      id: 2,
+      user: 'guest',
+      subject: 'sender',
+      message: '안녕하세요. 비둘기 아파트 매물을 보고 문의드립니다.',
+      time: '13:01',
+    },
+    {
+      id: 3,
+      user: 'consultant',
+      subject: 'responser',
+      message: '네, 어떤 부분이 궁금하신가요?',
+      time: '13:02',
+    },
+    {
+      id: 4,
+      user: 'guest',
+      subject: 'sender',
+      message: '전세 보증금 대출 가능 금액이 궁금합니다.',
+      time: '13:03',
+    },
+    {
+      id: 5,
+      user: 'consultant',
+      subject: 'responser',
+      message: '보증금과 자본금을 알려주시면 상세히 안내드리겠습니다.',
+      time: '13:04',
+    },
+    {
+      id: 6,
+      user: 'guest',
+      subject: 'sender',
+      message: '보증금은 3억이고 자본금은 5천만 원입니다.',
+      time: '13:05',
+    },
+    {
+      id: 7,
+      user: 'consultant',
+      subject: 'responser',
+      message:
+        '확인했습니다. 고객님께 적합한 대출 상품을 확인하여 금액과 조건을 안내드리겠습니다.',
+      time: '13:06',
+    },
+  ],
 };

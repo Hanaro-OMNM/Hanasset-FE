@@ -38,6 +38,7 @@ export default function RealEstateLayout() {
           {realEstateData.map((item, index) => (
             <div key={index} className="border-b flex">
               <RealEstateCard
+                isStarFilled={true}
                 {...item}
                 onClick={() => {
                   handleCardClick(item);
@@ -51,6 +52,7 @@ export default function RealEstateLayout() {
 
       {showRealEstate && selectedEstate && (
         <RealEstateDetail
+          isStarFilled={true}
           estate={selectedEstate}
           onBackClick={() => setShowRealEstate(false)}
         />

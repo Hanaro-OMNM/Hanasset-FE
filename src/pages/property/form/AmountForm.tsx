@@ -71,14 +71,12 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
     }
   };
 
-  // Handling case when loan is not available
   const handleNoLoan = () => {
     setLocalAmount(0);
     setAsset({ ...asset, hasLoan: false, loanAmount: 0 });
     onBack();
   };
 
-  // Handling case when equity is not available
   const handleNoEquity = () => {
     setLocalAmount(0);
     setAsset({ ...asset, equityAmount: 0 });

@@ -25,8 +25,7 @@ interface JobFormProps {
 
 export default function JobForm({ onBack }: JobFormProps) {
   const [asset, setAsset] = useRecoilState(assetState);
-  const jobType = asset.jobType;
-  const [localJobType, setLocalJobType] = useState<string>(jobType);
+  const [localJobType, setLocalJobType] = useState<string>(options[0].value);
 
   const handleJobChange = (job: Option) => {
     setLocalJobType(job.value);

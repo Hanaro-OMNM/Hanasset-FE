@@ -30,7 +30,7 @@ interface AssetState {
 }
 
 export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
-  const [asset] = useRecoilState<AssetState>(assetState); // Explicitly typing assetState
+  const [asset] = useRecoilState<AssetState>(assetState);
 
   const jobType = asset.jobType;
   const incomeAmount = asset.incomeAmount;
@@ -41,7 +41,6 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
   const hasLoan = asset.hasLoan;
   const equityAmount = asset.equityAmount;
 
-  // Combine family status logic directly in the component
   let familyStatus = '';
   if (isMarried) {
     familyStatus = hasChildren ? '결혼/자녀 있음' : '결혼/자녀 없음';

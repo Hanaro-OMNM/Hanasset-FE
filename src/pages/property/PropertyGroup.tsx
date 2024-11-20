@@ -49,7 +49,7 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
   }
 
   return (
-    <CommonBackground className="bg-white pl-5 pr-5">
+    <CommonBackground className="bg-white px-5">
       <PropertyItem
         type="job"
         label="직업"

@@ -30,7 +30,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
         <div className="flex items-center">
           <button
             className="px-2 py-1 text-xs text-white bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/Consulting')}
           >
             상담 종료
           </button>

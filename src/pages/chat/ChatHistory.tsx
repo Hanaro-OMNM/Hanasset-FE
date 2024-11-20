@@ -19,7 +19,7 @@ type ChatAppProps = {
   accessor: 'guest' | 'consultant';
 };
 
-const ChatApp: React.FC<ChatAppProps> = () => {
+const ChatHistory: React.FC<ChatAppProps> = () => {
   const { id } = useParams<{ id: string }>();
 
   const chatMessages = dummyChatData[id || '1'] || [];
@@ -80,4 +80,4 @@ const ChatApp: React.FC<ChatAppProps> = () => {
   );
 };
 
-export default ChatApp;
+export default ChatHistory;

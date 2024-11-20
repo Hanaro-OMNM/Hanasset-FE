@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { useState, useEffect } from 'react';
+import CommonBackground from '../../components/atoms/CommonBackground';
 import { assetState } from '../../recoil/asset/atom';
 import AmountForm from '../property/form/AmountForm';
 import FamilyStatusForm from '../property/form/FamilyStatusForm';
@@ -94,5 +95,11 @@ export default function DynamicFormSwitcher() {
   const CurrentComponent =
     forms[currentStep]?.component || (() => <div>폼이 없습니다.</div>);
 
-  return <div>{CurrentComponent(handleNext)}</div>;
+  return (
+    <div className="animate-fadeInRight pr-5">
+      <CommonBackground className="mt-5 mb-10">
+        {CurrentComponent(handleNext)}
+      </CommonBackground>
+    </div>
+  );
 }

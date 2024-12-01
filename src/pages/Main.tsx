@@ -1,7 +1,9 @@
+import { BsInfoCircle } from 'react-icons/bs';
 import { MdNavigateNext } from 'react-icons/md';
 import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import { realEstateData } from '../assets/Dummy';
+import HanaLogo from '../assets/img/hanaLogo.png';
 import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import Swiper from '../components/atoms/Swiper';
@@ -180,18 +182,20 @@ export default function Main() {
                 </h2>
                 <div className="flex mb-2">
                   <CommonBackground
-                    className="mr-1"
+                    className="mr-1 p-4"
                     onClick={() =>
                       window.open(
                         'https://www.kebhana.com/cont/mall/mall08/mall0805/index.jsp?catId=spb_2821&_menuNo=98786'
                       )
                     }
                   >
-                    <img src=""></img>
-                    하나은행 대출 사이트 이동
+                    <div className="flex">
+                      <p className="text-sm">하나은행 대출 사이트 이동</p>
+                      <img src={HanaLogo} className="h-10"></img>
+                    </div>
                   </CommonBackground>
                   <CommonBackground
-                    className="mr-1"
+                    className="mr-1 p-4"
                     onClick={() =>
                       window.open(
                         'https://nhuf.molit.go.kr/FP/FP05/FP0501/FP0501.jsp'
@@ -200,19 +204,18 @@ export default function Main() {
                   >
                     버팀목 대출 사이트 이동
                   </CommonBackground>
-                  <div>
-                    <button
-                      onClick={() => setModalOpen(true)}
-                      className="px-4 py-2 bg-hanaGreen text-white rounded"
-                    >
-                      이용 가이드 열기
-                    </button>
+
+                  <CommonBackground
+                    className=" p-4"
+                    onClick={() => setModalOpen(true)}
+                  >
+                    이용 가이드
                     <UserManual />
-                  </div>
+                  </CommonBackground>
                 </div>
                 <div>
                   <h2 className="text-xl text-slate-800 font-bold mb-6 mt-36">
-                    최근에 확인한 매물
+                    최근에 확인한 매물 <BsInfoCircle />
                   </h2>
                   <CommonBackground className="w-full px-2 py-3">
                     {recentHouses === 'none' ? (

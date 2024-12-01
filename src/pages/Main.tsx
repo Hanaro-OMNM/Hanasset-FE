@@ -1,10 +1,12 @@
 import { MdNavigateNext } from 'react-icons/md';
-// import { PiBuildingApartment } from 'react-icons/pi';
+import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import { realEstateData } from '../assets/Dummy';
 import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import Swiper from '../components/atoms/Swiper';
+import UserManual from '../components/template/userManual.tsx';
+import { modalState } from '../recoil/userManual/atom.ts';
 import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from './RealEstateList/RealEstateCard.tsx';
 import LocationFilter from './location/LocationFilter.tsx';
@@ -24,7 +26,7 @@ export default function Main() {
     'city' | 'gungu' | 'dong' | 'main'
   >('main');
 
-  // 일단 시/도, 시/군/구, 읍/면/동 정보는 로컬 스토리지에서 가져오는 걸로 (추후 DB 연동이 되겠죠?)
+  // 일단 시/도, 시/군/구, 읍/면/동 정보는 로컬 스토리지에서 가져오는 걸로 (추후 DB 연동이 되겠죠? 구웃)
   const [currCity, setCity] = useState<string>('시/도');
   const [currGungu, setGungu] = useState<string>('시/군/구');
   const [currDong, setDong] = useState<string>('읍/면/동');
@@ -33,6 +35,8 @@ export default function Main() {
     null
   ); // 초기값을 null로 설정
   const [showRealEstate, setShowRealEstate] = useState(true);
+
+  const setModalOpen = useSetRecoilState(modalState);
 
   useEffect(() => {
     // LocalStorage에서 값을 가져오고 없으면 기본값으로 설정
@@ -172,34 +176,69 @@ export default function Main() {
 
               <div className="w-full max-w-md mt-16">
                 <h2 className="text-xl text-slate-800 font-bold mb-6">
-                  최근에 확인한 매물
+                  빠른 메뉴 구현중
                 </h2>
-
-                <CommonBackground className="w-full px-2 py-3">
-                  {recentHouses === 'none' ? (
-                    <div>아직 둘러본 매물이 없네요.</div>
-                  ) : (
-                    <Swiper
-                      items={recentRealEstateData}
-                      pagination={{ clickable: true }}
-                      renderItem={(recentRealEstateData) => (
-                        <RealEstateCard
-                          isStarFilled={false}
-                          {...recentRealEstateData}
-                          onClick={() => {
-                            handleCardClick(recentRealEstateData);
-                            setShowRealEstate(true);
-                          }}
-                        />
-                      )}
-                      spaceBetween={30}
-                      slidesPerView={1}
-                    />
-                  )}
-                </CommonBackground>
+                <div className="flex mb-2">
+                  <CommonBackground
+                    className="mr-1"
+                    onClick={() =>
+                      window.open(
+                        'https://www.kebhana.com/cont/mall/mall08/mall0805/index.jsp?catId=spb_2821&_menuNo=98786'
+                      )
+                    }
+                  >
+                    <img src=""></img>
+                    하나은행 대출 사이트 이동
+                  </CommonBackground>
+                  <CommonBackground
+                    className="mr-1"
+                    onClick={() =>
+                      window.open(
+                        'https://nhuf.molit.go.kr/FP/FP05/FP0501/FP0501.jsp'
+                      )
+                    }
+                  >
+                    버팀목 대출 사이트 이동
+                  </CommonBackground>
+                  <div>
+                    <button
+                      onClick={() => setModalOpen(true)}
+                      className="px-4 py-2 bg-hanaGreen text-white rounded"
+                    >
+                      이용 가이드 열기
+                    </button>
+                    <UserManual />
+                  </div>
+                </div>
+                <div>
+                  <h2 className="text-xl text-slate-800 font-bold mb-6 mt-36">
+                    최근에 확인한 매물
+                  </h2>
+                  <CommonBackground className="w-full px-2 py-3">
+                    {recentHouses === 'none' ? (
+                      <div>아직 둘러본 매물이 없네요.</div>
+                    ) : (
+                      <Swiper
+                        items={recentRealEstateData}
+                        pagination={{ clickable: true }}
+                        renderItem={(recentRealEstateData) => (
+                          <RealEstateCard
+                            isStarFilled={false}
+                            {...recentRealEstateData}
+                            onClick={() => {
+                              handleCardClick(recentRealEstateData);
+                              setShowRealEstate(true);
+                            }}
+                          />
+                        )}
+                        spaceBetween={30}
+                        slidesPerView={1}
+                      />
+                    )}
+                  </CommonBackground>
+                </div>
               </div>
             </div>
-
             {showRealEstate && selectedEstate && (
               <RealEstateDetail
                 isStarFilled={false}

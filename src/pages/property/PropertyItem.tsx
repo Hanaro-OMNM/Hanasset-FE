@@ -25,8 +25,8 @@ interface PropertyItemProps {
   ) => void;
   className?: string;
   labelClassName?: string;
-  labelColorClassName?: string; // label 글씨 색상용 추가 prop
-  valueColorClassName?: string; // value 글씨 색상용 추가 prop
+  labelColorClassName?: string;
+  valueColorClassName?: string;
 }
 
 export default function PropertyItem({

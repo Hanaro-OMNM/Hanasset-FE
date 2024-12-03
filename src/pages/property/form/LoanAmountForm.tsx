@@ -11,7 +11,7 @@ interface AssetInfoInputProps {
 }
 
 export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
-  const [asset, setAsset] = useRecoilState(assetState); // Accessing assetState atom
+  const [asset, setAsset] = useRecoilState(assetState);
   const { annualInterest, annualPrincipal, hasLoan } = asset;
 
   const [localAnnualInterest, setLocalAnnualInterest] =
@@ -19,7 +19,6 @@ export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
   const [localAnnualPrincipal, setLocalAnnualPrincipal] =
     useState<number>(annualPrincipal);
 
-  // Separate error states for each input
   const [interestError, setInterestError] = useState<boolean>(false);
   const [interestErrorMessage, setInterestErrorMessage] = useState<string>('');
 
@@ -84,10 +83,10 @@ export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
 
   const handleInterestChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    const numericValue = validateInput(value, 'interest'); // 필드 이름 전달
+    const numericValue = validateInput(value, 'interest');
 
     if (numericValue !== null) {
-      setLocalAnnualInterest(numericValue); // 상태 업데이트
+      setLocalAnnualInterest(numericValue);
     }
   };
 
@@ -95,10 +94,10 @@ export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = event.target.value;
-    const numericValue = validateInput(value, 'principal'); // 필드 이름 전달
+    const numericValue = validateInput(value, 'principal');
 
     if (numericValue !== null) {
-      setLocalAnnualPrincipal(numericValue); // 상태 업데이트
+      setLocalAnnualPrincipal(numericValue);
     }
   };
 
@@ -115,6 +114,18 @@ export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
   };
 
   const handleSave = () => {
+    //논의 필요
+    /* 둘 중 하나만 0인 경우 에러 처리 */
+    if (
+      (localAnnualInterest === 0 && localAnnualPrincipal > 0) ||
+      (localAnnualInterest > 0 && localAnnualPrincipal === 0)
+    ) {
+      alert(
+        '연이자 상환액과 연원금 상환액은 동시에 존재하거나 둘 다 0이어야 합니다.'
+      );
+      return;
+    }
+
     if (
       !interestError &&
       !principalError &&

@@ -8,17 +8,19 @@ import { selectedEstateType } from '../../types/global';
 import AmountForm from '../property/form/AmountForm';
 import FamilyStatusForm from '../property/form/FamilyStatusForm';
 import JobForm from '../property/form/JobForm';
+import LoanAmountForm from '../property/form/LoanAmountForm';
 import OwnPropertyForm from '../property/form/OwnPropertyForm';
 
 interface AssetState {
-  jobType: string;
-  incomeAmount: number;
-  equityAmount: number;
-  isMarried: boolean;
-  hasChildren: boolean;
-  hasHome: boolean;
-  hasLoan: boolean;
-  loanAmount: number;
+  jobType: string; // 직업 종류
+  incomeAmount: number; // 연수입
+  equityAmount: number; // 자본금
+  isMarried: boolean; // 결혼 상태
+  hasChildren: boolean; // 자녀 여부
+  hasHome: boolean; // 주택 소유 여부
+  hasLoan: boolean; // 대출 여부
+  annualInterest: number; // 보유대출 연이자 상환액
+  annualPrincipal: number; // 보유대출 연원금 상환액
 }
 
 interface FormConfig {
@@ -60,9 +62,7 @@ const forms: FormConfig[] = [
   },
   {
     key: 'loan',
-    component: (onBack: () => void) => (
-      <AmountForm formType="loan" onBack={onBack} />
-    ),
+    component: (onBack: () => void) => <LoanAmountForm onBack={onBack} />,
     isUnValid: (state: AssetState) => state.hasLoan === false,
   },
 ];
@@ -95,7 +95,6 @@ export default function DynamicFormSwitcher({
           reservationInfo: estateInfo,
           reservationTime: selectedDate + ' ' + selectedTime,
         });
-        //alert('상담이 정상적으로 예약되었습니다.'); --> useEffect 로컬에서 알림 두번 뜸
         nav('/consulting');
       }
     }

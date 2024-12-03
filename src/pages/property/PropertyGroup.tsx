@@ -1,5 +1,4 @@
 import { useRecoilState } from 'recoil';
-// Import Asset type
 import CommonBackground from '../../components/atoms/CommonBackground';
 import { assetState } from '../../recoil/asset/atom';
 import PropertyItem from './PropertyItem';

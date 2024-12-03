@@ -12,9 +12,7 @@ interface AssetInfoInputProps {
 }
 
 export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
-  const [asset, setAsset] = useRecoilState(assetState); // Accessing assetState atom
-
-  // Get values from assetState
+  const [asset, setAsset] = useRecoilState(assetState);
   const incomeAmount = asset.incomeAmount;
   const equityAmount = asset.equityAmount;
 
@@ -35,8 +33,6 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-
-    // Handle empty string input
     if (value === '') {
       setLocalAmount(0);
       setError(false);

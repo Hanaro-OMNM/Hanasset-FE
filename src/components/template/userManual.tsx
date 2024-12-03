@@ -48,13 +48,13 @@ export default function UserManual() {
           <div className="flex fixed bottom-10 right-10">
             <button disabled={currentPage === 0}>
               <IoIosArrowBack
-                className="text-white bg-hanaColor2 h-5 w-5"
+                className="text-white bg-hanaColor2 h-7 w-7"
                 onClick={goToPrevPage}
               />
             </button>
             <button>
               <IoIosArrowForward
-                className="text-white bg-hanaColor2 h-5 w-5 animate-glow"
+                className="text-white bg-hanaColor2  h-7 w-7 animate-glow"
                 onClick={goToNextPage}
               />
             </button>
@@ -63,25 +63,22 @@ export default function UserManual() {
       )}
       {/* 주소로 골라보기 */}
       {currentPage === 1 && (
-        <div>
-          <img
-            src={Manual1}
-            className="fixed border-4 border-red-600 rounded-3xl top-24 left-10"
-          />
-          <div className="fixed top-7 text-white font-fontMedium">
+        <div className="fixed top-24 left-10 p-1 rounded-3xl bg-gradient-to-r from-hanaGreen to-hanaColor2">
+          <div className="rounded-3xl bg-white p-0">
+            <img src={Manual1} className="rounded-3xl" />
+          </div>
+          <div className="absolute top-[-60px] left-0 text-white font-fontMedium">
             <h2>
               1. <span className="text-hanaColor2">주소</span>로 볼 수 있음
             </h2>
           </div>
         </div>
       )}
+
       {/* 빠른 메뉴 구현중 */}
       {currentPage === 2 && (
-        <div>
-          <img
-            src={Manual2}
-            className="fixed border-4 border-red-600 rounded-3xl top-64 left-10"
-          />
+        <div className="fixed top-64 left-10 p-1 rounded-3xl bg-gradient-to-r from-hanaGreen to-hanaColor2">
+          <img src={Manual2} className="rounded-3xl" />
           <div className="fixed top-7 text-white font-fontMedium">
             <h2>
               1. <span className="text-hanaColor2">하나은행 대출 사이트</span>로
@@ -93,41 +90,32 @@ export default function UserManual() {
 
       {/* 지도 */}
       {currentPage === 3 && (
-        <div>
-          <img
-            src={Manual3}
-            className="fixed border-4 border-red-600 rounded-3xl top-36 left-0"
-          />
+        <div className="fixed top-36 left-0 p-1 rounded-3xl bg-gradient-to-r from-hanaGreen to-hanaColor2">
+          <img src={Manual3} className="rounded-3xl" />
         </div>
       )}
       {/* 상담 */}
       {currentPage === 4 && (
-        <div>
-          <img
-            src={Manual4}
-            className="fixed border-4 border-red-600 rounded-3xl top-52 left-0"
-          />
+        <div className="fixed top-52 left-0 p-1 rounded-3xl bg-gradient-to-r from-hanaGreen to-hanaColor2">
+          <img src={Manual4} className="rounded-3xl" />
         </div>
       )}
       {/* 마이홈 */}
       {currentPage === 5 && (
-        <div>
-          <img
-            src={Manual5}
-            className="fixed border-4 border-red-600 rounded-3xl top-72 left-0"
-          />
+        <div className="fixed top-72 left-0 p-1 rounded-3xl bg-gradient-to-r from-hanaGreen to-hanaColor2">
+          <img src={Manual5} className="rounded-3xl" />
         </div>
       )}
       <div className="flex fixed bottom-10 right-10">
         <button disabled={currentPage === 0}>
           <IoIosArrowBack
-            className="text-white bg-hanaColor2 h-5 w-5"
+            className="text-white bg-hanaColor2  h-7 w-7"
             onClick={goToPrevPage}
           />
         </button>
         <button>
           <IoIosArrowForward
-            className="text-white bg-hanaColor2 h-5 w-5 animate-glow"
+            className="text-white bg-hanaColor2  h-7 w-7 animate-glow"
             onClick={goToNextPage}
           />
         </button>

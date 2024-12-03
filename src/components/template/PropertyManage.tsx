@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AmountForm from '../../pages/property/form/AmountForm';
 import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
 import JobForm from '../../pages/property/form/JobForm';
+import LoanForm from '../../pages/property/form/LoanForm';
 import OwnPropertyForm from '../../pages/property/form/OwnPropertyForm';
 import CommonBackground from '../atoms/CommonBackground';
 import MobileHeader from '../atoms/MobileHeader';
@@ -53,7 +54,7 @@ export default function PropertyForm({
     },
     {
       key: 'loan',
-      component: <AmountForm formType="loan" onBack={onBack} />,
+      component: <LoanForm onBack={onBack} />,
       valid: validAmountForm,
     },
   ];

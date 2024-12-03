@@ -26,7 +26,8 @@ interface AssetState {
   hasChildren: boolean; // 자녀 여부
   hasHome: boolean; // 주택 소유 여부
   hasLoan: boolean; // 대출 여부
-  loanAmount: number; // 대출 금액
+  annualInterest: number; // 보유대출 연이자 상환액
+  annualPrincipal: number; // 보유대출 연원금 상환액
 }
 
 export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
@@ -37,7 +38,6 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
   const hasChildren = asset.hasChildren;
   const isMarried = asset.isMarried;
   const hasHome = asset.hasHome;
-  const loanAmount = asset.loanAmount;
   const hasLoan = asset.hasLoan;
   const equityAmount = asset.equityAmount;
 
@@ -98,7 +98,7 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
       <PropertyItem
         type="loan"
         label="보유 대출"
-        value={hasLoan ? `${loanAmount.toLocaleString()}만 원` : '없음'}
+        value={hasLoan ? '있음' : '없음'}
         onClick={onRegister}
         labelClassName="bg-orange-100 p-1 rounded-lg"
         labelColorClassName="text-orange-500 font-fontBold w-24"

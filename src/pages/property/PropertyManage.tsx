@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import AmountForm from '../../pages/property/form/AmountForm';
-import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
-import JobForm from '../../pages/property/form/JobForm';
-import LoanAmountForm from '../../pages/property/form/LoanAmountForm';
-import OwnPropertyForm from '../../pages/property/form/OwnPropertyForm';
-import CommonBackground from '../atoms/CommonBackground';
-import MobileHeader from '../atoms/MobileHeader';
+import CommonBackground from '../../components/atoms/CommonBackground';
+import MobileHeader from '../../components/atoms/MobileHeader';
+import AmountForm from './form/AmountForm';
+import FamilyStatusForm from './form/FamilyStatusForm';
+import JobForm from './form/JobForm';
+import LoanAmountForm from './form/LoanAmountForm';
+import OwnPropertyForm from './form/OwnPropertyForm';
 
 interface AssetRegisterProps {
   assetType:

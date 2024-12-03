@@ -198,7 +198,7 @@ export default function Main() {
                     className="mr-1 p-4"
                     onClick={() =>
                       window.open(
-                        'https://nhuf.molit.go.kr/FP/FP05/FP0501/FP0501.jsp'
+                        'https://www.kebhana.com/cont/mall/mall08/mall0805/index.jsp?_menuNo=98786'
                       )
                     }
                   >
@@ -210,8 +210,8 @@ export default function Main() {
                     onClick={() => setModalOpen(true)}
                   >
                     이용 가이드
-                    <UserManual />
                   </CommonBackground>
+                  <UserManual />
                 </div>
                 <div>
                   <h2 className="text-xl text-slate-800 font-bold mb-6 mt-36">

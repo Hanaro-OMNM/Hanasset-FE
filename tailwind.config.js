@@ -66,6 +66,7 @@ export default {
         fadeInUp: 'fadeInUp 0.5s ease-out forwards',
         fadeInRight: 'fadeInRight 0.5s ease-out forwards',
         slideInRight: 'slideInRight 0.5s ease-out forwards',
+        glow: 'glow 1.5s infinite',
       },
       keyframes: {
         fadeInUp: {
@@ -79,6 +80,10 @@ export default {
         slideInRight: {
           '0%': { transform: 'translateX(-100%)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        glow: {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0.5 },
         },
       },
     },

@@ -6,7 +6,6 @@ import { assetState } from '../../recoil/asset/atom';
 import loanReservationAtom from '../../recoil/loanReservation/atom';
 import { selectedEstateType } from '../../types/global';
 import AmountForm from '../property/form/AmountForm';
-import FamilyStatusForm from '../property/form/FamilyStatusForm';
 import JobForm from '../property/form/JobForm';
 import LoanAmountForm from '../property/form/LoanAmountForm';
 import OwnPropertyForm from '../property/form/OwnPropertyForm';
@@ -15,8 +14,6 @@ interface AssetState {
   jobType: string; // 직업 종류
   incomeAmount: number; // 연수입
   equityAmount: number; // 자본금
-  isMarried: boolean; // 결혼 상태
-  hasChildren: boolean; // 자녀 여부
   hasHome: boolean; // 주택 소유 여부
   hasLoan: boolean; // 대출 여부
   annualInterest: number; // 보유대출 연이자 상환액
@@ -48,12 +45,6 @@ const forms: FormConfig[] = [
       <AmountForm formType="equity" onBack={onBack} />
     ),
     isUnValid: (state: AssetState) => state.equityAmount === 0,
-  },
-  {
-    key: 'family',
-    component: (onBack: () => void) => <FamilyStatusForm onBack={onBack} />,
-    isUnValid: (state: AssetState) =>
-      state.isMarried === false && state.hasChildren === false,
   },
   {
     key: 'home',

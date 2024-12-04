@@ -2,7 +2,6 @@ import { useState } from 'react';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import MobileHeader from '../../components/atoms/MobileHeader';
 import AmountForm from './form/AmountForm';
-import FamilyStatusForm from './form/FamilyStatusForm';
 import JobForm from './form/JobForm';
 import LoanAmountForm from './form/LoanAmountForm';
 import OwnPropertyForm from './form/OwnPropertyForm';
@@ -43,11 +42,6 @@ export default function PropertyForm({
       valid: validAmountForm,
     },
     {
-      key: 'family',
-      component: <FamilyStatusForm onBack={onBack} />,
-      valid: true,
-    },
-    {
       key: 'home',
       component: <OwnPropertyForm onBack={onBack} />,
       valid: true,
@@ -67,8 +61,6 @@ export default function PropertyForm({
         return forms.findIndex((form) => form.key === 'income');
       case 'equity':
         return forms.findIndex((form) => form.key === 'equity');
-      case 'family':
-        return forms.findIndex((form) => form.key === 'family');
       case 'home':
         return forms.findIndex((form) => form.key === 'home');
       case 'loan':

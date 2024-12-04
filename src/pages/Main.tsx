@@ -186,20 +186,22 @@ export default function Main() {
                       )
                     }
                   >
-                    <div className="flex">
-                      <p className="text-sm">하나은행 대출 사이트 이동</p>
-                      <img src={HanaLogo} className="h-10"></img>
+                    <div className="">
+                      <p className="text-sm">하나은행 대출</p>
+                      <div className="w-full">
+                        <img src={HanaLogo} className="h-10"></img>
+                      </div>
                     </div>
                   </CommonBackground>
                   <CommonBackground
                     className="mr-1 p-4"
                     onClick={() =>
                       window.open(
-                        'https://www.kebhana.com/cont/mall/mall08/mall0805/index.jsp?_menuNo=98786'
+                        'https://www.kebhana.com/cont/mall/mall09/mall0903/mall090306/index.jsp'
                       )
                     }
                   >
-                    버팀목 대출 사이트 이동
+                    버팀목 대출
                   </CommonBackground>
 
                   <CommonBackground
@@ -214,8 +216,11 @@ export default function Main() {
                   )}
                 </div>
                 <div>
-                  <h2 className="text-xl text-slate-800 font-bold mb-6 mt-36">
-                    최근에 확인한 매물 <BsInfoCircle />
+                  <h2 className="text-xl text-slate-800 font-bold mb-6 mt-10 flex">
+                    최근에 확인한 매물
+                    <div className="ml-2 mt-1">
+                      <BsInfoCircle />
+                    </div>
                   </h2>
                   <CommonBackground className="w-full px-2 py-3">
                     {recentHouses === 'none' ? (

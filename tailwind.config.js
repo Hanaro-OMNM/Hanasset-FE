@@ -13,6 +13,9 @@ export default {
         hanaNavy: '#3A4058',
         hanaColor1: '#E0FBF5',
         hanaColor2: '#00CC9C',
+        ManualColor1: '#71D381',
+        ManualColor2: '#77CBA2',
+        ManualColor3: '#77D3CD',
         /* hanaGreen*/
         hanaGreen: '#0B9B97',
         hanaGreen80: '#5D9588',

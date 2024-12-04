@@ -1,6 +1,5 @@
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdNavigateNext } from 'react-icons/md';
-import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import { realEstateData } from '../assets/Dummy';
 import HanaLogo from '../assets/img/hanaLogo.png';
@@ -8,7 +7,6 @@ import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import Swiper from '../components/atoms/Swiper';
 import UserManual from '../components/template/userManual.tsx';
-import { modalState } from '../recoil/userManual/atom.ts';
 import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from './RealEstateList/RealEstateCard.tsx';
 import LocationFilter from './location/LocationFilter.tsx';
@@ -37,8 +35,7 @@ export default function Main() {
     null
   ); // 초기값을 null로 설정
   const [showRealEstate, setShowRealEstate] = useState(true);
-
-  const setModalOpen = useSetRecoilState(modalState);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     // LocalStorage에서 값을 가져오고 없으면 기본값으로 설정
@@ -207,11 +204,13 @@ export default function Main() {
 
                   <CommonBackground
                     className=" p-4"
-                    onClick={() => setModalOpen(true)}
+                    onClick={() => setShowModal(true)}
                   >
                     이용 가이드
                   </CommonBackground>
-                  <UserManual />
+                  {showModal && (
+                    <UserManual close={() => setShowModal(false)} />
+                  )}
                 </div>
                 <div>
                   <h2 className="text-xl text-slate-800 font-bold mb-6 mt-36">

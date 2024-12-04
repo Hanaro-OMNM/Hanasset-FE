@@ -114,18 +114,6 @@ export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
   };
 
   const handleSave = () => {
-    //논의 필요
-    /* 둘 중 하나만 0인 경우 에러 처리 */
-    if (
-      (localAnnualInterest === 0 && localAnnualPrincipal > 0) ||
-      (localAnnualInterest > 0 && localAnnualPrincipal === 0)
-    ) {
-      alert(
-        '연이자 상환액과 연원금 상환액은 동시에 존재하거나 둘 다 0이어야 합니다.'
-      );
-      return;
-    }
-
     if (
       !interestError &&
       !principalError &&

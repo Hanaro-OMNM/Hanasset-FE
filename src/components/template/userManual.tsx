@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from 'framer-motion';
 import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
 import Manual1 from '../../assets/img/manual/1.png';
@@ -34,10 +35,25 @@ export default function UserManual({ close }: userManualProps) {
   const goToPrevPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 0));
   };
+
+  const animationVariants = {
+    hidden: { opacity: 0, translateY: 5 },
+    visible: { opacity: 1, translateY: 0 },
+    exit: { opacity: 0, translateY: -5 },
+  };
+
   const pages = [
     {
       content: (
-        <>
+        <motion.div
+          key="page1"
+          variants={animationVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="absolute inset-0 flex flex-col items-center justify-center"
+        >
           <ManualImg className=" top-24 left-10">
             <img src={Manual1} className="rounded-3xl" />
           </ManualImg>
@@ -72,12 +88,20 @@ export default function UserManual({ close }: userManualProps) {
             onNext={goToNextPage}
             className="fixed top-96 left mt-8"
           />
-        </>
+        </motion.div>
       ),
     },
     {
       content: (
-        <>
+        <motion.div
+          key="page2"
+          variants={animationVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="absolute inset-0 flex flex-col items-center justify-center"
+        >
           <ManualImg className=" top-64 left-10">
             <img src={Manual2} className="rounded-3xl" />
           </ManualImg>
@@ -116,12 +140,20 @@ export default function UserManual({ close }: userManualProps) {
             onNext={goToNextPage}
             className="fixed bottom-80 mb-10 right-1/4"
           />
-        </>
+        </motion.div>
       ),
     },
     {
       content: (
-        <>
+        <motion.div
+          key="page3"
+          variants={animationVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="absolute inset-0 flex flex-col items-center justify-center"
+        >
           <ManualImg className=" top-36 left-0">
             <img src={Manual3} className="rounded-3xl" />
           </ManualImg>
@@ -138,12 +170,20 @@ export default function UserManual({ close }: userManualProps) {
             onNext={goToNextPage}
             className="fixed top-52 left-1/3"
           />
-        </>
+        </motion.div>
       ),
     },
     {
       content: (
-        <>
+        <motion.div
+          key="page4"
+          variants={animationVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="absolute inset-0 flex flex-col items-center justify-center"
+        >
           <ManualImg className=" top-52 left-0">
             <img src={Manual4} className="rounded-3xl" />
           </ManualImg>
@@ -157,7 +197,7 @@ export default function UserManual({ close }: userManualProps) {
               <span className="text-ManualColor3"> 직접 </span>소통하며 해결할
               수 있습니다.
             </div>
-          </div>{' '}
+          </div>
           <div className="fixed top-72 mt-4 left-24 text-hanaSilver">4/5</div>
           <ManualButton
             currentPage={currentPage}
@@ -166,12 +206,20 @@ export default function UserManual({ close }: userManualProps) {
             onNext={goToNextPage}
             className="fixed top-72 mt-4 left-auto"
           />
-        </>
+        </motion.div>
       ),
     },
     {
       content: (
-        <>
+        <motion.div
+          key="page5"
+          variants={animationVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="absolute inset-0 flex flex-col items-center justify-center"
+        >
           <ManualImg className=" top-72 left-0">
             <img src={Manual5} className="rounded-3xl" />
           </ManualImg>
@@ -198,7 +246,7 @@ export default function UserManual({ close }: userManualProps) {
             onNext={goToNextPage}
             className="fixed top-96 mt-5 left-auto"
           />
-        </>
+        </motion.div>
       ),
     },
   ];
@@ -208,7 +256,9 @@ export default function UserManual({ close }: userManualProps) {
       <button onClick={close} className="text-white top-10 right-10 fixed">
         ✕
       </button>
-      {pages[currentPage]?.content}
+      <AnimatePresence mode="wait">
+        {pages[currentPage]?.content}
+      </AnimatePresence>
     </div>,
     document.body
   );

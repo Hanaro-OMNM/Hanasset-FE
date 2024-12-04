@@ -208,6 +208,7 @@ export default function Main() {
                   >
                     이용 가이드
                   </CommonBackground>
+
                   {showModal && (
                     <UserManual close={() => setShowModal(false)} />
                   )}

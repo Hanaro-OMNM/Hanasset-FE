@@ -6,6 +6,7 @@ import Manual2 from '../../assets/img/manual/2.png';
 import Manual3 from '../../assets/img/manual/3.png';
 import Manual4 from '../../assets/img/manual/4.png';
 import Manual5 from '../../assets/img/manual/5.png';
+import CloseButton from '../atoms/CloseButton';
 import ManualImg from '../atoms/ManualImg';
 import ManualTitle from '../atoms/ManualTitle';
 import ManualButton from '../molecules/ManualButton';
@@ -54,6 +55,7 @@ export default function UserManual({ close }: userManualProps) {
           transition={{ duration: 0.3, ease: 'easeOut' }}
           className="absolute inset-0 flex flex-col items-center justify-center"
         >
+          <CloseButton onClick={close} />
           <ManualImg className=" top-24 left-10">
             <img src={Manual1} className="rounded-3xl" />
           </ManualImg>
@@ -102,6 +104,7 @@ export default function UserManual({ close }: userManualProps) {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="absolute inset-0 flex flex-col items-center justify-center"
         >
+          <CloseButton onClick={close} />
           <ManualImg className=" top-64 left-10">
             <img src={Manual2} className="rounded-3xl" />
           </ManualImg>
@@ -154,6 +157,7 @@ export default function UserManual({ close }: userManualProps) {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="absolute inset-0 flex flex-col items-center justify-center"
         >
+          <CloseButton onClick={close} />
           <ManualImg className=" top-36 left-0">
             <img src={Manual3} className="rounded-3xl" />
           </ManualImg>
@@ -184,6 +188,7 @@ export default function UserManual({ close }: userManualProps) {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="absolute inset-0 flex flex-col items-center justify-center"
         >
+          <CloseButton onClick={close} />
           <ManualImg className=" top-52 left-0">
             <img src={Manual4} className="rounded-3xl" />
           </ManualImg>
@@ -220,6 +225,7 @@ export default function UserManual({ close }: userManualProps) {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="absolute inset-0 flex flex-col items-center justify-center"
         >
+          <CloseButton onClick={close} />
           <ManualImg className=" top-72 left-0">
             <img src={Manual5} className="rounded-3xl" />
           </ManualImg>
@@ -253,9 +259,6 @@ export default function UserManual({ close }: userManualProps) {
 
   return ReactDOM.createPortal(
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80">
-      <button onClick={close} className="text-white top-10 right-10 fixed">
-        ✕
-      </button>
       <AnimatePresence mode="wait">
         {pages[currentPage]?.content}
       </AnimatePresence>

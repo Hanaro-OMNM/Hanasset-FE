@@ -45,7 +45,7 @@ export default function UserManual({ close }: userManualProps) {
             1.
             <ManualTitle text="원하는 매물을 더 빠르게 찾아보세요!" />
           </div>
-          <div className="text-white font-fontLight text-xl fixed top-36">
+          <div className="text-white font-fontLight text-xl fixed top-80 left-10">
             <div className="mb-4">
               <span>1. </span>
               <span className="text-ManualColor3">주소로 골라보기</span>에서
@@ -62,13 +62,15 @@ export default function UserManual({ close }: userManualProps) {
               하여 해당 지역 매물을 확인할 수 있습니다.
             </div>
           </div>
-          <div className="fixed top-60 right-2/3 mr-3 text-hanaSilver">1/5</div>
+          <div className="fixed top-96 mt-8 left-10 mr-3 text-hanaSilver">
+            1/5
+          </div>
           <ManualButton
             currentPage={currentPage}
             totalPages={6}
             onPrev={goToPrevPage}
             onNext={goToNextPage}
-            className="fixed top-60 right-1/4"
+            className="fixed top-96 left mt-8"
           />
         </>
       ),

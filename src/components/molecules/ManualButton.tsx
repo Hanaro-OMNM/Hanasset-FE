@@ -5,7 +5,7 @@ interface ManualButtonProps {
   totalPages: number;
   onPrev: () => void;
   onNext: () => void;
-  className?: string; // className 추가
+  className?: string;
 }
 
 export default function ManualButton({
@@ -18,15 +18,36 @@ export default function ManualButton({
   return (
     <div className={`flex ${className}`}>
       <button disabled={currentPage === 0} onClick={onPrev}>
-        <div className="flex text-white mr-5">
-          <IoIosArrowBack className="text-white h-7 w-7" />
+        <div
+          className={`flex mr-5 ${
+            currentPage === 0 ? 'text-hanaSilver80' : ' text-white'
+          }`}
+        >
+          <IoIosArrowBack
+            className={`h-7 w-7 ${
+              currentPage === 0 ? 'text-hanaSilver80' : 'text-white'
+            }`}
+          />
           이전
         </div>
       </button>
+
       <button disabled={currentPage === totalPages - 1} onClick={onNext}>
-        <div className="flex text-white animate-glow">
+        <div
+          className={`flex ${
+            currentPage === totalPages - 2
+              ? 'text-hanaSilver80'
+              : 'animate-glow text-white'
+          }`}
+        >
           다음
-          <IoIosArrowForward className="text-white h-7 w-7 animate-glow" />
+          <IoIosArrowForward
+            className={`h-7 w-7 ${
+              currentPage === totalPages - 2
+                ? 'text-hanaSilver80'
+                : 'animate-glow text-white'
+            }`}
+          />
         </div>
       </button>
     </div>

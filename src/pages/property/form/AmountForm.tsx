@@ -7,25 +7,16 @@ import NoItemButton from '../../../components/atoms/NoItemButton';
 import { assetState } from '../../../recoil/asset/atom';
 
 interface AssetInfoInputProps {
-  formType: 'income' | 'loan' | 'equity';
+  formType: 'income' | 'equity';
   onBack: () => void;
 }
 
 export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
-  const [asset, setAsset] = useRecoilState(assetState); // Accessing assetState atom
-
-  // Get values from assetState
+  const [asset, setAsset] = useRecoilState(assetState);
   const incomeAmount = asset.incomeAmount;
-  const loanAmount = asset.loanAmount;
   const equityAmount = asset.equityAmount;
-  const hasLoan = asset.hasLoan;
 
-  const initialAmount =
-    formType === 'income'
-      ? incomeAmount
-      : formType === 'loan'
-        ? loanAmount
-        : equityAmount;
+  const initialAmount = formType === 'income' ? incomeAmount : equityAmount;
 
   const [localAmount, setLocalAmount] = useState<number>(initialAmount);
   const [error, setError] = useState<boolean>(false);
@@ -35,17 +26,13 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
   useEffect(() => {
     if (formType === 'income') {
       setLocalAmount(incomeAmount);
-    } else if (formType === 'loan') {
-      setLocalAmount(loanAmount);
     } else {
       setLocalAmount(equityAmount);
     }
-  }, [incomeAmount, loanAmount, equityAmount, formType]);
+  }, [incomeAmount, equityAmount, formType]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-
-    // Handle empty string input
     if (value === '') {
       setLocalAmount(0);
       setError(false);
@@ -71,12 +58,6 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
     }
   };
 
-  const handleNoLoan = () => {
-    setLocalAmount(0);
-    setAsset({ ...asset, hasLoan: false, loanAmount: 0 });
-    onBack();
-  };
-
   const handleNoEquity = () => {
     setLocalAmount(0);
     setAsset({ ...asset, equityAmount: 0 });
@@ -91,12 +72,6 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
     if (isValid) {
       if (formType === 'income') {
         setAsset({ ...asset, incomeAmount: localAmount });
-      } else if (formType === 'loan') {
-        setAsset({
-          ...asset,
-          loanAmount: localAmount,
-          hasLoan: localAmount > 0,
-        });
       } else {
         setAsset({ ...asset, equityAmount: localAmount });
       }
@@ -112,9 +87,7 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
         text={
           formType === 'income'
             ? '소득정보를 입력하세요'
-            : formType === 'loan'
-              ? '이미 받은 대출은 얼마인가요?'
-              : '자본금을 입력해주세요'
+            : '자본금을 입력해주세요'
         }
       />
 
@@ -123,13 +96,7 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
           name="amount"
           value={localAmount.toString()}
           onChange={handleChange}
-          label={
-            formType === 'income'
-              ? '세전 연소득'
-              : formType === 'loan'
-                ? '이미 받은 대출 금액'
-                : '자본금 금액'
-          }
+          label={formType === 'income' ? '세전 연소득' : '자본금 금액'}
           error={error}
           errorMessage={errorMessage}
           isAmount={true}
@@ -139,10 +106,6 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
       <div className="w-full mt-8">
         <Button text="저장" onClick={handleSave} version="ver1" />
       </div>
-
-      {formType === 'loan' && (
-        <NoItemButton text={'보유 대출이 없어요'} onClick={handleNoLoan} />
-      )}
 
       {formType === 'equity' && (
         <NoItemButton text={'보유 자본금이 없어요'} onClick={handleNoEquity} />

@@ -15,11 +15,11 @@ import Swiper from '../components/atoms/Swiper';
 import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
 import MyEstateList from '../components/template/MyEstateList.tsx';
-import PropertyManage from '../components/template/PropertyManage.tsx';
 import centerAtom from '../recoil/center/atom.ts';
 import { CookieUtils } from '../utils/CookieUtils.ts';
 import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import PropertyGroup from './property/PropertyGroup.tsx';
+import PropertyManage from './property/PropertyManage.tsx';
 
 interface BookmarkedLocation {
   [key: string]: {

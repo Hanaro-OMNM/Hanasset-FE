@@ -4,11 +4,10 @@ interface AssetState {
   jobType: string; // 직업 종류
   incomeAmount: number; // 연수입
   equityAmount: number; // 자본금
-  isMarried: boolean; // 결혼 상태
-  hasChildren: boolean; // 자녀 여부
   hasHome: boolean; // 주택 소유 여부
   hasLoan: boolean; // 대출 여부
-  loanAmount: number; // 대출 금액
+  annualInterest: number; // 보유대출 연이자 상환액
+  annualPrincipal: number; // 보유대출 연원금 상환액
 }
 
 export const assetState = atom<AssetState>({
@@ -17,10 +16,9 @@ export const assetState = atom<AssetState>({
     jobType: '없음',
     incomeAmount: 0,
     equityAmount: 0,
-    isMarried: false,
-    hasChildren: false,
     hasHome: false,
     hasLoan: false,
-    loanAmount: 0,
+    annualInterest: 0,
+    annualPrincipal: 0,
   },
 });

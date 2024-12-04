@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import AmountForm from '../../pages/property/form/AmountForm';
-import FamilyStatusForm from '../../pages/property/form/FamilyStatusForm';
-import JobForm from '../../pages/property/form/JobForm';
-import OwnPropertyForm from '../../pages/property/form/OwnPropertyForm';
-import CommonBackground from '../atoms/CommonBackground';
-import MobileHeader from '../atoms/MobileHeader';
+import CommonBackground from '../../components/atoms/CommonBackground';
+import MobileHeader from '../../components/atoms/MobileHeader';
+import AmountForm from './form/AmountForm';
+import JobForm from './form/JobForm';
+import LoanAmountForm from './form/LoanAmountForm';
+import OwnPropertyForm from './form/OwnPropertyForm';
 
 interface AssetRegisterProps {
   assetType:
@@ -42,18 +42,13 @@ export default function PropertyForm({
       valid: validAmountForm,
     },
     {
-      key: 'family',
-      component: <FamilyStatusForm onBack={onBack} />,
-      valid: true,
-    },
-    {
       key: 'home',
       component: <OwnPropertyForm onBack={onBack} />,
       valid: true,
     },
     {
       key: 'loan',
-      component: <AmountForm formType="loan" onBack={onBack} />,
+      component: <LoanAmountForm onBack={onBack} />,
       valid: validAmountForm,
     },
   ];
@@ -66,8 +61,6 @@ export default function PropertyForm({
         return forms.findIndex((form) => form.key === 'income');
       case 'equity':
         return forms.findIndex((form) => form.key === 'equity');
-      case 'family':
-        return forms.findIndex((form) => form.key === 'family');
       case 'home':
         return forms.findIndex((form) => form.key === 'home');
       case 'loan':

@@ -1,25 +1,16 @@
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdNavigateNext } from 'react-icons/md';
 import { useEffect, useState } from 'react';
-import { realEstateData } from '../assets/Dummy';
 import HanaLogo from '../assets/img/hanaLogo.png';
+import { addDetailEstateData } from '../assets/Dummy';
 import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import Swiper from '../components/atoms/Swiper';
 import UserManual from '../components/template/userManual.tsx';
+import { AdditionalEstate } from '../types/global';
 import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from './RealEstateList/RealEstateCard.tsx';
 import LocationFilter from './location/LocationFilter.tsx';
-
-type estateProps = {
-  type: string;
-  location: string;
-  price: string;
-  size: string;
-  description: string;
-  dealType: string;
-  imageUrl: string;
-};
 
 export default function Main() {
   const [activePage, setActivePage] = useState<
@@ -31,7 +22,7 @@ export default function Main() {
   const [currGungu, setGungu] = useState<string>('시/군/구');
   const [currDong, setDong] = useState<string>('읍/면/동');
 
-  const [selectedEstate, setSelectedEstate] = useState<estateProps | null>(
+  const [selectedEstate, setSelectedEstate] = useState<AdditionalEstate | null>(
     null
   ); // 초기값을 null로 설정
   const [showRealEstate, setShowRealEstate] = useState(true);
@@ -67,18 +58,18 @@ export default function Main() {
   })();
 
   // 최근 확인한 매물 리스트와 매칭되는 더미 데이터 필터링
-  const recentRealEstateData: estateProps[] =
+  const recentRealEstateData: AdditionalEstate[] =
     recentHouses !== 'none'
-      ? realEstateData
-          .filter((estate) => recentHouses.includes(estate.location))
+      ? addDetailEstateData
+          .filter((estate) => recentHouses.includes(estate.basicInfo.atclNm))
           .sort(
             (a, b) =>
-              recentHouses.indexOf(a.location) -
-              recentHouses.indexOf(b.location)
+              recentHouses.indexOf(a.basicInfo.atclNm) -
+              recentHouses.indexOf(b.basicInfo.atclNm)
           )
       : [];
 
-  const handleCardClick = (estate: estateProps) => {
+  const handleCardClick = (estate: AdditionalEstate) => {
     setSelectedEstate(estate); // 선택된 매물 정보 설정
   };
 
@@ -235,8 +226,8 @@ export default function Main() {
                         pagination={{ clickable: true }}
                         renderItem={(recentRealEstateData) => (
                           <RealEstateCard
+                            estate={recentRealEstateData}
                             isStarFilled={false}
-                            {...recentRealEstateData}
                             onClick={() => {
                               handleCardClick(recentRealEstateData);
                               setShowRealEstate(true);

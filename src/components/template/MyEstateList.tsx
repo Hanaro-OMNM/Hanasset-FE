@@ -1,27 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { realEstateData } from '../../assets/Dummy.tsx';
+import { addDetailEstateData } from '../../assets/Dummy.tsx';
 import MobileHeader from '../../components/atoms/MobileHeader.tsx';
 import RealEstateDetail from '../../pages/RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from '../../pages/RealEstateList/RealEstateCard.tsx';
-
-type estateProps = {
-  type: string;
-  location: string;
-  price: string;
-  size: string;
-  description: string;
-  dealType: string;
-  imageUrl: string;
-};
+import { AdditionalEstate } from '../../types/global';
 
 export default function RealEstateLayout() {
-  const [selectedEstate, setSelectedEstate] = useState<estateProps | null>(
+  const [selectedEstate, setSelectedEstate] = useState<AdditionalEstate | null>(
     null
   );
   const [showRealEstate, setShowRealEstate] = useState(true);
 
-  const handleCardClick = (estate: estateProps) => {
+  const handleCardClick = (estate: AdditionalEstate) => {
     setSelectedEstate(estate);
   };
 
@@ -35,11 +26,11 @@ export default function RealEstateLayout() {
           onBack={() => navigate('/my-page')}
         />
         <div className="flex-grow min-h-0 overflow-y-auto">
-          {realEstateData.map((item, index) => (
+          {addDetailEstateData.map((item, index) => (
             <div key={index} className="border-b flex">
               <RealEstateCard
+                estate={item}
                 isStarFilled={true}
-                {...item}
                 onClick={() => {
                   handleCardClick(item);
                   setShowRealEstate(true);

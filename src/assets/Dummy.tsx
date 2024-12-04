@@ -2,6 +2,7 @@ import real_estate_1 from '../assets/img/realEstate/real_estate_1.jpg';
 import real_estate_2 from '../assets/img/realEstate/real_estate_2.jpg';
 import real_estate_3 from '../assets/img/realEstate/real_estate_3.jpeg';
 import real_estate_4 from '../assets/img/realEstate/real_estate_4.jpg';
+import { AdditionalEstate } from '../types/global';
 
 export interface Guest {
   name: string;
@@ -3066,6 +3067,2007 @@ export const estateData = [
     cortarNo: '1120010200',
     lat: 37.559208,
     lng: 127.026042,
+  },
+];
+
+export const addDetailEstateData: AdditionalEstate[] = [
+  {
+    basicInfo: {
+      gu: '금천구',
+      atclNo: '2459504892',
+      atclNm: '관악우방',
+      rletTpCd: 'A01',
+      tradTpNm: '전세',
+      bildNm: '108동',
+      flrInfo: '2/11',
+      prc: 29000,
+      cpNm: '매경부동산',
+      cortarNo: '1154510300',
+      lat: 37.449243,
+      lng: 126.915164,
+    },
+    estateKeyInfo: {
+      key: {
+        complexNumber: 3360,
+        pyeongTypeNumber: 1,
+        buildingNumber: 364679,
+        hoNumber: 18,
+        redevelopmentAreaNumber: null,
+        pnu: null,
+      },
+      type: {
+        realEstateType: 'A01',
+        tradeType: 'B1',
+      },
+      address: {
+        legalDivisionNumber: '1154510300',
+        jibun: null,
+        li: null,
+      },
+      isRealEstateAssociationArticle: false,
+      isArticleImageExist: false,
+    },
+    imageInfo: {
+      state: {
+        data: {
+          isSuccess: true,
+          detailCode: '',
+          message: '',
+          result: [],
+        },
+        dataUpdateCount: 1,
+        dataUpdatedAt: 1733198370065,
+        error: null,
+        errorUpdateCount: 0,
+        errorUpdatedAt: 0,
+        fetchFailureCount: 0,
+        fetchFailureReason: null,
+        fetchMeta: null,
+        isInvalidated: false,
+        status: 'success',
+        fetchStatus: 'idle',
+      },
+      queryKey: [
+        {
+          url: '/article/galleryImages',
+          method: 'get',
+          params: {
+            articleId: '2459504892',
+          },
+        },
+      ],
+      queryHash:
+        '[{"method":"get","params":{"articleId":"2459504892"},"url":"/article/galleryImages"}]',
+    },
+    priceInfo: {
+      priceInfo: {
+        tradeType: 'B1',
+        warrantyAmount: 290000000,
+        rentAmount: 0,
+        loan: 0,
+        loanCode: null,
+        loanTypeCode: null,
+      },
+      detailInfo: {
+        facilityInfo: {
+          life: [],
+          security: [],
+          etc: [],
+          buildingConjunctionDateType: null,
+          buildingConjunctionDate: null,
+          approvalElapsedYear: null,
+          entranceType: '20',
+          heatingAndCoolingSystemType: null,
+          heatingEnergyType: null,
+          totalParkingCount: 794,
+          parkingCountPerHousehold: 1.18,
+          structure: null,
+          householdNumber: null,
+        },
+        articleDetailInfo: {
+          articleNumber: '2459504892',
+          articleName: '관악우방',
+          nonComplexBuildingName: null,
+          nonComplexBuildingSubName: null,
+          articleFeatureDescription: '바로입주   깔끔 합니다',
+          articleDescription: null,
+          isAddressExposed: true,
+          isJibunAddressExposed: null,
+          isDirectTrade: false,
+          directTradeOwnerCellPhoneNumber: null,
+          buildingType: null,
+          cpId: 'bizmk',
+          exposureStartDate: '2024-12-02',
+          buildingUse: '공동주택',
+          buildingPrincipalUse: null,
+        },
+        movingInInfo: {
+          movingInNegotiation: true,
+          movingInDate: null,
+          movingInMonth: null,
+          movingInType: 'MV001',
+          contractPeriod: null,
+        },
+        verificationInfo: {
+          verificationType: 'MOBL',
+          isAssociationArticle: false,
+          exposureStartDate: '2024-12-02',
+        },
+        spaceInfo: {
+          floorInfo: {
+            targetFloor: '2',
+            totalFloor: '11',
+            groundTotalFloor: '0',
+            undergroundTotalFloor: '0',
+            floorType: '10',
+            residenceType: '1',
+          },
+          roomCount: 3,
+          bathRoomCount: 1,
+          direction: 'EE',
+          duplex: false,
+          directionStandard: '거실 기준',
+        },
+        sizeInfo: {
+          supplySpace: 84.99,
+          exclusiveSpace: 59.91,
+          supplySpaceName: '84',
+          exclusiveSpaceName: '59',
+          floorAreaRatio: null,
+          buildingCoverageRatio: null,
+          pyeongArea: 25.7,
+        },
+      },
+      communalComplexInfo: {
+        complexNumber: 3360,
+        complexName: '관악우방',
+        pyeongTypeNumber: 1,
+        dongName: '108동',
+      },
+    },
+    etcInfo: {
+      typeCode: '02',
+      criteriaType: '03',
+      etcDetail: {
+        type: '02',
+        typeDirectInput: null,
+        categoryList: [11, 12, 16, 1, 99],
+        amount: 130000,
+      },
+    },
+    addressInfo: {
+      name: '관악우방',
+      type: 'A01',
+      address: {
+        legalDivisionNumber: '1154510300',
+        legalDivisionLevel: 'EUP',
+        legalDivision: '서울시 금천구 시흥동',
+        city: '서울시',
+        division: '금천구',
+        sector: '시흥동',
+        jibun: '1011',
+        roadName: '금하로 750',
+        zipCode: '08645',
+      },
+      coordinates: {
+        xcoordinate: 126.914149,
+        ycoordinate: 37.449071,
+      },
+      photos: [
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_234/apt_realimage_1488768951202ecdmq_JPEG/2cd736fc0c1d96bd14e5f07196c6a5d1.jpg',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX01',
+          category: '전경',
+          comment:
+            '아파트단지 전경입니다. 아파트 건물외관이 깔끔하게 잘 관리되고 있습니다. 햇살이 들어오는 위치이며 따뜻한 느낌을 주고 있습니다. ',
+          coordinates: {
+            xcoordinate: 126.913746,
+            ycoordinate: 37.449263,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_80/apt_realimage_1488768950708DfF6L_JPEG/4720b0922b2da9c5b51e644e0d547a79.jpg',
+          majorCategory: 'CDOOR',
+          subCategory: 'CDO01',
+          category: '정문',
+          comment:
+            '외부인 출입을 통제 하는 차단봉이 있습니다. 또한 관리해주시는 분이 있어 외부인 출입에 관하여 효과적으로 통제 하고 있습니다.',
+          coordinates: {
+            xcoordinate: 126.912941,
+            ycoordinate: 37.44994,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_70/apt_realimage_1488768951704qKBXX_JPEG/8ba1318ee30f11ffc0ac1b110bbf789c.jpg',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX02',
+          category: '건물 외관',
+          comment:
+            '아파트단지 건물외관입니다. 아파트단지가 대단지가 아니기 때문에 건물이 떨어져 있어 쾌적에 보입니다. 2002년 준공 되었음에도 불구하고 외관이 깔끔한것으로 보아 외관관리를 잘하는 것을 보여주고 있습니다.',
+          coordinates: {
+            xcoordinate: 126.915131,
+            ycoordinate: 37.449202,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_113/apt_realimage_1488768952203VPpAl_JPEG/55fcffa8eb95aedd7147129287bae94b.jpg',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX02',
+          category: '건물 외관',
+          comment:
+            '아파트단지 건물외관입니다. 아파트단지가 대단지가 아니기 때문에 건물이 떨어져 있어 쾌적에 보입니다. 2002년 준공 되었음에도 불구하고 외관이 깔끔한것으로 보아 외관관리를 잘하는 것을 보여주고 있습니다.',
+          coordinates: {
+            xcoordinate: 126.913837,
+            ycoordinate: 37.449146,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_280/apt_realimage_1488768952772VyhlC_JPEG/44727beb306445de8695a4736e469cf0.jpg',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX03',
+          category: '1층 공용현관',
+          comment:
+            '복도식 아파트 임에도 불구하고 출입구에 도어락이 설치되어있습니다. 외부인 출입제한이 되어 입주민들이 좀 더 안전한 생활을 할수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.913217,
+            ycoordinate: 37.449666,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_190/apt_realimage_1488768953266Tv4vN_JPEG/1c0f7d44c2c2a6f7a7a696563e1f6f37.jpg',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX03',
+          category: '1층 공용현관',
+          comment:
+            '복도식 아파트 임에도 불구하고 출입구에 도어락이 설치되어있습니다. 외부인 출입제한이 되어 입주민들이 좀 더 안전한 생활을 할수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.915193,
+            ycoordinate: 37.449333,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_233/apt_realimage_1488768953763Dbb58_JPEG/a154db87952093b317a9b19b698ab554.jpg',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX04',
+          category: '조경',
+          comment:
+            '아파트단지 지하주차장옆에 위치하고있는 조형물입니다. 아파트단지내에 조형물이 있어 한층 더 고급스러운 단지를 조성하고 있습니다.',
+          coordinates: {
+            xcoordinate: 126.912997,
+            ycoordinate: 37.449577,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_272/apt_realimage_1488768954292YLJsJ_JPEG/e7f8b7a7307b10d3636c72b41dd2235f.jpg',
+          majorCategory: 'PKLOT',
+          subCategory: 'PKL02',
+          category: '지하 주차장 입구',
+          comment:
+            '지하주차장 입구 입니다. 경보음이 울려 출차를 알려주고 있습니다. 주차장 입구에 차량이 확인이 되기때문에 편하게 들어갈수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.91302,
+            ycoordinate: 37.44962,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_91/apt_realimage_1488768954700t13Jb_JPEG/374bd5128908e7d52c4dd257333d4d49.jpg',
+          majorCategory: 'PKLOT',
+          subCategory: 'PKL03',
+          category: '지하 주차장',
+          comment:
+            '지하 주차장 모습입니다. 주차장이 타 주차장보다 넓어 초보운전자나 여성운전자, 주차에 대한 부담이 있는 분들도 답답하지 않게 주차가 가능한 공간입니다. 또한 밝은 주차장은 주차하기에 더욱 용이합니다. ',
+          coordinates: {
+            xcoordinate: 126.913184,
+            ycoordinate: 37.449508,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_33/apt_realimage_1488768955154XXktF_JPEG/0e3c3b1e6c7f663dedbddfd82f0a393e.jpg',
+          majorCategory: 'PKLOT',
+          subCategory: 'PKL03',
+          category: '지하 주차장',
+          comment:
+            '지하 주차장 모습입니다. 주차장이 타 주차장보다 넓어 초보운전자나 여성운전자, 주차에 대한 부담이 있는 분들도 답답하지 않게 주차가 가능한 공간입니다. 또한 밝은 주차장은 주차하기에 더욱 용이합니다. ',
+          coordinates: {
+            xcoordinate: 126.913195,
+            ycoordinate: 37.449625,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_194/apt_realimage_1488768955631pxdKG_JPEG/056b7fb10a3ab7fe6c06b059d8eeb24d.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC01',
+          category: '놀이터',
+          comment:
+            '단지 내의 넓은 놀이터 입니다. 아이들이 뛰어놀기 가능한 넓은 놀이터 이며, 아이들의 혹시모를 안전에 대비하여 우레탄 메트를 설치하였습니다. 밝은색 놀이 기구들이 아이들이 밝게 노는 모습을 연상 시키는것 같습니다.',
+          coordinates: {
+            xcoordinate: 126.913388,
+            ycoordinate: 37.4495,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_159/apt_realimage_1488768956198lgJpX_JPEG/8c2f120eaf83676a00e44b8c4b04cf3f.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC01',
+          category: '놀이터',
+          comment:
+            '단지 내의 넓은 놀이터 입니다. 아이들이 뛰어놀기 가능한 넓은 놀이터 이며, 아이들의 혹시모를 안전에 대비하여 우레탄 메트를 설치하였습니다. 밝은색 놀이 기구들이 아이들이 밝게 노는 모습을 연상 시키는것 같습니다.',
+          coordinates: {
+            xcoordinate: 126.91482,
+            ycoordinate: 37.449205,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_145/apt_realimage_1488768956744pJcTa_JPEG/c74d3699fd48da5348dab8daca6519c7.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC02',
+          category: '운동시설',
+          comment:
+            '줄넘기나, 공놀이 같은 운동을 할수 있는 운동공간입니다. 도로는 자동차 때문에 위험하지만,공간이 따로 만들어져 안전하게 운동 할 수 있습니다. ',
+          coordinates: {
+            xcoordinate: 126.913874,
+            ycoordinate: 37.449494,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_22/apt_realimage_1488768957375by7Gs_JPEG/748e628b406dbcbe4b7d6a8c8973e315.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC03',
+          category: '산책로, 보행로',
+          comment:
+            '단지내 관리가 잘되어서 그런지 산책로 보도블럭이 평평하여 걷는데 불편함이 없습니다. 주위에 나무들이 많아 상쾌하고 쾌적한 느낌을 주고 있습니다.',
+          coordinates: {
+            xcoordinate: 126.913777,
+            ycoordinate: 37.449646,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_253/apt_realimage_1488768957990mYrYb_JPEG/063b589e13594717f7f50bb40954177d.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC03',
+          category: '산책로, 보행로',
+          comment:
+            '단지내 관리가 잘되어서 그런지 산책로 보도블럭이 평평하여 걷는데 불편함이 없습니다. 주위에 나무들이 많아 상쾌하고 쾌적한 느낌을 주고 있습니다.',
+          coordinates: {
+            xcoordinate: 126.913549,
+            ycoordinate: 37.449176,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_214/apt_realimage_1488768958502h4sbP_JPEG/5452487458fa895f5b5e6616fc4bb1af.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC04',
+          category: '휴식시설',
+          comment:
+            '단지내 등나무가 둘린 정자가 있습니다. 햇살이 잘 들어오는 위치이기 때문에 단지내가 따뜻해 보이는 분위기를 제공 하고있습니다.',
+          coordinates: {
+            xcoordinate: 126.913066,
+            ycoordinate: 37.449512,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_15/apt_realimage_1488768959085tWTb0_JPEG/335c126c55e1096161612c20982809b0.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC04',
+          category: '휴식시설',
+          comment:
+            '단지내 등나무가 둘린 정자가 있습니다. 햇살이 잘 들어오는 위치이기 때문에 단지내가 따뜻해 보이는 분위기를 제공 하고있습니다.',
+          coordinates: {
+            xcoordinate: 126.913478,
+            ycoordinate: 37.4496,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_125/apt_realimage_1488768959570B7NqT_JPEG/65b02c8517a7c0978b1db9ed79074e80.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC04',
+          category: '휴식시설',
+          comment:
+            '단지내 등나무가 둘린 정자가 있습니다. 햇살이 잘 들어오는 위치이기 때문에 단지내가 따뜻해 보이는 분위기를 제공 하고있습니다.',
+          coordinates: {
+            xcoordinate: 126.913678,
+            ycoordinate: 37.449249,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_226/apt_realimage_14887689601056mDkq_JPEG/43c633171c78c1f1b7b4b79b00c192ff.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC07',
+          category: '편의점/마트',
+          comment:
+            '가까이에 상가가 형성되어 있습니다.24시 편의점과 마트가 있어 바로 이용이 편리하고,세탁소와 독서실이있어 생활이 편리해 보입니다.또한 아파트 단지 바로앞에 카페가 있어 따듯한 커피도 한잔 마시며 이야기 할 공간이 있습니다. ',
+          coordinates: {
+            xcoordinate: 126.913136,
+            ycoordinate: 37.449927,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_13/apt_realimage_1488768960646J2f2D_JPEG/43ed43ba4f74c72a894f5e0d7850e769.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC09',
+          category: '관리사무소',
+          comment:
+            '관리사무소와 경로당을 같이 만들어 놓았습니다. 어르신들의 혹시모를 상황에 안전해 보입니다.햇살이 내리쬐는 벽돌색의 건물이 따뜻한 온정이 느껴집니다.',
+          coordinates: {
+            xcoordinate: 126.914078,
+            ycoordinate: 37.449513,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_215/apt_realimage_1488768961172gOYNV_JPEG/343bbeacf5f5b816944d014f8b401d5c.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC10',
+          category: '기타',
+          comment:
+            '지하 주차장 한켠에 주차하기 좁은 공간을 이용하여 자전거를 보관하고 있습니다.실내보관이 가능하기 때문에 비나 눈이 맞지않아 산성에 고장을 방지 할 수 있습니다. ',
+          coordinates: {
+            xcoordinate: 126.913263,
+            ycoordinate: 37.449608,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_280/apt_realimage_1488768961739fj9Ig_JPEG/c76345b02e64ee2b9b5582efc87439b7.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC10',
+          category: '기타',
+          comment:
+            '지하 주차장 한켠에 주차하기 좁은 공간을 이용하여 자전거를 보관하고 있습니다.실내보관이 가능하기 때문에 비나 눈이 맞지않아 산성에 고장을 방지 할 수 있습니다. ',
+          coordinates: {
+            xcoordinate: 126.914017,
+            ycoordinate: 37.449296,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_37/apt_realimage_14887689622197DaC4_JPEG/b8a9315b3b3242d915d8852705a1b6da.jpg',
+          majorCategory: 'EDUFA',
+          subCategory: 'EDU01',
+          category: '어린이집',
+          comment:
+            '아파트 단지내에 우방어린이집이 있습니다. 아이가 있는 입주자 분들께서는 아침시간과 저녁시간에 좀 더 수월한 등원을 할 수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.913728,
+            ycoordinate: 37.449723,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_54/apt_realimage_14887689627826LxwS_JPEG/b327b13f14e68175820ea019c46dfd0e.jpg',
+          majorCategory: 'LIFFA',
+          subCategory: 'LIF01',
+          category: '쓰레기장',
+          comment:
+            '쓰레기장이 깔끔하게 유지되고 있습니다. 순찰을 해주시며 관리를 해주시는 덕에 좀더 쾌적한 쓰레기장을 이용할 수 있습니다. ',
+          coordinates: {
+            xcoordinate: 126.914098,
+            ycoordinate: 37.449477,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_59/apt_realimage_1488768963380jGROs_JPEG/d557382adb020d8deed89f54ef23db7b.jpg',
+          majorCategory: 'LIFFA',
+          subCategory: 'LIF03',
+          category: '경비실',
+          comment:
+            '아파트단지 곳곳에 경비실이있습니다. 관리인이 많으며 단지내가 깨끗하고 깔끔하게 유지되는 것으로보아 아파트 관리가 잘되고있습니다.',
+          coordinates: {
+            xcoordinate: 126.913842,
+            ycoordinate: 37.449295,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_124/apt_realimage_1488768963859YLTqQ_JPEG/38001c85cda3701b1c27f3eb6600b920.jpg',
+          majorCategory: 'OTCNV',
+          subCategory: 'OTC01',
+          category: '도보 5분 이내 편의시설',
+          comment:
+            '아파트단지정문입구 옆에 은행이 자리잡고있으며 5분거리로 종합복지타운이 마련되어있고 옆으로는 도서관이 마련되어있어 입주민들이 조금더 편리하게 많은것을 이용할수있습니다.',
+          coordinates: {
+            xcoordinate: 126.914879,
+            ycoordinate: 37.449701,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_27/apt_realimage_1488768964331fGiop_JPEG/930cd1cd8aca2506e2fdd245771b030b.jpg',
+          majorCategory: 'OTCNV',
+          subCategory: 'OTC01',
+          category: '도보 5분 이내 편의시설',
+          comment:
+            '아파트단지정문입구 옆에 은행이 자리잡고있으며 5분거리로 종합복지타운이 마련되어있고 옆으로는 도서관이 마련되어있어 입주민들이 조금더 편리하게 많은것을 이용할수있습니다.',
+          coordinates: {
+            xcoordinate: 126.914569,
+            ycoordinate: 37.449578,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_149/apt_realimage_14887689651124zflP_JPEG/082fba45426abc4f4084f6dcd0281481.jpg',
+          majorCategory: 'OTCNV',
+          subCategory: 'OTC01',
+          category: '도보 5분 이내 편의시설',
+          comment:
+            '아파트단지정문입구 옆에 은행이 자리잡고있으며 5분거리로 종합복지타운이 마련되어있고 옆으로는 도서관이 마련되어있어 입주민들이 조금더 편리하게 많은것을 이용할수있습니다.',
+          coordinates: {
+            xcoordinate: 126.912797,
+            ycoordinate: 37.44993,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_117/land_system_1303379737784BoH1p_JPEG/detail_3360_7.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_179/land_system_13033797364597c5Qn_JPEG/detail_3360_3.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_24/land_system_1303379737570TmBDA_JPEG/detail_3360_6.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_230/land_system_1303379736283VxFJj_JPEG/detail_3360_2.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_151/land_system_1303379737982TtuDa_JPEG/detail_3360_8.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_170/land_system_1303379738310jCemq_JPEG/detail_3360_9.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_106/land_system_13033797358261xd7m_JPEG/detail_3360_0.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_39/land_system_1303379736111N5FKH_JPEG/detail_3360_1.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_43/land_system_1303379736651EkEoF_JPEG/detail_3360_4.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_198/land_system_1303379737358IolHl_JPEG/detail_3360_5.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+      ],
+      totalHouseholdNumber: 671,
+      leaseHouseholdNumber: 0,
+      dongCount: 8,
+      hasBuildingHoInfo: true,
+      constructionCompany: '(주)우방',
+      buildingUse: '공동주택',
+      isServicedResidence: false,
+      buildingRatioInfo: {
+        floorAreaRatio: 296,
+        buildingCoverageRatio: 22,
+      },
+      useApprovalDate: '20021230',
+      approvalElapsedYear: 22,
+      parkingInfo: {
+        totalParkingCount: 794,
+        parkingCountPerHousehold: 1.18,
+      },
+      heatingAndCoolingInfo: {
+        heatingAndCoolingSystemType: 'HT001',
+        heatingEnergyType: 'HF001',
+      },
+      managementOfficeContact: '02-803-2020',
+      monopolyRestrictionType: 'N',
+      isRestrictedTransferOfReconstructionAssociationMembership: false,
+      isComplexTourExist: false,
+    },
+    maintenanceInfo: {
+      yearMonth: '2024-09',
+      yearMonthFee: 167025,
+      monthAverageFee: 159196,
+      summerAverageFee: 166806,
+      winterAverageFee: 159559,
+    },
+    floorPlanInfo: {
+      number: 1,
+      name: '84',
+      nameType: '',
+      floorPlanUrls: {
+        BASE: {
+          0: [
+            'https://landthumb-phinf.pstatic.net/20201206_137/land_naver_1607205633963UUenU_JPEG/33601202010150232265405651206070033821000000.jpg',
+            'https://landthumb-phinf.pstatic.net/20201206_49/land_naver_1607205633648x9Vrw_JPEG/33601202010150232262822221206070033511000000.jpg',
+            'https://landthumb-phinf.pstatic.net/20110429_52/hscp_img_1304059081868GL6Bj_JPEG/GW70262_1304059080688.jpg',
+          ],
+        },
+      },
+      supplyArea: 84.99,
+      contractArea: 104.11,
+      exclusiveArea: 59.91,
+      roomCount: 3,
+      bathRoomCount: 1,
+      unitsOfSameArea: 304,
+      entranceType: '20',
+      direction: 'SS',
+      isDuplex: false,
+      isMonopolyRestricted: false,
+      monopolyPossibleDate: null,
+      preSalePrice: null,
+    },
+    utilityInfo: {
+      railList: [
+        {
+          stationId: 12531285,
+          stationName: '시흥사거리역(2027년예정)',
+          railId: 120,
+          railName: '신안산선',
+          openDate: '2027',
+          coordinates: {
+            xcoordinate: 126.900857,
+            ycoordinate: 37.454,
+          },
+          distance: 1295,
+          walkingTime: 19,
+        },
+      ],
+      jiguList: [],
+    },
+    brokerInfo: {
+      brokerageName: '태영 공인중개사사무소',
+      brokerName: '김행숙',
+      address: '서울특별시 금천구 금하로 749(시흥동),1층 102호',
+      businessRegistrationNumber: '92430000-1153',
+      profileImageUrl:
+        'https://landthumb-phinf.pstatic.net/20161031_42/rltr_profile_1477898372388PsacD_JPEG/8949236_cropImage.jpg',
+      brokerId: '8949236',
+      ownerConfirmationSaleCount: 239,
+      phone: {
+        brokerage: '02-894-9234',
+        mobile: '010-7203-1100',
+      },
+    },
+  },
+  {
+    basicInfo: {
+      gu: '금천구',
+      atclNo: '2460022211',
+      atclNm: '관악우방',
+      rletTpCd: 'A01',
+      tradTpNm: '전세',
+      bildNm: '107동',
+      flrInfo: '1/25',
+      prc: 41000,
+      cpNm: '매경부동산',
+      cortarNo: '1154510300',
+      lat: 37.449085,
+      lng: 126.914691,
+    },
+    estateKeyInfo: {
+      key: {
+        complexNumber: 3360,
+        pyeongTypeNumber: 2,
+        buildingNumber: 820799,
+        hoNumber: 7,
+        redevelopmentAreaNumber: null,
+        pnu: null,
+      },
+      type: {
+        realEstateType: 'A01',
+        tradeType: 'B1',
+      },
+      address: {
+        legalDivisionNumber: '1154510300',
+        jibun: null,
+        li: null,
+      },
+      isRealEstateAssociationArticle: false,
+      isArticleImageExist: false,
+    },
+    imageInfo: {
+      state: {
+        data: {
+          isSuccess: true,
+          detailCode: '',
+          message: '',
+          result: [],
+        },
+        dataUpdateCount: 1,
+        dataUpdatedAt: 1733204258918,
+        error: null,
+        errorUpdateCount: 0,
+        errorUpdatedAt: 0,
+        fetchFailureCount: 0,
+        fetchFailureReason: null,
+        fetchMeta: null,
+        isInvalidated: false,
+        status: 'success',
+        fetchStatus: 'idle',
+      },
+      queryKey: [
+        {
+          url: '/article/galleryImages',
+          method: 'get',
+          params: {
+            articleId: '2460022211',
+          },
+        },
+      ],
+      queryHash:
+        '[{"method":"get","params":{"articleId":"2460022211"},"url":"/article/galleryImages"}]',
+    },
+    priceInfo: {
+      priceInfo: {
+        tradeType: 'B1',
+        warrantyAmount: 410000000,
+        rentAmount: 0,
+        loan: 0,
+        loanCode: null,
+        loanTypeCode: null,
+      },
+      detailInfo: {
+        facilityInfo: {
+          life: [],
+          security: [],
+          etc: [],
+          buildingConjunctionDateType: null,
+          buildingConjunctionDate: null,
+          approvalElapsedYear: null,
+          entranceType: null,
+          heatingAndCoolingSystemType: null,
+          heatingEnergyType: null,
+          totalParkingCount: 794,
+          parkingCountPerHousehold: 1.18,
+          structure: null,
+          householdNumber: null,
+        },
+        articleDetailInfo: {
+          articleNumber: '2460022211',
+          articleName: '관악우방',
+          nonComplexBuildingName: null,
+          nonComplexBuildingSubName: null,
+          articleFeatureDescription:
+            '주인세대로 씽크대,화장실 등 수리되어 깔끔함.  빠른입주가능',
+          articleDescription: null,
+          isAddressExposed: true,
+          isJibunAddressExposed: null,
+          isDirectTrade: false,
+          directTradeOwnerCellPhoneNumber: null,
+          buildingType: null,
+          cpId: 'bizmk',
+          exposureStartDate: '2024-12-03',
+          buildingUse: '공동주택',
+          buildingPrincipalUse: null,
+        },
+        movingInInfo: {
+          movingInNegotiation: true,
+          movingInDate: null,
+          movingInMonth: null,
+          movingInType: 'MV001',
+          contractPeriod: null,
+        },
+        verificationInfo: {
+          verificationType: 'OWNER',
+          isAssociationArticle: false,
+          exposureStartDate: '2024-12-03',
+        },
+        spaceInfo: {
+          floorInfo: {
+            targetFloor: '1',
+            totalFloor: '25',
+            groundTotalFloor: '0',
+            undergroundTotalFloor: '0',
+            floorType: '10',
+            residenceType: '1',
+          },
+          roomCount: 3,
+          bathRoomCount: 2,
+          direction: 'SS',
+          duplex: false,
+          directionStandard: '거실 기준',
+        },
+        sizeInfo: {
+          supplySpace: 106.21,
+          exclusiveSpace: 84.84,
+          supplySpaceName: '106',
+          exclusiveSpaceName: '84',
+          floorAreaRatio: null,
+          buildingCoverageRatio: null,
+          pyeongArea: 32.12,
+        },
+      },
+      communalComplexInfo: {
+        complexNumber: 3360,
+        complexName: '관악우방',
+        pyeongTypeNumber: 2,
+        dongName: '107동',
+      },
+    },
+    etcInfo: {
+      typeCode: '02',
+      criteriaType: '02',
+      etcDetail: {
+        type: '02',
+        typeDirectInput: null,
+        categoryList: ['11', '12', '16', '01'],
+        amount: 180000,
+      },
+    },
+    addressInfo: {
+      name: '관악우방',
+      type: 'A01',
+      address: {
+        legalDivisionNumber: '1154510300',
+        legalDivisionLevel: 'EUP',
+        legalDivision: '서울시 금천구 시흥동',
+        city: '서울시',
+        division: '금천구',
+        sector: '시흥동',
+        jibun: '1011',
+        roadName: '금하로 750',
+        zipCode: '08645',
+      },
+      coordinates: {
+        ycoordinate: 37.449071,
+        xcoordinate: 126.914149,
+      },
+      photos: [
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_234/apt_realimage_1488768951202ecdmq_JPEG/2cd736fc0c1d96bd14e5f07196c6a5d1.jpg',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX01',
+          category: '전경',
+          comment:
+            '아파트단지 전경입니다. 아파트 건물외관이 깔끔하게 잘 관리되고 있습니다. 햇살이 들어오는 위치이며 따뜻한 느낌을 주고 있습니다. ',
+          coordinates: {
+            ycoordinate: 37.449263,
+            xcoordinate: 126.913746,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_80/apt_realimage_1488768950708DfF6L_JPEG/4720b0922b2da9c5b51e644e0d547a79.jpg',
+          majorCategory: 'CDOOR',
+          subCategory: 'CDO01',
+          category: '정문',
+          comment:
+            '외부인 출입을 통제 하는 차단봉이 있습니다. 또한 관리해주시는 분이 있어 외부인 출입에 관하여 효과적으로 통제 하고 있습니다.',
+          coordinates: {
+            ycoordinate: 37.44994,
+            xcoordinate: 126.912941,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_70/apt_realimage_1488768951704qKBXX_JPEG/8ba1318ee30f11ffc0ac1b110bbf789c.jpg',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX02',
+          category: '건물 외관',
+          comment:
+            '아파트단지 건물외관입니다. 아파트단지가 대단지가 아니기 때문에 건물이 떨어져 있어 쾌적에 보입니다. 2002년 준공 되었음에도 불구하고 외관이 깔끔한것으로 보아 외관관리를 잘하는 것을 보여주고 있습니다.',
+          coordinates: {
+            ycoordinate: 37.449202,
+            xcoordinate: 126.915131,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_113/apt_realimage_1488768952203VPpAl_JPEG/55fcffa8eb95aedd7147129287bae94b.jpg',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX02',
+          category: '건물 외관',
+          comment:
+            '아파트단지 건물외관입니다. 아파트단지가 대단지가 아니기 때문에 건물이 떨어져 있어 쾌적에 보입니다. 2002년 준공 되었음에도 불구하고 외관이 깔끔한것으로 보아 외관관리를 잘하는 것을 보여주고 있습니다.',
+          coordinates: {
+            ycoordinate: 37.449146,
+            xcoordinate: 126.913837,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_280/apt_realimage_1488768952772VyhlC_JPEG/44727beb306445de8695a4736e469cf0.jpg',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX03',
+          category: '1층 공용현관',
+          comment:
+            '복도식 아파트 임에도 불구하고 출입구에 도어락이 설치되어있습니다. 외부인 출입제한이 되어 입주민들이 좀 더 안전한 생활을 할수 있습니다.',
+          coordinates: {
+            ycoordinate: 37.449666,
+            xcoordinate: 126.913217,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_190/apt_realimage_1488768953266Tv4vN_JPEG/1c0f7d44c2c2a6f7a7a696563e1f6f37.jpg',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX03',
+          category: '1층 공용현관',
+          comment:
+            '복도식 아파트 임에도 불구하고 출입구에 도어락이 설치되어있습니다. 외부인 출입제한이 되어 입주민들이 좀 더 안전한 생활을 할수 있습니다.',
+          coordinates: {
+            ycoordinate: 37.449333,
+            xcoordinate: 126.915193,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_233/apt_realimage_1488768953763Dbb58_JPEG/a154db87952093b317a9b19b698ab554.jpg',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX04',
+          category: '조경',
+          comment:
+            '아파트단지 지하주차장옆에 위치하고있는 조형물입니다. 아파트단지내에 조형물이 있어 한층 더 고급스러운 단지를 조성하고 있습니다.',
+          coordinates: {
+            ycoordinate: 37.449577,
+            xcoordinate: 126.912997,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_272/apt_realimage_1488768954292YLJsJ_JPEG/e7f8b7a7307b10d3636c72b41dd2235f.jpg',
+          majorCategory: 'PKLOT',
+          subCategory: 'PKL02',
+          category: '지하 주차장 입구',
+          comment:
+            '지하주차장 입구 입니다. 경보음이 울려 출차를 알려주고 있습니다. 주차장 입구에 차량이 확인이 되기때문에 편하게 들어갈수 있습니다.',
+          coordinates: {
+            ycoordinate: 37.44962,
+            xcoordinate: 126.91302,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_91/apt_realimage_1488768954700t13Jb_JPEG/374bd5128908e7d52c4dd257333d4d49.jpg',
+          majorCategory: 'PKLOT',
+          subCategory: 'PKL03',
+          category: '지하 주차장',
+          comment:
+            '지하 주차장 모습입니다. 주차장이 타 주차장보다 넓어 초보운전자나 여성운전자, 주차에 대한 부담이 있는 분들도 답답하지 않게 주차가 가능한 공간입니다. 또한 밝은 주차장은 주차하기에 더욱 용이합니다. ',
+          coordinates: {
+            ycoordinate: 37.449508,
+            xcoordinate: 126.913184,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_33/apt_realimage_1488768955154XXktF_JPEG/0e3c3b1e6c7f663dedbddfd82f0a393e.jpg',
+          majorCategory: 'PKLOT',
+          subCategory: 'PKL03',
+          category: '지하 주차장',
+          comment:
+            '지하 주차장 모습입니다. 주차장이 타 주차장보다 넓어 초보운전자나 여성운전자, 주차에 대한 부담이 있는 분들도 답답하지 않게 주차가 가능한 공간입니다. 또한 밝은 주차장은 주차하기에 더욱 용이합니다. ',
+          coordinates: {
+            ycoordinate: 37.449625,
+            xcoordinate: 126.913195,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_194/apt_realimage_1488768955631pxdKG_JPEG/056b7fb10a3ab7fe6c06b059d8eeb24d.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC01',
+          category: '놀이터',
+          comment:
+            '단지 내의 넓은 놀이터 입니다. 아이들이 뛰어놀기 가능한 넓은 놀이터 이며, 아이들의 혹시모를 안전에 대비하여 우레탄 메트를 설치하였습니다. 밝은색 놀이 기구들이 아이들이 밝게 노는 모습을 연상 시키는것 같습니다.',
+          coordinates: {
+            ycoordinate: 37.4495,
+            xcoordinate: 126.913388,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_159/apt_realimage_1488768956198lgJpX_JPEG/8c2f120eaf83676a00e44b8c4b04cf3f.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC01',
+          category: '놀이터',
+          comment:
+            '단지 내의 넓은 놀이터 입니다. 아이들이 뛰어놀기 가능한 넓은 놀이터 이며, 아이들의 혹시모를 안전에 대비하여 우레탄 메트를 설치하였습니다. 밝은색 놀이 기구들이 아이들이 밝게 노는 모습을 연상 시키는것 같습니다.',
+          coordinates: {
+            ycoordinate: 37.449205,
+            xcoordinate: 126.91482,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_145/apt_realimage_1488768956744pJcTa_JPEG/c74d3699fd48da5348dab8daca6519c7.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC02',
+          category: '운동시설',
+          comment:
+            '줄넘기나, 공놀이 같은 운동을 할수 있는 운동공간입니다. 도로는 자동차 때문에 위험하지만,공간이 따로 만들어져 안전하게 운동 할 수 있습니다. ',
+          coordinates: {
+            ycoordinate: 37.449494,
+            xcoordinate: 126.913874,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_22/apt_realimage_1488768957375by7Gs_JPEG/748e628b406dbcbe4b7d6a8c8973e315.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC03',
+          category: '산책로, 보행로',
+          comment:
+            '단지내 관리가 잘되어서 그런지 산책로 보도블럭이 평평하여 걷는데 불편함이 없습니다. 주위에 나무들이 많아 상쾌하고 쾌적한 느낌을 주고 있습니다.',
+          coordinates: {
+            ycoordinate: 37.449646,
+            xcoordinate: 126.913777,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_253/apt_realimage_1488768957990mYrYb_JPEG/063b589e13594717f7f50bb40954177d.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC03',
+          category: '산책로, 보행로',
+          comment:
+            '단지내 관리가 잘되어서 그런지 산책로 보도블럭이 평평하여 걷는데 불편함이 없습니다. 주위에 나무들이 많아 상쾌하고 쾌적한 느낌을 주고 있습니다.',
+          coordinates: {
+            ycoordinate: 37.449176,
+            xcoordinate: 126.913549,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_214/apt_realimage_1488768958502h4sbP_JPEG/5452487458fa895f5b5e6616fc4bb1af.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC04',
+          category: '휴식시설',
+          comment:
+            '단지내 등나무가 둘린 정자가 있습니다. 햇살이 잘 들어오는 위치이기 때문에 단지내가 따뜻해 보이는 분위기를 제공 하고있습니다.',
+          coordinates: {
+            ycoordinate: 37.449512,
+            xcoordinate: 126.913066,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_15/apt_realimage_1488768959085tWTb0_JPEG/335c126c55e1096161612c20982809b0.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC04',
+          category: '휴식시설',
+          comment:
+            '단지내 등나무가 둘린 정자가 있습니다. 햇살이 잘 들어오는 위치이기 때문에 단지내가 따뜻해 보이는 분위기를 제공 하고있습니다.',
+          coordinates: {
+            ycoordinate: 37.4496,
+            xcoordinate: 126.913478,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_125/apt_realimage_1488768959570B7NqT_JPEG/65b02c8517a7c0978b1db9ed79074e80.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC04',
+          category: '휴식시설',
+          comment:
+            '단지내 등나무가 둘린 정자가 있습니다. 햇살이 잘 들어오는 위치이기 때문에 단지내가 따뜻해 보이는 분위기를 제공 하고있습니다.',
+          coordinates: {
+            ycoordinate: 37.449249,
+            xcoordinate: 126.913678,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_226/apt_realimage_14887689601056mDkq_JPEG/43c633171c78c1f1b7b4b79b00c192ff.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC07',
+          category: '편의점/마트',
+          comment:
+            '가까이에 상가가 형성되어 있습니다.24시 편의점과 마트가 있어 바로 이용이 편리하고,세탁소와 독서실이있어 생활이 편리해 보입니다.또한 아파트 단지 바로앞에 카페가 있어 따듯한 커피도 한잔 마시며 이야기 할 공간이 있습니다. ',
+          coordinates: {
+            ycoordinate: 37.449927,
+            xcoordinate: 126.913136,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_13/apt_realimage_1488768960646J2f2D_JPEG/43ed43ba4f74c72a894f5e0d7850e769.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC09',
+          category: '관리사무소',
+          comment:
+            '관리사무소와 경로당을 같이 만들어 놓았습니다. 어르신들의 혹시모를 상황에 안전해 보입니다.햇살이 내리쬐는 벽돌색의 건물이 따뜻한 온정이 느껴집니다.',
+          coordinates: {
+            ycoordinate: 37.449513,
+            xcoordinate: 126.914078,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_215/apt_realimage_1488768961172gOYNV_JPEG/343bbeacf5f5b816944d014f8b401d5c.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC10',
+          category: '기타',
+          comment:
+            '지하 주차장 한켠에 주차하기 좁은 공간을 이용하여 자전거를 보관하고 있습니다.실내보관이 가능하기 때문에 비나 눈이 맞지않아 산성에 고장을 방지 할 수 있습니다. ',
+          coordinates: {
+            ycoordinate: 37.449608,
+            xcoordinate: 126.913263,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_280/apt_realimage_1488768961739fj9Ig_JPEG/c76345b02e64ee2b9b5582efc87439b7.jpg',
+          majorCategory: 'INCNV',
+          subCategory: 'INC10',
+          category: '기타',
+          comment:
+            '지하 주차장 한켠에 주차하기 좁은 공간을 이용하여 자전거를 보관하고 있습니다.실내보관이 가능하기 때문에 비나 눈이 맞지않아 산성에 고장을 방지 할 수 있습니다. ',
+          coordinates: {
+            ycoordinate: 37.449296,
+            xcoordinate: 126.914017,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_37/apt_realimage_14887689622197DaC4_JPEG/b8a9315b3b3242d915d8852705a1b6da.jpg',
+          majorCategory: 'EDUFA',
+          subCategory: 'EDU01',
+          category: '어린이집',
+          comment:
+            '아파트 단지내에 우방어린이집이 있습니다. 아이가 있는 입주자 분들께서는 아침시간과 저녁시간에 좀 더 수월한 등원을 할 수 있습니다.',
+          coordinates: {
+            ycoordinate: 37.449723,
+            xcoordinate: 126.913728,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_54/apt_realimage_14887689627826LxwS_JPEG/b327b13f14e68175820ea019c46dfd0e.jpg',
+          majorCategory: 'LIFFA',
+          subCategory: 'LIF01',
+          category: '쓰레기장',
+          comment:
+            '쓰레기장이 깔끔하게 유지되고 있습니다. 순찰을 해주시며 관리를 해주시는 덕에 좀더 쾌적한 쓰레기장을 이용할 수 있습니다. ',
+          coordinates: {
+            ycoordinate: 37.449477,
+            xcoordinate: 126.914098,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_59/apt_realimage_1488768963380jGROs_JPEG/d557382adb020d8deed89f54ef23db7b.jpg',
+          majorCategory: 'LIFFA',
+          subCategory: 'LIF03',
+          category: '경비실',
+          comment:
+            '아파트단지 곳곳에 경비실이있습니다. 관리인이 많으며 단지내가 깨끗하고 깔끔하게 유지되는 것으로보아 아파트 관리가 잘되고있습니다.',
+          coordinates: {
+            ycoordinate: 37.449295,
+            xcoordinate: 126.913842,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_124/apt_realimage_1488768963859YLTqQ_JPEG/38001c85cda3701b1c27f3eb6600b920.jpg',
+          majorCategory: 'OTCNV',
+          subCategory: 'OTC01',
+          category: '도보 5분 이내 편의시설',
+          comment:
+            '아파트단지정문입구 옆에 은행이 자리잡고있으며 5분거리로 종합복지타운이 마련되어있고 옆으로는 도서관이 마련되어있어 입주민들이 조금더 편리하게 많은것을 이용할수있습니다.',
+          coordinates: {
+            ycoordinate: 37.449701,
+            xcoordinate: 126.914879,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_27/apt_realimage_1488768964331fGiop_JPEG/930cd1cd8aca2506e2fdd245771b030b.jpg',
+          majorCategory: 'OTCNV',
+          subCategory: 'OTC01',
+          category: '도보 5분 이내 편의시설',
+          comment:
+            '아파트단지정문입구 옆에 은행이 자리잡고있으며 5분거리로 종합복지타운이 마련되어있고 옆으로는 도서관이 마련되어있어 입주민들이 조금더 편리하게 많은것을 이용할수있습니다.',
+          coordinates: {
+            ycoordinate: 37.449578,
+            xcoordinate: 126.914569,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20170306_149/apt_realimage_14887689651124zflP_JPEG/082fba45426abc4f4084f6dcd0281481.jpg',
+          majorCategory: 'OTCNV',
+          subCategory: 'OTC01',
+          category: '도보 5분 이내 편의시설',
+          comment:
+            '아파트단지정문입구 옆에 은행이 자리잡고있으며 5분거리로 종합복지타운이 마련되어있고 옆으로는 도서관이 마련되어있어 입주민들이 조금더 편리하게 많은것을 이용할수있습니다.',
+          coordinates: {
+            ycoordinate: 37.44993,
+            xcoordinate: 126.912797,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_117/land_system_1303379737784BoH1p_JPEG/detail_3360_7.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_179/land_system_13033797364597c5Qn_JPEG/detail_3360_3.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_24/land_system_1303379737570TmBDA_JPEG/detail_3360_6.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_230/land_system_1303379736283VxFJj_JPEG/detail_3360_2.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_151/land_system_1303379737982TtuDa_JPEG/detail_3360_8.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_170/land_system_1303379738310jCemq_JPEG/detail_3360_9.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_106/land_system_13033797358261xd7m_JPEG/detail_3360_0.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_39/land_system_1303379736111N5FKH_JPEG/detail_3360_1.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_43/land_system_1303379736651EkEoF_JPEG/detail_3360_4.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20110421_198/land_system_1303379737358IolHl_JPEG/detail_3360_5.jpg',
+          majorCategory: null,
+          subCategory: null,
+          category: null,
+          comment: null,
+          coordinates: null,
+        },
+      ],
+      totalHouseholdNumber: 671,
+      leaseHouseholdNumber: 0,
+      dongCount: 8,
+      hasBuildingHoInfo: true,
+      constructionCompany: '(주)우방',
+      buildingUse: '공동주택',
+      isServicedResidence: false,
+      buildingRatioInfo: {
+        floorAreaRatio: 296,
+        buildingCoverageRatio: 22,
+      },
+      useApprovalDate: '20021230',
+      approvalElapsedYear: 22,
+      parkingInfo: {
+        totalParkingCount: 794,
+        parkingCountPerHousehold: 1.18,
+      },
+      heatingAndCoolingInfo: {
+        heatingAndCoolingSystemType: 'HT001',
+        heatingEnergyType: 'HF001',
+      },
+      managementOfficeContact: '02-803-2020',
+      monopolyRestrictionType: 'N',
+      isRestrictedTransferOfReconstructionAssociationMembership: false,
+      isComplexTourExist: false,
+    },
+    maintenanceInfo: {
+      yearMonth: '2024-09',
+      yearMonthFee: 236528,
+      monthAverageFee: 225442,
+      summerAverageFee: 236219,
+      winterAverageFee: 225955,
+    },
+    floorPlanInfo: {
+      number: 2,
+      name: '106',
+      nameType: '',
+      floorPlanUrls: {
+        BASE: {
+          '0': [
+            'https://landthumb-phinf.pstatic.net/20201206_89/land_naver_1607205634602TjfSf_JPEG/33602202010150232269871971206070034462000000.jpg',
+            'https://landthumb-phinf.pstatic.net/20201206_239/land_naver_1607205634289w0j2P_JPEG/33602202010150232267546011206070034142000000.jpg',
+            'https://landthumb-phinf.pstatic.net/20110429_268/hscp_img_1304059089109VDUmj_JPEG/GW70262_1304059087823.jpg',
+          ],
+        },
+      },
+      supplyArea: 106.21,
+      contractArea: 133.29,
+      exclusiveArea: 84.84,
+      roomCount: 3,
+      bathRoomCount: 2,
+      unitsOfSameArea: 207,
+      entranceType: '10',
+      direction: 'SS',
+      isDuplex: false,
+      isMonopolyRestricted: false,
+      monopolyPossibleDate: null,
+      preSalePrice: null,
+    },
+    utilityInfo: {
+      railList: [
+        {
+          stationId: 12531285,
+          stationName: '시흥사거리역(2027년예정)',
+          railId: 120,
+          railName: '신안산선',
+          openDate: '2027',
+          coordinates: {
+            xcoordinate: 126.900857,
+            ycoordinate: 37.454,
+          },
+          distance: 1295,
+          walkingTime: 19,
+        },
+      ],
+      jiguList: [],
+    },
+    brokerInfo: {
+      brokerageName: '한샘공인중개사사무소',
+      brokerName: '이선화',
+      address:
+        '서울특별시 금천구 금하로 816(시흥동, 벽산5단지아파트),상가1동 B09호',
+      businessRegistrationNumber: '11545-2018-00063',
+      profileImageUrl:
+        'https://landthumb-phinf.pstatic.net/20180719_230/rltr_profile_153196677220698uIx_JPEG/sun006751_cropImage.jpg',
+      brokerId: 'sun006751',
+      ownerConfirmationSaleCount: 163,
+      phone: {
+        brokerage: '02-894-9033',
+        mobile: '010-3161-8034',
+      },
+    },
+  },
+  {
+    basicInfo: {
+      gu: '금천구',
+      atclNo: '2460009398',
+      atclNm: '금천롯데캐슬골드파크3차(주상복합)',
+      rletTpCd: 'A01',
+      tradTpNm: '전세',
+      bildNm: '302동',
+      flrInfo: '4/46',
+      prc: 65000,
+      cpNm: '매경부동산',
+      cortarNo: '1154510200',
+      lat: 37.459867,
+      lng: 126.896613,
+    },
+    estateKeyInfo: {
+      key: {
+        complexNumber: 109956,
+        pyeongTypeNumber: 5,
+        buildingNumber: 2,
+        hoNumber: 2,
+        redevelopmentAreaNumber: null,
+        pnu: null,
+      },
+      type: {
+        realEstateType: 'A01',
+        tradeType: 'B1',
+      },
+      address: {
+        legalDivisionNumber: '1154510200',
+        jibun: null,
+        li: null,
+      },
+      isRealEstateAssociationArticle: false,
+      isArticleImageExist: false,
+    },
+    imageInfo: {
+      state: {
+        data: {
+          isSuccess: true,
+          detailCode: '',
+          message: '',
+          result: [],
+        },
+        dataUpdateCount: 1,
+        dataUpdatedAt: 1733204259279,
+        error: null,
+        errorUpdateCount: 0,
+        errorUpdatedAt: 0,
+        fetchFailureCount: 0,
+        fetchFailureReason: null,
+        fetchMeta: null,
+        isInvalidated: false,
+        status: 'success',
+        fetchStatus: 'idle',
+      },
+      queryKey: [
+        {
+          url: '/article/galleryImages',
+          method: 'get',
+          params: {
+            articleId: '2460009398',
+          },
+        },
+      ],
+      queryHash:
+        '[{"method":"get","params":{"articleId":"2460009398"},"url":"/article/galleryImages"}]',
+    },
+    priceInfo: {
+      priceInfo: {
+        tradeType: 'B1',
+        warrantyAmount: 650000000,
+        rentAmount: 0,
+        loan: 0,
+        loanCode: null,
+        loanTypeCode: null,
+      },
+      detailInfo: {
+        facilityInfo: {
+          life: [],
+          security: [],
+          etc: [],
+          buildingConjunctionDateType: null,
+          buildingConjunctionDate: null,
+          approvalElapsedYear: null,
+          entranceType: '10',
+          heatingAndCoolingSystemType: null,
+          heatingEnergyType: null,
+          totalParkingCount: 1602,
+          parkingCountPerHousehold: 1.29,
+          structure: null,
+          householdNumber: null,
+        },
+        articleDetailInfo: {
+          articleNumber: '2460009398',
+          articleName: '금천롯데캐슬골드파크3차(주상복합)',
+          nonComplexBuildingName: null,
+          nonComplexBuildingSubName: null,
+          articleFeatureDescription:
+            '전실에어컨0 인테리어예쁜집0  정원뷰0 숨은공간확장0',
+          articleDescription:
+            '롯데캐슬골드파크단지에서만 중 9년째 영업 중인 물건 많은\r\n＇캐슬단지내부동산공인중개사사무소＇\r\n02-809-4000\r\n\r\n\r\n시설물 :  시스템에어컨. 서재알파룸. 안전방충망. 숨은공간확장\r\n\r\n관리상태 최상!  \r\n\r\n\r\n금천구 내 최고 랜드마크 아파트\r\n좋은 동, 호수는 빨리 거래돼 버립니다. ~ 서두르세요!\r\n\r\n관리비 : 일반관리비, 경비비, 청소비, 전기료, 수도료 등 포함 (관리규약에 따라부과)\r\n( 주상복합이라도 아파트랑 같아요 ~~~ )\r\n\r\n단지 내 편의시설 완비\r\n\r\n- 남/여 사우나\r\n- 남/여 탈의실\r\n- 탁구장\r\n- 스크린골프\r\n- GYM\r\n- GX룸\r\n- PT실\r\n- 실내골프장\r\n- 단지 어린이집\r\n- 스터디룸\r\n- 도서관\r\n- 시니어클럽\r\n- 시니어사무실\r\n- 다목적실\r\n- 동호회실\r\n- 옥상 정원\r\n- 중앙광장\r\n- 휴게시설 및 놀이시설\r\n- 단지 내 금나래 초등학교 및 금나래 공원\r\n- 구립 체육관 및 수영장\r\n- 단지 내 대형 롯데마트 운영중\r\n\r\n\r\n\r\n단지 교통시설\r\n\r\n- 1호선 금천구청역 역세권\r\n- 강남순환도로 이용시 양재동 25분\r\n- 수원~광명(평택~파주) 고속도로 근접\r\n- 서해안고속도로 근접\r\n- KTX 광명역 이용 편리\r\n- 제2경인고속도로 근접\r\n\r\n\r\n\r\n허위/미끼매물 없는 캐슬부동산\r\n\r\n3차A 13호 입점 단지부동산\r\n\r\n명칭 : 캐슬 단지내 부동산 공인중개사사무소\r\n소재지 : 서울시 금천구 독산동 1155, 310동 로비층 13호\r\n연락처 : 02-809-4000\r\n등록번호 : 11545-2016-00026\r\n성명 : 곽명휘\r\n\r\n감사합니다.',
+          isAddressExposed: true,
+          isJibunAddressExposed: null,
+          isDirectTrade: false,
+          directTradeOwnerCellPhoneNumber: null,
+          buildingType: null,
+          cpId: 'bizmk',
+          exposureStartDate: '2024-12-03',
+          buildingUse: '공동주택',
+          buildingPrincipalUse: null,
+        },
+        movingInInfo: {
+          movingInNegotiation: true,
+          movingInDate: null,
+          movingInMonth: null,
+          movingInType: 'MV001',
+          contractPeriod: null,
+        },
+        verificationInfo: {
+          verificationType: 'OWNER',
+          isAssociationArticle: false,
+          exposureStartDate: '2024-12-03',
+        },
+        spaceInfo: {
+          floorInfo: {
+            targetFloor: '4',
+            totalFloor: '46',
+            groundTotalFloor: '0',
+            undergroundTotalFloor: '0',
+            floorType: '10',
+            residenceType: '1',
+          },
+          roomCount: 3,
+          bathRoomCount: 2,
+          direction: 'SS',
+          duplex: false,
+          directionStandard: '거실 기준',
+        },
+        sizeInfo: {
+          supplySpace: 119.13,
+          exclusiveSpace: 84.4,
+          supplySpaceName: '119',
+          exclusiveSpaceName: '84',
+          floorAreaRatio: null,
+          buildingCoverageRatio: null,
+          pyeongArea: 36.03,
+        },
+      },
+      communalComplexInfo: {
+        complexNumber: 109956,
+        complexName: '금천롯데캐슬골드파크3차(주상복합)',
+        pyeongTypeNumber: 5,
+        dongName: '302동',
+      },
+    },
+    etcInfo: {
+      typeCode: '02',
+      criteriaType: '02',
+      etcDetail: {
+        type: '02',
+        typeDirectInput: null,
+        categoryList: ['11', '12', '16', '01', '99'],
+        amount: 270000,
+      },
+    },
+    addressInfo: {
+      name: '금천롯데캐슬골드파크3차(주상복합)',
+      type: 'A01',
+      address: {
+        legalDivisionNumber: '1154510200',
+        legalDivisionLevel: 'EUP',
+        legalDivision: '서울시 금천구 독산동',
+        city: '서울시',
+        division: '금천구',
+        sector: '독산동',
+        jibun: '1155',
+        roadName: '시흥대로 291',
+        zipCode: '08608',
+      },
+      coordinates: {
+        xcoordinate: 126.897765,
+        ycoordinate: 37.460094,
+      },
+      photos: [
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_171/land_naver_1637660565684OD6sa_JPEG/897c2d3e815c89656ae5ea521d3d587c.JPG',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX01',
+          category: '전경',
+          comment:
+            '금천롯데캐슬골드파크3차 전경입니다. 건물은 총 6개동으로 되어 있으며 총세대수는 1236세대 입니다. 단지 내 다양한 근린생활시설이 있어서 편리합니다.',
+          coordinates: {
+            xcoordinate: 126.898033,
+            ycoordinate: 37.459647,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_100/land_naver_1637660565377cwTwH_JPEG/ca12a316cd6802988927098110d8306d.JPG',
+          majorCategory: 'CDOOR',
+          subCategory: 'CDO01',
+          category: '정문',
+          comment:
+            '금천롯데캐슬골드파크3차 정문입니다. 정문으로 보행자 출입이 가능합니다. 지상으로 여러 근린생활시설들이 있습니다. 또한 보행자 통행로가 잘 마련되어 있어 안전하게 이동할 수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.89695,
+            ycoordinate: 37.460588,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_71/land_naver_1637660565997Fvukr_JPEG/1c6a92b0920c62dc804925f18d61f680.JPG',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX01',
+          category: '전경',
+          comment:
+            '금천롯데캐슬골드파크3차 전경입니다. 건물은 총 6개동으로 되어 있으며 총세대수는 1236세대 입니다. 단지 내 다양한 근린생활시설이 있어서 편리합니다.',
+          coordinates: {
+            xcoordinate: 126.897154,
+            ycoordinate: 37.460201,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_278/land_naver_16376605663232WRlb_JPEG/a4af077ffb3d3aaaed71543d3738a019.JPG',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX01',
+          category: '전경',
+          comment:
+            '금천롯데캐슬골드파크3차 전경입니다. 건물은 총 6개동으로 되어 있으며 총세대수는 1236세대 입니다. 단지 내 다양한 근린생활시설이 있어서 편리합니다.',
+          coordinates: {
+            xcoordinate: 126.897529,
+            ycoordinate: 37.46035,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_128/land_naver_1637660566593gjPUv_JPEG/55dd77ada3fd68972456b0427e0356b9.JPG',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX02',
+          category: '건물 외관',
+          comment:
+            '금천롯데캐슬골드파크3차 전경입니다. 건물은 총 6개동으로 되어 있으며 총세대수는 1236세대 입니다. 지상으로 차량 진입을 할 수 없으며 보행자 통행로가 잘 마련되어 있습니다.',
+          coordinates: {
+            xcoordinate: 126.897626,
+            ycoordinate: 37.460205,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_203/land_naver_1637660566901wyDb2_JPEG/6b5504bb69dbf833ed8ab02f6e74ece0.JPG',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX02',
+          category: '건물 외관',
+          comment:
+            '금천롯데캐슬골드파크3차 전경입니다. 건물은 총 6개동으로 되어 있으며 총세대수는 1236세대 입니다. 지상으로 차량 진입을 할 수 없으며 보행자 통행로가 잘 마련되어 있습니다.',
+          coordinates: {
+            xcoordinate: 126.897685,
+            ycoordinate: 37.459988,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_230/land_naver_1637660567215LtaEV_JPEG/ca0efe25267525f1d3d15d8e338efdf7.JPG',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX02',
+          category: '건물 외관',
+          comment:
+            '금천롯데캐슬골드파크3차 전경입니다. 건물은 총 6개동으로 되어 있으며 총세대수는 1236세대 입니다. 지상으로 차량 진입을 할 수 없으며 보행자 통행로가 잘 마련되어 있습니다.',
+          coordinates: {
+            xcoordinate: 126.897835,
+            ycoordinate: 37.459736,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_60/land_naver_1637660567490Fg1Vw_JPEG/a22e01f8cbe857af6b6f751a485e64aa.JPG',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX03',
+          category: '1층 공용현관',
+          comment:
+            '금천롯데캐슬골드파크3차 1층 공동현관 입니다. 인터폰을 이용하여 각 세대 또는 경비실 호출하여 진입할 수 있습니다. 공동현관 안으로 엘리베이터와 계단을 이용하여 각 세대로 이동할 수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.896966,
+            ycoordinate: 37.459396,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_71/land_naver_1637660567725FXmlg_JPEG/4ed869516a67c1d3375065d3d26ecd88.JPG',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX03',
+          category: '1층 공용현관',
+          comment:
+            '금천롯데캐슬골드파크3차 1층 공동현관 입니다. 인터폰을 이용하여 각 세대 또는 경비실 호출하여 진입할 수 있습니다. 공동현관 안으로 엘리베이터와 계단을 이용하여 각 세대로 이동할 수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.89688,
+            ycoordinate: 37.45977,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_199/land_naver_16376605680117Wnln_JPEG/5400cf0650cfcbed54b1491be8dba353.JPG',
+          majorCategory: 'CPXFV',
+          subCategory: 'CPX03',
+          category: '1층 공용현관',
+          comment:
+            '금천롯데캐슬골드파크3차 1층 공동현관 입니다. 인터폰을 이용하여 각 세대 또는 경비실 호출하여 진입할 수 있습니다. 공동현관 안으로 엘리베이터와 계단을 이용하여 각 세대로 이동할 수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.89762,
+            ycoordinate: 37.460124,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_291/land_naver_1637660568274DbU5z_JPEG/2fc63dd71b503449d7c5efcfbd345148.JPG',
+          majorCategory: 'PKLOT',
+          subCategory: 'PKL02',
+          category: '지하 주차장 입구',
+          comment:
+            '금천롯데캐슬골드파크3차 지하주차장 입구입니다. 입구에 차량용 차단기가 설치되어 있으며 외부차량의 진입을 제한하고 있습니다.',
+          coordinates: {
+            xcoordinate: 126.897931,
+            ycoordinate: 37.459724,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_110/land_naver_1637660568553Rmj6k_JPEG/2ded626ea6c543f3a774964c138f6204.JPG',
+          majorCategory: 'PKLOT',
+          subCategory: 'PKL02',
+          category: '지하 주차장 입구',
+          comment:
+            '금천롯데캐슬골드파크3차 지하주차장 입구입니다. 입구에 차량용 차단기가 설치되어 있으며 외부차량의 진입을 제한하고 있습니다.',
+          coordinates: {
+            xcoordinate: 126.89776,
+            ycoordinate: 37.460064,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_264/land_naver_1637660568848pz11x_JPEG/32f0542d6a77508cbf0e9ca0b04ae45e.JPG',
+          majorCategory: 'PKLOT',
+          subCategory: 'PKL02',
+          category: '지하 주차장 입구',
+          comment:
+            '금천롯데캐슬골드파크3차 지하주차장 입구입니다. 입구에 차량용 차단기가 설치되어 있으며 외부차량의 진입을 제한하고 있습니다.',
+          coordinates: {
+            xcoordinate: 126.897851,
+            ycoordinate: 37.459962,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_76/land_naver_1637660569128hTgGL_JPEG/e9be3f7e75c3b93e749de6248e51d41a.JPG',
+          majorCategory: 'PKLOT',
+          subCategory: 'PKL03',
+          category: '지하 주차장',
+          comment:
+            '금천롯데캐슬골드파크3차 지하주차장 입니다. 건물 내 주차시설은 지하주차장을 이용할 수 있습니다. 지하주차장이 깨끗하게 잘 청소되어 있으며 주차공간이 넓게 잘 마련되어 있습니다.',
+          coordinates: {
+            xcoordinate: 126.897518,
+            ycoordinate: 37.459902,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_188/land_naver_1637660569425Bcd0t_JPEG/daa691e74597f796ca19fd2d9ab54e48.JPG',
+          majorCategory: 'PKLOT',
+          subCategory: 'PKL03',
+          category: '지하 주차장',
+          comment:
+            '금천롯데캐슬골드파크3차 지하주차장 입니다. 건물 내 주차시설은 지하주차장을 이용할 수 있습니다. 지하주차장이 깨끗하게 잘 청소되어 있으며 주차공간이 넓게 잘 마련되어 있습니다.',
+          coordinates: {
+            xcoordinate: 126.89762,
+            ycoordinate: 37.459856,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_265/land_naver_1637660569659JUL21_JPEG/9ade1616bb4239ef46c580df62c766bb.JPG',
+          majorCategory: 'PKLOT',
+          subCategory: 'PKL03',
+          category: '지하 주차장',
+          comment:
+            '금천롯데캐슬골드파크3차 지하주차장 입니다. 건물 내 주차시설은 지하주차장을 이용할 수 있습니다. 지하주차장이 깨끗하게 잘 청소되어 있으며 주차공간이 넓게 잘 마련되어 있습니다.',
+          coordinates: {
+            xcoordinate: 126.897604,
+            ycoordinate: 37.459732,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_114/land_naver_1637660569899CK9Hh_JPEG/b106f8d807cb94b28db44f363f9e44a1.JPG',
+          majorCategory: 'INCNV',
+          subCategory: 'INC01',
+          category: '놀이터',
+          comment:
+            '금천롯데캐슬골드파크3차 단지 내 놀이터 입니다. 지상으로 차량이 다닐 수 없기 때문에 안전하게 놀이터를 이용할 수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.896606,
+            ycoordinate: 37.460017,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_255/land_naver_1637660570182yNIhL_JPEG/fbfaa7a11a0d34670948241aca0ba27b.JPG',
+          majorCategory: 'INCNV',
+          subCategory: 'INC03',
+          category: '산책로, 보행로',
+          comment:
+            '금천롯데캐슬골드파크3차 단지 내 보행로 입니다. 건물 지상으로 여러 근린생활시설들이 있고 보행로가 잘 마련되어 있어서 안전하게 이동할 수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.897084,
+            ycoordinate: 37.459834,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_186/land_naver_1637660570480QxVyC_JPEG/50ec34cce9c55f484ffbdb4ec32d7e16.JPG',
+          majorCategory: 'INCNV',
+          subCategory: 'INC03',
+          category: '산책로, 보행로',
+          comment:
+            '금천롯데캐슬골드파크3차 단지 내 보행로 입니다. 건물 지상으로 여러 근린생활시설들이 있고 보행로가 잘 마련되어 있어서 안전하게 이동할 수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.897422,
+            ycoordinate: 37.459962,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_75/land_naver_1637660570796jtDSt_JPEG/f0acd272c9039c8471a142877e52fc8c.JPG',
+          majorCategory: 'INCNV',
+          subCategory: 'INC07',
+          category: '편의점/마트',
+          comment:
+            '금천롯데캐슬골드파크3차 단지 내 편의시설로 다양한 근린생활시설들이 있으며 대형마트가 있습니다. 입주민들이 가까운 거리로 마트를 이용하실 수 있어서 편리합니다.',
+          coordinates: {
+            xcoordinate: 126.897121,
+            ycoordinate: 37.46043,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_24/land_naver_1637660571221plX39_JPEG/dd12c2e0c259a7ee0548cb3a82a7a1c3.JPG',
+          majorCategory: 'INCNV',
+          subCategory: 'INC07',
+          category: '편의점/마트',
+          comment:
+            '금천롯데캐슬골드파크3차 단지 내 편의시설로 다양한 근린생활시설들이 있으며 대형마트가 있습니다. 입주민들이 가까운 거리로 마트를 이용하실 수 있어서 편리합니다.',
+          coordinates: {
+            xcoordinate: 126.896982,
+            ycoordinate: 37.460413,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_99/land_naver_1637660571513P3H9i_JPEG/ba10fef7da3905f6f729c9a77535a099.JPG',
+          majorCategory: 'INCNV',
+          subCategory: 'INC07',
+          category: '편의점/마트',
+          comment:
+            '금천롯데캐슬골드파크3차 단지 내 편의시설로 다양한 근린생활시설들이 있으며 대형마트가 있습니다. 입주민들이 가까운 거리로 마트를 이용하실 수 있어서 편리합니다.',
+          coordinates: {
+            xcoordinate: 126.897148,
+            ycoordinate: 37.460477,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_185/land_naver_1637660572033c0sHO_JPEG/306e170181874e7ffacf8c80aa2dd008.JPG',
+          majorCategory: 'INCNV',
+          subCategory: 'INC10',
+          category: '기타',
+          comment:
+            '금천롯데캐슬골드파크3차 단지 내 편의시설로 다양한 근린생활시설들이 있으며 대형마트가 있습니다. 입주민들이 가까운 거리로 다양한 편의시설을 이용할 수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.896993,
+            ycoordinate: 37.460452,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_111/land_naver_1637660572307Bvz13_JPEG/fcbc88f3d6d68a1e4692d7d2b07a898d.JPG',
+          majorCategory: 'INCNV',
+          subCategory: 'INC10',
+          category: '기타',
+          comment:
+            '금천롯데캐슬골드파크3차 단지 내 편의시설로 다양한 근린생활시설들이 있으며 대형마트가 있습니다. 입주민들이 가까운 거리로 다양한 편의시설을 이용할 수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.89717,
+            ycoordinate: 37.46049,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_50/land_naver_1637660572543zbSFl_JPEG/444a34901441202c863697cdaa376d91.JPG',
+          majorCategory: 'LIFFA',
+          subCategory: 'LIF01',
+          category: '쓰레기장',
+          comment:
+            '금천롯데캐슬골드파크3차 쓰레기장 입니다. 지하주차장 내에 쓰레기장이 위치해 있습니다. 주변이 깨끗하게 잘 정돈되어 있어서 편리하게 이용할 수 있습니다.',
+          coordinates: {
+            xcoordinate: 126.897309,
+            ycoordinate: 37.45957,
+          },
+        },
+        {
+          url: 'https://landthumb-phinf.pstatic.net/20211123_288/land_naver_1637660572777ga6OM_JPEG/998d32f8ecf4ee51d79043e24dea3bd9.JPG',
+          majorCategory: 'LIFFA',
+          subCategory: 'LIF03',
+          category: '경비실',
+          comment:
+            '금천롯데캐슬골드파크3차 경비실 입니다. 지하주차장 입구 옆으로 경비실이 위치해 있으며 주차장 입구에는 차량용 차단기가 설치되어 있어서 외부차량의 진입을 제한하고 있습니다.',
+          coordinates: {
+            xcoordinate: 126.897846,
+            ycoordinate: 37.459954,
+          },
+        },
+      ],
+      totalHouseholdNumber: 1236,
+      leaseHouseholdNumber: 0,
+      dongCount: 6,
+      hasBuildingHoInfo: true,
+      constructionCompany: '롯데건설(주)',
+      buildingUse: '공동주택',
+      isServicedResidence: false,
+      buildingRatioInfo: {
+        floorAreaRatio: 499,
+        buildingCoverageRatio: 59,
+      },
+      useApprovalDate: '20181030',
+      approvalElapsedYear: 7,
+      parkingInfo: {
+        totalParkingCount: 1602,
+        parkingCountPerHousehold: 1.29,
+      },
+      heatingAndCoolingInfo: {
+        heatingAndCoolingSystemType: 'HT001',
+        heatingEnergyType: 'HF001',
+      },
+      managementOfficeContact: '02-805-6876',
+      monopolyRestrictionType: 'N',
+      isRestrictedTransferOfReconstructionAssociationMembership: false,
+      isComplexTourExist: false,
+    },
+    maintenanceInfo: {
+      yearMonth: '2024-09',
+      yearMonthFee: 345377,
+      monthAverageFee: 279196,
+      summerAverageFee: 294884,
+      winterAverageFee: 0,
+    },
+    floorPlanInfo: {
+      number: 5,
+      name: '119',
+      nameType: '',
+      floorPlanUrls: {
+        EXPN: {
+          OPT1: [
+            'https://landthumb-phinf.pstatic.net/20210513_149/land_naver_1620898242971wf4Ua_JPEG/1099565202105131830423408890513183042824000000.jpg',
+            'https://landthumb-phinf.pstatic.net/20210513_169/land_naver_1620898243877Thffq_JPEG/1099565202105131830432988130513183043722000000.jpg',
+            'https://landthumb-phinf.pstatic.net/20150617_296/hscp_img_143451990811793d6e_JPEG/photoinfra_1434519907463.jpg',
+          ],
+        },
+      },
+      supplyArea: 119.13,
+      contractArea: 167.66,
+      exclusiveArea: 84.4,
+      roomCount: 3,
+      bathRoomCount: 2,
+      unitsOfSameArea: 386,
+      entranceType: '10',
+      direction: 'SS',
+      isDuplex: false,
+      isMonopolyRestricted: false,
+      monopolyPossibleDate: '2015-10-21',
+      preSalePrice: null,
+    },
+    utilityInfo: {
+      railList: [
+        {
+          stationId: 12531285,
+          stationName: '시흥사거리역(2027년예정)',
+          railId: 120,
+          railName: '신안산선',
+          openDate: '2027',
+          coordinates: {
+            xcoordinate: 126.900857,
+            ycoordinate: 37.454,
+          },
+          distance: 730,
+          walkingTime: 11,
+        },
+        {
+          stationId: 12531278,
+          stationName: '독산역(2027년예정)',
+          railId: 120,
+          railName: '신안산선',
+          openDate: '2027',
+          coordinates: {
+            xcoordinate: 126.897926,
+            ycoordinate: 37.468167,
+          },
+          distance: 897,
+          walkingTime: 14,
+        },
+      ],
+      jiguList: [
+        {
+          id: 328,
+          name: '금천구심지구단위계획구역',
+          typeName: '지구단위계획구역',
+          step: '실시변경',
+          period: null,
+        },
+      ],
+    },
+    brokerInfo: {
+      brokerageName: '캐슬단지내부동산공인중개사사무소',
+      brokerName: '곽명휘',
+      address:
+        '서울 금천구 시흥대로 291,상가동 B13호(독산동, 롯데캐슬골드파크)',
+      businessRegistrationNumber: '11545-2016-00026',
+      profileImageUrl:
+        'https://landthumb-phinf.pstatic.net/20220224_252/rltr_profile_1645693797171lEzsF_JPEG/realty000_cropImage.jpg',
+      brokerId: 'realty000',
+      ownerConfirmationSaleCount: 227,
+      phone: {
+        brokerage: '02-809-4000',
+        mobile: '010-2213-2234',
+      },
+    },
   },
 ];
 

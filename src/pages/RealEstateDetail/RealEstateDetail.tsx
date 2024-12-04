@@ -8,6 +8,7 @@ import {
   realEstateTypeInfoData,
 } from '../../assets/Dummy';
 import RealEstateDetailLayout from '../../components/template/RealEstateDetailLayout';
+import { AdditionalEstate } from '../../types/global';
 import BasicInfo from './components/BasicInfo';
 import Estimate from './components/Estimate';
 import ImageCarousel from './components/ImageCarousel';
@@ -18,15 +19,7 @@ import Tabs from './components/Tabs';
 import TypeInfo from './components/TypeInfo';
 
 interface RealEstateDetailProps {
-  estate?: {
-    type: string;
-    location: string;
-    price: string;
-    size: string;
-    description: string;
-    dealType: string;
-    imageUrl: string;
-  };
+  estate?: AdditionalEstate;
   onBackClick: () => void;
   isStarFilled: boolean;
 }

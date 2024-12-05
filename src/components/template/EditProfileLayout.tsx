@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CommonBackground from '../atoms/CommonBackground';
 import ConfirmModal from '../atoms/EditProfileModal';
 import Input from '../atoms/Input';

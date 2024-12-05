@@ -29,6 +29,7 @@ export type AdditionalEstate = {
   floorPlanInfo: FloorPlanInfo;
   utilityInfo: UtilityInfo;
   brokerInfo: BrokerInfo;
+  realPriceInfo: RealPriceInfo;
 };
 
 export type BasicInfo = {
@@ -102,12 +103,15 @@ export type ImageInfo = {
 
 export type PriceInfo = {
   priceInfo: {
-    tradeType: string;
-    warrantyAmount: number;
-    rentAmount: number;
+    price?: number;
+    tradeType?: string;
+    previousDeposit?: number;
+    previousMonthlyRent?: number;
+    warrantyAmount?: number;
+    rentAmount?: number;
     loan: number;
-    loanCode: number | null;
-    loanTypeCode: number | null;
+    loanCode: string | null;
+    loanTypeCode: string | null;
   };
   detailInfo: {
     facilityInfo: {
@@ -286,6 +290,25 @@ export type BrokerInfo = {
     mobile: string;
   };
 };
+
+export type RealPriceInfo = {
+  B1?: TradeInfo[];
+  B2?: TradeInfo[];
+};
+
+export type TradeInfo = {
+  tradeDate: string;
+  tradeYear: string;
+  floor: number;
+  dealPrice: number | null;
+  deposit: number;
+  monthlyRent: number;
+  deleteDate: string | null;
+  isDelete: boolean;
+  tradeCategory: string | null;
+  registrationDate: string | null;
+};
+
 export type Photo = {
   url: stinrg;
   majorCategory: string | null;

@@ -10,6 +10,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import React from 'react';
+import { RealPriceInfo, TradeInfo } from '../../../types/global';
 
 ChartJS.register(
   CategoryScale,
@@ -63,35 +64,28 @@ const labels = [
   '24.10',
 ];
 
-const data = {
-  labels,
-  datasets: [
-    {
-      label: '전세',
-      data: [
-        19.3, 19.3, 19.3, 24.1, 24.1, 24.1, 24.1, 24.1, 24.1, 24.1, 24.1, 24.1,
-        24.1,
-      ],
-      borderColor: 'rgba(34, 197, 94, 1)',
-      backgroundColor: 'rgba(34, 197, 94, 0.5)',
-      tension: 0.4,
-    },
-    {
-      label: '실거래',
-      data: [
-        19.0, 20.5, 21.0, 22.5, 24.0, 23.5, 24.1, 23.8, 24.0, 24.1, 24.2, 24.0,
-        24.1,
-      ],
-      borderColor: 'rgba(234, 88, 12, 1)',
-      backgroundColor: 'rgba(234, 88, 12, 0.5)',
-      tension: 0.4,
-      pointRadius: 5,
-      pointBackgroundColor: 'rgba(234, 88, 12, 0.7)',
-    },
-  ],
-};
-
-const MarketChart: React.FC = () => {
+const MarketChart: React.FC<RealPriceInfo> = (realPriceInfo) => {
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: '전세',
+        data: realPriceInfo.B1!.map((item: TradeInfo) => item.deposit)!,
+        borderColor: 'rgba(34, 197, 94, 1)',
+        backgroundColor: 'rgba(34, 197, 94, 0.5)',
+        tension: 0.4,
+      },
+      {
+        label: '월세',
+        data: realPriceInfo.B2!.map((item: TradeInfo) => item.deposit)!,
+        borderColor: 'rgba(234, 88, 12, 1)',
+        backgroundColor: 'rgba(234, 88, 12, 0.5)',
+        tension: 0.4,
+        pointRadius: 5,
+        pointBackgroundColor: 'rgba(234, 88, 12, 0.7)',
+      },
+    ],
+  };
   return <Line options={options} data={data} />;
 };
 

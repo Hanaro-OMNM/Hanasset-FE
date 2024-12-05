@@ -3,9 +3,10 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import React from 'react';
+import { Photo } from '../../../types/global';
 
 interface ImageCarouselProps {
-  images: string[];
+  images: Photo[] | undefined;
   onBackClick: () => void;
 }
 const ImageCarousel: React.FC<ImageCarouselProps> = ({
@@ -29,10 +30,10 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
         <FiChevronLeft className="w-[30px] h-[30px] mr-4" />
       </button>
       <Slider {...settings}>
-        {images.map((src, index) => (
+        {images!.map((src, index) => (
           <div key={index}>
             <img
-              src={src}
+              src={src.url}
               alt={`Slide ${index}`}
               className="w-full h-64 object-cover"
             />

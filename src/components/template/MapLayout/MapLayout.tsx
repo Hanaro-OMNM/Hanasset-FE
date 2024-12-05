@@ -27,7 +27,7 @@ export default function MapLayout({ children }: LayoutProps) {
     if (selectedEstate && location.pathname !== '/real-estate-list') {
       setSelectedEstate(false);
     }
-  }, [location.pathname]); // 의존성 배열에 location.pathname만 추가
+  }, [selectedEstate, location.pathname]); // 의존성 배열에 location.pathname만 추가
 
   const handleZoomIn = () => {
     if (mapRef.current) {

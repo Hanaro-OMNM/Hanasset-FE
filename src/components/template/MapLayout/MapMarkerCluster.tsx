@@ -1,8 +1,13 @@
 import { Overlay, useMap, useNavermaps } from 'react-naver-maps';
 import React, { useEffect, useState } from 'react';
-import { estateData } from '../../../assets/Dummy.tsx';
+import { addDetailEstateData } from '../../../assets/Dummy.tsx';
 
-export default function MapMarkerCluster({ onMarkerClick }) {
+interface MapMarkerClusterProps {
+  onMarkerClick: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export default function MapMarkerCluster({
+  onMarkerClick,
+}: MapMarkerClusterProps) {
   const naverMaps = useNavermaps();
   const map = useMap();
   const [MarkerClustering, setMarkerClustering] =
@@ -58,15 +63,15 @@ export default function MapMarkerCluster({ onMarkerClick }) {
     anchor: naverMaps.Point(32, 32),
   };
 
-  const markers = estateData.map((item) => {
+  const markers = addDetailEstateData.map((item) => {
     const priceText =
-      item.prc >= 10000
-        ? `${Math.floor(item.prc / 10000)}억`
-        : `${item.prc}만원`;
+      item.basicInfo.prc >= 10000
+        ? `${Math.floor(item.basicInfo.prc / 10000)}억`
+        : `${item.basicInfo.prc}만원`;
 
     const marker = new naverMaps.Marker({
-      position: new naverMaps.LatLng(item.lat, item.lng),
-      title: `${item.tradTpNm} ${item.prc}만원`,
+      position: new naverMaps.LatLng(item.basicInfo.lat, item.basicInfo.lng),
+      title: `${item.basicInfo.tradTpNm} ${item.basicInfo.prc}만원`,
       icon: {
         content: `
       <div style="
@@ -92,7 +97,7 @@ export default function MapMarkerCluster({ onMarkerClick }) {
           font-size: 10px;
           font-weight: bold;
         ">
-          ${item.tradTpNm}
+          ${item.basicInfo.tradTpNm}
         </div>
         <div style="margin-top: 4px;">
           ${priceText}

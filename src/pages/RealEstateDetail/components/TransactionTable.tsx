@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { RealPriceInfo } from '../../../types/global';
 
 interface Transaction {
   date: string;
@@ -21,7 +22,8 @@ const transactions: Transaction[] = [
   { date: '23.12.30', type: '전세', price: '21억 5,000', floor: 38 },
 ];
 
-const TransactionTable: React.FC = () => {
+const TransactionTable: React.FC<RealPriceInfo> = (realPriceInfo) => {
+  console.log(realPriceInfo);
   const [filter, setFilter] = useState<'전세' | '월세' | '전체'>('전세');
   const [visibleCount, setVisibleCount] = useState(5);
 

@@ -189,7 +189,11 @@ export default function Main() {
                     <div>
                       <p className="text-sm">하나은행 대출</p>
                       <div className="w-full">
-                        <img src={HanaLogo} className="h-10"></img>
+                        <img
+                          alt="HanaLogo"
+                          src={HanaLogo}
+                          className="h-10"
+                        ></img>
                       </div>
                     </div>
                   </CommonBackground>

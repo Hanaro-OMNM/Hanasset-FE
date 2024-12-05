@@ -50,7 +50,7 @@ export default function UserManual({ close }: userManualProps) {
         >
           <CloseButton onClick={close} />
           <ManualImg className="top-24 left-10">
-            <img src={Manual1} className="rounded-3xl" />
+            <img alt="Manual1" src={Manual1} className="rounded-3xl" />
           </ManualImg>
           <div className="fixed top-12 left-10">
             1.
@@ -97,7 +97,7 @@ export default function UserManual({ close }: userManualProps) {
         >
           <CloseButton onClick={close} />
           <ManualImg className="top-64 left-10">
-            <img src={Manual2} className="rounded-3xl" />
+            <img alt="Manual2" src={Manual2} className="rounded-3xl" />
           </ManualImg>
           <div className="fixed top-52 left-10">
             1.
@@ -150,7 +150,7 @@ export default function UserManual({ close }: userManualProps) {
         >
           <CloseButton onClick={close} />
           <ManualImg className="top-36 left-0">
-            <img src={Manual3} className="rounded-3xl" />
+            <img alt="Manual3" src={Manual3} className="rounded-3xl" />
           </ManualImg>
           <div className="absolute top-40 left-24 text-white font-fontMedium">
             <div>
@@ -181,7 +181,7 @@ export default function UserManual({ close }: userManualProps) {
         >
           <CloseButton onClick={close} />
           <ManualImg className="top-52 left-0">
-            <img src={Manual4} className="rounded-3xl" />
+            <img alt="Manual4" src={Manual4} className="rounded-3xl" />
           </ManualImg>
           <div className="absolute top-52 left-24 text-white font-fontMedium">
             <div>
@@ -218,7 +218,7 @@ export default function UserManual({ close }: userManualProps) {
         >
           <CloseButton onClick={close} />
           <ManualImg className="top-72 left-0">
-            <img src={Manual5} className="rounded-3xl" />
+            <img alt="Manual5" src={Manual5} className="rounded-3xl" />
           </ManualImg>
           <div className="absolute top-72 left-24 text-white font-fontMedium">
             <div>

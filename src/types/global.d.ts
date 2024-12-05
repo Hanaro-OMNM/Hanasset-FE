@@ -21,13 +21,10 @@ export type selectedEstateType = {
 export type AdditionalEstate = {
   basicInfo: BasicInfo;
   estateKeyInfo: EstateKeyInfo;
-  imageInfo: ImageInfo;
   priceInfo: PriceInfo;
-  etcInfo: EtcInfo;
   addressInfo: AddressInfo;
   maintenanceInfo: MaintenanceInfo;
   floorPlanInfo: FloorPlanInfo;
-  utilityInfo: UtilityInfo;
   brokerInfo: BrokerInfo;
   realPriceInfo: RealPriceInfo;
 };
@@ -67,38 +64,6 @@ export type EstateKeyInfo = {
   };
   isRealEstateAssociationArticle: boolean;
   isArticleImageExist: boolean;
-};
-
-export type ImageInfo = {
-  state: {
-    data: {
-      isSuccess: boolean;
-      detailCode: string;
-      message: string;
-      result: any;
-    };
-    dataUpdateCount: number;
-    dataUpdatedAt: number;
-    error: null | string;
-    errorUpdateCount: number;
-    errorUpdatedAt: number;
-    fetchFailureCount: number;
-    fetchFailureReason: null | string;
-    fetchMeta: null | string;
-    isInvalidated: boolean;
-    status: string;
-    fetchStatus: string;
-  };
-  queryKey: [
-    {
-      url: string;
-      method: string;
-      params: {
-        articleId: string;
-      };
-    },
-  ];
-  queryHash: string;
 };
 
 export type PriceInfo = {
@@ -191,17 +156,6 @@ export type PriceInfo = {
   };
 };
 
-export type EtcInfo = {
-  typeCode: string;
-  criteriaType: string;
-  etcDetail: {
-    type: string;
-    typeDirectInput: string | null;
-    categoryList: string[] | number[] | null;
-    amount: number;
-  };
-};
-
 export type AddressInfo = {
   name: string;
   type: string;
@@ -216,7 +170,7 @@ export type AddressInfo = {
   dongCount: number;
   hasBuildingHoInfo: boolean;
   constructionCompany: string;
-  buildingUse: string;
+  buildingUse: string | null;
   isServicedResidence: boolean;
   buildingRatioInfo: {
     floorAreaRatio: number;
@@ -239,11 +193,11 @@ export type AddressInfo = {
 };
 
 export type MaintenanceInfo = {
-  yearMonth: string;
-  yearMonthFee: number;
-  monthAverageFee: number;
-  summerAverageFee: number;
-  winterAverageFee: number;
+  yearMonth?: string;
+  yearMonthFee?: number;
+  monthAverageFee?: number;
+  summerAverageFee?: number;
+  winterAverageFee?: number;
 };
 
 export type FloorPlanInfo = {
@@ -272,21 +226,16 @@ export type FloorPlanInfo = {
   preSalePrice: string | null;
 };
 
-export type UtilityInfo = {
-  railList: Rail[];
-  jiguList: Array;
-};
-
 export type BrokerInfo = {
   brokerageName: string;
   brokerName: string;
   address: string;
   businessRegistrationNumber: string;
-  profileImageUrl: string;
+  profileImageUrl: string | null;
   brokerId: string;
   ownerConfirmationSaleCount: number;
   phone: {
-    brokerage: string;
+    brokerage: string | null;
     mobile: string;
   };
 };
@@ -331,18 +280,4 @@ export type Address = {
   jibun: string;
   roadName: string;
   zipCode: string;
-};
-
-export type Rail = {
-  stationId: number;
-  stationName: string;
-  railId: number;
-  railName: string;
-  openDate: string;
-  coordinates: {
-    xcoordinate: number;
-    ycoordinate: number;
-  };
-  distance: number;
-  walkingTime: number;
 };

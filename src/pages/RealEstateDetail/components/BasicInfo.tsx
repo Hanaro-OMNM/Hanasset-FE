@@ -19,7 +19,7 @@ interface BasicInfoProps {
   heatingEnergyType: string | undefined;
   floorAreaRatio: number | undefined;
   buildingRatio: number | undefined;
-  brokerage: string | undefined;
+  brokerage: string | null | undefined;
   constructionCompany: string | undefined;
 }
 

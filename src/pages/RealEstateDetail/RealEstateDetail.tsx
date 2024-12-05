@@ -39,6 +39,10 @@ export default function RealEstateDetail({
     }
   };
 
+  const floorPlanImage = estate?.floorPlanInfo.floorPlanUrls?.BASE
+    ? estate?.floorPlanInfo.floorPlanUrls.BASE['0'][2]
+    : estate?.floorPlanInfo.floorPlanUrls.EXPN?.OPT1[2];
+
   return (
     <RealEstateDetailLayout>
       <ImageCarousel
@@ -51,9 +55,6 @@ export default function RealEstateDetail({
         floor={estate?.priceInfo.detailInfo.spaceInfo.floorInfo.targetFloor}
         rentType={estate?.basicInfo.tradTpNm}
         price={estate?.basicInfo.prc}
-        description={
-          estate?.priceInfo.detailInfo.articleDetailInfo.articleDescription
-        }
         isStarFilled={isStarFilled}
       />
       <Tabs tabs={tabData} onTabClick={handleTabClick} />
@@ -62,7 +63,6 @@ export default function RealEstateDetail({
         <MarketSection
           supplyArea={estate?.floorPlanInfo.supplyArea}
           exclusiveArea={estate?.floorPlanInfo.exclusiveArea}
-          floor={estate?.priceInfo.detailInfo.spaceInfo.floorInfo.targetFloor}
           realPriceInfo={estate?.realPriceInfo}
         />
       </div>
@@ -70,7 +70,7 @@ export default function RealEstateDetail({
         <TypeInfo
           supplyArea={estate?.floorPlanInfo.supplyArea}
           unitsOfSameAreaNumber={estate?.floorPlanInfo.unitsOfSameArea}
-          floorPlanImage={estate?.floorPlanInfo.floorPlanUrls?.BASE?.['0'][2]}
+          floorPlanImage={floorPlanImage}
           exclusiveArea={estate?.floorPlanInfo.exclusiveArea}
           rooms={estate?.floorPlanInfo.roomCount}
           bathrooms={estate?.floorPlanInfo.bathRoomCount}
@@ -83,7 +83,7 @@ export default function RealEstateDetail({
       <div id="매물정보">
         <PropertyDetails
           propertyNumber={estate?.basicInfo.atclNo}
-          movingInInfo={estate?.priceInfo.detailInfo.movingInInfo}
+          movingInInfo={estate!.priceInfo.detailInfo.movingInInfo}
           managementFee={estate!.maintenanceInfo.yearMonthFee}
           parkingCount={estate?.addressInfo.parkingInfo.totalParkingCount}
           parkingPerHousehold={

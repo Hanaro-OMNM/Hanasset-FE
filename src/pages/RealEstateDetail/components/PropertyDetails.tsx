@@ -19,7 +19,7 @@ interface MovingInInfoProps {
   movingInNegotiation: boolean;
   movingInDate: string | null;
   movingInMonth: string | null;
-  movingInType: string;
+  movingInType: string | null;
   contractPeriod: string | null;
 }
 

@@ -7,14 +7,12 @@ import TransactionTable from './TransactionTable';
 interface MarketSectionProps {
   supplyArea: number | undefined;
   exclusiveArea: number | undefined;
-  floor: string | undefined;
   realPriceInfo: RealPriceInfo | undefined;
 }
 
 const MarketSection: React.FC<MarketSectionProps> = ({
   supplyArea,
   exclusiveArea,
-  floor,
   realPriceInfo,
 }) => {
   const strSupplyArea = supplyArea! + 'm²';
@@ -30,16 +28,8 @@ const MarketSection: React.FC<MarketSectionProps> = ({
         </p>
       </div>
       <div className="flex border-t">
-        <MarketInfoCard
-          tradeInfo={jeonseMarketInfo!}
-          type="전세"
-          floor={floor!}
-        />
-        <MarketInfoCard
-          tradeInfo={wolseMarketInfo!}
-          type="월세"
-          floor={floor!}
-        />
+        <MarketInfoCard tradeInfo={jeonseMarketInfo!} type="전세" />
+        <MarketInfoCard tradeInfo={wolseMarketInfo!} type="월세" />
       </div>
       <div className="mt-8 flex justify-center">
         <MarketChart {...realPriceInfo} />

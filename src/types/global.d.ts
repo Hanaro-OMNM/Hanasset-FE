@@ -134,29 +134,29 @@ export type PriceInfo = {
       articleName: string;
       nonComplexBuildingName: string | null;
       nonComplexBuildingSubName: string | null;
-      articleFeatureDescription: string;
+      articleFeatureDescription: string | null;
       articleDescription: string | null;
       isAddressExposed: boolean;
       isJibunAddressExposed: string | null;
       isDirectTrade: boolean;
       directTradeOwnerCellPhoneNumber: string | null;
       buildingType: string | null;
-      cpId: string;
-      exposureStartDate: string;
-      buildingUse: string;
+      cpId: string | null;
+      exposureStartDate: string | null;
+      buildingUse: string | null;
       buildingPrincipalUse: string | null;
     };
     movingInInfo: {
       movingInNegotiation: boolean;
       movingInDate: string | null;
       movingInMonth: string | null;
-      movingInType: string;
+      movingInType: string | null;
       contractPeriod: string | null;
     };
     verificationInfo: {
-      verificationType: string;
+      verificationType: string | null;
       isAssociationArticle: boolean;
-      exposureStartDate: string;
+      exposureStartDate: string | null;
     };
     spaceInfo: {
       floorInfo: {

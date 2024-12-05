@@ -1,8 +1,8 @@
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdNavigateNext } from 'react-icons/md';
 import { useEffect, useState } from 'react';
-import HanaLogo from '../assets/img/hanaLogo.png';
 import { addDetailEstateData } from '../assets/Dummy';
+import HanaLogo from '../assets/img/hanaLogo.png';
 import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import Swiper from '../components/atoms/Swiper';
@@ -78,7 +78,7 @@ export default function Main() {
       <div className="w-[420px]">
         {activePage === 'main' ? (
           <div className="top-0 absolute pl-4 animate-slideInRight">
-            <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-gray-50/90 backdrop-blur-[5px]">
+            <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-gray-50/90 backdrop-blur-[5px] overflow-y-auto scrollbar-hide">
               <SearchBar />
 
               <div className="w-full max-w-md mt-10">
@@ -217,7 +217,7 @@ export default function Main() {
                       <BsInfoCircle />
                     </div>
                   </h2>
-                  <CommonBackground className="w-full px-2 py-3">
+                  <CommonBackground className="w-full px-2 py-1 mb-6">
                     {recentHouses === 'none' ? (
                       <div>아직 둘러본 매물이 없네요.</div>
                     ) : (

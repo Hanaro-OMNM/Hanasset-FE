@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { parse, differenceInMonths, addMonths, format } from 'date-fns';
 import { Line } from 'react-chartjs-2';
 import React from 'react';
 import { RealPriceInfo, TradeInfo } from '../../../types/global';
@@ -41,30 +42,56 @@ const options = {
     y: {
       ticks: {
         callback: function (tickValue: string | number) {
-          return `${tickValue}억`;
+          // 숫자인지 확인
+          if (typeof tickValue === 'number') {
+            return tickValue === 0 ? tickValue : `${tickValue / 100000000}억`;
+          }
+
+          // 문자열인 경우
+          const numericValue = parseFloat(tickValue);
+          return isNaN(numericValue) || numericValue === 0
+            ? numericValue
+            : `${numericValue / 100000000}억`;
         },
       },
     },
   },
 };
 
-const labels = [
-  '21.10',
-  '22.01',
-  '22.04',
-  '22.07',
-  '22.10',
-  '23.01',
-  '23.04',
-  '23.07',
-  '23.10',
-  '24.01',
-  '24.04',
-  '24.07',
-  '24.10',
-];
-
 const MarketChart: React.FC<RealPriceInfo> = (realPriceInfo) => {
+  function generateMonthLabels(dates1: string[], dates2: string[]): string[] {
+    // 두 배열 합치기
+    const allDates = [...dates1, ...dates2];
+
+    // 가장 빠른 날짜와 가장 늦은 날짜 찾기
+    const parsedDates = allDates.map((date) =>
+      parse(date, 'yyyy-MM-dd', new Date())
+    );
+    const startDate = new Date(
+      Math.min(...parsedDates.map((date) => date.getTime()))
+    );
+    const endDate = new Date(
+      Math.max(...parsedDates.map((date) => date.getTime()))
+    );
+
+    const totalMonths = differenceInMonths(endDate, startDate);
+
+    const interval = Math.max(1, Math.floor(totalMonths / 7)); // 9로 나눠 10개의 구간 생성
+
+    const labels: string[] = [];
+    for (let i = 0; i < 8; i++) {
+      const labelDate = addMonths(startDate, i * interval);
+      labels.push(format(labelDate, 'yy/MM'));
+    }
+
+    return labels;
+  }
+
+  const labels = generateMonthLabels(
+    realPriceInfo.B1!.map((item: TradeInfo) => item.tradeDate),
+    realPriceInfo.B2!.map((item: TradeInfo) => item.tradeDate)
+  );
+
   const data = {
     labels,
     datasets: [

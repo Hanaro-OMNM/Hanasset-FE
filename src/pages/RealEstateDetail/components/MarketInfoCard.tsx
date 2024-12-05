@@ -4,7 +4,6 @@ import { TradeInfo } from '../../../types/global';
 interface MarketInfoCardProps {
   tradeInfo: TradeInfo[];
   type: string;
-  floor: string;
 }
 const MarketInfoCard: React.FC<MarketInfoCardProps> = (marketInfoCardProps) => {
   const isJeonse = marketInfoCardProps.type === '전세';
@@ -18,8 +17,8 @@ const MarketInfoCard: React.FC<MarketInfoCardProps> = (marketInfoCardProps) => {
   );
 
   const latestYear = latestTrade.tradeDate!.slice(0, 4);
-  const latestMonth = latestTrade.tradeDate!.slice(6, 7);
-  const latestDay = latestTrade.tradeDate!.slice(9, 11);
+  const latestMonth = latestTrade.tradeDate!.slice(5, 7);
+  const latestDay = latestTrade.tradeDate!.slice(8, 10);
 
   const latestTradeDeposit =
     (latestTrade.deposit / 100000000).toFixed(1) + '억';
@@ -55,7 +54,7 @@ const MarketInfoCard: React.FC<MarketInfoCardProps> = (marketInfoCardProps) => {
       </p>
       <p className="text-gray-500 mt-1 text-sm">
         {latestYear}년 {latestMonth}월 {latestDay}일/
-        {marketInfoCardProps.floor}층
+        {latestTrade.floor}층
       </p>
       <p className="text-sm mt-2 text-gray-600">
         매물평균가{' '}

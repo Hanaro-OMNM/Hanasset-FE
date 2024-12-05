@@ -20,11 +20,15 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
     return text;
   };
 
-  const truncateDescriptionText = (text: string) => {
-    if (text.length > 30) {
-      return text.substring(0, 30) + '...';
+  const truncateDescriptionText = (text: string | undefined | null) => {
+    if (text) {
+      if (text.length > 30) {
+        return text.substring(0, 30) + '...';
+      }
+      return text;
+    } else {
+      return '등록된 매물 설명이 없습니다.';
     }
-    return text;
   };
   // 텍스트 길이가 9자를 초과하면 말줄임표를 추가 (텍스트 태그별로 길이 재정의해야 함)
 

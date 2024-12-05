@@ -1,43 +1,36 @@
 import React, { useState } from 'react';
 import { RealPriceInfo } from '../../../types/global';
 
-interface Transaction {
-  date: string;
-  type: '전세' | '월세';
-  price: string;
-  floor: number;
-}
-
-const transactions: Transaction[] = [
-  { date: '24.10.11', type: '전세', price: '23억 6,000', floor: 36 },
-  { date: '24.07.06', type: '월세', price: '10억/620', floor: 33 },
-  { date: '24.06.28', type: '월세', price: '2억/682', floor: 30 },
-  { date: '24.05.11', type: '월세', price: '2억/1,100', floor: 34 },
-  { date: '24.04.15', type: '전세', price: '25억', floor: 40 },
-  { date: '24.03.12', type: '전세', price: '22억', floor: 35 },
-  { date: '24.02.10', type: '월세', price: '9억/500', floor: 32 },
-  { date: '24.01.05', type: '전세', price: '24억', floor: 39 },
-  { date: '24.01.01', type: '월세', price: '8억/400', floor: 31 },
-  { date: '23.12.30', type: '전세', price: '21억 5,000', floor: 38 },
-  { date: '23.12.30', type: '전세', price: '21억 5,000', floor: 38 },
-];
-
 const TransactionTable: React.FC<RealPriceInfo> = (realPriceInfo) => {
-  console.log(realPriceInfo);
-  const [filter, setFilter] = useState<'전세' | '월세' | '전체'>('전세');
+  const [filter, setFilter] = useState<'전세' | '월세' | '전체'>('전체');
   const [visibleCount, setVisibleCount] = useState(5);
-
-  const filteredTransactions = transactions.filter(
-    (transaction) => filter === '전체' || transaction.type === filter
-  );
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 5);
   };
 
+  const jeonseTransactions = realPriceInfo!.B1!.map((item) => {
+    return { ...item, type: '전세' };
+  });
+
+  const wolseTransactions = realPriceInfo!.B2!.map((item) => {
+    return { ...item, type: '월세' };
+  });
+
+  const totalTransactions = jeonseTransactions.concat(wolseTransactions);
+
+  const sortedTransactions = totalTransactions.sort((a, b) => {
+    const dateA = new Date(a.tradeDate).getTime(); // tradeDate를 Date 객체로 변환 후 시간값 추출
+    const dateB = new Date(b.tradeDate).getTime();
+    return dateB - dateA; // 오름차순 정렬 (내림차순은 dateB - dateA)
+  });
+
+  const filteredTransactions = sortedTransactions.filter(
+    (transaction) => filter === '전체' || transaction.type === filter
+  );
+
   return (
-    <div className="p-6 mt-4">
-      {/* 상단 필터 버튼 */}
+    <div className="p-4 mt-4">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">실거래가</h2>
         <div className="flex gap-2">
@@ -73,14 +66,17 @@ const TransactionTable: React.FC<RealPriceInfo> = (realPriceInfo) => {
             .slice(0, visibleCount)
             .map((transaction, index) => (
               <tr key={index} className="hover:bg-gray-50 animate-fadeInUp">
-                <td className="border px-4 py-2 text-right">
-                  {transaction.date}
+                <td className="border px-4 py-2 text-center">
+                  {transaction.tradeDate}
                 </td>
-                <td className="border px-4 py-2 text-right">
+                <td className="border px-4 py-2 text-center">
                   {transaction.type}
                 </td>
-                <td className="border px-4 py-2 text-right">
-                  {transaction.price}
+                <td className="border px-4 py-2 text-center">
+                  {transaction.type === '전세'
+                    ? (transaction.deposit / 100000000).toFixed(1) + '억'
+                    : (transaction.deposit / 100000000).toFixed(1) +
+                      `억/${transaction.monthlyRent / 10000}`}
                 </td>
                 <td className="border px-4 py-2 text-right">
                   {transaction.floor}층

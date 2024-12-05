@@ -30,15 +30,27 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
         <FiChevronLeft className="w-[30px] h-[30px] mr-4" />
       </button>
       <Slider {...settings}>
-        {images!.map((src, index) => (
-          <div key={index}>
+        {images![0] ? (
+          <div>
+            {images!.map((src, index) => (
+              <div key={index}>
+                <img
+                  src={src.url}
+                  alt={`Slide ${index}`}
+                  className="w-full h-64 object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div>
             <img
-              src={src.url}
-              alt={`Slide ${index}`}
+              src="https://placehold.co/420x256"
+              alt="임시 이미지"
               className="w-full h-64 object-cover"
             />
           </div>
-        ))}
+        )}
       </Slider>
     </div>
   );

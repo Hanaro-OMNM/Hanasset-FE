@@ -43,8 +43,12 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
       <div className="pl-2 flex hover:transition-transform transform py-4 hover:text-gray-600">
         <img
           className="w-[100px] h-[100px] object-cover flex-shrink-0 rounded-3xl"
-          src={estate.addressInfo.photos[0].url}
-          alt={`${estate.addressInfo.photos[0].category} 이미지`}
+          src={
+            estate.addressInfo.photos[0]
+              ? estate.addressInfo.photos[0].url
+              : 'https://placehold.co/100x100'
+          }
+          alt={`${estate.addressInfo.photos[0] ? estate.addressInfo.photos[0].category : '임시'} 이미지`}
         />
         <div className="flex flex-col justify-center p-4 flex-grow min-w-0 w-64">
           {estate.basicInfo.tradTpNm === '전세' ? (

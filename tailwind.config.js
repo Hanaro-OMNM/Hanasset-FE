@@ -13,6 +13,9 @@ export default {
         hanaNavy: '#3A4058',
         hanaColor1: '#E0FBF5',
         hanaColor2: '#00CC9C',
+        ManualColor1: '#71D381',
+        ManualColor2: '#77CBA2',
+        ManualColor3: '#77D3CD',
         /* hanaGreen*/
         hanaGreen: '#0B9B97',
         hanaGreen80: '#5D9588',
@@ -66,6 +69,7 @@ export default {
         fadeInUp: 'fadeInUp 0.5s ease-out forwards',
         fadeInRight: 'fadeInRight 0.5s ease-out forwards',
         slideInRight: 'slideInRight 0.5s ease-out forwards',
+        glow: 'glow 1.5s infinite',
       },
       keyframes: {
         fadeInUp: {
@@ -79,6 +83,10 @@ export default {
         slideInRight: {
           '0%': { transform: 'translateX(-100%)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        glow: {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0.5 },
         },
       },
     },

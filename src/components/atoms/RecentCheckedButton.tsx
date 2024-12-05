@@ -27,7 +27,7 @@ const RecentCheckedButton = ({
         <div className="text-hanaGreen text-xl w-5 mr-10">
           <FaLocationDot />
         </div>
-        <div className="">
+        <div>
           <div className="text-gray-800 text-base leading-tight">{title}</div>
         </div>
       </div>

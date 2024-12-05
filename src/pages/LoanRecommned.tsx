@@ -25,7 +25,7 @@ const LoanInfoPage: React.FC = () => {
 
   return (
     <div className="flex">
-      <div className=" top-0 absolute pl-4 animate-slideInRight">
+      <div className="top-0 absolute pl-4 animate-slideInRight">
         <div className="w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-gray-50/90 scrollbar-hide">
           <div className="px-6">
             <MobileHeader title="맞춤 대출 상품 안내" onBack={onBack} />

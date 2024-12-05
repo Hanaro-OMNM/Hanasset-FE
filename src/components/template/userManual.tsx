@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactDOM from 'react-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Manual1 from '../../assets/img/manual/1.png';
 import Manual2 from '../../assets/img/manual/2.png';
 import Manual3 from '../../assets/img/manual/3.png';
@@ -16,13 +16,6 @@ interface userManualProps {
 }
 export default function UserManual({ close }: userManualProps) {
   const [currentPage, setCurrentPage] = useState(0);
-  const [isOpen, setIsOpen] = useState();
-
-  useEffect(() => {
-    if (isOpen) {
-      setCurrentPage(0);
-    }
-  }, [isOpen]);
 
   const goToNextPage = () => {
     setCurrentPage((prev) => {
@@ -56,7 +49,7 @@ export default function UserManual({ close }: userManualProps) {
           className="absolute inset-0 flex flex-col items-center justify-center"
         >
           <CloseButton onClick={close} />
-          <ManualImg className=" top-24 left-10">
+          <ManualImg className="top-24 left-10">
             <img src={Manual1} className="rounded-3xl" />
           </ManualImg>
           <div className="fixed top-12 left-10">
@@ -65,19 +58,17 @@ export default function UserManual({ close }: userManualProps) {
           </div>
           <div className="text-white font-fontLight text-xl fixed top-80 left-10">
             <div className="mb-4">
-              <span>1. </span>
-              <span className="text-ManualColor3">주소로 골라보기</span>에서
-              <span> </span>
+              1. <span className="text-ManualColor3">주소로 골라보기</span>에서
               <span className="text-ManualColor1">
+                {' '}
                 시/도, 시/군/구, 읍/면/동
               </span>
               을 단계적으로 선택해보세요.
             </div>
             <div>
-              <span>2. </span>
-              지도에서
-              <span className="text-ManualColor2"> 원하는 위치를 클릭</span>
-              하여 해당 지역 매물을 확인할 수 있습니다.
+              2. 지도에서{' '}
+              <span className="text-ManualColor2">원하는 위치를 클릭</span>하여
+              해당 지역 매물을 확인할 수 있습니다.
             </div>
           </div>
           <div className="fixed top-96 mt-8 left-10 mr-3 text-hanaSilver">
@@ -105,7 +96,7 @@ export default function UserManual({ close }: userManualProps) {
           className="absolute inset-0 flex flex-col items-center justify-center"
         >
           <CloseButton onClick={close} />
-          <ManualImg className=" top-64 left-10">
+          <ManualImg className="top-64 left-10">
             <img src={Manual2} className="rounded-3xl" />
           </ManualImg>
           <div className="fixed top-52 left-10">
@@ -158,7 +149,7 @@ export default function UserManual({ close }: userManualProps) {
           className="absolute inset-0 flex flex-col items-center justify-center"
         >
           <CloseButton onClick={close} />
-          <ManualImg className=" top-36 left-0">
+          <ManualImg className="top-36 left-0">
             <img src={Manual3} className="rounded-3xl" />
           </ManualImg>
           <div className="absolute top-40 left-24 text-white font-fontMedium">
@@ -189,7 +180,7 @@ export default function UserManual({ close }: userManualProps) {
           className="absolute inset-0 flex flex-col items-center justify-center"
         >
           <CloseButton onClick={close} />
-          <ManualImg className=" top-52 left-0">
+          <ManualImg className="top-52 left-0">
             <img src={Manual4} className="rounded-3xl" />
           </ManualImg>
           <div className="absolute top-52 left-24 text-white font-fontMedium">
@@ -226,7 +217,7 @@ export default function UserManual({ close }: userManualProps) {
           className="absolute inset-0 flex flex-col items-center justify-center"
         >
           <CloseButton onClick={close} />
-          <ManualImg className=" top-72 left-0">
+          <ManualImg className="top-72 left-0">
             <img src={Manual5} className="rounded-3xl" />
           </ManualImg>
           <div className="absolute top-72 left-24 text-white font-fontMedium">
@@ -244,7 +235,7 @@ export default function UserManual({ close }: userManualProps) {
               확인할 수 있습니다.
             </div>
           </div>
-          <div className="fixed top-96 mt-5  left-28 text-hanaSilver">5/5</div>
+          <div className="fixed top-96 mt-5 left-28 text-hanaSilver">5/5</div>
           <ManualButton
             currentPage={currentPage}
             totalPages={6}

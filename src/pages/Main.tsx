@@ -186,7 +186,7 @@ export default function Main() {
                       )
                     }
                   >
-                    <div className="">
+                    <div>
                       <p className="text-sm">하나은행 대출</p>
                       <div className="w-full">
                         <img src={HanaLogo} className="h-10"></img>
@@ -205,7 +205,7 @@ export default function Main() {
                   </CommonBackground>
 
                   <CommonBackground
-                    className=" p-4"
+                    className="p-4"
                     onClick={() => setShowModal(true)}
                   >
                     이용 가이드

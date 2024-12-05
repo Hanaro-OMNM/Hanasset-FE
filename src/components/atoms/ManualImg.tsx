@@ -11,7 +11,7 @@ export default function ManualImg({
 }: ManualImgProps) {
   return (
     <div
-      className={`fixed p-1 rounded-3xl bg-gradient-to-r from-ManualColor1  via-ManualColor2 to-ManualColor3 ${className}`}
+      className={`fixed p-1 rounded-3xl bg-gradient-to-r from-ManualColor1 via-ManualColor2 to-ManualColor3 ${className}`}
     >
       {children}
     </div>

@@ -60,7 +60,7 @@ export default function RealEstateDetail({
       />
 
       <Tabs tabs={tabData} onTabClick={handleTabClick} />
-      <div id="타입" className="pt-12">
+      <div id="시세" className="pt-12">
         <MarketSection
           supplyArea={estate?.floorPlanInfo.supplyArea}
           exclusiveArea={estate?.floorPlanInfo.exclusiveArea}

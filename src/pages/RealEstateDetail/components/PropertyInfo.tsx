@@ -26,7 +26,7 @@ const PropertyInfo: React.FC<PropertyInfoProps> = ({
 
   return (
     <>
-      <div className="w-full ml-96">
+      <div className="ml-96">
         <PropertyStar isFilled={isStarFilled} />
       </div>
       <div className="p-4 flex flex-col justify-center items-center">

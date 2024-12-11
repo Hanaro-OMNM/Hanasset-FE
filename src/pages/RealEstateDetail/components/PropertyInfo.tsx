@@ -26,15 +26,17 @@ const PropertyInfo: React.FC<PropertyInfoProps> = ({
 
   return (
     <>
-      <div className="ml-96">
-        <PropertyStar isFilled={isStarFilled} />
-      </div>
-      <div className="p-4 flex flex-col justify-center items-center">
-        <p className="text-lg font-semibold">
-          {name} {title} {floor}층
-        </p>
+      <div className="p-4 flex flex-col items-center">
+        <div className="flex">
+          <p className="text-lg font-semibold">
+            {name} {title} {floor}층
+          </p>
+          <div className="absolute right-2">
+            <PropertyStar isFilled={isStarFilled} />
+          </div>
+        </div>
         <p
-          className={`text-3xl font-bold ${rentType === '전세' ? 'text-hanaColor2' : 'text-red-600'}`}
+          className={`justify-center text-3xl font-bold ${rentType === '전세' ? 'text-hanaColor2' : 'text-red-600'}`}
         >
           <span>{rentType}</span>{' '}
           <span className="text-black">{prcResult}</span>

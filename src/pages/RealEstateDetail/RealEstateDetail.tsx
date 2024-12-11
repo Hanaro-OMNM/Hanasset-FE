@@ -34,6 +34,7 @@ export default function RealEstateDetail({
   const handleTabClick = (index: number) => {
     setActiveTab(index);
     const element = document.getElementById(tabData[index].label);
+    console.log(element);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -57,16 +58,16 @@ export default function RealEstateDetail({
         price={estate?.basicInfo.prc}
         isStarFilled={isStarFilled}
       />
-      <Tabs tabs={tabData} onTabClick={handleTabClick} />
 
-      <div id="시세">
+      <Tabs tabs={tabData} onTabClick={handleTabClick} />
+      <div id="타입" className="pt-12">
         <MarketSection
           supplyArea={estate?.floorPlanInfo.supplyArea}
           exclusiveArea={estate?.floorPlanInfo.exclusiveArea}
           realPriceInfo={estate?.realPriceInfo}
         />
       </div>
-      <div id="타입">
+      <div id="타입" className="pt-12">
         <TypeInfo
           supplyArea={estate?.floorPlanInfo.supplyArea}
           unitsOfSameAreaNumber={estate?.floorPlanInfo.unitsOfSameArea}
@@ -80,7 +81,7 @@ export default function RealEstateDetail({
           }
         />
       </div>
-      <div id="매물정보">
+      <div id="매물정보" className="pt-12">
         <PropertyDetails
           propertyNumber={estate?.basicInfo.atclNo}
           movingInInfo={estate!.priceInfo.detailInfo.movingInInfo}
@@ -102,7 +103,7 @@ export default function RealEstateDetail({
           unitsOfSameAreaNumber={estate?.floorPlanInfo.unitsOfSameArea}
         />
       </div>
-      <div id="기본정보">
+      <div id="기본정보" className="pt-12">
         <BasicInfo
           useApprovalDate={estate?.addressInfo.useApprovalDate}
           approvalElapsedYear={estate?.addressInfo.approvalElapsedYear}
@@ -135,7 +136,7 @@ export default function RealEstateDetail({
           brokerage={estate?.brokerInfo.phone.brokerage}
         />
       </div>
-      <div id="예산">
+      <div id="예산" className="pt-12">
         <Estimate totalAsset={28} />
       </div>
     </RealEstateDetailLayout>

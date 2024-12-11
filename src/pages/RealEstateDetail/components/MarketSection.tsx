@@ -20,7 +20,7 @@ const MarketSection: React.FC<MarketSectionProps> = ({
   const jeonseMarketInfo = realPriceInfo?.B1;
   const wolseMarketInfo = realPriceInfo?.B2;
   return (
-    <div className="bg-white rounded-lg shadow p-6 mt-10">
+    <div className="bg-white rounded-lg shadow p-6">
       <div className="flex items-center justify-between mb-4">
         <div className="text-2xl font-bold">시세</div>
         <p className="text-xs text-gray-500">

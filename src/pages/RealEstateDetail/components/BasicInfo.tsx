@@ -66,7 +66,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({
   const approvalFormattedDate = `${year}.${month}.${day}`;
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 mt-10">
+    <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-2xl font-bold mb-4">기본정보</h2>
       <ul className="list-disc list-inside">
         <li>

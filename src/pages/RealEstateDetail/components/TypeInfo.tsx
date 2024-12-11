@@ -33,7 +33,7 @@ const TypeInfo: React.FC<TypeInfoProps> = ({
     (roundToN(exclusiveArea! / supplyArea!, 4) * 100).toFixed(2) + '%';
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 mt-6">
+    <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-2xl font-bold mb-4">타입</h2>
       <div className="flex items-start mb-4">
         <div className="flex-1">

@@ -44,7 +44,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({
     : undefined;
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 mt-6">
+    <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-2xl font-bold mb-4">매물정보</h2>
       <div className="flex items-center mb-4">
         <div className="flex-1 text-center">

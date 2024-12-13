@@ -13,7 +13,7 @@ interface TabsProps {
 const Tabs: React.FC<TabsProps> = ({ tabs, onTabClick }) => {
   return (
     <div className="sticky top-0 bg-white z-10 shadow">
-      <div className="flex space-x-4 p-4">
+      <div className="flex justify-center space-x-4 py-2">
         {tabs.map((tab, index) => (
           <button
             key={index}

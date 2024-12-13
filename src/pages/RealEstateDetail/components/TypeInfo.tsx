@@ -1,35 +1,44 @@
 import React from 'react';
 
 interface TypeInfoProps {
-  area: string;
-  areaSize: string;
-  supply: string;
-  rooms: string;
-  bathrooms: string;
-  exclusiveRate: string;
-  managementFee: string;
-  floorPlanImage: string;
-  floorPlanLink: string;
+  supplyArea: number | undefined;
+  unitsOfSameAreaNumber: number | undefined;
+  floorPlanImage: string | undefined;
+  exclusiveArea: number | undefined;
+  rooms: number | undefined;
+  bathrooms: number | undefined;
+  managementFee: number | undefined;
+  floorPlanLink: string | undefined;
 }
 
 const TypeInfo: React.FC<TypeInfoProps> = ({
-  area,
-  areaSize,
-  supply,
+  supplyArea,
+  unitsOfSameAreaNumber,
+  floorPlanImage,
+  exclusiveArea,
   rooms,
   bathrooms,
-  exclusiveRate,
   managementFee,
-  floorPlanImage,
   floorPlanLink,
 }) => {
+  const totalArea = Math.round(supplyArea!) + 'Bm²';
+  const strSupplyArea = supplyArea! + 'm²';
+  const strExclusiveArea = exclusiveArea + 'm²';
+
+  function roundToN(num: number, n: number) {
+    return Math.round(num * 10 ** n) / 10 ** n;
+  }
+
+  const exclusiveRatePer =
+    (roundToN(exclusiveArea! / supplyArea!, 4) * 100).toFixed(2) + '%';
+
   return (
-    <div className="bg-white rounded-lg shadow p-6 mt-6">
+    <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-2xl font-bold mb-4">타입</h2>
       <div className="flex items-start mb-4">
         <div className="flex-1">
           <p className="text-lg">
-            • {area} ({areaSize})
+            • {totalArea} ({unitsOfSameAreaNumber}세대)
           </p>
           <img
             src={floorPlanImage}
@@ -39,7 +48,9 @@ const TypeInfo: React.FC<TypeInfoProps> = ({
           <div className="flex justify-center text-xs text-gray-600 mb-2">
             <div className="flex flex-col text-center">
               <p>공급/전용</p>
-              <p className="font-bold">{supply}</p>
+              <p className="font-bold">
+                {strSupplyArea}/{strExclusiveArea}
+              </p>
             </div>
             <span className="border-r border-gray-300 mx-5"></span>
             <div className="flex flex-col">
@@ -51,14 +62,18 @@ const TypeInfo: React.FC<TypeInfoProps> = ({
             <span className="border-r border-gray-300 mx-5"></span>
             <div className="flex flex-col">
               <p>전용률</p>
-              <p className="font-bold">{exclusiveRate}</p>
+              <p className="font-bold">{exclusiveRatePer}</p>
             </div>
           </div>
         </div>
       </div>
       <div className="bg-gray-100 p-2 rounded text-center">
         <p>
-          연 평균 관리비 <span className="font-bold">{managementFee}</span>원
+          연 평균 관리비{' '}
+          <span className="font-bold">
+            {new Intl.NumberFormat('ko-KR').format(managementFee!)}
+          </span>
+          원
         </p>
       </div>
       <div className="text-right mt-2">

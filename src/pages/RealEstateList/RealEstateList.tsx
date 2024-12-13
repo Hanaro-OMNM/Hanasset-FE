@@ -1,22 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { useEffect, useState } from 'react';
-import { realEstateData } from '../../assets/Dummy.tsx';
+import { addDetailEstateData } from '../../assets/Dummy.tsx';
 import DropdownCombobox from '../../components/atoms/Dropdown.tsx';
 import MobileHeader from '../../components/atoms/MobileHeader.tsx';
 import centerAtom from '../../recoil/center/index.ts';
+import { AdditionalEstate } from '../../types/global';
 import RealEstateDetail from '../RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from './RealEstateCard.tsx';
-
-type estateProps = {
-  type: string;
-  location: string;
-  price: string;
-  size: string;
-  description: string;
-  dealType: string;
-  imageUrl: string;
-};
 
 const sortItems = [
   '최신순',
@@ -30,7 +21,7 @@ export default function RealEstateLayout() {
   const center = useRecoilValue(centerAtom);
   const [currAddr, setCurrentAddr] = useState<string>('');
   const [selectedItem, setSelectedItem] = useState(sortItems[0]);
-  const [selectedEstate, setSelectedEstate] = useState<estateProps | null>(
+  const [selectedEstate, setSelectedEstate] = useState<AdditionalEstate | null>(
     null
   ); // 초기값을 null로 설정
   const [showRealEstate, setShowRealEstate] = useState(true);
@@ -61,7 +52,7 @@ export default function RealEstateLayout() {
     fetchAddressData();
   }, [center]);
 
-  const handleCardClick = (estate: estateProps) => {
+  const handleCardClick = (estate: AdditionalEstate) => {
     setSelectedEstate(estate); // 선택된 매물 정보 설정
 
     // 최근에 확인한 매물을 로컬 스토리지에 저장하는 로직
@@ -72,18 +63,18 @@ export default function RealEstateLayout() {
       // 기존 값이 있으면 파싱 후 배열의 맨 앞에 추가
       const parsedList = JSON.parse(existingList) as string[];
       // 중복 방지
-      if (!parsedList.includes(estate.location)) {
+      if (!parsedList.includes(estate.basicInfo.atclNm)) {
         // 리스트 길이는 항상 3을 유지 -> 최근 확인한 매물은 항상 최대 3개만 유지
         if (parsedList.length === 3) {
           parsedList.pop();
         }
 
-        parsedList.unshift(estate.location);
+        parsedList.unshift(estate.basicInfo.atclNm);
         localStorage.setItem(key, JSON.stringify(parsedList));
       }
     } else {
       // 기존 값이 없으면 새로운 배열 생성
-      localStorage.setItem(key, JSON.stringify([estate.location]));
+      localStorage.setItem(key, JSON.stringify([estate.basicInfo.atclNm]));
     }
   };
 
@@ -106,12 +97,12 @@ export default function RealEstateLayout() {
           />
         </div>
         <div className="flex-grow min-h-0 overflow-y-auto">
-          {realEstateData.map((item, index) => (
+          {addDetailEstateData.map((item, index) => (
             <div key={index} className="border-b">
               {/* 카드 클릭 시 handleCardClick 호출 */}
               <RealEstateCard
+                estate={item}
                 isStarFilled={false}
-                {...item}
                 onClick={() => {
                   handleCardClick(item);
                   setShowRealEstate(true);

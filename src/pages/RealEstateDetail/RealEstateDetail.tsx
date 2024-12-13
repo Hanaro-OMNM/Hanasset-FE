@@ -1,14 +1,7 @@
 import { useState } from 'react';
-import {
-  realEstateBasicInfoList,
-  realEstateImages,
-  realEstateMarketSectionProps,
-  realEstatePropertyDetailsProps,
-  realEstatePropertyInfoProps,
-  realEstateTypeInfoData,
-} from '../../assets/Dummy';
 import RealEstateDetailLayout from '../../components/template/RealEstateDetailLayout';
-import BasicInfo from './components/BasicInfo';
+import { AdditionalEstate } from '../../types/global';
+import BasicInfo from './components/BasicInfo.tsx';
 import Estimate from './components/Estimate';
 import ImageCarousel from './components/ImageCarousel';
 import MarketSection from './components/MarketSection';
@@ -18,15 +11,7 @@ import Tabs from './components/Tabs';
 import TypeInfo from './components/TypeInfo';
 
 interface RealEstateDetailProps {
-  estate?: {
-    type: string;
-    location: string;
-    price: string;
-    size: string;
-    description: string;
-    dealType: string;
-    imageUrl: string;
-  };
+  estate?: AdditionalEstate;
   onBackClick: () => void;
   isStarFilled: boolean;
 }
@@ -49,38 +34,109 @@ export default function RealEstateDetail({
   const handleTabClick = (index: number) => {
     setActiveTab(index);
     const element = document.getElementById(tabData[index].label);
+    console.log(element);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  console.log(estate); // estate는 props로 받아오기 위한 객체 -> console.log()로 unused 에러 방지
+  const floorPlanImage = estate?.floorPlanInfo.floorPlanUrls?.BASE
+    ? estate?.floorPlanInfo.floorPlanUrls.BASE['0'][2]
+    : estate?.floorPlanInfo.floorPlanUrls.EXPN?.OPT1[2];
 
   return (
     <RealEstateDetailLayout>
-      <ImageCarousel images={realEstateImages} onBackClick={onBackClick} />
+      <ImageCarousel
+        images={estate?.addressInfo.photos}
+        onBackClick={onBackClick}
+      />
       <PropertyInfo
-        title={realEstatePropertyInfoProps.title}
-        rentType={realEstatePropertyInfoProps.rentType}
-        price={realEstatePropertyInfoProps.price}
-        description={realEstatePropertyInfoProps.description}
+        name={estate?.basicInfo.atclNm}
+        title={estate?.basicInfo.bildNm}
+        floor={estate?.priceInfo.detailInfo.spaceInfo.floorInfo.targetFloor}
+        rentType={estate?.basicInfo.tradTpNm}
+        price={estate?.basicInfo.prc}
         isStarFilled={isStarFilled}
       />
-      <Tabs tabs={tabData} onTabClick={handleTabClick} />
 
-      <div id="시세">
-        <MarketSection {...realEstateMarketSectionProps} />
+      <Tabs tabs={tabData} onTabClick={handleTabClick} />
+      <div id="시세" className="pt-12">
+        <MarketSection
+          supplyArea={estate?.floorPlanInfo.supplyArea}
+          exclusiveArea={estate?.floorPlanInfo.exclusiveArea}
+          realPriceInfo={estate?.realPriceInfo}
+        />
       </div>
-      <div id="타입">
-        <TypeInfo {...realEstateTypeInfoData} />
+      <div id="타입" className="pt-12">
+        <TypeInfo
+          supplyArea={estate?.floorPlanInfo.supplyArea}
+          unitsOfSameAreaNumber={estate?.floorPlanInfo.unitsOfSameArea}
+          floorPlanImage={floorPlanImage}
+          exclusiveArea={estate?.floorPlanInfo.exclusiveArea}
+          rooms={estate?.floorPlanInfo.roomCount}
+          bathrooms={estate?.floorPlanInfo.bathRoomCount}
+          managementFee={estate!.maintenanceInfo.yearMonthFee}
+          floorPlanLink={
+            'https://fin.land.naver.com/articles/' + estate?.basicInfo.atclNo
+          }
+        />
       </div>
-      <div id="매물정보">
-        <PropertyDetails {...realEstatePropertyDetailsProps} />
+      <div id="매물정보" className="pt-12">
+        <PropertyDetails
+          propertyNumber={estate?.basicInfo.atclNo}
+          movingInInfo={estate!.priceInfo.detailInfo.movingInInfo}
+          managementFee={estate!.maintenanceInfo.yearMonthFee}
+          parkingCount={estate?.addressInfo.parkingInfo.totalParkingCount}
+          parkingPerHousehold={
+            estate?.addressInfo.parkingInfo.parkingCountPerHousehold
+          }
+          direction={estate?.priceInfo.detailInfo.spaceInfo.direction}
+          directionStandard={
+            estate?.priceInfo.detailInfo.spaceInfo.directionStandard
+          }
+          totalFloors={
+            estate?.priceInfo.detailInfo.spaceInfo.floorInfo.totalFloor
+          }
+          currentFloor={
+            estate?.priceInfo.detailInfo.spaceInfo.floorInfo.targetFloor
+          }
+          unitsOfSameAreaNumber={estate?.floorPlanInfo.unitsOfSameArea}
+        />
       </div>
-      <div id="기본정보">
-        <BasicInfo infoList={realEstateBasicInfoList} />
+      <div id="기본정보" className="pt-12">
+        <BasicInfo
+          useApprovalDate={estate?.addressInfo.useApprovalDate}
+          approvalElapsedYear={estate?.addressInfo.approvalElapsedYear}
+          city={estate?.addressInfo.address.city}
+          division={estate?.addressInfo.address.division}
+          sector={estate?.addressInfo.address.sector}
+          roadName={estate?.addressInfo.address.roadName}
+          totalHouseholdNumber={estate?.addressInfo.totalHouseholdNumber}
+          dongCount={estate?.addressInfo.dongCount}
+          parkingPerHousehold={
+            estate?.addressInfo.parkingInfo.parkingCountPerHousehold
+          }
+          parkingCount={estate?.addressInfo.parkingInfo.totalParkingCount}
+          totalFloors={
+            estate?.priceInfo.detailInfo.spaceInfo.floorInfo.totalFloor
+          }
+          entranceType={estate?.priceInfo.detailInfo.facilityInfo.entranceType}
+          heatingAndCoolingSystemType={
+            estate?.addressInfo.heatingAndCoolingInfo
+              .heatingAndCoolingSystemType
+          }
+          heatingEnergyType={
+            estate?.addressInfo.heatingAndCoolingInfo.heatingEnergyType
+          }
+          floorAreaRatio={estate?.addressInfo.buildingRatioInfo.floorAreaRatio}
+          buildingRatio={
+            estate?.addressInfo.buildingRatioInfo.buildingCoverageRatio
+          }
+          constructionCompany={estate?.addressInfo.constructionCompany}
+          brokerage={estate?.brokerInfo.phone.brokerage}
+        />
       </div>
-      <div id="예산">
+      <div id="예산" className="pt-12">
         <Estimate totalAsset={28} />
       </div>
     </RealEstateDetailLayout>

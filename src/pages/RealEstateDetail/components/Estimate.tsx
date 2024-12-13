@@ -10,7 +10,7 @@ const Estimate: React.FC<EstimateProps> = ({ totalAsset }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 mt-6">
+    <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-2xl font-bold mb-4">예산</h2>
       <p className="text-lg mb-2">총 필요 자금 {totalAsset}억</p>
       <hr className="my-4 border-gray-300" />

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import RealEstateDetailLayout from '../../components/template/RealEstateDetailLayout';
-import { AdditionalEstate } from '../../types/global';
+import { AdditionalEstate } from '../../types/hanaAsset';
 import BasicInfo from './components/BasicInfo.tsx';
 import Estimate from './components/Estimate';
 import ImageCarousel from './components/ImageCarousel';

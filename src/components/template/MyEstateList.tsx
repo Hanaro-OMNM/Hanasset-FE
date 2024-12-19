@@ -4,7 +4,7 @@ import { addDetailEstateData } from '../../assets/Dummy.tsx';
 import MobileHeader from '../../components/atoms/MobileHeader.tsx';
 import RealEstateDetail from '../../pages/RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from '../../pages/RealEstateList/RealEstateCard.tsx';
-import { AdditionalEstate } from '../../types/global';
+import { AdditionalEstate } from '../../types/hanaAsset';
 
 export default function RealEstateLayout() {
   const [selectedEstate, setSelectedEstate] = useState<AdditionalEstate | null>(

@@ -2,7 +2,7 @@ import real_estate_1 from '../assets/img/realEstate/real_estate_1.jpg';
 import real_estate_2 from '../assets/img/realEstate/real_estate_2.jpg';
 import real_estate_3 from '../assets/img/realEstate/real_estate_3.jpeg';
 import real_estate_4 from '../assets/img/realEstate/real_estate_4.jpg';
-import { AdditionalEstate } from '../types/global';
+import { AdditionalEstate } from '../types/hanaAsset';
 
 export interface Guest {
   name: string;

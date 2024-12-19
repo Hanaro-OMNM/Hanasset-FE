@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import { assetState } from '../../recoil/asset/atom';
 import loanReservationAtom from '../../recoil/loanReservation/atom';
-import { selectedEstateType } from '../../types/global';
+import { selectedEstateType } from '../../types/hanaAsset';
 import AmountForm from '../property/form/AmountForm';
 import JobForm from '../property/form/JobForm';
 import LoanAmountForm from '../property/form/LoanAmountForm';

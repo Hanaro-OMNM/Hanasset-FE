@@ -5,7 +5,7 @@ import { addDetailEstateData } from '../../assets/Dummy.tsx';
 import DropdownCombobox from '../../components/atoms/Dropdown.tsx';
 import MobileHeader from '../../components/atoms/MobileHeader.tsx';
 import centerAtom from '../../recoil/center/index.ts';
-import { AdditionalEstate } from '../../types/global';
+import { AdditionalEstate } from '../../types/hanaAsset';
 import RealEstateDetail from '../RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from './RealEstateCard.tsx';
 

@@ -2,7 +2,7 @@ import { IoMdCalendar } from 'react-icons/io';
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { selectedEstateType } from '../../types/global';
+import { selectedEstateType } from '../../types/hanaAsset';
 import Button from '../atoms/Button.tsx';
 import CommonBackground from '../atoms/CommonBackground';
 

@@ -1,31 +1,25 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { useEffect, useState } from 'react';
-import { addDetailEstateData } from '../../assets/Dummy.tsx';
-import DropdownCombobox from '../../components/atoms/Dropdown.tsx';
 import MobileHeader from '../../components/atoms/MobileHeader.tsx';
 import centerAtom from '../../recoil/center/index.ts';
-import { AdditionalEstate } from '../../types/hanaAsset';
+import {
+  RealEstateList,
+  RealEstatePreview,
+} from '../../types/hanaAssetResponse.common.ts';
 import RealEstateDetail from '../RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from './RealEstateCard.tsx';
 
-const sortItems = [
-  '최신순',
-  '낮은가격순',
-  '높은가격순',
-  '넓은면적순',
-  '좁은면적순',
-];
-
 export default function RealEstateLayout() {
+  const location = useLocation();
+  const state = location.state as RealEstateList; // 전달받은 state 객체
+
   const center = useRecoilValue(centerAtom);
   const [currAddr, setCurrentAddr] = useState<string>('');
-  const [selectedItem, setSelectedItem] = useState(sortItems[0]);
-  const [selectedEstate, setSelectedEstate] = useState<AdditionalEstate | null>(
-    null
-  ); // 초기값을 null로 설정
+  const [selectedEstate, setSelectedEstate] =
+    useState<RealEstatePreview | null>(null);
   const [showRealEstate, setShowRealEstate] = useState(true);
-  const realEstateCount = 27;
+  const realEstateCount = state.result.count;
 
   useEffect(() => {
     const fetchAddressData = async () => {
@@ -52,7 +46,7 @@ export default function RealEstateLayout() {
     fetchAddressData();
   }, [center]);
 
-  const handleCardClick = (estate: AdditionalEstate) => {
+  const handleCardClick = (estate: RealEstatePreview) => {
     setSelectedEstate(estate); // 선택된 매물 정보 설정
 
     // 최근에 확인한 매물을 로컬 스토리지에 저장하는 로직
@@ -63,18 +57,18 @@ export default function RealEstateLayout() {
       // 기존 값이 있으면 파싱 후 배열의 맨 앞에 추가
       const parsedList = JSON.parse(existingList) as string[];
       // 중복 방지
-      if (!parsedList.includes(estate.basicInfo.atclNm)) {
+      if (!parsedList.includes(estate.name)) {
         // 리스트 길이는 항상 3을 유지 -> 최근 확인한 매물은 항상 최대 3개만 유지
         if (parsedList.length === 3) {
           parsedList.pop();
         }
 
-        parsedList.unshift(estate.basicInfo.atclNm);
+        parsedList.unshift(estate.name);
         localStorage.setItem(key, JSON.stringify(parsedList));
       }
     } else {
       // 기존 값이 없으면 새로운 배열 생성
-      localStorage.setItem(key, JSON.stringify([estate.basicInfo.atclNm]));
+      localStorage.setItem(key, JSON.stringify([estate.name]));
     }
   };
 
@@ -88,18 +82,10 @@ export default function RealEstateLayout() {
           <div className="flex items-center font-bold ml-1">
             <div>{realEstateCount}개의 매물</div>
           </div>
-          <DropdownCombobox
-            items={sortItems}
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-            comboboxClassName="border-gray-300 w-[130px] bg-white"
-            optionClassName="hover:bg-gray-200"
-          />
         </div>
         <div className="flex-grow min-h-0 overflow-y-auto">
-          {addDetailEstateData.map((item, index) => (
+          {state.result.realEstates.map((item, index) => (
             <div key={index} className="border-b">
-              {/* 카드 클릭 시 handleCardClick 호출 */}
               <RealEstateCard
                 estate={item}
                 isStarFilled={false}
@@ -113,13 +99,13 @@ export default function RealEstateLayout() {
         </div>
       </div>
 
-      {showRealEstate && selectedEstate && (
-        <RealEstateDetail
-          isStarFilled={false}
-          estate={selectedEstate}
-          onBackClick={() => setShowRealEstate(false)}
-        />
-      )}
+      {/*{showRealEstate && selectedEstate && (*/}
+      {/*  <RealEstateDetail*/}
+      {/*    isStarFilled={false}*/}
+      {/*    estate={selectedEstate}*/}
+      {/*    onBackClick={() => setShowRealEstate(false)}*/}
+      {/*  />*/}
+      {/*)}*/}
     </div>
   );
 }

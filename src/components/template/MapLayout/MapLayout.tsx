@@ -1,12 +1,22 @@
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { FaLocationCrosshairs } from 'react-icons/fa6';
-import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
+import {
+  Container as MapDiv,
+  Marker,
+  NaverMap,
+  useNavermaps,
+} from 'react-naver-maps';
 import { useLocation } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
 import centerAtom from '../../../recoil/center/index.ts';
+import {
+  CurrentAptMarkers,
+  CurrentAreaMarkers,
+  RealEstateList,
+} from '../../../types/hanaAssetResponse.common.ts';
 import Footer from '../Footer.tsx';
-import MapMarkerCluster from '../MapLayout/MapMarkerCluster.tsx';
 import MapPanel from '../MapLayout/MapPannel.tsx';
 import { Navbar } from '../Navbar.tsx';
 
@@ -17,17 +27,22 @@ interface LayoutProps {
 export default function MapLayout({ children }: LayoutProps) {
   const naverMaps = useNavermaps();
   const mapRef = useRef<naver.maps.Map | null>(null);
-
   const [showControlPanel, setShowControlPanel] = useState(false);
   const [mapType, setMapType] = useState(naverMaps.MapTypeId.NORMAL);
-  const [selectedEstate, setSelectedEstate] = useState(false);
+  const [realEstateList, setRealEstateList] = useState<RealEstateList | null>(
+    null
+  );
+  const [areaMarkers, setAreaMarkers] = useState<CurrentAreaMarkers | null>(
+    null
+  );
+  const [aptMarkers, setAptMarkers] = useState<CurrentAptMarkers | null>(null);
   const location = useLocation();
 
   useEffect(() => {
-    if (selectedEstate && location.pathname !== '/real-estate-list') {
-      setSelectedEstate(false);
+    if (realEstateList && location.pathname !== '/real-estate-list') {
+      setRealEstateList(null);
     }
-  }, [selectedEstate, location.pathname]); // 의존성 배열에 location.pathname만 추가
+  }, [realEstateList, location.pathname]); // 의존성 배열에 location.pathname만 추가
 
   const handleZoomIn = () => {
     if (mapRef.current) {
@@ -45,6 +60,38 @@ export default function MapLayout({ children }: LayoutProps) {
 
   const [zoom, setZoom] = useState(13);
   const [center, setCenter] = useRecoilState(centerAtom);
+
+  useEffect(() => {
+    if (zoom <= 15) {
+      const fetchMarkers = async () => {
+        try {
+          const currentAreaMarkers = await PlatformAPI.getAreaMarkersInfo({
+            lat: center.lat,
+            lng: center.lng,
+            zoom: zoom,
+          });
+          setAreaMarkers(currentAreaMarkers);
+        } catch (error) {
+          console.error('Error fetching clustering info:', error);
+        }
+      };
+      fetchMarkers();
+    } else {
+      const fetchMarkers = async () => {
+        try {
+          const currentAptMarkers = await PlatformAPI.getAptMarkersInfo({
+            lat: center.lat,
+            lng: center.lng,
+            zoom: zoom,
+          });
+          setAptMarkers(currentAptMarkers);
+        } catch (error) {
+          console.error('Error fetching clustering info:', error);
+        }
+      };
+      fetchMarkers();
+    }
+  }, [center, zoom]);
 
   const handleZoomChanged = useCallback((newZoom: number) => {
     setZoom(newZoom);
@@ -72,6 +119,18 @@ export default function MapLayout({ children }: LayoutProps) {
       alert('Geolocation is not supported by this browser.');
     }
   };
+
+  async function handleMarkerClick(markerId: number) {
+    try {
+      const realEstateList = await PlatformAPI.getRealEstatesList({
+        housingComplexId: markerId,
+      });
+      setRealEstateList(realEstateList);
+      console.log(realEstateList);
+    } catch (error) {
+      console.error('Error fetching real estate list:', error);
+    }
+  }
 
   return (
     <div className="w-full h-svh relative bg-[#f8fafb]">
@@ -136,14 +195,56 @@ export default function MapLayout({ children }: LayoutProps) {
           disableTwoFingerTapZoom={false}
           tileTransition={true}
           minZoom={7}
-          maxZoom={21}
+          maxZoom={17}
           scaleControl={true}
         >
-          <MapMarkerCluster onMarkerClick={setSelectedEstate} />
+          {zoom <= 15
+            ? areaMarkers?.result.markerInfos &&
+              areaMarkers?.result.markerInfos.map((marker) => (
+                <Marker
+                  key={marker.cortarNoCode}
+                  position={
+                    new naverMaps.LatLng(marker.centerLat, marker.centerLng)
+                  }
+                  title={marker.name.split(' ').pop()}
+                  icon={{
+                    content: `
+                    <div class="bg-hanaGreen w-18 h-10 px-2 py-2 rounded-lg flex items-center justify-center text-white text-xs font-bold text-center shadow-md">
+                      ${marker.name.split(' ').pop()}
+                
+                    </div>
+                 `,
+                    size: naverMaps.Size(50, 50),
+                  }}
+                  onClick={() => {
+                    setCenter({ lat: marker.centerLat, lng: marker.centerLng });
+                    handleZoomIn();
+                  }}
+                />
+              ))
+            : aptMarkers?.result.markerInfos &&
+              aptMarkers?.result.markerInfos.map((marker) => (
+                <Marker
+                  key={marker.housingComplexId}
+                  position={
+                    new naverMaps.LatLng(marker.centerLat, marker.centerLng)
+                  }
+                  title={marker.name}
+                  icon={{
+                    content: `
+  <div class="text-white text-xl mb-1">
+    🏢
+  </div>
+  `,
+                    size: naverMaps.Size(60, 60),
+                  }}
+                  onClick={() => handleMarkerClick(marker.housingComplexId)}
+                />
+              ))}
         </NaverMap>
       </MapDiv>
       <div className="hidden xs:block">
-        <Navbar state={selectedEstate}>{children}</Navbar>
+        <Navbar state={realEstateList!}>{children}</Navbar>
       </div>
 
       <div className="block xs:hidden">

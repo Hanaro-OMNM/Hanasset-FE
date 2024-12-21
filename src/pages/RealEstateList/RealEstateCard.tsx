@@ -1,9 +1,9 @@
 import React from 'react';
 import Star from '../../components/molecules/Star';
-import { AdditionalEstate } from '../../types/hanaAsset';
+import { RealEstatePreview } from '../../types/hanaAssetResponse.common.ts';
 
 interface RealEstateCardProps {
-  estate: AdditionalEstate;
+  estate: RealEstatePreview;
   onClick: () => void;
   isStarFilled: boolean;
 }
@@ -33,10 +33,15 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
   // 텍스트 길이가 9자를 초과하면 말줄임표를 추가 (텍스트 태그별로 길이 재정의해야 함)
 
   function convertToEok(number: number) {
-    return (number / 10000).toFixed(1) + '억';
+    return (number / 100000000).toFixed(1) + '억';
   }
 
-  const prcResult = estate ? convertToEok(estate.basicInfo.prc) : undefined;
+  function convertToMan(number: number) {
+    return (number / 10000).toFixed(1) + '만';
+  }
+
+  const prcResult = estate ? convertToMan(estate.price) : undefined;
+  const depositResult = estate ? convertToEok(estate.deposit) : undefined;
 
   return (
     <button className="flex" onClick={onClick}>
@@ -44,32 +49,35 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
         <img
           className="w-[100px] h-[100px] object-cover flex-shrink-0 rounded-3xl"
           src={
-            estate.addressInfo.photos[0]
-              ? estate.addressInfo.photos[0].url
+            estate.imgUrl
+              ? 'https://landthumb-phinf.pstatic.net/' + estate.imgUrl
               : 'https://placehold.co/100x100'
           }
-          alt={`${estate.addressInfo.photos[0] ? estate.addressInfo.photos[0].category : '임시'} 이미지`}
+          alt={`${estate.imgUrl ? estate.name : '임시'} 이미지`}
         />
         <div className="flex flex-col justify-center p-4 flex-grow min-w-0 w-64">
-          {estate.basicInfo.tradTpNm === '전세' ? (
+          {estate.type === '전세' ? (
             <div className="flex text-sm font-bold mb-2 items-center">
               <div className="text-hanaGreen flex-shrink-0 text-xl">전세</div>
-              <div className="ml-2 flex-shrink-0"> {prcResult} </div>
+              <div className="ml-2 flex-shrink-0"> {depositResult} </div>
             </div>
           ) : (
             <div className="flex text-sm font-bold mb-2 items-center">
               <div className="text-hanaRed80 flex-shrink-0 text-xl">월세</div>
-              <div className="ml-2 flex-shrink-0"> {prcResult} </div>
+              <div className="ml-2 flex-shrink-0">
+                {' '}
+                {depositResult}/{prcResult}{' '}
+              </div>
             </div>
           )}
           <div className="flex w-full min-w-0">
-            {estate.basicInfo.rletTpCd === 'A01' ? (
+            {estate.rentType === 'A01' ? (
               <span className="text-blue-600 pr-1 font-semibold flex-shrink-0 ">
-                아파트
+                아파트 {estate.floor}층
               </span>
             ) : (
               <div>
-                {estate.basicInfo.rletTpCd === 'B01' ? (
+                {estate.rentType === 'B01' ? (
                   <span className="text-hanaRed80 pr-1 font-bold text-base flex-shrink-0">
                     오피스텔
                   </span>
@@ -81,14 +89,11 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
               </div>
             )}
             <span className="text-black text-sm truncate content-center">
-              · {truncateArticleName(estate.basicInfo.atclNm)}
+              · {truncateArticleName(estate.name)}
             </span>
           </div>
           <p className="text-[#b5b5b5] text-sm text-start">
-            {truncateDescriptionText(
-              estate.priceInfo.detailInfo.articleDetailInfo
-                .articleFeatureDescription
-            )}
+            {truncateDescriptionText(estate.description)}
           </p>
         </div>
       </div>

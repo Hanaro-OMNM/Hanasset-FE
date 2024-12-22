@@ -1,6 +1,6 @@
 import { FaTimes } from 'react-icons/fa';
 import { useState } from 'react';
-import Greeting from '../../../assets/img/login/HanaGreeting.png';
+import Happy from '../../../assets/img/login/HanaHappy.png';
 import { CookieUtils } from '../../../utils/CookieUtils.ts';
 import Input from '../../atoms/Input.tsx';
 import SocialLoginGroup from '../../molecules/SocialLoginGroup.tsx';
@@ -46,7 +46,7 @@ export default function LoginPage({
         <div className="font-bold">관심 매물 상담까지 받아보세요!</div>
       </div>
       <div className="flex justify-center">
-        <img src={Greeting} alt="인사" />
+        <img src={Happy} alt="하나은행 로그인" />
       </div>
       <div className="space-y-4 px-4 pt-2">
         <div className="relative">

@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import {
+  BirthDate,
   ConfirmCode,
   CurrentLocation,
   EmailSignUpRequest,
@@ -78,6 +79,16 @@ export class PlatformAPI {
   public static async signUp(emailSignUp: EmailSignUpRequest): Promise<number> {
     try {
       const response = await this.instance.post('/users/signup', emailSignUp);
+      return response.status;
+    } catch (error) {
+      console.error('Error sending email:', error); // 요청 실패 시 false 반환
+      return 400;
+    }
+  }
+
+  public static async submitBirthDate(birthDate: BirthDate): Promise<number> {
+    try {
+      const response = await this.instance.post(`/users/birth`, birthDate);
       return response.status;
     } catch (error) {
       console.error('Error sending email:', error); // 요청 실패 시 false 반환

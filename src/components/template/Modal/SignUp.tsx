@@ -1,17 +1,22 @@
 import { FaTimes } from 'react-icons/fa';
 import { FiChevronLeft } from 'react-icons/fi';
 import { useState } from 'react';
-import HanaGreeting from '../../../assets/img/signUp/HanaGreeting.png';
 import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
 import ModalInput from '../../atoms/ModalInput.tsx';
 
 interface SignUpPageProps {
-  onSignUpSuccess?: () => void;
+  onSignUpSuccessEmail: React.Dispatch<
+    React.SetStateAction<string | undefined>
+  >;
   onClose: () => void;
   onSignUpPage: () => void;
 }
 
-export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
+export default function SignUpPage({
+  onSignUpSuccessEmail,
+  onSignUpPage,
+  onClose,
+}: SignUpPageProps) {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,7 +42,6 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
       emailVerification: false,
     };
 
-    // 유효성 검사
     if (!userName) {
       newErrors.userName = '닉네임을 입력하세요.';
       valid = false;
@@ -72,8 +76,8 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
         confirmPassword: confirmPassword,
       });
       if (statusCode === 200) {
-        alert('회원가입에 성공하셨습니다!');
-        onSignUpPage();
+        alert('회원가입에 성공하셨습니다.');
+        onSignUpSuccessEmail(email!);
       } else {
         if (statusCode === 401 || statusCode === 400) {
           alert('이미 등록된 이메일입니다.');
@@ -85,7 +89,7 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
   const handleSendEmailVerification = async (email: string) => {
     const response = await PlatformAPI.sendMail(email);
     if (response) {
-      alert('메일이 전송되었습니다!');
+      alert('메일이 전송되었습니다.');
       setIsVerificationSent(true);
     } else {
       alert('메일 전송에 실패했습니다!');
@@ -99,17 +103,17 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
       code: code,
     });
     if (response) {
-      alert('인증에 성공하셨습니다!');
+      alert('인증에 성공하셨습니다.');
       setEmailVerification(true);
     } else {
-      alert('메일 전송에 실패했습니다!');
+      alert('메일 인증에 실패했습니다!');
     }
   };
 
   return (
-    <div>
+    <div className="bg-white w-[320px] h-[500px] rounded-lg shadow-lg animate-fadeInRight">
       <div className="flex items-center justify-center my-4">
-        <div className="font-bold">회원가입</div>
+        <div className="font-bold mt-4">회원가입</div>
         <button
           className="absolute top-4 left-2 text-gray-500 hover:text-gray-700"
           onClick={onSignUpPage}
@@ -123,76 +127,86 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
           <FaTimes className="text-xl" />
         </button>
       </div>
-      <div className="flex justify-center">
-        <img src={HanaGreeting} alt="하나은행 로그인" />
-      </div>
-      <div className="relative space-y-1 px-4 py-1">
+      <div className="relative px-4 py-1">
         <ModalInput
           name="userName"
           type="text"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
           placeholder="이름"
+          className="pb-4"
           error={!!errors.userName}
           errorMessage={errors.userName}
         />
-        <div>
-          <div className="flex">
-            <input
-              className="flex-grow rounded-xl p-2 focus:outline-none text-left border-2 bg-white text-hanaBlack80 !border-opacity-50 !border-hanaGreen40"
-              name="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="이메일"
-            />
-            <button
-              onClick={() => handleSendEmailVerification(email)}
-              className="w-20 h-10 px-1 mx-2 mt-1 text-white text-sm bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
-            >
-              메일인증
-            </button>
+        <div className="space-y-2">
+          <div>
+            <div className="flex">
+              <input
+                className="flex-grow rounded-xl p-2 focus:outline-none text-left border-2 bg-white text-hanaBlack80 !border-opacity-50 !border-hanaGreen40"
+                name="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="이메일"
+              />
+              <button
+                onClick={() => handleSendEmailVerification(email)}
+                className="w-20 h-10 px-1 mx-2 mt-1 text-white text-sm bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
+              >
+                인증
+              </button>
+            </div>
+            {isVerificationSent && !emailVerification && (
+              <p className="text-xs text-gray-500 ml-2 my-1">
+                인증 메일이 전송되었습니다. 메일을 확인해 주세요.
+              </p>
+            )}
+            {emailVerification && (
+              <p className="text-xs text-green-600 ml-2 my-1">
+                이메일 인증이 성공적으로 완료되었습니다.
+              </p>
+            )}
+            {!isVerificationSent && !emailVerification && (
+              <p className="text-xs text-red-500 ml-2 my-1">
+                확인 코드를 전송해주세요.
+              </p>
+            )}
           </div>
-          {isVerificationSent && !emailVerification && (
-            <p className="text-xs text-gray-500 ml-2 my-1">
-              인증 메일이 전송되었습니다. 메일을 확인해 주세요.
-            </p>
-          )}
-          {emailVerification && (
-            <p className="text-xs text-green-600 ml-2 my-1">
-              이메일 인증이 성공적으로 완료되었습니다.
-            </p>
-          )}
-
-          <div className="flex">
-            <input
-              className="flex-grow rounded-xl p-2 focus:outline-none text-left border-2 bg-white text-hanaBlack80 !border-opacity-50 !border-hanaGreen40"
-              name="verificationCode"
-              type="text"
-              value={verificationCode}
-              onChange={(e) => setVerificationCode(e.target.value)}
-              placeholder="인증 코드"
-            />
-            <button
-              onClick={() => handleVerifyCode(email, verificationCode)}
-              className="w-20 h-10 px-1 mx-2 mt-1 text-white text-sm bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
-            >
-              확인
-            </button>
+          <div>
+            <div className="flex">
+              <input
+                className="flex-grow rounded-xl p-2 focus:outline-none text-left border-2 bg-white text-hanaBlack80 !border-opacity-50 !border-hanaGreen40"
+                name="verificationCode"
+                type="text"
+                value={verificationCode}
+                onChange={(e) => setVerificationCode(e.target.value)}
+                placeholder="인증 코드"
+              />
+              <button
+                onClick={() => handleVerifyCode(email, verificationCode)}
+                className="w-20 h-10 px-1 mx-2 mt-1 text-white text-sm bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
+              >
+                확인
+              </button>
+            </div>
+            {emailVerification ? (
+              <p className="text-xs text-green-600 ml-2 my-1">
+                인증 코드가 확인되었습니다.
+              </p>
+            ) : (
+              <p className="text-xs text-red-500 ml-2 my-1">
+                인증 코드를 확인해주세요.
+              </p>
+            )}
           </div>
-          {emailVerification && (
-            <p className="text-xs text-green-600 ml-2 my-1">
-              인증 코드가 확인되었습니다.
-            </p>
-          )}
         </div>
-
         <ModalInput
           name="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="비밀번호"
+          className="pb-4"
           error={!!errors.password}
           errorMessage={errors.password}
         />
@@ -202,11 +216,11 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder="비밀번호 확인"
+          className="pb-4"
           error={!!errors.confirmPassword}
           errorMessage={errors.confirmPassword}
         />
       </div>
-
       <div className="flex justify-center flex-col">
         <button
           onClick={() => handleSignUp()}

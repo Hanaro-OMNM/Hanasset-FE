@@ -19,3 +19,8 @@ export interface EmailSignUpRequest {
   password: string;
   confirmPassword: string;
 }
+
+export interface BirthDate {
+  email: string;
+  birthDate: Date;
+}

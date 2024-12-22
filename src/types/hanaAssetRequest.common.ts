@@ -12,3 +12,10 @@ export interface ConfirmCode {
   email: string;
   code: number;
 }
+
+export interface EmailSignUpRequest {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}

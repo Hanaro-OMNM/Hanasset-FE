@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import {
   ConfirmCode,
   CurrentLocation,
+  EmailSignUpRequest,
   MarkerComplexId,
 } from '../types/hanaAssetRequest.common.ts';
 import {
@@ -71,6 +72,16 @@ export class PlatformAPI {
     } catch (error) {
       console.error('Error sending email:', error);
       return false; // 요청 실패 시 false 반환
+    }
+  }
+
+  public static async signUp(emailSignUp: EmailSignUpRequest): Promise<number> {
+    try {
+      const response = await this.instance.post('/users/signup', emailSignUp);
+      return response.status;
+    } catch (error) {
+      console.error('Error sending email:', error); // 요청 실패 시 false 반환
+      return 400;
     }
   }
 }

@@ -55,7 +55,7 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
       valid = false;
     }
 
-    if (!verificationCode) {
+    if (!emailVerification) {
       valid = false;
     }
 
@@ -63,17 +63,32 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
     return valid;
   };
 
-  const handleSignup = () => {
+  const handleSignUp = async () => {
     if (validateInputs()) {
-      const response = await PlatformAPI.
-      onSignUpPage();
+      const statusCode = await PlatformAPI.signUp({
+        email: email,
+        name: userName,
+        password: password,
+        confirmPassword: confirmPassword,
+      });
+      if (statusCode === 200) {
+        alert('회원가입에 성공하셨습니다!');
+        onSignUpPage();
+      } else {
+        if (statusCode === 401 || statusCode === 400) {
+          alert('이미 등록된 이메일입니다.');
+        }
+      }
     }
   };
 
   const handleSendEmailVerification = async (email: string) => {
     const response = await PlatformAPI.sendMail(email);
     if (response) {
+      alert('메일이 전송되었습니다!');
       setIsVerificationSent(true);
+    } else {
+      alert('메일 전송에 실패했습니다!');
     }
   };
 
@@ -86,6 +101,8 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
     if (response) {
       alert('인증에 성공하셨습니다!');
       setEmailVerification(true);
+    } else {
+      alert('메일 전송에 실패했습니다!');
     }
   };
 
@@ -119,26 +136,37 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
           error={!!errors.userName}
           errorMessage={errors.userName}
         />
-        <div className="flex">
-          <ModalInput
-            name="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="이메일"
-            error={!!errors.email}
-            errorMessage={errors.email}
-          />
-          <button
-            onClick={() => handleSendEmailVerification(email)}
-            className="w-20 h-10 px-1 mx-2 mt-1 text-white text-sm bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
-          >
-            메일인증
-          </button>
-        </div>
-        {isVerificationSent && (
+        <div>
           <div className="flex">
-            <ModalInput
+            <input
+              className="flex-grow rounded-xl p-2 focus:outline-none text-left border-2 bg-white text-hanaBlack80 !border-opacity-50 !border-hanaGreen40"
+              name="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="이메일"
+            />
+            <button
+              onClick={() => handleSendEmailVerification(email)}
+              className="w-20 h-10 px-1 mx-2 mt-1 text-white text-sm bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
+            >
+              메일인증
+            </button>
+          </div>
+          {isVerificationSent && !emailVerification && (
+            <p className="text-xs text-gray-500 ml-2 my-1">
+              인증 메일이 전송되었습니다. 메일을 확인해 주세요.
+            </p>
+          )}
+          {emailVerification && (
+            <p className="text-xs text-green-600 ml-2 my-1">
+              이메일 인증이 성공적으로 완료되었습니다.
+            </p>
+          )}
+
+          <div className="flex">
+            <input
+              className="flex-grow rounded-xl p-2 focus:outline-none text-left border-2 bg-white text-hanaBlack80 !border-opacity-50 !border-hanaGreen40"
               name="verificationCode"
               type="text"
               value={verificationCode}
@@ -152,7 +180,13 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
               확인
             </button>
           </div>
-        )}
+          {emailVerification && (
+            <p className="text-xs text-green-600 ml-2 my-1">
+              인증 코드가 확인되었습니다.
+            </p>
+          )}
+        </div>
+
         <ModalInput
           name="password"
           type="password"
@@ -175,7 +209,7 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
 
       <div className="flex justify-center flex-col">
         <button
-          onClick={handleSignup}
+          onClick={() => handleSignUp()}
           className="mx-4 py-1 text-white bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
         >
           회원가입

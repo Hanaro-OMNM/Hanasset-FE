@@ -1,6 +1,8 @@
-import { FaTimes, FaCamera } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import { FiChevronLeft } from 'react-icons/fi';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
+import HanaGreeting from '../../../assets/img/signUp/HanaGreeting.png';
+import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
 import ModalInput from '../../atoms/ModalInput.tsx';
 
 interface SignUpPageProps {
@@ -10,24 +12,20 @@ interface SignUpPageProps {
 }
 
 export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
-  const [profileImage, setProfileImage] = useState('https://placehold.co/100');
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [emailVerification, setEmailVerification] = useState(false);
+  const [isVerificationSent, setIsVerificationSent] = useState(false);
   const [errors, setErrors] = useState({
     userName: '',
     email: '',
     password: '',
     confirmPassword: '',
+    emailVerification: false,
   });
-
-  const handleProfileImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setProfileImage(URL.createObjectURL(file));
-    }
-  };
 
   const validateInputs = () => {
     let valid = true;
@@ -36,6 +34,7 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
       email: '',
       password: '',
       confirmPassword: '',
+      emailVerification: false,
     };
 
     // 유효성 검사
@@ -56,13 +55,37 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
       valid = false;
     }
 
+    if (!verificationCode) {
+      valid = false;
+    }
+
     setErrors(newErrors);
     return valid;
   };
 
   const handleSignup = () => {
     if (validateInputs()) {
+      const response = await PlatformAPI.
       onSignUpPage();
+    }
+  };
+
+  const handleSendEmailVerification = async (email: string) => {
+    const response = await PlatformAPI.sendMail(email);
+    if (response) {
+      setIsVerificationSent(true);
+    }
+  };
+
+  const handleVerifyCode = async (email: string, verificationCode: string) => {
+    const code = Number(verificationCode);
+    const response = await PlatformAPI.confirmCode({
+      email: email,
+      code: code,
+    });
+    if (response) {
+      alert('인증에 성공하셨습니다!');
+      setEmailVerification(true);
     }
   };
 
@@ -83,45 +106,53 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
           <FaTimes className="text-xl" />
         </button>
       </div>
-
-      <div className="relative flex flex-col items-center mb-2">
-        <img
-          src={profileImage}
-          alt="프로필"
-          className="w-24 h-24 rounded-full object-cover shadow-md"
-        />
-
-        {/* 연필 아이콘 - input 대신 사용할 버튼 */}
-        <label className="absolute top-[65px] right-[105px] bg-white rounded-full p-2 cursor-pointer">
-          <FaCamera className="text-gray-500 text-xl" />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleProfileImageChange}
-            className="hidden"
-          />
-        </label>
+      <div className="flex justify-center">
+        <img src={HanaGreeting} alt="하나은행 로그인" />
       </div>
-
-      <div className="relative space-y-2 p-4">
+      <div className="relative space-y-1 px-4 py-1">
         <ModalInput
           name="userName"
           type="text"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
-          placeholder="닉네임"
+          placeholder="이름"
           error={!!errors.userName}
           errorMessage={errors.userName}
         />
-        <ModalInput
-          name="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="이메일"
-          error={!!errors.email}
-          errorMessage={errors.email}
-        />
+        <div className="flex">
+          <ModalInput
+            name="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="이메일"
+            error={!!errors.email}
+            errorMessage={errors.email}
+          />
+          <button
+            onClick={() => handleSendEmailVerification(email)}
+            className="w-20 h-10 px-1 mx-2 mt-1 text-white text-sm bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
+          >
+            메일인증
+          </button>
+        </div>
+        {isVerificationSent && (
+          <div className="flex">
+            <ModalInput
+              name="verificationCode"
+              type="text"
+              value={verificationCode}
+              onChange={(e) => setVerificationCode(e.target.value)}
+              placeholder="인증 코드"
+            />
+            <button
+              onClick={() => handleVerifyCode(email, verificationCode)}
+              className="w-20 h-10 px-1 mx-2 mt-1 text-white text-sm bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
+            >
+              확인
+            </button>
+          </div>
+        )}
         <ModalInput
           name="password"
           type="password"
@@ -149,7 +180,7 @@ export default function SignUpPage({ onSignUpPage, onClose }: SignUpPageProps) {
         >
           회원가입
         </button>
-        <div className="text-xs text-center py-1 mt-2">
+        <div className="text-xs text-center py-1 mt-1">
           이미 계정이 있으신가요?{' '}
           <button onClick={onSignUpPage} className="ml-1 my-1 text-hanaColor2">
             로그인

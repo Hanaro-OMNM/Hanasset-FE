@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import RealEstateDetailLayout from '../../components/template/RealEstateDetailLayout';
 import { AdditionalEstate } from '../../types/hanaAsset';
+import { RealEstatePreview } from '../../types/hanaAssetResponse.common.ts';
 import BasicInfo from './components/BasicInfo.tsx';
 import Estimate from './components/Estimate';
 import ImageCarousel from './components/ImageCarousel';
@@ -11,15 +12,15 @@ import Tabs from './components/Tabs';
 import TypeInfo from './components/TypeInfo';
 
 interface RealEstateDetailProps {
-  estate?: AdditionalEstate;
+  realEstate: RealEstatePreview;
   onBackClick: () => void;
   isStarFilled: boolean;
 }
 
 export default function RealEstateDetail({
-  estate,
-  onBackClick,
+  realEstate,
   isStarFilled,
+  onBackClick,
 }: RealEstateDetailProps) {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -39,102 +40,168 @@ export default function RealEstateDetail({
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  const floorPlanImage = estate?.floorPlanInfo.floorPlanUrls?.BASE
-    ? estate?.floorPlanInfo.floorPlanUrls.BASE['0'][2]
-    : estate?.floorPlanInfo.floorPlanUrls.EXPN?.OPT1[2];
-
   return (
     <RealEstateDetailLayout>
-      <ImageCarousel
-        images={estate?.addressInfo.photos}
-        onBackClick={onBackClick}
-      />
-      <PropertyInfo
-        name={estate?.basicInfo.atclNm}
-        title={estate?.basicInfo.bildNm}
-        floor={estate?.priceInfo.detailInfo.spaceInfo.floorInfo.targetFloor}
-        rentType={estate?.basicInfo.tradTpNm}
-        price={estate?.basicInfo.prc}
-        isStarFilled={isStarFilled}
-      />
+      <ImageCarousel image={realEstate.imgUrl} onBackClick={onBackClick} />
+      <PropertyInfo estate={realEstate} isStarFilled={isStarFilled} />
 
       <Tabs tabs={tabData} onTabClick={handleTabClick} />
+
       <div id="시세" className="pt-12">
         <MarketSection
-          supplyArea={estate?.floorPlanInfo.supplyArea}
-          exclusiveArea={estate?.floorPlanInfo.exclusiveArea}
-          realPriceInfo={estate?.realPriceInfo}
+          supplyArea={138.89}
+          exclusiveArea={101.83}
+          realPriceInfo={{
+            B1: [
+              {
+                tradeDate: '2024-03-25',
+                tradeYear: '2024',
+                floor: 2,
+                dealPrice: null,
+                deposit: 730000000,
+                monthlyRent: 0,
+                deleteDate: null,
+                isDelete: false,
+                tradeCategory: null,
+                registrationDate: null,
+              },
+              {
+                tradeDate: '2023-11-13',
+                tradeYear: '2023',
+                floor: 15,
+                dealPrice: null,
+                deposit: 800000000,
+                monthlyRent: 0,
+                deleteDate: null,
+                isDelete: false,
+                tradeCategory: null,
+                registrationDate: null,
+              },
+              {
+                tradeDate: '2023-03-28',
+                tradeYear: '2023',
+                floor: 27,
+                dealPrice: null,
+                deposit: 750000000,
+                monthlyRent: 0,
+                deleteDate: null,
+                isDelete: false,
+                tradeCategory: null,
+                registrationDate: null,
+              },
+              {
+                tradeDate: '2018-12-19',
+                tradeYear: '2018',
+                floor: 33,
+                dealPrice: null,
+                deposit: 620000000,
+                monthlyRent: 0,
+                deleteDate: null,
+                isDelete: false,
+                tradeCategory: null,
+                registrationDate: null,
+              },
+              {
+                tradeDate: '2017-06-04',
+                tradeYear: '2017',
+                floor: 22,
+                dealPrice: null,
+                deposit: 570000000,
+                monthlyRent: 0,
+                deleteDate: null,
+                isDelete: false,
+                tradeCategory: null,
+                registrationDate: null,
+              },
+              {
+                tradeDate: '2016-10-06',
+                tradeYear: '2016',
+                floor: 33,
+                dealPrice: null,
+                deposit: 520000000,
+                monthlyRent: 0,
+                deleteDate: null,
+                isDelete: false,
+                tradeCategory: null,
+                registrationDate: null,
+              },
+            ],
+            B2: [
+              {
+                tradeDate: '2023-01-28',
+                tradeYear: '2023',
+                floor: 22,
+                dealPrice: null,
+                deposit: 250000000,
+                monthlyRent: 1650000,
+                deleteDate: null,
+                isDelete: false,
+                tradeCategory: null,
+                registrationDate: null,
+              },
+              {
+                tradeDate: '2022-12-03',
+                tradeYear: '2022',
+                floor: 33,
+                dealPrice: null,
+                deposit: 700000000,
+                monthlyRent: 600000,
+                deleteDate: null,
+                isDelete: false,
+                tradeCategory: null,
+                registrationDate: null,
+              },
+              {
+                tradeDate: '2021-02-16',
+                tradeYear: '2021',
+                floor: 22,
+                dealPrice: null,
+                deposit: 250000000,
+                monthlyRent: 1800000,
+                deleteDate: null,
+                isDelete: false,
+                tradeCategory: null,
+                registrationDate: null,
+              },
+              {
+                tradeDate: '2020-07-08',
+                tradeYear: '2020',
+                floor: 32,
+                dealPrice: null,
+                deposit: 400000000,
+                monthlyRent: 750000,
+                deleteDate: null,
+                isDelete: false,
+                tradeCategory: null,
+                registrationDate: null,
+              },
+              {
+                tradeDate: '2018-11-10',
+                tradeYear: '2018',
+                floor: 22,
+                dealPrice: null,
+                deposit: 260000000,
+                monthlyRent: 1000000,
+                deleteDate: null,
+                isDelete: false,
+                tradeCategory: null,
+                registrationDate: null,
+              },
+            ],
+          }}
         />
       </div>
+
       <div id="타입" className="pt-12">
-        <TypeInfo
-          supplyArea={estate?.floorPlanInfo.supplyArea}
-          unitsOfSameAreaNumber={estate?.floorPlanInfo.unitsOfSameArea}
-          floorPlanImage={floorPlanImage}
-          exclusiveArea={estate?.floorPlanInfo.exclusiveArea}
-          rooms={estate?.floorPlanInfo.roomCount}
-          bathrooms={estate?.floorPlanInfo.bathRoomCount}
-          managementFee={estate!.maintenanceInfo.yearMonthFee}
-          floorPlanLink={
-            'https://fin.land.naver.com/articles/' + estate?.basicInfo.atclNo
-          }
-        />
+        <TypeInfo realEstateId={realEstate.realEstateId} />
       </div>
+
       <div id="매물정보" className="pt-12">
-        <PropertyDetails
-          propertyNumber={estate?.basicInfo.atclNo}
-          movingInInfo={estate!.priceInfo.detailInfo.movingInInfo}
-          managementFee={estate!.maintenanceInfo.yearMonthFee}
-          parkingCount={estate?.addressInfo.parkingInfo.totalParkingCount}
-          parkingPerHousehold={
-            estate?.addressInfo.parkingInfo.parkingCountPerHousehold
-          }
-          direction={estate?.priceInfo.detailInfo.spaceInfo.direction}
-          directionStandard={
-            estate?.priceInfo.detailInfo.spaceInfo.directionStandard
-          }
-          totalFloors={
-            estate?.priceInfo.detailInfo.spaceInfo.floorInfo.totalFloor
-          }
-          currentFloor={
-            estate?.priceInfo.detailInfo.spaceInfo.floorInfo.targetFloor
-          }
-          unitsOfSameAreaNumber={estate?.floorPlanInfo.unitsOfSameArea}
-        />
+        <PropertyDetails realEstateId={realEstate.realEstateId} />
       </div>
+
       <div id="기본정보" className="pt-12">
-        <BasicInfo
-          useApprovalDate={estate?.addressInfo.useApprovalDate}
-          approvalElapsedYear={estate?.addressInfo.approvalElapsedYear}
-          city={estate?.addressInfo.address.city}
-          division={estate?.addressInfo.address.division}
-          sector={estate?.addressInfo.address.sector}
-          roadName={estate?.addressInfo.address.roadName}
-          totalHouseholdNumber={estate?.addressInfo.totalHouseholdNumber}
-          dongCount={estate?.addressInfo.dongCount}
-          parkingPerHousehold={
-            estate?.addressInfo.parkingInfo.parkingCountPerHousehold
-          }
-          parkingCount={estate?.addressInfo.parkingInfo.totalParkingCount}
-          totalFloors={
-            estate?.priceInfo.detailInfo.spaceInfo.floorInfo.totalFloor
-          }
-          entranceType={estate?.priceInfo.detailInfo.facilityInfo.entranceType}
-          heatingAndCoolingSystemType={
-            estate?.addressInfo.heatingAndCoolingInfo
-              .heatingAndCoolingSystemType
-          }
-          heatingEnergyType={
-            estate?.addressInfo.heatingAndCoolingInfo.heatingEnergyType
-          }
-          floorAreaRatio={estate?.addressInfo.buildingRatioInfo.floorAreaRatio}
-          buildingRatio={
-            estate?.addressInfo.buildingRatioInfo.buildingCoverageRatio
-          }
-          constructionCompany={estate?.addressInfo.constructionCompany}
-          brokerage={estate?.brokerInfo.phone.brokerage}
-        />
+        <BasicInfo realEstateId={realEstate.realEstateId} />
       </div>
       <div id="예산" className="pt-12">
         <Estimate totalAsset={28} />

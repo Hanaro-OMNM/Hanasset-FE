@@ -48,28 +48,6 @@ export default function RealEstateLayout() {
 
   const handleCardClick = (estate: RealEstatePreview) => {
     setSelectedEstate(estate); // 선택된 매물 정보 설정
-
-    // 최근에 확인한 매물을 로컬 스토리지에 저장하는 로직
-    const key = 'recentVisitedList';
-    const existingList = localStorage.getItem(key);
-
-    if (existingList) {
-      // 기존 값이 있으면 파싱 후 배열의 맨 앞에 추가
-      const parsedList = JSON.parse(existingList) as string[];
-      // 중복 방지
-      if (!parsedList.includes(estate.name)) {
-        // 리스트 길이는 항상 3을 유지 -> 최근 확인한 매물은 항상 최대 3개만 유지
-        if (parsedList.length === 3) {
-          parsedList.pop();
-        }
-
-        parsedList.unshift(estate.name);
-        localStorage.setItem(key, JSON.stringify(parsedList));
-      }
-    } else {
-      // 기존 값이 없으면 새로운 배열 생성
-      localStorage.setItem(key, JSON.stringify([estate.name]));
-    }
   };
 
   const navigate = useNavigate();
@@ -99,13 +77,13 @@ export default function RealEstateLayout() {
         </div>
       </div>
 
-      {/*{showRealEstate && selectedEstate && (*/}
-      {/*  <RealEstateDetail*/}
-      {/*    isStarFilled={false}*/}
-      {/*    estate={selectedEstate}*/}
-      {/*    onBackClick={() => setShowRealEstate(false)}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {showRealEstate && selectedEstate && (
+        <RealEstateDetail
+          realEstate={selectedEstate}
+          isStarFilled={false}
+          onBackClick={() => setShowRealEstate(false)}
+        />
+      )}
     </div>
   );
 }

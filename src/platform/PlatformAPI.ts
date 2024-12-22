@@ -6,7 +6,10 @@ import {
 import {
   CurrentAptMarkers,
   CurrentAreaMarkers,
+  RealEstateBasic,
+  RealEstateDetail,
   RealEstateList,
+  RealEstateType,
 } from '../types/hanaAssetResponse.common.ts';
 
 export class PlatformAPI {
@@ -47,5 +50,41 @@ export class PlatformAPI {
       params: markerComplexId,
     });
     return response.data as RealEstateList;
+  }
+
+  public static async getRealEstateType(
+    realEstateId: number
+  ): Promise<RealEstateType> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/type`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateType;
+  }
+
+  public static async getRealEstateDetail(
+    realEstateId: number
+  ): Promise<RealEstateDetail> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/detail`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateDetail;
+  }
+
+  public static async getRealEstateBasic(
+    realEstateId: number
+  ): Promise<RealEstateBasic> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/basic`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateBasic;
   }
 }

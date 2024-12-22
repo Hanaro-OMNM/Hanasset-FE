@@ -32,7 +32,7 @@ export default function LoginPage({
   };
 
   return (
-    <div>
+    <div className="bg-white w-[320px] h-[500px] rounded-lg shadow-lg animate-fadeInRight">
       <div className="flex items-center justify-center my-3">
         <button
           className="absolute top-4 right-2 text-gray-500 hover:text-gray-700"

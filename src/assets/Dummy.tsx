@@ -20,7 +20,7 @@ export interface Loan {
   name: string;
   rate: number;
   limit: number;
-  newDsr: number;
+  dsr: number;
   loanDetailUrl: string;
 }
 
@@ -73,7 +73,7 @@ export const hanaYouthJeonseLoan: Loan = {
   name: '하나 청년전세론',
   rate: 4.453,
   limit: 2,
-  newDsr: 20,
+  dsr: 20,
   loanDetailUrl: '',
 };
 
@@ -81,7 +81,7 @@ export const seoulYouthLoan: Loan = {
   name: '서울특별시 청년임차 보증금 대출',
   rate: 4.52,
   limit: 2,
-  newDsr: 25,
+  dsr: 25,
   loanDetailUrl: '',
 };
 
@@ -89,7 +89,7 @@ export const welfareGuardianJeonseLoan: Loan = {
   name: '복지지킴이전세론',
   rate: 4.383,
   limit: 2,
-  newDsr: 25,
+  dsr: 25,
   loanDetailUrl: '',
 };
 
@@ -97,7 +97,7 @@ export const jeonseSecurityLoan: Loan = {
   name: '전세안심금대출',
   rate: 4.71,
   limit: 2,
-  newDsr: 30,
+  dsr: 30,
   loanDetailUrl: '',
 };
 
@@ -105,7 +105,7 @@ export const beotimmogYoungWarrantyWolseLoan: Loan = {
   name: '버팀목 청년전용보증부월세대출',
   rate: 1.3,
   limit: 0.45,
-  newDsr: 23,
+  dsr: 23,
   loanDetailUrl: '',
 };
 
@@ -113,7 +113,7 @@ export const beotimmogSmallBusinessJeonseLoan: Loan = {
   name: '버팀목 중소기업취업청년 전세자금대출',
   rate: 1.5,
   limit: 1,
-  newDsr: 28,
+  dsr: 28,
   loanDetailUrl: '',
 };
 
@@ -121,7 +121,7 @@ export const beotimmogJeonseLoan: Loan = {
   name: '버팀목전세자금대출',
   rate: 2.0,
   limit: 3,
-  newDsr: 32,
+  dsr: 32,
   loanDetailUrl: '',
 };
 

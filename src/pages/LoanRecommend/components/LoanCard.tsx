@@ -60,10 +60,10 @@ const LoanLimit: React.FC<LoanLimitProps> = ({ isBest, limit }) => {
 // LoanNewDsr Components
 interface LoanNewDsrProps {
   isBest: boolean;
-  newDsr: number;
+  dsr: number;
 }
 
-const LoanNewDsr: React.FC<LoanNewDsrProps> = ({ isBest, newDsr }) => {
+const LoanDsr: React.FC<LoanNewDsrProps> = ({ isBest, dsr }) => {
   return (
     <h6
       className={clsx(
@@ -71,7 +71,7 @@ const LoanNewDsr: React.FC<LoanNewDsrProps> = ({ isBest, newDsr }) => {
         !isBest && 'h-5 text-hanaBlack60 text-xs font-semibold'
       )}
     >
-      {`DSR ${newDsr}%`}
+      {`DSR ${dsr}%`}
     </h6>
   );
 };
@@ -83,7 +83,7 @@ interface LoanCardProps {
   name: string;
   rate: number;
   limit: number;
-  newDsr: number;
+  dsr: number;
   loanDetailUrl: string;
   onLoanDetailButtonClick: () => void;
 }
@@ -94,7 +94,7 @@ const LoanCard: React.FC<LoanCardProps> = ({
   name,
   rate,
   limit,
-  newDsr,
+  dsr,
   onLoanDetailButtonClick,
 }) => {
   return (
@@ -112,7 +112,7 @@ const LoanCard: React.FC<LoanCardProps> = ({
             <div className="mt-1 pt-1 flex justify-between">
               <LoanRate isBest={isBest} rate={rate} />
               <LoanLimit isBest={isBest} limit={limit} />
-              <LoanNewDsr isBest={isBest} newDsr={newDsr} />
+              <LoanDsr isBest={isBest} dsr={dsr} />
             </div>
           </div>
         </div>

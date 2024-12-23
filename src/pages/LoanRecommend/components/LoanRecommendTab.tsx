@@ -10,7 +10,7 @@ interface Loan {
   name: string;
   rate: number;
   limit: number;
-  newDsr: number;
+  dsr: number;
   loanDetailUrl: string;
 }
 
@@ -29,7 +29,7 @@ const loanListPreProcessing = (loanList: Loan[]) => {
     name: '-',
     rate: 100,
     limit: 0,
-    newDsr: 100,
+    dsr: 100,
     loanDetailUrl: '',
   };
 
@@ -104,7 +104,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                       name={loan.name}
                       rate={loan.rate}
                       limit={loan.limit}
-                      newDsr={loan.newDsr}
+                      dsr={loan.dsr}
                       loanDetailUrl={loan.loanDetailUrl}
                       onLoanDetailButtonClick={onLoanDetailButtonClick}
                     />
@@ -138,7 +138,7 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                       name={loan.name}
                       rate={loan.rate}
                       limit={loan.limit}
-                      newDsr={loan.newDsr}
+                      dsr={loan.dsr}
                       loanDetailUrl={loan.loanDetailUrl}
                       onLoanDetailButtonClick={onLoanDetailButtonClick}
                     />

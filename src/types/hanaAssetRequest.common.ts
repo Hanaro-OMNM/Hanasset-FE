@@ -24,3 +24,8 @@ export interface BirthDate {
   email: string;
   birthDate: Date;
 }
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}

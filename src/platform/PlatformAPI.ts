@@ -4,6 +4,7 @@ import {
   ConfirmCode,
   CurrentLocation,
   EmailSignUpRequest,
+  LoginRequest,
   MarkerComplexId,
 } from '../types/hanaAssetRequest.common.ts';
 import {
@@ -91,8 +92,48 @@ export class PlatformAPI {
       const response = await this.instance.post(`/users/birth`, birthDate);
       return response.status;
     } catch (error) {
-      console.error('Error sending email:', error); // 요청 실패 시 false 반환
+      console.error('Error sending email:', error);
       return 400;
+    }
+  }
+
+  public static async login(
+    loginData: LoginRequest
+  ): Promise<string | undefined> {
+    try {
+      const response = await this.instance.post('/users/signin', loginData);
+      const authorizationHeader = response.headers.authorization;
+
+      if (authorizationHeader && authorizationHeader.startsWith('Bearer ')) {
+        const accessToken = authorizationHeader.split(' ')[1];
+        localStorage.setItem('accessToken', accessToken);
+        return accessToken;
+      } else {
+        console.error('Authorization header is missing or invalid');
+        return undefined;
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      return undefined;
+    }
+  }
+
+  public static async logout(): Promise<string | undefined> {
+    try {
+      const token = localStorage.getItem('accessToken'); // 로컬 스토리지에서 토큰 가져오기
+      const response = await this.instance.post(
+        '/users/logout',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // 헤더에 토큰 추가
+          },
+        }
+      );
+      localStorage.removeItem('accessToken');
+      return response.data;
+    } catch (error) {
+      console.error('Error logout:', error);
     }
   }
 }

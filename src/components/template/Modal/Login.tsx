@@ -1,7 +1,10 @@
+import { jwtDecode } from 'jwt-decode';
 import { FaTimes } from 'react-icons/fa';
+import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import Happy from '../../../assets/img/login/HanaHappy.png';
-import { CookieUtils } from '../../../utils/CookieUtils.ts';
+import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
+import isLoginAtom from '../../../recoil/isLogin';
 import Input from '../../atoms/Input.tsx';
 import SocialLoginGroup from '../../molecules/SocialLoginGroup.tsx';
 
@@ -19,16 +22,28 @@ export default function LoginPage({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
+  const [isLogin, setIsLogin] = useRecoilState<boolean>(isLoginAtom);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!email || !password) {
       setError(true);
       return;
     }
 
-    // 임시 쿠키 설정 (예: 1일 동안 유효)
-    CookieUtils.setCookie('connect.sid', 'temporary-session-id', 1);
-    onLoginSuccess();
+    const loginSuccess = await PlatformAPI.login({ email, password });
+    if (loginSuccess) {
+      alert('로그인 성공하셨습니다.');
+      const decodedPayload = jwtDecode(loginSuccess);
+      if (decodedPayload.sub) {
+        if (!isLogin) {
+          setIsLogin(true);
+        }
+      }
+      onClose();
+    } else {
+      alert('로그인 실패하였습니다.');
+      setError(true);
+    }
   };
 
   return (

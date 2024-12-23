@@ -4,9 +4,10 @@ import Consultant from '../../assets/img/main/consultant.jpeg';
 import Home from '../../assets/img/main/home.jpeg';
 import Map from '../../assets/img/main/map.jpeg';
 import MyPage from '../../assets/img/main/mypage.jpeg';
+import { RealEstateList } from '../../types/hanaAssetResponse.common.ts';
 
 interface NavbarProps {
-  state?: boolean;
+  state?: RealEstateList;
   children: React.ReactNode;
 }
 
@@ -16,9 +17,9 @@ export const Navbar: React.FC<NavbarProps> = ({ state, children }) => {
 
   useEffect(() => {
     if (state) {
-      navigate('/real-estate-list');
+      navigate('/real-estate-list', { state });
     }
-  }, [state]);
+  }, [navigate, state]);
 
   return (
     <div className="space-x-12">

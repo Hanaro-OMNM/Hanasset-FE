@@ -11,7 +11,7 @@ import {
 import { parse, differenceInMonths, addMonths, format } from 'date-fns';
 import { Line } from 'react-chartjs-2';
 import React from 'react';
-import { RealPriceInfo, TradeInfo } from '../../../types/global';
+import { RealPriceInfo, TradeInfo } from '../../../types/hanaAsset';
 
 ChartJS.register(
   CategoryScale,

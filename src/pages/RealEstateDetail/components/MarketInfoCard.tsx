@@ -1,5 +1,5 @@
 import React from 'react';
-import { TradeInfo } from '../../../types/global';
+import { TradeInfo } from '../../../types/hanaAsset';
 
 interface MarketInfoCardProps {
   tradeInfo: TradeInfo[];

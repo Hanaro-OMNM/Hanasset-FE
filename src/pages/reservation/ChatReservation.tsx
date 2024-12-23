@@ -4,7 +4,7 @@ import reserve_hand from '../../assets/img/reserve_img.png';
 import Button from '../../components/atoms/Button';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import MobileHeader from '../../components/atoms/MobileHeader';
-import { selectedEstateType } from '../../types/global';
+import { selectedEstateType } from '../../types/hanaAsset';
 import AssetItem from './AssetItem';
 import DatePicker from './DatePicker';
 import DynamicFormSwitcher from './DynamicFormSwitcher';

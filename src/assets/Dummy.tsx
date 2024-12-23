@@ -45,7 +45,7 @@ export interface RealEstate {
   location: string;
   size: string;
   address: string;
-  price: number;
+  deposit: number;
 }
 
 type ChatMessageType = {
@@ -193,7 +193,7 @@ export const dummyRealEstateList: RealEstate[] = [
     location: '103동 1201호',
     size: '100.97㎡',
     address: '서울특별시 성동구 왕십리로 16',
-    price: 5,
+    deposit: 5,
   },
   {
     id: 1,
@@ -202,7 +202,7 @@ export const dummyRealEstateList: RealEstate[] = [
     location: '104동 1502호',
     size: '85.42㎡',
     address: '서울특별시 성동구 왕십리로 16',
-    price: 10,
+    deposit: 10,
   },
   {
     id: 2,
@@ -211,7 +211,7 @@ export const dummyRealEstateList: RealEstate[] = [
     location: '105동 1803호',
     size: '120.50㎡',
     address: '서울특별시 성동구 왕십리로 16',
-    price: 8,
+    deposit: 8,
   },
 ];
 

@@ -92,7 +92,7 @@ export default function GuestInfo() {
                   <SemiTitle title="대출 상품 리스트" />
                   <FixedExpectation
                     capital={dummyGuest.capital}
-                    totalPrice={dummyRealEstateList[loanIndex].price}
+                    totalPrice={dummyRealEstateList[loanIndex].deposit}
                     maxLoan={5}
                   />
                   <LoanRecommendTab

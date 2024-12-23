@@ -61,7 +61,7 @@ export default function MapLayout({ children }: LayoutProps) {
   const [zoom, setZoom] = useState(13);
   const [center, setCenter] = useRecoilState(centerAtom);
 
-  useEffect(() => {
+  const handleMarkerFetch = async () => {
     if (zoom <= 15) {
       const fetchMarkers = async () => {
         try {
@@ -91,7 +91,22 @@ export default function MapLayout({ children }: LayoutProps) {
       };
       fetchMarkers();
     }
-  }, [center, zoom]);
+  };
+
+  useEffect(() => {
+    handleMarkerFetch();
+  }, []);
+
+  useEffect(() => {
+    handleMarkerFetch();
+  }, [zoom]);
+
+  useEffect(() => {
+    window.addEventListener('mouseup', handleMarkerFetch);
+    return () => {
+      window.removeEventListener('mouseup', handleMarkerFetch);
+    };
+  }, [center]);
 
   const handleZoomChanged = useCallback((newZoom: number) => {
     setZoom(newZoom);

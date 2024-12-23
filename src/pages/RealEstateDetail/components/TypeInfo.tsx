@@ -56,11 +56,14 @@ const TypeInfo: React.FC<TypeInfoProps> = ({ realEstateId }) => {
       <div className="flex items-start mb-4">
         <div className="flex-1">
           <p className="text-lg">• {name + 'm²'}</p>
-          <img
-            src={floorPlanImgUrl}
-            alt="Floor Plan"
-            className="w-auto h-auto"
-          />
+          {floorPlanImgUrl && (
+            <img
+              src={floorPlanImgUrl}
+              alt="Floor Plan"
+              className="w-auto h-auto"
+            />
+          )}
+
           <div className="flex justify-center text-xs text-gray-600 mb-2">
             <div className="flex flex-col text-center">
               <p>공급/전용</p>

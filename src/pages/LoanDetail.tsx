@@ -83,11 +83,6 @@ const LoanDetail: React.FC<LoanDetailProps> = ({ onHide }) => {
                 title={'상환방식'}
                 content={dummyLoanDetail.paybackMethod}
               />
-              {/* 이자계산방법 */}
-              <LoanDetailDisclosure
-                title={'이자계산방법'}
-                content={dummyLoanDetail.rateCalculateMethod}
-              />
               {/* 대출 받으러 가기 버튼 */}
             </div>
           </CommonBackground>

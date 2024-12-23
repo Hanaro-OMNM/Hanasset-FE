@@ -29,8 +29,8 @@ export interface LoanDetail {
   name: string;
   rate: number;
   outline: string;
-  amount: number;
-  detail: string;
+  limit: number;
+  feature: string;
   targetGuest: string;
   targetHouse: string;
   period: string;
@@ -161,8 +161,8 @@ export const dummyLoanDetail: LoanDetail = {
   outline:
     '청년층 주거비용 경감을 위해 임차보증금의 90%이내, 최대 2억원까지(전세,반전세 계약 모두 가능해요)',
   rate: 4.453,
-  amount: 2,
-  detail:
+  limit: 2,
+  feature:
     '만 19세이상 만 34세 이하의 무주택(배우자 포함)세대주를 대상으로 한국주택금융공사의 보증서 담보로 임차보증금의 90%범위 내에서 최대 2억원까지 주택의 전세자금을 지원해드리는 상품이에요.',
   targetGuest: `주택임대차계약을 체결한 국민인 거주자로 아래의 조건을 모두 충족하는 손님 
 

@@ -42,7 +42,7 @@ const LoanDetail: React.FC<LoanDetailProps> = ({ onHide }) => {
               />
               <LoanDetailAccentInfo
                 title={'최대 한도'}
-                content={`${dummyLoanDetail.amount}억원`}
+                content={`${dummyLoanDetail.limit}억원`}
               />
               <LoanDetailHint content="예상 금리와 한도예요. 서류 제출과정에서 신용 및 손님의 정보가 변동되면 금리와 한도가 변경될 수 있어요. 자세한 내용은 하나은행 홈페이지나 대출 상담을 통해 확인해주세요." />
               <LoanDetailAccentInfo
@@ -59,10 +59,14 @@ const LoanDetail: React.FC<LoanDetailProps> = ({ onHide }) => {
               />
               {/* 대출 상세 정보 */}
               {/* 상품특징 */}
-              <LoanDetailDisclosure
-                title={'상품특징'}
-                content={dummyLoanDetail.detail}
-              />
+              {dummyLoanDetail.feature.length == 0 ? (
+                <></>
+              ) : (
+                <LoanDetailDisclosure
+                  title={'상품특징'}
+                  content={dummyLoanDetail.feature}
+                />
+              )}
               {/* 대출대상 */}
               <LoanDetailDisclosure
                 title={'대출대상'}

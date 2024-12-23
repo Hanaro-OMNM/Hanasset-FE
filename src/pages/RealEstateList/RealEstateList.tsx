@@ -44,7 +44,7 @@ export default function RealEstateLayout() {
     };
 
     fetchAddressData();
-  }, [center]);
+  }, [state]);
 
   const handleCardClick = (estate: RealEstatePreview) => {
     setSelectedEstate(estate); // 선택된 매물 정보 설정

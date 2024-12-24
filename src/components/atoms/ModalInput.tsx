@@ -86,7 +86,7 @@ const ModalInput: React.FC<InputProps> = (props) => {
           </span>
         )}
       </div>
-      <p className="text-red-500 text-xs ml-1 h-2">
+      <p className="text-red-500 text-xs ml-1 h-2 pt-1">
         {props.error
           ? props.errorMessage || '입력란을 올바르게 작성해주세요.'
           : ''}

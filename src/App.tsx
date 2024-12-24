@@ -1,7 +1,7 @@
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { NavermapsProvider } from 'react-naver-maps';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, useRecoilState } from 'recoil';
 import { useState, useEffect } from 'react';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
@@ -19,20 +19,25 @@ import ChatHistory from './pages/chat/ChatHistory.tsx';
 import Consultant from './pages/consultant/Consultant.tsx';
 import ChatReservation from './pages/reservation/ChatReservation.tsx';
 import SearchResult from './pages/search/SearchResult.tsx';
-import { CookieUtils } from './utils/CookieUtils.ts';
+import isLoginAtom from './recoil/isLogin';
 
-function App() {
-  const isLogin = CookieUtils.getCookieValue('connect.sid');
+function AppContent() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
+  const handleLoginSuccess = () => {
+    setIsLoginModalOpen(false);
+  };
 
-    if (code) {
-      CookieUtils.setCookie('connect.sid', 'temporary-session-id', 1);
+  const closeLoginModal = () => {
+    setIsLoginModalOpen(false);
+  };
+
+  const [isLogin] = useRecoilState(isLoginAtom);
+
+  useEffect(() => {
+    if (isLogin) {
       setIsLoginModalOpen(false);
     } else if (
       !isLogin &&
@@ -43,55 +48,50 @@ function App() {
     }
   }, [isLogin, location.pathname, navigate]);
 
-  const handleLoginSuccess = () => {
-    setIsLoginModalOpen(false);
-  };
-
-  const closeLoginModal = () => {
-    setIsLoginModalOpen(false);
-  };
-
   return (
     <div className="App">
-      <RecoilRoot>
-        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-          <NavermapsProvider ncpClientId={import.meta.env.VITE_MAP_CLIENT_ID}>
-            <Layout>
-              <Routes>
-                <Route path="/" element={<></>} />
-                <Route path="/home" element={<Main />} />
-                <Route path="/consulting" element={<Consulting />} />
-                <Route path="/my-page" element={<MyPage />} />
-                <Route path="/loan-recommend" element={<LoanRecommend />} />
-                <Route path="/chat-reservation" element={<ChatReservation />} />
-                <Route path="/real-estate-list" element={<RealEstateList />} />
-                <Route path="/select-estate" element={<SelectEstate />} />
-                <Route path="/my-estate-list" element={<MyEstateList />} />
-                <Route path="/property-agree" element={<PropertyAgree />} />
-                <Route path="/consultant" element={<Consultant />} />
-                <Route
-                  path="/live-chat"
-                  element={<ChatApp accessor="guest" />}
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+        <NavermapsProvider ncpClientId={import.meta.env.VITE_MAP_CLIENT_ID}>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<></>} />
+              <Route path="/home" element={<Main />} />
+              <Route path="/consulting" element={<Consulting />} />
+              <Route path="/my-page" element={<MyPage />} />
+              <Route path="/loan-recommend" element={<LoanRecommend />} />
+              <Route path="/chat-reservation" element={<ChatReservation />} />
+              <Route path="/real-estate-list" element={<RealEstateList />} />
+              <Route path="/select-estate" element={<SelectEstate />} />
+              <Route path="/my-estate-list" element={<MyEstateList />} />
+              <Route path="/property-agree" element={<PropertyAgree />} />
+              <Route path="/consultant" element={<Consultant />} />
+              <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
+              <Route
+                path="/chat-history/:id"
+                element={<ChatHistory accessor="guest" />}
+              />
+              <Route path="/search-result" element={<SearchResult />} />
+            </Routes>
+            {isLoginModalOpen && (
+              <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                <Modal
+                  onLoginSuccess={handleLoginSuccess}
+                  onClose={closeLoginModal}
                 />
-                <Route
-                  path="/chat-history/:id"
-                  element={<ChatHistory accessor="guest" />}
-                />
-                <Route path="/search-result" element={<SearchResult />} />
-              </Routes>
-              {isLoginModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-                  <Modal
-                    onLoginSuccess={handleLoginSuccess}
-                    onClose={closeLoginModal}
-                  />
-                </div>
-              )}
-            </Layout>
-          </NavermapsProvider>
-        </GoogleOAuthProvider>
-      </RecoilRoot>
+              </div>
+            )}
+          </Layout>
+        </NavermapsProvider>
+      </GoogleOAuthProvider>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <RecoilRoot>
+      <AppContent />
+    </RecoilRoot>
   );
 }
 

@@ -9,25 +9,36 @@ const TransactionTable: React.FC<RealPriceInfo> = (realPriceInfo) => {
     setVisibleCount((prev) => prev + 5);
   };
 
-  const jeonseTransactions = realPriceInfo!.B1!.map((item) => {
-    return { ...item, type: '전세' };
-  });
+  const jeonseTransactions = realPriceInfo.B1
+    ? realPriceInfo.B1.map((item) => {
+        return { ...item, type: '전세' };
+      })
+    : null;
 
-  const wolseTransactions = realPriceInfo!.B2!.map((item) => {
-    return { ...item, type: '월세' };
-  });
+  const wolseTransactions = realPriceInfo.B2
+    ? realPriceInfo.B2.map((item) => {
+        return { ...item, type: '월세' };
+      })
+    : null;
 
-  const totalTransactions = jeonseTransactions.concat(wolseTransactions);
+  const totalTransactions =
+    jeonseTransactions && wolseTransactions
+      ? jeonseTransactions.concat(wolseTransactions)
+      : null;
 
-  const sortedTransactions = totalTransactions.sort((a, b) => {
-    const dateA = new Date(a.tradeDate).getTime(); // tradeDate를 Date 객체로 변환 후 시간값 추출
-    const dateB = new Date(b.tradeDate).getTime();
-    return dateB - dateA; // 오름차순 정렬 (내림차순은 dateB - dateA)
-  });
+  const sortedTransactions = totalTransactions
+    ? totalTransactions.sort((a, b) => {
+        const dateA = new Date(a.tradeDate).getTime(); // tradeDate를 Date 객체로 변환 후 시간값 추출
+        const dateB = new Date(b.tradeDate).getTime();
+        return dateB - dateA; // 오름차순 정렬 (내림차순은 dateB - dateA)
+      })
+    : null;
 
-  const filteredTransactions = sortedTransactions.filter(
-    (transaction) => filter === '전체' || transaction.type === filter
-  );
+  const filteredTransactions = sortedTransactions
+    ? sortedTransactions.filter(
+        (transaction) => filter === '전체' || transaction.type === filter
+      )
+    : null;
 
   return (
     <div className="p-4 mt-4">
@@ -62,32 +73,33 @@ const TransactionTable: React.FC<RealPriceInfo> = (realPriceInfo) => {
           </tr>
         </thead>
         <tbody className="text-sm">
-          {filteredTransactions
-            .slice(0, visibleCount)
-            .map((transaction, index) => (
-              <tr key={index} className="hover:bg-gray-50 animate-fadeInUp">
-                <td className="border px-4 py-2 text-center">
-                  {transaction.tradeDate}
-                </td>
-                <td className="border px-4 py-2 text-center">
-                  {transaction.type}
-                </td>
-                <td className="border px-4 py-2 text-center">
-                  {transaction.type === '전세'
-                    ? (transaction.deposit / 100000000).toFixed(1) + '억'
-                    : (transaction.deposit / 100000000).toFixed(1) +
-                      `억/${transaction.monthlyRent / 10000}`}
-                </td>
-                <td className="border px-4 py-2 text-right">
-                  {transaction.floor}층
-                </td>
-              </tr>
-            ))}
+          {filteredTransactions &&
+            filteredTransactions
+              .slice(0, visibleCount)
+              .map((transaction, index) => (
+                <tr key={index} className="hover:bg-gray-50 animate-fadeInUp">
+                  <td className="border px-4 py-2 text-center">
+                    {transaction.tradeDate}
+                  </td>
+                  <td className="border px-4 py-2 text-center">
+                    {transaction.type}
+                  </td>
+                  <td className="border px-4 py-2 text-center">
+                    {transaction.type === '전세'
+                      ? (transaction.deposit / 100000000).toFixed(1) + '억'
+                      : (transaction.deposit / 100000000).toFixed(1) +
+                        `억/${transaction.monthlyRent / 10000}`}
+                  </td>
+                  <td className="border px-4 py-2 text-right">
+                    {transaction.floor}층
+                  </td>
+                </tr>
+              ))}
         </tbody>
       </table>
 
       {/* 더 보기 버튼 */}
-      {visibleCount < filteredTransactions.length && (
+      {filteredTransactions && visibleCount < filteredTransactions.length && (
         <button
           className="mt-3 mx-auto block text-hanaColor2 font-semibold hover:underline transition-all duration-200"
           onClick={handleLoadMore}

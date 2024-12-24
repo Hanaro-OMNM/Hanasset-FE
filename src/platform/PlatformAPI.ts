@@ -13,6 +13,9 @@ import {
   RealEstateBasic,
   RealEstateDetail,
   RealEstateList,
+  RealEstateMarketPrice,
+  RealEstateMarketPriceParam,
+  RealEstateMarketPriceParamInfo,
   RealEstateType,
 } from '../types/hanaAssetResponse.common.ts';
 
@@ -66,7 +69,7 @@ export class PlatformAPI {
       }
     );
     return response.data as RealEstateType;
-    }
+  }
   public static async sendMail(email: string): Promise<boolean> {
     try {
       const response = await this.instance.post(
@@ -101,7 +104,8 @@ export class PlatformAPI {
       }
     );
     return response.data as RealEstateDetail;
-    }
+  }
+
   public static async signUp(emailSignUp: EmailSignUpRequest): Promise<number> {
     try {
       const response = await this.instance.post('/users/signup', emailSignUp);
@@ -122,7 +126,8 @@ export class PlatformAPI {
       }
     );
     return response.data as RealEstateBasic;
-    }
+  }
+
   public static async submitBirthDate(birthDate: BirthDate): Promise<number> {
     try {
       const response = await this.instance.post(`/users/birth`, birthDate);
@@ -171,5 +176,34 @@ export class PlatformAPI {
     } catch (error) {
       console.error('Error logout:', error);
     }
+  }
+
+  public static async getRealEstateMarketPriceParam(
+    realEstateId: number
+  ): Promise<RealEstateMarketPriceParam> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/market-price`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateMarketPriceParam;
+  }
+
+  public static async getRealEstateMarketPrice(
+    realEstateMarketPriceParam: RealEstateMarketPriceParamInfo,
+    tradeType: string
+  ): Promise<RealEstateMarketPrice> {
+    const response = await axios.get(
+      '/real-estate-api/front-api/v1/complex/pyeong/realPrice',
+      {
+        params: {
+          complexNumber: realEstateMarketPriceParam.complexNumber,
+          pyeongTypeNumber: realEstateMarketPriceParam.pyeongTypeNumber,
+          tradeType: tradeType,
+        },
+      }
+    );
+    return response.data as RealEstateMarketPrice;
   }
 }

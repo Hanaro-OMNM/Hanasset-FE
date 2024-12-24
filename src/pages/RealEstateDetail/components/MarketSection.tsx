@@ -1,35 +1,82 @@
-import React from 'react';
-import { RealPriceInfo } from '../../../types/hanaAsset';
+import React, { useEffect, useState } from 'react';
+import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
+import {
+  RealEstateMarketPriceParamInfo,
+  TradeInfo,
+} from '../../../types/hanaAssetResponse.common.ts';
 import MarketChart from './MarketChart';
 import MarketInfoCard from './MarketInfoCard';
 import TransactionTable from './TransactionTable';
 
 interface MarketSectionProps {
-  supplyArea: number | undefined;
-  exclusiveArea: number | undefined;
-  realPriceInfo: RealPriceInfo | undefined;
+  realEstateId: number;
 }
 
-const MarketSection: React.FC<MarketSectionProps> = ({
-  supplyArea,
-  exclusiveArea,
-  realPriceInfo,
-}) => {
-  const strSupplyArea = supplyArea! + 'm²';
-  const strExclusiveArea = exclusiveArea! + 'm²';
-  const jeonseMarketInfo = realPriceInfo?.B1;
-  const wolseMarketInfo = realPriceInfo?.B2;
+const MarketSection: React.FC<MarketSectionProps> = ({ realEstateId }) => {
+  const [realEstateMarketPriceParam, setRealEstateMarketPriceParam] =
+    useState<RealEstateMarketPriceParamInfo | null>(null);
+  const [jeonseMarketPrice, setJeonseMarketPrice] = useState<
+    TradeInfo[] | null
+  >(null);
+
+  const [wolseMarketPrice, setWolseMarketPrice] = useState<TradeInfo[] | null>(
+    null
+  );
+
+  useEffect(() => {
+    const fetchRealEstateMarketPriceParam = async () => {
+      try {
+        const realEstateMarketPriceParam =
+          await PlatformAPI.getRealEstateMarketPriceParam(realEstateId);
+        const realEstateMarketPriceParamInfo =
+          realEstateMarketPriceParam.result;
+        setRealEstateMarketPriceParam(realEstateMarketPriceParamInfo);
+      } catch (error) {
+        console.error('Error fetching real estate type:', error);
+      }
+    };
+
+    fetchRealEstateMarketPriceParam();
+  }, [realEstateId]);
+
+  useEffect(() => {
+    const fetchRealEstateMarketPrice = async () => {
+      try {
+        if (realEstateMarketPriceParam) {
+          const jeonseMarketPrice = await PlatformAPI.getRealEstateMarketPrice(
+            realEstateMarketPriceParam,
+            'B1'
+          );
+          const jeonseMarketPriceInfo = jeonseMarketPrice.result;
+          setJeonseMarketPrice(jeonseMarketPriceInfo.list);
+
+          const wolseMarketPrice = await PlatformAPI.getRealEstateMarketPrice(
+            realEstateMarketPriceParam,
+            'B2'
+          );
+          const wolseMarketPriceInfo = wolseMarketPrice.result;
+          setWolseMarketPrice(wolseMarketPriceInfo.list);
+        }
+      } catch (error) {
+        console.error('Error fetching real estate type:', error);
+      }
+    };
+
+    fetchRealEstateMarketPrice();
+  }, [realEstateMarketPriceParam]);
+
+  const realPriceInfo = {
+    B1: jeonseMarketPrice,
+    B2: wolseMarketPrice,
+  };
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <div className="flex items-center justify-between mb-4">
         <div className="text-2xl font-bold">시세</div>
-        <p className="text-xs text-gray-500">
-          {strSupplyArea}/{strExclusiveArea}(평형)
-        </p>
       </div>
       <div className="flex border-t">
-        <MarketInfoCard tradeInfo={jeonseMarketInfo!} type="전세" />
-        <MarketInfoCard tradeInfo={wolseMarketInfo!} type="월세" />
+        <MarketInfoCard tradeInfo={jeonseMarketPrice} type="전세" />
+        <MarketInfoCard tradeInfo={wolseMarketPrice} type="월세" />
       </div>
       <div className="mt-8 flex justify-center">
         <MarketChart {...realPriceInfo} />

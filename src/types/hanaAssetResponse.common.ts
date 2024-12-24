@@ -87,6 +87,12 @@ export interface RealEstateBasicInfo {
   constructionCompany: string;
 }
 
+export interface RealEstateMarketPriceParamInfo {
+  complexNumber: string;
+  pyeongTypeNumber: number;
+  tradeType: string;
+}
+
 export interface RealEstateList {
   message: string;
   result: {
@@ -108,4 +114,31 @@ export interface RealEstateDetail {
 export interface RealEstateBasic {
   message: string;
   result: RealEstateBasicInfo;
+}
+
+export interface RealEstateMarketPriceParam {
+  message: string;
+  result: RealEstateMarketPriceParamInfo;
+}
+
+export interface RealEstateMarketPrice {
+  isSuccess: boolean;
+  detailCode: string;
+  message: string;
+  result: {
+    list: TradeInfo[];
+  };
+}
+
+export interface TradeInfo {
+  tradeDate: string;
+  tradeYear: string;
+  floor: number;
+  dealPrice: number | null;
+  deposit: number;
+  monthlyRent: number;
+  deleteDate: string | null;
+  isDelete: boolean;
+  tradeCategory: string | null;
+  registrationDate: string | null;
 }

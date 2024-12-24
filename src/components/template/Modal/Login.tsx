@@ -1,7 +1,10 @@
+import { jwtDecode } from 'jwt-decode';
 import { FaTimes } from 'react-icons/fa';
+import { useRecoilState } from 'recoil';
 import { useState } from 'react';
-import Greeting from '../../../assets/img/login/HanaGreeting.png';
-import { CookieUtils } from '../../../utils/CookieUtils.ts';
+import Happy from '../../../assets/img/login/HanaHappy.png';
+import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
+import isLoginAtom from '../../../recoil/isLogin';
 import Input from '../../atoms/Input.tsx';
 import SocialLoginGroup from '../../molecules/SocialLoginGroup.tsx';
 
@@ -19,20 +22,32 @@ export default function LoginPage({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
+  const [isLogin, setIsLogin] = useRecoilState<boolean>(isLoginAtom);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!email || !password) {
       setError(true);
       return;
     }
 
-    // 임시 쿠키 설정 (예: 1일 동안 유효)
-    CookieUtils.setCookie('connect.sid', 'temporary-session-id', 1);
-    onLoginSuccess();
+    const loginSuccess = await PlatformAPI.login({ email, password });
+    if (loginSuccess) {
+      alert('로그인 성공하셨습니다.');
+      const decodedPayload = jwtDecode(loginSuccess);
+      if (decodedPayload.sub) {
+        if (!isLogin) {
+          setIsLogin(true);
+        }
+      }
+      onClose();
+    } else {
+      alert('로그인 실패하였습니다.');
+      setError(true);
+    }
   };
 
   return (
-    <div>
+    <div className="bg-white w-[320px] h-[500px] rounded-lg shadow-lg animate-fadeInRight">
       <div className="flex items-center justify-center my-3">
         <button
           className="absolute top-4 right-2 text-gray-500 hover:text-gray-700"
@@ -46,7 +61,7 @@ export default function LoginPage({
         <div className="font-bold">관심 매물 상담까지 받아보세요!</div>
       </div>
       <div className="flex justify-center">
-        <img src={Greeting} alt="인사" />
+        <img src={Happy} alt="하나은행 로그인" />
       </div>
       <div className="space-y-4 px-4 pt-2">
         <div className="relative">

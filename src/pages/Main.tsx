@@ -7,7 +7,7 @@ import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import Swiper from '../components/atoms/Swiper';
 import UserManual from '../components/template/userManual.tsx';
-import { AdditionalEstate } from '../types/global';
+import { AdditionalEstate } from '../types/hanaAsset';
 import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from './RealEstateList/RealEstateCard.tsx';
 import LocationFilter from './location/LocationFilter.tsx';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RealPriceInfo } from '../../../types/global';
+import { RealPriceInfo } from '../../../types/hanaAsset';
 
 const TransactionTable: React.FC<RealPriceInfo> = (realPriceInfo) => {
   const [filter, setFilter] = useState<'전세' | '월세' | '전체'>('전체');

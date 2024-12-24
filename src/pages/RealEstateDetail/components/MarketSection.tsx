@@ -1,5 +1,5 @@
 import React from 'react';
-import { RealPriceInfo } from '../../../types/global';
+import { RealPriceInfo } from '../../../types/hanaAsset';
 import MarketChart from './MarketChart';
 import MarketInfoCard from './MarketInfoCard';
 import TransactionTable from './TransactionTable';

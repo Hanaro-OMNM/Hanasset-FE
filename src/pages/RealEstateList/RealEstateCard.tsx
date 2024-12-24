@@ -1,6 +1,6 @@
 import React from 'react';
 import Star from '../../components/molecules/Star';
-import { AdditionalEstate } from '../../types/global';
+import { AdditionalEstate } from '../../types/hanaAsset';
 
 interface RealEstateCardProps {
   estate: AdditionalEstate;

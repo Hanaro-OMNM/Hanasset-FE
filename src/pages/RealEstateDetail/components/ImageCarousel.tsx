@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import React from 'react';
-import { Photo } from '../../../types/global';
+import { Photo } from '../../../types/hanaAsset';
 
 interface ImageCarouselProps {
   images: Photo[] | undefined;

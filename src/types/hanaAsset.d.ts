@@ -1,4 +1,4 @@
-// global.d.ts
+// hanaAsset.d.ts
 import type { maps } from 'navermaps';
 
 // 네이버 지도 타입을 임포트

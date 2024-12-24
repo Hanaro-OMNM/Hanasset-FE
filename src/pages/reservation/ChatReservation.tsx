@@ -97,9 +97,6 @@ export default function ChatReservation() {
       return;
     }
 
-    console.log('Selected date:', selectedDate);
-    console.log('Selected time:', selectedTime);
-
     const [year, month, day] = selectedDate.split('-').map(Number);
     const [hour, minute] = selectedTime.split(':').map(Number);
 
@@ -136,6 +133,7 @@ export default function ChatReservation() {
       chatroomTitle: chatroomTitle,
       reservedTime: reservedTime,
     };
+    console.log('Final reservedTime:', reservedTime);
     console.log('Request payload to be sent to the server:', request);
 
     try {

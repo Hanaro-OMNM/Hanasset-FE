@@ -64,23 +64,38 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
   }, [messages]);
 
   useEffect(() => {
-    const socket = new SockJS('http://localhost:8080/ws-chat');
+    const socket = new SockJS('http://localhost:8080/ws-chat'); // 백엔드 서버 URL
+    const token = window.localStorage.getItem('accessToken');
+    console.log(token);
     const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
+      connectHeaders: {
+        Authorization: token ? `Bearer ${token}` : '',
+      },
     });
 
     client.onConnect = () => {
       console.log(`[${accessor}] Connected to WebSocket`);
+
+      // Redis에서 채팅 기록 요청
       client.publish({
         destination: `/app/chat.history/${chatroomId}`,
+        headers: {
+          Authorization: token
+            ? `Bearer ${window.localStorage.getItem('accessToken')}`
+            : '',
+        },
       });
+
+      // Redis에서 메시지 기록 및 실시간 메시지 처리
       const sub = client.subscribe(
         `/topic/rooms/${chatroomId}`,
         (message: Message) => {
           const newData = JSON.parse(message.body);
 
           if (Array.isArray(newData)) {
+            // Redis에서 가져온 기록 메시지
             const loadedMessages = newData.slice(1).map((msg, index) => ({
               id: index + 1,
               user: msg.accessor === 'consultant' ? 'consultant' : 'guest',
@@ -90,8 +105,11 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
                 ? new Date(msg.createdAt).toLocaleTimeString()
                 : getCurrentTime(),
             }));
+
+            // 기존 메시지 초기화 후 새로운 기록 추가
             setMessages([...initialMessages, ...loadedMessages]);
           } else {
+            // 실시간 메시지 처리
             const newMessage: ChatMessageType = {
               id: messages.length + 1,
               user: newData.accessor === 'consultant' ? 'consultant' : 'guest',
@@ -111,6 +129,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
     client.activate();
     setStompClient(client);
 
+    // 컴포넌트 언마운트 시 정리
     return () => {
       if (subscription) subscription.unsubscribe();
       client.deactivate();
@@ -144,6 +163,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
   };
 
   const handleSendMessage = () => {
+    const token = window.localStorage.getItem('accessToken');
     if (stompClient && inputMessage.trim() !== '') {
       const message = {
         messageType: 'TALK',
@@ -156,10 +176,16 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
       stompClient.publish({
         destination: `/app/chat.sendMessage/${chatroomId}`,
         body: JSON.stringify(message),
+        headers: {
+          Authorization: token
+            ? `Bearer ${window.localStorage.getItem('accessToken')}`
+            : '',
+        },
       });
       setInputMessage('');
     }
   };
+
   useEffect(() => {
     if (chatroomId && currentState === 'waiting') {
       updateChatroomStatus();

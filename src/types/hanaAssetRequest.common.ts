@@ -29,6 +29,16 @@ export interface LoginRequest {
   email: string;
   password: string;
 }
+export interface ChatRoom {
+  chatroomId: string;
+  userId: number;
+  consultantId: number;
+  chatroomTitle: string;
+  chatroomStatus: string;
+  reservedTime: string;
+  finishedAt: string | null;
+  createdAt: string;
+}
 export interface ChatCreateRequest {
   userId: number;
   consultantId: number;

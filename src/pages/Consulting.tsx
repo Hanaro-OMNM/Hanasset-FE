@@ -1,35 +1,74 @@
 import { AiOutlineRight } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Consultant from '../assets/img/consultantPg.png';
 import CommonBackground from '../components/atoms/CommonBackground';
 import MobileHeader from '../components/atoms/MobileHeader';
 import SemiTitle from '../components/atoms/SemiTitle';
 import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting';
+import { PlatformAPI } from '../platform/PlatformAPI.ts';
+import { historyChatroomIdState } from '../recoil/chathistory/historyChatroomIdState';
 import loanReservationAtom from '../recoil/loanReservation';
-
-type Consulting = {
-  id: number;
-  title: string;
-  date: string;
-};
-
-const consultingHistory: Consulting[] = [
-  { id: 1, title: '롯데캐슬엠파이어', date: '2024.10.27 19:07' },
-  { id: 2, title: '광장아파트', date: '2024.10.27 19:07' },
-  { id: 3, title: '푸르지오벨라르테', date: '2024.10.27 19:07' },
-  { id: 4, title: '비둘기 아파트', date: '2024.10.27 19:07' },
-];
+import { ChatRoom } from '../types/hanaAssetResponse.common';
 
 const Consulting: React.FC = () => {
   const navigate = useNavigate();
   const [upcomingConsulting, setUpcomingConsulting] =
     useRecoilState(loanReservationAtom);
 
-  const handleHistoryClick = (id: number) => {
-    navigate(`/chat-history/${id}`);
+  const [consultingHistory, setConsultingHistory] = useState<ChatRoom[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const [_, setHistoryChatroomId] = useRecoilState(historyChatroomIdState);
+
+  const formatDateTime = (dateTime: string): string => {
+    const date = new Date(dateTime);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${year}.${month}.${day} ${hours}:${minutes}`;
   };
+
+  useEffect(() => {
+    const fetchConsultingHistory = async () => {
+      try {
+        const userId = 1;
+
+        const response =
+          await PlatformAPI.getCompletedChatroomsByUserId(userId);
+
+        if (response && Array.isArray(response)) {
+          setConsultingHistory(response);
+        } else {
+          setConsultingHistory([]);
+        }
+      } catch (err) {
+        setError('상담 내역을 불러오는 중 오류가 발생했습니다.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchConsultingHistory();
+  }, []);
+
+  const handleHistoryClick = (chatroomId: string) => {
+    if (!chatroomId) {
+      console.error('Invalid chatroomId:', chatroomId);
+      return;
+    }
+    setHistoryChatroomId(chatroomId);
+    navigate('/chat-history');
+  };
+
+  useEffect(() => {
+    setUpcomingConsulting({ reservationInfo: [], reservationTime: undefined });
+  }, [setUpcomingConsulting]);
 
   return (
     <div className="top-0 absolute pl-4 animate-slideInRight">
@@ -44,35 +83,41 @@ const Consulting: React.FC = () => {
             채팅방은 예약 시간이 되면 활성화 됩니다.
           </p>
           <img src={Consultant} alt="상담 화면"></img>
-          <UpcomingConsultingComponent
-            upcomingConsulting={upcomingConsulting}
-            setUpcomingConsulting={setUpcomingConsulting}
-          />
+          <UpcomingConsultingComponent />
         </div>
         <SemiTitle>지난 상담 내역</SemiTitle>
         <CommonBackground className="p-5 mt-4 mb-4">
-          {consultingHistory.map((consulting) => (
-            <div
-              key={consulting.id}
-              className="border-b last:border-none py-4 flex items-center justify-between hover:transition-transform transform hover:scale-105"
-            >
-              <button
-                className="w-full text-left"
-                onClick={() => handleHistoryClick(consulting.id)}
+          {loading ? (
+            <p>상담 내역을 불러오는 중입니다...</p>
+          ) : error ? (
+            <p className="text-red-500">{error}</p>
+          ) : consultingHistory.length === 0 ? (
+            <p>지난 상담 내역이 없습니다.</p>
+          ) : (
+            consultingHistory.map((consulting) => (
+              <div
+                key={consulting.chatroomId}
+                className="border-b last:border-none py-4 flex items-center justify-between hover:transition-transform transform hover:scale-105"
               >
-                <h3 className="text-md font-semibold text-hanaBlack">
-                  {consulting.title}
-                </h3>
-                <p className="text-xs text-gray-500">
-                  상담 일시: {consulting.date}
-                </p>
-              </button>
-              <AiOutlineRight className="text-gray-400 text-xl" />
-            </div>
-          ))}
+                <button
+                  className="w-full text-left"
+                  onClick={() => handleHistoryClick(consulting.chatroomId)}
+                >
+                  <h3 className="text-md font-semibold text-hanaBlack">
+                    {consulting.chatroomTitle}
+                  </h3>
+                  <p className="text-xs text-gray-500">
+                    상담 일시: {formatDateTime(consulting.reservedTime)}
+                  </p>
+                </button>
+                <AiOutlineRight className="text-gray-400 text-xl" />
+              </div>
+            ))
+          )}
         </CommonBackground>
       </div>
     </div>
   );
 };
+
 export default Consulting;

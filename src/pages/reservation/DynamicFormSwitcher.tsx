@@ -1,10 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { useState, useEffect } from 'react';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import { assetState } from '../../recoil/asset/atom';
-import loanReservationAtom from '../../recoil/loanReservation/atom';
-import { selectedEstateType } from '../../types/hanaAsset';
 import AmountForm from '../property/form/AmountForm';
 import JobForm from '../property/form/JobForm';
 import LoanAmountForm from '../property/form/LoanAmountForm';
@@ -57,47 +54,26 @@ const forms: FormConfig[] = [
     isUnValid: (state: AssetState) => state.hasLoan === false,
   },
 ];
-
 interface DynamicFormSwitcherProps {
-  estateInfo: selectedEstateType[];
-  selectedDate: string;
-  selectedTime: string;
+  showForm: boolean;
+  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function DynamicFormSwitcher({
-  estateInfo,
-  selectedDate,
-  selectedTime,
+  showForm,
+  setShowForm,
 }: DynamicFormSwitcherProps) {
   const [asset] = useRecoilState<AssetState>(assetState);
   const [currentStep, setCurrentStep] = useState(
     forms.findIndex((form) => form.isUnValid(asset))
   );
-  const nav = useNavigate();
-  const [selectedLoanReservation, setSelectedLoanReservation] =
-    useRecoilState(loanReservationAtom);
 
-  /*임시 수정 리팩토링 필요*/
   useEffect(() => {
     console.log(`현재 단계: ${currentStep}`);
     if (currentStep < 0) {
-      if (!selectedLoanReservation.reservationTime) {
-        setSelectedLoanReservation({
-          reservationInfo: estateInfo,
-          reservationTime: selectedDate + ' ' + selectedTime,
-        });
-        nav('/consulting');
-      }
+      setShowForm(false);
     }
-  }, [
-    currentStep,
-    estateInfo,
-    nav,
-    selectedDate,
-    selectedLoanReservation.reservationTime,
-    selectedTime,
-    setSelectedLoanReservation,
-  ]);
+  }, []);
 
   const handleNext = () => {
     let nextStep = currentStep;
@@ -110,14 +86,7 @@ export default function DynamicFormSwitcher({
     if (nextStep < forms.length - 1) {
       setCurrentStep(nextStep + 1);
     } else {
-      if (!selectedLoanReservation.reservationTime) {
-        setSelectedLoanReservation({
-          reservationInfo: estateInfo,
-          reservationTime: selectedDate + ' ' + selectedTime,
-        });
-        alert('상담이 정상적으로 예약되었습니다.');
-        nav('/consulting');
-      }
+      setShowForm(false);
     }
   };
 

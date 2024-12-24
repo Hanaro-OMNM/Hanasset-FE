@@ -1,6 +1,8 @@
 import { HiBell } from 'react-icons/hi';
-import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import React from 'react';
+import { PlatformAPI } from '../../platform/PlatformAPI.ts';
+import chatroomIdState from '../../recoil/chatroomId/atom';
 
 type ChatHeaderProps = {
   responserName: string;
@@ -11,7 +13,31 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
   responserName,
   responserImage,
 }) => {
-  const navigate = useNavigate();
+  const chatroomId = useRecoilValue(chatroomIdState);
+
+  const handleEndConsultation = async () => {
+    try {
+      if (!chatroomId) {
+        console.error('Chatroom ID is not set.');
+        alert('Chatroom ID is missing. Cannot end consultation.');
+        return;
+      }
+
+      console.log(`Ending consultation for chatroomId: ${chatroomId}`);
+
+      const response = await PlatformAPI.updateChatroomStatus(
+        chatroomId,
+        'active'
+      );
+      console.log('Chatroom status updated to active:', response);
+
+      window.location.href = '/consulting';
+    } catch (error) {
+      console.error('Failed to end consultation:', error);
+      alert('Failed to end consultation. Please try again.');
+    }
+  };
+
   return (
     <div className="w-full p-3 bg-white justify-center">
       <div className="flex justify-between items-center">
@@ -30,7 +56,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
         <div className="flex items-center">
           <button
             className="px-2 py-1 text-xs text-white bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
-            onClick={() => navigate('/Consulting')}
+            onClick={handleEndConsultation}
           >
             상담 종료
           </button>

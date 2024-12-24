@@ -1,50 +1,69 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { PlatformAPI } from '../../../platform/PlatformAPI';
+import { RealEstateTypeInfo } from '../../../types/hanaAssetResponse.common';
 
 interface TypeInfoProps {
-  supplyArea: number | undefined;
-  unitsOfSameAreaNumber: number | undefined;
-  floorPlanImage: string | undefined;
-  exclusiveArea: number | undefined;
-  rooms: number | undefined;
-  bathrooms: number | undefined;
-  managementFee: number | undefined;
-  floorPlanLink: string | undefined;
+  realEstateId: number;
 }
 
-const TypeInfo: React.FC<TypeInfoProps> = ({
-  supplyArea,
-  unitsOfSameAreaNumber,
-  floorPlanImage,
-  exclusiveArea,
-  rooms,
-  bathrooms,
-  managementFee,
-  floorPlanLink,
-}) => {
-  const totalArea = Math.round(supplyArea!) + 'Bm²';
-  const strSupplyArea = supplyArea! + 'm²';
-  const strExclusiveArea = exclusiveArea + 'm²';
+const TypeInfo: React.FC<TypeInfoProps> = ({ realEstateId }) => {
+  const [realEstateType, setRealEstateType] =
+    useState<RealEstateTypeInfo | null>(null);
+
+  useEffect(() => {
+    const fetchRealEstateType = async () => {
+      try {
+        const realEstateType =
+          await PlatformAPI.getRealEstateType(realEstateId);
+        const realEstateTypeInfo = realEstateType.result;
+        setRealEstateType(realEstateTypeInfo);
+      } catch (error) {
+        console.error('Error fetching real estate type:', error);
+      }
+    };
+
+    fetchRealEstateType();
+  }, [realEstateId]);
+
+  if (!realEstateType) {
+    return null;
+  }
+
+  const {
+    name,
+    supplyAreaSize,
+    exclusiveAreaSize,
+    managementFee,
+    roomCount,
+    bathroomCount,
+    floorPlanImgUrl,
+    floorPlanLink,
+  } = realEstateType;
+
+  const strSupplyArea = supplyAreaSize.toFixed(2) + 'm²';
+  const strExclusiveArea = exclusiveAreaSize.toFixed(2) + 'm²';
 
   function roundToN(num: number, n: number) {
     return Math.round(num * 10 ** n) / 10 ** n;
   }
 
   const exclusiveRatePer =
-    (roundToN(exclusiveArea! / supplyArea!, 4) * 100).toFixed(2) + '%';
+    (roundToN(exclusiveAreaSize / supplyAreaSize, 4) * 100).toFixed(2) + '%';
 
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-2xl font-bold mb-4">타입</h2>
       <div className="flex items-start mb-4">
         <div className="flex-1">
-          <p className="text-lg">
-            • {totalArea} ({unitsOfSameAreaNumber}세대)
-          </p>
-          <img
-            src={floorPlanImage}
-            alt="Floor Plan"
-            className="w-auto h-auto"
-          />
+          <p className="text-lg">• {name + 'm²'}</p>
+          {floorPlanImgUrl && (
+            <img
+              src={floorPlanImgUrl}
+              alt="Floor Plan"
+              className="w-auto h-auto"
+            />
+          )}
+
           <div className="flex justify-center text-xs text-gray-600 mb-2">
             <div className="flex flex-col text-center">
               <p>공급/전용</p>
@@ -56,7 +75,7 @@ const TypeInfo: React.FC<TypeInfoProps> = ({
             <div className="flex flex-col">
               <p>방/욕실</p>
               <p className="font-bold">
-                {rooms}개/{bathrooms}개
+                {roomCount}개/{bathroomCount}개
               </p>
             </div>
             <span className="border-r border-gray-300 mx-5"></span>

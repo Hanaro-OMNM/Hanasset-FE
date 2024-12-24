@@ -10,7 +10,13 @@ import {
 import {
   CurrentAptMarkers,
   CurrentAreaMarkers,
+  RealEstateBasic,
+  RealEstateDetail,
   RealEstateList,
+  RealEstateMarketPrice,
+  RealEstateMarketPriceParam,
+  RealEstateMarketPriceParamInfo,
+  RealEstateType,
 } from '../types/hanaAssetResponse.common.ts';
 
 export class PlatformAPI {
@@ -53,6 +59,17 @@ export class PlatformAPI {
     return response.data as RealEstateList;
   }
 
+  public static async getRealEstateType(
+    realEstateId: number
+  ): Promise<RealEstateType> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/type`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateType;
+  }
   public static async sendMail(email: string): Promise<boolean> {
     try {
       const response = await this.instance.post(
@@ -77,6 +94,18 @@ export class PlatformAPI {
     }
   }
 
+  public static async getRealEstateDetail(
+    realEstateId: number
+  ): Promise<RealEstateDetail> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/detail`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateDetail;
+  }
+
   public static async signUp(emailSignUp: EmailSignUpRequest): Promise<number> {
     try {
       const response = await this.instance.post('/users/signup', emailSignUp);
@@ -85,6 +114,18 @@ export class PlatformAPI {
       console.error('Error sending email:', error); // 요청 실패 시 false 반환
       return 400;
     }
+  }
+
+  public static async getRealEstateBasic(
+    realEstateId: number
+  ): Promise<RealEstateBasic> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/basic`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateBasic;
   }
 
   public static async submitBirthDate(birthDate: BirthDate): Promise<number> {
@@ -135,5 +176,34 @@ export class PlatformAPI {
     } catch (error) {
       console.error('Error logout:', error);
     }
+  }
+
+  public static async getRealEstateMarketPriceParam(
+    realEstateId: number
+  ): Promise<RealEstateMarketPriceParam> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/market-price`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateMarketPriceParam;
+  }
+
+  public static async getRealEstateMarketPrice(
+    realEstateMarketPriceParam: RealEstateMarketPriceParamInfo,
+    tradeType: string
+  ): Promise<RealEstateMarketPrice> {
+    const response = await axios.get(
+      '/real-estate-api/front-api/v1/complex/pyeong/realPrice',
+      {
+        params: {
+          complexNumber: realEstateMarketPriceParam.complexNumber,
+          pyeongTypeNumber: realEstateMarketPriceParam.pyeongTypeNumber,
+          tradeType: tradeType,
+        },
+      }
+    );
+    return response.data as RealEstateMarketPrice;
   }
 }

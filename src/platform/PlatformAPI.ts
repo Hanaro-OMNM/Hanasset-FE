@@ -56,7 +56,7 @@ export class PlatformAPI {
   public static async sendMail(email: string): Promise<boolean> {
     try {
       const response = await this.instance.post(
-        `/users/signup/sendemail?email=${encodeURIComponent(email)}`
+        `/users/signup/send-email?email=${encodeURIComponent(email)}`
       );
       return response.status === 200;
     } catch (error) {
@@ -67,7 +67,7 @@ export class PlatformAPI {
 
   public static async confirmCode(code: ConfirmCode): Promise<boolean> {
     try {
-      const response = await this.instance.get('/users/signup/receive_code', {
+      const response = await this.instance.get('/users/signup/receive-code', {
         params: code,
       });
       return response.status === 200;

@@ -204,7 +204,7 @@ export default function RealEstateDetail({
         <BasicInfo realEstateId={realEstate.realEstateId} />
       </div>
       <div id="예산" className="pt-12">
-        <Estimate totalAsset={28} />
+        <Estimate totalAsset={28} realEstateId={realEstate.realEstateId} />
       </div>
     </RealEstateDetailLayout>
   );

@@ -30,14 +30,13 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
       return '등록된 매물 설명이 없습니다.';
     }
   };
-  // 텍스트 길이가 9자를 초과하면 말줄임표를 추가 (텍스트 태그별로 길이 재정의해야 함)
 
   function convertToEok(number: number) {
     return (number / 100000000).toFixed(1) + '억';
   }
 
   function convertToMan(number: number) {
-    return (number / 10000).toFixed(1) + '만';
+    return (number / 10000).toFixed(0) + '만';
   }
 
   const prcResult = estate ? convertToMan(estate.price) : undefined;

@@ -1,7 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
+import qs from 'qs';
 import {
   CurrentLocation,
   MarkerComplexId,
+  RealEstateIds,
 } from '../types/hanaAssetRequest.common.ts';
 import {
   CurrentAptMarkers,
@@ -11,6 +13,7 @@ import {
   RealEstateList,
   RealEstateType,
 } from '../types/hanaAssetResponse.common.ts';
+import { LoanRecommend } from '../types/hanaAssetResponse.common.ts';
 
 export class PlatformAPI {
   static instance: AxiosInstance = axios.create({
@@ -86,5 +89,18 @@ export class PlatformAPI {
       }
     );
     return response.data as RealEstateBasic;
+  }
+
+  public static async getLoanRecommend(
+    realEstateIds: RealEstateIds
+  ): Promise<LoanRecommend> {
+    const response = await this.instance.get(`/loan`, {
+      ...this.defaultConfig,
+      params: realEstateIds,
+      paramsSerializer: function (params) {
+        return qs.stringify(params, { arrayFormat: 'repeat' });
+      },
+    });
+    return response.data as LoanRecommend;
   }
 }

@@ -7,3 +7,7 @@ export interface CurrentLocation {
 export interface MarkerComplexId {
   housingComplexId: number;
 }
+
+export interface RealEstateIds {
+  realEstateIds: number[];
+}

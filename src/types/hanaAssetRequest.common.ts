@@ -29,3 +29,15 @@ export interface LoginRequest {
   email: string;
   password: string;
 }
+export interface ChatCreateRequest {
+  userId: number;
+  consultantId: number;
+  chatroomTitle: string;
+  reservedTime: string;
+}
+export interface ChatMessage {
+  id: string;
+  sender: string;
+  message: string;
+  timestamp: string;
+}

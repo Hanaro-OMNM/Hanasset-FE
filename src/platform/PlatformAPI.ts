@@ -165,6 +165,31 @@ export class PlatformAPI {
     }
   }
 
+  // 채팅방 생성
+  public static async createChat(
+    chatCreateRequest: ChatCreateRequest
+  ): Promise<ChatRoom> {
+    try {
+      console.log('Creating a new chatroom with request:', chatCreateRequest);
+
+      const response = await this.instance.post<{
+        message: string;
+        result: { count: number; chatrooms: ChatRoom[] };
+      }>(`/chat/create`, chatCreateRequest, this.defaultConfig);
+
+      console.log('Chatroom created successfully:', response.data);
+
+      if (response.data.result.chatrooms.length > 0) {
+        return response.data.result.chatrooms[0];
+      } else {
+        throw new Error('No chatrooms found in the response.');
+      }
+    } catch (error) {
+      console.error('Error creating chatroom:', error);
+      throw error;
+    }
+  }
+
   public static async getCompletedChatroomsByUserId(
     userId: number
   ): Promise<ChatRoom[]> {

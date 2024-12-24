@@ -67,7 +67,7 @@ export default function BirthDateForm({
             htmlFor="birthDate"
             className="block text-sm font-medium text-gray-700"
           >
-            생년월일 (YYYY-MM-DD)
+            생년월일
           </label>
           <input
             type="date"

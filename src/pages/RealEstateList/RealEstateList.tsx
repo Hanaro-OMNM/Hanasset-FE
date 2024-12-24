@@ -47,7 +47,7 @@ export default function RealEstateLayout() {
   }, [state]);
 
   const handleCardClick = (estate: RealEstatePreview) => {
-    setSelectedEstate(estate); // 선택된 매물 정보 설정
+    setSelectedEstate(estate);
   };
 
   const navigate = useNavigate();

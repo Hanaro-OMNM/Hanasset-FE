@@ -60,7 +60,6 @@ const options = {
 
 function generateMonthLabels(dates1: string[], dates2: string[]): string[] {
   const labelLength = Math.max(dates1.length, dates2.length);
-  console.log(labelLength);
   const allDates = [...dates1, ...dates2];
 
   // 가장 빠른 날짜와 가장 늦은 날짜 찾기

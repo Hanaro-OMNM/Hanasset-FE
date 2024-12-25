@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { useEffect, useState } from 'react';
 import MobileHeader from '../../components/atoms/MobileHeader.tsx';
+import { PlatformAPI } from '../../platform/PlatformAPI.ts';
 import centerAtom from '../../recoil/center/index.ts';
 import {
   RealEstateList,
@@ -12,38 +13,55 @@ import RealEstateCard from './RealEstateCard.tsx';
 
 export default function RealEstateLayout() {
   const location = useLocation();
-  const state = location.state as RealEstateList; // 전달받은 state 객체
+  const state = location.state as RealEstateList;
 
   const center = useRecoilValue(centerAtom);
   const [currAddr, setCurrentAddr] = useState<string>('');
   const [selectedEstate, setSelectedEstate] =
     useState<RealEstatePreview | null>(null);
-  const [showRealEstate, setShowRealEstate] = useState(true);
+  const [bookmarkEstateList, setBookmarkEstateList] = useState<
+    RealEstatePreview[] | null
+  >(null);
   const realEstateCount = state.result.count;
 
-  useEffect(() => {
-    const fetchAddressData = async () => {
-      try {
-        const response = await fetch(
-          `api/map-reversegeocode/v2/gc?coords=${center.lng},${center.lat}&output=json`,
-          {
-            method: 'GET',
-            headers: {
-              'x-ncp-apigw-api-key-id': `${import.meta.env.VITE_MAP_CLIENT_ID}`,
-              'x-ncp-apigw-api-key': `${import.meta.env.VITE_MAP_CLIENT_SECRET}`,
-            },
-          }
-        );
-        const data = await response.json();
-        const { area1, area2, area3 } = data.results[0].region;
-        const address = `${area1.name} ${area2.name} ${area3.name}`;
-        setCurrentAddr(address);
-      } catch (error) {
-        console.error('Error fetching address data:', error);
-      }
-    };
+  const fetchAddressData = async () => {
+    try {
+      const response = await fetch(
+        `api/map-reversegeocode/v2/gc?coords=${center.lng},${center.lat}&output=json`,
+        {
+          method: 'GET',
+          headers: {
+            'x-ncp-apigw-api-key-id': `${import.meta.env.VITE_MAP_CLIENT_ID}`,
+            'x-ncp-apigw-api-key': `${import.meta.env.VITE_MAP_CLIENT_SECRET}`,
+          },
+        }
+      );
+      const data = await response.json();
+      const { area1, area2, area3 } = data.results[0].region;
+      const address = `${area1.name} ${area2.name} ${area3.name}`;
+      setCurrentAddr(address);
+    } catch (error) {
+      console.error('Error fetching address data:', error);
+    }
+  };
 
+  const getBookmarkRealEstates = async () => {
+    try {
+      const bookmarkRealEstateListResponse =
+        await PlatformAPI.getBookmarkRealEstates();
+      if (bookmarkRealEstateListResponse) {
+        const bookmarkRealEstateList =
+          bookmarkRealEstateListResponse.result.realEstates;
+        setBookmarkEstateList(bookmarkRealEstateList);
+      }
+    } catch (error) {
+      console.error('Error getBookmarkRealEstates:', error);
+    }
+  };
+
+  useEffect(() => {
     fetchAddressData();
+    getBookmarkRealEstates();
   }, [state]);
 
   const handleCardClick = (estate: RealEstatePreview) => {
@@ -64,11 +82,15 @@ export default function RealEstateLayout() {
         localStorage.setItem(key, JSON.stringify(parsedList));
       }
     } else {
-      // 기존 값이 없으면 새로운 배열 생성
       localStorage.setItem(key, JSON.stringify([estate.name]));
     }
 
     setSelectedEstate(estate);
+  };
+
+  const isBookmarkedRealEstate = (id: number): boolean => {
+    if (!bookmarkEstateList) return false;
+    return bookmarkEstateList.some((item) => item.realEstateId === id);
   };
 
   const navigate = useNavigate();
@@ -87,10 +109,10 @@ export default function RealEstateLayout() {
             <div key={index} className="border-b">
               <RealEstateCard
                 estate={item}
-                isStarFilled={false}
+                isBookmarked={isBookmarkedRealEstate(item.realEstateId)}
+                onBookmarkUpdate={getBookmarkRealEstates}
                 onClick={() => {
                   handleCardClick(item);
-                  setShowRealEstate(true);
                 }}
               />
             </div>
@@ -98,11 +120,12 @@ export default function RealEstateLayout() {
         </div>
       </div>
 
-      {showRealEstate && selectedEstate && (
+      {selectedEstate && (
         <RealEstateDetail
           realEstate={selectedEstate}
-          isStarFilled={false}
-          onBackClick={() => setShowRealEstate(false)}
+          isBookmarked={isBookmarkedRealEstate(selectedEstate.realEstateId)}
+          onBookmarkUpdate={getBookmarkRealEstates}
+          onBackClick={() => setSelectedEstate(null)}
         />
       )}
     </div>

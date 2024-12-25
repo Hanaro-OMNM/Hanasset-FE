@@ -1,22 +1,46 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { addDetailEstateData } from '../../assets/Dummy.tsx';
 import MobileHeader from '../../components/atoms/MobileHeader.tsx';
 import RealEstateDetail from '../../pages/RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from '../../pages/RealEstateList/RealEstateCard.tsx';
-import { AdditionalEstate } from '../../types/hanaAsset';
+import { PlatformAPI } from '../../platform/PlatformAPI.ts';
+import { RealEstatePreview } from '../../types/hanaAssetResponse.common.ts';
 
 export default function RealEstateLayout() {
-  const [selectedEstate, setSelectedEstate] = useState<AdditionalEstate | null>(
-    null
-  );
-  const [showRealEstate, setShowRealEstate] = useState(true);
+  const { state } = useLocation(); // 2번 라인
+  const sendBookmarkEstateList = state.bookMark as RealEstatePreview[];
 
-  const handleCardClick = (estate: AdditionalEstate) => {
+  const [bookmarkEstateList, setBookmarkEstateList] = useState<
+    RealEstatePreview[] | null
+  >(sendBookmarkEstateList);
+
+  const [selectedEstate, setSelectedEstate] =
+    useState<RealEstatePreview | null>(null);
+
+  const handleCardClick = (estate: RealEstatePreview) => {
     setSelectedEstate(estate);
   };
 
   const navigate = useNavigate();
+
+  const isBookmarkedRealEstate = (id: number): boolean => {
+    if (!bookmarkEstateList) return false;
+    return bookmarkEstateList.some((item) => item.realEstateId === id);
+  };
+
+  const getBookmarkRealEstates = async () => {
+    try {
+      const bookmarkRealEstateListResponse =
+        await PlatformAPI.getBookmarkRealEstates();
+      if (bookmarkRealEstateListResponse) {
+        const bookmarkRealEstateList =
+          bookmarkRealEstateListResponse.result.realEstates;
+        setBookmarkEstateList(bookmarkRealEstateList);
+      }
+    } catch (error) {
+      console.error('Error getBookmarkRealEstates:', error);
+    }
+  };
 
   return (
     <div className="top-0 absolute pl-4 animate-fadeInRight">
@@ -26,26 +50,28 @@ export default function RealEstateLayout() {
           onBack={() => navigate('/my-page')}
         />
         <div className="flex-grow min-h-0 overflow-y-auto">
-          {addDetailEstateData.map((item, index) => (
-            <div key={index} className="border-b flex">
-              <RealEstateCard
-                estate={item}
-                isStarFilled={true}
-                onClick={() => {
-                  handleCardClick(item);
-                  setShowRealEstate(true);
-                }}
-              />
-            </div>
-          ))}
+          {bookmarkEstateList &&
+            bookmarkEstateList.map((item, index) => (
+              <div key={index} className="border-b flex">
+                <RealEstateCard
+                  estate={item}
+                  isBookmarked={isBookmarkedRealEstate(item.realEstateId)}
+                  onBookmarkUpdate={getBookmarkRealEstates}
+                  onClick={() => {
+                    handleCardClick(item);
+                  }}
+                />
+              </div>
+            ))}
         </div>
       </div>
 
-      {showRealEstate && selectedEstate && (
+      {selectedEstate && (
         <RealEstateDetail
-          isStarFilled={true}
-          estate={selectedEstate}
-          onBackClick={() => setShowRealEstate(false)}
+          realEstate={selectedEstate}
+          isBookmarked={isBookmarkedRealEstate(selectedEstate.realEstateId)}
+          onBookmarkUpdate={getBookmarkRealEstates}
+          onBackClick={() => setSelectedEstate(null)}
         />
       )}
     </div>

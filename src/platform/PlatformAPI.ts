@@ -264,4 +264,30 @@ export class PlatformAPI {
     );
     return response!.data as RealEstateList;
   }
+
+  public static async getBookmarkRealEstates(): Promise<RealEstateList | null> {
+    const response = await this.instance.get('/users/bookmarks/real-estates');
+    return response ? (response.data as RealEstateList) : null;
+  }
+
+  public static async addBookmarkRealEstate(
+    realEstateId: number
+  ): Promise<number> {
+    const response = await this.instance.post(
+      `/users/bookmarks/real-estates/${realEstateId}`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.status;
+  }
+
+  public static async removeBookmarkRealEstate(
+    realEstateId: number
+  ): Promise<number> {
+    const response = await this.instance.delete(
+      `/users/bookmarks/real-estates/${realEstateId}`
+    );
+    return response.status;
+  }
 }

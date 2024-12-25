@@ -24,9 +24,11 @@ export default function Main() {
 
   const [selectedEstate, setSelectedEstate] =
     useState<RealEstatePreview | null>(null); // 초기값을 null로 설정
-  const [showRealEstate, setShowRealEstate] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [recentRealEstateData, setRecentRealEstateData] = useState<
+    RealEstatePreview[] | null
+  >(null);
+  const [bookmarkEstateList, setBookmarkEstateList] = useState<
     RealEstatePreview[] | null
   >(null);
 
@@ -59,23 +61,44 @@ export default function Main() {
     }
   })();
 
-  useEffect(() => {
-    const fetchRecentRealEstatesData = async () => {
-      const recentVisitedREalEstateList =
-        recentHouses && recentHouses !== 'none'
-          ? await PlatformAPI.getRecentVisitedRealEstateList({
-              realEstateIds: recentHouses,
-            })
-          : null;
-      if (recentVisitedREalEstateList) {
-        setRecentRealEstateData(recentVisitedREalEstateList.result.realEstates);
+  const fetchRecentRealEstatesData = async () => {
+    const recentVisitedREalEstateList =
+      recentHouses && recentHouses !== 'none'
+        ? await PlatformAPI.getRecentVisitedRealEstateList({
+            realEstateIds: recentHouses,
+          })
+        : null;
+    if (recentVisitedREalEstateList) {
+      setRecentRealEstateData(recentVisitedREalEstateList.result.realEstates);
+    }
+  };
+
+  const getBookmarkRealEstates = async () => {
+    try {
+      const bookmarkRealEstateListResponse =
+        await PlatformAPI.getBookmarkRealEstates();
+      if (bookmarkRealEstateListResponse) {
+        const bookmarkRealEstateList =
+          bookmarkRealEstateListResponse.result.realEstates;
+        setBookmarkEstateList(bookmarkRealEstateList);
       }
-    };
+    } catch (error) {
+      console.error('Error getBookmarkRealEstates:', error);
+    }
+  };
+
+  useEffect(() => {
+    getBookmarkRealEstates();
     fetchRecentRealEstatesData();
   }, []);
 
   const handleCardClick = (estate: RealEstatePreview) => {
     setSelectedEstate(estate); // 선택된 매물 정보 설정
+  };
+
+  const isBookmarkedRealEstate = (id: number): boolean => {
+    if (!bookmarkEstateList) return false;
+    return bookmarkEstateList.some((item) => item.realEstateId === id);
   };
 
   return (
@@ -233,10 +256,12 @@ export default function Main() {
                           renderItem={(recentRealEstateData) => (
                             <RealEstateCard
                               estate={recentRealEstateData}
-                              isStarFilled={false}
+                              isBookmarked={isBookmarkedRealEstate(
+                                recentRealEstateData.realEstateId
+                              )}
+                              onBookmarkUpdate={getBookmarkRealEstates}
                               onClick={() => {
                                 handleCardClick(recentRealEstateData);
-                                setShowRealEstate(true);
                               }}
                             />
                           )}
@@ -249,11 +274,14 @@ export default function Main() {
                 </div>
               </div>
             </div>
-            {showRealEstate && selectedEstate && (
+            {selectedEstate && (
               <RealEstateDetail
-                isStarFilled={false}
                 realEstate={selectedEstate}
-                onBackClick={() => setShowRealEstate(false)}
+                isBookmarked={isBookmarkedRealEstate(
+                  selectedEstate.realEstateId
+                )}
+                onBookmarkUpdate={getBookmarkRealEstates}
+                onBackClick={() => setSelectedEstate(null)}
               />
             )}
           </div>

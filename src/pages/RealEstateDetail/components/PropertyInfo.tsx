@@ -1,15 +1,18 @@
 import React from 'react';
 import PropertyStar from '../../../components/molecules/Star';
+import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
 import { RealEstatePreview } from '../../../types/hanaAssetResponse.common';
 
 interface PropertyInfoProps {
   estate: RealEstatePreview;
-  isStarFilled: boolean;
+  isBookmarked: boolean;
+  onBookmarkUpdate: () => Promise<void>;
 }
 
 const PropertyInfo: React.FC<PropertyInfoProps> = ({
   estate,
-  isStarFilled,
+  isBookmarked,
+  onBookmarkUpdate,
 }) => {
   function convertToEok(number: number) {
     return (number / 100000000).toFixed(1) + '억';
@@ -23,6 +26,36 @@ const PropertyInfo: React.FC<PropertyInfoProps> = ({
   const prcResult = convertToMan(price);
   const depositResult = convertToEok(deposit);
 
+  function handleBookmark(isBookmarked: boolean) {
+    if (!isBookmarked) {
+      addBookmark(estate.realEstateId);
+    } else {
+      removeBookmark(estate.realEstateId);
+    }
+  }
+
+  const addBookmark = async (id: number) => {
+    try {
+      const responseStatus = await PlatformAPI.addBookmarkRealEstate(id);
+      if (responseStatus === 200) {
+        onBookmarkUpdate();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const removeBookmark = async (id: number) => {
+    try {
+      const responseStatus = await PlatformAPI.removeBookmarkRealEstate(id);
+      if (responseStatus === 200) {
+        onBookmarkUpdate();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <div className="p-4 flex flex-col items-center">
@@ -31,7 +64,10 @@ const PropertyInfo: React.FC<PropertyInfoProps> = ({
             {name} {floor}층
           </p>
           <div className="absolute right-2">
-            <PropertyStar isFilled={isStarFilled} />
+            <PropertyStar
+              isFilled={isBookmarked}
+              onClick={() => handleBookmark(isBookmarked)}
+            />
           </div>
         </div>
         {type === '전세' ? (

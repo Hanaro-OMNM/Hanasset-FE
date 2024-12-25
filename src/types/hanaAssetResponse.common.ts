@@ -155,18 +155,20 @@ export interface LoanInfo {
 
 export interface LoanDetail {
   message: string;
-  result: {
-    loanId: number;
-    type: string;
-    name: string;
-    outline: string;
-    limitAmount: number;
-    rate: number;
-    feature: string;
-    targetGuest: string;
-    targetHouse: string;
-    period: string;
-    paybackMethod: string;
-    dsr: number;
-  };
+  result: LoanDetailInfo;
+}
+
+export interface LoanDetailInfo {
+  loanId: number;
+  type: string;
+  name: string;
+  outline: string;
+  limitAmount: number;
+  rate: number;
+  feature: string;
+  targetGuest: string;
+  targetHouse: string;
+  period: string;
+  paybackMethod: string;
+  dsr: number;
 }

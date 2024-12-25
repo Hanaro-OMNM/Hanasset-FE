@@ -13,7 +13,10 @@ import {
   RealEstateList,
   RealEstateType,
 } from '../types/hanaAssetResponse.common.ts';
-import { LoanRecommend } from '../types/hanaAssetResponse.common.ts';
+import {
+  LoanRecommend,
+  LoanDetail,
+} from '../types/hanaAssetResponse.common.ts';
 
 export class PlatformAPI {
   static instance: AxiosInstance = axios.create({
@@ -102,5 +105,12 @@ export class PlatformAPI {
       },
     });
     return response.data as LoanRecommend;
+  }
+
+  public static async getLoanDetail(loanId: number): Promise<LoanDetail> {
+    const response = await this.instance.get(`/loan/detail/${loanId}`, {
+      ...this.defaultConfig,
+    });
+    return response.data as LoanDetail;
   }
 }

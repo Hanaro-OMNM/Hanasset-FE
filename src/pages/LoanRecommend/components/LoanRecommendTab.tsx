@@ -9,7 +9,7 @@ import LoanFoundMessage from './LoanFoundMessage';
 interface LoanRecommendTabProps {
   hanaLoanList: LoanInfo[];
   beotimmogLoanList: LoanInfo[];
-  onLoanDetailButtonClick: () => void;
+  onLoanDetailButtonClick: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 // 대출 리스트 최소 개수 전처리

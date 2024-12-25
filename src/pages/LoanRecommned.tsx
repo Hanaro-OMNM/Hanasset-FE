@@ -35,11 +35,7 @@ const LoanInfoPage: React.FC = () => {
     fetchLoanRecommend();
   }, [searchParams]);
 
-  const [showDetail, setShowDetail] = useState(false);
-
-  const handleShowDetail = () => {
-    setShowDetail(true);
-  };
+  const [showDetail, setShowDetail] = useState<number | null>(null);
 
   const onBack = (): void => {
     window.history.back();
@@ -72,7 +68,7 @@ const LoanInfoPage: React.FC = () => {
                   ? loanRecommendInfos[0].beotimmokLoans
                   : []
               }
-              onLoanDetailButtonClick={handleShowDetail}
+              onLoanDetailButtonClick={setShowDetail}
             />
             <div className="pb-4">
               <Button text="관심 매물 등록하기" />
@@ -82,7 +78,7 @@ const LoanInfoPage: React.FC = () => {
       </div>
       {showDetail && (
         <div className="h-full absolute top-0 left-[484px]">
-          <LoanDetail onHide={() => setShowDetail(false)} />
+          <LoanDetail loanId={showDetail} onHide={() => setShowDetail(null)} />
         </div>
       )}
     </div>

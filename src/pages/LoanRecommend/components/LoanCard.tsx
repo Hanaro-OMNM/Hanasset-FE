@@ -52,7 +52,9 @@ const LoanLimit: React.FC<LoanLimitProps> = ({ isBest, limit }) => {
         !isBest && 'h-5 text-hanaBlack60 text-xs font-semibold'
       )}
     >
-      {`${limit.toLocaleString()} 만 원`}
+      {limit > 10000
+        ? `${(limit / 10000).toLocaleString()}억 원`
+        : `${limit.toLocaleString()}만 원`}
     </h6>
   );
 };
@@ -85,12 +87,13 @@ interface LoanCardProps {
   rate: number;
   limit: number;
   dsr: number;
-  onLoanDetailButtonClick: () => void;
+  onLoanDetailButtonClick: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const LoanCard: React.FC<LoanCardProps> = ({
   isBest,
   isShow,
+  loanId,
   name,
   rate,
   limit,
@@ -99,7 +102,10 @@ const LoanCard: React.FC<LoanCardProps> = ({
 }) => {
   return (
     <div className={clsx(!isShow && 'hidden')}>
-      <button className="mb-3 w-full" onClick={onLoanDetailButtonClick}>
+      <button
+        className="mb-3 w-full"
+        onClick={() => onLoanDetailButtonClick(loanId)}
+      >
         <div
           className={clsx(
             'p-4 rounded-lg shadow transition-transform duration-100',

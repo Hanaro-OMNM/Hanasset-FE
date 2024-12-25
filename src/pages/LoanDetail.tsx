@@ -1,5 +1,4 @@
 import { IoChevronBack } from 'react-icons/io5';
-import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import CommonBackground from '../components/atoms/CommonBackground';
 import LoanProgressBar from '../components/atoms/LoanProgressBar';

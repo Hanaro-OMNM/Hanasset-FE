@@ -19,6 +19,10 @@ const LoanInfoPage: React.FC = () => {
   const [loanRecommendInfos, setLoanRecommendInfos] = useState<
     LoanRecommendInfo[] | []
   >([]);
+  const [loanId, setLoanId] = useState<number | null>(null);
+  const onBack = (): void => {
+    window.history.back();
+  };
 
   useEffect(() => {
     const fetchLoanRecommend = async () => {
@@ -34,12 +38,6 @@ const LoanInfoPage: React.FC = () => {
     };
     fetchLoanRecommend();
   }, [searchParams]);
-
-  const [loanId, setLoanId] = useState<number | null>(null);
-
-  const onBack = (): void => {
-    window.history.back();
-  };
 
   return (
     <div className="flex">

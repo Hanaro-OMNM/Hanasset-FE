@@ -114,7 +114,7 @@ export interface RealEstateBasic {
 export interface LoanRecommend {
   message: string;
   result: {
-    guest: GuestInfo;
+    user: GuestInfo;
     loanRecommendInfos: LoanRecommendInfo[];
   };
 }

@@ -26,7 +26,7 @@ const LoanInfoPage: React.FC = () => {
         const loanRecommend = await PlatformAPI.getLoanRecommend({
           realEstateIds: [Number(searchParams.get('realEstateIds'))],
         });
-        // setGuestInfo(loanRecommend.result.guest);
+        setGuestInfo(loanRecommend.result.user);
         setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
       } catch (error) {
         console.error('Error fetching loan data:', error);
@@ -35,7 +35,7 @@ const LoanInfoPage: React.FC = () => {
     fetchLoanRecommend();
   }, [searchParams]);
 
-  const [showDetail, setShowDetail] = useState<number | null>(null);
+  const [loanId, setLoanId] = useState<number | null>(null);
 
   const onBack = (): void => {
     window.history.back();
@@ -55,7 +55,7 @@ const LoanInfoPage: React.FC = () => {
               <div className="font-fontMedium text-2xl"> 이에요.</div>
             </div>
             <Expectation title="예상 대출금" totalPrice={10} maxLoan={5} />
-            {/* <DsrInfo dsr={guestInfo!.dsr} /> */}
+            <DsrInfo dsr={guestInfo ? guestInfo.dsr : 0.0} />
             <LoanFoundMessage isFound={true} />
             <LoanRecommendTab
               hanaLoanList={
@@ -68,7 +68,7 @@ const LoanInfoPage: React.FC = () => {
                   ? loanRecommendInfos[0].beotimmokLoans
                   : []
               }
-              onLoanDetailButtonClick={setShowDetail}
+              onLoanDetailButtonClick={setLoanId}
             />
             <div className="pb-4">
               <Button text="관심 매물 등록하기" />
@@ -76,9 +76,9 @@ const LoanInfoPage: React.FC = () => {
           </div>
         </div>
       </div>
-      {showDetail && (
+      {loanId && (
         <div className="h-full absolute top-0 left-[484px]">
-          <LoanDetail loanId={showDetail} onHide={() => setShowDetail(null)} />
+          <LoanDetail loanId={loanId} onHide={() => setLoanId(null)} />
         </div>
       )}
     </div>

@@ -1,11 +1,18 @@
 import { PiBuildingApartment } from 'react-icons/pi';
 import { useState } from 'react';
-import { dummyLoanGroup } from '../assets/Dummy';
-import { dummyRealEstateList } from '../assets/Dummy';
-import { dummyGuest } from '../assets/Dummy';
-import { dummyBeotimmogLoanGroup } from '../assets/Dummy';
+import { useEffect } from 'react';
+// import { dummyLoanGroup } from '../assets/Dummy';
+// import { dummyRealEstateList } from '../assets/Dummy';
+// import { dummyGuest } from '../assets/Dummy';
+// import { dummyBeotimmogLoanGroup } from '../assets/Dummy';
 import CommonBackground from '../components/atoms/CommonBackground';
 import Swiper from '../components/atoms/Swiper';
+import { PlatformAPI } from '../platform/PlatformAPI';
+import {
+  GuestInfo,
+  LoanRecommendInfo,
+  RealEstateInfo,
+} from '../types/hanaAssetResponse.common';
 import FixedExpectation from './GuestChatDetail/FixedExpectation';
 import LoanDetail from './LoanDetail';
 import DsrInfo from './LoanRecommend/components/DsrInfo';
@@ -13,23 +20,42 @@ import LoanRecommendTab from './LoanRecommend/components/LoanRecommendTab';
 import SemiTitle from './consultant/SemiTitle';
 
 const GuestChatDetail: React.FC = () => {
-  const [loanIndex, setLoanIndex] = useState(0);
-  const [showDetail, setShowDetail] = useState(false);
-
-  const handleShowDetail = () => {
-    setShowDetail(true);
-  };
+  const [guestInfo, setGuestInfo] = useState<GuestInfo | null>(null);
+  const [loanRecommendInfos, setLoanRecommendInfos] = useState<
+    LoanRecommendInfo[] | []
+  >([]);
+  const [realEsetateId, setRealEstateId] = useState(0);
+  const [loanId, setLoanId] = useState<number | null>(null);
+  const [realEstateInfos, setRealEstateInfos] = useState<RealEstateInfo[] | []>(
+    []
+  );
 
   const swiperClick = (index: number) => {
-    setLoanIndex(index);
-    console.log(loanIndex, index);
+    setRealEstateId(index);
   };
+
+  useEffect(() => {
+    const fetchLoanRecommend = async () => {
+      try {
+        const loanRecommend = await PlatformAPI.getConsultingUserInfo();
+        setGuestInfo(loanRecommend.result.user);
+        setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
+        const realEstateInfoList = loanRecommendInfos.map(
+          (loanRecommendInfo) => loanRecommendInfo.realEstate
+        );
+        setRealEstateInfos(realEstateInfoList);
+      } catch (error) {
+        console.error('Error fetching loan data:', error);
+      }
+    };
+    fetchLoanRecommend();
+  }, []);
 
   return (
     <div className="top-0 absolute animate-slideInRight">
-      {showDetail ? (
+      {loanId ? (
         <div className="absolute left-[420px]">
-          <LoanDetail onHide={() => setShowDetail(false)} />
+          <LoanDetail loanId={loanId} onHide={() => setLoanId(null)} />
         </div>
       ) : (
         <div className="w-[420px] backdrop-blur-[10px] absolute px-4 top-0 h-screen left-[420px] overflow-y-auto bg-gray-50/90 scrollbar-hide">
@@ -37,22 +63,26 @@ const GuestChatDetail: React.FC = () => {
           <div>
             <SemiTitle title="매물 정보" />
             <Swiper
-              items={dummyRealEstateList}
+              items={realEstateInfos ? realEstateInfos : []}
               renderItem={(realEstate) => (
                 <div className="flex flex-col gap-4 h-32 mr-1 ml-1">
                   <div>
                     <button
-                      onClick={() => swiperClick(realEstate.id)}
+                      onClick={() =>
+                        swiperClick(realEstate ? realEstate.realEstateId : 0)
+                      }
                       className="w-full transition-transform transform hover:scale-105"
                     >
                       <CommonBackground className="flex items-center p-4 h-20 rounded-lg shadow-md bg-gradient-to-r from-white to-hanaGreen20">
                         <PiBuildingApartment className="text-2xl text-hanaGreen" />
                         <div className="ml-4 text-hanaBlack font-medium text-left">
-                          {realEstate.name} ({realEstate.rentType})
+                          {realEstate ? realEstate.name : ''} (
+                          {realEstate ? realEstate.rentType : ''})
                           <div className="text-sm text-hanaBlack80">
-                            {realEstate.location}, {realEstate.size}
+                            {realEstate ? realEstate.address : ''}
                             <br />
-                            {realEstate.address}
+                            {realEstate ? realEstate.addressDetail : ''},{' '}
+                            {realEstate ? realEstate.exclusiveAreaSize : 0}
                           </div>
                         </div>
                       </CommonBackground>
@@ -69,15 +99,23 @@ const GuestChatDetail: React.FC = () => {
           <div>
             <SemiTitle title="대출 상품 리스트" />
             <FixedExpectation
-              capital={dummyGuest.capital}
-              totalPrice={dummyRealEstateList[loanIndex].deposit}
+              capital={guestInfo ? guestInfo.capital : 0}
+              totalPrice={realEstateInfos[realEsetateId].deposit}
               maxLoan={5}
             />
-            <DsrInfo dsr={dummyGuest.dsr} />
+            <DsrInfo dsr={guestInfo ? guestInfo.dsr : 0.0} />
             <LoanRecommendTab
-              hanaLoanList={dummyLoanGroup[loanIndex]}
-              beotimmogLoanList={dummyBeotimmogLoanGroup[loanIndex]}
-              onLoanDetailButtonClick={handleShowDetail}
+              hanaLoanList={
+                loanRecommendInfos.length > 0
+                  ? loanRecommendInfos[realEsetateId].hanaLoans
+                  : []
+              }
+              beotimmogLoanList={
+                loanRecommendInfos.length > 0
+                  ? loanRecommendInfos[realEsetateId].beotimmokLoans
+                  : []
+              }
+              onLoanDetailButtonClick={setLoanId}
             />
           </div>
         </div>

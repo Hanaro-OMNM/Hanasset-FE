@@ -113,4 +113,11 @@ export class PlatformAPI {
     });
     return response.data as LoanDetail;
   }
+
+  public static async getConsultingUserInfo(): Promise<LoanRecommend> {
+    const response = await this.instance.get(`/chat/user`, {
+      ...this.defaultConfig,
+    });
+    return response.data as LoanRecommend;
+  }
 }

@@ -121,9 +121,11 @@ export interface LoanRecommend {
 
 export interface GuestInfo {
   name: string;
+  age: number;
   jobType: string;
   income: number;
-  hasHome: boolean;
+  capital: number;
+  hasHouse: boolean;
   annualInterest: number;
   annualPrinciple: number;
   dsr: number;

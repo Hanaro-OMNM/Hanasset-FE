@@ -110,7 +110,9 @@ export default function MyPage() {
         console.error('Error parsing bookmarkedLocations:', error);
       }
     }
-    getBookmarkRealEstates();
+    if (isLogin) {
+      getBookmarkRealEstates();
+    }
   }, []);
 
   const navigate = useNavigate();

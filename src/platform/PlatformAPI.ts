@@ -7,6 +7,8 @@ import {
   EmailSignUpRequest,
   LoginRequest,
   MarkerComplexId,
+  RealEstateMarketPriceParamInfo,
+  RecentVisitedRealEstatesIds,
 } from '../types/hanaAssetRequest.common.ts';
 import {
   CurrentAptMarkers,
@@ -16,7 +18,6 @@ import {
   RealEstateList,
   RealEstateMarketPrice,
   RealEstateMarketPriceParam,
-  RealEstateMarketPriceParamInfo,
   RealEstateType,
 } from '../types/hanaAssetResponse.common.ts';
 
@@ -246,5 +247,21 @@ export class PlatformAPI {
       }
     );
     return response.data as RealEstateMarketPrice;
+  }
+
+  public static async getRecentVisitedRealEstateList(
+    recentVisitedRealEstatesIds: RecentVisitedRealEstatesIds
+  ): Promise<RealEstateList> {
+    const params = new URLSearchParams();
+    recentVisitedRealEstatesIds.realEstateIds.forEach((id) =>
+      params.append('realEstatesIds', id)
+    );
+    const response = await this.instance.get(
+      `/real-estates/recent-visited-list`,
+      {
+        params: params,
+      }
+    );
+    return response!.data as RealEstateList;
   }
 }

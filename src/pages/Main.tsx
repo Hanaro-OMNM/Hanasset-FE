@@ -1,13 +1,13 @@
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdNavigateNext } from 'react-icons/md';
 import { useEffect, useState } from 'react';
-import { addDetailEstateData } from '../assets/Dummy';
 import HanaLogo from '../assets/img/hanaLogo.png';
 import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import Swiper from '../components/atoms/Swiper';
 import UserManual from '../components/template/userManual.tsx';
-import { AdditionalEstate } from '../types/hanaAsset';
+import { PlatformAPI } from '../platform/PlatformAPI.ts';
+import { RealEstatePreview } from '../types/hanaAssetResponse.common.ts';
 import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from './RealEstateList/RealEstateCard.tsx';
 import LocationFilter from './location/LocationFilter.tsx';
@@ -22,11 +22,13 @@ export default function Main() {
   const [currGungu, setGungu] = useState<string>('시/군/구');
   const [currDong, setDong] = useState<string>('읍/면/동');
 
-  const [selectedEstate, setSelectedEstate] = useState<AdditionalEstate | null>(
-    null
-  ); // 초기값을 null로 설정
+  const [selectedEstate, setSelectedEstate] =
+    useState<RealEstatePreview | null>(null); // 초기값을 null로 설정
   const [showRealEstate, setShowRealEstate] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [recentRealEstateData, setRecentRealEstateData] = useState<
+    RealEstatePreview[] | null
+  >(null);
 
   useEffect(() => {
     // LocalStorage에서 값을 가져오고 없으면 기본값으로 설정
@@ -57,19 +59,22 @@ export default function Main() {
     }
   })();
 
-  // 최근 확인한 매물 리스트와 매칭되는 더미 데이터 필터링
-  const recentRealEstateData: AdditionalEstate[] =
-    recentHouses !== 'none'
-      ? addDetailEstateData
-          .filter((estate) => recentHouses.includes(estate.basicInfo.atclNm))
-          .sort(
-            (a, b) =>
-              recentHouses.indexOf(a.basicInfo.atclNm) -
-              recentHouses.indexOf(b.basicInfo.atclNm)
-          )
-      : [];
+  useEffect(() => {
+    const fetchRecentRealEstatesData = async () => {
+      const recentVisitedREalEstateList =
+        recentHouses && recentHouses !== 'none'
+          ? await PlatformAPI.getRecentVisitedRealEstateList({
+              realEstateIds: recentHouses,
+            })
+          : null;
+      if (recentVisitedREalEstateList) {
+        setRecentRealEstateData(recentVisitedREalEstateList.result.realEstates);
+      }
+    };
+    fetchRecentRealEstatesData();
+  }, []);
 
-  const handleCardClick = (estate: AdditionalEstate) => {
+  const handleCardClick = (estate: RealEstatePreview) => {
     setSelectedEstate(estate); // 선택된 매물 정보 설정
   };
 
@@ -221,22 +226,24 @@ export default function Main() {
                     {recentHouses === 'none' ? (
                       <div>아직 둘러본 매물이 없네요.</div>
                     ) : (
-                      <Swiper
-                        items={recentRealEstateData}
-                        pagination={{ clickable: true }}
-                        renderItem={(recentRealEstateData) => (
-                          <RealEstateCard
-                            estate={recentRealEstateData}
-                            isStarFilled={false}
-                            onClick={() => {
-                              handleCardClick(recentRealEstateData);
-                              setShowRealEstate(true);
-                            }}
-                          />
-                        )}
-                        spaceBetween={30}
-                        slidesPerView={1}
-                      />
+                      recentRealEstateData && (
+                        <Swiper
+                          items={recentRealEstateData}
+                          pagination={{ clickable: true }}
+                          renderItem={(recentRealEstateData) => (
+                            <RealEstateCard
+                              estate={recentRealEstateData}
+                              isStarFilled={false}
+                              onClick={() => {
+                                handleCardClick(recentRealEstateData);
+                                setShowRealEstate(true);
+                              }}
+                            />
+                          )}
+                          spaceBetween={30}
+                          slidesPerView={1}
+                        />
+                      )
                     )}
                   </CommonBackground>
                 </div>
@@ -245,7 +252,7 @@ export default function Main() {
             {showRealEstate && selectedEstate && (
               <RealEstateDetail
                 isStarFilled={false}
-                estate={selectedEstate}
+                realEstate={selectedEstate}
                 onBackClick={() => setShowRealEstate(false)}
               />
             )}

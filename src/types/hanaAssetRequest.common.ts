@@ -29,3 +29,13 @@ export interface LoginRequest {
   email: string;
   password: string;
 }
+
+export interface RealEstateMarketPriceParamInfo {
+  complexNumber: string;
+  pyeongTypeNumber: number;
+  tradeType: string;
+}
+
+export interface RecentVisitedRealEstatesIds {
+  realEstateIds: string[];
+}

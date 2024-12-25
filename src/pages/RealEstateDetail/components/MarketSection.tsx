@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
-import {
-  RealEstateMarketPriceParamInfo,
-  TradeInfo,
-} from '../../../types/hanaAssetResponse.common.ts';
+import { RealEstateMarketPriceParamInfo } from '../../../types/hanaAssetRequest.common.ts';
+import { TradeInfo } from '../../../types/hanaAssetResponse.common.ts';
 import MarketChart from './MarketChart';
 import MarketInfoCard from './MarketInfoCard';
 import TransactionTable from './TransactionTable';

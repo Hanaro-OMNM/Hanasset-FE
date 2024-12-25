@@ -1,3 +1,5 @@
+import { RealEstateMarketPriceParamInfo } from './hanaAssetRequest.common.ts';
+
 export interface CurrentAreaMarkers {
   message: string;
   result: {
@@ -85,12 +87,6 @@ export interface RealEstateBasicInfo {
     buildingCoverageRatio: number;
   };
   constructionCompany: string;
-}
-
-export interface RealEstateMarketPriceParamInfo {
-  complexNumber: string;
-  pyeongTypeNumber: number;
-  tradeType: string;
 }
 
 export interface RealEstateList {

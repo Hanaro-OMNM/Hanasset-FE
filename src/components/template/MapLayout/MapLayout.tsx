@@ -95,10 +95,6 @@ export default function MapLayout({ children }: LayoutProps) {
 
   useEffect(() => {
     handleMarkerFetch();
-  }, []);
-
-  useEffect(() => {
-    handleMarkerFetch();
   }, [zoom]);
 
   useEffect(() => {

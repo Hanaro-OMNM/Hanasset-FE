@@ -1,6 +1,8 @@
+import { useRecoilState } from 'recoil';
 import React from 'react';
 import Star from '../../components/molecules/Star';
 import { PlatformAPI } from '../../platform/PlatformAPI.ts';
+import isLoginAtom from '../../recoil/isLogin';
 import { RealEstatePreview } from '../../types/hanaAssetResponse.common.ts';
 
 interface RealEstateCardProps {
@@ -16,6 +18,8 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
   isBookmarked,
   onBookmarkUpdate,
 }) => {
+  const [isLogin] = useRecoilState(isLoginAtom);
+
   const truncateArticleName = (text: string) => {
     if (text.length > 9) {
       return text.substring(0, 9) + '...';
@@ -133,10 +137,12 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
         <hr className="border-2 solid lightgray; margin: 10px 0;" />
       </button>
       <div className="z-10">
-        <Star
-          isFilled={isBookmarked}
-          onClick={() => handleBookmark(isBookmarked)}
-        />
+        {isLogin && (
+          <Star
+            isFilled={isBookmarked}
+            onClick={() => handleBookmark(isBookmarked)}
+          />
+        )}
       </div>
     </div>
   );

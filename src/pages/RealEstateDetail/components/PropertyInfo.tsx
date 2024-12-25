@@ -1,6 +1,8 @@
+import { useRecoilState } from 'recoil';
 import React from 'react';
 import PropertyStar from '../../../components/molecules/Star';
 import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
+import isLoginAtom from '../../../recoil/isLogin';
 import { RealEstatePreview } from '../../../types/hanaAssetResponse.common';
 
 interface PropertyInfoProps {
@@ -14,6 +16,8 @@ const PropertyInfo: React.FC<PropertyInfoProps> = ({
   isBookmarked,
   onBookmarkUpdate,
 }) => {
+  const [isLogin] = useRecoilState(isLoginAtom);
+
   function convertToEok(number: number) {
     return (number / 100000000).toFixed(1) + '억';
   }
@@ -64,10 +68,12 @@ const PropertyInfo: React.FC<PropertyInfoProps> = ({
             {name} {floor}층
           </p>
           <div className="absolute right-2">
-            <PropertyStar
-              isFilled={isBookmarked}
-              onClick={() => handleBookmark(isBookmarked)}
-            />
+            {isLogin && (
+              <PropertyStar
+                isFilled={isBookmarked}
+                onClick={() => handleBookmark(isBookmarked)}
+              />
+            )}
           </div>
         </div>
         {type === '전세' ? (

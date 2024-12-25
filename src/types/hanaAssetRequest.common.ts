@@ -8,6 +8,38 @@ export interface MarkerComplexId {
   housingComplexId: number;
 }
 
+export interface ConfirmCode {
+  email: string;
+  code: number;
+}
+
+export interface EmailSignUpRequest {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+export interface BirthDate {
+  email: string;
+  birthDate: Date;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface RealEstateMarketPriceParamInfo {
+  complexNumber: string;
+  pyeongTypeNumber: number;
+  tradeType: string;
+}
+
+export interface RecentVisitedRealEstatesIds {
+  realEstateIds: string[];
+}
+
 export interface RealEstateIds {
   realEstateIds: number[];
 }

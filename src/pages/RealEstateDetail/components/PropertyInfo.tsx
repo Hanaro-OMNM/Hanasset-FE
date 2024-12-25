@@ -16,7 +16,7 @@ const PropertyInfo: React.FC<PropertyInfoProps> = ({
   }
 
   function convertToMan(number: number) {
-    return (number / 10000).toFixed(1) + '만';
+    return (number / 10000).toFixed(0) + '만';
   }
 
   const { name, deposit, price, floor, type } = estate;

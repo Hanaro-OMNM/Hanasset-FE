@@ -95,10 +95,6 @@ export default function MapLayout({ children }: LayoutProps) {
 
   useEffect(() => {
     handleMarkerFetch();
-  }, []);
-
-  useEffect(() => {
-    handleMarkerFetch();
   }, [zoom]);
 
   useEffect(() => {
@@ -141,7 +137,6 @@ export default function MapLayout({ children }: LayoutProps) {
         housingComplexId: markerId,
       });
       setRealEstateList(realEstateList);
-      console.log(realEstateList);
     } catch (error) {
       console.error('Error fetching real estate list:', error);
     }

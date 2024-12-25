@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import LoginPage from './Login.tsx';
-import SignUpPage from './SignUp.tsx';
+import SignUpForm from './SignUpForm.tsx';
 
 interface LoginPageProps {
   onLoginSuccess: () => void;
@@ -10,7 +10,7 @@ interface LoginPageProps {
 export default function Modal({ onLoginSuccess, onClose }: LoginPageProps) {
   const [isLoginPage, setIsLoginPage] = useState(true);
   return (
-    <div className="bg-white w-[320px] h-[500px] rounded-lg shadow-lg animate-fadeInRight">
+    <div>
       {isLoginPage ? (
         <LoginPage
           onLoginSuccess={onLoginSuccess}
@@ -18,7 +18,7 @@ export default function Modal({ onLoginSuccess, onClose }: LoginPageProps) {
           onSignUpPage={() => setIsLoginPage(false)}
         />
       ) : (
-        <SignUpPage
+        <SignUpForm
           onSignUpSuccess={() => setIsLoginPage(true)}
           onClose={onClose}
           onSignUpPage={() => setIsLoginPage(true)}

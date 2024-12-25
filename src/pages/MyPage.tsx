@@ -1,6 +1,6 @@
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import { realEstateData } from '../assets/Dummy.tsx';
 import Background1 from '../assets/img/background1.jpg';
@@ -15,8 +15,9 @@ import Swiper from '../components/atoms/Swiper';
 import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
 import MyEstateList from '../components/template/MyEstateList.tsx';
+import { PlatformAPI } from '../platform/PlatformAPI.ts';
 import centerAtom from '../recoil/center/atom.ts';
-import { CookieUtils } from '../utils/CookieUtils.ts';
+import isLoginAtom from '../recoil/isLogin';
 import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import PropertyGroup from './property/PropertyGroup.tsx';
 import PropertyManage from './property/PropertyManage.tsx';
@@ -49,6 +50,8 @@ export default function MyPage() {
   const [interestAreas, setInterestAreas] = useState<
     { name: string; lat: number; lng: number }[]
   >([]);
+
+  const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
 
   // 로컬 스토리지에서 "관심 지역" 데이터 가져오기
   useEffect(() => {
@@ -135,6 +138,17 @@ export default function MyPage() {
     navigate('/');
   };
 
+  const logout = async () => {
+    const response = await PlatformAPI.logout();
+    if (response) {
+      navigate('/');
+      if (location.pathname === '/' && isLogin) {
+        alert('로그아웃 성공하셨습니다.');
+        setIsLogin(false);
+      }
+    }
+  };
+
   return (
     <div className="top-0 absolute animate-fadeInRight">
       <div className="pl-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-gray-50/90 scrollbar-hide">
@@ -162,10 +176,7 @@ export default function MyPage() {
                   <EditProfile onEdit={handleEditProfile} />
                   <div>
                     <button
-                      onClick={() => {
-                        CookieUtils.removeCookieValue('connect.sid');
-                        navigate('/');
-                      }}
+                      onClick={logout}
                       className="bg-hanaRed p-1 rounded-full shadow-md hover:bg-hanaRed20 transition duration-200"
                     >
                       <AiOutlineLogout className="text-xl text-white" />

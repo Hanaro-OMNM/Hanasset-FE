@@ -15,6 +15,7 @@ import {
   ChatRoom,
   ChatRoomDTO,
   ChatMessage,
+  ApiResponseEntity,
 } from '../types/hanaAssetResponse.common.ts';
 
 export class PlatformAPI {
@@ -165,36 +166,16 @@ export class PlatformAPI {
     }
   }
 
-  // 채팅방 생성
-  public static async createChat(
-    chatCreateRequest: ChatCreateRequest
-  ): Promise<ChatRoom> {
-    try {
-      console.log('Creating a new chatroom with request:', chatCreateRequest);
-
-      const response = await this.instance.post<{
-        message: string;
-        result: { count: number; chatrooms: ChatRoom[] };
-      }>(`/chat/create`, chatCreateRequest, this.defaultConfig);
-
-      console.log('Chatroom created successfully:', response.data);
-
-      if (response.data.result.chatrooms.length > 0) {
-        return response.data.result.chatrooms[0];
-      } else {
-        throw new Error('No chatrooms found in the response.');
-      }
-    } catch (error) {
-      console.error('Error creating chatroom:', error);
-      throw error;
-    }
-  }
-
+  // PlatformAPI.ts - API 호출 코드 수정
   public static async getCompletedChatroomsByUserId(
-    userId: number
+    accessToken: string
   ): Promise<ChatRoom[]> {
     try {
-      console.log(`Requesting completed chatrooms with userId=${userId}`);
+      console.log(
+        `Requesting completed chatrooms with accessToken=${accessToken}`
+      );
+
+      // API 호출 시 Authorization 헤더에 토큰 추가
       const response = await this.instance.get<{
         message: string;
         result: {
@@ -202,8 +183,10 @@ export class PlatformAPI {
           chatrooms: ChatRoom[];
         };
       }>(`/chat/completed-chatrooms`, {
-        params: { userId },
-        ...this.defaultConfig,
+        headers: {
+          ...this.defaultConfig.headers,
+          Authorization: `Bearer ${accessToken}`, // Access Token 추가
+        },
       });
 
       console.log('Response:', response.data);
@@ -224,32 +207,29 @@ export class PlatformAPI {
 
   // 특정 상태의 채팅방 가져오기
   public static async findRoomDetails(
-    userId: number,
+    accessToken: string,
     status: string
   ): Promise<ChatRoomDTO | null> {
     try {
-      console.log(
-        `Fetching chatroom details for userId=${userId}, status=${status}`
-      );
+      console.log(`Fetching chatroom details with status=${status}`);
 
       const response = await this.instance.get<{
         message: string;
         result: ChatRoomDTO;
       }>(`/chat/findRoom`, {
-        params: { userId, chatroomStatus: status },
-        ...this.defaultConfig,
+        params: { chatroomStatus: status },
+        headers: {
+          ...this.defaultConfig.headers,
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
-
       console.log('Fetched room details:', response.data);
       return response.data.result;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.status === 404) {
-        console.warn(
-          `No chatroom found for userId=${userId} with status=${status}.`
-        );
+        console.warn(`No chatroom found with status=${status}.`);
         return null;
       }
-
       console.error('Error fetching chatroom details:', error);
       throw error;
     }
@@ -364,5 +344,13 @@ export class PlatformAPI {
 
       throw error;
     }
+  }
+  public static async getBookmarkRealEstates(): Promise<
+    ApiResponseEntity<RealEstateList>
+  > {
+    const response = await this.instance.get('/users/bookmarks/real-estates', {
+      ...this.defaultConfig,
+    });
+    return response.data as ApiResponseEntity<RealEstateList>;
   }
 }

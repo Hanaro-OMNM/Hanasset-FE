@@ -44,7 +44,16 @@ export interface ChatCreateRequest {
   consultantId: number;
   chatroomTitle: string;
   reservedTime: string;
+  reservationInfo: selectedEstateType[];
 }
+
+export type selectedEstateType = {
+  id: number;
+  name: string;
+  detail: string;
+  address: string;
+};
+
 export interface ChatMessage {
   id: string;
   sender: string;

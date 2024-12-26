@@ -23,15 +23,25 @@ const UpcomingConsultingComponent = () => {
     Date | undefined
   >();
   const [loading, setLoading] = useState<boolean>(true);
+  const accessToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
     const fetchRoomDetails = async () => {
+      if (!accessToken) {
+        console.error('No access token available');
+        return;
+      }
+
       try {
-        const userId = 1;
         const chatroomStatus = 'waiting';
 
+        console.log('Sending request to server:', {
+          accessToken,
+          chatroomStatus,
+        });
+
         const chatroom = await PlatformAPI.findRoomDetails(
-          userId,
+          accessToken,
           chatroomStatus
         );
 
@@ -55,7 +65,7 @@ const UpcomingConsultingComponent = () => {
     };
 
     fetchRoomDetails();
-  }, [setChatroomId]);
+  }, [setChatroomId, accessToken]);
 
   useEffect(() => {
     if (reservationTime) {

@@ -1,5 +1,5 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useLocation } from 'react-router-dom';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { useState } from 'react';
 import reserve_hand from '../../assets/img/reserve_img.png';
 import Button from '../../components/atoms/Button';
@@ -8,6 +8,7 @@ import MobileHeader from '../../components/atoms/MobileHeader';
 import { PlatformAPI } from '../../platform/PlatformAPI.ts';
 import chatroomIdState from '../../recoil/chatroomId/atom';
 import loanReservationAtom from '../../recoil/loanReservation/atom';
+import userIdAtom from '../../recoil/userId/atom.ts';
 import { selectedEstateType } from '../../types/hanaAsset.ts';
 import { ChatCreateRequest } from '../../types/hanaAssetRequest.common';
 import AssetItem from './AssetItem';
@@ -20,10 +21,10 @@ export default function ChatReservation() {
   const estateInfo = useLocation().state!.selectedItems!;
   const day = new Date();
   const [showForm, setShowForm] = useState(true);
-  const nav = useNavigate();
   const [selectedLoanReservation, setSelectedLoanReservation] =
     useRecoilState(loanReservationAtom);
   const setChatroomId = useSetRecoilState(chatroomIdState);
+  const setUserId = useSetRecoilState(userIdAtom);
 
   function isWeekend(date: Date) {
     const dayOfWeek = date.getDay();
@@ -61,7 +62,6 @@ export default function ChatReservation() {
         daysAdded++;
       }
     }
-
     return newDate;
   }
 
@@ -94,6 +94,7 @@ export default function ChatReservation() {
 
     if (!selectedTime) {
       alert('예약 시간을 선택해주세요.');
+      console.log('Final :', estateInfo);
       return;
     }
 
@@ -105,7 +106,6 @@ export default function ChatReservation() {
 
     const reservedTime = `${selectedDate} ${selectedTime}:00`;
     console.log('Final reservedTime:', reservedTime);
-    console.log('Final reservedTime:', reservedTime);
 
     if (!selectedLoanReservation.reservationTime) {
       setSelectedLoanReservation({
@@ -114,26 +114,29 @@ export default function ChatReservation() {
         reservationTime: reservedTime,
       });
       alert('상담이 정상적으로 예약되었습니다.');
-      createChat(reservedTime);
+      createChat(reservedTime, estateInfo);
       window.location.href = '/consulting';
     }
   };
+
   const onBack = (): void => {
     window.history.back();
   };
 
-  const createChat = async (reservedTime: string) => {
-    const chatroomTitle = estateInfo
+  const createChat = async (
+    reservedTime: string,
+    reservationInfo: selectedEstateType[]
+  ) => {
+    const chatroomTitle = reservationInfo
       .map((item: selectedEstateType) => item.name)
       .join(', ');
 
-    const request: ChatCreateRequest = {
-      userId: 1,
+    const request: Omit<ChatCreateRequest, 'userId'> = {
       consultantId: 1,
       chatroomTitle: chatroomTitle,
       reservedTime: reservedTime,
+      reservationInfo: reservationInfo,
     };
-    console.log('Final reservedTime:', reservedTime);
     console.log('Request payload to be sent to the server:', request);
 
     try {
@@ -141,7 +144,9 @@ export default function ChatReservation() {
       console.log('API Response:', response);
       if (response.success) {
         const chatroomId = response.data.rooms[0].chatroomId;
+        const userId = response.data.userId;
         setChatroomId(chatroomId);
+        setUserId(userId);
       } else {
         console.error('Error from server:', response.message);
         alert(response.message || '채팅방 생성 중 오류가 발생했습니다.');
@@ -151,6 +156,7 @@ export default function ChatReservation() {
       alert('채팅방 생성 API 호출 중 문제가 발생했습니다.');
     }
   };
+
   return (
     <div className="top-0 absolute pl-4 animate-fadeInRight">
       <div className="pl-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen overflow-y-auto bg-gray-50/90 scrollbar-hide">
@@ -174,6 +180,7 @@ export default function ChatReservation() {
                     )
                   )}
                 </div>
+
                 <DatePicker
                   dateOptions={dateOptions}
                   selectedDate={selectedDate}

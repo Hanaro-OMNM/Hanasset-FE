@@ -23,6 +23,8 @@ const Consulting: React.FC = () => {
 
   const [_, setHistoryChatroomId] = useRecoilState(historyChatroomIdState);
 
+  const accessToken = localStorage.getItem('accessToken'); // Access Token 가져오기
+
   const formatDateTime = (dateTime: string): string => {
     const date = new Date(dateTime);
     const year = date.getFullYear();
@@ -35,11 +37,16 @@ const Consulting: React.FC = () => {
 
   useEffect(() => {
     const fetchConsultingHistory = async () => {
-      try {
-        const userId = 1;
+      if (!accessToken) {
+        setError('Access token is missing. Please log in again.');
+        console.error('Access token is missing.');
+        setLoading(false);
+        return;
+      }
 
+      try {
         const response =
-          await PlatformAPI.getCompletedChatroomsByUserId(userId);
+          await PlatformAPI.getCompletedChatroomsByUserId(accessToken);
 
         if (response && Array.isArray(response)) {
           setConsultingHistory(response);
@@ -55,7 +62,7 @@ const Consulting: React.FC = () => {
     };
 
     fetchConsultingHistory();
-  }, []);
+  }, [accessToken]);
 
   const handleHistoryClick = (chatroomId: string) => {
     if (!chatroomId) {

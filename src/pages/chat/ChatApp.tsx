@@ -7,6 +7,7 @@ import logo from '../../assets/img/logo.png';
 import profile from '../../assets/img/profile_ex.jpg';
 import { PlatformAPI } from '../../platform/PlatformAPI.ts';
 import chatroomIdState from '../../recoil/chatroomId/atom.ts';
+import userIdAtom from '../../recoil/userId/atom.ts';
 import GuestChatDetail from '../GuestChatDetail';
 import ChatHeader from './ChatHeader';
 import ChatMessage from './ChatMessage';
@@ -29,7 +30,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
   const [subscription, setSubscription] = useState<StompSubscription | null>(
     null
   );
-
+  const userId = useRecoilValue(userIdAtom);
   const [currentState, setCurrentState] = useState<string>('waiting');
   const chatroomId = useRecoilValue(chatroomIdState);
   const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
@@ -168,7 +169,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
       const message = {
         messageType: 'TALK',
         chatroomId: chatroomId,
-        senderId: 1,
+        senderId: userId,
         accessor: accessor,
         content: inputMessage,
         createdAt: new Date().toISOString(),

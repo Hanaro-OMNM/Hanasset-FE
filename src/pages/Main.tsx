@@ -1,8 +1,10 @@
-import { BsInfoCircle } from 'react-icons/bs';
 import { MdNavigateNext } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 import { addDetailEstateData } from '../assets/Dummy';
-import HanaLogo from '../assets/img/hanaLogo.png';
+import Estate from '../assets/img/main/estate.png';
+import fast1 from '../assets/img/main/fast1.png';
+import fast2 from '../assets/img/main/fast2.png';
+import fast3 from '../assets/img/main/fast3.png';
 import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import Swiper from '../components/atoms/Swiper';
@@ -82,9 +84,9 @@ export default function Main() {
               <SearchBar />
 
               <div className="w-full max-w-md mt-10">
-                <h2 className="text-xl text-slate-800 font-bold mb-6">
+                <div className="text-lg text-fontNavy font-bold mb-6">
                   주소로 골라보기
-                </h2>
+                </div>
 
                 <CommonBackground className="flex items-center">
                   {/* 시/도 버튼 */}
@@ -165,61 +167,78 @@ export default function Main() {
               </div>
 
               <div className="w-full max-w-md mt-16">
-                <h2 className="text-xl text-slate-800 font-bold mb-6">
-                  빠른 메뉴 구현중
-                </h2>
+                <div className="text-lg text-fontNavy font-bold mb-6">
+                  빠른 메뉴
+                </div>
                 <div className="flex mb-2">
-                  <CommonBackground
-                    className="mr-1 p-4"
+                  <div
+                    className="mr-2 p-4 rounded-[15px] shadow-md w-full bg-red-100"
                     onClick={() =>
                       window.open(
                         'https://www.kebhana.com/cont/mall/mall08/mall0805/index.jsp?catId=spb_2821&_menuNo=98786'
                       )
                     }
                   >
-                    <div>
-                      <p className="text-sm">하나은행 대출</p>
-                      <div className="w-full">
-                        <img
-                          alt="HanaLogo"
-                          src={HanaLogo}
-                          className="h-10"
-                        ></img>
+                    <div className="flex flex-col ">
+                      <div className="w-full flex justify-center ">
+                        <img alt="HanaLogo" src={fast1} className="h-15"></img>
+                      </div>
+                      <div className="text-sm text-center mt-2 font-semibold text-red-400">
+                        하나은행 대출
                       </div>
                     </div>
-                  </CommonBackground>
-                  <CommonBackground
-                    className="mr-1 p-4"
+                  </div>
+                  <div
+                    className="mr-2 p-4 rounded-[15px] shadow-md w-full bg-blue-100"
                     onClick={() =>
                       window.open(
                         'https://www.kebhana.com/cont/mall/mall09/mall0903/mall090306/index.jsp'
                       )
                     }
                   >
-                    버팀목 대출
-                  </CommonBackground>
+                    <div className="flex flex-col ">
+                      <div className="w-full flex justify-center ">
+                        <img alt="HanaLogo" src={fast3} className="h-15"></img>
+                      </div>
+                      <div className="text-sm text-center mt-2 font-semibold text-blue-400">
+                        버팀목 대출
+                      </div>
+                    </div>
+                  </div>
 
-                  <CommonBackground
-                    className="p-4"
+                  <div
+                    className="mr-2 p-4 rounded-[15px] shadow-md w-full bg-green-100"
                     onClick={() => setShowModal(true)}
                   >
-                    이용 가이드
-                  </CommonBackground>
+                    <div className="flex flex-col ">
+                      <div className="w-full flex justify-center ">
+                        <img alt="HanaLogo" src={fast2} className="h-15"></img>
+                      </div>
+                      <div className="text-sm text-center mt-2 font-semibold text-green-400">
+                        이용가이드
+                      </div>
+                    </div>
+                  </div>
 
                   {showModal && (
                     <UserManual close={() => setShowModal(false)} />
                   )}
                 </div>
                 <div>
-                  <h2 className="text-xl text-slate-800 font-bold mb-6 mt-10 flex">
+                  <div className="text-lg text-fontNavy font-bold mb-6 flex mt-16">
                     최근에 확인한 매물
-                    <div className="ml-2 mt-1">
-                      <BsInfoCircle />
-                    </div>
-                  </h2>
+                    <div className="ml-2 mt-1"></div>
+                  </div>
                   <CommonBackground className="w-full px-2 py-1 mb-6">
                     {recentHouses === 'none' ? (
-                      <div>아직 둘러본 매물이 없네요.</div>
+                      <div>
+                        <div className="flex justify-center mt-5">
+                          아직 둘러본 매물이 없네요.
+                        </div>
+                        <div className="flex justify-center">
+                          <img alt="Estate" src={Estate} className="h-32"></img>
+                        </div>
+                      </div>
                     ) : (
                       <Swiper
                         items={recentRealEstateData}

@@ -51,6 +51,7 @@ export class PlatformAPI {
             authorizationHeader.startsWith('Bearer ')
           ) {
             const accessToken = authorizationHeader.split(' ')[1];
+            localStorage.removeItem('accessToken');
             localStorage.setItem('accessToken', accessToken);
             return accessToken;
           } else {

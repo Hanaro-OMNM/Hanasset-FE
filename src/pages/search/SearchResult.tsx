@@ -116,7 +116,7 @@ const SearchResult = () => {
             <CommonBackground className="w-full px-5 py-3">
               <div>
                 일치하는 매물이 없습니다. 다른 검색어로 시도해 보세요.
-                <img src={redAlert} />
+                <img alt="경고" src={redAlert} />
               </div>
             </CommonBackground>
           </div>
@@ -141,7 +141,7 @@ const SearchResult = () => {
               ) : (
                 <div>
                   일치하는 지역이 없습니다. 다른 검색어로 시도해 보세요.
-                  <img src={redAlert} />
+                  <img alt="경고" src={redAlert} />
                 </div>
               )}
             </CommonBackground>

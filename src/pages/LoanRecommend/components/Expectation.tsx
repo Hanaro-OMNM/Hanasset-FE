@@ -8,7 +8,7 @@ interface ExpectationProps {
   title?: string;
   totalPrice: number;
   maxLoan: number;
-  setPredictedAmount: Dispatch<SetStateAction<number>>;
+  setPredictedAmount?: Dispatch<SetStateAction<number>>;
 }
 const Expectation: React.FC<ExpectationProps> = ({
   title,
@@ -23,7 +23,10 @@ const Expectation: React.FC<ExpectationProps> = ({
     Number(totalPrice / 10 - capital / 10),
     maxLoan / 10
   );
-  setPredictedAmount(loanAmount);
+
+  if (setPredictedAmount) {
+    setPredictedAmount(loanAmount);
+  }
 
   return (
     <div className="w-full mb-4 py-6">

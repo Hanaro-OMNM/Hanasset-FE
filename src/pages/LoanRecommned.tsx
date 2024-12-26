@@ -20,6 +20,7 @@ const LoanInfoPage: React.FC = () => {
     LoanRecommendInfo[] | []
   >([]);
   const [loanId, setLoanId] = useState<number | null>(null);
+
   const onBack = (): void => {
     window.history.back();
   };

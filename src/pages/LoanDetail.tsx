@@ -4,11 +4,11 @@ import CommonBackground from '../components/atoms/CommonBackground';
 import LoanProgressBar from '../components/atoms/LoanProgressBar';
 import { PlatformAPI } from '../platform/PlatformAPI';
 import { LoanDetailInfo } from '../types/hanaAssetResponse.common';
-import InstructionCard from './LoanDetail/Components/InstructionCard';
-import LoanDetailAccentInfo from './LoanDetail/Components/LoanDetailAccentInfo';
-import LoanDetailCard from './LoanDetail/Components/LoanDetailCard';
-import LoanDetailDisclosure from './LoanDetail/Components/LoanDetailDisclosure';
-import LoanDetailHint from './LoanDetail/Components/LoanDetailHint';
+import InstructionCard from './LoanDetail/components/InstructionCard';
+import LoanDetailAccentInfo from './LoanDetail/components/LoanDetailAccentInfo';
+import LoanDetailCard from './LoanDetail/components/LoanDetailCard';
+import LoanDetailDisclosure from './LoanDetail/components/LoanDetailDisclosure';
+import LoanDetailHint from './LoanDetail/components/LoanDetailHint';
 
 interface LoanDetailProps {
   onHide: () => void;

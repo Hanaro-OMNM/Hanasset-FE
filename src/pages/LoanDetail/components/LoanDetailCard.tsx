@@ -1,4 +1,4 @@
-// Type Components
+// Type components
 interface TypeProps {
   type: string;
 }
@@ -9,7 +9,7 @@ const Type: React.FC<TypeProps> = ({ type }) => {
   );
 };
 
-// LoanName Components
+// LoanName components
 interface LoanNameProps {
   name: string;
 }
@@ -20,7 +20,7 @@ const LoanName: React.FC<LoanNameProps> = ({ name }) => {
   );
 };
 
-// Outline Components
+// Outline components
 interface OutlineProps {
   outline: string;
 }

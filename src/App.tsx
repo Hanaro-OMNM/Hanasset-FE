@@ -70,10 +70,7 @@ function AppContent() {
               <Route path="/property-agree" element={<PropertyAgree />} />
               <Route path="/consultant" element={<Consultant />} />
               <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
-              <Route
-                path="/chat-history/:id"
-                element={<ChatHistory accessor="guest" />}
-              />
+              <Route path="/chat-history/:id" element={<ChatHistory />} />
               <Route path="/search-result" element={<SearchResult />} />
             </Routes>
             {isLoginModalOpen && (

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import CommonBackground from '../../../components/atoms/CommonBackground';
 import SemiTitle from '../../../components/atoms/SemiTitle';
 import LoanSlider from '../../../components/molecules/LoanSlider';
@@ -24,9 +24,11 @@ const Expectation: React.FC<ExpectationProps> = ({
     maxLoan / 10
   );
 
-  if (setPredictedAmount) {
-    setPredictedAmount(loanAmount);
-  }
+  useEffect(() => {
+    if (setPredictedAmount) {
+      setPredictedAmount(loanAmount);
+    }
+  }, [setPredictedAmount]);
 
   return (
     <div className="w-full mb-4 py-6">

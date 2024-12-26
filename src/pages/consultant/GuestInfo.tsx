@@ -27,18 +27,14 @@ export default function GuestInfoPage() {
   const [realEstateInfos, setRealEstateInfos] = useState<RealEstateInfo[] | []>(
     []
   );
-  // const [loanIndex, setLoanIndex] = useState(0);
-  const [consultingDataShowCount, setConsultingDataShowCount] = useState(3);
-  // const [showDetail, setShowDetail] = useState(false);
-  // const handleShowDetail = () => {
-  //   setShowDetail(true);
-  // };
+  // 상담 이력 관련 변수
+  // const [consultingDataShowCount, setConsultingDataShowCount] = useState(3);
 
-  const addOnClick = () => {
-    setConsultingDataShowCount(
-      (consultingDataShowCount) => consultingDataShowCount + 3
-    );
-  };
+  // const addOnClick = () => {
+  //   setConsultingDataShowCount(
+  //     (consultingDataShowCount) => consultingDataShowCount + 3
+  //   );
+  // };
 
   const swiperClick = (index: number) => {
     setRealEstateId(index);
@@ -51,7 +47,7 @@ export default function GuestInfoPage() {
         setGuestInfo(loanRecommend.result.user);
         setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
         const realEstateInfoList = loanRecommendInfos.map(
-          (loanRecommendInfo) => loanRecommendInfo.realEstate
+          (loanRecommendInfo) => loanRecommendInfo.realEstateInfo
         );
         setRealEstateInfos(realEstateInfoList);
       } catch (error) {
@@ -59,7 +55,27 @@ export default function GuestInfoPage() {
       }
     };
     fetchLoanRecommend();
-  }, []);
+  }, [realEstateInfos]);
+
+  // 테스트
+  // useEffect(() => {
+  //   const fetchLoanRecommend = async () => {
+  //     try {
+  //       const loanRecommend = await PlatformAPI.getLoanRecommend({
+  //         realEstateIds: [52, 1],
+  //       });
+  //       setGuestInfo(loanRecommend.result.user);
+  //       setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
+  //       const realEstateInfoList = loanRecommendInfos.map(
+  //         (loanRecommendInfo) => loanRecommendInfo.realEstateInfo
+  //       );
+  //       setRealEstateInfos(realEstateInfoList);
+  //     } catch (error) {
+  //       console.error('Error fetching loan data:', error);
+  //     }
+  //   };
+  //   fetchLoanRecommend();
+  // }, [realEstateInfos]);
 
   return (
     <div>
@@ -94,7 +110,13 @@ export default function GuestInfoPage() {
                             <button
                               onClick={() =>
                                 swiperClick(
-                                  realEstate ? realEstate.realEstateId : 0
+                                  realEstate
+                                    ? realEstateInfos.findIndex(
+                                        (realEstateInfo) =>
+                                          realEstateInfo.realEstateId ===
+                                          realEstate.realEstateId
+                                      )
+                                    : 0
                                 )
                               }
                               className="w-full transition-transform transform hover:scale-105"
@@ -128,9 +150,18 @@ export default function GuestInfoPage() {
                 <div>
                   <SemiTitle title="대출 상품 리스트" />
                   <FixedExpectation
-                    capital={guestInfo ? guestInfo.capital : 0}
-                    totalPrice={realEstateInfos[realEsetateId].deposit}
-                    maxLoan={5}
+                    capital={guestInfo ? guestInfo.capital / 1000 : 0}
+                    totalPrice={
+                      realEstateInfos[realEsetateId]
+                        ? realEstateInfos[realEsetateId].deposit / 1000_0000
+                        : 0
+                    }
+                    maxLoan={
+                      realEstateInfos[realEsetateId]
+                        ? (realEstateInfos[realEsetateId].deposit / 1000_0000) *
+                          0.8
+                        : 0
+                    }
                   />
                   <LoanRecommendTab
                     hanaLoanList={
@@ -146,9 +177,8 @@ export default function GuestInfoPage() {
                     onLoanDetailButtonClick={setLoanId}
                   />
                 </div>
-                {/* TODO: dummy -> data fetch */}
-                {/* 상담 이력 */}
-                <div>
+                {/* 상담 이력 제거 */}
+                {/* <div>
                   <SemiTitle title="상담 이력" />
                   <table className="min-w-full">
                     <thead>
@@ -171,10 +201,10 @@ export default function GuestInfoPage() {
                         )
                       )}
                     </tbody>
-                  </table>
+                  </table> */}
 
-                  {/* 더 보기 */}
-                  <div
+                {/* 더 보기 */}
+                {/* <div
                     className={clsx(
                       consultingDataShowCount < dummyConsultationData.length &&
                         'mx-4 my-2 text-hanaBlack60 text-center',
@@ -184,7 +214,7 @@ export default function GuestInfoPage() {
                   >
                     <button onClick={addOnClick}>더 보기</button>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

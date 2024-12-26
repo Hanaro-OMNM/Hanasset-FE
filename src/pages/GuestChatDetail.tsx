@@ -41,7 +41,7 @@ const GuestChatDetail: React.FC = () => {
         setGuestInfo(loanRecommend.result.user);
         setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
         const realEstateInfoList = loanRecommendInfos.map(
-          (loanRecommendInfo) => loanRecommendInfo.realEstate
+          (loanRecommendInfo) => loanRecommendInfo.realEstateInfo
         );
         setRealEstateInfos(realEstateInfoList);
       } catch (error) {
@@ -49,7 +49,27 @@ const GuestChatDetail: React.FC = () => {
       }
     };
     fetchLoanRecommend();
-  }, []);
+  }, [realEstateInfos]);
+
+  // 테스트
+  // useEffect(() => {
+  //   const fetchLoanRecommend = async () => {
+  //     try {
+  //       const loanRecommend = await PlatformAPI.getLoanRecommend({
+  //         realEstateIds: [52, 12],
+  //       });
+  //       setGuestInfo(loanRecommend.result.user);
+  //       setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
+  //       const realEstateInfoList = loanRecommendInfos.map(
+  //         (loanRecommendInfo) => loanRecommendInfo.realEstateInfo
+  //       );
+  //       setRealEstateInfos(realEstateInfoList);
+  //     } catch (error) {
+  //       console.error('Error fetching loan data:', error);
+  //     }
+  //   };
+  //   fetchLoanRecommend();
+  // }, [realEstateInfos]);
 
   return (
     <div className="top-0 absolute animate-slideInRight">
@@ -69,7 +89,15 @@ const GuestChatDetail: React.FC = () => {
                   <div>
                     <button
                       onClick={() =>
-                        swiperClick(realEstate ? realEstate.realEstateId : 0)
+                        swiperClick(
+                          realEstate
+                            ? realEstateInfos.findIndex(
+                                (realEstateInfo) =>
+                                  realEstateInfo.realEstateId ===
+                                  realEstate.realEstateId
+                              )
+                            : 0
+                        )
                       }
                       className="w-full transition-transform transform hover:scale-105"
                     >
@@ -99,9 +127,17 @@ const GuestChatDetail: React.FC = () => {
           <div>
             <SemiTitle title="대출 상품 리스트" />
             <FixedExpectation
-              capital={guestInfo ? guestInfo.capital : 0}
-              totalPrice={realEstateInfos[realEsetateId].deposit}
-              maxLoan={5}
+              capital={guestInfo ? guestInfo.capital / 1000 : 0}
+              totalPrice={
+                realEstateInfos[realEsetateId]
+                  ? realEstateInfos[realEsetateId].deposit / 1000_0000
+                  : 0
+              }
+              maxLoan={
+                realEstateInfos[realEsetateId]
+                  ? (realEstateInfos[realEsetateId].deposit / 1000_0000) * 0.8
+                  : 0
+              }
             />
             <DsrInfo dsr={guestInfo ? guestInfo.dsr : 0.0} />
             <LoanRecommendTab

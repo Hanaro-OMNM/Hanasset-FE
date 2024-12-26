@@ -14,7 +14,7 @@ import Expectation from './LoanRecommend/components/Expectation';
 import LoanFoundMessage from './LoanRecommend/components/LoanFoundMessage';
 import LoanRecommendTab from './LoanRecommend/components/LoanRecommendTab';
 
-const LoanInfoPage: React.FC = () => {
+export default function LoanInfoPage() {
   const [searchParams] = useSearchParams();
   const [guestInfo, setGuestInfo] = useState<GuestInfo | null>(null);
   const [loanRecommendInfos, setLoanRecommendInfos] = useState<
@@ -29,23 +29,34 @@ const LoanInfoPage: React.FC = () => {
     window.history.back();
   };
 
+  const getRealEstateInfoList = async (
+    loanRecommendInfos: LoanRecommendInfo[]
+  ) => {
+    const realEstateInfoList = loanRecommendInfos.map(
+      (loanRecommendInfo) => loanRecommendInfo.realEstateInfo
+    );
+    if (realEstateInfoList) {
+      setRealEstateInfos(realEstateInfoList);
+    }
+  };
+
+  const fetchLoanRecommend = async () => {
+    try {
+      const loanRecommend = await PlatformAPI.getLoanRecommend({
+        realEstateIds: [Number(searchParams.get('realEstateIds'))],
+      });
+      setGuestInfo(loanRecommend.result.user);
+      setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
+      await getRealEstateInfoList(loanRecommendInfos);
+    } catch (error) {
+      console.error('Error fetching loan data:', error);
+    }
+  };
+
   useEffect(() => {
-    const fetchLoanRecommend = async () => {
-      try {
-        const loanRecommend = await PlatformAPI.getLoanRecommend({
-          realEstateIds: [Number(searchParams.get('realEstateIds'))],
-        });
-        setGuestInfo(loanRecommend.result.user);
-        setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
-        const realEstateInfoList = loanRecommendInfos.map(
-          (loanRecommendInfo) => loanRecommendInfo.realEstateInfo
-        );
-        setRealEstateInfos(realEstateInfoList);
-      } catch (error) {
-        console.error('Error fetching loan data:', error);
-      }
-    };
-    fetchLoanRecommend();
+    if (realEstateInfos.length < 1) {
+      fetchLoanRecommend();
+    }
   }, [realEstateInfos]);
 
   return (
@@ -100,6 +111,4 @@ const LoanInfoPage: React.FC = () => {
       )}
     </div>
   );
-};
-
-export default LoanInfoPage;
+}

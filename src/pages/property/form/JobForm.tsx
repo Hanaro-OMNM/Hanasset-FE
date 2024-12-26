@@ -2,6 +2,7 @@ import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import Button from '../../../components/atoms/Button';
 import FormRadio from '../../../components/molecules/FormRadio';
+import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
 import { assetState } from '../../../recoil/asset/atom';
 
 interface Option {
@@ -31,12 +32,18 @@ export default function JobForm({ onBack }: JobFormProps) {
     setLocalJobType(job.value);
   };
 
-  const handleSave = () => {
-    setAsset({
-      ...asset,
-      jobType: localJobType,
-    });
-    onBack();
+  const putJobFormPropertyValue = async (localJobType: string) => {
+    const response = await PlatformAPI.putPropertyValue(
+      'jobType',
+      localJobType
+    );
+    if (response === 200) {
+      setAsset({
+        ...asset,
+        jobType: localJobType,
+      });
+      onBack();
+    }
   };
 
   const selectedItem: Option =
@@ -54,7 +61,11 @@ export default function JobForm({ onBack }: JobFormProps) {
         )}
       />
       <div className="w-full mt-8">
-        <Button text="저장" onClick={handleSave} version="ver1" />
+        <Button
+          text="저장"
+          onClick={() => putJobFormPropertyValue(localJobType)}
+          version="ver1"
+        />
       </div>
     </div>
   );

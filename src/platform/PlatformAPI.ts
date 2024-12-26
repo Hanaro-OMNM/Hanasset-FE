@@ -21,8 +21,6 @@ import {
   RealEstateMarketPrice,
   RealEstateMarketPriceParam,
   RealEstateType,
-} from '../types/hanaAssetResponse.common.ts';
-import {
   LoanRecommend,
   LoanDetail,
 } from '../types/hanaAssetResponse.common.ts';
@@ -57,6 +55,7 @@ export class PlatformAPI {
             authorizationHeader.startsWith('Bearer ')
           ) {
             const accessToken = authorizationHeader.split(' ')[1];
+            localStorage.removeItem('accessToken');
             localStorage.setItem('accessToken', accessToken);
             return accessToken;
           } else {
@@ -296,5 +295,31 @@ export class PlatformAPI {
       ...this.defaultConfig,
     });
     return response.data as LoanRecommend;
+  }
+
+  public static async getBookmarkRealEstates(): Promise<RealEstateList | null> {
+    const response = await this.instance.get('/users/bookmarks/real-estates');
+    return response ? (response.data as RealEstateList) : null;
+  }
+
+  public static async addBookmarkRealEstate(
+    realEstateId: number
+  ): Promise<number> {
+    const response = await this.instance.post(
+      `/users/bookmarks/real-estates/${realEstateId}`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.status;
+  }
+
+  public static async removeBookmarkRealEstate(
+    realEstateId: number
+  ): Promise<number> {
+    const response = await this.instance.delete(
+      `/users/bookmarks/real-estates/${realEstateId}`
+    );
+    return response.status;
   }
 }

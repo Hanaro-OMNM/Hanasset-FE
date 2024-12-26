@@ -6,6 +6,7 @@ import { PlatformAPI } from '../platform/PlatformAPI.ts';
 import {
   GuestInfo,
   LoanRecommendInfo,
+  RealEstateInfo,
 } from '../types/hanaAssetResponse.common.ts';
 import LoanDetail from './LoanDetail.tsx';
 import DsrInfo from './LoanRecommend/components/DsrInfo';
@@ -14,12 +15,16 @@ import LoanFoundMessage from './LoanRecommend/components/LoanFoundMessage';
 import LoanRecommendTab from './LoanRecommend/components/LoanRecommendTab';
 
 const LoanInfoPage: React.FC = () => {
-  const [searchParams, setSearchParam] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [guestInfo, setGuestInfo] = useState<GuestInfo | null>(null);
   const [loanRecommendInfos, setLoanRecommendInfos] = useState<
     LoanRecommendInfo[] | []
   >([]);
   const [loanId, setLoanId] = useState<number | null>(null);
+  const [realEstateInfos, setRealEstateInfos] = useState<RealEstateInfo[] | []>(
+    []
+  );
+
   const onBack = (): void => {
     window.history.back();
   };
@@ -32,12 +37,16 @@ const LoanInfoPage: React.FC = () => {
         });
         setGuestInfo(loanRecommend.result.user);
         setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
+        const realEstateInfoList = loanRecommendInfos.map(
+          (loanRecommendInfo) => loanRecommendInfo.realEstateInfo
+        );
+        setRealEstateInfos(realEstateInfoList);
       } catch (error) {
         console.error('Error fetching loan data:', error);
       }
     };
     fetchLoanRecommend();
-  }, [searchParams]);
+  }, [realEstateInfos]);
 
   return (
     <div className="flex">
@@ -52,7 +61,17 @@ const LoanInfoPage: React.FC = () => {
               <div className="flex font-fontBold text-2xl">맞춤 대출 상품</div>
               <div className="font-fontMedium text-2xl"> 이에요.</div>
             </div>
-            <Expectation title="예상 대출금" totalPrice={10} maxLoan={5} />
+            <Expectation
+              title="예상 대출금"
+              totalPrice={
+                realEstateInfos[0] ? realEstateInfos[0].deposit / 1000_0000 : 0
+              }
+              maxLoan={
+                realEstateInfos[0]
+                  ? (realEstateInfos[0].deposit / 1000_0000) * 0.8
+                  : 0
+              }
+            />
             <DsrInfo dsr={guestInfo ? guestInfo.dsr : 0.0} />
             <LoanFoundMessage isFound={true} />
             <LoanRecommendTab

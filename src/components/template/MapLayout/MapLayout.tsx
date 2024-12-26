@@ -98,9 +98,38 @@ export default function MapLayout({ children }: LayoutProps) {
   }, [zoom]);
 
   useEffect(() => {
-    window.addEventListener('mouseup', handleMarkerFetch);
+    let isDragging = false;
+    let dragStartPosition = { x: 0, y: 0 };
+
+    const handleMouseDown = (event: MouseEvent) => {
+      isDragging = false;
+      dragStartPosition = { x: event.clientX, y: event.clientY };
+    };
+
+    const handleMouseMove = (event: MouseEvent) => {
+      const distanceX = Math.abs(event.clientX - dragStartPosition.x);
+      const distanceY = Math.abs(event.clientY - dragStartPosition.y);
+
+      if (distanceX > 5 || distanceY > 5) {
+        isDragging = true;
+      }
+    };
+
+    const handleMouseUp = () => {
+      if (isDragging) {
+        handleMarkerFetch(); // 드래그 후 마우스 버튼을 놓았을 때만 호출
+      }
+      isDragging = false;
+    };
+
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
     return () => {
-      window.removeEventListener('mouseup', handleMarkerFetch);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
     };
   }, [center]);
 

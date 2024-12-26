@@ -13,13 +13,15 @@ import TypeInfo from './components/TypeInfo';
 interface RealEstateDetailProps {
   realEstate: RealEstatePreview;
   onBackClick: () => void;
-  isStarFilled: boolean;
+  isBookmarked: boolean;
+  onBookmarkUpdate: () => Promise<void>;
 }
 
 export default function RealEstateDetail({
   realEstate,
-  isStarFilled,
   onBackClick,
+  isBookmarked,
+  onBookmarkUpdate,
 }: RealEstateDetailProps) {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -41,7 +43,11 @@ export default function RealEstateDetail({
   return (
     <RealEstateDetailLayout>
       <ImageCarousel image={realEstate.imgUrl} onBackClick={onBackClick} />
-      <PropertyInfo estate={realEstate} isStarFilled={isStarFilled} />
+      <PropertyInfo
+        estate={realEstate}
+        isBookmarked={isBookmarked}
+        onBookmarkUpdate={onBookmarkUpdate}
+      />
 
       <Tabs tabs={tabData} onTabClick={handleTabClick} />
 

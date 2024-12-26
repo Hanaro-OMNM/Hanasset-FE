@@ -1,5 +1,6 @@
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdNavigateNext } from 'react-icons/md';
+import { useRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import HanaLogo from '../assets/img/hanaLogo.png';
 import CommonBackground from '../components/atoms/CommonBackground.tsx';
@@ -7,6 +8,7 @@ import SearchBar from '../components/atoms/SearchBar.tsx';
 import Swiper from '../components/atoms/Swiper';
 import UserManual from '../components/template/userManual.tsx';
 import { PlatformAPI } from '../platform/PlatformAPI.ts';
+import isLoginAtom from '../recoil/isLogin';
 import { RealEstatePreview } from '../types/hanaAssetResponse.common.ts';
 import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from './RealEstateList/RealEstateCard.tsx';
@@ -24,11 +26,14 @@ export default function Main() {
 
   const [selectedEstate, setSelectedEstate] =
     useState<RealEstatePreview | null>(null); // 초기값을 null로 설정
-  const [showRealEstate, setShowRealEstate] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [recentRealEstateData, setRecentRealEstateData] = useState<
     RealEstatePreview[] | null
   >(null);
+  const [bookmarkEstateList, setBookmarkEstateList] = useState<
+    RealEstatePreview[] | null
+  >(null);
+  const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
 
   useEffect(() => {
     // LocalStorage에서 값을 가져오고 없으면 기본값으로 설정
@@ -59,23 +64,46 @@ export default function Main() {
     }
   })();
 
-  useEffect(() => {
-    const fetchRecentRealEstatesData = async () => {
-      const recentVisitedREalEstateList =
-        recentHouses && recentHouses !== 'none'
-          ? await PlatformAPI.getRecentVisitedRealEstateList({
-              realEstateIds: recentHouses,
-            })
-          : null;
-      if (recentVisitedREalEstateList) {
-        setRecentRealEstateData(recentVisitedREalEstateList.result.realEstates);
+  const fetchRecentRealEstatesData = async () => {
+    const recentVisitedREalEstateList =
+      recentHouses && recentHouses !== 'none'
+        ? await PlatformAPI.getRecentVisitedRealEstateList({
+            realEstateIds: recentHouses,
+          })
+        : null;
+    if (recentVisitedREalEstateList) {
+      setRecentRealEstateData(recentVisitedREalEstateList.result.realEstates);
+    }
+  };
+
+  const getBookmarkRealEstates = async () => {
+    try {
+      const bookmarkRealEstateListResponse =
+        await PlatformAPI.getBookmarkRealEstates();
+      if (bookmarkRealEstateListResponse) {
+        const bookmarkRealEstateList =
+          bookmarkRealEstateListResponse.result.realEstates;
+        setBookmarkEstateList(bookmarkRealEstateList);
       }
-    };
+    } catch (error) {
+      console.error('Error getBookmarkRealEstates:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (isLogin) {
+      getBookmarkRealEstates();
+    }
     fetchRecentRealEstatesData();
   }, []);
 
   const handleCardClick = (estate: RealEstatePreview) => {
     setSelectedEstate(estate); // 선택된 매물 정보 설정
+  };
+
+  const isBookmarkedRealEstate = (id: number): boolean => {
+    if (!bookmarkEstateList) return false;
+    return bookmarkEstateList.some((item) => item.realEstateId === id);
   };
 
   return (
@@ -233,10 +261,12 @@ export default function Main() {
                           renderItem={(recentRealEstateData) => (
                             <RealEstateCard
                               estate={recentRealEstateData}
-                              isStarFilled={false}
+                              isBookmarked={isBookmarkedRealEstate(
+                                recentRealEstateData.realEstateId
+                              )}
+                              onBookmarkUpdate={getBookmarkRealEstates}
                               onClick={() => {
                                 handleCardClick(recentRealEstateData);
-                                setShowRealEstate(true);
                               }}
                             />
                           )}
@@ -249,11 +279,14 @@ export default function Main() {
                 </div>
               </div>
             </div>
-            {showRealEstate && selectedEstate && (
+            {selectedEstate && (
               <RealEstateDetail
-                isStarFilled={false}
                 realEstate={selectedEstate}
-                onBackClick={() => setShowRealEstate(false)}
+                isBookmarked={isBookmarkedRealEstate(
+                  selectedEstate.realEstateId
+                )}
+                onBookmarkUpdate={getBookmarkRealEstates}
+                onBackClick={() => setSelectedEstate(null)}
               />
             )}
           </div>

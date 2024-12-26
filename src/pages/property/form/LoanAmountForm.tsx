@@ -102,15 +102,28 @@ export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
     }
   };
 
-  const handleNoLoan = () => {
+  const handleNoLoan = async () => {
     setLocalAnnualInterest(0);
     setLocalAnnualPrincipal(0);
-    setAsset({
-      ...asset,
-      hasLoan: false,
-      annualInterest: 0,
-      annualPrincipal: 0,
-    });
+
+    const annualInterestResponse = await PlatformAPI.putPropertyValue(
+      'annualInterest',
+      localAnnualInterest.toString()
+    );
+
+    const annualPrincipalResponse = await PlatformAPI.putPropertyValue(
+      'annualPrincipal',
+      localAnnualPrincipal.toString()
+    );
+
+    if (annualInterestResponse === 200 && annualPrincipalResponse === 200) {
+      setAsset({
+        ...asset,
+        hasLoan: true,
+        annualInterest: localAnnualInterest,
+        annualPrincipal: localAnnualPrincipal,
+      });
+    }
     onBack();
   };
 

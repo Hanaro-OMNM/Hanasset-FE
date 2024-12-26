@@ -29,9 +29,7 @@ export default function LoanInfoPage() {
     window.history.back();
   };
 
-  const getRealEstateInfoList = async (
-    loanRecommendInfos: LoanRecommendInfo[]
-  ) => {
+  const getRealEstateInfoList = (loanRecommendInfos: LoanRecommendInfo[]) => {
     const realEstateInfoList = loanRecommendInfos.map(
       (loanRecommendInfo) => loanRecommendInfo.realEstateInfo
     );
@@ -47,7 +45,7 @@ export default function LoanInfoPage() {
       });
       setGuestInfo(loanRecommend.result.user);
       setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
-      await getRealEstateInfoList(loanRecommendInfos);
+      getRealEstateInfoList(loanRecommendInfos);
     } catch (error) {
       console.error('Error fetching loan data:', error);
     }

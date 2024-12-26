@@ -1,4 +1,5 @@
 import { MdNavigateNext } from 'react-icons/md';
+import { useRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import { addDetailEstateData } from '../assets/Dummy';
 import Estate from '../assets/img/main/estate.png';
@@ -9,7 +10,10 @@ import CommonBackground from '../components/atoms/CommonBackground.tsx';
 import SearchBar from '../components/atoms/SearchBar.tsx';
 import Swiper from '../components/atoms/Swiper';
 import UserManual from '../components/template/userManual.tsx';
+import { PlatformAPI } from '../platform/PlatformAPI.ts';
+import isLoginAtom from '../recoil/isLogin';
 import { AdditionalEstate } from '../types/hanaAsset';
+import { RealEstatePreview } from '../types/hanaAssetResponse.common.ts';
 import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from './RealEstateList/RealEstateCard.tsx';
 import LocationFilter from './location/LocationFilter.tsx';
@@ -24,11 +28,16 @@ export default function Main() {
   const [currGungu, setGungu] = useState<string>('시/군/구');
   const [currDong, setDong] = useState<string>('읍/면/동');
 
-  const [selectedEstate, setSelectedEstate] = useState<AdditionalEstate | null>(
-    null
-  ); // 초기값을 null로 설정
-  const [showRealEstate, setShowRealEstate] = useState(true);
+  const [selectedEstate, setSelectedEstate] =
+    useState<RealEstatePreview | null>(null); // 초기값을 null로 설정
   const [showModal, setShowModal] = useState(false);
+  const [recentRealEstateData, setRecentRealEstateData] = useState<
+    RealEstatePreview[] | null
+  >(null);
+  const [bookmarkEstateList, setBookmarkEstateList] = useState<
+    RealEstatePreview[] | null
+  >(null);
+  const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
 
   useEffect(() => {
     // LocalStorage에서 값을 가져오고 없으면 기본값으로 설정
@@ -59,20 +68,46 @@ export default function Main() {
     }
   })();
 
-  // 최근 확인한 매물 리스트와 매칭되는 더미 데이터 필터링
-  const recentRealEstateData: AdditionalEstate[] =
-    recentHouses !== 'none'
-      ? addDetailEstateData
-          .filter((estate) => recentHouses.includes(estate.basicInfo.atclNm))
-          .sort(
-            (a, b) =>
-              recentHouses.indexOf(a.basicInfo.atclNm) -
-              recentHouses.indexOf(b.basicInfo.atclNm)
-          )
-      : [];
+  const fetchRecentRealEstatesData = async () => {
+    const recentVisitedREalEstateList =
+      recentHouses && recentHouses !== 'none'
+        ? await PlatformAPI.getRecentVisitedRealEstateList({
+            realEstateIds: recentHouses,
+          })
+        : null;
+    if (recentVisitedREalEstateList) {
+      setRecentRealEstateData(recentVisitedREalEstateList.result.realEstates);
+    }
+  };
 
-  const handleCardClick = (estate: AdditionalEstate) => {
+  const getBookmarkRealEstates = async () => {
+    try {
+      const bookmarkRealEstateListResponse =
+        await PlatformAPI.getBookmarkRealEstates();
+      if (bookmarkRealEstateListResponse) {
+        const bookmarkRealEstateList =
+          bookmarkRealEstateListResponse.result.realEstates;
+        setBookmarkEstateList(bookmarkRealEstateList);
+      }
+    } catch (error) {
+      console.error('Error getBookmarkRealEstates:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (isLogin) {
+      getBookmarkRealEstates();
+    }
+    fetchRecentRealEstatesData();
+  }, []);
+
+  const handleCardClick = (estate: RealEstatePreview) => {
     setSelectedEstate(estate); // 선택된 매물 정보 설정
+  };
+
+  const isBookmarkedRealEstate = (id: number): boolean => {
+    if (!bookmarkEstateList) return false;
+    return bookmarkEstateList.some((item) => item.realEstateId === id);
   };
 
   return (
@@ -240,32 +275,39 @@ export default function Main() {
                         </div>
                       </div>
                     ) : (
-                      <Swiper
-                        items={recentRealEstateData}
-                        pagination={{ clickable: true }}
-                        renderItem={(recentRealEstateData) => (
-                          <RealEstateCard
-                            estate={recentRealEstateData}
-                            isStarFilled={false}
-                            onClick={() => {
-                              handleCardClick(recentRealEstateData);
-                              setShowRealEstate(true);
-                            }}
-                          />
-                        )}
-                        spaceBetween={30}
-                        slidesPerView={1}
-                      />
+                      recentRealEstateData && (
+                        <Swiper
+                          items={recentRealEstateData}
+                          pagination={{ clickable: true }}
+                          renderItem={(recentRealEstateData) => (
+                            <RealEstateCard
+                              estate={recentRealEstateData}
+                              isBookmarked={isBookmarkedRealEstate(
+                                recentRealEstateData.realEstateId
+                              )}
+                              onBookmarkUpdate={getBookmarkRealEstates}
+                              onClick={() => {
+                                handleCardClick(recentRealEstateData);
+                              }}
+                            />
+                          )}
+                          spaceBetween={30}
+                          slidesPerView={1}
+                        />
+                      )
                     )}
                   </CommonBackground>
                 </div>
               </div>
             </div>
-            {showRealEstate && selectedEstate && (
+            {selectedEstate && (
               <RealEstateDetail
-                isStarFilled={false}
-                estate={selectedEstate}
-                onBackClick={() => setShowRealEstate(false)}
+                realEstate={selectedEstate}
+                isBookmarked={isBookmarkedRealEstate(
+                  selectedEstate.realEstateId
+                )}
+                onBookmarkUpdate={getBookmarkRealEstates}
+                onBackClick={() => setSelectedEstate(null)}
               />
             )}
           </div>

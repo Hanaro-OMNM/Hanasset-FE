@@ -3,14 +3,13 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import React from 'react';
-import { Photo } from '../../../types/hanaAsset';
 
 interface ImageCarouselProps {
-  images: Photo[] | undefined;
+  image: string;
   onBackClick: () => void;
 }
 const ImageCarousel: React.FC<ImageCarouselProps> = ({
-  images,
+  image,
   onBackClick,
 }) => {
   const settings = {
@@ -21,6 +20,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+
   return (
     <div className="relative w-full h-64 overflow-hidden">
       <button
@@ -30,17 +30,13 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
         <FiChevronLeft className="w-[30px] h-[30px] mr-4" />
       </button>
       <Slider {...settings}>
-        {images![0] ? (
+        {image ? (
           <div>
-            {images!.map((src, index) => (
-              <div key={index}>
-                <img
-                  src={src.url}
-                  alt={`Slide ${index}`}
-                  className="w-full h-64 object-cover"
-                />
-              </div>
-            ))}
+            <img
+              src={'https://landthumb-phinf.pstatic.net/' + image}
+              alt="이미지"
+              className="w-full h-64 object-cover"
+            />
           </div>
         ) : (
           <div>

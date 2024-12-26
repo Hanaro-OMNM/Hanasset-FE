@@ -20,7 +20,7 @@ export interface Loan {
   name: string;
   rate: number;
   limit: number;
-  newDsr: number;
+  dsr: number;
   loanDetailUrl: string;
 }
 
@@ -29,13 +29,12 @@ export interface LoanDetail {
   name: string;
   rate: number;
   outline: string;
-  amount: number;
-  detail: string;
+  limit: number;
+  feature: string;
   targetGuest: string;
   targetHouse: string;
   period: string;
   paybackMethod: string;
-  rateCalculateMethod: string;
   loanApplyUrl: string;
 }
 
@@ -46,7 +45,7 @@ export interface RealEstate {
   location: string;
   size: string;
   address: string;
-  price: number;
+  deposit: number;
 }
 
 type ChatMessageType = {
@@ -73,7 +72,7 @@ export const hanaYouthJeonseLoan: Loan = {
   name: '하나 청년전세론',
   rate: 4.453,
   limit: 2,
-  newDsr: 20,
+  dsr: 20,
   loanDetailUrl: '',
 };
 
@@ -81,7 +80,7 @@ export const seoulYouthLoan: Loan = {
   name: '서울특별시 청년임차 보증금 대출',
   rate: 4.52,
   limit: 2,
-  newDsr: 25,
+  dsr: 25,
   loanDetailUrl: '',
 };
 
@@ -89,7 +88,7 @@ export const welfareGuardianJeonseLoan: Loan = {
   name: '복지지킴이전세론',
   rate: 4.383,
   limit: 2,
-  newDsr: 25,
+  dsr: 25,
   loanDetailUrl: '',
 };
 
@@ -97,7 +96,7 @@ export const jeonseSecurityLoan: Loan = {
   name: '전세안심금대출',
   rate: 4.71,
   limit: 2,
-  newDsr: 30,
+  dsr: 30,
   loanDetailUrl: '',
 };
 
@@ -105,7 +104,7 @@ export const beotimmogYoungWarrantyWolseLoan: Loan = {
   name: '버팀목 청년전용보증부월세대출',
   rate: 1.3,
   limit: 0.45,
-  newDsr: 23,
+  dsr: 23,
   loanDetailUrl: '',
 };
 
@@ -113,7 +112,7 @@ export const beotimmogSmallBusinessJeonseLoan: Loan = {
   name: '버팀목 중소기업취업청년 전세자금대출',
   rate: 1.5,
   limit: 1,
-  newDsr: 28,
+  dsr: 28,
   loanDetailUrl: '',
 };
 
@@ -121,7 +120,7 @@ export const beotimmogJeonseLoan: Loan = {
   name: '버팀목전세자금대출',
   rate: 2.0,
   limit: 3,
-  newDsr: 32,
+  dsr: 32,
   loanDetailUrl: '',
 };
 
@@ -162,8 +161,8 @@ export const dummyLoanDetail: LoanDetail = {
   outline:
     '청년층 주거비용 경감을 위해 임차보증금의 90%이내, 최대 2억원까지(전세,반전세 계약 모두 가능해요)',
   rate: 4.453,
-  amount: 2,
-  detail:
+  limit: 2,
+  feature:
     '만 19세이상 만 34세 이하의 무주택(배우자 포함)세대주를 대상으로 한국주택금융공사의 보증서 담보로 임차보증금의 90%범위 내에서 최대 2억원까지 주택의 전세자금을 지원해드리는 상품이에요.',
   targetGuest: `주택임대차계약을 체결한 국민인 거주자로 아래의 조건을 모두 충족하는 손님 
 
@@ -176,21 +175,6 @@ export const dummyLoanDetail: LoanDetail = {
   period: `6개월이상 3년이내 (단, 임대차 계약기간 범위내)
 (만 34세 이하 임차인은 임대차 계약 기간 범위에서 횟수 제한없이 기한연장 가능하며, 만 35세 이상 임차인은 1회에 한하여 기한연장 가능. 이후 연장불가)`,
   paybackMethod: '만기일시상환',
-  rateCalculateMethod: `대출금에 연이율과 대출일수를 곱한 후 이를 365일(윤년인 경우 366일)로 나누어 산출하되 원단위 미만은 절사
-
-원리금균등분할상환대출의 월별이자 계산은 대출원금에 연이율을 곱한 다음 12로 나누어 계산
-
-일수계산은 여신당일로부터 기일 또는 상환일(일부상환 및 분할상환 포함) 전일까지로 해요.(한편넣기)
-
-위 내용에도 불구하고 다음의 여신은 여신당일부터 기일 또는 상환일까지로 해요.
-
-1. 대출 당일에 회수되는 대출금
-2. 대외기관으로부터 자금을 차입하는 대출금으로서 이자를 상환일까지 지급하는 대출금
-3. 연체기간이 1일인 연체대출채권 및 지급보증대지급금
-4. 대여유가증권
-
-- 원금 균등분할상환대출 : 대출금액 x 대출이자율 x 이자일수 ÷ 365(윤년은 366일)
-- 원리금 균등분할상환대출 : 대출금액 × 대출이자율 ÷ 12`,
   loanApplyUrl: '',
 };
 
@@ -209,7 +193,7 @@ export const dummyRealEstateList: RealEstate[] = [
     location: '103동 1201호',
     size: '100.97㎡',
     address: '서울특별시 성동구 왕십리로 16',
-    price: 5,
+    deposit: 5,
   },
   {
     id: 1,
@@ -218,7 +202,7 @@ export const dummyRealEstateList: RealEstate[] = [
     location: '104동 1502호',
     size: '85.42㎡',
     address: '서울특별시 성동구 왕십리로 16',
-    price: 10,
+    deposit: 10,
   },
   {
     id: 2,
@@ -227,7 +211,7 @@ export const dummyRealEstateList: RealEstate[] = [
     location: '105동 1803호',
     size: '120.50㎡',
     address: '서울특별시 성동구 왕십리로 16',
-    price: 8,
+    deposit: 8,
   },
 ];
 

@@ -1,46 +1,99 @@
+import { useRecoilState } from 'recoil';
 import React from 'react';
 import PropertyStar from '../../../components/molecules/Star';
+import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
+import isLoginAtom from '../../../recoil/isLogin';
+import { RealEstatePreview } from '../../../types/hanaAssetResponse.common';
 
 interface PropertyInfoProps {
-  name: string | undefined;
-  title: string | undefined;
-  floor: string | undefined;
-  rentType: string | undefined;
-  price: number | undefined;
-  isStarFilled: boolean;
+  estate: RealEstatePreview;
+  isBookmarked: boolean;
+  onBookmarkUpdate: () => Promise<void>;
 }
 
 const PropertyInfo: React.FC<PropertyInfoProps> = ({
-  name,
-  title,
-  floor,
-  rentType,
-  price,
-  isStarFilled,
+  estate,
+  isBookmarked,
+  onBookmarkUpdate,
 }) => {
+  const [isLogin] = useRecoilState(isLoginAtom);
+
   function convertToEok(number: number) {
-    return (number / 10000).toFixed(1) + '억';
+    return (number / 100000000).toFixed(1) + '억';
   }
 
-  const prcResult = price ? convertToEok(price) : undefined;
+  function convertToMan(number: number) {
+    return (number / 10000).toFixed(0) + '만';
+  }
+
+  const { name, deposit, price, floor, type } = estate;
+  const prcResult = convertToMan(price);
+  const depositResult = convertToEok(deposit);
+
+  function handleBookmark(isBookmarked: boolean) {
+    if (!isBookmarked) {
+      addBookmark(estate.realEstateId);
+    } else {
+      removeBookmark(estate.realEstateId);
+    }
+  }
+
+  const addBookmark = async (id: number) => {
+    try {
+      const responseStatus = await PlatformAPI.addBookmarkRealEstate(id);
+      if (responseStatus === 200) {
+        onBookmarkUpdate();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const removeBookmark = async (id: number) => {
+    try {
+      const responseStatus = await PlatformAPI.removeBookmarkRealEstate(id);
+      if (responseStatus === 200) {
+        onBookmarkUpdate();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
       <div className="p-4 flex flex-col items-center">
         <div className="flex">
           <p className="text-lg font-semibold">
-            {name} {title} {floor}층
+            {name} {floor}층
           </p>
           <div className="absolute right-2">
-            <PropertyStar isFilled={isStarFilled} />
+            {isLogin && (
+              <PropertyStar
+                isFilled={isBookmarked}
+                onClick={() => handleBookmark(isBookmarked)}
+              />
+            )}
           </div>
         </div>
-        <p
-          className={`justify-center text-3xl font-bold ${rentType === '전세' ? 'text-hanaColor2' : 'text-red-600'}`}
-        >
-          <span>{rentType}</span>{' '}
-          <span className="text-black">{prcResult}</span>
-        </p>
+        {type === '전세' ? (
+          <div className="flex text-sm font-bold mb-2 items-center">
+            <div className="justify-center text-3xl font-bold text-hanaGreen">
+              전세
+            </div>
+            <div className="ml-2 flex-shrink-0"> {depositResult} </div>
+          </div>
+        ) : (
+          <div className="flex text-sm font-bold mb-2 items-center">
+            <div className="justify-center text-3xl font-bold text-hanaRed80">
+              월세
+            </div>
+            <div className="ml-2 flex-shrink-0">
+              {' '}
+              {depositResult}/{prcResult}{' '}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

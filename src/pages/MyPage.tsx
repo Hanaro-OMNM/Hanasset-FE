@@ -2,7 +2,6 @@ import { AiOutlineLogout } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
-import { realEstateData } from '../assets/Dummy.tsx';
 import Background1 from '../assets/img/background1.jpg';
 import Background2 from '../assets/img/background2.png';
 import Background3 from '../assets/img/background3.jpg';
@@ -18,6 +17,7 @@ import MyEstateList from '../components/template/MyEstateList.tsx';
 import { PlatformAPI } from '../platform/PlatformAPI.ts';
 import centerAtom from '../recoil/center/atom.ts';
 import isLoginAtom from '../recoil/isLogin';
+import { RealEstatePreview } from '../types/hanaAssetResponse.common.ts';
 import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import PropertyGroup from './property/PropertyGroup.tsx';
 import PropertyManage from './property/PropertyManage.tsx';
@@ -33,7 +33,11 @@ interface BookmarkedLocation {
 
 export default function MyPage() {
   const setCenter = useSetRecoilState(centerAtom);
-  const [showRealEstate, setShowRealEstate] = useState(false);
+  const [selectedEstate, setSelectedEstate] =
+    useState<RealEstatePreview | null>(null);
+  const [bookmarkEstateList, setBookmarkEstateList] = useState<
+    RealEstatePreview[] | null
+  >(null);
 
   const [currentPage, setCurrentPage] = useState<
     | 'home'
@@ -52,6 +56,20 @@ export default function MyPage() {
   >([]);
 
   const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
+
+  const getBookmarkRealEstates = async () => {
+    try {
+      const bookmarkRealEstateListResponse =
+        await PlatformAPI.getBookmarkRealEstates();
+      if (bookmarkRealEstateListResponse) {
+        const bookmarkRealEstateList =
+          bookmarkRealEstateListResponse.result.realEstates;
+        setBookmarkEstateList(bookmarkRealEstateList);
+      }
+    } catch (error) {
+      console.error('Error getBookmarkRealEstates:', error);
+    }
+  };
 
   // 로컬 스토리지에서 "관심 지역" 데이터 가져오기
   useEffect(() => {
@@ -92,6 +110,9 @@ export default function MyPage() {
         console.error('Error parsing bookmarkedLocations:', error);
       }
     }
+    if (isLogin) {
+      getBookmarkRealEstates();
+    }
   }, []);
 
   const navigate = useNavigate();
@@ -99,8 +120,13 @@ export default function MyPage() {
   const handleEditProfile = () => {
     setCurrentPage('editProfile');
   };
-  const handleEstate = () => {
-    navigate('/my-estate-list');
+
+  const handleEstate = (bookmarkEstateList: RealEstatePreview[]) => {
+    navigate('/my-estate-list', {
+      state: {
+        bookMark: bookmarkEstateList,
+      },
+    });
   };
   const profile = {
     name: '김하나',
@@ -147,6 +173,11 @@ export default function MyPage() {
         setIsLogin(false);
       }
     }
+  };
+
+  const isBookmarkedRealEstate = (id: number): boolean => {
+    if (!bookmarkEstateList) return false;
+    return bookmarkEstateList.some((item) => item.realEstateId === id);
   };
 
   return (
@@ -233,32 +264,38 @@ export default function MyPage() {
                   <SemiTitle>내 관심 매물</SemiTitle>
                   <div
                     className="ml-2 px-4 text-md text-white font-semibold bg-hanaColor2 hover:opacity-90' hover:scale-105 rounded-lg flex flex-col items-center justify-center shadow-md transition-transform duration-200 ease-in-out cursor-pointer"
-                    onClick={handleEstate}
+                    onClick={() =>
+                      bookmarkEstateList && handleEstate(bookmarkEstateList)
+                    }
                   >
                     더보기
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  {realEstateData.slice(0, 2).map((asset, index) => {
-                    return (
-                      <div
-                        key={index}
-                        onClick={() => setShowRealEstate(true)}
-                        className="bg-white hover:scale-105 rounded-lg flex flex-col items-center justify-center p-4 shadow-md transition-transform duration-200 ease-in-out cursor-pointer"
-                      >
-                        <>
-                          <img
-                            src={MyEstateList2}
-                            alt={asset.location}
-                            className="h-16 w-16 mb-2"
-                          />
-                          <span className="text-gray-600 font-sm font-fontCm text-center">
-                            {asset.location}
-                          </span>
-                        </>
-                      </div>
-                    );
-                  })}
+                  {bookmarkEstateList ? (
+                    bookmarkEstateList.slice(0, 2).map((asset, index) => {
+                      return (
+                        <div
+                          key={index}
+                          onClick={() => setSelectedEstate(asset)}
+                          className="bg-white hover:scale-105 rounded-lg flex flex-col items-center justify-center p-4 shadow-md transition-transform duration-200 ease-in-out cursor-pointer"
+                        >
+                          <>
+                            <img
+                              src={MyEstateList2}
+                              alt={asset.name}
+                              className="h-16 w-16 mb-2"
+                            />
+                            <span className="text-gray-600 font-sm font-fontCm text-center">
+                              {asset.name}
+                            </span>
+                          </>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
               </div>
             </div>
@@ -276,10 +313,12 @@ export default function MyPage() {
           />
         )}
       </div>
-      {showRealEstate && (
+      {selectedEstate && (
         <RealEstateDetail
-          isStarFilled={true}
-          onBackClick={() => setShowRealEstate(false)}
+          realEstate={selectedEstate}
+          isBookmarked={isBookmarkedRealEstate(selectedEstate.realEstateId)}
+          onBookmarkUpdate={getBookmarkRealEstates}
+          onBackClick={() => setSelectedEstate(null)}
         />
       )}
     </div>

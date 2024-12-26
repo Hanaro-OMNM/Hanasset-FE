@@ -71,7 +71,7 @@ const SearchResult = () => {
   return (
     <div className="w-[420px]">
       <div className="top-0 absolute pl-4 animate-slideInRight">
-        <div className="w-[420px] max-w-[420px] h-svh bg-gray-50/90 backdrop-blur-[5px] absolute overflow-y-auto">
+        <div className="w-[420px] max-w-[420px] h-svh bg-gray-50/90 backdrop-blur-[5px] absolute overflow-y-auto scrollbar-hide">
           {/* 헤더 */}
           <div className="w-[420px] max-w-[420px] h-16 fixed top-0 bg-white border-b border-gray-200 z-10 px-4 py-2 flex justify-between items-center">
             <button type="button" onClick={() => navigate('/home')}>
@@ -116,7 +116,7 @@ const SearchResult = () => {
             <CommonBackground className="w-full px-5 py-3">
               <div>
                 일치하는 매물이 없습니다. 다른 검색어로 시도해 보세요.
-                <img src={redAlert} />
+                <img alt="경고" src={redAlert} />
               </div>
             </CommonBackground>
           </div>
@@ -141,7 +141,7 @@ const SearchResult = () => {
               ) : (
                 <div>
                   일치하는 지역이 없습니다. 다른 검색어로 시도해 보세요.
-                  <img src={redAlert} />
+                  <img alt="경고" src={redAlert} />
                 </div>
               )}
             </CommonBackground>

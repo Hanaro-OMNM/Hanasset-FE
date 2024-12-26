@@ -241,8 +241,8 @@ export type BrokerInfo = {
 };
 
 export type RealPriceInfo = {
-  B1?: TradeInfo[];
-  B2?: TradeInfo[];
+  B1: TradeInfo[] | null;
+  B2: TradeInfo[] | null;
 };
 
 export type TradeInfo = {

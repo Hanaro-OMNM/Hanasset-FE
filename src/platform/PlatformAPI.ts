@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import qs from 'qs';
 import {
   BirthDate,
   ConfirmCode,
@@ -9,6 +10,7 @@ import {
   MarkerComplexId,
   RealEstateMarketPriceParamInfo,
   RecentVisitedRealEstatesIds,
+  RealEstateIds,
 } from '../types/hanaAssetRequest.common.ts';
 import {
   CurrentAptMarkers,
@@ -19,6 +21,10 @@ import {
   RealEstateMarketPrice,
   RealEstateMarketPriceParam,
   RealEstateType,
+} from '../types/hanaAssetResponse.common.ts';
+import {
+  LoanRecommend,
+  LoanDetail,
 } from '../types/hanaAssetResponse.common.ts';
 
 export class PlatformAPI {
@@ -263,5 +269,32 @@ export class PlatformAPI {
       }
     );
     return response!.data as RealEstateList;
+  }
+
+  public static async getLoanRecommend(
+    realEstateIds: RealEstateIds
+  ): Promise<LoanRecommend> {
+    const response = await this.instance.get(`/loan`, {
+      ...this.defaultConfig,
+      params: realEstateIds,
+      paramsSerializer: function (params) {
+        return qs.stringify(params, { arrayFormat: 'repeat' });
+      },
+    });
+    return response.data as LoanRecommend;
+  }
+
+  public static async getLoanDetail(loanId: number): Promise<LoanDetail> {
+    const response = await this.instance.get(`/loan/detail/${loanId}`, {
+      ...this.defaultConfig,
+    });
+    return response.data as LoanDetail;
+  }
+
+  public static async getConsultingUserInfo(): Promise<LoanRecommend> {
+    const response = await this.instance.get(`/chat/user`, {
+      ...this.defaultConfig,
+    });
+    return response.data as LoanRecommend;
   }
 }

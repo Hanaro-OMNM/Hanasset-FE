@@ -39,3 +39,7 @@ export interface RealEstateMarketPriceParamInfo {
 export interface RecentVisitedRealEstatesIds {
   realEstateIds: string[];
 }
+
+export interface RealEstateIds {
+  realEstateIds: number[];
+}

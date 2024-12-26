@@ -58,7 +58,7 @@ function AppContent() {
               <Route path="/home" element={<Main />} />
               <Route path="/consulting" element={<Consulting />} />
               <Route path="/my-page" element={<MyPage />} />
-              <Route path="/loan-recommend" element={<LoanRecommend />} />
+              <Route path="/loan" element={<LoanRecommend />} />
               <Route path="/chat-reservation" element={<ChatReservation />} />
               <Route path="/real-estate-list" element={<RealEstateList />} />
               <Route path="/select-estate" element={<SelectEstate />} />

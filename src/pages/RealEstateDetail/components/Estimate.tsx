@@ -4,9 +4,10 @@ import Expectation from '../../LoanRecommend/components/Expectation';
 
 interface EstimateProps {
   deposit: number;
+  realEstateId: number;
 }
 
-const Estimate: React.FC<EstimateProps> = ({ deposit }) => {
+const Estimate: React.FC<EstimateProps> = ({ deposit, realEstateId }) => {
   const navigate = useNavigate();
   const [predictedAmount, setPredictedAmount] = useState(0);
 
@@ -65,7 +66,12 @@ const Estimate: React.FC<EstimateProps> = ({ deposit }) => {
 
       <div className="flex justify-center">
         <button
-          onClick={() => navigate('/loan-recommend')}
+          onClick={() =>
+            navigate({
+              pathname: '/loan',
+              search: `?realEstateIds=${realEstateId}`,
+            })
+          }
           className="bg-hanaGreen60 text-white my-4 py-2 px-4 rounded-lg w-full hover:bg-hanaColor2"
         >
           대출금리 / 금액 확인하기

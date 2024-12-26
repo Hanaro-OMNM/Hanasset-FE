@@ -161,7 +161,7 @@ export interface GuestInfo {
 }
 
 export interface LoanRecommendInfo {
-  realEstate: RealEstateInfo;
+  realEstateInfo: RealEstateInfo;
   hanaLoans: LoanInfo[];
   beotimmokLoans: LoanInfo[];
 }

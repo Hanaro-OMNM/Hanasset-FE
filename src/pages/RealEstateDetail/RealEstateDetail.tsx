@@ -67,7 +67,10 @@ export default function RealEstateDetail({
         <BasicInfo realEstateId={realEstate.realEstateId} />
       </div>
       <div id="예산" className="pt-12">
-        <Estimate deposit={realEstate.deposit} />
+        <Estimate
+          deposit={realEstate.deposit}
+          realEstateId={realEstate.realEstateId}
+        />
       </div>
     </RealEstateDetailLayout>
   );

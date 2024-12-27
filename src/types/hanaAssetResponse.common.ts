@@ -1,16 +1,11 @@
-import { RealEstateMarketPriceParamInfo } from './hanaAssetRequest.common.ts';
-
 export interface CurrentAreaMarkers {
-  message: string;
-  result: {
-    currentMarkers: {
-      cityName: string;
-      cortarNo: number;
-      emdName: string;
-      sigunguName: string;
-    };
-    markerInfos: areaMarkerInfos[];
+  currentMarkers: {
+    cityName: string;
+    cortarNo: number;
+    emdName: string;
+    sigunguName: string;
   };
+  markerInfos: areaMarkerInfos[];
 }
 
 export interface areaMarkerInfos {
@@ -22,10 +17,7 @@ export interface areaMarkerInfos {
 }
 
 export interface CurrentAptMarkers {
-  message: string;
-  result: {
-    markerInfos: aptMarkerInfos[];
-  };
+  markerInfos: aptMarkerInfos[];
 }
 
 export interface aptMarkerInfos {
@@ -59,47 +51,22 @@ export interface RealEstateTypeInfo {
   floorPlanLink: string;
 }
 
-export interface RealEstateDetailInfo {
-  unitCount: number;
-  entranceType: string;
-  floorInfo: {
-    total: number;
-    target: number;
-  };
-  directionInfo: {
-    standard: string;
-    facing: string;
-  };
-}
-
-export interface RealEstateBasicInfo {
-  address: string;
-  unitCount: number;
-  parkingCount: number;
-  establishedDate: string;
-  dongCount: number;
-  heatingAndCoolingInfo: {
-    systemType: string;
-    energyType: string;
-  };
-  buildingRatioInfo: {
-    floorAreaRatio: number;
-    buildingCoverageRatio: number;
-  };
-  constructionCompany: string;
-}
-
 export interface RealEstateList {
-  message: string;
-  result: {
-    count: number;
-    realEstates: RealEstatePreview[];
-  };
+  count: number;
+  realEstates: RealEstatePreview[];
 }
+
 export interface RealEstateType {
-  message: string;
-  result: RealEstateTypeInfo;
+  name: string;
+  supplyAreaSize: number;
+  exclusiveAreaSize: number;
+  managementFee: number;
+  roomCount: number;
+  bathroomCount: number;
+  floorPlanImgUrl: string;
+  floorPlanLink: string;
 }
+
 export interface ChatRoom {
   chatroomId: string;
   userId: number;
@@ -147,16 +114,20 @@ export interface ChatMessage {
   message: string;
   timestamp: string;
 }
+
 export interface ChatroomApiResponse {
   data: {
     chatrooms: ChatRoom[];
   };
 }
+
 // ApiResponseEntity 타입
 export interface ApiResponseEntity<T> {
   success: boolean;
   message: string;
-  data: T;
+  data: {
+    result: T;
+  };
 }
 
 // ChatroomResponse 타입
@@ -174,66 +145,8 @@ export interface ChatRoomDTO {
   reservedTime: string; // ISO 8601 형식
   chatroomStatus: string;
 }
-export interface CurrentAreaMarkers {
-  message: string;
-  result: {
-    currentMarkers: {
-      cityName: string;
-      cortarNo: number;
-      emdName: string;
-      sigunguName: string;
-    };
-    markerInfos: areaMarkerInfos[];
-  };
-}
 
-export interface areaMarkerInfos {
-  centerLat: number;
-  centerLng: number;
-  cortarNoCode: number;
-  name: string;
-  housingComplexId: number;
-}
-
-export interface CurrentAptMarkers {
-  message: string;
-  result: {
-    markerInfos: aptMarkerInfos[];
-  };
-}
-
-export interface aptMarkerInfos {
-  housingComplexId: number;
-  name: string;
-  centerLat: number;
-  centerLng: number;
-}
-
-export interface RealEstatePreview {
-  realEstateId: number;
-  imgUrl: string;
-  type: string;
-  rentType: string;
-  name: string;
-  addressDetail: string;
-  floor: string;
-  deposit: number;
-  price: number;
-  description: string;
-}
-
-export interface RealEstateTypeInfo {
-  name: string;
-  supplyAreaSize: number;
-  exclusiveAreaSize: number;
-  managementFee: number;
-  roomCount: number;
-  bathroomCount: number;
-  floorPlanImgUrl: string;
-  floorPlanLink: string;
-}
-
-export interface RealEstateDetailInfo {
+export interface RealEstateDetail {
   unitCount: number;
   entranceType: string;
   floorInfo: {
@@ -246,7 +159,7 @@ export interface RealEstateDetailInfo {
   };
 }
 
-export interface RealEstateBasicInfo {
+export interface RealEstateBasic {
   address: string;
   unitCount: number;
   parkingCount: number;
@@ -261,34 +174,6 @@ export interface RealEstateBasicInfo {
     buildingCoverageRatio: number;
   };
   constructionCompany: string;
-}
-
-export interface RealEstateList {
-  message: string;
-  result: {
-    count: number;
-    realEstates: RealEstatePreview[];
-  };
-}
-
-export interface RealEstateType {
-  message: string;
-  result: RealEstateTypeInfo;
-}
-
-export interface RealEstateDetail {
-  message: string;
-  result: RealEstateDetailInfo;
-}
-
-export interface RealEstateBasic {
-  message: string;
-  result: RealEstateBasicInfo;
-}
-
-export interface RealEstateMarketPriceParam {
-  message: string;
-  result: RealEstateMarketPriceParamInfo;
 }
 
 export interface RealEstateMarketPrice {
@@ -313,13 +198,9 @@ export interface TradeInfo {
   registrationDate: string | null;
 }
 
-// 대출 추천
 export interface LoanRecommend {
-  message: string;
-  result: {
-    user: GuestInfo;
-    loanRecommendInfos: LoanRecommendInfo[];
-  };
+  user: GuestInfo;
+  loanRecommendInfos: LoanRecommendInfo[];
 }
 
 export interface GuestInfo {
@@ -359,11 +240,6 @@ export interface LoanInfo {
 }
 
 export interface LoanDetail {
-  message: string;
-  result: LoanDetailInfo;
-}
-
-export interface LoanDetailInfo {
   loanId: number;
   type: string;
   name: string;
@@ -377,6 +253,7 @@ export interface LoanDetailInfo {
   paybackMethod: string;
   dsr: number;
 }
+
 export interface UserInfoResponse {
   id: number;
   name: string;

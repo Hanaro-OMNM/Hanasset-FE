@@ -1,5 +1,4 @@
 import { AiOutlineLogout } from 'react-icons/ai';
-import { CiCirclePlus } from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
@@ -64,7 +63,7 @@ export default function MyPage() {
         await PlatformAPI.getBookmarkRealEstates();
       if (bookmarkRealEstateListResponse) {
         const bookmarkRealEstateList =
-          bookmarkRealEstateListResponse.result.realEstates;
+          bookmarkRealEstateListResponse.realEstates;
         setBookmarkEstateList(bookmarkRealEstateList);
       }
     } catch (error) {
@@ -196,7 +195,7 @@ export default function MyPage() {
     };
 
     fetchUserName();
-  }, [accessToken]);
+  }, []);
 
   return (
     <div className="top-0 absolute animate-fadeInRight">

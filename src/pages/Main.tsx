@@ -74,7 +74,7 @@ export default function Main() {
           })
         : null;
     if (recentVisitedREalEstateList) {
-      setRecentRealEstateData(recentVisitedREalEstateList.result.realEstates);
+      setRecentRealEstateData(recentVisitedREalEstateList.realEstates);
     }
   };
 
@@ -84,7 +84,7 @@ export default function Main() {
         await PlatformAPI.getBookmarkRealEstates();
       if (bookmarkRealEstateListResponse) {
         const bookmarkRealEstateList =
-          bookmarkRealEstateListResponse.result.realEstates;
+          bookmarkRealEstateListResponse.realEstates;
         setBookmarkEstateList(bookmarkRealEstateList);
       }
     } catch (error) {

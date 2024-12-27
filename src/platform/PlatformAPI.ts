@@ -8,7 +8,7 @@ import {
   EmailSignUpRequest,
   LoginRequest,
   MarkerComplexId,
-  RealEstateMarketPriceParamInfo,
+  RealEstateMarketPriceParam,
   RecentVisitedRealEstatesIds,
   RealEstateIds,
   ChatCreateRequest,
@@ -24,7 +24,6 @@ import {
   ChatMessage,
   ApiResponseEntity,
   RealEstateMarketPrice,
-  RealEstateMarketPriceParam,
   RealEstateType,
   LoanRecommend,
   LoanDetail,
@@ -83,66 +82,78 @@ export class PlatformAPI {
   public static async getAreaMarkersInfo(
     currentLocationData: CurrentLocation
   ): Promise<CurrentAreaMarkers> {
-    const response = await this.instance.get(`/markers/area`, {
+    const response = (await this.instance.get(`/markers/area`, {
       ...this.defaultConfig,
       params: currentLocationData,
-    });
-    return response.data as CurrentAreaMarkers;
+    })) as ApiResponseEntity<CurrentAreaMarkers>;
+    return response.data.result as CurrentAreaMarkers;
   }
 
   public static async getAptMarkersInfo(
     currentLocationData: CurrentLocation
   ): Promise<CurrentAptMarkers> {
-    const response = await this.instance.get('/markers/apt', {
+    const response = (await this.instance.get('/markers/apt', {
       ...this.defaultConfig,
       params: currentLocationData,
-    });
-    return response.data as CurrentAptMarkers;
+    })) as ApiResponseEntity<CurrentAptMarkers>;
+    return response.data.result as CurrentAptMarkers;
   }
 
   public static async getRealEstatesList(
     markerComplexId: MarkerComplexId
   ): Promise<RealEstateList> {
-    const response = await this.instance.get('/real-estates', {
+    const response = (await this.instance.get('/real-estates', {
       params: markerComplexId,
-    });
-    return response.data as RealEstateList;
+    })) as ApiResponseEntity<RealEstateList>;
+    return response.data.result as RealEstateList;
   }
 
   public static async getRealEstateDetail(
     realEstateId: number
   ): Promise<RealEstateDetail> {
-    const response = await this.instance.get(
+    const response = (await this.instance.get(
       `/real-estates/${realEstateId}/detail`,
       {
         ...this.defaultConfig,
       }
-    );
-    return response.data as RealEstateDetail;
+    )) as ApiResponseEntity<RealEstateDetail>;
+    return response.data.result as RealEstateDetail;
   }
 
   public static async getRealEstateBasic(
     realEstateId: number
   ): Promise<RealEstateBasic> {
-    const response = await this.instance.get(
+    const response = (await this.instance.get(
       `/real-estates/${realEstateId}/basic`,
       {
         ...this.defaultConfig,
       }
-    );
-    return response.data as RealEstateBasic;
+    )) as ApiResponseEntity<RealEstateBasic>;
+    return response.data.result as RealEstateBasic;
   }
 
   public static async getRealEstateType(
     realEstateId: number
   ): Promise<RealEstateType> {
-    const response = await this.instance.get(
+    const response = (await this.instance.get(
       `/real-estates/${realEstateId}/type`,
       {
         ...this.defaultConfig,
       }
-    );
-    return response.data as RealEstateType;
+    )) as ApiResponseEntity<RealEstateType>;
+    return response.data.result as RealEstateType;
+  }
+
+  public static async getRealEstateMarketPriceParam(
+    realEstateId: number
+  ): Promise<RealEstateMarketPriceParam> {
+    const response = (await this.instance.get(
+      `/real-estates/${realEstateId}/market-price`,
+      {
+        ...this.defaultConfig,
+      }
+    )) as ApiResponseEntity<RealEstateMarketPriceParam>;
+    return response.data.result as RealEstateMarketPriceParam;
   }
 
   public static async sendMail(email: string): Promise<boolean> {
@@ -227,6 +238,14 @@ export class PlatformAPI {
     } catch (error) {
       console.error('Error logout:', error);
     }
+  }
+
+  // 회원 정보 조회
+  public static async getUserInfo(): Promise<UserInfoResponse> {
+    const response = (await this.instance.get(
+      'users/me'
+    )) as ApiResponseEntity<UserInfoResponse>;
+    return response.data.result as UserInfoResponse;
   }
 
   // 채팅방 생성
@@ -348,17 +367,15 @@ export class PlatformAPI {
     }
   }
 
-  public static async getBookmarkRealEstates(): Promise<
-    ApiResponseEntity<RealEstateList>
-  > {
-    const response = await this.instance.get('/users/bookmarks/real-estates', {
+  public static async getBookmarkRealEstates(): Promise<RealEstateList> {
+    const response = (await this.instance.get('/users/bookmarks/real-estates', {
       ...this.defaultConfig,
-    });
-    return response.data as ApiResponseEntity<RealEstateList>;
+    })) as ApiResponseEntity<RealEstateList>;
+    return response.data.result as RealEstateList;
   }
 
   public static async getRealEstateMarketPrice(
-    realEstateMarketPriceParam: RealEstateMarketPriceParamInfo,
+    realEstateMarketPriceParam: RealEstateMarketPriceParam,
     tradeType: string
   ): Promise<RealEstateMarketPrice> {
     const response = await axios.get(
@@ -377,21 +394,21 @@ export class PlatformAPI {
   public static async getLoanRecommend(
     realEstateIds: RealEstateIds
   ): Promise<LoanRecommend> {
-    const response = await this.instance.get(`/loan`, {
+    const response = (await this.instance.get(`/loan`, {
       ...this.defaultConfig,
       params: realEstateIds,
       paramsSerializer: function (params) {
         return qs.stringify(params, { arrayFormat: 'repeat' });
       },
-    });
-    return response.data as LoanRecommend;
+    })) as ApiResponseEntity<LoanRecommend>;
+    return response.data.result as LoanRecommend;
   }
 
   public static async getLoanDetail(loanId: number): Promise<LoanDetail> {
-    const response = await this.instance.get(`/loan/detail/${loanId}`, {
+    const response = (await this.instance.get(`/loan/detail/${loanId}`, {
       ...this.defaultConfig,
-    });
-    return response.data as LoanDetail;
+    })) as ApiResponseEntity<LoanDetail>;
+    return response.data.result as LoanDetail;
   }
 
   public static async getConsultingUserInfo(): Promise<LoanRecommend> {
@@ -399,5 +416,53 @@ export class PlatformAPI {
       ...this.defaultConfig,
     });
     return response.data as LoanRecommend;
+  }
+
+  public static async addBookmarkRealEstate(
+    realEstateId: number
+  ): Promise<number> {
+    const response = await this.instance.post(
+      `/users/bookmarks/real-estates/${realEstateId}`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.status;
+  }
+
+  public static async removeBookmarkRealEstate(
+    realEstateId: number
+  ): Promise<number> {
+    const response = await this.instance.delete(
+      `/users/bookmarks/real-estates/${realEstateId}`
+    );
+    return response.status;
+  }
+
+  public static async putPropertyValue(
+    propertyType: string,
+    propertyValue: string
+  ): Promise<number> {
+    const response = await this.instance.put(
+      `/users/property?type=${propertyType}&value=${propertyValue}`
+    );
+
+    return response.status;
+  }
+
+  public static async getRecentVisitedRealEstateList(
+    recentVisitedRealEstatesIds: RecentVisitedRealEstatesIds
+  ): Promise<RealEstateList> {
+    const params = new URLSearchParams();
+    recentVisitedRealEstatesIds.realEstateIds.forEach((id) =>
+      params.append('realEstatesIds', id)
+    );
+    const response = (await this.instance.get(
+      `/real-estates/recent-visited-list`,
+      {
+        params: params,
+      }
+    )) as ApiResponseEntity<RealEstateList>;
+    return response.data.result as RealEstateList;
   }
 }

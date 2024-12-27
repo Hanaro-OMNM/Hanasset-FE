@@ -28,10 +28,10 @@ const Estimate: React.FC<EstimateProps> = ({ deposit, realEstateId }) => {
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-2xl font-bold mb-4">예산</h2>
-      <p className="text-lg mb-2 flex">
+      <div className="text-lg mb-2 flex">
         총 필요 자금
         <p className="font-semibold pl-1 text-gray-800 pr-1">{totalAsset} </p>원
-      </p>
+      </div>
       <hr className="my-4 border-gray-300" />
 
       <div className="mb-4 flex justify-between">

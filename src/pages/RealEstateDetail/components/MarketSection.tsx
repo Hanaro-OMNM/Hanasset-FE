@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
-import { RealEstateMarketPriceParamInfo } from '../../../types/hanaAssetRequest.common.ts';
+import { RealEstateMarketPriceParam } from '../../../types/hanaAssetRequest.common.ts';
 import { TradeInfo } from '../../../types/hanaAssetResponse.common.ts';
 import MarketChart from './MarketChart';
 import MarketInfoCard from './MarketInfoCard';
@@ -12,7 +12,7 @@ interface MarketSectionProps {
 
 const MarketSection: React.FC<MarketSectionProps> = ({ realEstateId }) => {
   const [realEstateMarketPriceParam, setRealEstateMarketPriceParam] =
-    useState<RealEstateMarketPriceParamInfo | null>(null);
+    useState<RealEstateMarketPriceParam | null>(null);
   const [jeonseMarketPrice, setJeonseMarketPrice] = useState<
     TradeInfo[] | null
   >(null);
@@ -26,9 +26,7 @@ const MarketSection: React.FC<MarketSectionProps> = ({ realEstateId }) => {
       try {
         const realEstateMarketPriceParam =
           await PlatformAPI.getRealEstateMarketPriceParam(realEstateId);
-        const realEstateMarketPriceParamInfo =
-          realEstateMarketPriceParam.result;
-        setRealEstateMarketPriceParam(realEstateMarketPriceParamInfo);
+        setRealEstateMarketPriceParam(realEstateMarketPriceParam);
       } catch (error) {
         console.error('Error fetching real estate type:', error);
       }

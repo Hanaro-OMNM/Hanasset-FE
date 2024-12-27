@@ -239,8 +239,8 @@ export default function MapLayout({ children }: LayoutProps) {
           scaleControl={true}
         >
           {zoom <= 15
-            ? areaMarkers?.result.markerInfos &&
-              areaMarkers?.result.markerInfos.map((marker) => (
+            ? areaMarkers &&
+              areaMarkers.markerInfos.map((marker) => (
                 <Marker
                   key={marker.cortarNoCode}
                   position={
@@ -262,8 +262,8 @@ export default function MapLayout({ children }: LayoutProps) {
                   }}
                 />
               ))
-            : aptMarkers?.result.markerInfos &&
-              aptMarkers?.result.markerInfos.map((marker) => (
+            : aptMarkers &&
+              aptMarkers.markerInfos.map((marker) => (
                 <Marker
                   key={marker.housingComplexId}
                   position={

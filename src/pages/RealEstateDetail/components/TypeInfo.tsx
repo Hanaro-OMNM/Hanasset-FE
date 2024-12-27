@@ -15,8 +15,7 @@ const TypeInfo: React.FC<TypeInfoProps> = ({ realEstateId }) => {
       try {
         const realEstateType =
           await PlatformAPI.getRealEstateType(realEstateId);
-        const realEstateTypeInfo = realEstateType.result;
-        setRealEstateType(realEstateTypeInfo);
+        setRealEstateType(realEstateType);
       } catch (error) {
         console.error('Error fetching real estate type:', error);
       }

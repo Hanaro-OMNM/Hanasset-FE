@@ -1,7 +1,7 @@
 import { FaBuilding, FaCompass, FaUsers } from 'react-icons/fa';
 import React, { useEffect, useState } from 'react';
 import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
-import { RealEstateDetailInfo } from '../../../types/hanaAssetResponse.common.ts';
+import { RealEstateDetail } from '../../../types/hanaAssetResponse.common.ts';
 import { DirectionUtils } from '../../../utils/DirectionUtils.ts';
 import { EntranceYpeUtils } from '../../../utils/EntranceYpeUtils.ts';
 
@@ -11,15 +11,14 @@ interface PropertyDetailsProps {
 
 const PropertyDetails: React.FC<PropertyDetailsProps> = ({ realEstateId }) => {
   const [realEstateDetailInfo, setRealEstateDetailInfo] =
-    useState<RealEstateDetailInfo | null>(null);
+    useState<RealEstateDetail | null>(null);
 
   useEffect(() => {
     const fetchRealEstateDetail = async () => {
       try {
         const realEstateDetail =
           await PlatformAPI.getRealEstateDetail(realEstateId);
-        const realEstateDetailInfo = realEstateDetail.result;
-        setRealEstateDetailInfo(realEstateDetailInfo);
+        setRealEstateDetailInfo(realEstateDetail);
       } catch (error) {
         console.error('Error fetching real estate detail:', error);
       }

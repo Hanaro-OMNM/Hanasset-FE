@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
-import { RealEstateBasicInfo } from '../../../types/hanaAssetResponse.common.ts';
+import { RealEstateBasic } from '../../../types/hanaAssetResponse.common.ts';
 import { HeatingAndCoolingUtils } from '../../../utils/HeatingAndCoolingUtils.ts';
 
 interface BasicInfoProps {
@@ -9,15 +9,14 @@ interface BasicInfoProps {
 
 const BasicInfo: React.FC<BasicInfoProps> = ({ realEstateId }) => {
   const [realEstateBasicInfo, setRealEstateBasicInfo] =
-    useState<RealEstateBasicInfo | null>(null);
+    useState<RealEstateBasic | null>(null);
 
   useEffect(() => {
     const fetchRealEstateBasic = async () => {
       try {
         const realEstateBasic =
           await PlatformAPI.getRealEstateBasic(realEstateId);
-        const realEstateBasicInfo = realEstateBasic.result;
-        setRealEstateBasicInfo(realEstateBasicInfo);
+        setRealEstateBasicInfo(realEstateBasic);
       } catch (error) {
         console.error('Error fetching real estate basic:', error);
       }

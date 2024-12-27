@@ -22,7 +22,7 @@ export default function RealEstateLayout() {
   const [bookmarkEstateList, setBookmarkEstateList] = useState<
     RealEstatePreview[] | null
   >(null);
-  const realEstateCount = state.result.count;
+  const realEstateCount = state.count;
   const [fadeIn, setFadeIn] = useState(false);
   const fetchAddressData = async () => {
     try {
@@ -51,7 +51,7 @@ export default function RealEstateLayout() {
         await PlatformAPI.getBookmarkRealEstates();
       if (bookmarkRealEstateListResponse) {
         const bookmarkRealEstateList =
-          bookmarkRealEstateListResponse.result.realEstates;
+          bookmarkRealEstateListResponse.realEstates;
         setBookmarkEstateList(bookmarkRealEstateList);
       }
     } catch (error) {
@@ -111,7 +111,7 @@ export default function RealEstateLayout() {
           </div>
         </div>
         <div className="flex-grow min-h-0 overflow-y-auto">
-          {state.result.realEstates.map((item, index) => (
+          {state.realEstates.map((item, index) => (
             <div key={index} className="border-b">
               <RealEstateCard
                 estate={item}

@@ -213,11 +213,11 @@ export default function Main() {
                       )
                     }
                   >
-                    <div className="flex flex-col ">
+                    <div className="flex flex-col hover:transition-transform transform hover:scale-105 ">
                       <div className="w-full flex justify-center ">
                         <img alt="HanaLogo" src={fast1} className="h-15"></img>
                       </div>
-                      <div className="text-sm text-center mt-2 font-semibold text-red-400">
+                      <div className="text-sm text-center mt-2 font-semibold text-red-400 ">
                         하나은행 대출
                       </div>
                     </div>
@@ -230,7 +230,7 @@ export default function Main() {
                       )
                     }
                   >
-                    <div className="flex flex-col ">
+                    <div className="flex flex-col hover:transition-transform transform hover:scale-105 ">
                       <div className="w-full flex justify-center ">
                         <img alt="HanaLogo" src={fast3} className="h-15"></img>
                       </div>
@@ -244,7 +244,7 @@ export default function Main() {
                     className="mr-2 p-4 rounded-[15px] shadow-md w-full bg-green-100"
                     onClick={() => setShowModal(true)}
                   >
-                    <div className="flex flex-col ">
+                    <div className="flex flex-col hover:transition-transform transform hover:scale-105 ">
                       <div className="w-full flex justify-center ">
                         <img alt="HanaLogo" src={fast2} className="h-15"></img>
                       </div>
@@ -267,7 +267,7 @@ export default function Main() {
                     {recentHouses === 'none' ? (
                       <div>
                         <div className="flex justify-center mt-5">
-                          아직 둘러본 매물이 없네요.
+                          아직 둘러본 매물이 없습니다.
                         </div>
                         <div className="flex justify-center">
                           <img alt="Estate" src={Estate} className="h-32"></img>

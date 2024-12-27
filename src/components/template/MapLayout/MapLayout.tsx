@@ -9,6 +9,7 @@ import {
 import { useLocation } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import React, { useState, useCallback, useRef, useEffect } from 'react';
+import mapMarker from '../../../assets/img/manual/mapMarker9.png';
 import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
 import centerAtom from '../../../recoil/center/index.ts';
 import {
@@ -248,7 +249,8 @@ export default function MapLayout({ children }: LayoutProps) {
                   title={marker.name.split(' ').pop()}
                   icon={{
                     content: `
-                    <div class="bg-hanaGreen w-18 h-10 px-2 py-2 rounded-lg flex items-center justify-center text-white text-xs font-bold text-center shadow-md">
+                    <div class=" border-2 border-hanaColor2 bg-hanaColor2 bg-opacity-70 h-20 w-20 rounded-full flex items-center justify-center text-white text-xs font-bold text-center shadow-md">
+
                       ${marker.name.split(' ').pop()}
                 
                     </div>
@@ -272,7 +274,7 @@ export default function MapLayout({ children }: LayoutProps) {
                   icon={{
                     content: `
   <div class="text-white text-xl mb-1">
-    🏢
+     <img src="${mapMarker}" alt="mapMarker" style="width: 50px; height: 50px;" />
   </div>
   `,
                     size: naverMaps.Size(60, 60),

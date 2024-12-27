@@ -23,7 +23,9 @@ const Consulting: React.FC = () => {
 
   const [_, setHistoryChatroomId] = useRecoilState(historyChatroomIdState);
 
-  const accessToken = localStorage.getItem('accessToken'); // Access Token 가져오기
+  const accessToken = localStorage.getItem('accessToken');
+
+  const [userName, setUserName] = useState<string>('');
 
   const formatDateTime = (dateTime: string): string => {
     const date = new Date(dateTime);
@@ -70,13 +72,29 @@ const Consulting: React.FC = () => {
     setUpcomingConsulting({ reservationInfo: [], reservationTime: undefined });
   }, [setUpcomingConsulting]);
 
+  useEffect(() => {
+    const fetchUserName = async () => {
+      try {
+        if (!accessToken) {
+          console.error('No access token available');
+          return;
+        }
+        const response = await PlatformAPI.getUserInfo();
+        setUserName(response.name);
+      } catch (err) {
+        console.error('Failed to fetch user info:', err);
+      }
+    };
+
+    fetchUserName();
+  }, [accessToken]);
   return (
     <div className="top-0 absolute pl-4 animate-slideInRight">
       <div className="w-[420px] max-w-[420px] h-svh px-5 absolute bg-gray-50/90 backdrop-blur-[10px] overflow-y-auto scrollbar-hide">
         <MobileHeader title="상담현황 확인하기" onBack={() => navigate('/')} />
         <div className="mt-6 mb-8">
           <div>
-            <div className="text-2xl font-fontMedium">김하나님의</div>
+            <div className="text-2xl font-fontMedium">{userName}님의</div>
             <div className="font-fontBold text-2xl">상담 현황</div>
           </div>
           <p className="text-xs mt-2 text-hanaGreen60 mb-4">

@@ -28,6 +28,7 @@ import {
   RealEstateType,
   LoanRecommend,
   LoanDetail,
+  UserInfoResponse,
 } from '../types/hanaAssetResponse.common.ts';
 
 export class PlatformAPI {
@@ -304,14 +305,6 @@ export class PlatformAPI {
     }
   }
 
-  // 특정 채팅방 메시지 가져오기
-  public static async getChatroomMessages(
-    chatroomId: string
-  ): Promise<ChatMessage[]> {
-    const response = await this.instance.get(`/chat/${chatroomId}/messages`);
-    return response.data;
-  }
-
   // 채팅방 삭제
   public static async deleteChatroom(chatroomId: string): Promise<void> {
     const response = await this.instance.delete<{
@@ -324,37 +317,22 @@ export class PlatformAPI {
   public static async getChatroomMessagesByChatroomId(
     chatroomId: string
   ): Promise<ChatMessage[]> {
-    try {
-      if (!chatroomId) {
-        throw new Error('chatroomId is required.');
-      }
-
-      console.log(`Fetching messages for chatroomId: ${chatroomId}`);
-
-      const response = await this.instance.get<{
-        message: string;
-        result: {
-          count: number;
-          messages: ChatMessage[];
-        };
-      }>(`/chat/${chatroomId}/messages`, {
-        ...this.defaultConfig,
-      });
-
-      console.log('API Response:', response.data);
-
-      return response.data.result.messages;
-    } catch (error) {
-      console.error('Error fetching chatroom messages:', error);
-
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        console.error('No messages found for the given chatroomId.');
-        return [];
-      }
-
-      throw error;
+    if (!chatroomId) {
+      throw new Error('chatroomId is required.');
     }
+    const response = await this.instance.get<{
+      message: string;
+      result: {
+        count: number;
+        chatMessages: ChatMessage[];
+      };
+    }>(`/chat/${chatroomId}/messages`, {
+      ...this.defaultConfig,
+    });
+
+    return response.data.result.chatMessages;
   }
+
   public static async getBookmarkRealEstates(): Promise<
     ApiResponseEntity<RealEstateList>
   > {
@@ -430,5 +408,31 @@ export class PlatformAPI {
       ...this.defaultConfig,
     });
     return response.data as LoanRecommend;
+  }
+
+  // 회원 정보 조회
+  public static async getUserInfo(): Promise<UserInfoResponse> {
+    const response =
+      await this.instance.get<ApiResponseEntity<UserInfoResponse>>('users/me');
+    return response.data.result;
+  }
+  public static async addBookmarkRealEstate(
+    realEstateId: number
+  ): Promise<number> {
+    const response = await this.instance.post(
+      `/users/bookmarks/real-estates/${realEstateId}`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.status;
+  }
+  public static async removeBookmarkRealEstate(
+    realEstateId: number
+  ): Promise<number> {
+    const response = await this.instance.delete(
+      `/users/bookmarks/real-estates/${realEstateId}`
+    );
+    return response.status;
   }
 }

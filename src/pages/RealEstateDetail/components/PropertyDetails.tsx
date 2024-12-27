@@ -41,20 +41,20 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ realEstateId }) => {
       <div className="flex items-center mb-4">
         <div className="flex-1 text-center">
           <FaBuilding className="mx-auto mb-1 text-gray-600" size={24} />
-          <p>
+          <p className="text-sm mt-3">
             {floorInfo.target}층 / {floorInfo.total}층
           </p>
         </div>
         <div className="flex-1 text-center">
           <FaCompass className="mx-auto mb-1 text-gray-600" size={24} />
-          <p>
+          <p className="text-sm mt-3">
             ({directionInfo.standard})
             {DirectionUtils.setDirection(directionInfo.facing)}
           </p>
         </div>
         <div className="flex-1 text-center">
           <FaUsers className="mx-auto mb-1 text-gray-600" size={24} />
-          <p>해당면적 {unitCount}세대</p>
+          <p className="text-sm mt-3">해당면적 {unitCount}세대</p>
         </div>
       </div>
       <hr className="my-4 border-gray-300" />

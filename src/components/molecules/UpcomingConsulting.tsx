@@ -60,10 +60,13 @@ const UpcomingConsultingComponent = () => {
   useEffect(() => {
     if (reservationTime) {
       const [date, time] = reservationTime.split(' ');
-      const [year, month, day] = date?.split('-').map(Number) || [];
-      const [hour, minute] = time?.split(':').map(Number) || [];
-
-      if (year && month && day && hour && minute) {
+      if (!date || !time) {
+        console.error('Invalid reservationTime format:', reservationTime);
+        return;
+      }
+      const [year, month, day] = date.split('-').map(Number);
+      const [hour, minute] = time.split(':').map(Number);
+      if (year && month && day && hour !== undefined && minute !== undefined) {
         const parsedDateTime = new Date(year, month - 1, day, hour, minute);
         setReservationDateTime(parsedDateTime);
       }
@@ -74,6 +77,7 @@ const UpcomingConsultingComponent = () => {
     reservationInfo.length > 0 && reservationTime !== undefined;
 
   const currentDateTime = new Date();
+
   const isPast = reservationDateTime
     ? reservationDateTime > currentDateTime
     : undefined;
@@ -173,7 +177,7 @@ const UpcomingConsultingComponent = () => {
           onClick={handleDelete}
           className="ml-6 w-32 flex items-center justify-center text-center text-white px-4 py-2 text-md bg-hanaRed20 rounded-xl hover:bg-hanaRed transition duration-150 ease-in-out"
         >
-          상담 삭제
+          상담 취소
         </button>
       </div>
     </div>

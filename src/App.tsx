@@ -1,7 +1,9 @@
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { NavermapsProvider } from 'react-naver-maps';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { RecoilRoot, useRecoilState } from 'recoil';
+import { RecoilRoot, useRecoilState, useSetRecoilState } from 'recoil';
+import 'recoil';
+import 'recoil';
 import { useState, useEffect } from 'react';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
@@ -67,7 +69,7 @@ function AppContent() {
               <Route path="/consultant" element={<Consultant />} />
               <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
               <Route
-                path="/chat-history/:id"
+                path="/chat-history"
                 element={<ChatHistory accessor="guest" />}
               />
               <Route path="/search-result" element={<SearchResult />} />

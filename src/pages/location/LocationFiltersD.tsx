@@ -38,7 +38,13 @@ const LocationFilterDong = () => {
 
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [generalAddModalOpen, setGeneralAddModalOpen] = useState(false);
+
+  const [fullAddModalOpen, setFullAddModalOpen] = useState(false);
+
+  const [isFull, setIsFull] = useState(false);
+
+  const [deleteLocation, setDeleteLocation] = useState<string | null>(null);
 
   const currCity: string = JSON.parse(
     localStorage.getItem('currCity') || '"시/도"'
@@ -66,6 +72,19 @@ const LocationFilterDong = () => {
         await PlatformAPI.getBookmarksAreaCode();
       if (bookmarksAreaCodeResponse) {
         setBookmarkedLocations(bookmarksAreaCodeResponse.areaCodes);
+      }
+    } catch (error) {
+      console.error('Error fetching bookmarks area code:', error);
+    }
+  };
+
+  const getBookmarksAreaCodeStatus = async () => {
+    try {
+      const bookmarksAreaCodeStatus =
+        await PlatformAPI.getBookmarksAreaCodeStatus();
+      if (bookmarksAreaCodeStatus) {
+        setIsFull(bookmarksAreaCodeStatus.full);
+        setDeleteLocation(bookmarksAreaCodeStatus.emdName);
       }
     } catch (error) {
       console.error('Error fetching bookmarks area code:', error);
@@ -104,6 +123,7 @@ const LocationFilterDong = () => {
 
   useEffect(() => {
     if (isLogin && !bookmarkedLocations && dong.size == 0) {
+      getBookmarksAreaCodeStatus();
       getBookmarksAreaCode();
       dongInfoFetch();
     }
@@ -149,8 +169,11 @@ const LocationFilterDong = () => {
         removeBookmark(selectedCode);
         alert(`${selectedLocation}이(가) 관심 지역에서 삭제되었습니다.`);
       } else {
-        // 관심 지역 추가
-        setIsModalOpen(true); // 모달 열기
+        if (!isFull) {
+          setGeneralAddModalOpen(true);
+        } else {
+          setFullAddModalOpen(true);
+        }
       }
     }
   };
@@ -160,6 +183,7 @@ const LocationFilterDong = () => {
       const responseStatus = await PlatformAPI.removeBookmarksAreaCode(code);
       if (responseStatus === 200) {
         getBookmarksAreaCode();
+        getBookmarksAreaCodeStatus();
       }
     } catch (error) {
       console.error(error);
@@ -171,6 +195,7 @@ const LocationFilterDong = () => {
       const responseStatus = await PlatformAPI.addBookmarksAreaCode(code);
       if (responseStatus === 200) {
         getBookmarksAreaCode();
+        getBookmarksAreaCodeStatus();
       }
     } catch (error) {
       console.error(error);
@@ -192,13 +217,21 @@ const LocationFilterDong = () => {
         addBookmark(selectedCode);
       }
     }
-
-    setIsModalOpen(false); // 모달 닫기
+    if (generalAddModalOpen) {
+      setGeneralAddModalOpen(false);
+    }
+    if (fullAddModalOpen) {
+      setFullAddModalOpen(false);
+    }
   };
 
   // 모달 닫기
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleGeneralAddCloseModal = () => {
+    setGeneralAddModalOpen(false);
+  };
+
+  const handleFullAddCloseModal = () => {
+    setFullAddModalOpen(false);
   };
 
   return (
@@ -282,8 +315,8 @@ const LocationFilterDong = () => {
             )}
 
             {/* 모달 컴포넌트 */}
-            {isModalOpen && (
-              <MyLocationModal onClose={handleCloseModal}>
+            {generalAddModalOpen && (
+              <MyLocationModal onClose={handleGeneralAddCloseModal}>
                 <div className="p-4">
                   <p className="text-lg font-medium text-slate-800">
                     내 관심 지역으로 등록하시겠습니까?
@@ -292,7 +325,33 @@ const LocationFilterDong = () => {
                     <button
                       type="button"
                       className="px-4 py-2 bg-gray-200 text-gray-800 rounded"
-                      onClick={handleCloseModal}
+                      onClick={handleGeneralAddCloseModal}
+                    >
+                      취소
+                    </button>
+                    <button
+                      type="button"
+                      className="px-4 py-2 bg-hanaGreen80 text-white rounded"
+                      onClick={handleConfirmBookmark}
+                    >
+                      등록
+                    </button>
+                  </div>
+                </div>
+              </MyLocationModal>
+            )}
+            {fullAddModalOpen && (
+              <MyLocationModal onClose={handleFullAddCloseModal}>
+                <div className="p-4">
+                  <p className="text-lg font-medium text-slate-800">
+                    {deleteLocation}을 지우고 {selectedLocation}을 내 관심
+                    지역으로 등록하시겠습니까?
+                  </p>
+                  <div className="mt-4 flex justify-end space-x-4">
+                    <button
+                      type="button"
+                      className="px-4 py-2 bg-gray-200 text-gray-800 rounded"
+                      onClick={handleFullAddCloseModal}
                     >
                       취소
                     </button>

@@ -270,3 +270,8 @@ export interface BookmarkAreaInfo {
   centerLat: number;
   centerLng: number;
 }
+
+export interface BookmarkAreaStatus {
+  full: boolean;
+  emdName: string;
+}

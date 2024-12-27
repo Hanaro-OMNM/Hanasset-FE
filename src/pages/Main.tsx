@@ -212,7 +212,7 @@ export default function Main() {
                       )
                     }
                   >
-                    <div className="flex flex-col hover:transition-transform transform hover:scale-105 ">
+                    <div className="flex flex-col hover:transition-transform transform hover:scale-105">
                       <div className="w-full flex justify-center ">
                         <img alt="HanaLogo" src={fast1} className="h-15"></img>
                       </div>
@@ -229,7 +229,7 @@ export default function Main() {
                       )
                     }
                   >
-                    <div className="flex flex-col hover:transition-transform transform hover:scale-105 ">
+                    <div className="flex flex-col hover:transition-transform transform hover:scale-105">
                       <div className="w-full flex justify-center ">
                         <img alt="HanaLogo" src={fast3} className="h-15"></img>
                       </div>
@@ -243,7 +243,7 @@ export default function Main() {
                     className="mr-2 p-4 rounded-[15px] shadow-md w-full bg-green-100"
                     onClick={() => setShowModal(true)}
                   >
-                    <div className="flex flex-col hover:transition-transform transform hover:scale-105 ">
+                    <div className="flex flex-col hover:transition-transform transform hover:scale-105">
                       <div className="w-full flex justify-center ">
                         <img alt="HanaLogo" src={fast2} className="h-15"></img>
                       </div>

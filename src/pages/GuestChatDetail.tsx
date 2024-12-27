@@ -46,8 +46,8 @@ const GuestChatDetail: React.FC = () => {
       const loanRecommend = await PlatformAPI.getConsultingUserInfo(
         chatroomId!
       );
-      setGuestInfo(loanRecommend.result.user);
-      setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
+      setGuestInfo(loanRecommend.user);
+      setLoanRecommendInfos(loanRecommend.loanRecommendInfos);
       getRealEstateInfoList(loanRecommendInfos);
     } catch (error) {
       console.error('Error fetching loan data:', error);

@@ -410,16 +410,17 @@ export class PlatformAPI {
     })) as ApiResponseEntity<LoanDetail>;
     return response.data.result as LoanDetail;
   }
+
   public static async getConsultingUserInfo(
     chatroomId: string
   ): Promise<LoanRecommend> {
-    const response = await this.instance.get(
+    const response = (await this.instance.get(
       `/loan/consulting?chatroomId=${chatroomId}`,
       {
         ...this.defaultConfig,
       }
-    );
-    return response.data as LoanRecommend;
+    )) as ApiResponseEntity<LoanRecommend>;
+    return response.data.result as LoanRecommend;
   }
 
   public static async addBookmarkRealEstate(

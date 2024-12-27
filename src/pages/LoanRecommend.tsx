@@ -106,7 +106,7 @@ export default function LoanInfoPage() {
     if (!bookmarkEstateList && isLogin) {
       getBookmarkRealEstates();
     }
-  }, [isLogin, realEstateInfos]);
+  }, [bookmarkEstateList, fetchLoanRecommend, isLogin, realEstateInfos]);
 
   return (
     <div className="flex">
@@ -169,7 +169,7 @@ export default function LoanInfoPage() {
           </div>
         </div>
       </div>
-      {loanId && (
+      {loanId && loanId > 0 ? (
         <div className="h-full absolute top-0 left-[484px]">
           <LoanDetail
             loanId={loanId}
@@ -177,6 +177,8 @@ export default function LoanInfoPage() {
             onHide={() => setLoanId(null)}
           />
         </div>
+      ) : (
+        <></>
       )}
     </div>
   );

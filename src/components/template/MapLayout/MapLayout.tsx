@@ -248,7 +248,7 @@ export default function MapLayout({ children }: LayoutProps) {
                   title={marker.name.split(' ').pop()}
                   icon={{
                     content: `
-                    <div class="bg-hanaGreen w-18 h-10 px-2 py-2 rounded-lg flex items-center justify-center text-white text-xs font-bold text-center shadow-md">
+                    <div class="bg-hanaGreen px-4 py-2 rounded-lg flex items-center justify-center text-white text-xs font-bold text-center shadow-md overflow-hidden whitespace-nowrap">
                       ${marker.name.split(' ').pop()}
                 
                     </div>
@@ -288,7 +288,6 @@ export default function MapLayout({ children }: LayoutProps) {
 
       <div className="block xs:hidden">
         <Footer />
-        {children}
       </div>
     </div>
   );

@@ -34,10 +34,14 @@ function AppContent() {
     setIsLoginModalOpen(false);
   };
 
-  const [isLogin] = useRecoilState(isLoginAtom);
+  const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
 
   useEffect(() => {
     if (isLogin) {
+      const accessToken = localStorage.getItem('accessToken');
+      if (!accessToken) {
+        setIsLogin(false);
+      }
       setIsLoginModalOpen(false);
     } else if (
       !isLogin &&
@@ -66,10 +70,7 @@ function AppContent() {
               <Route path="/property-agree" element={<PropertyAgree />} />
               <Route path="/consultant" element={<Consultant />} />
               <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
-              <Route
-                path="/chat-history/:id"
-                element={<ChatHistory accessor="guest" />}
-              />
+              <Route path="/chat-history/:id" element={<ChatHistory />} />
               <Route path="/search-result" element={<SearchResult />} />
             </Routes>
             {isLoginModalOpen && (

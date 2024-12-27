@@ -2,6 +2,7 @@ import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import Button from '../../../components/atoms/Button';
 import FormRadio from '../../../components/molecules/FormRadio';
+import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
 import { assetState } from '../../../recoil/asset/atom';
 
 interface Option {
@@ -26,12 +27,18 @@ export default function OwnPropertyForm({ onBack }: OwnPropertyFormProps) {
     setLocalHasHome(hasProperty);
   };
 
-  const handleSave = () => {
-    setAsset({
-      ...asset,
-      hasHome: localHasHome,
-    });
-    onBack();
+  const handleSave = async () => {
+    const response = await PlatformAPI.putPropertyValue(
+      'hasHouse',
+      localHasHome ? '있음' : '없음'
+    );
+    if (response === 200) {
+      setAsset({
+        ...asset,
+        hasHome: localHasHome,
+      });
+      onBack();
+    }
   };
 
   return (

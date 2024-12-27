@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import React, { useState, useEffect } from 'react';
 import logo from '../../assets/img/logo.png';
 import { PlatformAPI } from '../../platform/PlatformAPI.ts';
-import { historyChatroomIdState } from '../../recoil/chathistory/historyChatroomIdState';
+import historyChatroomIdState from '../../recoil/chathistory/atom.tsx';
 import GuestChatDetail from '../GuestChatDetail';
 import ChatHeader from './ChatHeader';
 import ChatMessage from './ChatMessage';

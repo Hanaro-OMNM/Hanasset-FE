@@ -34,19 +34,10 @@ const UpcomingConsultingComponent = () => {
 
       try {
         const chatroomStatus = 'waiting';
-
-        console.log('Sending request to server:', {
-          accessToken,
-          chatroomStatus,
-        });
-
         const chatroom = await PlatformAPI.findRoomDetails(
           accessToken,
           chatroomStatus
         );
-
-        console.log('Fetched chatroom:', chatroom);
-
         if (chatroom) {
           setChatroomId(chatroom.chatroomId);
           setReservationInfo([{ name: chatroom.chatroomTitle || '제목 없음' }]);
@@ -56,7 +47,6 @@ const UpcomingConsultingComponent = () => {
           setReservationTime(undefined);
         }
       } catch (err) {
-        console.error('Error fetching reservation details:', err);
         setReservationInfo([]);
         setReservationTime(undefined);
       } finally {
@@ -114,19 +104,15 @@ const UpcomingConsultingComponent = () => {
       alert('삭제할 상담이 없습니다.');
       return;
     }
-
     try {
       await PlatformAPI.deleteChatroom(chatroomId);
-      alert(`ChatRoom ${chatroomId} deleted successfully.`);
-
+      alert(`삭제되었습니다`);
       setReservationInfo([]);
       setReservationTime(undefined);
       setChatroomId('');
-
       window.location.href = '/consulting';
     } catch (error) {
       alert('상담 삭제 중 오류가 발생했습니다.');
-      console.error('Error deleting chatroom:', error);
     }
   };
 

@@ -67,7 +67,6 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
   useEffect(() => {
     const socket = new SockJS('http://localhost:8080/ws-chat'); // 백엔드 서버 URL
     const token = window.localStorage.getItem('accessToken');
-    console.log(token);
     const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
@@ -77,8 +76,6 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
     });
 
     client.onConnect = () => {
-      console.log(`[${accessor}] Connected to WebSocket`);
-
       // Redis에서 채팅 기록 요청
       client.publish({
         destination: `/app/chat.history/${chatroomId}`,
@@ -94,7 +91,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
         `/topic/rooms/${chatroomId}`,
         (message: Message) => {
           const newData = JSON.parse(message.body);
-
+          console.log('Current userId:', userId);
           if (Array.isArray(newData)) {
             // Redis에서 가져온 기록 메시지
             const loadedMessages = newData.slice(1).map((msg, index) => ({
@@ -146,18 +143,12 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
 
     setIsUpdatingStatus(true);
     try {
-      console.log(`Updating chatroom status for chatroomId: ${chatroomId}`);
       const nextState = currentState === 'waiting' ? 'active' : 'completed';
-
       const response = await PlatformAPI.updateChatroomStatus(
         chatroomId,
         currentState
       );
-      console.log('Chatroom status updated successfully:', response);
-
       setCurrentState(nextState);
-    } catch (error) {
-      console.error('Error updating chatroom status:', error);
     } finally {
       setIsUpdatingStatus(false);
     }
@@ -174,6 +165,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
         content: inputMessage,
         createdAt: new Date().toISOString(),
       };
+      console.log(message);
       stompClient.publish({
         destination: `/app/chat.sendMessage/${chatroomId}`,
         body: JSON.stringify(message),

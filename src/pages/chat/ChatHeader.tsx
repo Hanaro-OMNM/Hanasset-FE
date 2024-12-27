@@ -19,22 +19,15 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
     try {
       if (!chatroomId) {
         console.error('Chatroom ID is not set.');
-        alert('Chatroom ID is missing. Cannot end consultation.');
         return;
       }
-
-      console.log(`Ending consultation for chatroomId: ${chatroomId}`);
-
       const response = await PlatformAPI.updateChatroomStatus(
         chatroomId,
         'active'
       );
-      console.log('Chatroom status updated to active:', response);
-
       window.location.href = '/consulting';
     } catch (error) {
-      console.error('Failed to end consultation:', error);
-      alert('Failed to end consultation. Please try again.');
+      console.error(error);
     }
   };
 
@@ -72,5 +65,3 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
 };
 
 export default ChatHeader;
-
-//////////////////

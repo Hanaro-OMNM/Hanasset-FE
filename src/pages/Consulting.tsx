@@ -8,7 +8,7 @@ import MobileHeader from '../components/atoms/MobileHeader';
 import SemiTitle from '../components/atoms/SemiTitle';
 import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting';
 import { PlatformAPI } from '../platform/PlatformAPI.ts';
-import { historyChatroomIdState } from '../recoil/chathistory/historyChatroomIdState';
+import historyChatroomIdState from '../recoil/chathistory/atom.tsx';
 import loanReservationAtom from '../recoil/loanReservation';
 import { ChatRoom } from '../types/hanaAssetResponse.common';
 
@@ -38,24 +38,17 @@ const Consulting: React.FC = () => {
   useEffect(() => {
     const fetchConsultingHistory = async () => {
       if (!accessToken) {
-        setError('Access token is missing. Please log in again.');
-        console.error('Access token is missing.');
         setLoading(false);
         return;
       }
-
       try {
         const response =
           await PlatformAPI.getCompletedChatroomsByUserId(accessToken);
-
         if (response && Array.isArray(response)) {
           setConsultingHistory(response);
         } else {
           setConsultingHistory([]);
         }
-      } catch (err) {
-        setError('상담 내역을 불러오는 중 오류가 발생했습니다.');
-        console.error(err);
       } finally {
         setLoading(false);
       }

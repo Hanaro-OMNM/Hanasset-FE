@@ -1,7 +1,6 @@
 import { MdNavigateNext } from 'react-icons/md';
 import { useRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
-import { addDetailEstateData } from '../assets/Dummy';
 import Estate from '../assets/img/main/estate.png';
 import fast1 from '../assets/img/main/fast1.png';
 import fast2 from '../assets/img/main/fast2.png';
@@ -102,7 +101,7 @@ export default function Main() {
   }, []);
 
   const handleCardClick = (estate: RealEstatePreview) => {
-    setSelectedEstate(estate); // 선택된 매물 정보 설정
+    setSelectedEstate(estate);
   };
 
   const isBookmarkedRealEstate = (id: number): boolean => {

@@ -83,7 +83,6 @@ export default function ChatReservation() {
 
   const handleTimeChange = (value: string) => {
     setSelectedTime(value);
-    console.log(selectedDate + ' ' + selectedTime);
   };
 
   const handleSubmit = () => {
@@ -94,7 +93,6 @@ export default function ChatReservation() {
 
     if (!selectedTime) {
       alert('예약 시간을 선택해주세요.');
-      console.log('Final :', estateInfo);
       return;
     }
 
@@ -102,10 +100,8 @@ export default function ChatReservation() {
     const [hour, minute] = selectedTime.split(':').map(Number);
 
     const reservedDate = new Date(Date.UTC(year, month - 1, day, hour, minute));
-    console.log('Reserved Date (UTC):', reservedDate);
 
     const reservedTime = `${selectedDate} ${selectedTime}:00`;
-    console.log('Final reservedTime:', reservedTime);
 
     if (!selectedLoanReservation.reservationTime) {
       setSelectedLoanReservation({
@@ -113,7 +109,7 @@ export default function ChatReservation() {
         reservationInfo: estateInfo,
         reservationTime: reservedTime,
       });
-      alert('상담이 정상적으로 예약되었습니다.');
+      alert('상담이 예약되었습니다.');
       createChat(reservedTime, estateInfo);
       window.location.href = '/consulting';
     }
@@ -137,24 +133,12 @@ export default function ChatReservation() {
       reservedTime: reservedTime,
       reservationInfo: reservationInfo,
     };
-    console.log('Request payload to be sent to the server:', request);
 
-    try {
-      const response = await PlatformAPI.createChat(request);
-      console.log('API Response:', response);
-      if (response.success) {
-        const chatroomId = response.data.rooms[0].chatroomId;
-        const userId = response.data.userId;
-        setChatroomId(chatroomId);
-        setUserId(userId);
-      } else {
-        console.error('Error from server:', response.message);
-        alert(response.message || '채팅방 생성 중 오류가 발생했습니다.');
-      }
-    } catch (error) {
-      console.error('API Call Error:', error);
-      alert('채팅방 생성 API 호출 중 문제가 발생했습니다.');
-    }
+    const response = await PlatformAPI.createChat(request);
+    const chatroomId = response.data.rooms[0].chatroomId;
+    const userId = response.data.userId;
+    setChatroomId(chatroomId);
+    setUserId(userId);
   };
 
   return (

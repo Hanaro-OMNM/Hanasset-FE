@@ -12,10 +12,15 @@ import LoanDetailHint from './LoanDetail/components/LoanDetailHint';
 
 interface LoanDetailProps {
   onHide: () => void;
+  name?: string;
   loanId: number;
 }
 
-export default function LoanDetailPage({ onHide, loanId }: LoanDetailProps) {
+export default function LoanDetailPage({
+  onHide,
+  loanId,
+  name,
+}: LoanDetailProps) {
   const [loanDetailInfo, setLoanDetailInfo] = useState<LoanDetail | null>(null);
 
   useEffect(() => {
@@ -53,7 +58,7 @@ export default function LoanDetailPage({ onHide, loanId }: LoanDetailProps) {
               />
               {/* 대출 한 눈에 보여야 하는 정보 */}
               <LoanDetailAccentInfo
-                title={'oo님의 금리'}
+                title={`${name}님의 금리`}
                 content={`${loanDetailInfo ? loanDetailInfo.rate : ''}%`}
               />
               <LoanDetailAccentInfo

@@ -104,7 +104,11 @@ export default function LoanInfoPage() {
       </div>
       {loanId && (
         <div className="h-full absolute top-0 left-[484px]">
-          <LoanDetail loanId={loanId} onHide={() => setLoanId(null)} />
+          <LoanDetail
+            loanId={loanId}
+            name={guestInfo?.name}
+            onHide={() => setLoanId(null)}
+          />
         </div>
       )}
     </div>

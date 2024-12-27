@@ -17,7 +17,7 @@ import FixedExpectation from './GuestChatDetail/FixedExpectation';
 import LoanDetail from './LoanDetail';
 import DsrInfo from './LoanRecommend/components/DsrInfo';
 import LoanRecommendTab from './LoanRecommend/components/LoanRecommendTab';
-import SemiTitle from './consultant/SemiTitle';
+import SemiTitle from './chat/SemiTitle';
 
 const GuestChatDetail: React.FC = () => {
   const [guestInfo, setGuestInfo] = useState<GuestInfo | null>(null);

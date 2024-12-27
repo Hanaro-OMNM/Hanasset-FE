@@ -4,7 +4,7 @@ const axios = require('axios');
 const readline = require('readline'); // readline 모듈 추가
 
 const filePath = path.join(__dirname, 'input.csv');
-const outputFilePath = path.join(__dirname, 'output.csv');
+const outputFilePath = path.join(__dirname, 'dongInfo.csv');
 
 async function processCsv(inputFile, outputFile) {
   const fileStream = fs.createReadStream(inputFile);

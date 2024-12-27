@@ -259,3 +259,14 @@ export interface UserInfoResponse {
   name: string;
   email: string;
 }
+
+export interface BookmarkArea {
+  areaCodes: BookmarkAreaInfo[];
+}
+
+export interface BookmarkAreaInfo {
+  areaCodeId: number;
+  emdName: string;
+  centerLat: number;
+  centerLng: number;
+}

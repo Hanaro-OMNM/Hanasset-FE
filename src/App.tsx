@@ -9,7 +9,7 @@ import Modal from './components/template/Modal/Modal.tsx';
 import MyEstateList from './components/template/MyEstateList.tsx';
 import SelectEstate from './components/template/SelectEstate.tsx';
 import Consulting from './pages/Consulting.tsx';
-import LoanRecommend from './pages/LoanRecommned.tsx';
+import LoanRecommend from './pages/LoanRecommend.tsx';
 import Main from './pages/Main.tsx';
 import MyPage from './pages/MyPage.tsx';
 import RealEstateList from './pages/RealEstateList/RealEstateList.tsx';

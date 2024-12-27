@@ -65,10 +65,11 @@ export default function RealEstateLayout() {
     if (currAddr.length === 0) {
       fetchAddressData();
     }
-    if (isLogin) {
+
+    if (isLogin && !bookmarkEstateList) {
       getBookmarkRealEstates();
     }
-  }, [currAddr.length, fetchAddressData, isLogin, state]);
+  }, [currAddr.length, isLogin]);
 
   const handleCardClick = (estate: RealEstatePreview) => {
     const key = 'recentVisitedList';

@@ -15,8 +15,7 @@ const TypeInfo: React.FC<TypeInfoProps> = ({ realEstateId }) => {
       try {
         const realEstateType =
           await PlatformAPI.getRealEstateType(realEstateId);
-        const realEstateTypeInfo = realEstateType.result;
-        setRealEstateType(realEstateTypeInfo);
+        setRealEstateType(realEstateType);
       } catch (error) {
         console.error('Error fetching real estate type:', error);
       }
@@ -97,7 +96,7 @@ const TypeInfo: React.FC<TypeInfoProps> = ({ realEstateId }) => {
       <div className="bg-gray-100 p-2 rounded text-center">
         <p>
           연 평균 관리비{' '}
-          <span className="font-bold">
+          <span className="font-bold pr-1">
             {new Intl.NumberFormat('ko-KR').format(managementFee!)}
           </span>
           원

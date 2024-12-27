@@ -32,8 +32,7 @@ export default function SelectEstate() {
         const response = await PlatformAPI.getBookmarkRealEstates();
         console.log('API Response:', response);
 
-        const realEstates: RealEstatePreview[] =
-          response?.result?.realEstates || [];
+        const realEstates: RealEstatePreview[] = response?.realEstates || [];
         setApartments(realEstates);
         setCheckedItems(Array(realEstates.length).fill(false));
 

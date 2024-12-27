@@ -80,7 +80,7 @@ const RealEstateCard: React.FC<RealEstateCardProps> = ({
   const depositResult = estate ? convertToEok(estate.deposit) : undefined;
 
   return (
-    <div className="flex">
+    <div className="flex animate-fadeInRight">
       <button className="flex" onClick={onClick}>
         <div className="pl-2 flex hover:transition-transform transform py-4 hover:text-gray-600">
           <img

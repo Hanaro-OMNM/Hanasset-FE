@@ -43,8 +43,8 @@ export default function LoanInfoPage() {
       const loanRecommend = await PlatformAPI.getLoanRecommend({
         realEstateIds: [Number(searchParams.get('realEstateIds'))],
       });
-      setGuestInfo(loanRecommend.result.user);
-      setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
+      setGuestInfo(loanRecommend.user);
+      setLoanRecommendInfos(loanRecommend.loanRecommendInfos);
       getRealEstateInfoList(loanRecommendInfos);
     } catch (error) {
       console.error('Error fetching loan data:', error);

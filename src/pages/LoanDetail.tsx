@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import CommonBackground from '../components/atoms/CommonBackground';
 import LoanProgressBar from '../components/atoms/LoanProgressBar';
 import { PlatformAPI } from '../platform/PlatformAPI';
-import { LoanDetailInfo } from '../types/hanaAssetResponse.common';
+import { LoanDetail } from '../types/hanaAssetResponse.common';
 import InstructionCard from './LoanDetail/components/InstructionCard';
 import LoanDetailAccentInfo from './LoanDetail/components/LoanDetailAccentInfo';
 import LoanDetailCard from './LoanDetail/components/LoanDetailCard';
@@ -15,16 +15,14 @@ interface LoanDetailProps {
   loanId: number;
 }
 
-const LoanDetail: React.FC<LoanDetailProps> = ({ onHide, loanId }) => {
-  const [loanDetailInfo, setLoanDetailInfo] = useState<LoanDetailInfo | null>(
-    null
-  );
+export default function LoanDetailPage({ onHide, loanId }: LoanDetailProps) {
+  const [loanDetailInfo, setLoanDetailInfo] = useState<LoanDetail | null>(null);
 
   useEffect(() => {
     const fetchLoanDetail = async () => {
       try {
         const loanResponse = await PlatformAPI.getLoanDetail(loanId);
-        setLoanDetailInfo(loanResponse.result);
+        setLoanDetailInfo(loanResponse);
       } catch (error) {
         console.error('Error fetching loan data:', error);
       }
@@ -112,6 +110,4 @@ const LoanDetail: React.FC<LoanDetailProps> = ({ onHide, loanId }) => {
       </div>
     </div>
   );
-};
-
-export default LoanDetail;
+}

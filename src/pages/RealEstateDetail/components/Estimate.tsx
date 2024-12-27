@@ -28,19 +28,22 @@ const Estimate: React.FC<EstimateProps> = ({ deposit, realEstateId }) => {
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-2xl font-bold mb-4">예산</h2>
-      <p className="text-lg mb-2">총 필요 자금 {totalAsset} 원</p>
+      <div className="text-lg mb-2 flex">
+        총 필요 자금
+        <p className="font-semibold pl-1 text-gray-800 pr-1">{totalAsset} </p>원
+      </div>
       <hr className="my-4 border-gray-300" />
 
       <div className="mb-4 flex justify-between">
         <p className="font-semibold">대출예상비용</p>
-        <p className="text-teal-600">매월 약 {monthlyPredictedAmount}만원</p>
+        <p className="text-teal-600">매월 약 {monthlyPredictedAmount}만 원</p>
       </div>
 
       <hr className="my-4 border-gray-300" />
 
       <div className="mb-4 flex justify-between">
         <p className="font-semibold">연간예상비용</p>
-        <p className="text-teal-600">약 {yearlyPredictedAmount}만원</p>
+        <p className="text-teal-600">약 {yearlyPredictedAmount}만 원</p>
       </div>
 
       <hr className="my-4 border-gray-300" />
@@ -57,10 +60,10 @@ const Estimate: React.FC<EstimateProps> = ({ deposit, realEstateId }) => {
           <p className="text-sm text-gray-500">
             최대 대출 가능한 금액{' '}
             <span className="font-semibold text-teal-600">
-              {((deposit / 100000000) * 0.8).toFixed(1)}억원
+              {((deposit / 100000000) * 0.8).toFixed(1)}억 원
             </span>
           </p>
-          <p className="text-sm text-gray-500">단위: 원</p>
+          <p className="text-sm text-gray-500">단위: 천만 원</p>
         </div>
       </div>
 

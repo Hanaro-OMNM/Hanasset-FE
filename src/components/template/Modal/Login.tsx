@@ -1,5 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
-import { FaTimes } from 'react-icons/fa';
+import { FiX } from 'react-icons/fi';
 import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import hanaCheerUp from '../../../assets/img/login/hanaCheerUp.gif';
@@ -46,15 +46,15 @@ export default function LoginPage({
   };
 
   return (
-    <div className="p-4 animate-fadeInRight">
+    <div className="animate-fadeInRight">
       <div className="flex grid-rows-2">
-        <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
+        <div className="max-w-md bg-white shadow-lg rounded-lg p-6">
           <div className="flex items-center justify-center my-3">
             <button
               className="absolute top-6 right-6 text-gray-500 hover:text-gray-700"
               onClick={onClose}
             >
-              <FaTimes className="text-xl" />
+              <FiX className="text-2xl" />
             </button>
           </div>
           <div className="flex flex-col items-center justify-center mb-4">
@@ -117,7 +117,7 @@ export default function LoginPage({
             <div className="border-t w-1/3"></div>
           </div>
           <SocialLoginGroup onLoginSuccess={onLoginSuccess} />
-        </div>{' '}
+        </div>
       </div>
     </div>
   );

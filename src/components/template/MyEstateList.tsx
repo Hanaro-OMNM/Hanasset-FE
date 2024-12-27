@@ -34,7 +34,7 @@ export default function RealEstateLayout() {
         await PlatformAPI.getBookmarkRealEstates();
       if (bookmarkRealEstateListResponse) {
         const bookmarkRealEstateList =
-          bookmarkRealEstateListResponse.result.realEstates;
+          bookmarkRealEstateListResponse.realEstates;
         setBookmarkEstateList(bookmarkRealEstateList);
       }
     } catch (error) {

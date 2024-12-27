@@ -22,8 +22,8 @@ export default function RealEstateLayout() {
   const [bookmarkEstateList, setBookmarkEstateList] = useState<
     RealEstatePreview[] | null
   >(null);
-  const realEstateCount = state.result.count;
-
+  const realEstateCount = state.count;
+  const [fadeIn, setFadeIn] = useState(false);
   const fetchAddressData = async () => {
     try {
       const response = await fetch(
@@ -51,7 +51,7 @@ export default function RealEstateLayout() {
         await PlatformAPI.getBookmarkRealEstates();
       if (bookmarkRealEstateListResponse) {
         const bookmarkRealEstateList =
-          bookmarkRealEstateListResponse.result.realEstates;
+          bookmarkRealEstateListResponse.realEstates;
         setBookmarkEstateList(bookmarkRealEstateList);
       }
     } catch (error) {
@@ -95,6 +95,12 @@ export default function RealEstateLayout() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (selectedEstate) {
+      setFadeIn(true);
+    }
+  }, [selectedEstate]);
+
   return (
     <div className="top-0 absolute pl-4 animate-slideInRight">
       <div className="w-[420px] px-2 pt-2 bg-gray-50/90 absolute backdrop-blur-[10px] left-4 overflow-y-auto h-screen scrollbar-hide">
@@ -105,7 +111,7 @@ export default function RealEstateLayout() {
           </div>
         </div>
         <div className="flex-grow min-h-0 overflow-y-auto">
-          {state.result.realEstates.map((item, index) => (
+          {state.realEstates.map((item, index) => (
             <div key={index} className="border-b">
               <RealEstateCard
                 estate={item}
@@ -119,14 +125,18 @@ export default function RealEstateLayout() {
           ))}
         </div>
       </div>
-
       {selectedEstate && (
-        <RealEstateDetail
-          realEstate={selectedEstate}
-          isBookmarked={isBookmarkedRealEstate(selectedEstate.realEstateId)}
-          onBookmarkUpdate={getBookmarkRealEstates}
-          onBackClick={() => setSelectedEstate(null)}
-        />
+        <div
+          className={`${fadeIn ? 'animate-fadeInRight2' : ''}`}
+          onAnimationEnd={() => setFadeIn(false)}
+        >
+          <RealEstateDetail
+            realEstate={selectedEstate}
+            isBookmarked={isBookmarkedRealEstate(selectedEstate.realEstateId)}
+            onBookmarkUpdate={getBookmarkRealEstates}
+            onBackClick={() => setSelectedEstate(null)}
+          />
+        </div>
       )}
     </div>
   );

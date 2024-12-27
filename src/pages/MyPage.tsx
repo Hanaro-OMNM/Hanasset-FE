@@ -63,13 +63,16 @@ export default function MyPage() {
         await PlatformAPI.getBookmarkRealEstates();
       if (bookmarkRealEstateListResponse) {
         const bookmarkRealEstateList =
-          bookmarkRealEstateListResponse.result.realEstates;
+          bookmarkRealEstateListResponse.realEstates;
         setBookmarkEstateList(bookmarkRealEstateList);
       }
     } catch (error) {
       console.error('Error getBookmarkRealEstates:', error);
     }
   };
+  const accessToken = localStorage.getItem('accessToken');
+
+  const [userName, setUserName] = useState<string>('');
 
   // 로컬 스토리지에서 "관심 지역" 데이터 가져오기
   useEffect(() => {
@@ -128,9 +131,6 @@ export default function MyPage() {
       },
     });
   };
-  const profile = {
-    name: '김하나',
-  };
 
   const backgrounds = [
     { image: Background1 },
@@ -180,6 +180,23 @@ export default function MyPage() {
     return bookmarkEstateList.some((item) => item.realEstateId === id);
   };
 
+  useEffect(() => {
+    const fetchUserName = async () => {
+      try {
+        if (!accessToken) {
+          console.error('No access token available');
+          return;
+        }
+        const response = await PlatformAPI.getUserInfo();
+        setUserName(response.name);
+      } catch (err) {
+        console.error('Failed to fetch user info:', err);
+      }
+    };
+
+    fetchUserName();
+  }, []);
+
   return (
     <div className="top-0 absolute animate-fadeInRight">
       <div className="pl-6 w-[420px] backdrop-blur-[10px] absolute top-0 h-screen left-4 overflow-y-auto bg-gray-50/90 scrollbar-hide">
@@ -199,7 +216,7 @@ export default function MyPage() {
                     안녕하세요
                   </div>
                   <div className="font-fontBold text-2xl">
-                    {profile.name}
+                    {userName}
                     <span className="font-fontMedium text-2xl">님</span>
                   </div>
                 </div>

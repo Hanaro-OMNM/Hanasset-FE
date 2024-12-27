@@ -70,6 +70,7 @@ export default {
         fadeInRight: 'fadeInRight 0.5s ease-out forwards',
         slideInRight: 'slideInRight 0.5s ease-out forwards',
         glow: 'glow 1.5s infinite',
+        fadeInRight2: 'fadeInRight2 0.5s ease-in-out',
       },
       keyframes: {
         fadeInUp: {
@@ -79,6 +80,10 @@ export default {
         fadeInRight: {
           '0%': { transform: 'translateX(-10px)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        fadeInRight2: {
+          '0%': { opacity: '0', transform: 'none' },
+          '100%': { opacity: '5', transform: 'none' },
         },
         slideInRight: {
           '0%': { transform: 'translateX(-100%)', opacity: '0' },

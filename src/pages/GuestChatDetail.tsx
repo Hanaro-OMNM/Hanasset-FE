@@ -1,13 +1,10 @@
 import { PiBuildingApartment } from 'react-icons/pi';
-import { useState } from 'react';
-import { useEffect } from 'react';
-// import { dummyLoanGroup } from '../assets/Dummy';
-// import { dummyRealEstateList } from '../assets/Dummy';
-// import { dummyGuest } from '../assets/Dummy';
-// import { dummyBeotimmogLoanGroup } from '../assets/Dummy';
+import { useRecoilValue } from 'recoil';
+import { useState, useEffect } from 'react';
 import CommonBackground from '../components/atoms/CommonBackground';
 import Swiper from '../components/atoms/Swiper';
 import { PlatformAPI } from '../platform/PlatformAPI';
+import chatroomIdState from '../recoil/chatroomId/atom';
 import {
   GuestInfo,
   LoanRecommendInfo,
@@ -29,47 +26,39 @@ const GuestChatDetail: React.FC = () => {
   const [realEstateInfos, setRealEstateInfos] = useState<RealEstateInfo[] | []>(
     []
   );
+  const chatroomId = useRecoilValue(chatroomIdState);
 
   const swiperClick = (index: number) => {
     setRealEstateId(index);
   };
 
-  useEffect(() => {
-    const fetchLoanRecommend = async () => {
-      try {
-        const loanRecommend = await PlatformAPI.getConsultingUserInfo();
-        setGuestInfo(loanRecommend.result.user);
-        setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
-        const realEstateInfoList = loanRecommendInfos.map(
-          (loanRecommendInfo) => loanRecommendInfo.realEstateInfo
-        );
-        setRealEstateInfos(realEstateInfoList);
-      } catch (error) {
-        console.error('Error fetching loan data:', error);
-      }
-    };
-    fetchLoanRecommend();
-  }, [realEstateInfos]);
+  const getRealEstateInfoList = (loanRecommendInfos: LoanRecommendInfo[]) => {
+    const realEstateInfoList = loanRecommendInfos.map(
+      (loanRecommendInfo) => loanRecommendInfo.realEstateInfo
+    );
+    if (realEstateInfoList) {
+      setRealEstateInfos(realEstateInfoList);
+    }
+  };
 
-  // 테스트
-  // useEffect(() => {
-  //   const fetchLoanRecommend = async () => {
-  //     try {
-  //       const loanRecommend = await PlatformAPI.getLoanRecommend({
-  //         realEstateIds: [52, 12],
-  //       });
-  //       setGuestInfo(loanRecommend.result.user);
-  //       setLoanRecommendInfos(loanRecommend.result.loanRecommendInfos);
-  //       const realEstateInfoList = loanRecommendInfos.map(
-  //         (loanRecommendInfo) => loanRecommendInfo.realEstateInfo
-  //       );
-  //       setRealEstateInfos(realEstateInfoList);
-  //     } catch (error) {
-  //       console.error('Error fetching loan data:', error);
-  //     }
-  //   };
-  //   fetchLoanRecommend();
-  // }, [realEstateInfos]);
+  const fetchLoanRecommend = async () => {
+    try {
+      const loanRecommend = await PlatformAPI.getConsultingUserInfo(
+        chatroomId!
+      );
+      setGuestInfo(loanRecommend.user);
+      setLoanRecommendInfos(loanRecommend.loanRecommendInfos);
+      getRealEstateInfoList(loanRecommendInfos);
+    } catch (error) {
+      console.error('Error fetching loan data:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (realEstateInfos.length < 1) {
+      fetchLoanRecommend();
+    }
+  }, [realEstateInfos]);
 
   return (
     <div className="top-0 absolute animate-slideInRight">
@@ -109,8 +98,12 @@ const GuestChatDetail: React.FC = () => {
                           <div className="text-sm text-hanaBlack80">
                             {realEstate ? realEstate.address : ''}
                             <br />
-                            {realEstate ? realEstate.addressDetail : ''},{' '}
-                            {realEstate ? realEstate.exclusiveAreaSize : 0}
+                            {realEstate ? realEstate.addressDetail : ''},
+                            {' 전용면적: '}
+                            {realEstate
+                              ? Math.round(realEstate.exclusiveAreaSize * 100) /
+                                100
+                              : 0}
                           </div>
                         </div>
                       </CommonBackground>

@@ -3,7 +3,16 @@ import type { maps } from 'navermaps';
 
 // 네이버 지도 타입을 임포트
 
-export {};
+declare global {
+  namespace naver.maps {
+    interface Map {
+      setCenter: (latLng: LatLng | LatLngLiteral) => void;
+      getCenter: () => LatLng;
+      getZoom: () => number;
+      setZoom: (zoom: number) => void;
+    }
+  }
+}
 
 declare global {
   interface Window {

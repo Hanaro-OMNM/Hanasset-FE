@@ -112,6 +112,30 @@ export class PlatformAPI {
     return response.data as RealEstateList;
   }
 
+  public static async getRealEstateDetail(
+    realEstateId: number
+  ): Promise<RealEstateDetail> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/detail`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateDetail;
+  }
+
+  public static async getRealEstateBasic(
+    realEstateId: number
+  ): Promise<RealEstateBasic> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/basic`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateBasic;
+  }
+
   public static async getRealEstateType(
     realEstateId: number
   ): Promise<RealEstateType> {
@@ -123,6 +147,7 @@ export class PlatformAPI {
     );
     return response.data as RealEstateType;
   }
+
   public static async sendMail(email: string): Promise<boolean> {
     try {
       const response = await this.instance.post(
@@ -147,18 +172,6 @@ export class PlatformAPI {
     }
   }
 
-  public static async getRealEstateDetail(
-    realEstateId: number
-  ): Promise<RealEstateDetail> {
-    const response = await this.instance.get(
-      `/real-estates/${realEstateId}/detail`,
-      {
-        ...this.defaultConfig,
-      }
-    );
-    return response.data as RealEstateDetail;
-  }
-
   public static async signUp(emailSignUp: EmailSignUpRequest): Promise<number> {
     try {
       const response = await this.instance.post('/users/signup', emailSignUp);
@@ -167,18 +180,6 @@ export class PlatformAPI {
       console.error('Error sending email:', error); // 요청 실패 시 false 반환
       return 400;
     }
-  }
-
-  public static async getRealEstateBasic(
-    realEstateId: number
-  ): Promise<RealEstateBasic> {
-    const response = await this.instance.get(
-      `/real-estates/${realEstateId}/basic`,
-      {
-        ...this.defaultConfig,
-      }
-    );
-    return response.data as RealEstateBasic;
   }
 
   public static async submitBirthDate(birthDate: BirthDate): Promise<number> {
@@ -230,6 +231,7 @@ export class PlatformAPI {
       console.error('Error logout:', error);
     }
   }
+
   // 채팅방 생성
   public static async createChat(
     chatCreateRequest: ChatCreateRequest
@@ -317,20 +319,36 @@ export class PlatformAPI {
   public static async getChatroomMessagesByChatroomId(
     chatroomId: string
   ): Promise<ChatMessage[]> {
-    if (!chatroomId) {
-      throw new Error('chatroomId is required.');
-    }
-    const response = await this.instance.get<{
-      message: string;
-      result: {
-        count: number;
-        chatMessages: ChatMessage[];
-      };
-    }>(`/chat/${chatroomId}/messages`, {
-      ...this.defaultConfig,
-    });
+    try {
+      if (!chatroomId) {
+        throw new Error('chatroomId is required.');
+      }
 
-    return response.data.result.chatMessages;
+      console.log(`Fetching messages for chatroomId: ${chatroomId}`);
+
+      const response = await this.instance.get<{
+        message: string;
+        result: {
+          count: number;
+          messages: ChatMessage[];
+        };
+      }>(`/chat/${chatroomId}/messages`, {
+        ...this.defaultConfig,
+      });
+
+      console.log('API Response:', response.data);
+
+      return response.data.result.messages;
+    } catch (error) {
+      console.error('Error fetching chatroom messages:', error);
+
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        console.error('No messages found for the given chatroomId.');
+        return [];
+      }
+
+      throw error;
+    }
   }
 
   public static async getBookmarkRealEstates(): Promise<
@@ -341,6 +359,7 @@ export class PlatformAPI {
     });
     return response.data as ApiResponseEntity<RealEstateList>;
   }
+
   public static async getRealEstateMarketPrice(
     realEstateMarketPriceParam: RealEstateMarketPriceParamInfo,
     tradeType: string
@@ -358,22 +377,6 @@ export class PlatformAPI {
     return response.data as RealEstateMarketPrice;
   }
 
-  public static async getRecentVisitedRealEstateList(
-    recentVisitedRealEstatesIds: RecentVisitedRealEstatesIds
-  ): Promise<RealEstateList> {
-    const params = new URLSearchParams();
-    recentVisitedRealEstatesIds.realEstateIds.forEach((id) =>
-      params.append('realEstatesIds', id)
-    );
-    const response = await this.instance.get(
-      `/real-estates/recent-visited-list`,
-      {
-        params: params,
-      }
-    );
-    return response!.data as RealEstateList;
-  }
-
   public static async getLoanRecommend(
     realEstateIds: RealEstateIds
   ): Promise<LoanRecommend> {
@@ -386,53 +389,18 @@ export class PlatformAPI {
     });
     return response.data as LoanRecommend;
   }
-  public static async getRealEstateMarketPriceParam(
-    realEstateId: number
-  ): Promise<RealEstateMarketPriceParam> {
-    const response = await this.instance.get(
-      `/real-estates/${realEstateId}/market-price`,
-      {
-        ...this.defaultConfig,
-      }
-    );
-    return response.data as RealEstateMarketPriceParam;
-  }
+
   public static async getLoanDetail(loanId: number): Promise<LoanDetail> {
     const response = await this.instance.get(`/loan/detail/${loanId}`, {
       ...this.defaultConfig,
     });
     return response.data as LoanDetail;
   }
+
   public static async getConsultingUserInfo(): Promise<LoanRecommend> {
     const response = await this.instance.get(`/chat/user`, {
       ...this.defaultConfig,
     });
     return response.data as LoanRecommend;
-  }
-
-  // 회원 정보 조회
-  public static async getUserInfo(): Promise<UserInfoResponse> {
-    const response =
-      await this.instance.get<ApiResponseEntity<UserInfoResponse>>('users/me');
-    return response.data.result;
-  }
-  public static async addBookmarkRealEstate(
-    realEstateId: number
-  ): Promise<number> {
-    const response = await this.instance.post(
-      `/users/bookmarks/real-estates/${realEstateId}`,
-      {
-        ...this.defaultConfig,
-      }
-    );
-    return response.status;
-  }
-  public static async removeBookmarkRealEstate(
-    realEstateId: number
-  ): Promise<number> {
-    const response = await this.instance.delete(
-      `/users/bookmarks/real-estates/${realEstateId}`
-    );
-    return response.status;
   }
 }

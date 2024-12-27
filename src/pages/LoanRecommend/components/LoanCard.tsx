@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-// LoanName Components
+// LoanName components
 interface LoanNameProps {
   isBest: boolean;
   name: string;
@@ -19,7 +19,7 @@ const LoanName: React.FC<LoanNameProps> = ({ isBest, name }) => {
   );
 };
 
-// LoanRate Components
+// LoanRate components
 interface LoanRateProps {
   isBest: boolean;
   rate: number;
@@ -38,7 +38,7 @@ const LoanRate: React.FC<LoanRateProps> = ({ isBest, rate }) => {
   );
 };
 
-// LoanLimit Components
+// LoanLimit components
 interface LoanLimitProps {
   isBest: boolean;
   limit: number;
@@ -59,7 +59,7 @@ const LoanLimit: React.FC<LoanLimitProps> = ({ isBest, limit }) => {
   );
 };
 
-// LoanNewDsr Components
+// LoanNewDsr components
 interface LoanNewDsrProps {
   isBest: boolean;
   dsr: number;
@@ -78,7 +78,7 @@ const LoanDsr: React.FC<LoanNewDsrProps> = ({ isBest, dsr }) => {
   );
 };
 
-// LoanCard Components
+// LoanCard components
 interface LoanCardProps {
   isBest: boolean;
   isShow: boolean;

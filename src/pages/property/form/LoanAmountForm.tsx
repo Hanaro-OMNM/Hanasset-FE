@@ -4,6 +4,7 @@ import Button from '../../../components/atoms/Button';
 import FormTitle from '../../../components/atoms/FormTitle';
 import Input from '../../../components/atoms/Input';
 import NoItemButton from '../../../components/atoms/NoItemButton';
+import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
 import { assetState } from '../../../recoil/asset/atom';
 
 interface AssetInfoInputProps {
@@ -12,7 +13,7 @@ interface AssetInfoInputProps {
 
 export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
   const [asset, setAsset] = useRecoilState(assetState);
-  const { annualInterest, annualPrincipal, hasLoan } = asset;
+  const { annualInterest, annualPrincipal } = asset;
 
   const [localAnnualInterest, setLocalAnnualInterest] =
     useState<number>(annualInterest);
@@ -101,30 +102,55 @@ export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
     }
   };
 
-  const handleNoLoan = () => {
+  const handleNoLoan = async () => {
     setLocalAnnualInterest(0);
     setLocalAnnualPrincipal(0);
-    setAsset({
-      ...asset,
-      hasLoan: false,
-      annualInterest: 0,
-      annualPrincipal: 0,
-    });
-    onBack();
-  };
 
-  const handleSave = () => {
-    if (
-      !interestError &&
-      !principalError &&
-      (localAnnualInterest > 0 || localAnnualPrincipal > 0)
-    ) {
+    const annualInterestResponse = await PlatformAPI.putPropertyValue(
+      'annualInterest',
+      localAnnualInterest.toString()
+    );
+
+    const annualPrincipalResponse = await PlatformAPI.putPropertyValue(
+      'annualPrincipal',
+      localAnnualPrincipal.toString()
+    );
+
+    if (annualInterestResponse === 200 && annualPrincipalResponse === 200) {
       setAsset({
         ...asset,
         hasLoan: true,
         annualInterest: localAnnualInterest,
         annualPrincipal: localAnnualPrincipal,
       });
+    }
+    onBack();
+  };
+
+  const handleSave = async () => {
+    if (
+      !interestError &&
+      !principalError &&
+      (localAnnualInterest > 0 || localAnnualPrincipal > 0)
+    ) {
+      const annualInterestResponse = await PlatformAPI.putPropertyValue(
+        'annualInterest',
+        localAnnualInterest.toString()
+      );
+
+      const annualPrincipalResponse = await PlatformAPI.putPropertyValue(
+        'annualPrincipal',
+        localAnnualPrincipal.toString()
+      );
+
+      if (annualInterestResponse === 200 && annualPrincipalResponse === 200) {
+        setAsset({
+          ...asset,
+          hasLoan: true,
+          annualInterest: localAnnualInterest,
+          annualPrincipal: localAnnualPrincipal,
+        });
+      }
       onBack();
     } else {
       alert('입력값을 올바르게 작성해주세요');

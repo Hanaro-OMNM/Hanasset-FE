@@ -11,7 +11,6 @@ import Swiper from '../components/atoms/Swiper';
 import UserManual from '../components/template/userManual.tsx';
 import { PlatformAPI } from '../platform/PlatformAPI.ts';
 import isLoginAtom from '../recoil/isLogin';
-import { AdditionalEstate } from '../types/hanaAsset';
 import { RealEstatePreview } from '../types/hanaAssetResponse.common.ts';
 import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import RealEstateCard from './RealEstateList/RealEstateCard.tsx';
@@ -36,7 +35,7 @@ export default function Main() {
   const [bookmarkEstateList, setBookmarkEstateList] = useState<
     RealEstatePreview[] | null
   >(null);
-  const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
+  const [isLogin] = useRecoilState(isLoginAtom);
 
   useEffect(() => {
     // LocalStorage에서 값을 가져오고 없으면 기본값으로 설정

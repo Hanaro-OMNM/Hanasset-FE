@@ -36,10 +36,14 @@ function AppContent() {
     setIsLoginModalOpen(false);
   };
 
-  const [isLogin] = useRecoilState(isLoginAtom);
+  const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
 
   useEffect(() => {
     if (isLogin) {
+      const accessToken = localStorage.getItem('accessToken');
+      if (!accessToken) {
+        setIsLogin(false);
+      }
       setIsLoginModalOpen(false);
     } else if (
       !isLogin &&

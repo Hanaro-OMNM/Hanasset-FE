@@ -4,6 +4,7 @@ import Button from '../../../components/atoms/Button';
 import FormTitle from '../../../components/atoms/FormTitle';
 import Input from '../../../components/atoms/Input';
 import NoItemButton from '../../../components/atoms/NoItemButton';
+import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
 import { assetState } from '../../../recoil/asset/atom';
 
 interface AssetInfoInputProps {
@@ -64,20 +65,39 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
     onBack();
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (localAmount === 0) {
       setIsValid(false);
+      alert('입력값을 올바르게 작성해주세요');
+      return;
     }
 
-    if (isValid) {
-      if (formType === 'income') {
-        setAsset({ ...asset, incomeAmount: localAmount });
-      } else {
-        setAsset({ ...asset, equityAmount: localAmount });
-      }
-      onBack();
-    } else {
+    if (!isValid) {
       alert('입력값을 올바르게 작성해주세요');
+      return;
+    }
+
+    const propertyType = formType === 'income' ? 'income' : 'equity';
+    const updatedKey = formType === 'income' ? 'incomeAmount' : 'equityAmount';
+
+    try {
+      const response = await PlatformAPI.putPropertyValue(
+        propertyType,
+        localAmount.toString()
+      );
+
+      if (response === 200) {
+        setAsset((prevAsset) => ({
+          ...prevAsset,
+          [updatedKey]: localAmount,
+        }));
+        onBack();
+      } else {
+        alert('저장에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('Error saving property value:', error);
+      alert('오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 

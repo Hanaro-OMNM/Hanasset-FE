@@ -53,7 +53,7 @@ const MarketInfoCard: React.FC<MarketInfoCardProps> = (marketInfoCardProps) => {
         {marketInfoCardProps.type}
       </h3>
       <p className="text-sm text-gray-500">최근 실거래가</p>
-      <p className="text-2xl font-bold mt-2">
+      <div className="text-2xl font-bold mt-2">
         {latestTradeDeposit ? (
           <div>
             {latestTradeDeposit}
@@ -62,8 +62,8 @@ const MarketInfoCard: React.FC<MarketInfoCardProps> = (marketInfoCardProps) => {
         ) : (
           <div>정보 없음</div>
         )}
-      </p>
-      <p className="text-gray-500 mt-1 text-sm">
+      </div>
+      <div className="text-gray-500 mt-1 text-sm">
         {latestTrade ? (
           <div>
             {latestYear}년 {latestMonth}월 {latestDay}일{' '}
@@ -72,8 +72,8 @@ const MarketInfoCard: React.FC<MarketInfoCardProps> = (marketInfoCardProps) => {
         ) : (
           <></>
         )}
-      </p>
-      <p className="text-sm mt-2 text-gray-600">
+      </div>
+      <div className="text-sm mt-2 text-gray-600">
         {averageDeposit && averageMonthlyRent ? (
           <div>
             매물평균가{' '}
@@ -84,7 +84,7 @@ const MarketInfoCard: React.FC<MarketInfoCardProps> = (marketInfoCardProps) => {
         ) : (
           <></>
         )}
-      </p>
+      </div>
     </div>
   );
 };

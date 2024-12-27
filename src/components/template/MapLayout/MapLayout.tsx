@@ -250,9 +250,8 @@ export default function MapLayout({ children }: LayoutProps) {
                   icon={{
                     content: `
                     <div class=" border-2 border-hanaColor2 bg-hanaColor2 bg-opacity-70 h-20 w-20 rounded-full flex items-center justify-center text-white text-xs font-bold text-center shadow-md">
-
                       ${marker.name.split(' ').pop()}
-                
+              
                     </div>
                  `,
                     size: naverMaps.Size(50, 50),
@@ -290,7 +289,6 @@ export default function MapLayout({ children }: LayoutProps) {
 
       <div className="block xs:hidden">
         <Footer />
-        {children}
       </div>
     </div>
   );

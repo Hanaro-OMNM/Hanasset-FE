@@ -5,7 +5,7 @@ import {
 } from '@headlessui/react';
 import { FaChevronDown } from 'react-icons/fa6';
 
-// Title Components
+// Title components
 interface TitleProps {
   title: string;
 }
@@ -14,7 +14,7 @@ const Title: React.FC<TitleProps> = ({ title }) => {
   return <h2 className="font-semibold">{title}</h2>;
 };
 
-// Content Components
+// Content components
 interface ContentProps {
   content: string;
 }

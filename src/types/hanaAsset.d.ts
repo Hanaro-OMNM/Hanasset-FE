@@ -290,3 +290,13 @@ export type Address = {
   roadName: string;
   zipCode: string;
 };
+
+export type AssetState = {
+  jobType: string; // 직업 종류
+  incomeAmount: number; // 연수입
+  equityAmount: number; // 자본금
+  hasHome: boolean | null; // 주택 소유 여부 (null 허용)
+  hasLoan: boolean | null; // 대출 여부 (null 허용)
+  annualInterest: number; // 보유대출 연이자 상환액
+  annualPrincipal: number; // 보유대출 연원금 상환액
+};

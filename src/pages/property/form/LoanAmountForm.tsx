@@ -119,7 +119,7 @@ export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
     if (annualInterestResponse === 200 && annualPrincipalResponse === 200) {
       setAsset({
         ...asset,
-        hasLoan: true,
+        hasLoan: false,
         annualInterest: localAnnualInterest,
         annualPrincipal: localAnnualPrincipal,
       });

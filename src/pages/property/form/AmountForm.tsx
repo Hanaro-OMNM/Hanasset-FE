@@ -114,7 +114,7 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
       <div className="mt-10">
         <Input
           name="amount"
-          value={localAmount.toString()}
+          value={localAmount === -1 ? '0' : localAmount.toString()}
           onChange={handleChange}
           label={formType === 'income' ? '세전 연소득' : '자본금 금액'}
           error={error}

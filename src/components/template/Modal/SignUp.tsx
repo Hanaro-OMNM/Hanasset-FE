@@ -1,5 +1,5 @@
-import { FaTimes } from 'react-icons/fa';
 import { FiChevronLeft } from 'react-icons/fi';
+import { FiX } from 'react-icons/fi';
 import { useState } from 'react';
 import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
 import ModalInput from '../../atoms/ModalInput.tsx';
@@ -111,128 +111,134 @@ export default function SignUpPage({
   };
 
   return (
-    <div className="bg-white w-[320px] h-[500px] rounded-lg shadow-lg animate-fadeInRight">
-      <div className="flex items-center justify-center my-4">
-        <div className="font-bold mt-4">회원가입</div>
-        <button
-          className="absolute top-4 left-2 text-gray-500 hover:text-gray-700"
-          onClick={onSignUpPage}
-        >
-          <FiChevronLeft className="text-xl" />
-        </button>
-        <button
-          className="absolute top-4 right-2 text-gray-500 hover:text-gray-700"
-          onClick={onClose}
-        >
-          <FaTimes className="text-xl" />
-        </button>
-      </div>
-      <div className="relative px-4 py-1">
-        <ModalInput
-          name="userName"
-          type="text"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-          placeholder="이름"
-          className="pb-4"
-          error={!!errors.userName}
-          errorMessage={errors.userName}
-        />
-        <div className="space-y-2">
-          <div>
-            <div className="flex">
-              <input
-                className="flex-grow rounded-xl p-2 focus:outline-none text-left border-2 bg-white text-hanaBlack80 !border-opacity-50 !border-hanaGreen40"
-                name="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="이메일"
-              />
-              <button
-                onClick={() => handleSendEmailVerification(email)}
-                className="w-20 h-10 px-1 mx-2 mt-1 text-white text-sm bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
-              >
-                인증
-              </button>
-            </div>
-            {isVerificationSent && !emailVerification && (
-              <p className="text-xs text-gray-500 ml-2 my-1">
-                인증 메일이 전송되었습니다. 메일을 확인해 주세요.
-              </p>
-            )}
-            {emailVerification && (
-              <p className="text-xs text-green-600 ml-2 my-1">
-                이메일 인증이 성공적으로 완료되었습니다.
-              </p>
-            )}
-            {!isVerificationSent && !emailVerification && (
-              <p className="text-xs text-red-500 ml-2 my-1">
-                확인 코드를 전송해주세요.
-              </p>
-            )}
+    <div className="animate-fadeInRight">
+      <div className="flex grid-rows-2">
+        <div className="max-w-md bg-white shadow-lg rounded-lg p-5">
+          <div className=" text-lg font-semibold flex justify-center text-gray-700">
+            회원가입
+          </div>
+          <div className="flex items-center justify-center my-4">
+            <button
+              className="absolute top-4 left-4 text-gray-500 hover:text-gray-700"
+              onClick={onSignUpPage}
+            >
+              <FiChevronLeft className="text-2xl" />
+            </button>
+            <button
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+              onClick={onClose}
+            >
+              <FiX className="text-2xl" />
+            </button>
           </div>
           <div>
-            <div className="flex">
-              <input
-                className="flex-grow rounded-xl p-2 focus:outline-none text-left border-2 bg-white text-hanaBlack80 !border-opacity-50 !border-hanaGreen40"
-                name="verificationCode"
-                type="text"
-                value={verificationCode}
-                onChange={(e) => setVerificationCode(e.target.value)}
-                placeholder="인증 코드"
-              />
-              <button
-                onClick={() => handleVerifyCode(email, verificationCode)}
-                className="w-20 h-10 px-1 mx-2 mt-1 text-white text-sm bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
-              >
-                확인
+            <ModalInput
+              name="userName"
+              type="text"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              placeholder="이름"
+              className="pb-4"
+              error={!!errors.userName}
+              errorMessage={errors.userName}
+            />
+            <div className="space-y-2">
+              <div>
+                <div className="flex">
+                  <input
+                    className="flex-grow rounded-xl p-2 focus:outline-none text-left border-2 bg-white text-hanaBlack80 !border-opacity-50 !border-hanaGreen40"
+                    name="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="이메일"
+                  />
+                  <button
+                    onClick={() => handleSendEmailVerification(email)}
+                    className="w-20 h-10 px-1 mx-2 mt-1 text-white bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
+                  >
+                    인증
+                  </button>
+                </div>
+                {isVerificationSent && !emailVerification && (
+                  <p className="text-xs text-gray-500 ml-2 my-1">
+                    인증 메일이 전송되었습니다. 메일을 확인해 주세요.
+                  </p>
+                )}
+                {emailVerification && (
+                  <p className="text-xs text-green-600 ml-2 my-1">
+                    이메일 인증이 성공적으로 완료되었습니다.
+                  </p>
+                )}
+                {!isVerificationSent && !emailVerification && (
+                  <p className="text-xs text-red-500 ml-2 my-1">
+                    확인 코드를 전송해주세요.
+                  </p>
+                )}
+              </div>
+              <div>
+                <div className="flex">
+                  <input
+                    className="flex-grow rounded-xl p-2 focus:outline-none text-left border-2 bg-white text-hanaBlack80 !border-opacity-50 !border-hanaGreen40"
+                    name="verificationCode"
+                    type="text"
+                    value={verificationCode}
+                    onChange={(e) => setVerificationCode(e.target.value)}
+                    placeholder="인증 코드"
+                  />
+                  <button
+                    onClick={() => handleVerifyCode(email, verificationCode)}
+                    className="w-20 h-10 px-1 mx-2 mt-1 text-white bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
+                  >
+                    확인
+                  </button>
+                </div>
+                {emailVerification ? (
+                  <p className="text-xs text-green-600 ml-2 my-1">
+                    인증 코드가 확인되었습니다.
+                  </p>
+                ) : (
+                  <p className="text-xs text-red-500 ml-2 my-1">
+                    인증 코드를 확인해주세요.
+                  </p>
+                )}
+              </div>
+            </div>
+            <ModalInput
+              name="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="비밀번호"
+              className="pb-4"
+              error={!!errors.password}
+              errorMessage={errors.password}
+            />
+            <ModalInput
+              name="confirmPassword"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="비밀번호 확인"
+              className="pb-4"
+              error={!!errors.confirmPassword}
+              errorMessage={errors.confirmPassword}
+            />
+          </div>
+          <div className="flex justify-center flex-col">
+            <button
+              onClick={() => handleSignUp()}
+              className="text-md py-2 text-white bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
+            >
+              회원가입
+            </button>
+            <div className="text-sm text-center mt-5 text-gray-500">
+              이미 계정이 있으신가요?
+              <button onClick={onSignUpPage} className="ml-2 text-hanaColor2">
+                로그인
               </button>
             </div>
-            {emailVerification ? (
-              <p className="text-xs text-green-600 ml-2 my-1">
-                인증 코드가 확인되었습니다.
-              </p>
-            ) : (
-              <p className="text-xs text-red-500 ml-2 my-1">
-                인증 코드를 확인해주세요.
-              </p>
-            )}
           </div>
-        </div>
-        <ModalInput
-          name="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="비밀번호"
-          className="pb-4"
-          error={!!errors.password}
-          errorMessage={errors.password}
-        />
-        <ModalInput
-          name="confirmPassword"
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="비밀번호 확인"
-          className="pb-4"
-          error={!!errors.confirmPassword}
-          errorMessage={errors.confirmPassword}
-        />
-      </div>
-      <div className="flex justify-center flex-col">
-        <button
-          onClick={() => handleSignUp()}
-          className="mx-4 py-1 text-white bg-hanaGreen60 hover:bg-hanaColor2 rounded-md transition"
-        >
-          회원가입
-        </button>
-        <div className="text-xs text-center py-1 mt-1">
-          이미 계정이 있으신가요?{' '}
-          <button onClick={onSignUpPage} className="ml-1 my-1 text-hanaColor2">
-            로그인
-          </button>
         </div>
       </div>
     </div>

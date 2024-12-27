@@ -28,6 +28,7 @@ import {
   RealEstateType,
   LoanRecommend,
   LoanDetail,
+  UserInfoResponse,
 } from '../types/hanaAssetResponse.common.ts';
 
 export class PlatformAPI {
@@ -303,14 +304,6 @@ export class PlatformAPI {
     }
   }
 
-  // 특정 채팅방 메시지 가져오기
-  public static async getChatroomMessages(
-    chatroomId: string
-  ): Promise<ChatMessage[]> {
-    const response = await this.instance.get(`/chat/${chatroomId}/messages`);
-    return response.data;
-  }
-
   // 채팅방 삭제
   public static async deleteChatroom(chatroomId: string): Promise<void> {
     const response = await this.instance.delete<{
@@ -355,16 +348,13 @@ export class PlatformAPI {
     }
   }
 
-  public static async getRealEstateMarketPriceParam(
-    realEstateId: number
-  ): Promise<RealEstateMarketPriceParam> {
-    const response = await this.instance.get(
-      `/real-estates/${realEstateId}/market-price`,
-      {
-        ...this.defaultConfig,
-      }
-    );
-    return response.data as RealEstateMarketPriceParam;
+  public static async getBookmarkRealEstates(): Promise<
+    ApiResponseEntity<RealEstateList>
+  > {
+    const response = await this.instance.get('/users/bookmarks/real-estates', {
+      ...this.defaultConfig,
+    });
+    return response.data as ApiResponseEntity<RealEstateList>;
   }
 
   public static async getRealEstateMarketPrice(
@@ -409,62 +399,5 @@ export class PlatformAPI {
       ...this.defaultConfig,
     });
     return response.data as LoanRecommend;
-  }
-
-  public static async getBookmarkRealEstates(): Promise<
-    ApiResponseEntity<RealEstateList>
-  > {
-    const response = await this.instance.get('/users/bookmarks/real-estates', {
-      ...this.defaultConfig,
-    });
-    return response.data as ApiResponseEntity<RealEstateList>;
-  }
-
-  public static async addBookmarkRealEstate(
-    realEstateId: number
-  ): Promise<number> {
-    const response = await this.instance.post(
-      `/users/bookmarks/real-estates/${realEstateId}`,
-      {
-        ...this.defaultConfig,
-      }
-    );
-    return response.status;
-  }
-
-  public static async removeBookmarkRealEstate(
-    realEstateId: number
-  ): Promise<number> {
-    const response = await this.instance.delete(
-      `/users/bookmarks/real-estates/${realEstateId}`
-    );
-    return response.status;
-  }
-
-  public static async putPropertyValue(
-    propertyType: string,
-    propertyValue: string
-  ): Promise<number> {
-    const response = await this.instance.put(
-      `/users/property?type=${propertyType}&value=${propertyValue}`
-    );
-
-    return response.status;
-  }
-
-  public static async getRecentVisitedRealEstateList(
-    recentVisitedRealEstatesIds: RecentVisitedRealEstatesIds
-  ): Promise<RealEstateList> {
-    const params = new URLSearchParams();
-    recentVisitedRealEstatesIds.realEstateIds.forEach((id) =>
-      params.append('realEstatesIds', id)
-    );
-    const response = await this.instance.get(
-      `/real-estates/recent-visited-list`,
-      {
-        params: params,
-      }
-    );
-    return response!.data as RealEstateList;
   }
 }

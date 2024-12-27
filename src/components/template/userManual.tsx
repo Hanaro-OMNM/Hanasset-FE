@@ -222,17 +222,17 @@ export default function UserManual({ close }: userManualProps) {
           </ManualImg>
           <div className="absolute top-72 left-24 text-white font-fontMedium">
             <div>
-              <ManualTitle text="내 정보 무라고 적지" />
+              <ManualTitle text="편리하게 내 정보를 관리하세요." />
             </div>
             <div className="text-white font-fontLight text-xl fixed top-80 mt-2">
               <span>1. </span>
-              <span className="text-ManualColor3">내 정보</span>를 관리하고,
-              관심 있는 지역과 매물을 한눈에 확인할 수 있는 공간입니다.
+              <span className="text-ManualColor3">내 정보</span>를 관리할 수
+              있습니다.
             </div>
             <div className="text-white font-fontLight text-xl fixed top-80 mt-12">
               <span>2. </span>
-              <span className="text-ManualColor2">관심 지역 및 매물</span>을
-              확인할 수 있습니다.
+              <span className="text-ManualColor2">관심 지역 및 매물</span>을 을
+              한눈에 확인할 수 있습니다.
             </div>
           </div>
           <div className="fixed top-96 mt-5 left-28 text-hanaSilver">5/5</div>

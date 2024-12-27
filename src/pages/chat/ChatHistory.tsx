@@ -30,24 +30,16 @@ const ChatHistory: React.FC = () => {
       console.error('No historyChatroomId found!');
       return;
     }
-    console.log(
-      `Fetching messages for historyChatroomId: ${historyChatroomId}`
-    );
     const fetchMessages = async () => {
       try {
-        console.log(`Fetching messages for chatroom ID: ${historyChatroomId}`);
         const response =
           await PlatformAPI.getChatroomMessagesByChatroomId(historyChatroomId);
-
         if (Array.isArray(response)) {
-          console.log('Fetched messages:', response);
           setMessages(response);
         } else {
-          console.error('Unexpected response format:', response);
           setMessages([]);
         }
       } catch (err) {
-        console.error('Error fetching messages:', err);
         setError('Failed to fetch messages.');
       } finally {
         setLoading(false);
@@ -59,7 +51,6 @@ const ChatHistory: React.FC = () => {
 
   const handleSendMessage = () => {
     if (inputValue.trim() === '') return;
-    console.log('Sending message:', inputValue);
     setInputValue('');
   };
 

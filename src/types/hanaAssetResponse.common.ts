@@ -377,3 +377,8 @@ export interface LoanDetailInfo {
   paybackMethod: string;
   dsr: number;
 }
+export interface UserInfoResponse {
+  id: number;
+  name: string;
+  email: string;
+}

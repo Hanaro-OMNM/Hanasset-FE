@@ -407,10 +407,10 @@ export class PlatformAPI {
     return response.data as LoanDetail;
   }
   public static async getConsultingUserInfo(
-    chatroomId: number
+    chatroomId: string
   ): Promise<LoanRecommend> {
     const response = await this.instance.get(
-      `/loan/consulting/?chatroomId=${chatroomId}`,
+      `/loan/consulting?chatroomId=${chatroomId}`,
       {
         ...this.defaultConfig,
       }

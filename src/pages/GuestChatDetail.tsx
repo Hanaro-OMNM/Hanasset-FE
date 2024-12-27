@@ -98,8 +98,12 @@ const GuestChatDetail: React.FC = () => {
                           <div className="text-sm text-hanaBlack80">
                             {realEstate ? realEstate.address : ''}
                             <br />
-                            {realEstate ? realEstate.addressDetail : ''},{' '}
-                            {realEstate ? realEstate.exclusiveAreaSize : 0}
+                            {realEstate ? realEstate.addressDetail : ''},
+                            {' 전용면적: '}
+                            {realEstate
+                              ? Math.round(realEstate.exclusiveAreaSize * 100) /
+                                100
+                              : 0}
                           </div>
                         </div>
                       </CommonBackground>

@@ -1,4 +1,4 @@
-// Title Components
+// Title components
 interface TitleProps {
   title: string;
 }
@@ -7,7 +7,7 @@ const Title: React.FC<TitleProps> = ({ title }) => {
   return <h2 className="h-6 text-hanaBlack60 font-semibold">{title}</h2>;
 };
 
-// Content Components
+// Content components
 interface ContentProps {
   content: string;
 }

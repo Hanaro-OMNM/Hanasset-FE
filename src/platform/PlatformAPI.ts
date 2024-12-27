@@ -111,6 +111,30 @@ export class PlatformAPI {
     return response.data as RealEstateList;
   }
 
+  public static async getRealEstateDetail(
+    realEstateId: number
+  ): Promise<RealEstateDetail> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/detail`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateDetail;
+  }
+
+  public static async getRealEstateBasic(
+    realEstateId: number
+  ): Promise<RealEstateBasic> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/basic`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateBasic;
+  }
+
   public static async getRealEstateType(
     realEstateId: number
   ): Promise<RealEstateType> {
@@ -122,6 +146,7 @@ export class PlatformAPI {
     );
     return response.data as RealEstateType;
   }
+
   public static async sendMail(email: string): Promise<boolean> {
     try {
       const response = await this.instance.post(
@@ -146,18 +171,6 @@ export class PlatformAPI {
     }
   }
 
-  public static async getRealEstateDetail(
-    realEstateId: number
-  ): Promise<RealEstateDetail> {
-    const response = await this.instance.get(
-      `/real-estates/${realEstateId}/detail`,
-      {
-        ...this.defaultConfig,
-      }
-    );
-    return response.data as RealEstateDetail;
-  }
-
   public static async signUp(emailSignUp: EmailSignUpRequest): Promise<number> {
     try {
       const response = await this.instance.post('/users/signup', emailSignUp);
@@ -166,18 +179,6 @@ export class PlatformAPI {
       console.error('Error sending email:', error); // 요청 실패 시 false 반환
       return 400;
     }
-  }
-
-  public static async getRealEstateBasic(
-    realEstateId: number
-  ): Promise<RealEstateBasic> {
-    const response = await this.instance.get(
-      `/real-estates/${realEstateId}/basic`,
-      {
-        ...this.defaultConfig,
-      }
-    );
-    return response.data as RealEstateBasic;
   }
 
   public static async submitBirthDate(birthDate: BirthDate): Promise<number> {
@@ -229,6 +230,7 @@ export class PlatformAPI {
       console.error('Error logout:', error);
     }
   }
+
   // 채팅방 생성
   public static async createChat(
     chatCreateRequest: ChatCreateRequest
@@ -355,14 +357,19 @@ export class PlatformAPI {
       throw error;
     }
   }
-  public static async getBookmarkRealEstates(): Promise<
-    ApiResponseEntity<RealEstateList>
-  > {
-    const response = await this.instance.get('/users/bookmarks/real-estates', {
-      ...this.defaultConfig,
-    });
-    return response.data as ApiResponseEntity<RealEstateList>;
+
+  public static async getRealEstateMarketPriceParam(
+    realEstateId: number
+  ): Promise<RealEstateMarketPriceParam> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/market-price`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateMarketPriceParam;
   }
+
   public static async getRealEstateMarketPrice(
     realEstateMarketPriceParam: RealEstateMarketPriceParamInfo,
     tradeType: string
@@ -380,6 +387,74 @@ export class PlatformAPI {
     return response.data as RealEstateMarketPrice;
   }
 
+  public static async getLoanRecommend(
+    realEstateIds: RealEstateIds
+  ): Promise<LoanRecommend> {
+    const response = await this.instance.get(`/loan`, {
+      ...this.defaultConfig,
+      params: realEstateIds,
+      paramsSerializer: function (params) {
+        return qs.stringify(params, { arrayFormat: 'repeat' });
+      },
+    });
+    return response.data as LoanRecommend;
+  }
+
+  public static async getLoanDetail(loanId: number): Promise<LoanDetail> {
+    const response = await this.instance.get(`/loan/detail/${loanId}`, {
+      ...this.defaultConfig,
+    });
+    return response.data as LoanDetail;
+  }
+
+  public static async getConsultingUserInfo(): Promise<LoanRecommend> {
+    const response = await this.instance.get(`/chat/user`, {
+      ...this.defaultConfig,
+    });
+    return response.data as LoanRecommend;
+  }
+
+  public static async getBookmarkRealEstates(): Promise<
+    ApiResponseEntity<RealEstateList>
+  > {
+    const response = await this.instance.get('/users/bookmarks/real-estates', {
+      ...this.defaultConfig,
+    });
+    return response.data as ApiResponseEntity<RealEstateList>;
+  }
+
+  public static async addBookmarkRealEstate(
+    realEstateId: number
+  ): Promise<number> {
+    const response = await this.instance.post(
+      `/users/bookmarks/real-estates/${realEstateId}`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.status;
+  }
+
+  public static async removeBookmarkRealEstate(
+    realEstateId: number
+  ): Promise<number> {
+    const response = await this.instance.delete(
+      `/users/bookmarks/real-estates/${realEstateId}`
+    );
+    return response.status;
+  }
+
+  public static async putPropertyValue(
+    propertyType: string,
+    propertyValue: string
+  ): Promise<number> {
+    const response = await this.instance.put(
+      `/users/property?type=${propertyType}&value=${propertyValue}`
+    );
+
+    return response.status;
+  }
+
   public static async getRecentVisitedRealEstateList(
     recentVisitedRealEstatesIds: RecentVisitedRealEstatesIds
   ): Promise<RealEstateList> {
@@ -394,41 +469,5 @@ export class PlatformAPI {
       }
     );
     return response!.data as RealEstateList;
-  }
-
-  public static async getLoanRecommend(
-    realEstateIds: RealEstateIds
-  ): Promise<LoanRecommend> {
-    const response = await this.instance.get(`/loan`, {
-      ...this.defaultConfig,
-      params: realEstateIds,
-      paramsSerializer: function (params) {
-        return qs.stringify(params, { arrayFormat: 'repeat' });
-      },
-    });
-    return response.data as LoanRecommend;
-  }
-  public static async getRealEstateMarketPriceParam(
-    realEstateId: number
-  ): Promise<RealEstateMarketPriceParam> {
-    const response = await this.instance.get(
-      `/real-estates/${realEstateId}/market-price`,
-      {
-        ...this.defaultConfig,
-      }
-    );
-    return response.data as RealEstateMarketPriceParam;
-  }
-  public static async getLoanDetail(loanId: number): Promise<LoanDetail> {
-    const response = await this.instance.get(`/loan/detail/${loanId}`, {
-      ...this.defaultConfig,
-    });
-    return response.data as LoanDetail;
-  }
-  public static async getConsultingUserInfo(): Promise<LoanRecommend> {
-    const response = await this.instance.get(`/chat/user`, {
-      ...this.defaultConfig,
-    });
-    return response.data as LoanRecommend;
   }
 }

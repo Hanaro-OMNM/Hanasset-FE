@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-// OrderButton Components
+// OrderButton components
 interface OrderButtonProps {
   activate: boolean;
   onClick: () => void;

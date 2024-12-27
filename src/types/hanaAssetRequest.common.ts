@@ -29,7 +29,6 @@ export interface LoginRequest {
   email: string;
   password: string;
 }
-
 export interface RealEstateMarketPriceParamInfo {
   complexNumber: string;
   pyeongTypeNumber: number;
@@ -42,4 +41,35 @@ export interface RecentVisitedRealEstatesIds {
 
 export interface RealEstateIds {
   realEstateIds: number[];
+}
+export interface ChatRoom {
+  chatroomId: string;
+  userId: number;
+  consultantId: number;
+  chatroomTitle: string;
+  chatroomStatus: string;
+  reservedTime: string;
+  finishedAt: string | null;
+  createdAt: string;
+}
+export interface ChatCreateRequest {
+  userId: number;
+  consultantId: number;
+  chatroomTitle: string;
+  reservedTime: string;
+  reservationInfo: selectedEstateType[];
+}
+
+export type selectedEstateType = {
+  id: number;
+  name: string;
+  detail: string;
+  address: string;
+};
+
+export interface ChatMessage {
+  id: string;
+  sender: string;
+  message: string;
+  timestamp: string;
 }

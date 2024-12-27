@@ -13,6 +13,7 @@
   "dependencies": {
     "@headlessui/react": "^2.1.10",
     "@react-oauth/google": "^0.12.1",
+    "@stomp/stompjs": "^7.0.0",
     "@tanstack/react-query": "^5.59.15",
     "@types/chart.js": "^2.9.41",
     "@types/papaparse": "^5.3.15",
@@ -36,7 +37,9 @@
     "react-slick": "^0.30.2",
     "react-swipeable": "^7.0.1",
     "recoil": "^0.7.7",
+    "recoil-persist": "^5.1.0",
     "slick-carousel": "^1.8.1",
+    "sockjs-client": "^1.6.1",
     "swiper": "^11.1.14",
     "tailwind-scrollbar": "^3.1.0",
     "tailwind-scrollbar-hide": "^1.1.7",

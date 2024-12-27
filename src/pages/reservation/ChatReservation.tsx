@@ -1,10 +1,16 @@
 import { useLocation } from 'react-router-dom';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { useState } from 'react';
 import reserve_hand from '../../assets/img/reserve_img.png';
 import Button from '../../components/atoms/Button';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import MobileHeader from '../../components/atoms/MobileHeader';
-import { selectedEstateType } from '../../types/hanaAsset';
+import { PlatformAPI } from '../../platform/PlatformAPI.ts';
+import chatroomIdState from '../../recoil/chatroomId/atom';
+import loanReservationAtom from '../../recoil/loanReservation/atom';
+import userIdAtom from '../../recoil/userId/atom.ts';
+import { selectedEstateType } from '../../types/hanaAsset.ts';
+import { ChatCreateRequest } from '../../types/hanaAssetRequest.common';
 import AssetItem from './AssetItem';
 import DatePicker from './DatePicker';
 import DynamicFormSwitcher from './DynamicFormSwitcher';
@@ -14,7 +20,11 @@ import UserGuide from './UserGuide';
 export default function ChatReservation() {
   const estateInfo = useLocation().state!.selectedItems!;
   const day = new Date();
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(true);
+  const [selectedLoanReservation, setSelectedLoanReservation] =
+    useRecoilState(loanReservationAtom);
+  const setChatroomId = useSetRecoilState(chatroomIdState);
+  const setUserId = useSetRecoilState(userIdAtom);
 
   function isWeekend(date: Date) {
     const dayOfWeek = date.getDay();
@@ -52,7 +62,6 @@ export default function ChatReservation() {
         daysAdded++;
       }
     }
-
     return newDate;
   }
 
@@ -87,12 +96,49 @@ export default function ChatReservation() {
       return;
     }
 
-    /* 폼 전환 */
-    setShowForm(true);
+    const [year, month, day] = selectedDate.split('-').map(Number);
+    const [hour, minute] = selectedTime.split(':').map(Number);
+
+    const reservedDate = new Date(Date.UTC(year, month - 1, day, hour, minute));
+
+    const reservedTime = `${selectedDate} ${selectedTime}:00`;
+
+    if (!selectedLoanReservation.reservationTime) {
+      setSelectedLoanReservation({
+        ...selectedLoanReservation,
+        reservationInfo: estateInfo,
+        reservationTime: reservedTime,
+      });
+      alert('상담이 예약되었습니다.');
+      createChat(reservedTime, estateInfo);
+      window.location.href = '/consulting';
+    }
   };
 
   const onBack = (): void => {
     window.history.back();
+  };
+
+  const createChat = async (
+    reservedTime: string,
+    reservationInfo: selectedEstateType[]
+  ) => {
+    const chatroomTitle = reservationInfo
+      .map((item: selectedEstateType) => item.name)
+      .join(', ');
+
+    const request: Omit<ChatCreateRequest, 'userId'> = {
+      consultantId: 1,
+      chatroomTitle: chatroomTitle,
+      reservedTime: reservedTime,
+      reservationInfo: reservationInfo,
+    };
+
+    const response = await PlatformAPI.createChat(request);
+    const chatroomId = response.data.rooms[0].chatroomId;
+    const userId = response.data.userId;
+    setChatroomId(chatroomId);
+    setUserId(userId);
   };
 
   return (
@@ -118,6 +164,7 @@ export default function ChatReservation() {
                     )
                   )}
                 </div>
+
                 <DatePicker
                   dateOptions={dateOptions}
                   selectedDate={selectedDate}
@@ -136,11 +183,7 @@ export default function ChatReservation() {
             </div>
           </div>
         ) : (
-          <DynamicFormSwitcher
-            estateInfo={estateInfo}
-            selectedDate={selectedDate}
-            selectedTime={selectedTime}
-          />
+          <DynamicFormSwitcher showForm={showForm} setShowForm={setShowForm} />
         )}
       </div>
     </div>

@@ -11,6 +11,7 @@ import {
   RealEstateMarketPriceParamInfo,
   RecentVisitedRealEstatesIds,
   RealEstateIds,
+  ChatCreateRequest,
 } from '../types/hanaAssetRequest.common.ts';
 import {
   CurrentAptMarkers,
@@ -18,6 +19,10 @@ import {
   RealEstateBasic,
   RealEstateDetail,
   RealEstateList,
+  ChatRoom,
+  ChatRoomDTO,
+  ChatMessage,
+  ApiResponseEntity,
   RealEstateMarketPrice,
   RealEstateMarketPriceParam,
   RealEstateType,
@@ -28,9 +33,9 @@ import {
 export class PlatformAPI {
   static isTokenExpired = (token: string) => {
     try {
-      const decoded = jwtDecode(token); // 토큰 디코딩
+      const decoded = jwtDecode(token);
       const currentTime = Math.floor(Date.now() / 1000);
-      return decoded.exp! < currentTime; // 만료 여부 확인
+      return decoded.exp! < currentTime;
     } catch (error) {
       console.error('Invalid token', error);
       return true;
@@ -224,19 +229,140 @@ export class PlatformAPI {
       console.error('Error logout:', error);
     }
   }
-
-  public static async getRealEstateMarketPriceParam(
-    realEstateId: number
-  ): Promise<RealEstateMarketPriceParam> {
-    const response = await this.instance.get(
-      `/real-estates/${realEstateId}/market-price`,
-      {
-        ...this.defaultConfig,
-      }
-    );
-    return response.data as RealEstateMarketPriceParam;
+  // 채팅방 생성
+  public static async createChat(
+    chatCreateRequest: ChatCreateRequest
+  ): Promise<ChatRoom> {
+    const response = await this.instance.post<{
+      message: string;
+      result: { count: number; chatrooms: ChatRoom[] };
+    }>(`/chat/create`, chatCreateRequest, this.defaultConfig);
+    if (response.data.result.chatrooms.length > 0) {
+      return response.data.result.chatrooms[0];
+    } else {
+      throw new Error('No chatrooms found in the response.');
+    }
   }
 
+  // 지난 상담 내역 리스트 가져오기
+  public static async getCompletedChatroomsByUserId(
+    accessToken: string
+  ): Promise<ChatRoom[]> {
+    const response = await this.instance.get<{
+      message: string;
+      result: {
+        count: number;
+        chatrooms: ChatRoom[];
+      };
+    }>(`/chat/completed-chatrooms`, {
+      headers: {
+        ...this.defaultConfig.headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data.result.chatrooms;
+  }
+
+  // 특정 상태의 채팅방 가져오기
+  public static async findRoomDetails(
+    accessToken: string,
+    status: string
+  ): Promise<ChatRoomDTO | null> {
+    const response = await this.instance.get<{
+      message: string;
+      result: ChatRoomDTO;
+    }>(`/chat/findRoom`, {
+      params: { chatroomStatus: status },
+      headers: {
+        ...this.defaultConfig.headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data.result;
+  }
+
+  // 채팅방 상태 업데이트
+  public static async updateChatroomStatus(
+    chatroomId: string,
+    currentState: string
+  ): Promise<ChatRoomDTO> {
+    const response = await this.instance.put<{
+      message: string;
+      result: {
+        count: number;
+        chatrooms: ChatRoomDTO[];
+      };
+    }>(
+      `/chat/update-status`,
+      { chatroomId, state: currentState },
+      this.defaultConfig
+    );
+    if (response.data.result.chatrooms.length > 0) {
+      return response.data.result.chatrooms[1];
+    } else {
+      throw new Error('No chatrooms found in the response.');
+    }
+  }
+
+  // 특정 채팅방 메시지 가져오기
+  public static async getChatroomMessages(
+    chatroomId: string
+  ): Promise<ChatMessage[]> {
+    const response = await this.instance.get(`/chat/${chatroomId}/messages`);
+    return response.data;
+  }
+
+  // 채팅방 삭제
+  public static async deleteChatroom(chatroomId: string): Promise<void> {
+    const response = await this.instance.delete<{
+      message: string;
+      result: null;
+    }>(`/chat/delete/${chatroomId}`);
+  }
+
+  // chatroomId로 채팅 내역 가져오기
+  public static async getChatroomMessagesByChatroomId(
+    chatroomId: string
+  ): Promise<ChatMessage[]> {
+    try {
+      if (!chatroomId) {
+        throw new Error('chatroomId is required.');
+      }
+
+      console.log(`Fetching messages for chatroomId: ${chatroomId}`);
+
+      const response = await this.instance.get<{
+        message: string;
+        result: {
+          count: number;
+          messages: ChatMessage[];
+        };
+      }>(`/chat/${chatroomId}/messages`, {
+        ...this.defaultConfig,
+      });
+
+      console.log('API Response:', response.data);
+
+      return response.data.result.messages;
+    } catch (error) {
+      console.error('Error fetching chatroom messages:', error);
+
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        console.error('No messages found for the given chatroomId.');
+        return [];
+      }
+
+      throw error;
+    }
+  }
+  public static async getBookmarkRealEstates(): Promise<
+    ApiResponseEntity<RealEstateList>
+  > {
+    const response = await this.instance.get('/users/bookmarks/real-estates', {
+      ...this.defaultConfig,
+    });
+    return response.data as ApiResponseEntity<RealEstateList>;
+  }
   public static async getRealEstateMarketPrice(
     realEstateMarketPriceParam: RealEstateMarketPriceParamInfo,
     tradeType: string
@@ -282,44 +408,27 @@ export class PlatformAPI {
     });
     return response.data as LoanRecommend;
   }
-
+  public static async getRealEstateMarketPriceParam(
+    realEstateId: number
+  ): Promise<RealEstateMarketPriceParam> {
+    const response = await this.instance.get(
+      `/real-estates/${realEstateId}/market-price`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.data as RealEstateMarketPriceParam;
+  }
   public static async getLoanDetail(loanId: number): Promise<LoanDetail> {
     const response = await this.instance.get(`/loan/detail/${loanId}`, {
       ...this.defaultConfig,
     });
     return response.data as LoanDetail;
   }
-
   public static async getConsultingUserInfo(): Promise<LoanRecommend> {
     const response = await this.instance.get(`/chat/user`, {
       ...this.defaultConfig,
     });
     return response.data as LoanRecommend;
-  }
-
-  public static async getBookmarkRealEstates(): Promise<RealEstateList | null> {
-    const response = await this.instance.get('/users/bookmarks/real-estates');
-    return response ? (response.data as RealEstateList) : null;
-  }
-
-  public static async addBookmarkRealEstate(
-    realEstateId: number
-  ): Promise<number> {
-    const response = await this.instance.post(
-      `/users/bookmarks/real-estates/${realEstateId}`,
-      {
-        ...this.defaultConfig,
-      }
-    );
-    return response.status;
-  }
-
-  public static async removeBookmarkRealEstate(
-    realEstateId: number
-  ): Promise<number> {
-    const response = await this.instance.delete(
-      `/users/bookmarks/real-estates/${realEstateId}`
-    );
-    return response.status;
   }
 }

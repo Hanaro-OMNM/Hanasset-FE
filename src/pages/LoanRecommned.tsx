@@ -1,8 +1,10 @@
 import { useSearchParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import Button from '../components/atoms/Button';
 import MobileHeader from '../components/atoms/MobileHeader.tsx';
 import { PlatformAPI } from '../platform/PlatformAPI.ts';
+import isLoginAtom from '../recoil/isLogin';
 import {
   GuestInfo,
   LoanRecommendInfo,
@@ -24,6 +26,7 @@ export default function LoanInfoPage() {
   const [realEstateInfos, setRealEstateInfos] = useState<RealEstateInfo[] | []>(
     []
   );
+  const [isLogin] = useRecoilState(isLoginAtom);
 
   const onBack = (): void => {
     window.history.back();
@@ -52,10 +55,10 @@ export default function LoanInfoPage() {
   };
 
   useEffect(() => {
-    if (realEstateInfos.length < 1) {
+    if (realEstateInfos.length < 1 && isLogin) {
       fetchLoanRecommend();
     }
-  }, [realEstateInfos]);
+  }, [fetchLoanRecommend, isLogin, realEstateInfos]);
 
   return (
     <div className="flex">

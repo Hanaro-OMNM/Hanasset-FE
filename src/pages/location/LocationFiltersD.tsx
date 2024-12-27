@@ -72,22 +72,6 @@ const LocationFilterDong = () => {
     }
   };
 
-  useEffect(() => {
-    if (!bookmarkedLocations) {
-      dongInfoFetch();
-      getBookmarksAreaCode();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (bookmarkedLocations) {
-      const isBookmarked = bookmarkedLocations.some(
-        (items) => items.emdName === selectedLocation
-      );
-      setIsBookmarked(isBookmarked);
-    }
-  }, [bookmarkedLocations, selectedLocation]);
-
   const dongInfoFetch = async () => {
     const fetchDong = new Set<string>();
     const fetchInfo: Array<Info> = [];
@@ -117,6 +101,26 @@ const LocationFilterDong = () => {
         });
       });
   };
+
+  useEffect(() => {
+    if (isLogin && !bookmarkedLocations && dong.size == 0) {
+      getBookmarksAreaCode();
+      dongInfoFetch();
+    }
+
+    if (!isLogin && !bookmarkedLocations && dong.size == 0) {
+      dongInfoFetch();
+    }
+  }, [isLogin, bookmarkedLocations, dongInfoFetch, dong.size]);
+
+  useEffect(() => {
+    if (bookmarkedLocations) {
+      const isBookmarked = bookmarkedLocations.some(
+        (items) => items.emdName === selectedLocation
+      );
+      setIsBookmarked(isBookmarked);
+    }
+  }, [bookmarkedLocations, selectedLocation]);
 
   const handleNavigateToMap = () => {
     if (!selectedLocation) return;

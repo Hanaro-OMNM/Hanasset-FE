@@ -43,7 +43,7 @@ const LocationFilterGungu = () => {
     };
 
     fetchData();
-  }, []);
+  }, [currCity]);
 
   // 배열을 JSON 문자열로 변환하여 로컬 스토리지에 저장
   localStorage.setItem('gungu', JSON.stringify(Array.from(gungu).sort()));

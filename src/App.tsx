@@ -48,7 +48,7 @@ function AppContent() {
       setIsLoginModalOpen(true);
       navigate('/');
     }
-  }, [isLogin, location.pathname, navigate]);
+  }, [setIsLogin, isLogin, location.pathname, navigate]);
 
   return (
     <div className="App">

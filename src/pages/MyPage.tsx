@@ -82,11 +82,11 @@ export default function MyPage() {
 
   // 로컬 스토리지에서 "관심 지역" 데이터 가져오기
   useEffect(() => {
-    getBookmarksAreaCode();
     if (isLogin) {
+      getBookmarksAreaCode();
       getBookmarkRealEstates();
     }
-  }, []);
+  }, [isLogin]);
 
   const navigate = useNavigate();
 
@@ -167,7 +167,7 @@ export default function MyPage() {
     };
 
     fetchUserName();
-  }, []);
+  }, [accessToken]);
 
   return (
     <div className="top-0 absolute animate-fadeInRight">

@@ -36,7 +36,7 @@ async function processCsv(inputFile, outputFile) {
   output.end();
 }
 
-fs.readFile(filePath, 'utf8', (err, data) => {
+fs.readFile(filePath, 'utf8', (err) => {
   if (err) {
     console.error(err);
     return;

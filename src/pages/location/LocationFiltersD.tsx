@@ -152,7 +152,7 @@ const LocationFilterDong = () => {
     if (!selected) return;
 
     const { lat, lng } = selected;
-    setCenter({ lat, lng });
+    setCenter({ lat, lng, bookmarkLocation: true });
     navigate('/');
   };
 

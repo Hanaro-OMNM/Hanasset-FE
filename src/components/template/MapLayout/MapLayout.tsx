@@ -99,6 +99,13 @@ export default function MapLayout({ children }: LayoutProps) {
   }, [zoom]);
 
   useEffect(() => {
+    if (center.bookmarkLocation) {
+      handleMarkerFetch();
+      setCenter({ lat: center.lat, lng: center.lng, bookmarkLocation: false });
+    }
+  }, [center.bookmarkLocation]);
+
+  useEffect(() => {
     let isDragging = false;
     let dragStartPosition = { x: 0, y: 0 };
 
@@ -132,7 +139,7 @@ export default function MapLayout({ children }: LayoutProps) {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [center]);
+  }, [center, center.bookmarkLocation]);
 
   const handleZoomChanged = useCallback((newZoom: number) => {
     setZoom(newZoom);
@@ -141,7 +148,11 @@ export default function MapLayout({ children }: LayoutProps) {
   const handleCenterChanged = () => {
     if (mapRef.current) {
       const newCenter = mapRef.current.getCenter();
-      setCenter({ lat: newCenter.lat(), lng: newCenter.lng() });
+      setCenter({
+        lat: newCenter.lat(),
+        lng: newCenter.lng(),
+        bookmarkLocation: false,
+      });
     }
   };
 
@@ -150,7 +161,7 @@ export default function MapLayout({ children }: LayoutProps) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setCenter({ lat: latitude, lng: longitude });
+          setCenter({ lat: latitude, lng: longitude, bookmarkLocation: false });
         },
         (error) =>
           console.error('Error occurred while fetching location:', error),
@@ -257,7 +268,11 @@ export default function MapLayout({ children }: LayoutProps) {
                     size: naverMaps.Size(50, 50),
                   }}
                   onClick={() => {
-                    setCenter({ lat: marker.centerLat, lng: marker.centerLng });
+                    setCenter({
+                      lat: marker.centerLat,
+                      lng: marker.centerLng,
+                      bookmarkLocation: false,
+                    });
                     handleZoomIn();
                   }}
                 />

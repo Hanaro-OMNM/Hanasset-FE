@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 const centerAtom = atom({
   key: 'centerAtom',
-  default: { lat: 37.544713515, lng: 127.056343325 },
+  default: { lat: 37.544713515, lng: 127.056343325, bookmarkLocation: false },
 });
 
 export default centerAtom;

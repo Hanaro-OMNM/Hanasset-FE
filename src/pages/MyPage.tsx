@@ -132,7 +132,7 @@ export default function MyPage() {
   };
 
   const handleNavigateToMap = (lat: number, lng: number) => {
-    setCenter({ lat, lng });
+    setCenter({ lat, lng, bookmarkLocation: true });
     navigate('/');
   };
 

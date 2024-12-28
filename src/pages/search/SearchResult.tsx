@@ -8,7 +8,9 @@ import { useEffect, useState } from 'react';
 import redAlert from '../../assets/img/redAlert.png';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import RecentCheckedButton from '../../components/atoms/RecentCheckedButton';
+import { PlatformAPI } from '../../platform/PlatformAPI';
 import centerAtom from '../../recoil/center';
+import { Search } from '../../types/hanaAssetResponse.common';
 
 type localSearchResult = {
   title: string;
@@ -30,6 +32,9 @@ const SearchResult = () => {
   const [localSearchResults, setLocalSearchResults] = useState<
     localSearchResult[]
   >([]);
+  const [realEstateSearchResults, setRealEstateSearchResults] = useState<
+    Search[]
+  >([]);
 
   const handleClear = () => {
     setSearchText('');
@@ -42,6 +47,7 @@ const SearchResult = () => {
 
   useEffect(() => {
     setSearchText(query ?? '');
+    // 지역 검색 결과 가져오기
     const fetchData = async () => {
       const fetchLocalSearchResults = new Set<localSearchResult>();
       await fetch('src/assets/dongInfo.csv')
@@ -64,9 +70,15 @@ const SearchResult = () => {
             },
           });
         });
+
+      // 단지 검색 결과 가져오기
+      const searchResultsFromAPI =
+        await PlatformAPI.getSearchResults(searchText);
+      setRealEstateSearchResults(searchResultsFromAPI);
+      searchResultsFromAPI.forEach((v) => console.log(v));
     };
     fetchData();
-  }, [query]);
+  }, [query, searchText]);
 
   return (
     <div className="w-[420px]">
@@ -114,10 +126,25 @@ const SearchResult = () => {
               매물 검색 결과
             </h2>
             <CommonBackground className="w-full px-5 py-3">
-              <div>
-                일치하는 매물이 없습니다. 다른 검색어로 시도해 보세요.
-                <img alt="경고" src={redAlert} />
-              </div>
+              {realEstateSearchResults.length > 0 ? (
+                realEstateSearchResults.map((result) => (
+                  <RecentCheckedButton
+                    title={result.complexName}
+                    onClick={() =>
+                      setCenter({
+                        lat: result.lat,
+                        lng: result.lng,
+                        bookmarkLocation: false,
+                      })
+                    }
+                  />
+                ))
+              ) : (
+                <div>
+                  일치하는 매물이 없습니다. 다른 검색어로 시도해 보세요.
+                  <img alt="경고" src={redAlert} />
+                </div>
+              )}
             </CommonBackground>
           </div>
 

@@ -118,7 +118,12 @@ export default function MapLayout({ children }: LayoutProps) {
       const distanceX = Math.abs(event.clientX - dragStartPosition.x);
       const distanceY = Math.abs(event.clientY - dragStartPosition.y);
 
-      if (distanceX > 5 || distanceY > 5) {
+      if (
+        (distanceX > 5 || distanceY > 5) &&
+        event &&
+        event.target instanceof HTMLImageElement &&
+        event.target.src.includes('naver')
+      ) {
         isDragging = true;
       }
     };
@@ -139,7 +144,7 @@ export default function MapLayout({ children }: LayoutProps) {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [center, center.bookmarkLocation]);
+  }, [center, handleMarkerFetch]);
 
   const handleZoomChanged = useCallback((newZoom: number) => {
     setZoom(newZoom);

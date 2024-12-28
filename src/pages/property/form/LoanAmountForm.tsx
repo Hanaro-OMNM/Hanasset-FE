@@ -119,7 +119,7 @@ export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
     if (annualInterestResponse === 200 && annualPrincipalResponse === 200) {
       setAsset({
         ...asset,
-        hasLoan: true,
+        hasLoan: false,
         annualInterest: localAnnualInterest,
         annualPrincipal: localAnnualPrincipal,
       });
@@ -164,7 +164,9 @@ export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
       <div className="mt-10">
         <Input
           name="annualInterest"
-          value={localAnnualInterest.toString()}
+          value={
+            localAnnualInterest === -1 ? '0' : localAnnualInterest.toString()
+          }
           onChange={handleInterestChange}
           label="보유 대출 연이자 상환액"
           error={interestError}
@@ -176,7 +178,9 @@ export default function LoanAmountForm({ onBack }: AssetInfoInputProps) {
       <div className="mt-4">
         <Input
           name="annualPrincipal"
-          value={localAnnualPrincipal.toString()}
+          value={
+            localAnnualPrincipal === -1 ? '0' : localAnnualPrincipal.toString()
+          }
           onChange={handlePrincipalChange}
           label="보유 대출 연원금 상환액"
           error={principalError}

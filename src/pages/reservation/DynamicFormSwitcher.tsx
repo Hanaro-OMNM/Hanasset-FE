@@ -2,20 +2,11 @@ import { useRecoilState } from 'recoil';
 import { useState, useEffect } from 'react';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import { assetState } from '../../recoil/asset/atom';
+import { AssetState } from '../../types/hanaAsset';
 import AmountForm from '../property/form/AmountForm';
 import JobForm from '../property/form/JobForm';
 import LoanAmountForm from '../property/form/LoanAmountForm';
 import OwnPropertyForm from '../property/form/OwnPropertyForm';
-
-interface AssetState {
-  jobType: string; // 직업 종류
-  incomeAmount: number; // 연수입
-  equityAmount: number; // 자본금
-  hasHome: boolean; // 주택 소유 여부
-  hasLoan: boolean; // 대출 여부
-  annualInterest: number; // 보유대출 연이자 상환액
-  annualPrincipal: number; // 보유대출 연원금 상환액
-}
 
 interface FormConfig {
   key: string;
@@ -34,33 +25,32 @@ const forms: FormConfig[] = [
     component: (onBack: () => void) => (
       <AmountForm formType="income" onBack={onBack} />
     ),
-    isUnValid: (state: AssetState) => state.incomeAmount === 0,
+    isUnValid: (state: AssetState) => state.incomeAmount === -1,
   },
   {
     key: 'equity',
     component: (onBack: () => void) => (
       <AmountForm formType="equity" onBack={onBack} />
     ),
-    isUnValid: (state: AssetState) => state.equityAmount === 0,
+    isUnValid: (state: AssetState) => state.equityAmount === -1,
   },
   {
     key: 'home',
     component: (onBack: () => void) => <OwnPropertyForm onBack={onBack} />,
-    isUnValid: (state: AssetState) => state.hasHome === false,
+    isUnValid: (state: AssetState) => state.hasHome === null,
   },
   {
     key: 'loan',
     component: (onBack: () => void) => <LoanAmountForm onBack={onBack} />,
-    isUnValid: (state: AssetState) => state.hasLoan === false,
+    isUnValid: (state: AssetState) => state.hasLoan === null,
   },
 ];
+
 interface DynamicFormSwitcherProps {
-  showForm: boolean;
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function DynamicFormSwitcher({
-  showForm,
   setShowForm,
 }: DynamicFormSwitcherProps) {
   const [asset] = useRecoilState<AssetState>(assetState);
@@ -68,16 +58,24 @@ export default function DynamicFormSwitcher({
     forms.findIndex((form) => form.isUnValid(asset))
   );
 
+  // `asset` 상태가 바뀔 때마다 currentStep을 다시 계산
+  useEffect(() => {
+    const newCurrentStep = forms.findIndex((form) => form.isUnValid(asset));
+    setCurrentStep(newCurrentStep);
+  }, [asset]);
+
   useEffect(() => {
     console.log(`현재 단계: ${currentStep}`);
     if (currentStep < 0) {
       setShowForm(false);
     }
-  }, []);
+  }, [currentStep]);
 
   const handleNext = () => {
     let nextStep = currentStep;
     console.log(forms.length);
+    console.log(asset);
+    console.log(forms[nextStep].isUnValid(asset));
 
     while (nextStep < forms.length - 1 && !forms[nextStep].isUnValid(asset)) {
       nextStep += 1;

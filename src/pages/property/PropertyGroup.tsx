@@ -1,6 +1,7 @@
 import { useRecoilState } from 'recoil';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import { assetState } from '../../recoil/asset/atom';
+import { AssetState } from '../../types/hanaAsset';
 import PropertyItem from './PropertyItem';
 
 interface PropertyGroupProp {
@@ -15,16 +16,6 @@ interface PropertyGroupProp {
       | 'loan'
       | 'equity'
   ) => void;
-}
-
-interface AssetState {
-  jobType: string; // 직업 종류
-  incomeAmount: number; // 연수입
-  equityAmount: number; // 자본금
-  hasHome: boolean; // 주택 소유 여부
-  hasLoan: boolean; // 대출 여부
-  annualInterest: number; // 보유대출 연이자 상환액
-  annualPrincipal: number; // 보유대출 연원금 상환액
 }
 
 export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
@@ -50,7 +41,11 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
       <PropertyItem
         type="income"
         label="연소득"
-        value={incomeAmount ? `${incomeAmount.toLocaleString()}만 원` : '없음'}
+        value={
+          incomeAmount && incomeAmount > 0
+            ? `${incomeAmount.toLocaleString()}만 원`
+            : '없음'
+        }
         onClick={onRegister}
         labelClassName="bg-[#F9F1EC] p-1 rounded-lg"
         labelColorClassName="text-hanaRed60 font-fontBold w-24"
@@ -59,7 +54,11 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
       <PropertyItem
         type="equity"
         label="자본금"
-        value={equityAmount ? `${equityAmount.toLocaleString()}만 원` : '없음'}
+        value={
+          equityAmount && equityAmount > 0
+            ? `${equityAmount.toLocaleString()}만 원`
+            : '없음'
+        }
         onClick={onRegister}
         labelClassName="bg-purple-100 p-1 rounded-lg"
         labelColorClassName="text-purple-500 font-fontBold w-24"

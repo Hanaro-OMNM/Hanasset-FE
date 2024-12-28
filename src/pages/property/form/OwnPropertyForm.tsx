@@ -28,14 +28,15 @@ export default function OwnPropertyForm({ onBack }: OwnPropertyFormProps) {
   };
 
   const handleSave = async () => {
+    const updatedHasHome = localHasHome === null ? false : localHasHome; // localHasHome이 null이면 false로 처리
     const response = await PlatformAPI.putPropertyValue(
       'hasHouse',
-      localHasHome ? '있음' : '없음'
+      updatedHasHome ? '있음' : '없음'
     );
     if (response === 200) {
       setAsset({
         ...asset,
-        hasHome: localHasHome,
+        hasHome: updatedHasHome,
       });
       onBack();
     }

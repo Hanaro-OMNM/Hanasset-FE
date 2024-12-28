@@ -33,14 +33,16 @@ export default function JobForm({ onBack }: JobFormProps) {
   };
 
   const putJobFormPropertyValue = async (localJobType: string) => {
+    const updatedJobType =
+      localJobType === '없음' ? options[0].value : localJobType;
     const response = await PlatformAPI.putPropertyValue(
       'jobType',
-      localJobType
+      updatedJobType
     );
     if (response === 200) {
       setAsset({
         ...asset,
-        jobType: localJobType,
+        jobType: updatedJobType,
       });
       onBack();
     }

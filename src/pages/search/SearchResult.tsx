@@ -7,6 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import redAlert from '../../assets/img/redAlert.png';
 import CommonBackground from '../../components/atoms/CommonBackground';
+import RealEstateResultButton from '../../components/atoms/RealEstateResultButton';
 import RecentCheckedButton from '../../components/atoms/RecentCheckedButton';
 import { PlatformAPI } from '../../platform/PlatformAPI';
 import centerAtom from '../../recoil/center';
@@ -75,7 +76,6 @@ const SearchResult = () => {
       const searchResultsFromAPI =
         await PlatformAPI.getSearchResults(searchText);
       setRealEstateSearchResults(searchResultsFromAPI);
-      searchResultsFromAPI.forEach((v) => console.log(v));
     };
     fetchData();
   }, [query, searchText]);
@@ -128,8 +128,11 @@ const SearchResult = () => {
             <CommonBackground className="w-full px-5 py-3">
               {realEstateSearchResults.length > 0 ? (
                 realEstateSearchResults.map((result) => (
-                  <RecentCheckedButton
+                  <RealEstateResultButton
                     title={result.complexName}
+                    keyword={searchText}
+                    address={result.addressName}
+                    complexId={result.housingComplexId}
                     onClick={() =>
                       setCenter({
                         lat: result.lat,
@@ -157,6 +160,7 @@ const SearchResult = () => {
                 localSearchResults.map((result) => (
                   <RecentCheckedButton
                     title={result.title}
+                    query={searchText}
                     onClick={() =>
                       setCenter({
                         lat: result.lat,

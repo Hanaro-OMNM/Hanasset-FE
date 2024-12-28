@@ -1,7 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
-import Button from '../components/atoms/Button';
 import MobileHeader from '../components/atoms/MobileHeader.tsx';
 import { PlatformAPI } from '../platform/PlatformAPI.ts';
 import isLoginAtom from '../recoil/isLogin';
@@ -151,19 +150,23 @@ export default function LoanInfoPage() {
               {isBookmarkedRealEstate(
                 Number(searchParams.get('realEstateIds'))
               ) ? (
-                <Button
-                  text="관심 매물 삭제하기"
+                <button
+                  className="bg-hanaGreen60 text-white my-4 py-2 px-4 rounded-lg w-full hover:bg-hanaColor2"
                   onClick={() =>
                     removeBookmark(Number(searchParams.get('realEstateIds')))
                   }
-                />
+                >
+                  관심 매물 삭제하기
+                </button>
               ) : (
-                <Button
-                  text="관심 매물 등록하기"
+                <button
+                  className="bg-hanaGreen60 text-white my-4 py-2 px-4 rounded-lg w-full hover:bg-hanaColor2"
                   onClick={() =>
                     addBookmark(Number(searchParams.get('realEstateIds')))
                   }
-                />
+                >
+                  관심 매물 등록하기
+                </button>
               )}
             </div>
           </div>

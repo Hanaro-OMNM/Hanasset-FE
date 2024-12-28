@@ -8,7 +8,8 @@ type ModalProps = {
 
 const MyLocationModal = ({ children, onClose }: ModalProps) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    // 높이 하드코딩
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 h-[895px]">
       <div className="bg-white p-6 rounded shadow-lg relative">
         {children}
         <button

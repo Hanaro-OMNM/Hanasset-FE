@@ -1,7 +1,7 @@
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { NavermapsProvider } from 'react-naver-maps';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { RecoilRoot, useRecoilState, useSetRecoilState } from 'recoil';
+import { RecoilRoot, useRecoilState } from 'recoil';
 import { useState, useEffect } from 'react';
 import './App.css';
 import Layout from './components/template/Layout.tsx';
@@ -9,14 +9,12 @@ import Modal from './components/template/Modal/Modal.tsx';
 import MyEstateList from './components/template/MyEstateList.tsx';
 import SelectEstate from './components/template/SelectEstate.tsx';
 import Consulting from './pages/Consulting.tsx';
-import LoanRecommend from './pages/LoanRecommned.tsx';
+import LoanRecommend from './pages/LoanRecommend.tsx';
 import Main from './pages/Main.tsx';
 import MyPage from './pages/MyPage.tsx';
-import PropertyAgree from './pages/PropertyAgree.tsx';
 import RealEstateList from './pages/RealEstateList/RealEstateList.tsx';
 import ChatApp from './pages/chat/ChatApp.tsx';
 import ChatHistory from './pages/chat/ChatHistory.tsx';
-import Consultant from './pages/consultant/Consultant.tsx';
 import ChatReservation from './pages/reservation/ChatReservation.tsx';
 import SearchResult from './pages/search/SearchResult.tsx';
 import isLoginAtom from './recoil/isLogin';
@@ -50,7 +48,7 @@ function AppContent() {
       setIsLoginModalOpen(true);
       navigate('/');
     }
-  }, [isLogin, location.pathname, navigate]);
+  }, [setIsLogin, isLogin, location.pathname, navigate]);
 
   return (
     <div className="App">
@@ -67,13 +65,8 @@ function AppContent() {
               <Route path="/real-estate-list" element={<RealEstateList />} />
               <Route path="/select-estate" element={<SelectEstate />} />
               <Route path="/my-estate-list" element={<MyEstateList />} />
-              <Route path="/property-agree" element={<PropertyAgree />} />
-              <Route path="/consultant" element={<Consultant />} />
               <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
-              <Route
-                path="/chat-history"
-                element={<ChatHistory accessor="guest" />}
-              />
+              <Route path="/chat-history" element={<ChatHistory />} />
               <Route path="/search-result" element={<SearchResult />} />
             </Routes>
             {isLoginModalOpen && (

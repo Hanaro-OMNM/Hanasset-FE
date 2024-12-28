@@ -17,19 +17,13 @@ import MyEstateList from '../components/template/MyEstateList.tsx';
 import { PlatformAPI } from '../platform/PlatformAPI.ts';
 import centerAtom from '../recoil/center/atom.ts';
 import isLoginAtom from '../recoil/isLogin';
-import { RealEstatePreview } from '../types/hanaAssetResponse.common.ts';
+import {
+  BookmarkAreaInfo,
+  RealEstatePreview,
+} from '../types/hanaAssetResponse.common.ts';
 import RealEstateDetail from './RealEstateDetail/RealEstateDetail.tsx';
 import PropertyGroup from './property/PropertyGroup.tsx';
 import PropertyManage from './property/PropertyManage.tsx';
-
-interface BookmarkedLocation {
-  [key: string]: {
-    code: string;
-    address: string;
-    lat: number;
-    lng: number;
-  };
-}
 
 export default function MyPage() {
   const setCenter = useSetRecoilState(centerAtom);
@@ -51,9 +45,9 @@ export default function MyPage() {
     | 'equity'
   >('main');
 
-  const [interestAreas, setInterestAreas] = useState<
-    { name: string; lat: number; lng: number }[]
-  >([]);
+  const [bookmarkedLocations, setBookmarkedLocations] = useState<
+    BookmarkAreaInfo[] | null
+  >(null);
 
   const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
 
@@ -74,49 +68,25 @@ export default function MyPage() {
 
   const [userName, setUserName] = useState<string>('');
 
+  const getBookmarksAreaCode = async () => {
+    try {
+      const bookmarksAreaCodeResponse =
+        await PlatformAPI.getBookmarksAreaCode();
+      if (bookmarksAreaCodeResponse) {
+        setBookmarkedLocations(bookmarksAreaCodeResponse.areaCodes);
+      }
+    } catch (error) {
+      console.error('Error fetching bookmarks area code:', error);
+    }
+  };
+
   // 로컬 스토리지에서 "관심 지역" 데이터 가져오기
   useEffect(() => {
-    const savedLocations = localStorage.getItem('bookmarkedLocations');
-    if (savedLocations) {
-      try {
-        const parsedLocations: BookmarkedLocation[] =
-          JSON.parse(savedLocations);
-
-        // parsedLocations이 갖고 있는 모든 객체를 처리
-        const transformedLocations = parsedLocations.flatMap((item) =>
-          Object.entries(item).map(([key, value]) => {
-            const location = value as {
-              code: string;
-              address: string;
-              lat: number;
-              lng: number;
-            };
-            return {
-              name: key,
-              code: location.code,
-              address: location.address,
-              lat: location.lat,
-              lng: location.lng,
-            };
-          })
-        );
-
-        // lat, lng 포함 변환
-        const updatedInterestAreas = transformedLocations.map((location) => ({
-          name: location.name,
-          lat: location.lat,
-          lng: location.lng,
-        }));
-
-        setInterestAreas(updatedInterestAreas); // 상태 업데이트
-      } catch (error) {
-        console.error('Error parsing bookmarkedLocations:', error);
-      }
-    }
     if (isLogin) {
+      getBookmarksAreaCode();
       getBookmarkRealEstates();
     }
-  }, []);
+  }, [isLogin]);
 
   const navigate = useNavigate();
 
@@ -139,10 +109,12 @@ export default function MyPage() {
   ];
 
   // 관심 지역 + 배경사진 모음
-  const combinedItems = interestAreas.map((area, index) => ({
-    ...area,
-    background: backgrounds[index],
-  }));
+  const combinedItems =
+    bookmarkedLocations &&
+    bookmarkedLocations.map((area, index) => ({
+      ...area,
+      background: backgrounds[index],
+    }));
 
   const handleRegister = (
     type:
@@ -195,7 +167,7 @@ export default function MyPage() {
     };
 
     fetchUserName();
-  }, []);
+  }, [accessToken]);
 
   return (
     <div className="top-0 absolute animate-fadeInRight">
@@ -247,26 +219,30 @@ export default function MyPage() {
                 <div className="mt-10">
                   <SemiTitle>내 관심 지역</SemiTitle>
                 </div>
-                {interestAreas.length > 0 ? (
+                {combinedItems && combinedItems ? (
                   <Swiper
-                    items={combinedItems}
+                    items={combinedItems.slice(0, 3)}
                     pagination={{ clickable: true }}
-                    renderItem={(item) => (
-                      <CommonBackground
-                        className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md relative overflow-hidden cursor-pointer"
-                        onClick={() => handleNavigateToMap(item.lat, item.lng)}
-                      >
-                        <img
-                          src={item.background.image}
-                          alt={item.name}
-                          className="absolute inset-0 w-full h-full object-cover opacity-70"
-                        />
-                        <div className="absolute inset-0 bg-black opacity-30"></div>
-                        <span className="relative text-white font-semibold">
-                          {item.name}
-                        </span>
-                      </CommonBackground>
-                    )}
+                    renderItem={(item) =>
+                      item.background && (
+                        <CommonBackground
+                          className="mb-10 ml-1 h-20 flex items-center justify-center rounded-lg shadow-md relative overflow-hidden cursor-pointer"
+                          onClick={() =>
+                            handleNavigateToMap(item.centerLat, item.centerLng)
+                          }
+                        >
+                          <img
+                            src={item.background.image}
+                            alt={item.emdName}
+                            className="absolute inset-0 w-full h-full object-cover opacity-70"
+                          />
+                          <div className="absolute inset-0 bg-black opacity-30"></div>
+                          <span className="relative text-white font-semibold">
+                            {item.emdName}
+                          </span>
+                        </CommonBackground>
+                      )
+                    }
                   />
                 ) : (
                   <div className="mt-5 text-gray-500 text-center">

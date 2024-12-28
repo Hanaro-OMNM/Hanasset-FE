@@ -28,6 +28,8 @@ import {
   LoanRecommend,
   LoanDetail,
   UserInfoResponse,
+  BookmarkArea,
+  BookmarkAreaStatus,
 } from '../types/hanaAssetResponse.common.ts';
 
 export class PlatformAPI {
@@ -469,5 +471,41 @@ export class PlatformAPI {
       }
     )) as ApiResponseEntity<RealEstateList>;
     return response.data.result as RealEstateList;
+  }
+
+  public static async getBookmarksAreaCode(): Promise<BookmarkArea> {
+    const response = (await this.instance.get(
+      '/users/bookmarks/area-codes'
+    )) as ApiResponseEntity<BookmarkArea>;
+    return response.data.result as BookmarkArea;
+  }
+
+  public static async getBookmarksAreaCodeStatus(): Promise<BookmarkAreaStatus> {
+    const response = (await this.instance.get(
+      '/users/bookmarks/area-codes/status'
+    )) as ApiResponseEntity<BookmarkAreaStatus>;
+    return response.data.result as BookmarkAreaStatus;
+  }
+
+  public static async addBookmarksAreaCode(areaCode: string): Promise<number> {
+    const response = await this.instance.post(
+      `/users/bookmarks/area-codes/${areaCode}`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.status;
+  }
+
+  public static async removeBookmarksAreaCode(
+    areaCode: string
+  ): Promise<number> {
+    const response = await this.instance.delete(
+      `/users/bookmarks/area-codes/${areaCode}`,
+      {
+        ...this.defaultConfig,
+      }
+    );
+    return response.status;
   }
 }

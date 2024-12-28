@@ -44,7 +44,7 @@ const SearchResult = () => {
     setSearchText(query ?? '');
     const fetchData = async () => {
       const fetchLocalSearchResults = new Set<localSearchResult>();
-      await fetch('src/assets/output.csv')
+      await fetch('src/assets/dongInfo.csv')
         .then((response) => response.text())
         .then((csvString) => {
           Papa.parse<string>(csvString, {

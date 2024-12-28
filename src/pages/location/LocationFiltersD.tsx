@@ -3,11 +3,14 @@ import { FaStar } from 'react-icons/fa';
 import { HiOutlineOfficeBuilding } from 'react-icons/hi';
 import { MdNavigateNext } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useState, useEffect } from 'react';
 import CommonBackground from '../../components/atoms/CommonBackground';
 import MyLocationModal from '../../components/template/Modal/MyLocation';
+import { PlatformAPI } from '../../platform/PlatformAPI.ts';
 import centerAtom from '../../recoil/center';
+import isLoginAtom from '../../recoil/isLogin';
+import { BookmarkAreaInfo } from '../../types/hanaAssetResponse.common.ts';
 import LocationFilterCity from './LocationFiltersC';
 import LocationFilterGungu from './LocationFiltersG';
 
@@ -20,6 +23,7 @@ type Info = {
 
 const LocationFilterDong = () => {
   const setCenter = useSetRecoilState(centerAtom);
+  const [isLogin] = useRecoilState(isLoginAtom);
 
   const navigate = useNavigate();
 
@@ -29,55 +33,29 @@ const LocationFilterDong = () => {
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 
   const [bookmarkedLocations, setBookmarkedLocations] = useState<
-    Array<Record<string, Info>>
-  >(JSON.parse(localStorage.getItem('bookmarkedLocations') || '[]'));
+    BookmarkAreaInfo[] | null
+  >(null);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
+
+  const [generalAddModalOpen, setGeneralAddModalOpen] = useState(false);
+
+  const [fullAddModalOpen, setFullAddModalOpen] = useState(false);
+
+  const [isFull, setIsFull] = useState(false);
+
+  const [deleteLocation, setDeleteLocation] = useState<string | null>(null);
 
   const currCity: string = JSON.parse(
     localStorage.getItem('currCity') || '"시/도"'
   );
+
   const currGungu: string = JSON.parse(
     localStorage.getItem('currGungu') || '"시/군/구"'
   );
   const currDong: string = '읍/면/동';
 
-  // 일단 더미 데이터
   const [dong, setDong] = useState<Set<string>>(new Set());
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchDong = new Set<string>();
-      const fetchInfo: Array<Info> = [];
-
-      await fetch('src/assets/output.csv')
-        .then((response) => response.text())
-        .then((csvString) => {
-          Papa.parse<string>(csvString, {
-            complete: (results) => {
-              results.data.forEach((row) => {
-                if (row[1] && row[1].startsWith(currCity + ' ' + currGungu)) {
-                  const dongName = row[1].split(' ')[2];
-                  if (dongName) {
-                    fetchDong.add(dongName);
-                    fetchInfo.push({
-                      code: row[0] || '',
-                      address: row[1] || '',
-                      lat: parseFloat(row[3] || '0'),
-                      lng: parseFloat(row[2] || '0'),
-                    });
-                  }
-                }
-              });
-              setDong(fetchDong);
-              localStorage.setItem('info', JSON.stringify(fetchInfo));
-            },
-          });
-        });
-    };
-
-    fetchData();
-  }, []);
 
   // 배열을 JSON 문자열로 변환하여 로컬 스토리지에 저장
   localStorage.setItem('dong', JSON.stringify(Array.from(dong).sort()));
@@ -88,8 +66,84 @@ const LocationFilterDong = () => {
   const storedKey: string = 'currDong';
   const info: Info[] = JSON.parse(localStorage.getItem('info') || '[]');
 
+  const getBookmarksAreaCode = async () => {
+    try {
+      const bookmarksAreaCodeResponse =
+        await PlatformAPI.getBookmarksAreaCode();
+      if (bookmarksAreaCodeResponse) {
+        setBookmarkedLocations(bookmarksAreaCodeResponse.areaCodes);
+      }
+    } catch (error) {
+      console.error('Error fetching bookmarks area code:', error);
+    }
+  };
+
+  const getBookmarksAreaCodeStatus = async () => {
+    try {
+      const bookmarksAreaCodeStatus =
+        await PlatformAPI.getBookmarksAreaCodeStatus();
+      if (bookmarksAreaCodeStatus) {
+        setIsFull(bookmarksAreaCodeStatus.full);
+        setDeleteLocation(bookmarksAreaCodeStatus.emdName);
+      }
+    } catch (error) {
+      console.error('Error fetching bookmarks area code:', error);
+    }
+  };
+
+  const dongInfoFetch = async () => {
+    const fetchDong = new Set<string>();
+    const fetchInfo: Array<Info> = [];
+
+    await fetch('src/assets/dongInfo.csv')
+      .then((response) => response.text())
+      .then((csvString) => {
+        Papa.parse<string>(csvString, {
+          complete: (results) => {
+            results.data.forEach((row) => {
+              if (row[1] && row[1].startsWith(currCity + ' ' + currGungu)) {
+                const dongName = row[1].split(' ')[2];
+                if (dongName) {
+                  fetchDong.add(dongName);
+                  fetchInfo.push({
+                    code: row[0] || '',
+                    address: row[1] || '',
+                    lat: parseFloat(row[3] || '0'),
+                    lng: parseFloat(row[2] || '0'),
+                  });
+                }
+              }
+            });
+            setDong(fetchDong);
+            localStorage.setItem('info', JSON.stringify(fetchInfo));
+          },
+        });
+      });
+  };
+
+  useEffect(() => {
+    if (isLogin && !bookmarkedLocations && dong.size == 0) {
+      getBookmarksAreaCodeStatus();
+      getBookmarksAreaCode();
+      dongInfoFetch();
+    }
+
+    if (!isLogin && !bookmarkedLocations && dong.size == 0) {
+      dongInfoFetch();
+    }
+  }, [isLogin, bookmarkedLocations, dongInfoFetch, dong.size]);
+
+  useEffect(() => {
+    if (bookmarkedLocations) {
+      const isBookmarked = bookmarkedLocations.some(
+        (items) => items.emdName === selectedLocation
+      );
+      setIsBookmarked(isBookmarked);
+    }
+  }, [bookmarkedLocations, selectedLocation]);
+
   const handleNavigateToMap = () => {
-    if (!selectedLocation) return; // 선택된 지역이 없으면 아무 작업도 하지 않음
+    if (!selectedLocation) return;
     localStorage.setItem(storedKey, JSON.stringify(selectedLocation));
 
     const fullAddress = `${currCity} ${currGungu} ${selectedLocation}`;
@@ -103,29 +157,48 @@ const LocationFilterDong = () => {
   };
 
   // 관심 지역 추가/삭제 함수 업데이트
-  const handleBookmarkClick = () => {
+  const handleBookmarkClick = async () => {
     if (!selectedLocation) return;
+    else {
+      const fullAddress = `${currCity} ${currGungu} ${selectedLocation}`;
+      const selectedCode = info.find(
+        (item) => item.address === fullAddress
+      )?.code;
 
-    const isAlreadyBookmarked = bookmarkedLocations.some(
-      (entry) => entry[selectedLocation] !== undefined
-    );
+      if (isBookmarked && selectedCode) {
+        removeBookmark(selectedCode);
+        alert(`${selectedLocation}이(가) 관심 지역에서 삭제되었습니다.`);
+      } else {
+        if (!isFull) {
+          setGeneralAddModalOpen(true);
+        } else {
+          setFullAddModalOpen(true);
+        }
+      }
+    }
+  };
 
-    if (isAlreadyBookmarked) {
-      // 관심 지역 삭제
-      const updatedLocations = bookmarkedLocations.filter(
-        (entry) => entry[selectedLocation] === undefined
-      );
+  const removeBookmark = async (code: string) => {
+    try {
+      const responseStatus = await PlatformAPI.removeBookmarksAreaCode(code);
+      if (responseStatus === 200) {
+        getBookmarksAreaCode();
+        getBookmarksAreaCodeStatus();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-      setBookmarkedLocations(updatedLocations); // 상태 업데이트
-      localStorage.setItem(
-        'bookmarkedLocations',
-        JSON.stringify(updatedLocations)
-      );
-
-      alert(`${selectedLocation}이(가) 관심 지역에서 삭제되었습니다.`);
-    } else {
-      // 관심 지역 추가
-      setIsModalOpen(true); // 모달 열기
+  const addBookmark = async (code: string) => {
+    try {
+      const responseStatus = await PlatformAPI.addBookmarksAreaCode(code);
+      if (responseStatus === 200) {
+        getBookmarksAreaCode();
+        getBookmarksAreaCodeStatus();
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -133,71 +206,33 @@ const LocationFilterDong = () => {
   const handleConfirmBookmark = () => {
     if (selectedLocation) {
       const fullAddress = `${currCity} ${currGungu} ${selectedLocation}`;
-      const selected = info.find((item) => item.address === fullAddress);
+      const selectedCode = info.find(
+        (item) => item.address === fullAddress
+      )?.code;
 
-      if (!selected) {
+      if (!selectedCode) {
         alert('선택한 지역 정보를 찾을 수 없습니다.');
         return;
-      }
-
-      const isAlreadyBookmarked = bookmarkedLocations.some(
-        (entry) => entry[selectedLocation] !== undefined
-      );
-
-      if (!isAlreadyBookmarked) {
-        if (bookmarkedLocations.length >= 3) {
-          const name = Object.keys(bookmarkedLocations[0])[0];
-
-          const userConfirmed = window.confirm(
-            `관심 지역은 총 세 개까지만 등록 가능합니다. 기존의 [${name}]을 삭제하고 [${selectedLocation}]을 추가하시겠어요?`
-          );
-
-          if (userConfirmed) {
-            const updatedLocations = [...bookmarkedLocations];
-            updatedLocations.shift(); // 첫 번째 지역 삭제
-            updatedLocations.push({ [selectedLocation]: selected });
-
-            setBookmarkedLocations(updatedLocations); // 상태 업데이트
-            localStorage.setItem(
-              'bookmarkedLocations',
-              JSON.stringify(updatedLocations)
-            );
-
-            alert(
-              `[${name}]이 삭제되고 [${selectedLocation}]이 관심 지역으로 등록되었습니다.`
-            );
-            handleNavigateToMap();
-          }
-        } else {
-          const updatedLocations = [
-            ...bookmarkedLocations,
-            { [selectedLocation]: selected },
-          ];
-
-          setBookmarkedLocations(updatedLocations); // 상태 업데이트
-          localStorage.setItem(
-            'bookmarkedLocations',
-            JSON.stringify(updatedLocations)
-          );
-
-          alert(`${selectedLocation}이(가) 관심 지역으로 등록되었습니다.`);
-          handleNavigateToMap();
-        }
+      } else {
+        addBookmark(selectedCode);
       }
     }
-
-    setIsModalOpen(false); // 모달 닫기
+    if (generalAddModalOpen) {
+      setGeneralAddModalOpen(false);
+    }
+    if (fullAddModalOpen) {
+      setFullAddModalOpen(false);
+    }
   };
 
   // 모달 닫기
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleGeneralAddCloseModal = () => {
+    setGeneralAddModalOpen(false);
   };
 
-  // 별 아이콘의 색상 동기화
-  const isBookmarked = selectedLocation
-    ? bookmarkedLocations.some((entry) => entry[selectedLocation] !== undefined)
-    : false;
+  const handleFullAddCloseModal = () => {
+    setFullAddModalOpen(false);
+  };
 
   return (
     <div>
@@ -254,18 +289,20 @@ const LocationFilterDong = () => {
             {/* 지도로 이동 & 관심 지역 추가 버튼 */}
             {selectedLocation && (
               <div className="relative inline-flex items-center mt-4">
-                <button
-                  type="button"
-                  className="absolute right-2 p-2"
-                  onClick={handleBookmarkClick}
-                >
-                  {/* 관심 지역 추가 버튼 */}
-                  <FaStar
-                    className={`${
-                      isBookmarked ? 'text-yellow-300' : 'text-white'
-                    } hover:text-yellow-300`}
-                  />
-                </button>
+                {isLogin && (
+                  <button
+                    type="button"
+                    className="absolute right-2 p-2"
+                    onClick={handleBookmarkClick}
+                  >
+                    {/* 관심 지역 추가 버튼 */}
+                    <FaStar
+                      className={`${
+                        isBookmarked ? 'text-yellow-300' : 'text-white'
+                      } hover:text-yellow-300`}
+                    />
+                  </button>
+                )}
 
                 <button
                   type="button"
@@ -278,8 +315,8 @@ const LocationFilterDong = () => {
             )}
 
             {/* 모달 컴포넌트 */}
-            {isModalOpen && (
-              <MyLocationModal onClose={handleCloseModal}>
+            {generalAddModalOpen && (
+              <MyLocationModal onClose={handleGeneralAddCloseModal}>
                 <div className="p-4">
                   <p className="text-lg font-medium text-slate-800">
                     내 관심 지역으로 등록하시겠습니까?
@@ -288,7 +325,33 @@ const LocationFilterDong = () => {
                     <button
                       type="button"
                       className="px-4 py-2 bg-gray-200 text-gray-800 rounded"
-                      onClick={handleCloseModal}
+                      onClick={handleGeneralAddCloseModal}
+                    >
+                      취소
+                    </button>
+                    <button
+                      type="button"
+                      className="px-4 py-2 bg-hanaGreen80 text-white rounded"
+                      onClick={handleConfirmBookmark}
+                    >
+                      등록
+                    </button>
+                  </div>
+                </div>
+              </MyLocationModal>
+            )}
+            {fullAddModalOpen && (
+              <MyLocationModal onClose={handleFullAddCloseModal}>
+                <div className="p-4">
+                  <p className="text-lg font-medium text-slate-800">
+                    {deleteLocation}을 지우고 {selectedLocation}을 내 관심
+                    지역으로 등록하시겠습니까?
+                  </p>
+                  <div className="mt-4 flex justify-end space-x-4">
+                    <button
+                      type="button"
+                      className="px-4 py-2 bg-gray-200 text-gray-800 rounded"
+                      onClick={handleFullAddCloseModal}
                     >
                       취소
                     </button>

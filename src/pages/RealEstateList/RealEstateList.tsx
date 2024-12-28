@@ -1,9 +1,10 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect, useState } from 'react';
 import MobileHeader from '../../components/atoms/MobileHeader.tsx';
 import { PlatformAPI } from '../../platform/PlatformAPI.ts';
 import centerAtom from '../../recoil/center/index.ts';
+import isLoginAtom from '../../recoil/isLogin';
 import {
   RealEstateList,
   RealEstatePreview,
@@ -22,6 +23,7 @@ export default function RealEstateLayout() {
   const [bookmarkEstateList, setBookmarkEstateList] = useState<
     RealEstatePreview[] | null
   >(null);
+  const [isLogin] = useRecoilState(isLoginAtom);
   const realEstateCount = state.count;
   const [fadeIn, setFadeIn] = useState(false);
   const fetchAddressData = async () => {
@@ -60,9 +62,14 @@ export default function RealEstateLayout() {
   };
 
   useEffect(() => {
-    fetchAddressData();
-    getBookmarkRealEstates();
-  }, [state]);
+    if (currAddr.length === 0) {
+      fetchAddressData();
+    }
+
+    if (isLogin && !bookmarkEstateList) {
+      getBookmarkRealEstates();
+    }
+  }, [currAddr.length, isLogin]);
 
   const handleCardClick = (estate: RealEstatePreview) => {
     const key = 'recentVisitedList';

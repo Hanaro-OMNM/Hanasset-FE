@@ -88,8 +88,8 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                   {hanaLoanList.map((loan: LoanInfo, index: number) => (
                     <LoanCard
                       key={index}
-                      isBest={index === 0 ? true : false}
-                      isShow={index < showCount ? true : false}
+                      isBest={index === 0}
+                      isShow={index < showCount}
                       loanId={loan.loanId}
                       name={loan.name}
                       rate={loan.rate}
@@ -122,8 +122,8 @@ const LoanRecommendTab: React.FC<LoanRecommendTabProps> = ({
                   {beotimmogLoanList.map((loan: LoanInfo, index: number) => (
                     <LoanCard
                       key={index}
-                      isBest={index === 0 ? true : false}
-                      isShow={index < showCount ? true : false}
+                      isBest={index === 0}
+                      isShow={index < showCount}
                       loanId={loan.loanId}
                       name={loan.name}
                       rate={loan.rate}

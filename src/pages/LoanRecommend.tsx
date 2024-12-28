@@ -1,12 +1,15 @@
 import { useSearchParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import Button from '../components/atoms/Button';
 import MobileHeader from '../components/atoms/MobileHeader.tsx';
 import { PlatformAPI } from '../platform/PlatformAPI.ts';
+import isLoginAtom from '../recoil/isLogin';
 import {
   GuestInfo,
   LoanRecommendInfo,
   RealEstateInfo,
+  RealEstatePreview,
 } from '../types/hanaAssetResponse.common.ts';
 import LoanDetail from './LoanDetail.tsx';
 import DsrInfo from './LoanRecommend/components/DsrInfo';
@@ -24,6 +27,10 @@ export default function LoanInfoPage() {
   const [realEstateInfos, setRealEstateInfos] = useState<RealEstateInfo[] | []>(
     []
   );
+  const [bookmarkEstateList, setBookmarkEstateList] = useState<
+    RealEstatePreview[] | null
+  >(null);
+  const [isLogin] = useRecoilState(isLoginAtom);
 
   const onBack = (): void => {
     window.history.back();
@@ -51,11 +58,55 @@ export default function LoanInfoPage() {
     }
   };
 
+  const getBookmarkRealEstates = async () => {
+    try {
+      const bookmarkRealEstateListResponse =
+        await PlatformAPI.getBookmarkRealEstates();
+      if (bookmarkRealEstateListResponse) {
+        const bookmarkRealEstateList =
+          bookmarkRealEstateListResponse.realEstates;
+        setBookmarkEstateList(bookmarkRealEstateList);
+      }
+    } catch (error) {
+      console.error('Error getBookmarkRealEstates:', error);
+    }
+  };
+
+  const isBookmarkedRealEstate = (id: number): boolean => {
+    if (!bookmarkEstateList) return false;
+    return bookmarkEstateList.some((item) => item.realEstateId === id);
+  };
+
+  const addBookmark = async (id: number) => {
+    try {
+      const responseStatus = await PlatformAPI.addBookmarkRealEstate(id);
+      if (responseStatus === 200) {
+        getBookmarkRealEstates();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const removeBookmark = async (id: number) => {
+    try {
+      const responseStatus = await PlatformAPI.removeBookmarkRealEstate(id);
+      if (responseStatus === 200) {
+        getBookmarkRealEstates();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    if (realEstateInfos.length < 1) {
+    if (realEstateInfos.length < 1 && isLogin) {
       fetchLoanRecommend();
     }
-  }, [realEstateInfos]);
+    if (!bookmarkEstateList && isLogin) {
+      getBookmarkRealEstates();
+    }
+  }, [bookmarkEstateList, fetchLoanRecommend, isLogin, realEstateInfos]);
 
   return (
     <div className="flex">
@@ -97,15 +148,37 @@ export default function LoanInfoPage() {
               onLoanDetailButtonClick={setLoanId}
             />
             <div className="pb-4">
-              <Button text="관심 매물 등록하기" />
+              {isBookmarkedRealEstate(
+                Number(searchParams.get('realEstateIds'))
+              ) ? (
+                <Button
+                  text="관심 매물 삭제하기"
+                  onClick={() =>
+                    removeBookmark(Number(searchParams.get('realEstateIds')))
+                  }
+                />
+              ) : (
+                <Button
+                  text="관심 매물 등록하기"
+                  onClick={() =>
+                    addBookmark(Number(searchParams.get('realEstateIds')))
+                  }
+                />
+              )}
             </div>
           </div>
         </div>
       </div>
-      {loanId && (
+      {loanId && loanId > 0 ? (
         <div className="h-full absolute top-0 left-[484px]">
-          <LoanDetail loanId={loanId} onHide={() => setLoanId(null)} />
+          <LoanDetail
+            loanId={loanId}
+            name={guestInfo?.name}
+            onHide={() => setLoanId(null)}
+          />
         </div>
+      ) : (
+        <></>
       )}
     </div>
   );

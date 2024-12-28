@@ -21,11 +21,11 @@ const GuestChatDetail: React.FC = () => {
   const [loanRecommendInfos, setLoanRecommendInfos] = useState<
     LoanRecommendInfo[] | []
   >([]);
-  const [realEsetateId, setRealEstateId] = useState(0);
+  const [realEstateId, setRealEstateId] = useState(0);
   const [loanId, setLoanId] = useState<number | null>(null);
-  const [realEstateInfos, setRealEstateInfos] = useState<RealEstateInfo[] | []>(
-    []
-  );
+  const [realEstateInfos, setRealEstateInfos] = useState<
+    RealEstateInfo[] | null
+  >(null);
   const chatroomId = useRecoilValue(chatroomIdState);
 
   const swiperClick = (index: number) => {
@@ -55,10 +55,10 @@ const GuestChatDetail: React.FC = () => {
   };
 
   useEffect(() => {
-    if (realEstateInfos.length < 1) {
+    if (!realEstateInfos) {
       fetchLoanRecommend();
     }
-  }, [realEstateInfos]);
+  }, [fetchLoanRecommend, realEstateInfos]);
 
   return (
     <div className="top-0 absolute animate-slideInRight">
@@ -79,7 +79,7 @@ const GuestChatDetail: React.FC = () => {
                     <button
                       onClick={() =>
                         swiperClick(
-                          realEstate
+                          realEstate && realEstateInfos
                             ? realEstateInfos.findIndex(
                                 (realEstateInfo) =>
                                   realEstateInfo.realEstateId ===
@@ -122,13 +122,13 @@ const GuestChatDetail: React.FC = () => {
             <FixedExpectation
               capital={guestInfo ? guestInfo.capital / 1000 : 0}
               totalPrice={
-                realEstateInfos[realEsetateId]
-                  ? realEstateInfos[realEsetateId].deposit / 1000_0000
+                realEstateInfos && realEstateInfos[realEstateId]
+                  ? realEstateInfos[realEstateId].deposit / 1000_0000
                   : 0
               }
               maxLoan={
-                realEstateInfos[realEsetateId]
-                  ? (realEstateInfos[realEsetateId].deposit / 1000_0000) * 0.8
+                realEstateInfos && realEstateInfos[realEstateId]
+                  ? (realEstateInfos[realEstateId].deposit / 1000_0000) * 0.8
                   : 0
               }
             />
@@ -136,12 +136,12 @@ const GuestChatDetail: React.FC = () => {
             <LoanRecommendTab
               hanaLoanList={
                 loanRecommendInfos.length > 0
-                  ? loanRecommendInfos[realEsetateId].hanaLoans
+                  ? loanRecommendInfos[realEstateId].hanaLoans
                   : []
               }
               beotimmogLoanList={
                 loanRecommendInfos.length > 0
-                  ? loanRecommendInfos[realEsetateId].beotimmokLoans
+                  ? loanRecommendInfos[realEstateId].beotimmokLoans
                   : []
               }
               onLoanDetailButtonClick={setLoanId}

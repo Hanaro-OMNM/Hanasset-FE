@@ -20,8 +20,8 @@ export default function LoanInfoPage() {
   const [searchParams] = useSearchParams();
   const [guestInfo, setGuestInfo] = useState<GuestInfo | null>(null);
   const [loanRecommendInfos, setLoanRecommendInfos] = useState<
-    LoanRecommendInfo[] | []
-  >([]);
+    LoanRecommendInfo[] | null
+  >(null);
   const [loanId, setLoanId] = useState<number | null>(null);
   const [realEstateInfos, setRealEstateInfos] = useState<RealEstateInfo[] | []>(
     []
@@ -51,7 +51,6 @@ export default function LoanInfoPage() {
       });
       setGuestInfo(loanRecommend.user);
       setLoanRecommendInfos(loanRecommend.loanRecommendInfos);
-      getRealEstateInfoList(loanRecommendInfos);
     } catch (error) {
       console.error('Error fetching loan data:', error);
     }
@@ -99,13 +98,18 @@ export default function LoanInfoPage() {
   };
 
   useEffect(() => {
-    if (realEstateInfos.length < 1 && isLogin) {
-      fetchLoanRecommend();
+    if (isLogin) {
+      if (!loanRecommendInfos) {
+        fetchLoanRecommend();
+      } else {
+        getRealEstateInfoList(loanRecommendInfos);
+      }
+
+      if (!bookmarkEstateList) {
+        getBookmarkRealEstates();
+      }
     }
-    if (!bookmarkEstateList && isLogin) {
-      getBookmarkRealEstates();
-    }
-  }, [bookmarkEstateList, fetchLoanRecommend, isLogin, realEstateInfos]);
+  }, [loanRecommendInfos, bookmarkEstateList, isLogin]);
 
   return (
     <div className="flex">
@@ -135,12 +139,12 @@ export default function LoanInfoPage() {
             <LoanFoundMessage isFound={true} />
             <LoanRecommendTab
               hanaLoanList={
-                loanRecommendInfos.length > 0
+                loanRecommendInfos && loanRecommendInfos.length > 0
                   ? loanRecommendInfos[0].hanaLoans
                   : []
               }
               beotimmogLoanList={
-                loanRecommendInfos.length > 0
+                loanRecommendInfos && loanRecommendInfos.length > 0
                   ? loanRecommendInfos[0].beotimmokLoans
                   : []
               }

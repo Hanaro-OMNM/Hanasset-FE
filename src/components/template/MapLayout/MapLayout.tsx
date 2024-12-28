@@ -166,7 +166,7 @@ export default function MapLayout({ children }: LayoutProps) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setCenter({ lat: latitude, lng: longitude, bookmarkLocation: false });
+          setCenter({ lat: latitude, lng: longitude, bookmarkLocation: true });
         },
         (error) =>
           console.error('Error occurred while fetching location:', error),

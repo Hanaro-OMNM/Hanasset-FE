@@ -151,7 +151,7 @@ export default function LoanInfoPage() {
                 Number(searchParams.get('realEstateIds'))
               ) ? (
                 <button
-                  className="bg-hanaGreen60 text-white my-4 py-2 px-4 rounded-lg w-full hover:bg-hanaColor2"
+                  className="bg-hanaRed40 text-white my-4 py-2 px-4 rounded-lg w-full hover:bg-hanaRed60"
                   onClick={() =>
                     removeBookmark(Number(searchParams.get('realEstateIds')))
                   }

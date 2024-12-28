@@ -99,6 +99,13 @@ export default function MapLayout({ children }: LayoutProps) {
   }, [zoom]);
 
   useEffect(() => {
+    if (center.bookmarkLocation) {
+      handleMarkerFetch();
+      setCenter({ lat: center.lat, lng: center.lng, bookmarkLocation: false });
+    }
+  }, [center.bookmarkLocation]);
+
+  useEffect(() => {
     let isDragging = false;
     let dragStartPosition = { x: 0, y: 0 };
 
@@ -111,7 +118,12 @@ export default function MapLayout({ children }: LayoutProps) {
       const distanceX = Math.abs(event.clientX - dragStartPosition.x);
       const distanceY = Math.abs(event.clientY - dragStartPosition.y);
 
-      if (distanceX > 5 || distanceY > 5) {
+      if (
+        (distanceX > 5 || distanceY > 5) &&
+        event &&
+        event.target instanceof HTMLImageElement &&
+        event.target.src.includes('naver')
+      ) {
         isDragging = true;
       }
     };
@@ -132,7 +144,7 @@ export default function MapLayout({ children }: LayoutProps) {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [center]);
+  }, [center, handleMarkerFetch]);
 
   const handleZoomChanged = useCallback((newZoom: number) => {
     setZoom(newZoom);
@@ -141,7 +153,11 @@ export default function MapLayout({ children }: LayoutProps) {
   const handleCenterChanged = () => {
     if (mapRef.current) {
       const newCenter = mapRef.current.getCenter();
-      setCenter({ lat: newCenter.lat(), lng: newCenter.lng() });
+      setCenter({
+        lat: newCenter.lat(),
+        lng: newCenter.lng(),
+        bookmarkLocation: false,
+      });
     }
   };
 
@@ -150,7 +166,7 @@ export default function MapLayout({ children }: LayoutProps) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setCenter({ lat: latitude, lng: longitude });
+          setCenter({ lat: latitude, lng: longitude, bookmarkLocation: true });
         },
         (error) =>
           console.error('Error occurred while fetching location:', error),
@@ -257,7 +273,11 @@ export default function MapLayout({ children }: LayoutProps) {
                     size: naverMaps.Size(50, 50),
                   }}
                   onClick={() => {
-                    setCenter({ lat: marker.centerLat, lng: marker.centerLng });
+                    setCenter({
+                      lat: marker.centerLat,
+                      lng: marker.centerLng,
+                      bookmarkLocation: false,
+                    });
                     handleZoomIn();
                   }}
                 />

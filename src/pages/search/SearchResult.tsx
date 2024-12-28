@@ -134,6 +134,7 @@ const SearchResult = () => {
                       setCenter({
                         lat: result.lat,
                         lng: result.lng,
+                        bookmarkLocation: false,
                       })
                     }
                   />

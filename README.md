@@ -1,23 +1,34 @@
+<img width="1025" alt="image" src="https://github.com/user-attachments/assets/fb7714ac-960e-458c-90ac-a2c4f52a96d2" />
 # 전월세 대출 맞춤 추천 및 상담 지원 플랫폼 
+지도 위에서 부동산 매물 확인과 대출 상담까지 한번에
+
+
 
 
 
 ## 목차
 1. [프로젝트 개요](#프로젝트-개요)
-2. 팀원 구성
-3. [기술 스택](#기술-스택) 
-4. [기능 소개](#기능-소개)
+2. [팀원 구성](#팀원-구성)
+3. [개발 기간](#개발 기간)
+4. [기술 스택](#기술-스택)
+5. [시스템 아키텍처](#시스템-아키텍처)
+6. [프로젝트 구조](#프로젝트 구조)
+7. [기능 소개](#기능-소개)
    - [전월세 매물 조회](#전월세-매물-조회)
    - [맞춤형 대출 상품 추천](#맞춤형-대출-상품-추천)
    - [실시간 상담 서비스](#실시간-상담-서비스)
-5. 
-6. [문의](#문의)
+8. [문의](#문의)
+
+
 
 
 
 ## 프로젝트 개요
 HANA + ASSET은 사용자 자산 정보를 바탕으로 서울시 전월세 매물을 분석하여 적합한 대출 상품을 추천하고,  
 하나은행의 전문 대출 상담사와 실시간 상담을 통해 전월세 자금 대출 계획을 효율적으로 수립할 수 있는 플랫폼입니다.
+
+
+
 
 
 ## 팀원 구성
@@ -32,4 +43,68 @@ HANA + ASSET은 사용자 자산 정보를 바탕으로 서울시 전월세 매�
 
 <br>
 
+
+
+
+
+## 개발 기간
+- 전체 개발 기간 : 2024-10-17 ~ 2024-12-30
+- UI 구현 기간 : 2024-10-17 ~ 2024-10-30
+- 기능 개발 기간 : 2024-12-16 ~ 2024-12-30
+  
+
+
+
+
 ## 기술 스택 
+| **분류**       | **스택**                                                                                   |
+|----------------|-------------------------------------------------------------------------------------------|
+| **Language**   | ![Java](https://img.shields.io/badge/Java-17-007396?style=flat&logo=openjdk&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-4.5-3178C6?style=flat&logo=typescript&logoColor=white) |
+| **Framework**  | ![SpringBoot](https://img.shields.io/badge/SpringBoot-3.1.1-6DB33F?style=flat&logo=springboot&logoColor=white) ![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=flat&logo=react&logoColor=black) |
+| **Build**      | ![Gradle](https://img.shields.io/badge/Gradle-7.0-02303A?style=flat&logo=gradle&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-4.0-646CFF?style=flat&logo=vite&logoColor=white) |
+| **Front-end**  | ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.2-06B6D4?style=flat&logo=tailwindcss&logoColor=white) ![Recoil](https://img.shields.io/badge/Recoil-Experimental-3578E5?style=flat&logoColor=white) ![Axios](https://img.shields.io/badge/Axios-0.21.1-5A29E4?style=flat) ![React Naver Maps](https://img.shields.io/badge/React%20Naver%20Maps-API-61DAFB?style=flat&logo=react&logoColor=black) ![React Query](https://img.shields.io/badge/React%20Query-3.39.0-FF4154?style=flat&logo=reactquery&logoColor=white) |
+| **Back-end**   | ![Spring Security](https://img.shields.io/badge/Spring%20Security-5.6.1-6DB33F?style=flat&logo=springsecurity&logoColor=white) ![Spring Data JPA](https://img.shields.io/badge/Spring%20Data%20JPA-2.5.6-6DB33F?style=flat&logo=spring&logoColor=white) ![OAuth 2.0](https://img.shields.io/badge/OAuth%202.0-Standard-3C7EBB?style=flat&logo=oauth&logoColor=white) ![WebSocket](https://img.shields.io/badge/WebSocket-API-4A90E2?style=flat) ![STOMP](https://img.shields.io/badge/STOMP-Protocol-800000?style=flat) ![Spring Batch](https://img.shields.io/badge/Spring%20Batch-4.3.6-6DB33F?style=flat&logo=spring&logoColor=white) ![Spring Mail](https://img.shields.io/badge/Spring%20Mail-3.0.0-6DB33F?style=flat) ![ElasticSearch](https://img.shields.io/badge/ElasticSearch-8.5.0-005571?style=flat&logo=elasticsearch&logoColor=white) |
+| **Data**       | ![Python](https://img.shields.io/badge/Python-3.10-3776AB?style=flat&logo=python&logoColor=white) ![BeautifulSoup4](https://img.shields.io/badge/BeautifulSoup4-WebScraping-4B8BBE?style=flat) |
+| **Database**   | ![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat&logo=mysql&logoColor=white) ![Redis](https://img.shields.io/badge/Redis-6.2-DC382D?style=flat&logo=redis&logoColor=white) |
+| **Tool**       | ![Postman](https://img.shields.io/badge/Postman-API%20Testing-FF6C37?style=flat&logo=postman&logoColor=white) ![IntelliJ](https://img.shields.io/badge/IntelliJ%20IDEA-2023-000000?style=flat&logo=intellijidea&logoColor=white) ![Figma](https://img.shields.io/badge/Figma-Design-FF7262?style=flat&logo=figma&logoColor=white) ![VSCode](https://img.shields.io/badge/VSCode-1.77-007ACC?style=flat&logo=visualstudiocode&logoColor=white) ![Swagger](https://img.shields.io/badge/Swagger-API%20Docs-85EA2D?style=flat&logo=swagger&logoColor=white) ![Github](https://img.shields.io/badge/Github-Code%20Hosting-181717?style=flat&logo=github&logoColor=white) |
+| **Deploy**     | ![EC2](https://img.shields.io/badge/AWS%20EC2-Cloud-orange?style=flat&logo=amazonaws&logoColor=white) ![AWS RDS](https://img.shields.io/badge/AWS%20RDS-Database-527FFF?style=flat&logo=amazonrds&logoColor=white) ![Jenkins](https://img.shields.io/badge/Jenkins-CI/CD-D24939?style=flat&logo=jenkins&logoColor=white) |
+| **Communication** | ![Notion](https://img.shields.io/badge/Notion-Wiki-000000?style=flat&logo=notion&logoColor=white) ![Slack](https://img.shields.io/badge/Slack-Chat-4A154B?style=flat&logo=slack&logoColor=white) ![Jira](https://img.shields.io/badge/Jira-Project%20Management-0052CC?style=flat&logo=jira&logoColor=white) |
+
+
+
+
+
+## 시스템 아키텍처
+![image](https://github.com/user-attachments/assets/04fcd265-40dc-4a39-870f-d1bfa73702f6)
+
+
+
+
+
+## 기능 소개 : 사진 더 추가해야 함 
+
+### 전월세 매물 조회  
+- 🏠 **간편하게 부동산 매물 정보 확인**  
+  - 최신 전월세 매물 정보 제공  
+  - 원하는 지역의 모든 매물 위치를 한 눈에 파악  
+  - 매물 상세 정보 열람   
+
+---
+
+### 맞춤형 대출 상품 추천  
+- 💳 **사용자 자산 기반 대출 상품 추천**  
+  - 연소득, 대출 현황 등의 자산 정보를 분석하여 최적의 상품 제안  
+  - 대출 조건 비교 기능   
+
+---
+
+### 전문 상담사와의 실시간 상담  
+- 💬 **대출 상담 및 계획 수립 지원**  
+  - 하나은행 전문 상담사와 채팅 기능 
+  - 대출 계획 수립 및 맞춤형 컨설팅 제공  
+  - 상담 내역 저장 및 다시보기 기능
+  - 예약을 통해 원하는 시간에 상담 가능
+
+
+  
+

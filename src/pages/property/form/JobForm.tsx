@@ -10,8 +10,8 @@ interface Option {
 }
 
 const options: Option[] = [
-  { value: '중소·중견기업 직장인' },
-  { value: '대기업 직장인' },
+  { value: '중소, 중견' },
+  { value: '대기업' },
   { value: '개인사업자' },
   { value: '임대사업자' },
   { value: '공무원' },

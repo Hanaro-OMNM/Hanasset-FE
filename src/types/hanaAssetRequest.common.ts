@@ -1,3 +1,5 @@
+import { RealEstatePreview } from './hanaAssetResponse.common.ts';
+
 export interface CurrentLocation {
   lat: number;
   lng: number;
@@ -53,24 +55,10 @@ export interface ChatRoom {
   finishedAt: string | null;
   createdAt: string;
 }
+
 export interface ChatCreateRequest {
-  userId: number;
   consultantId: number;
   chatroomTitle: string;
   reservedTime: string;
-  reservationInfo: selectedEstateType[];
-}
-
-export type selectedEstateType = {
-  id: number;
-  name: string;
-  detail: string;
-  address: string;
-};
-
-export interface ChatMessage {
-  id: string;
-  sender: string;
-  message: string;
-  timestamp: string;
+  reservationInfo: RealEstatePreview[];
 }

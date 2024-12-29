@@ -7,11 +7,13 @@ import chatroomIdState from '../../recoil/chatroomId/atom';
 type ChatHeaderProps = {
   responserName: string;
   responserImage: string;
+  isHistory: boolean;
 };
 
 const ChatHeader: React.FC<ChatHeaderProps> = ({
   responserName,
   responserImage,
+  isHistory,
 }) => {
   const chatroomId = useRecoilValue(chatroomIdState);
 
@@ -21,10 +23,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
         console.error('Chatroom ID is not set.');
         return;
       }
-      const response = await PlatformAPI.updateChatroomStatus(
-        chatroomId,
-        'active'
-      );
+      await PlatformAPI.updateChatroomStatus(chatroomId, 'active');
       window.location.href = '/consulting';
     } catch (error) {
       console.error(error);
@@ -47,12 +46,14 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
         </div>
 
         <div className="flex items-center">
-          <button
-            className="px-2 py-1 text-xs text-white bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
-            onClick={handleEndConsultation}
-          >
-            상담 종료
-          </button>
+          {isHistory! && (
+            <button
+              className="px-2 py-1 text-xs text-white bg-hanaRed80 rounded hover:bg-hanaRed transition duration-150 ease-in-out"
+              onClick={handleEndConsultation}
+            >
+              상담 종료
+            </button>
+          )}
           <button className="ml-2 flex items-center justify-center p-1 text-gray-500 hover:text-gray-700">
             <HiBell className="h-5 w-5" />
           </button>

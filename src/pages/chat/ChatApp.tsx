@@ -14,14 +14,14 @@ import ChatMessage from './ChatMessage';
 
 type ChatMessageType = {
   id: number;
-  user: 'guest' | 'consultant';
-  subject: 'sender' | 'responser';
+  user: string;
+  subject: string;
   message: string;
   time: string;
 };
 
 interface ChatAppProps {
-  accessor: 'guest' | 'consultant';
+  accessor: string;
 }
 
 const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
@@ -91,7 +91,6 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
         `/topic/rooms/${chatroomId}`,
         (message: Message) => {
           const newData = JSON.parse(message.body);
-          console.log('Current userId:', userId);
           if (Array.isArray(newData)) {
             // Redis에서 가져온 기록 메시지
             const loadedMessages = newData.slice(1).map((msg, index) => ({
@@ -144,10 +143,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
     setIsUpdatingStatus(true);
     try {
       const nextState = currentState === 'waiting' ? 'active' : 'completed';
-      const response = await PlatformAPI.updateChatroomStatus(
-        chatroomId,
-        currentState
-      );
+      await PlatformAPI.updateChatroomStatus(chatroomId, currentState);
       setCurrentState(nextState);
     } finally {
       setIsUpdatingStatus(false);
@@ -165,7 +161,6 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
         content: inputMessage,
         createdAt: new Date().toISOString(),
       };
-      console.log(message);
       stompClient.publish({
         destination: `/app/chat.sendMessage/${chatroomId}`,
         body: JSON.stringify(message),
@@ -193,6 +188,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
               <ChatHeader
                 responserName="하나은행 상담사"
                 responserImage={logo}
+                isHistory={true}
               />
               <div className="flex-1 w-full px-4 md:px-8 py-4 bg-hanaSilver20 shadow overflow-y-auto scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400 space-y-4">
                 {messages.map((msg, index) => (
@@ -232,7 +228,11 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
           </div>
         ) : (
           <div className="flex flex-col h-screen w-full items-center">
-            <ChatHeader responserName={'고객1'} responserImage={profile} />
+            <ChatHeader
+              responserName={'고객1'}
+              responserImage={profile}
+              isHistory={true}
+            />
             <div className="flex-1 w-full px-4 md:px-8 py-4 bg-hanaSilver20 shadow overflow-y-auto scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400 space-y-4">
               {messages.map((msg, index) => (
                 <ChatMessage

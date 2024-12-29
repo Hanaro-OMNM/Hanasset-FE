@@ -1,53 +1,46 @@
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
-import { useRecoilValue } from 'recoil';
+import { useSearchParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import logo from '../../assets/img/logo.png';
 import { PlatformAPI } from '../../platform/PlatformAPI.ts';
-import historyChatroomIdState from '../../recoil/chathistory/atom.tsx';
 import GuestChatDetail from '../GuestChatDetail';
 import ChatHeader from './ChatHeader';
 import ChatMessage from './ChatMessage';
 
 type ChatMessageType = {
-  chatMessageId: number;
+  messageType: string;
   chatroomId: string;
   senderId: number;
-  accessor: 'guest' | 'consultant';
   content: string;
-  createdAt: string | null;
-  messageType: string;
+  accessor: string;
+  createdAt: string;
 };
 
 const ChatHistory: React.FC = () => {
+  const [searchParams] = useSearchParams();
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
   const [inputValue, setInputValue] = useState('');
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const historyChatroomId = useRecoilValue(historyChatroomIdState);
+
+  const historyChatroomId = searchParams.get('chatroomId');
+
+  const fetchMessages = async () => {
+    try {
+      const response = await PlatformAPI.getChatroomMessagesByChatroomId(
+        historyChatroomId as string
+      );
+      if (Array.isArray(response)) {
+        setMessages(response);
+      } else {
+        setMessages([]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    if (!historyChatroomId) {
-      console.error('No historyChatroomId found!');
-      return;
-    }
-    const fetchMessages = async () => {
-      try {
-        const response =
-          await PlatformAPI.getChatroomMessagesByChatroomId(historyChatroomId);
-        if (Array.isArray(response)) {
-          setMessages(response);
-        } else {
-          setMessages([]);
-        }
-      } catch (err) {
-        setError('Failed to fetch messages.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchMessages();
-  }, [historyChatroomId]);
+  }, []);
 
   const handleSendMessage = () => {
     if (inputValue.trim() === '') return;
@@ -57,16 +50,16 @@ const ChatHistory: React.FC = () => {
   return (
     <div className="top-0 absolute pl-4 animate-fadeInRight">
       <div className="flex flex-col h-screen w-full min-w-[420px]">
-        <ChatHeader responserName="하나은행 상담사" responserImage={logo} />
+        <ChatHeader
+          responserName="하나은행 상담사"
+          responserImage={logo}
+          isHistory={false}
+        />
         <div className="flex-1 w-full px-4 md:px-8 py-4 bg-hanaSilver20 shadow overflow-y-auto scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400 space-y-4">
-          {loading ? (
-            <p>Loading messages...</p>
-          ) : error ? (
-            <p className="text-red-500">{error}</p>
-          ) : messages.length > 0 ? (
+          {messages.length > 0 ? (
             messages.map((msg, index) => (
               <ChatMessage
-                key={msg.chatMessageId}
+                key={msg.content}
                 subject={msg.accessor === 'guest' ? 'sender' : 'responser'}
                 message={msg.content || '내용 없음'}
                 lastMessageTime={
@@ -88,6 +81,7 @@ const ChatHistory: React.FC = () => {
           <input
             type="text"
             value={inputValue}
+            disabled={true}
             onChange={(e) => setInputValue(e.target.value)}
             className="flex-1 px-4 rounded-full text-sm border-2 focus:outline-none bg-gray-100"
             placeholder="메시지를 입력하세요."

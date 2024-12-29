@@ -20,12 +20,10 @@ export default function LoginPage({
 }: LoginPageProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
   const [isLogin, setIsLogin] = useRecoilState<boolean>(isLoginAtom);
 
   const handleLogin = async () => {
     if (!email || !password) {
-      setError(true);
       return;
     }
 
@@ -41,7 +39,6 @@ export default function LoginPage({
       onClose();
     } else {
       alert('로그인 실패하였습니다.');
-      setError(true);
     }
   };
 

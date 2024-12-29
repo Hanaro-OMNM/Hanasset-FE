@@ -78,12 +78,14 @@ export interface ChatRoom {
   createdAt: string;
 }
 export interface ChatMessage {
-  messageId: string;
+  messageType: string;
+  chatroomId: string;
   senderId: number;
-  receiverId: number;
   content: string;
-  timestamp: string;
+  accessor: string;
+  createdAt: string;
 }
+
 export interface GetCompletedChatroomsResponse {
   message: string;
   result: ChatRoom[];
@@ -93,6 +95,7 @@ export interface GetChatroomMessagesResponse {
   message: string;
   result: ChatMessage[];
 }
+
 //기존 메세지 불러오기
 export interface CurrentMessages {
   message: string;
@@ -101,18 +104,17 @@ export interface CurrentMessages {
   };
 }
 
+export interface ChatHistoryResponse {
+  chatMessages: ChatMessage[];
+  count: number;
+}
+
 //대기열
 export interface CurrentChatRooms {
   message: string;
   result: {
     chatroomResponse: ChatRoom[];
   };
-}
-export interface ChatMessage {
-  id: string;
-  sender: string;
-  message: string;
-  timestamp: string;
 }
 
 export interface ChatroomApiResponse {

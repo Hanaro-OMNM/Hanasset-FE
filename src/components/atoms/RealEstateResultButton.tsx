@@ -15,7 +15,6 @@ const RealEstateResultButton = ({
   title,
   keyword,
   address,
-  complexId,
   roundedTop = false,
   roundedBottom = false,
 }: RealEstateResultButtonProps) => {

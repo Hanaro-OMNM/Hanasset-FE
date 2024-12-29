@@ -31,6 +31,7 @@ import {
   BookmarkArea,
   BookmarkAreaStatus,
   Search,
+  ChatHistoryResponse,
 } from '../types/hanaAssetResponse.common.ts';
 
 export class PlatformAPI {
@@ -328,7 +329,7 @@ export class PlatformAPI {
 
   // 채팅방 삭제
   public static async deleteChatroom(chatroomId: string): Promise<void> {
-    const response = await this.instance.delete<{
+    await this.instance.delete<{
       message: string;
       result: null;
     }>(`/chat/delete/${chatroomId}`);
@@ -338,36 +339,15 @@ export class PlatformAPI {
   public static async getChatroomMessagesByChatroomId(
     chatroomId: string
   ): Promise<ChatMessage[]> {
-    try {
-      if (!chatroomId) {
-        throw new Error('chatroomId is required.');
-      }
-
-      console.log(`Fetching messages for chatroomId: ${chatroomId}`);
-
-      const response = await this.instance.get<{
-        message: string;
-        result: {
-          count: number;
-          messages: ChatMessage[];
-        };
-      }>(`/chat/${chatroomId}/messages`, {
-        ...this.defaultConfig,
-      });
-
-      console.log('API Response:', response.data);
-
-      return response.data.result.messages;
-    } catch (error) {
-      console.error('Error fetching chatroom messages:', error);
-
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        console.error('No messages found for the given chatroomId.');
-        return [];
-      }
-
-      throw error;
+    if (!chatroomId) {
+      throw new Error('chatroomId is required.');
     }
+
+    const response = (await this.instance.get(`/chat/${chatroomId}/messages`, {
+      ...this.defaultConfig,
+    })) as ApiResponseEntity<ChatHistoryResponse>;
+
+    return response.data.result.chatMessages as ChatMessage[];
   }
 
   public static async getBookmarkRealEstates(): Promise<RealEstateList> {

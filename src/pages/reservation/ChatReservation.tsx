@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useState } from 'react';
 import reserve_hand from '../../assets/img/reserve_img.png';
 import Button from '../../components/atoms/Button';
@@ -9,8 +9,8 @@ import { PlatformAPI } from '../../platform/PlatformAPI.ts';
 import chatroomIdState from '../../recoil/chatroomId/atom';
 import loanReservationAtom from '../../recoil/loanReservation/atom';
 import userIdAtom from '../../recoil/userId/atom.ts';
-import { selectedEstateType } from '../../types/hanaAsset.ts';
 import { ChatCreateRequest } from '../../types/hanaAssetRequest.common';
+import { RealEstatePreview } from '../../types/hanaAssetResponse.common.ts';
 import AssetItem from './AssetItem';
 import DatePicker from './DatePicker';
 import DynamicFormSwitcher from './DynamicFormSwitcher';
@@ -96,11 +96,6 @@ export default function ChatReservation() {
       return;
     }
 
-    const [year, month, day] = selectedDate.split('-').map(Number);
-    const [hour, minute] = selectedTime.split(':').map(Number);
-
-    const reservedDate = new Date(Date.UTC(year, month - 1, day, hour, minute));
-
     const reservedTime = `${selectedDate} ${selectedTime}:00`;
 
     if (!selectedLoanReservation.reservationTime) {
@@ -121,13 +116,13 @@ export default function ChatReservation() {
 
   const createChat = async (
     reservedTime: string,
-    reservationInfo: selectedEstateType[]
+    reservationInfo: RealEstatePreview[]
   ) => {
     const chatroomTitle = reservationInfo
-      .map((item: selectedEstateType) => item.name)
+      .map((item: RealEstatePreview) => item.name)
       .join(', ');
 
-    const request: Omit<ChatCreateRequest, 'userId'> = {
+    const request: ChatCreateRequest = {
       consultantId: 1,
       chatroomTitle: chatroomTitle,
       reservedTime: reservedTime,
@@ -135,8 +130,8 @@ export default function ChatReservation() {
     };
 
     const response = await PlatformAPI.createChat(request);
-    const chatroomId = response.data.rooms[0].chatroomId;
-    const userId = response.data.userId;
+    const chatroomId = response.chatroomId;
+    const userId = response.userId;
     setChatroomId(chatroomId);
     setUserId(userId);
   };
@@ -158,11 +153,9 @@ export default function ChatReservation() {
                   <h2 className="text-lg font-semibold mb-4">
                     선택 부동산 매물
                   </h2>
-                  {estateInfo.map(
-                    (asset: selectedEstateType, index: number) => (
-                      <AssetItem key={index} name={asset.name} />
-                    )
-                  )}
+                  {estateInfo.map((asset: RealEstatePreview, index: number) => (
+                    <AssetItem key={index} name={asset.name} />
+                  ))}
                 </div>
 
                 <DatePicker
@@ -183,7 +176,7 @@ export default function ChatReservation() {
             </div>
           </div>
         ) : (
-          <DynamicFormSwitcher showForm={showForm} setShowForm={setShowForm} />
+          <DynamicFormSwitcher setShowForm={setShowForm} />
         )}
       </div>
     </div>

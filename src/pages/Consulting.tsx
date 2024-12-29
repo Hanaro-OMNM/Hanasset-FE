@@ -8,7 +8,6 @@ import MobileHeader from '../components/atoms/MobileHeader';
 import SemiTitle from '../components/atoms/SemiTitle';
 import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting';
 import { PlatformAPI } from '../platform/PlatformAPI.ts';
-import historyChatroomIdState from '../recoil/chathistory/atom.tsx';
 import loanReservationAtom from '../recoil/loanReservation';
 import { ChatRoom } from '../types/hanaAssetResponse.common';
 
@@ -19,9 +18,6 @@ const Consulting: React.FC = () => {
 
   const [consultingHistory, setConsultingHistory] = useState<ChatRoom[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const [_, setHistoryChatroomId] = useRecoilState(historyChatroomIdState);
 
   const accessToken = localStorage.getItem('accessToken');
 
@@ -64,12 +60,19 @@ const Consulting: React.FC = () => {
       console.error('Invalid chatroomId:', chatroomId);
       return;
     }
-    setHistoryChatroomId(chatroomId);
-    navigate('/chat-history');
+    navigate({
+      pathname: '/chat-history',
+      search: `?chatroomId=${chatroomId}`,
+    });
   };
 
   useEffect(() => {
-    setUpcomingConsulting({ reservationInfo: [], reservationTime: undefined });
+    if (upcomingConsulting) {
+      setUpcomingConsulting({
+        reservationInfo: [],
+        reservationTime: undefined,
+      });
+    }
   }, [setUpcomingConsulting]);
 
   useEffect(() => {
@@ -107,8 +110,6 @@ const Consulting: React.FC = () => {
         <CommonBackground className="p-5 mt-4 mb-4">
           {loading ? (
             <p>상담 내역을 불러오는 중입니다...</p>
-          ) : error ? (
-            <p className="text-red-500">{error}</p>
           ) : consultingHistory.length === 0 ? (
             <p>지난 상담 내역이 없습니다.</p>
           ) : (

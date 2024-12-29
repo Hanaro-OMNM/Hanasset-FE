@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { PlatformAPI } from '../../platform/PlatformAPI';
 import { accessToken } from '../../recoil/token/atom';
 // API 호출 메서드 import
-import { selectedEstateType } from '../../types/hanaAsset';
 import { RealEstatePreview } from '../../types/hanaAssetResponse.common';
 import Button from '../atoms/Button';
 import Checkbox from '../atoms/Checkbox';
@@ -21,7 +20,7 @@ export default function SelectEstate() {
   const [apartments, setApartments] = useState<RealEstatePreview[]>([]);
   const [slides, setSlides] = useState<RealEstatePreview[][]>([]);
   const [checkedItems, setCheckedItems] = useState<boolean[]>([]);
-  const selectedItems: selectedEstateType[] = [];
+  const selectedItems: RealEstatePreview[] = [];
 
   const token = useRecoilValue(accessToken);
 
@@ -30,8 +29,6 @@ export default function SelectEstate() {
     async function fetchApartments() {
       try {
         const response = await PlatformAPI.getBookmarkRealEstates();
-        console.log('API Response:', response);
-
         const realEstates: RealEstatePreview[] = response?.realEstates || [];
         setApartments(realEstates);
         setCheckedItems(Array(realEstates.length).fill(false));
@@ -44,16 +41,12 @@ export default function SelectEstate() {
         setSlides(generatedSlides);
       } catch (error) {
         console.error('Error fetching apartments:', error);
-        alert('데이터를 불러오는 중 문제가 발생했습니다.');
       }
     }
 
     fetchApartments();
   }, [token]); // 토큰 변경 시 API 호출
 
-  const [reservationInfo, setReservationInfo] = useState<selectedEstateType[]>(
-    []
-  );
   const handleItemChange = (index: number, checked: boolean) => {
     const selectedCount = checkedItems.filter((item) => item).length;
 
@@ -68,7 +61,6 @@ export default function SelectEstate() {
 
     // 선택된 매물 업데이트
     const selectedEstates = apartments.filter((_, i) => updatedCheckedItems[i]);
-    setReservationInfo(selectedEstates); // 상태 업데이트
     console.log('Updated ReservationInfo:', selectedEstates); // 콘솔 출력
   };
 

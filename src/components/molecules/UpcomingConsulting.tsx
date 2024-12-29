@@ -5,7 +5,6 @@ import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { useState, useEffect } from 'react';
 import { PlatformAPI } from '../../platform/PlatformAPI.ts';
 import chatroomIdState from '../../recoil/chatroomId/atom.ts';
-import { selectedEstateType } from '../../types/hanaAsset.ts';
 import Button from '../atoms/Button.tsx';
 import CommonBackground from '../atoms/CommonBackground';
 
@@ -13,16 +12,15 @@ const UpcomingConsultingComponent = () => {
   const navigate = useNavigate();
   const setChatroomId = useSetRecoilState(chatroomIdState);
   const chatroomId = useRecoilValue(chatroomIdState);
-  const [reservationInfo, setReservationInfo] = useState<selectedEstateType[]>(
-    []
-  );
   const [reservationTime, setReservationTime] = useState<string | undefined>(
     undefined
   );
   const [reservationDateTime, setReservationDateTime] = useState<
     Date | undefined
   >();
+  const [chatroomTitle, setChatroomTitle] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
+  const [isReserved, setIsReserved] = useState<boolean>(false);
   const accessToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
@@ -40,14 +38,13 @@ const UpcomingConsultingComponent = () => {
         );
         if (chatroom) {
           setChatroomId(chatroom.chatroomId);
-          setReservationInfo([{ name: chatroom.chatroomTitle || '제목 없음' }]);
+          setIsReserved(true);
+          setChatroomTitle(chatroom.chatroomTitle);
           setReservationTime(chatroom.reservedTime);
         } else {
-          setReservationInfo([]);
           setReservationTime(undefined);
         }
-      } catch (err) {
-        setReservationInfo([]);
+      } catch {
         setReservationTime(undefined);
       } finally {
         setLoading(false);
@@ -72,9 +69,6 @@ const UpcomingConsultingComponent = () => {
       }
     }
   }, [reservationTime]);
-
-  const isReserved =
-    reservationInfo.length > 0 && reservationTime !== undefined;
 
   const currentDateTime = new Date();
 
@@ -111,11 +105,11 @@ const UpcomingConsultingComponent = () => {
     try {
       await PlatformAPI.deleteChatroom(chatroomId);
       alert(`삭제되었습니다`);
-      setReservationInfo([]);
       setReservationTime(undefined);
       setChatroomId('');
       window.location.href = '/consulting';
     } catch (error) {
+      console.log(error);
       alert('상담 삭제 중 오류가 발생했습니다.');
     }
   };
@@ -145,9 +139,7 @@ const UpcomingConsultingComponent = () => {
             </div>
             <div>
               <p className="text-gray-800 font-fontMedium text-lg">
-                {isReserved
-                  ? reservationInfo.map((item) => item.name).join(', ')
-                  : '상담 예약하러 가기'}
+                {isReserved ? chatroomTitle : '상담 예약하러 가기'}
               </p>
               <p className="text-sm text-gray-600">
                 {isReserved

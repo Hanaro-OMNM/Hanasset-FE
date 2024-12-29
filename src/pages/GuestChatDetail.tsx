@@ -61,7 +61,7 @@ const GuestChatDetail: React.FC = () => {
       }
     }
   }, [loanRecommendInfos, isLogin]);
-  console.log(guestInfo);
+
   return (
     <div className="top-0 absolute animate-slideInRight">
       {loanId ? (

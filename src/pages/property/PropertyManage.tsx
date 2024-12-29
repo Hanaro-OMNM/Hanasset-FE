@@ -23,7 +23,7 @@ export default function PropertyForm({
   assetType,
   onBack,
 }: AssetRegisterProps) {
-  const [validAmountForm, setValidAmountForm] = useState(true);
+  const [validAmountForm] = useState(true);
 
   const forms = [
     {
@@ -70,7 +70,7 @@ export default function PropertyForm({
     }
   };
 
-  const [currentStep, setCurrentStep] = useState(getInitialStep(assetType));
+  const [currentStep] = useState(getInitialStep(assetType));
 
   return (
     <div className="animate-fadeInRight pr-5">

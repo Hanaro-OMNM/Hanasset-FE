@@ -89,7 +89,7 @@ export default function RealEstateLayout() {
         localStorage.setItem(key, JSON.stringify(parsedList));
       }
     } else {
-      localStorage.setItem(key, JSON.stringify([estate.name]));
+      localStorage.setItem(key, JSON.stringify([estate.realEstateId]));
     }
 
     setSelectedEstate(estate);

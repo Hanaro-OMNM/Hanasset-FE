@@ -198,6 +198,15 @@ export interface TradeInfo {
   registrationDate: string | null;
 }
 
+// SearchResponse 타입
+export interface Search {
+  housingComplexId: number;
+  complexName: string;
+  addressName: string;
+  lat: number;
+  lng: number;
+}
+
 export interface LoanRecommend {
   user: GuestInfo;
   loanRecommendInfos: LoanRecommendInfo[];

@@ -30,6 +30,7 @@ import {
   UserInfoResponse,
   BookmarkArea,
   BookmarkAreaStatus,
+  Search,
 } from '../types/hanaAssetResponse.common.ts';
 
 export class PlatformAPI {
@@ -391,6 +392,21 @@ export class PlatformAPI {
       }
     );
     return response.data as RealEstateMarketPrice;
+  }
+
+  // 검색 결과 가져오기
+  public static async getSearchResults(keyword: string): Promise<Search[]> {
+    try {
+      const response = await this.instance.get('/search', {
+        ...this.defaultConfig,
+        params: { keyword },
+      });
+
+      return response.data.result as Search[];
+    } catch (error) {
+      console.error('검색 결과 가져오기 중 에러 발생:', error);
+      throw error;
+    }
   }
 
   public static async getLoanRecommend(

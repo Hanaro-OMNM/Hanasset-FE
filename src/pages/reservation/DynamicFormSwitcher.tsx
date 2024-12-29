@@ -30,7 +30,7 @@ const forms: FormConfig[] = [
   {
     key: 'equity',
     component: (onBack: () => void) => (
-      <AmountForm formType="equity" onBack={onBack} />
+      <AmountForm formType="capital" onBack={onBack} />
     ),
     isUnValid: (state: AssetState) => state.equityAmount === -1,
   },

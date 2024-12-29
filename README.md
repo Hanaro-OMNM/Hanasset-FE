@@ -34,7 +34,7 @@ HANA + ASSET은 사용자 자산 정보를 바탕으로 서울시 전월세 매�
 
 <div align="center">
 
-| **김미강** | **양지은** | **이동윤** | **이인수** | **최선정** | **한성민** |
+| **김미강** | 👑 **양지은** | **이동윤** | **이인수** | **최선정** | **한성민** |
 | :------: |  :------: | :------: | :------: | :------: | :------: |
 | [<img src="https://avatars.githubusercontent.com/u/113813881?v=4" height=150 width=150> <br/> @mkngkm](https://github.com/mkngkm) | [<img src="https://avatars.githubusercontent.com/u/38836598?v=4" height=150 width=150> <br/> @yje9802](https://github.com/yje9802) | [<img src="https://avatars.githubusercontent.com/u/30024566?v=4" height=150 width=150> <br/> @leedy903](https://github.com/leedy903)| [<img src="https://avatars.githubusercontent.com/u/77774140?v=4" height=150 width=150> <br/> @jinsoo00](https://github.com/insoo00)| [<img src="https://avatars.githubusercontent.com/u/128480236?v=4" height=150 width=150> <br/> @Choeseonjeong](https://github.com/Choeseonjeong)| [<img src="https://avatars.githubusercontent.com/u/115688628?v=4" height=150 width=150> <br/> @kkx7787](https://github.com/kkx7787)
 
@@ -85,7 +85,7 @@ HANA + ASSET은 사용자 자산 정보를 바탕으로 서울시 전월세 매�
 <br>
 
 ## API 명세 
-Swagger 사용
+- Swagger 사용
 ![image](https://github.com/user-attachments/assets/2be6ac64-4276-4c36-b200-999be4272d7d)
 
 <br>

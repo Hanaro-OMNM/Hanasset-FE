@@ -23,7 +23,7 @@ const LocationFilterGungu = () => {
   useEffect(() => {
     const fetchData = async () => {
       const fetchGungu = new Set<string>();
-      await fetch('src/assets/dongInfo.csv')
+      await fetch('/dongInfo.csv')
         .then((response) => response.text())
         .then((csvString) => {
           Papa.parse<string>(csvString, {

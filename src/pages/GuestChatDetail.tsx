@@ -66,7 +66,11 @@ const GuestChatDetail: React.FC = () => {
     <div className="top-0 absolute animate-slideInRight">
       {loanId ? (
         <div className="absolute left-[420px]">
-          <LoanDetail loanId={loanId} onHide={() => setLoanId(null)} />
+          <LoanDetail
+            loanId={loanId}
+            onHide={() => setLoanId(null)}
+            name={guestInfo?.name}
+          />
         </div>
       ) : (
         <div className="w-[420px] backdrop-blur-[10px] absolute px-4 top-0 h-screen left-[420px] overflow-y-auto bg-gray-50/90 scrollbar-hide">

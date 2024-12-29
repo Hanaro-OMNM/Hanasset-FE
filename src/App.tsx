@@ -14,7 +14,7 @@ import Main from './pages/Main.tsx';
 import MyPage from './pages/MyPage.tsx';
 import RealEstateList from './pages/RealEstateList/RealEstateList.tsx';
 import ChatApp from './pages/chat/ChatApp.tsx';
-import ChatHistory from './pages/chat/ChatHistory.tsx';
+import ChatHistoryPage from './pages/chat/ChatHistory.tsx';
 import ChatReservation from './pages/reservation/ChatReservation.tsx';
 import SearchResult from './pages/search/SearchResult.tsx';
 import isLoginAtom from './recoil/isLogin';
@@ -65,8 +65,8 @@ function AppContent() {
               <Route path="/real-estate-list" element={<RealEstateList />} />
               <Route path="/select-estate" element={<SelectEstate />} />
               <Route path="/my-estate-list" element={<MyEstateList />} />
-              <Route path="/live-chat" element={<ChatApp accessor="guest" />} />
-              <Route path="/chat-history" element={<ChatHistory />} />
+              <Route path="/live-chat" element={<ChatApp />} />
+              <Route path="/chat-history" element={<ChatHistoryPage />} />
               <Route path="/search-result" element={<SearchResult />} />
             </Routes>
             {isLoginModalOpen && (

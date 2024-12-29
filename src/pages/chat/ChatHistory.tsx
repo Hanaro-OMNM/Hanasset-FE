@@ -1,6 +1,6 @@
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
 import { useSearchParams } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import logo from '../../assets/img/logo.png';
 import { PlatformAPI } from '../../platform/PlatformAPI.ts';
 import GuestChatDetail from '../GuestChatDetail';
@@ -16,17 +16,15 @@ type ChatMessageType = {
   createdAt: string;
 };
 
-const ChatHistory: React.FC = () => {
+export default function ChatHistoryPage() {
   const [searchParams] = useSearchParams();
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
   const [inputValue, setInputValue] = useState('');
 
-  const historyChatroomId = searchParams.get('chatroomId');
-
   const fetchMessages = async () => {
     try {
       const response = await PlatformAPI.getChatroomMessagesByChatroomId(
-        historyChatroomId as string
+        searchParams.get('chatroomId') as string
       );
       if (Array.isArray(response)) {
         setMessages(response);
@@ -56,7 +54,7 @@ const ChatHistory: React.FC = () => {
           isHistory={false}
         />
         <div className="flex-1 w-full px-4 md:px-8 py-4 bg-hanaSilver20 shadow overflow-y-auto scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400 space-y-4">
-          {messages.length > 0 ? (
+          {messages.length > 0 &&
             messages.map((msg, index) => (
               <ChatMessage
                 key={msg.content}
@@ -71,10 +69,7 @@ const ChatHistory: React.FC = () => {
                 responserName="하나은행 상담사"
                 responserImage={logo}
               />
-            ))
-          ) : (
-            <p>No messages available.</p>
-          )}
+            ))}
         </div>
 
         <div className="flex w-full p-5 bg-gray-300">
@@ -97,6 +92,4 @@ const ChatHistory: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default ChatHistory;
+}

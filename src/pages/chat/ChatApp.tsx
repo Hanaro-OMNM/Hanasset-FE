@@ -4,7 +4,6 @@ import { useRecoilValue } from 'recoil';
 import SockJS from 'sockjs-client';
 import React, { useState, useEffect, useRef } from 'react';
 import logo from '../../assets/img/logo.png';
-import profile from '../../assets/img/profile_ex.jpg';
 import { PlatformAPI } from '../../platform/PlatformAPI.ts';
 import chatroomIdState from '../../recoil/chatroomId/atom.ts';
 import userIdAtom from '../../recoil/userId/atom.ts';
@@ -20,11 +19,7 @@ type ChatMessageType = {
   time: string;
 };
 
-interface ChatAppProps {
-  accessor: string;
-}
-
-const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
+const ChatApp: React.FC = () => {
   const [inputMessage, setInputMessage] = useState<string>('');
   const [stompClient, setStompClient] = useState<Client | null>(null);
   const [subscription, setSubscription] = useState<StompSubscription | null>(
@@ -131,7 +126,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
       if (subscription) subscription.unsubscribe();
       client.deactivate();
     };
-  }, [chatroomId, accessor]);
+  }, [chatroomId]);
 
   const updateChatroomStatus = async () => {
     if (isUpdatingStatus) return;
@@ -157,7 +152,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
         messageType: 'TALK',
         chatroomId: chatroomId,
         senderId: userId,
-        accessor: accessor,
+        accessor: 'guest',
         content: inputMessage,
         createdAt: new Date().toISOString(),
       };
@@ -182,55 +177,11 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
   return (
     <div>
       <div>
-        {accessor === 'guest' ? (
-          <div className="top-0 absolute pl-4 animate-fadeInRight">
-            <div className="flex flex-col h-screen w-full items-center min-w-[420px]">
-              <ChatHeader
-                responserName="하나은행 상담사"
-                responserImage={logo}
-                isHistory={true}
-              />
-              <div className="flex-1 w-full px-4 md:px-8 py-4 bg-hanaSilver20 shadow overflow-y-auto scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400 space-y-4">
-                {messages.map((msg, index) => (
-                  <ChatMessage
-                    key={msg.id}
-                    subject={msg.subject}
-                    message={msg.message}
-                    lastMessageTime={
-                      index === 0 || msg.time !== messages[index - 1].time
-                        ? msg.time
-                        : null
-                    }
-                    responserName="하나은행 상담사"
-                    responserImage={logo}
-                  />
-                ))}
-                <div ref={messagesEndRef} />
-              </div>
-              <div className="flex w-full p-5 bg-hanaGreen60">
-                <input
-                  type="text"
-                  value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                  className="flex-1 px-4 rounded-full text-sm border-2 focus:border-hanaGreen80 focus:outline-none"
-                  placeholder="메세지를 입력해주세요..."
-                />
-                <button
-                  onClick={handleSendMessage}
-                  className="flex items-center justify-center p-2 ml-2 rounded-full bg-hanaGreen80 text-white hover:bg-hanaGreen transition duration-150 ease-in-out"
-                >
-                  <PiPaperPlaneRightFill className="h-5 w-5" />
-                </button>
-              </div>
-            </div>
-            <GuestChatDetail />
-          </div>
-        ) : (
-          <div className="flex flex-col h-screen w-full items-center">
+        <div className="top-0 absolute pl-4 animate-fadeInRight">
+          <div className="flex flex-col h-screen w-full items-center min-w-[420px]">
             <ChatHeader
-              responserName={'고객1'}
-              responserImage={profile}
+              responserName="하나은행 상담사"
+              responserImage={logo}
               isHistory={true}
             />
             <div className="flex-1 w-full px-4 md:px-8 py-4 bg-hanaSilver20 shadow overflow-y-auto scrollbar-hide hover:scrollbar-hide hover:scrollbar-thumb-gray-400 space-y-4">
@@ -244,8 +195,8 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
                       ? msg.time
                       : null
                   }
-                  responserName="고객1"
-                  responserImage={profile}
+                  responserName="하나은행 상담사"
+                  responserImage={logo}
                 />
               ))}
               <div ref={messagesEndRef} />
@@ -267,7 +218,8 @@ const ChatApp: React.FC<ChatAppProps> = ({ accessor }) => {
               </button>
             </div>
           </div>
-        )}
+          <GuestChatDetail />
+        </div>
       </div>
     </div>
   );

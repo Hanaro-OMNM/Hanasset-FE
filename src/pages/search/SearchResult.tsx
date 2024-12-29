@@ -51,7 +51,7 @@ const SearchResult = () => {
     // 지역 검색 결과 가져오기
     const fetchData = async () => {
       const fetchLocalSearchResults = new Set<localSearchResult>();
-      await fetch('src/assets/dongInfo.csv')
+      await fetch('/dongInfo.csv')
         .then((response) => response.text())
         .then((csvString) => {
           Papa.parse<string>(csvString, {

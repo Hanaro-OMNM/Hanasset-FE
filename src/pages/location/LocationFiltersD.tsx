@@ -95,7 +95,7 @@ const LocationFilterDong = () => {
     const fetchDong = new Set<string>();
     const fetchInfo: Array<Info> = [];
 
-    await fetch('src/assets/dongInfo.csv')
+    await fetch('/dongInfo.csv')
       .then((response) => response.text())
       .then((csvString) => {
         Papa.parse<string>(csvString, {

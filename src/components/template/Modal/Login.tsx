@@ -102,7 +102,7 @@ export default function LoginPage({
           </form>
           <div className="text-center mt-4 mb-1">
             <p className="text-sm text-gray-500">
-              아직 MapHana에 가입하지 않으셨나요?
+              아직 HanaAsset에 가입하지 않으셨나요?
               <button
                 onClick={onSignUpPage}
                 className="ml-2 my-1 text-hanaColor2 "

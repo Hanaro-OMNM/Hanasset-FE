@@ -1,10 +1,10 @@
-![image](https://github.com/user-attachments/assets/0d9a883b-4e55-46f3-b02b-2f064617ce82)<img width="1025" alt="image" src="https://github.com/user-attachments/assets/fb7714ac-960e-458c-90ac-a2c4f52a96d2" />
+<img width="720" alt="image" src="https://github.com/user-attachments/assets/ae1e1960-dfa3-4b88-970e-22ce84282895" />
+
 # 전월세 대출 맞춤 추천 및 상담 지원 플랫폼 
 지도 위에서 부동산 매물 확인과 대출 상담까지 한번에
-
-
-
-
+<br>
+<br>
+<br>
 
 ## 목차
 1. [프로젝트 개요](#프로젝트-개요)
@@ -12,25 +12,24 @@
 3. [개발 기간](#개발-기간)
 4. [기술 스택](#기술-스택)
 5. [개발 환경](#개발-환경)
-6. [ERD](#ERD)
-7. [API 명세](#API-명세)
+6. [ERD](#erd)
+7. [API 명세](#api-명세)
 8. [시스템 아키텍처](#시스템-아키텍처)
-9. [프로젝트 구조](#프로젝트 구조)
+9. [프로젝트 구조](#프로젝트-구조)
 10. [기능 소개](#기능-소개)
-   - [전월세 매물 조회](#전월세-매물-조회)
-   - [맞춤형 대출 상품 추천](#맞춤형-대출-상품-추천)
-   - [실시간 상담 서비스](#실시간-상담-서비스)
-
-
-
-
+    - [전월세 매물 조회](#전월세-매물-조회)
+    - [맞춤형 대출 상품 추천](#맞춤형-대출-상품-추천)
+    - [실시간 상담 서비스](#실시간-상담-서비스)
+<br>
+<br>
+<br>
 
 ## 프로젝트 개요
 HANA + ASSET은 사용자 자산 정보를 바탕으로 서울시 전월세 매물을 분석하여 적합한 대출 상품을 추천하고,  
 하나은행의 전문 대출 상담사와 실시간 상담을 통해 전월세 자금 대출 계획을 효율적으로 수립할 수 있는 플랫폼입니다.
-
-
-
+<br>
+<br>
+<br>
 
 ## 팀원 구성
 
@@ -43,22 +42,17 @@ HANA + ASSET은 사용자 자산 정보를 바탕으로 서울시 전월세 매�
 </div>
 
 <br>
-
-
-
-
+<br>
+<br>
 
 ## 개발 기간
 - 2024년 10월 17일 ~ 2024년 10월 30일: 프론트 엔드
 - 2024년 12월 16일 ~ 2024년 12월 27일 : 백엔드
 - 배포: 2024년 12월 29일
 - 최종 발표 및 평가: 2024년 12월 30일
-
-
-  
-
-
-
+<br>
+<br>
+<br>
 
 ## 기술 스택 
 | **분류**       | **스택**                                                                                   |
@@ -73,45 +67,51 @@ HANA + ASSET은 사용자 자산 정보를 바탕으로 서울시 전월세 매�
 | **Tool**       | ![Postman](https://img.shields.io/badge/Postman-API%20Testing-FF6C37?style=flat&logo=postman&logoColor=white) ![IntelliJ](https://img.shields.io/badge/IntelliJ%20IDEA-2023-000000?style=flat&logo=intellijidea&logoColor=white) ![Figma](https://img.shields.io/badge/Figma-Design-FF7262?style=flat&logo=figma&logoColor=white) ![VSCode](https://img.shields.io/badge/VSCode-1.77-007ACC?style=flat&logo=visualstudiocode&logoColor=white) ![Swagger](https://img.shields.io/badge/Swagger-API%20Docs-85EA2D?style=flat&logo=swagger&logoColor=white) ![Github](https://img.shields.io/badge/Github-Code%20Hosting-181717?style=flat&logo=github&logoColor=white) |
 | **Deploy**     | ![EC2](https://img.shields.io/badge/AWS%20EC2-Cloud-orange?style=flat&logo=amazonaws&logoColor=white) ![AWS RDS](https://img.shields.io/badge/AWS%20RDS-Database-527FFF?style=flat&logo=amazonrds&logoColor=white) ![Jenkins](https://img.shields.io/badge/Jenkins-CI/CD-D24939?style=flat&logo=jenkins&logoColor=white) |
 | **Communication** | ![Notion](https://img.shields.io/badge/Notion-Wiki-000000?style=flat&logo=notion&logoColor=white) ![Slack](https://img.shields.io/badge/Slack-Chat-4A154B?style=flat&logo=slack&logoColor=white) ![Jira](https://img.shields.io/badge/Jira-Project%20Management-0052CC?style=flat&logo=jira&logoColor=white) |
-
-
-
-
-
-
-
+<br>
+<br>
+<br>
 
 ## 개발 환경
 ![image](https://github.com/user-attachments/assets/b00e9391-ef7d-419a-b358-01856f537190)
 
-
-
-
+<br>
+<br>
+<br>
 
 ## ERD
 ![image](https://github.com/user-attachments/assets/6f86e0a5-cec3-487f-83a2-d71928d00c61)
 
+<br>
+<br>
+<br>
 
-
-
-
-## API 명세 (Swagger) 
+## API 명세 
+Swagger 사용
 ![image](https://github.com/user-attachments/assets/2be6ac64-4276-4c36-b200-999be4272d7d)
 
-
-
-
+<br>
+<br>
+<br>
 
 ## 시스템 아키텍처
 ![image](https://github.com/user-attachments/assets/04fcd265-40dc-4a39-870f-d1bfa73702f6)
 
+<br>
+<br>
+<br>
+
+## 프로젝트 구조 
+고민
 
 
+<br>
+<br>
+<br>
 
 
-## 기능 소개 : 사진 더 추가해야 함 
-
-### 전월세 매물 조회  
+## 기능 소개 
+사진 더 추가해야함
+### 전월세 매물 조회
 - 🏠 **간편하게 부동산 매물 정보 확인**  
   - 최신 전월세 매물 정보 제공  
   - 원하는 지역의 모든 매물 위치를 한 눈에 파악  
@@ -119,14 +119,14 @@ HANA + ASSET은 사용자 자산 정보를 바탕으로 서울시 전월세 매�
 
 ---
 
-### 맞춤형 대출 상품 추천  
+### 맞춤형 대출 상품 추천
 - 💳 **사용자 자산 기반 대출 상품 추천**  
   - 연소득, 대출 현황 등의 자산 정보를 분석하여 최적의 상품 제안  
   - 대출 조건 비교 기능   
 
 ---
 
-### 전문 상담사와의 실시간 상담  
+### 실시간 상담 서비스
 - 💬 **대출 상담 및 계획 수립 지원**  
   - 하나은행 전문 상담사와 채팅 기능 
   - 대출 계획 수립 및 맞춤형 컨설팅 제공  

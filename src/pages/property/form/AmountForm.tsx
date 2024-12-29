@@ -8,7 +8,7 @@ import { PlatformAPI } from '../../../platform/PlatformAPI.ts';
 import { assetState } from '../../../recoil/asset/atom';
 
 interface AssetInfoInputProps {
-  formType: 'income' | 'equity';
+  formType: 'income' | 'capital';
   onBack: () => void;
 }
 
@@ -77,8 +77,8 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
       return;
     }
 
-    const propertyType = formType === 'income' ? 'income' : 'equity';
-    const updatedKey = formType === 'income' ? 'incomeAmount' : 'equityAmount';
+    const propertyType = formType === 'income' ? 'income' : 'capital';
+    const updatedKey = formType === 'income' ? 'incomeAmount' : 'capitalAmount';
 
     try {
       const response = await PlatformAPI.putPropertyValue(
@@ -127,7 +127,7 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
         <Button text="저장" onClick={handleSave} version="ver1" />
       </div>
 
-      {formType === 'equity' && (
+      {formType === 'capital' && (
         <NoItemButton text={'보유 자본금이 없어요'} onClick={handleNoEquity} />
       )}
     </div>

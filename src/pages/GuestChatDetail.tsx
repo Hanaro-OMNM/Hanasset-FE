@@ -1,10 +1,12 @@
 import { PiBuildingApartment } from 'react-icons/pi';
 import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { useState, useEffect } from 'react';
 import CommonBackground from '../components/atoms/CommonBackground';
 import Swiper from '../components/atoms/Swiper';
 import { PlatformAPI } from '../platform/PlatformAPI';
 import chatroomIdState from '../recoil/chatroomId/atom';
+import isLoginAtom from '../recoil/isLogin';
 import {
   GuestInfo,
   LoanRecommendInfo,
@@ -19,19 +21,18 @@ import SemiTitle from './chat/SemiTitle';
 const GuestChatDetail: React.FC = () => {
   const [guestInfo, setGuestInfo] = useState<GuestInfo | null>(null);
   const [loanRecommendInfos, setLoanRecommendInfos] = useState<
-    LoanRecommendInfo[] | []
-  >([]);
+    LoanRecommendInfo[] | null
+  >(null);
   const [realEstateId, setRealEstateId] = useState(0);
   const [loanId, setLoanId] = useState<number | null>(null);
   const [realEstateInfos, setRealEstateInfos] = useState<
     RealEstateInfo[] | null
   >(null);
   const chatroomId = useRecoilValue(chatroomIdState);
-
+  const [isLogin] = useRecoilState(isLoginAtom);
   const swiperClick = (index: number) => {
     setRealEstateId(index);
   };
-
   const getRealEstateInfoList = (loanRecommendInfos: LoanRecommendInfo[]) => {
     const realEstateInfoList = loanRecommendInfos.map(
       (loanRecommendInfo) => loanRecommendInfo.realEstateInfo
@@ -40,7 +41,6 @@ const GuestChatDetail: React.FC = () => {
       setRealEstateInfos(realEstateInfoList);
     }
   };
-
   const fetchLoanRecommend = async () => {
     try {
       const loanRecommend = await PlatformAPI.getConsultingUserInfo(
@@ -48,18 +48,20 @@ const GuestChatDetail: React.FC = () => {
       );
       setGuestInfo(loanRecommend.user);
       setLoanRecommendInfos(loanRecommend.loanRecommendInfos);
-      getRealEstateInfoList(loanRecommendInfos);
     } catch (error) {
       console.error('Error fetching loan data:', error);
     }
   };
-
   useEffect(() => {
-    if (!realEstateInfos) {
-      fetchLoanRecommend();
+    if (isLogin) {
+      if (!loanRecommendInfos) {
+        fetchLoanRecommend();
+      } else {
+        getRealEstateInfoList(loanRecommendInfos);
+      }
     }
-  }, [fetchLoanRecommend, realEstateInfos]);
-
+  }, [loanRecommendInfos, isLogin]);
+  console.log(guestInfo);
   return (
     <div className="top-0 absolute animate-slideInRight">
       {loanId ? (
@@ -115,7 +117,6 @@ const GuestChatDetail: React.FC = () => {
               slidesPerView={1}
             />
           </div>
-
           {/* 대출 상품 리스트 */}
           <div>
             <SemiTitle title="대출 상품 리스트" />
@@ -135,12 +136,12 @@ const GuestChatDetail: React.FC = () => {
             <DsrInfo dsr={guestInfo ? guestInfo.dsr : 0.0} />
             <LoanRecommendTab
               hanaLoanList={
-                loanRecommendInfos.length > 0
+                loanRecommendInfos
                   ? loanRecommendInfos[realEstateId].hanaLoans
                   : []
               }
               beotimmogLoanList={
-                loanRecommendInfos.length > 0
+                loanRecommendInfos
                   ? loanRecommendInfos[realEstateId].beotimmokLoans
                   : []
               }
@@ -152,5 +153,4 @@ const GuestChatDetail: React.FC = () => {
     </div>
   );
 };
-
 export default GuestChatDetail;

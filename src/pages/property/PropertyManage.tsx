@@ -37,7 +37,7 @@ export default function PropertyForm({
       valid: validAmountForm,
     },
     {
-      key: 'equity',
+      key: 'capital',
       component: <AmountForm formType="capital" onBack={onBack} />,
       valid: validAmountForm,
     },
@@ -60,7 +60,7 @@ export default function PropertyForm({
       case 'income':
         return forms.findIndex((form) => form.key === 'income');
       case 'capital':
-        return forms.findIndex((form) => form.key === 'equity');
+        return forms.findIndex((form) => form.key === 'capital');
       case 'home':
         return forms.findIndex((form) => form.key === 'home');
       case 'loan':

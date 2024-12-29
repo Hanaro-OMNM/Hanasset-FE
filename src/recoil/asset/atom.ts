@@ -25,7 +25,7 @@ export const assetState = atom<AssetState>({
   default: {
     jobType: '없음',
     incomeAmount: -1,
-    equityAmount: -1,
+    capitalAmount: -1,
     hasHome: null, // 초기값 null
     hasLoan: null, // 초기값 null
     annualInterest: -1,

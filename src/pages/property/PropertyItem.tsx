@@ -9,7 +9,7 @@ interface PropertyItemProps {
     | 'job'
     | 'income'
     | 'loan'
-    | 'equity';
+    | 'capital';
   label: string;
   value: string;
   onClick: (
@@ -21,7 +21,7 @@ interface PropertyItemProps {
       | 'job'
       | 'income'
       | 'loan'
-      | 'equity'
+      | 'capital'
   ) => void;
   className?: string;
   labelClassName?: string;

@@ -15,9 +15,9 @@ interface AssetInfoInputProps {
 export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
   const [asset, setAsset] = useRecoilState(assetState);
   const incomeAmount = asset.incomeAmount;
-  const equityAmount = asset.equityAmount;
+  const capitalAmount = asset.capitalAmount;
 
-  const initialAmount = formType === 'income' ? incomeAmount : equityAmount;
+  const initialAmount = formType === 'income' ? incomeAmount : capitalAmount;
 
   const [localAmount, setLocalAmount] = useState<number>(initialAmount);
   const [error, setError] = useState<boolean>(false);
@@ -28,9 +28,9 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
     if (formType === 'income') {
       setLocalAmount(incomeAmount);
     } else {
-      setLocalAmount(equityAmount);
+      setLocalAmount(capitalAmount);
     }
-  }, [incomeAmount, equityAmount, formType]);
+  }, [incomeAmount, capitalAmount, formType]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -59,9 +59,9 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
     }
   };
 
-  const handleNoEquity = () => {
+  const handleNoCapital = () => {
     setLocalAmount(0);
-    setAsset({ ...asset, equityAmount: 0 });
+    setAsset({ ...asset, capitalAmount: 0 });
     onBack();
   };
 
@@ -128,7 +128,7 @@ export default function AmountForm({ formType, onBack }: AssetInfoInputProps) {
       </div>
 
       {formType === 'capital' && (
-        <NoItemButton text={'보유 자본금이 없어요'} onClick={handleNoEquity} />
+        <NoItemButton text={'보유 자본금이 없어요'} onClick={handleNoCapital} />
       )}
     </div>
   );

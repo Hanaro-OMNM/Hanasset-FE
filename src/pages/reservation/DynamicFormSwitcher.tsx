@@ -28,11 +28,11 @@ const forms: FormConfig[] = [
     isUnValid: (state: AssetState) => state.incomeAmount === -1,
   },
   {
-    key: 'equity',
+    key: 'capital',
     component: (onBack: () => void) => (
       <AmountForm formType="capital" onBack={onBack} />
     ),
-    isUnValid: (state: AssetState) => state.equityAmount === -1,
+    isUnValid: (state: AssetState) => state.capitalAmount === -1,
   },
   {
     key: 'home',

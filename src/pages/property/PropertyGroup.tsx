@@ -14,7 +14,7 @@ interface PropertyGroupProp {
       | 'job'
       | 'income'
       | 'loan'
-      | 'equity'
+      | 'capital'
   ) => void;
 }
 
@@ -25,7 +25,7 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
   const incomeAmount = asset.incomeAmount;
   const hasHome = asset.hasHome;
   const hasLoan = asset.hasLoan;
-  const equityAmount = asset.equityAmount;
+  const capitalAmount = asset.capitalAmount;
 
   return (
     <CommonBackground className="bg-white px-5">
@@ -52,11 +52,11 @@ export default function PropertyGroup({ onRegister }: PropertyGroupProp) {
       />
       <hr />
       <PropertyItem
-        type="equity"
+        type="capital"
         label="자본금"
         value={
-          equityAmount && equityAmount > 0
-            ? `${equityAmount.toLocaleString()}만 원`
+          capitalAmount && capitalAmount > 0
+            ? `${capitalAmount.toLocaleString()}만 원`
             : '없음'
         }
         onClick={onRegister}

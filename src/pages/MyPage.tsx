@@ -42,7 +42,7 @@ export default function MyPage() {
     | 'income'
     | 'loan'
     | 'EstateList'
-    | 'equity'
+    | 'capital'
   >('main');
 
   const [bookmarkedLocations, setBookmarkedLocations] = useState<
@@ -126,7 +126,7 @@ export default function MyPage() {
       | 'income'
       | 'loan'
       | 'EstateList'
-      | 'equity'
+      | 'capital'
   ) => {
     setCurrentPage(type);
   };

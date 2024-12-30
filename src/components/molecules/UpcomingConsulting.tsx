@@ -6,11 +6,13 @@ import { useState, useEffect } from 'react';
 import { PlatformAPI } from '../../platform/PlatformAPI.ts';
 import chatroomIdState from '../../recoil/chatroomId/atom.ts';
 import isLoginAtom from '../../recoil/isLogin';
+import userIdAtom from '../../recoil/userId/atom.ts';
 import Button from '../atoms/Button.tsx';
 import CommonBackground from '../atoms/CommonBackground';
 
 const UpcomingConsultingComponent = () => {
   const navigate = useNavigate();
+  const setUserId = useSetRecoilState(userIdAtom);
   const setChatroomId = useSetRecoilState(chatroomIdState);
   const chatroomId = useRecoilValue(chatroomIdState);
   const [reservationTime, setReservationTime] = useState<string | undefined>(
@@ -40,6 +42,7 @@ const UpcomingConsultingComponent = () => {
         );
         if (chatroom) {
           setChatroomId(chatroom.chatroomId);
+          setUserId(chatroom.userId);
           setIsReserved(true);
           setChatroomTitle(chatroom.chatroomTitle);
           setReservationTime(chatroom.reservedTime);

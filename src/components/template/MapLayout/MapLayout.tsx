@@ -122,7 +122,8 @@ export default function MapLayout({ children }: LayoutProps) {
         (distanceX > 5 || distanceY > 5) &&
         event &&
         event.target instanceof HTMLImageElement &&
-        event.target.src.includes('naver')
+        (event.target.src.includes('naver') ||
+          event.target.src.includes('nrbe'))
       ) {
         isDragging = true;
       }

@@ -32,6 +32,7 @@ import {
   BookmarkAreaStatus,
   Search,
   ChatHistoryResponse,
+  UserProperty,
 } from '../types/hanaAssetResponse.common.ts';
 
 export class PlatformAPI {
@@ -453,6 +454,14 @@ export class PlatformAPI {
       `/users/bookmarks/real-estates/${realEstateId}`
     );
     return response.status;
+  }
+
+  public static async getPropertyValue(): Promise<UserProperty> {
+    const response = (await this.instance.get(
+      '/users/property'
+    )) as ApiResponseEntity<UserProperty>;
+
+    return response.data.result as UserProperty;
   }
 
   public static async putPropertyValue(

@@ -15,6 +15,7 @@ import EditProfile from '../components/template/EditProfile';
 import EditProfileLayout from '../components/template/EditProfileLayout';
 import MyEstateList from '../components/template/MyEstateList.tsx';
 import { PlatformAPI } from '../platform/PlatformAPI.ts';
+import { assetState } from '../recoil/asset/atom.ts';
 import centerAtom from '../recoil/center/atom.ts';
 import isLoginAtom from '../recoil/isLogin';
 import {
@@ -50,6 +51,7 @@ export default function MyPage() {
   >(null);
 
   const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
+  const [property, setProperty] = useRecoilState(assetState);
 
   const getBookmarkRealEstates = async () => {
     try {
@@ -152,22 +154,46 @@ export default function MyPage() {
     return bookmarkEstateList.some((item) => item.realEstateId === id);
   };
 
-  useEffect(() => {
-    const fetchUserName = async () => {
-      try {
-        if (!accessToken) {
-          console.error('No access token available');
-          return;
-        }
-        const response = await PlatformAPI.getUserInfo();
-        setUserName(response.name);
-      } catch (err) {
-        console.error('Failed to fetch user info:', err);
+  const fetchUserName = async () => {
+    try {
+      if (!accessToken) {
+        console.error('No access token available');
+        return;
       }
-    };
+      const response = await PlatformAPI.getUserInfo();
+      setUserName(response.name);
+    } catch (err) {
+      console.error('Failed to fetch user info:', err);
+    }
+  };
 
+  const fetchUserProperty = async () => {
+    try {
+      if (!accessToken) {
+        console.error('No access token available');
+        return;
+      }
+      const response = await PlatformAPI.getPropertyValue();
+      if (property) {
+        setProperty({
+          jobType: response.jobType,
+          incomeAmount: response.income,
+          capitalAmount: response.capital,
+          hasHome: response.hasHouse,
+          hasLoan: !!(response.annualInterest && response.annualPrincipal),
+          annualInterest: -1,
+          annualPrincipal: -1,
+        });
+      }
+    } catch (error) {
+      console.error('Failed to fetch user info:', error);
+    }
+  };
+
+  useEffect(() => {
     if (isLogin) {
       fetchUserName();
+      fetchUserProperty();
     }
   }, [accessToken]);
 

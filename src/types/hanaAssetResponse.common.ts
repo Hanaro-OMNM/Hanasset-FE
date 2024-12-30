@@ -286,3 +286,15 @@ export interface BookmarkAreaStatus {
   full: boolean;
   emdName: string;
 }
+
+export interface UserProperty {
+  jobType: string;
+  income: number;
+  capital: number;
+  hasHouse: boolean;
+  annualInterest: number;
+  annualPrincipal: number;
+  isAbnormalHouse: boolean;
+  isHousingFraudVictim: boolean;
+  stressDsr: number;
+}

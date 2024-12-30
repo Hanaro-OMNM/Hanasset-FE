@@ -1,8 +1,4 @@
 {
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/index.html" }
-  ],
   "rewrites": [
     {
       "source": "/api/:path*",
@@ -19,6 +15,10 @@
     {
       "source": "/chat/:path*",
       "destination": "http://localhost:8080/:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
     }
   ]
 }

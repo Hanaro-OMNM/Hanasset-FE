@@ -1,4 +1,4 @@
-![2-2](https://github.com/user-attachments/assets/16cebca0-7383-4185-b995-1b954515a4e6)<img width="720" alt="image" src="https://github.com/user-attachments/assets/ae1e1960-dfa3-4b88-970e-22ce84282895" />
+
 
 # 전월세 대출 맞춤 추천 및 상담 지원 플랫폼 
 

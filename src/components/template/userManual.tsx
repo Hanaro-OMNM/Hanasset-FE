@@ -124,7 +124,7 @@ export default function UserManual({ close }: userManualProps) {
               있습니다.
             </div>
           </div>
-          <div className="fixed bottom-80 mb-10 left-1/3 ml-14 text-hanaSilver">
+          <div className="fixed bottom-60 mb-10 left-2/3 text-hanaSilver">
             2/5
           </div>
           <ManualButton
@@ -132,7 +132,7 @@ export default function UserManual({ close }: userManualProps) {
             totalPages={6}
             onPrev={goToPrevPage}
             onNext={goToNextPage}
-            className="fixed bottom-80 mb-10 right-1/4"
+            className="fixed bottom-70 mb-10 right-1/4"
           />
         </motion.div>
       ),
@@ -231,7 +231,7 @@ export default function UserManual({ close }: userManualProps) {
             </div>
             <div className="text-white font-fontLight text-xl fixed top-80 mt-12">
               <span>2. </span>
-              <span className="text-ManualColor2">관심 지역 및 매물</span>을 을
+              <span className="text-ManualColor2">관심 지역 및 매물</span>을
               한눈에 확인할 수 있습니다.
             </div>
           </div>

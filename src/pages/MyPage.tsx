@@ -166,7 +166,9 @@ export default function MyPage() {
       }
     };
 
-    fetchUserName();
+    if (isLogin) {
+      fetchUserName();
+    }
   }, [accessToken]);
 
   return (

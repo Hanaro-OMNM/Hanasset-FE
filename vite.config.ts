@@ -24,7 +24,7 @@ export default defineConfig({
       },
       '/ws-chat': {
         target: 'http://localhost:8080', // 백엔드 서버
-        ws: true, // WebSocket 지원
+        ws: true,
         changeOrigin: true,
       },
       '/chat': {

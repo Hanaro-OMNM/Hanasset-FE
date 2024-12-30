@@ -1,10 +1,11 @@
 import { IoMdCalendar } from 'react-icons/io';
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 import { useState, useEffect } from 'react';
 import { PlatformAPI } from '../../platform/PlatformAPI.ts';
 import chatroomIdState from '../../recoil/chatroomId/atom.ts';
+import isLoginAtom from '../../recoil/isLogin';
 import Button from '../atoms/Button.tsx';
 import CommonBackground from '../atoms/CommonBackground';
 
@@ -21,6 +22,7 @@ const UpcomingConsultingComponent = () => {
   const [chatroomTitle, setChatroomTitle] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const [isReserved, setIsReserved] = useState<boolean>(false);
+  const [isLogin] = useRecoilState(isLoginAtom);
   const accessToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
@@ -50,8 +52,9 @@ const UpcomingConsultingComponent = () => {
         setLoading(false);
       }
     };
-
-    fetchRoomDetails();
+    if (isLogin) {
+      fetchRoomDetails();
+    }
   }, [setChatroomId, accessToken]);
 
   useEffect(() => {

@@ -42,7 +42,9 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
           <span className="text-md font-bold text-hanaBlack80">
             {responserName}
           </span>
-          <div className="w-2 h-2 rounded-full bg-red-500 mx-2"></div>
+          {isHistory && (
+            <div className="w-2 h-2 rounded-full bg-red-500 mx-2"></div>
+          )}
         </div>
 
         <div className="flex items-center">

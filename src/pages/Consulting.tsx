@@ -8,6 +8,7 @@ import MobileHeader from '../components/atoms/MobileHeader';
 import SemiTitle from '../components/atoms/SemiTitle';
 import UpcomingConsultingComponent from '../components/molecules/UpcomingConsulting';
 import { PlatformAPI } from '../platform/PlatformAPI.ts';
+import isLoginAtom from '../recoil/isLogin';
 import loanReservationAtom from '../recoil/loanReservation';
 import { ChatRoom } from '../types/hanaAssetResponse.common';
 
@@ -22,6 +23,7 @@ const Consulting: React.FC = () => {
   const accessToken = localStorage.getItem('accessToken');
 
   const [userName, setUserName] = useState<string>('');
+  const [isLogin] = useRecoilState(isLoginAtom);
 
   const formatDateTime = (dateTime: string): string => {
     const date = new Date(dateTime);
@@ -51,8 +53,9 @@ const Consulting: React.FC = () => {
         setLoading(false);
       }
     };
-
-    fetchConsultingHistory();
+    if (isLogin) {
+      fetchConsultingHistory();
+    }
   }, [accessToken]);
 
   const handleHistoryClick = (chatroomId: string) => {
@@ -66,6 +69,19 @@ const Consulting: React.FC = () => {
     });
   };
 
+  const fetchUserName = async () => {
+    try {
+      if (!accessToken) {
+        console.error('No access token available');
+        return;
+      }
+      const response = await PlatformAPI.getUserInfo();
+      setUserName(response.name);
+    } catch (err) {
+      console.error('Failed to fetch user info:', err);
+    }
+  };
+
   useEffect(() => {
     if (upcomingConsulting) {
       setUpcomingConsulting({
@@ -76,20 +92,9 @@ const Consulting: React.FC = () => {
   }, [setUpcomingConsulting]);
 
   useEffect(() => {
-    const fetchUserName = async () => {
-      try {
-        if (!accessToken) {
-          console.error('No access token available');
-          return;
-        }
-        const response = await PlatformAPI.getUserInfo();
-        setUserName(response.name);
-      } catch (err) {
-        console.error('Failed to fetch user info:', err);
-      }
-    };
-
-    fetchUserName();
+    if (isLogin) {
+      fetchUserName();
+    }
   }, [accessToken]);
   return (
     <div className="top-0 absolute pl-4 animate-slideInRight">

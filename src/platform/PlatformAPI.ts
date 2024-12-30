@@ -48,7 +48,7 @@ export class PlatformAPI {
 
   static instance: AxiosInstance = (() => {
     const instance = axios.create({
-      baseURL: 'http://localhost:8080',
+      baseURL: 'https://api.om-nm.com',
       timeout: 10000,
       withCredentials: true,
       headers: { 'Content-Type': 'application/json' },
